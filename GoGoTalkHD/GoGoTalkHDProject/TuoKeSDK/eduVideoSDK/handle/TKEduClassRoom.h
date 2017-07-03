@@ -42,5 +42,10 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 
 +(UIViewController *)currentViewController;
 +(void)leftRoom;
+
 +(instancetype )shareTKEduClassRoomInstance;
+
+// 需要密码 title
+@property (nonatomic, strong) NSString *xc_roomPassword;
+
 @end

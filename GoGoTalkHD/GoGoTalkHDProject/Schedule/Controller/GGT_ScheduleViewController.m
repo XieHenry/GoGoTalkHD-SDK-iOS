@@ -642,9 +642,9 @@ static NSString * const CalendarCellID = @"cell";
                             @"nickname":@"test",    // 学生密码567
                             @"userrole":@(2)    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                             };
-    
     TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
-//    shareRoom.xc_roomPassword = @"567";
+    shareRoom.xc_roomPassword = @"567";
+
 //    shareRoom.xc_roomName = cell1.xc_cellModel.LessonName;
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
     

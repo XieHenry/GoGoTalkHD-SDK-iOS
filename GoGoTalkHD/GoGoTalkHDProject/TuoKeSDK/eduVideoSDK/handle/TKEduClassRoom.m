@@ -320,10 +320,10 @@ TKNavigationController* _iEduNavigationController = nil;
         {
 #pragma mark - 需要延迟操作 否则会崩溃
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                _iRoomProperty.sCmdPassWord = @"567";
+                _iRoomProperty.sCmdPassWord = self.xc_roomPassword;
                 NSDictionary *tDict = @{
                                         @"serial"   :_iRoomProperty.iRoomId,
-                                        @"password":@"567",
+                                        @"password":self.xc_roomPassword,
                                         @"host"    :_iRoomProperty.sWebIp,
                                         @"port"    :_iRoomProperty.sWebPort,
                                         // @"userid"  :_iRoomProperty.iUserId,
