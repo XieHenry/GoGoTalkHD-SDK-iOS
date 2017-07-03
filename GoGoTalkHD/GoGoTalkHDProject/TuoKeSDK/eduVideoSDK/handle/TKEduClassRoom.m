@@ -128,6 +128,11 @@ TKNavigationController* _iEduNavigationController = nil;
                     _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aClassRoomProperty:_iRoomProperty];
                     
                     _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:_iRoomController];
+                    
+#pragma mark - 修改屏幕旋转问题
+                    _iEduNavigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+
+                    
                     [controller presentViewController:_iEduNavigationController animated:YES completion:^{
                         [_HUD hide:YES];
                     }];
