@@ -35,6 +35,9 @@
 #import "TKTeacherMessageTableViewCell.h"
 #import "TKStudentMessageTableViewCell.h"
 #import "TKDocumentListView.h"
+
+#import "GGT_PopoverController.h"
+
 @import AVFoundation;
 //214 *142
 
@@ -101,7 +104,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 
 
 //https://imtx.me/archives/1933.html 黑色背景
-@interface RoomController() <TKEduWhiteBoardDelegate,TKEduClassRoomSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate>
+@interface RoomController() <TKEduWhiteBoardDelegate,TKEduClassRoomSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIPopoverPresentationControllerDelegate>
 
 
 //其他
@@ -868,7 +871,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             TKGrowingTextView *tInputField =  [[TKGrowingTextView alloc] initWithFrame:rectInputFieldFrame];
 //            tInputField.internalTextView.backgroundColor = RGBCOLOR(62,62,62);
             tInputField.internalTextView.backgroundColor = [UIColor whiteColor];
-
+            [tInputField xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:4];
+            
             //tInputField.internalTextView.backgroundColor = [UIColor magentaColor];
             [tInputField.internalTextView setTextColor:RGBACOLOR(168, 168, 168, 1)];
             [tInputField.internalTextView setTintColor:RGBACOLOR(255, 255, 255, 1)];
@@ -913,16 +917,21 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             UIButton *tSendButton =  [UIButton buttonWithType:UIButtonTypeCustom];
             tSendButton.frame = CGRectMake(tSendButtonX, 4*Proportion, sSendButtonWidth*Proportion, tInPutInerContainerHeigh-4*2*Proportion);
             
-            [tSendButton setTitle:MTLocalized(@"Button.send") forState:UIControlStateNormal];
+//            [tSendButton setTitle:MTLocalized(@"Button.send") forState:UIControlStateNormal];
+            
+            [tSendButton setImage:UIIMAGE_FROM_NAME(@"changyongyu_wei") forState:UIControlStateNormal];
+            [tSendButton setImage:UIIMAGE_FROM_NAME(@"chongyongyu_yi") forState:UIControlStateSelected];
+            
+            
             tSendButton.titleLabel.font = TKFont(10);
             tSendButton.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-            [tSendButton addTarget:self action:@selector(replyAction) forControlEvents:UIControlEventTouchUpInside];
-            tSendButton.backgroundColor       = RGBCOLOR(62,62,62);
+            [tSendButton addTarget:self action:@selector(replyAction2:) forControlEvents:UIControlEventTouchUpInside];
+//            tSendButton.backgroundColor       = RGBCOLOR(62,62,62);
             
 //            tSendButton.layer.borderColor     = RGBCOLOR(89,89,89).CGColor;
-            tSendButton.layer.borderWidth     = 1;
-            tSendButton.layer.masksToBounds = YES;
-            tSendButton.layer.cornerRadius = 4;
+//            tSendButton.layer.borderWidth     = 1;
+//            tSendButton.layer.masksToBounds = YES;
+//            tSendButton.layer.cornerRadius = 4;
             tSendButton;
         });
         [_inputInerContainer addSubview:_sendButton];
@@ -2157,9 +2166,62 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
    // [self refreshData];
     _replyText.hidden = NO;
     [_inputField resignFirstResponder];
-   
     
 }
+
+- (void)replyAction2:(UIButton *)button
+{
+    button.selected = YES;
+    [self.view endEditing:YES];
+    [self showPopView:button];
+}
+
+- (void)showPopView:(UIButton *)button
+{
+    //showPopView
+    GGT_PopoverController *vc = [GGT_PopoverController new];
+    vc.modalPresentationStyle = UIModalPresentationPopover;
+    vc.popoverPresentationController.sourceView = button;
+    vc.popoverPresentationController.sourceRect = button.bounds;
+    vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    vc.popoverPresentationController.delegate = self;
+    
+    // 修改弹出视图的size 在控制器内部修改更好
+    //    vc.preferredContentSize = CGSizeMake(100, 100);
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    @weakify(self)
+    vc.dismissBlock = ^(NSString *selectString) {
+        @strongify(self);
+        NSLog(@"点击了---%@", selectString);
+        button.selected = NO;
+        if ([selectString isKindOfClass:[NSString class]]) {
+            if (selectString.length>0) {
+                //                [self.room.chatVM sendMessage:selectString];
+                _inputField.text = selectString;
+                [self replyAction];
+            }
+        }
+    };
+}
+
+#pragma mark - UIPopoverPresentationControllerDelegate
+//默认返回的是覆盖整个屏幕，需设置成UIModalPresentationNone。
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+    return UIModalPresentationNone;
+}
+
+//点击蒙版是否消失，默认为yes；
+-(BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+    return NO;
+}
+
+//弹框消失时调用的方法
+-(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+    NSLog(@"弹框已经消失");
+}
+
+
 -(void)raiseHandAction:(UIButton *)aButton{
     
     
