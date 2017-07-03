@@ -2060,8 +2060,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 //            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitHeight:28 Font:TEXT_FONT];
 //            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitHeight:28 Font:TEXT_FONT];
             
-            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
-            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
+            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
+            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
+
             tHeight = titlesize.height+tTranslationSize.height;
         }
             break;
@@ -2070,7 +2071,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     }
     
     
-    return tHeight + 5 + 10;
+    return tHeight + 5 + 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
