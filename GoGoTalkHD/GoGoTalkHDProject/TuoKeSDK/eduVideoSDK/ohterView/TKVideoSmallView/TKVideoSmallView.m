@@ -9,7 +9,7 @@
 #import "TKVideoSmallView.h"
 #import "TKMacro.h"
 #import "TKUtil.h"
-#import "TKVideoFunctionView.h"
+//#import "TKVideoFunctionView.h"
 #import "TKEduClassRoomSessionHandle.h"
 
 //214*140  214*120 214*20
@@ -23,10 +23,10 @@ static const CGFloat sVideoSmallNameLabelHeight = 0;
 
 
 @interface TKVideoSmallView ()<VideolistProtocol,CAAnimationDelegate>
-@property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
+//@property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
 @property(nonatomic,assign)EVideoRole iVideoRole;
 /** *  画笔 */
-@property (nonatomic, strong) UIImageView * _Nullable iDrawImageView;
+//@property (nonatomic, strong) UIImageView * _Nullable iDrawImageView;
 /** *  音频 */
 @property (nonatomic, strong) UIImageView * _Nullable iAudioImageView;
 /** *  举手 */
@@ -179,6 +179,9 @@ static const CGFloat sVideoSmallNameLabelHeight = 0;
     return self;
 }
 -(void)functionButtonClicked:(UIButton *)aButton{
+    
+    return;
+
     TKLog(@"aaaaaa");
     if (!_iFunctionView) {
         switch (_iVideoRole) {

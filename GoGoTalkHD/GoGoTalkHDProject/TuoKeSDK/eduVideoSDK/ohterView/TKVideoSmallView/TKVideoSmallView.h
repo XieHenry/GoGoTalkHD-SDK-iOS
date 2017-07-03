@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "TKMacro.h"
+#import "TKVideoFunctionView.h"
+
 @class TKEduClassRoomSessionHandle;
 // 枚举四个吸附方向
 typedef NS_ENUM(NSInteger, EDir)
@@ -59,6 +61,12 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)();
 @property (nonatomic, strong) UIImageView * _Nullable iVideoBackgroundImageView;
 /** *  授权等点击事件 */
 @property(strong,nonatomic)UIButton *_Nonnull iFunctionButton;
+
+@property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
+/** *  画笔 */
+@property (nonatomic, strong) UIImageView * _Nullable iDrawImageView;
+
+
 
 @property(strong,nonatomic)TKEduClassRoomSessionHandle *_Nonnull iEduClassRoomSessionHandle;
 

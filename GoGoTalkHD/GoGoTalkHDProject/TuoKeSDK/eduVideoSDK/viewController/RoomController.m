@@ -112,7 +112,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 
 
 //https://imtx.me/archives/1933.html 黑色背景
-@interface RoomController() <TKEduWhiteBoardDelegate,TKEduClassRoomSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIPopoverPresentationControllerDelegate>
+@interface RoomController() <TKEduWhiteBoardDelegate,TKEduClassRoomSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIPopoverPresentationControllerDelegate,VideolistProtocol>
+
 
 
 //其他
@@ -305,10 +306,54 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     [_iScroll bringSubviewToFront:_iClassTimeView];
     [_iScroll bringSubviewToFront:_iTKEduWhiteBoardView];
     
-  
+#pragma mark - 添加画笔功能
+    _iOurVideoView.iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(_iOurVideoView.frame), CGRectGetMinY(_iOurVideoView.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleOur];
+    _iOurVideoView.iFunctionView.iDelegate = self;
+    [[UIApplication sharedApplication].keyWindow addSubview:_iOurVideoView.iFunctionView];
+    _iOurVideoView.iFunctionView.hidden = YES;
+    
+    
+    @weakify(self);
+    [[_xc_drawButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        _xc_drawButton.selected = !_xc_drawButton.selected;
+        @strongify(self);
+        NSLog(@"hello world");
+        
+        
+        if (_iOurVideoView.iFunctionView.iDelegate && [_iOurVideoView.iFunctionView.iDelegate respondsToSelector:@selector(videoSmallbutton1:aVideoRole:)]) {
+            [(id<VideolistProtocol>)_iOurVideoView.iFunctionView.iDelegate videoSmallbutton1:_xc_drawButton aVideoRole:EVideoRoleOur];
+        }
+        
+    }];
    
+}
+
+-(void)videoSmallbutton1:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
+    
+    if (!_iOurVideoView.iPeerId || ![_iOurVideoView.iPeerId isEqualToString:@""]) {
+        _iOurVideoView.iCurrentPeerId = _iOurVideoView.iPeerId;
+    }
+    if (aVideoRole == EVideoRoleTeacher) {
+        TKLog(@"关闭视频");
+        
+        if (!aButton.selected) {
+            [_iOurVideoView.iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iOurVideoView.iCurrentPeerId Publish:PublishState_NONE completion:nil];
+        }else{
+            [_iOurVideoView.iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iOurVideoView.iCurrentPeerId Publish:PublishState_BOTH completion:nil];
+        }
+        
+        //        [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iPeerId TellWhom:sTellAll Key:sPublishstate Value:@(aButton.selected) completion:nil];
+        
+    }else{
+        TKLog(@"授权涂鸦");
+        _iOurVideoView.iDrawImageView.hidden = !aButton.selected;
+        [_iOurVideoView.iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iOurVideoView.iCurrentPeerId TellWhom:sTellAll Key:sCandraw Value:@(aButton.selected) completion:nil];
+        
+    }
+    //_iEduClassRoomSessionHandle
     
 }
+
 
 -(void)initAutoReconection{
     _iAFNetworkReachablitityManager = [TKAFNetworkReachabilityManager sharedManager];
