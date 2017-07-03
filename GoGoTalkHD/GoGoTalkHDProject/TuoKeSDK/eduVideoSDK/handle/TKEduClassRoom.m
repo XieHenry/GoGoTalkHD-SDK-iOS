@@ -46,6 +46,7 @@ TKNavigationController* _iEduNavigationController = nil;
 @property (nonatomic, strong) TKEduClassRoomProperty * iRoomProperty;
 @property (nonatomic, strong) TKEduClassRoomSessionHandle * iTKEduClassRoomsessionHandle;
 @property (nonatomic, strong) TKProgressHUD *HUD;
+@property (nonatomic, assign) NSInteger xc_showHUDCount;
 @end
 
 @implementation TKEduClassRoom
@@ -56,6 +57,7 @@ TKNavigationController* _iEduNavigationController = nil;
     dispatch_once(&onceToken, ^
                   {
                       singleton = [[TKEduClassRoom alloc] init];
+                      singleton.xc_showHUDCount = 1;
                   });
     
     return singleton;
@@ -94,7 +96,12 @@ TKNavigationController* _iEduNavigationController = nil;
     [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
     _HUD.dimBackground = YES;
     _HUD.removeFromSuperViewOnHide = YES;
-    [_HUD show:YES];
+    
+    if (self.xc_showHUDCount % 2 == 0) {
+        [_HUD show:YES];
+    }
+    self.xc_showHUDCount++;
+    
     [TKEduClassRoomNetWorkManager checkRoom:_iRoomProperty.iRoomId aPwd:_iRoomProperty.sCmdPassWord  aHost:_iRoomProperty.sWebIp aPort: _iRoomProperty.sWebPort   aUserID: _iRoomProperty.iUserId aDidComplete:^int( id _Nullable response ,NSString* aPassWord) {
         __strong typeof(self)strongSelf = weekSelf;
         _iRoomProperty.sCmdPassWord = aPassWord;
@@ -283,7 +290,8 @@ TKNavigationController* _iEduNavigationController = nil;
             }];
             [alertController addAction:tAction];
             [alertController addAction:tAction2];
-            [_iController presentViewController:alertController animated:YES completion:nil];
+#pragma mark - 不能弹框
+//            [_iController presentViewController:alertController animated:YES completion:nil];
             
         }else{
            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:MTLocalized(@"Prompt.prompt") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
@@ -307,6 +315,25 @@ TKNavigationController* _iEduNavigationController = nil;
             _iStatus = EClassStatus_IDLE;
 
         }
+        
+        if (ret == CONNECT_RESULE_PasswordError || ret == CONNECT_RESULE_NeedPassword)
+        {
+#pragma mark - 需要延迟操作 否则会崩溃
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                _iRoomProperty.sCmdPassWord = @"567";
+                NSDictionary *tDict = @{
+                                        @"serial"   :_iRoomProperty.iRoomId,
+                                        @"password":@"567",
+                                        @"host"    :_iRoomProperty.sWebIp,
+                                        @"port"    :_iRoomProperty.sWebPort,
+                                        // @"userid"  :_iRoomProperty.iUserId,
+                                        @"userrole":@(_iRoomProperty.sCmdUserRole),
+                                        @"nickname":_iRoomProperty.sNickName
+                                        };
+                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:_iController Delegate:_iTKEduEnterClassRoomDelegate];
+            });
+        }
+
     }
 }
 #pragma mark - private

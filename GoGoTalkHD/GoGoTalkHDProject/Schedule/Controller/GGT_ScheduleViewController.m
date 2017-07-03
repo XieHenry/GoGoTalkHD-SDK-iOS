@@ -671,7 +671,7 @@ static NSString * const CalendarCellID = @"cell";
 - (void)getLessonWithCourseModel:(GGT_CourseCellModel *)courseModel tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
     NSString *url = [NSString stringWithFormat:@"%@?lessonId=%@", URL_GetLessonByLessonId, courseModel.LessonId];
-    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self success:^(id responseObject) {
+    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
         if ([responseObject[@"data"] isKindOfClass:[NSArray class]]) {
             
