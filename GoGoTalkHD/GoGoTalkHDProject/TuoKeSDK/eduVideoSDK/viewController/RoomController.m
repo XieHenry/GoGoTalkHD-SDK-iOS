@@ -2057,11 +2057,12 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             break;
         case MessageType_Me:
         {
-            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitHeight:28 Font:TEXT_FONT];
-            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitHeight:28 Font:TEXT_FONT];
+//            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitHeight:28 Font:TEXT_FONT];
+//            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitHeight:28 Font:TEXT_FONT];
             
-            
-            tHeight = titlesize.height+tTranslationSize.height;
+            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
+            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
+            tHeight = titlesize.height+tTranslationSize.height + 10;
         }
             break;
         default:
