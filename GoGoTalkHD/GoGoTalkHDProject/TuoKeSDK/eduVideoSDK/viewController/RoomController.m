@@ -53,7 +53,7 @@
 #define VideoSmallViewLittleWidth  (([UIScreen mainScreen].bounds.size.width -6*VideoSmallViewMargins)/ 5.0)
 #define VideoSmallViewLittleHeigh (VideoSmallViewLittleWidth * 3.0/4.0)
 
-static CGFloat const kBottomDrawHeight = 64;
+
 
 @interface TGInputToolBarView : UIView
 @end
@@ -95,8 +95,16 @@ static const CGFloat sTeacherVideoViewHeigh     = 214;
 
 static const CGFloat sStudentVideoViewHeigh     = 112;
 static const CGFloat sStudentVideoViewWidth     = 120;
-static const CGFloat sRightViewChatBarHeight    = 50;
+//static const CGFloat sRightViewChatBarHeight    = 50;
+static const CGFloat sRightViewChatBarHeight    = 44;
+
 static const CGFloat sSendButtonWidth           = 64;
+
+static CGFloat const kBottomDrawHeight = 68;       // 画笔高度
+
+
+
+
 static NSString *const sMessageCellIdentifier           = @"messageCellIdentifier";
 static NSString *const sStudentCellIdentifier           = @"studentCellIdentifier";
 static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifier";
@@ -871,7 +879,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             TKGrowingTextView *tInputField =  [[TKGrowingTextView alloc] initWithFrame:rectInputFieldFrame];
 //            tInputField.internalTextView.backgroundColor = RGBCOLOR(62,62,62);
             tInputField.internalTextView.backgroundColor = [UIColor whiteColor];
-            [tInputField xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:4];
+            
+            tInputField.layer.masksToBounds = YES;
+            tInputField.layer.cornerRadius = 4;
+
             
             //tInputField.internalTextView.backgroundColor = [UIColor magentaColor];
             [tInputField.internalTextView setTextColor:RGBACOLOR(168, 168, 168, 1)];
@@ -2171,9 +2182,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 
 - (void)replyAction2:(UIButton *)button
 {
-    button.selected = YES;
-    [self.view endEditing:YES];
-    [self showPopView:button];
+#pragma 有问题
+//    button.selected = YES;
+//    [self.view endEditing:YES];
+//    [self showPopView:button];
 }
 
 - (void)showPopView:(UIButton *)button
