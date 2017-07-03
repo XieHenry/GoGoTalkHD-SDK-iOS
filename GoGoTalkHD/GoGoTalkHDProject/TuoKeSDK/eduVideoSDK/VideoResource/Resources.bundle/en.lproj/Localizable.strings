@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  libMeetings
+
+  Created by miniMac on 16/2/24.
+  Copyright © 2016年 macmini. All rights reserved.
+*/
+"Error.NoMeeting" = "Cannot find this meeting";
+"Error.NoLiving" = "Cannot find this Living";
+"Error.NotSupportThisType" = "Do't Support this Live's type,please use computer login";
+"Error.ServerExpired" = "Server license is expired";
+"Error.CheckmeetingFail" = "Check meeting fail";
+"Error.CheckserverInformationFail" = "Failed to get server information";
+"Error.CompanyFreeze" = "Your company has been frozen";
+"Error.RoomDeletedOrExpired" = "The Room has been deleted or expired";
+"Error.MemberOverRoomLimit" = "The maximum number of participants is exceeding limitaion.";
+"Error.NeedPwd" = "A password is required for this rooom";
+"Error.PwdError" = "the password of room is error";
+"Error.AuthIncorrect" = "Invalid parameter";
+"Error.WaitingForNetwork" = "Your network is temporarily unavailable, please try again later";
+//Prompt
+"Prompt.prompt" = "Prompt";
+"Prompt.inputPwd" = "A password is required for this rooom";
+"Prompt.OK" = "OK";
+"Prompt.Cancel" = "Cancel";
+"Prompt.Know" = "Yes,I know";
+"Prompt.Quite" = "Do you want to exit";
+"Prompt.nicknameNotNull" = "The nickName cannot be empt";
+"Prompt.RoomIDNotNull" = "The RoomId cannot be empt";
+"Login.EnterRoom" = "Enter the classroom";
+"Login.RoomId"    = "classroom number";
+"Login.nickName"  = "nickName";
+"Login.Role"      = "role";
+// State
+"State.connecting" = "connecting";
+"State.updating" = "updating";
+"State.Connecting" = "Connecting...";
+"State.Updating" = "Updating...";
+"State.WaitingForNetwork" = "Waiting for network";
+"State.ConnectFailure" = "Failed to connect";
+"State.ConnectException" = "Exception to connect";
+"State.ConnectLocked" = "Meeting room is locked";
+"State.Retry" = "retry";
+"State.Reconnecting" = "Automatic reconnection...";
+"KickOut.ChairmanKick" = "You have been kicked out of conference by chairman...";
+"KickOut.Repeat" = "Users of the same identity enter, you have left the room";
+//role
+"Role.Me" = "me";
+"Role.Teacher" = "teacher";
+//say
+"Say.say" = "say something";
+//button
+"Button.send" = "send";
+//Class.Begin
+"Class.Begin" = "Class is beginning";
+"Class.Over" = "Class is over";
+
+
+"Button.MuteAudio" = "Mute All";
+"Button.Reward"    = "Reward All";
+"Button.ClassBegin"    = "Class Begin";
+"Button.ClassIsOver"    = "Class is over";
+"Button.ClassEnd"      = "Class End";
+"Button.RaiseHand"     = "RaiseHand";

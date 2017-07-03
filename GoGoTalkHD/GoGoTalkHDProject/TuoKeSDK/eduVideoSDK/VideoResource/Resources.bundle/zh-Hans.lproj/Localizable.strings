@@ -1,0 +1,65 @@
+/*
+ Meetings.strings
+ Meetings
+ 
+ Created by macmini on 15/2/3.
+ Copyright (c) 2015年 macmini. All rights reserved.
+ */
+"Error.NoMeeting" = "会议不存在";
+"Error.NoLiving" = "直播不存在";
+"Error.NotSupportThisType" = "不支持这种直播类型，请用电脑端登陆";
+"Error.ServerExpired" = "服务器过期";
+"Error.CheckmeetingFail" = "检查会议失败";
+"Error.CheckserverInformationFail" = "获取服务器信息失败";
+"Error.CompanyFreeze" = "公司被冻结";
+"Error.RoomDeletedOrExpired" = "教室被删除或过期";
+"Error.MemberOverRoomLimit" = "教室人数超过限制";
+"Error.NeedPwd" = "该教室需要密码，请输入密码";
+"Error.PwdError" = "教室密码错误!";
+"Error.AuthIncorrect" = "Auth不正确";
+"Error.WaitingForNetwork" = "您的网络暂时不可用,请稍后重试";
+//Prompt
+"Prompt.prompt" = "提示";
+"Prompt.inputPwd" = "请输入秘密";
+"Prompt.OK" = "确定";
+"Prompt.Cancel" = "取消";
+"Prompt.Know" = "知道啦";
+"Prompt.Quite" = "您确定退出吗？";
+"Prompt.nicknameNotNull" = "昵称不能为空";
+"Prompt.RoomIDNotNull" = "课堂号不能为空";
+"Login.EnterRoom" = "进入教室";
+"Login.RoomId" = "教室号";
+"Login.nickName" = "昵称";
+"Login.Role"      = "角色";
+// State
+"State.connecting" = "连接中";
+"State.updating" = "更新数据";
+"State.Connecting" = "连接中...";
+"State.Updating" = "更新数据...";
+"State.WaitingForNetwork" = "离线";
+"State.ConnectFailure" = "连接失败！";
+"State.ConnectException" = "网路异常！";
+"State.ConnectLocked" = "会议室锁死！";
+"State.Retry" = "重连";
+"State.Reconnecting" = "自动重连中...";
+"KickOut.ChairmanKick" = "您已被主席请出会议...";
+"KickOut.Repeat" = "有相同身份的用户进入，您已经离开房间";
+//role
+"Role.Me" = "我";
+"Role.Teacher" = "老师";
+//say
+"Say.say" = "说点什么吧";
+//button
+"Button.send" = "发送";
+//Class.Begin
+"Class.Begin" = "上课啦";
+"Class.Over" = "下课啦";
+
+"Button.MuteAudio" = "全体静音";
+"Button.Reward"    = "全员奖励";
+"Button.ClassBegin"    = "开始上课";
+"Button.ClassIsOver"    = "下课";
+"Button.ClassEnd"      = "课程结束";
+"Button.RaiseHand"     = "举手";
+
+
