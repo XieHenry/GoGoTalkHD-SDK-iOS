@@ -43,6 +43,7 @@ static CGFloat const marginMineRight = 586.0f;
 #define Color2C2C2C 0x2C2C2C
 #define Color0198FF 0x0198FF
 #define Color7E7E7E 0x7E7E7E
+#define ColorC8C8CE 0xC8C8CE
 
 //灰色界面背景
 #define ColorF2F2F2 0xF2F2F2

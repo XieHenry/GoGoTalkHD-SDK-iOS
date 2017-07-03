@@ -835,8 +835,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         _inputContainer  = ({
             
             TGInputToolBarView *tTollBarView =  [[TGInputToolBarView alloc] initWithFrame:_inputContainerFrame];
-//            tTollBarView.backgroundColor       = RGBCOLOR(62,62,62);
-            tTollBarView.backgroundColor = UICOLOR_FROM_HEX(0xc8c8ce);
+            tTollBarView.backgroundColor = UICOLOR_FROM_HEX(ColorC8C8CE);
             //tTollBarView.layer.backgroundColor = RGBCOLOR(247,247,247).CGColor;
             tTollBarView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
             tTollBarView;
@@ -854,8 +853,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
             TGInputToolBarView *tInputInerContainer  = [[TGInputToolBarView alloc] initWithFrame:tInPutInerContainerRect];
             tInputInerContainer.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//            tInputInerContainer.backgroundColor =  RGBCOLOR(62, 62, 62);
-            tInputInerContainer.backgroundColor = UICOLOR_FROM_HEX(0xc8c8ce);
+            tInputInerContainer.backgroundColor = UICOLOR_FROM_HEX(ColorC8C8CE);
             tInputInerContainer;
             
             
@@ -2045,7 +2043,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         }
             break;
        
-        case MessageType_OtherUer:
+        case MessageType_Me:
         {
             CGSize titlesize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
             CGSize tTranslationSize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
@@ -2054,11 +2052,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
         }
             break;
-        case MessageType_Me:
+        case MessageType_OtherUer:
         {
-//            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitHeight:28 Font:TEXT_FONT];
-//            CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitHeight:28 Font:TEXT_FONT];
-            
             CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
             CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
 
@@ -2090,7 +2085,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             return tCell;
         }
             break;
-        case MessageType_OtherUer:
+        case MessageType_Me:
         {
             TKTeacherMessageTableViewCell *tCell = ( TKTeacherMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:sStudentCellIdentifier forIndexPath:indexPath];
              tCell.iText = tMessageModel.iMessage;
@@ -2099,7 +2094,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
         }
             break;
-        case MessageType_Me:
+        case MessageType_OtherUer:
         {
              TKStudentMessageTableViewCell* tCell = ( TKStudentMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:sTeacherCellIdentifier forIndexPath:indexPath];
 

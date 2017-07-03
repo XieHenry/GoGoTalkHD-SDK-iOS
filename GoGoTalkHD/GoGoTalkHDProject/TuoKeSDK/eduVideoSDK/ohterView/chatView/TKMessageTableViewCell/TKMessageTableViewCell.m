@@ -29,6 +29,12 @@
     _iMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _iMessageLabel.textColor = RGBCOLOR(134, 134, 134);
     _iMessageLabel.backgroundColor = [UIColor clearColor];
+    
+    _iMessageLabel.textColor = [UIColor whiteColor];
+    _iMessageLabel.backgroundColor = UICOLOR_FROM_HEX(ColorC8C8CE);
+    _iMessageLabel.layer.masksToBounds = YES;
+    _iMessageLabel.layer.cornerRadius = 4.0f;
+    
     [_iMessageLabel setFont:TEXT_FONT];
     [self.contentView addSubview:_iMessageLabel];
     self.contentView.backgroundColor = [UIColor clearColor];
@@ -37,7 +43,7 @@
 }
 - (void)resetView
 {
-    _iMessageLabel.text = _text;
+    _iMessageLabel.text = [NSString stringWithFormat:@" %@ ", _text];
 }
 
 

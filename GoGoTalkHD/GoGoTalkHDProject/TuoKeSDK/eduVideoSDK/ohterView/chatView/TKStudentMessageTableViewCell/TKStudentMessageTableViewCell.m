@@ -19,6 +19,7 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupView];
     }
     return self;
@@ -139,6 +140,7 @@
             tLabel.backgroundColor = RGBCOLOR(28, 28, 28);
             tLabel.font            = TKFont(15);
             tLabel.numberOfLines = 0;
+            tLabel.hidden = YES;
             tLabel;
             
         });
@@ -166,12 +168,10 @@
     
     CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:CGRectGetWidth(self.contentView.frame)-22*Proportion-10*2*Proportion Font:TKFont(15)];
     
-//    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
-//    _iMessageView.frame = CGRectMake(CGRectGetWidth(self.frame)-tMessageLabelsize.width+5, 0, tMessageLabelsize.width+22*Proportion+5, tMessageLabelsize.height+5);
     
     _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5+5, tMessageLabelsize.height+5);
     
-    _iMessageView.frame = CGRectMake(CGRectGetWidth(self.frame)-_iMessageLabel.width-5, 0, _iMessageLabel.width, _iMessageLabel.height+5);
+    _iMessageView.frame = CGRectMake(CGRectGetWidth(self.frame)-_iMessageLabel.width-5, 0, _iMessageLabel.width, _iMessageLabel.height);
 
     
     _xc_imgView.frame = CGRectMake(-5, 0, _iMessageView.width+10, _iMessageView.height);
