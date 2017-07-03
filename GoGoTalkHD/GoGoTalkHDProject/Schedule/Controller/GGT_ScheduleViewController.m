@@ -644,8 +644,7 @@ static NSString * const CalendarCellID = @"cell";
                             };
     TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
     shareRoom.xc_roomPassword = @"567";
-
-//    shareRoom.xc_roomName = cell1.xc_cellModel.LessonName;
+    shareRoom.xc_roomName = cell1.xc_cellModel.LessonName;
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
     
     return;

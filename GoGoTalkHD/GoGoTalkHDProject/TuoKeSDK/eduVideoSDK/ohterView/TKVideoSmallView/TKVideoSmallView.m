@@ -50,7 +50,7 @@ static const CGFloat sVideoSmallNameLabelHeight = 0;
         //[iRootView addSubview:self];
         _iRootView  = iRootView;
         _iGifNumber = 0;
-        self.backgroundColor = RGBCOLOR(47, 47, 47);
+        self.backgroundColor = [UIColor clearColor];
         //self.userInteractionEnabled = NO;
         CGFloat tVideoWidth     = CGRectGetWidth(frame);
         CGFloat tVideoHeigh     = CGRectGetHeight(frame)-sVideoSmallNameLabelHeight*Proportion;
@@ -60,19 +60,18 @@ static const CGFloat sVideoSmallNameLabelHeight = 0;
         _iVideoRole = aVideoRole;
         switch (aVideoRole) {
             case EVideoRoleTeacher:{
-                
+                _iVideoBackgroundImageView.image = UIIMAGE_FROM_NAME(@"icon_teacher");
                  break;
             }
             case EVideoRoleOur:{
                 
-                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_big");
+                _iVideoBackgroundImageView.image = UIIMAGE_FROM_NAME(@"icon_students");
                 break;
                 
             }
             default:{
                 
-                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
-                
+                _iVideoBackgroundImageView.image = UIIMAGE_FROM_NAME(@"icon_teacher");
                 break;
                 
             }

@@ -483,6 +483,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         tTitleLabel.font = Font(18);
         tTitleLabel.textColor = RGBCOLOR(255, 255, 255);
         tTitleLabel.textColor = UICOLOR_FROM_HEX(kThemeColor);
+        
+        TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+        tTitleLabel.text = shareRoom.xc_roomName;
+        
         tTitleLabel;
         
     });
@@ -1708,7 +1712,11 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     _iTKEduClassRoomProperty.iRoomName =_iTKEduClassRoomSessionHandle.roomName;
     _iTKEduClassRoomProperty.iRoomId = [_iTKEduClassRoomSessionHandle.roomProperties objectForKey:@"serial"];
     _iTKEduClassRoomProperty.iUserId = _iTKEduClassRoomSessionHandle.localUser.peerID;
-    _titleLable.text =  _iTKEduClassRoomSessionHandle.roomName;
+    
+//    _titleLable.text =  _iTKEduClassRoomSessionHandle.roomName;
+    TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+    _titleLable.text = shareRoom.xc_roomName;
+    
     _iGiftCount = [[_iTKEduClassRoomSessionHandle.localUser.properties objectForKey:sGiftNumber]integerValue];
     BOOL meHasVideo = _iTKEduClassRoomSessionHandle.localUser.hasVideo;
     BOOL meHasAudio = _iTKEduClassRoomSessionHandle.localUser.hasAudio;

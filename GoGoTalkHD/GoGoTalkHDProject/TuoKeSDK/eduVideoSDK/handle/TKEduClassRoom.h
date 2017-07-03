@@ -48,4 +48,7 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 // 需要密码 title
 @property (nonatomic, strong) NSString *xc_roomPassword;
 
+// 教室名字
+@property (nonatomic, strong) NSString *xc_roomName;
+
 @end
