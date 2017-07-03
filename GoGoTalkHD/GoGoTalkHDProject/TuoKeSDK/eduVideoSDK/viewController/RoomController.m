@@ -50,6 +50,7 @@
 #define VideoSmallViewLittleWidth  (([UIScreen mainScreen].bounds.size.width -6*VideoSmallViewMargins)/ 5.0)
 #define VideoSmallViewLittleHeigh (VideoSmallViewLittleWidth * 3.0/4.0)
 
+static CGFloat const kBottomDrawHeight = 64;
 
 @interface TGInputToolBarView : UIView
 @end
@@ -80,11 +81,14 @@ static const CGFloat sRaiseHandHeigh = 35;
 
 #pragma mark nav
 static const CGFloat sDocumentButtonWidth = 55;
-static const CGFloat sRightWidth          = 234;
+//static const CGFloat sRightWidth          = 234;
+static const CGFloat sRightWidth          = 286;
+
 static const CGFloat sClassTimeViewHeigh  = 57.5;
 static const CGFloat sViewCap             = 10;
 static const CGFloat sBottomViewHeigh     = 132;
-static const CGFloat sTeacherVideoViewHeigh     = 182;
+//static const CGFloat sTeacherVideoViewHeigh     = 182;
+static const CGFloat sTeacherVideoViewHeigh     = 214;
 
 static const CGFloat sStudentVideoViewHeigh     = 112;
 static const CGFloat sStudentVideoViewWidth     = 120;
@@ -204,7 +208,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 @property (nonatomic, strong) UIImageView *iGiftAnimationView;
 @property (nonatomic, assign) NSInteger iGiftCount;
 
-
+// 底部画笔
+@property (nonatomic) UIView *xc_bottomToolBarParentView;
+@property (nonatomic) UIButton *xc_cleanButton;
+@property (nonatomic) UIButton *xc_drawButton;
 
 
 @end
@@ -228,11 +235,18 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     
     [super viewWillDisappear:animated];
     [self invalidateTimer];
+#pragma mark - 设置状态栏颜色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self setNeedsStatusBarAppearanceUpdate];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     // Do any additional setup after loading the view, typically from a nib.
     CGRect tFrame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -256,6 +270,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         tScrollView.delegate = self;
         tScrollView.contentSize = CGSizeMake(CGRectGetWidth(tFrame), CGRectGetHeight(tFrame));
         tScrollView.backgroundColor =  RGBCOLOR(62,62,62);
+        
+        tScrollView.backgroundColor = [UIColor whiteColor];
+        
         tScrollView;
     
     
@@ -373,6 +390,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         
         UIView *tTitleView = [[UIView alloc] initWithFrame: CGRectMake(0, 20, CGRectGetWidth(aFrame), sDocumentButtonWidth*Proportion)];
         tTitleView.backgroundColor =  RGBCOLOR(41, 41, 41) ;
+        tTitleView.backgroundColor = [UIColor whiteColor];
         tTitleView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         tTitleView;
     });
@@ -386,8 +404,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 //        tLeftButton.center = CGPointMake(25+8, _titleView.center.y);
         tLeftButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         
-        [tLeftButton setImage: LOADIMAGE(@"btn_back_normal") forState:UIControlStateNormal];
-        [tLeftButton setImage: LOADIMAGE(@"btn_back_pressed") forState:UIControlStateHighlighted];
+        [tLeftButton setImage: UIIMAGE_FROM_NAME(@"fanhui_red") forState:UIControlStateNormal];
+        [tLeftButton setImage: UIIMAGE_FROM_NAME(@"fanhui_red") forState:UIControlStateHighlighted];
         [tLeftButton addTarget:self action:@selector(leftButtonPress) forControlEvents:UIControlEventTouchUpInside];
         tLeftButton;
         
@@ -399,13 +417,16 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     
     _titleLable = ({
         
-        UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, self.view.frame.size.width-65-sDocumentButtonWidth*4- 8* 4, sDocumentButtonWidth*Proportion)];
+        //        UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, self.view.frame.size.width-65-sDocumentButtonWidth*4- 8* 4, sDocumentButtonWidth*Proportion)];
+        
+        UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, self.view.frame.size.width-65*2, sDocumentButtonWidth*Proportion)];
         tTitleLabel.text = _iTKEduClassRoomProperty.iRoomName ;
         tTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tTitleLabel.backgroundColor = [UIColor clearColor];
-        tTitleLabel.textAlignment = NSTextAlignmentLeft;
-        tTitleLabel.font = TKFont(21);
+        tTitleLabel.textAlignment = NSTextAlignmentCenter;
+        tTitleLabel.font = Font(18);
         tTitleLabel.textColor = RGBCOLOR(255, 255, 255);
+        tTitleLabel.textColor = UICOLOR_FROM_HEX(kThemeColor);
         tTitleLabel;
         
     });
@@ -485,8 +506,11 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     
     [_iScroll addSubview:_iClassTimeView];
     
-   
     
+#pragma mark - 隐藏顶部导航栏上面的button
+    _iMediaButton.hidden = YES;
+    _iUserButton.hidden = YES;
+    _iDocumentButton.hidden = YES;
     
 }
 
@@ -541,13 +565,16 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     CGFloat tViewWidth = (sRightWidth-2*sViewCap)*Proportion;
     {
         
-        _iTeacherVideoView.frame = CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion);
+//        _iTeacherVideoView.frame = CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion);
+        _iTeacherVideoView.frame = CGRectMake(0, 0, sRightWidth, sTeacherVideoViewHeigh*Proportion);
     }
     //我
     {
         
         CGFloat tOurVideoViewHeight = (_iRoomType == RoomType_OneToOne)?sTeacherVideoViewHeigh*Proportion:0;
-        _iOurVideoView.frame = CGRectMake(tViewCap,CGRectGetMaxY(_iTeacherVideoView.frame)+tViewCap, tViewWidth, tOurVideoViewHeight);
+//        _iOurVideoView.frame = CGRectMake(tViewCap,CGRectGetMaxY(_iTeacherVideoView.frame)+tViewCap, tViewWidth, tOurVideoViewHeight);
+        
+        _iOurVideoView.frame = CGRectMake(0,CGRectGetMaxY(_iTeacherVideoView.frame), sRightWidth, tOurVideoViewHeight);
          _iOurVideoView.hidden = !tOurVideoViewHeight;
        
         
@@ -581,9 +608,11 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     //聊天
     {
         CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
-        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)-tChatHeight-tViewCap;
+//        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)-tChatHeight-tViewCap;
+//        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight);
         
-        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight);
+        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iOurVideoView.frame)-tChatHeight;
+        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iOurVideoView.frame), CGRectGetWidth(_iRightView.frame), tChatTableHeight);
         
         _inputContainerFrame      = CGRectMake(0, CGRectGetMaxY(_iChatTableView.frame), sRightWidth*Proportion, tChatHeight);
         _inputContainer.frame     = _inputContainerFrame;
@@ -592,13 +621,19 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         {
             CGFloat tInPutInerContainerWidth = CGRectGetWidth(_inputInerContainer.frame);
             CGFloat tInPutInerContainerHeigh = CGRectGetHeight(_inputInerContainer.frame);
-            CGRect rectInputFieldFrame = CGRectMake(0, 0, tInPutInerContainerWidth-sSendButtonWidth, tInPutInerContainerHeigh);
+//            CGRect rectInputFieldFrame = CGRectMake(0, 0, tInPutInerContainerWidth-sSendButtonWidth, tInPutInerContainerHeigh);
+            
+            CGRect rectInputFieldFrame = CGRectMake(8, 8, tInPutInerContainerWidth-sSendButtonWidth-8*2, tInPutInerContainerHeigh-8*2);
+
             _inputField.frame = rectInputFieldFrame;
         
         }
         {
             CGFloat tInPutInerContainerHeigh = CGRectGetHeight(_inputInerContainer.frame);
-            CGRect tReplyTextFrame = CGRectMake(0, 0, 100, tInPutInerContainerHeigh);
+//            CGRect tReplyTextFrame = CGRectMake(0, 0, 100, tInPutInerContainerHeigh);
+            
+            CGRect tReplyTextFrame = CGRectMake(8, 8, 100, tInPutInerContainerHeigh-8*2);
+
             _replyText.frame = tReplyTextFrame;
         
         }
@@ -630,11 +665,13 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     {
         CGFloat tRightY = CGRectGetMaxY(_titleView.frame);
         CGRect tRithtFrame = CGRectMake(ScreenW-sRightWidth*Proportion, tRightY, sRightWidth*Proportion, ScreenH-tRightY);
-        
+
+#pragma mark -  右侧老师、学生、聊天界面的父view
         _iRightView = ({
             
             UIView *tRightView = [[UIView alloc] initWithFrame: tRithtFrame];
-            tRightView.backgroundColor =  RGBCOLOR(62, 62, 62) ;
+//            tRightView.backgroundColor =  RGBCOLOR(62, 62, 62) ;
+            tRightView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
             tRightView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             tRightView;
         });
@@ -648,7 +685,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     
         _iTeacherVideoView= ({
             
-            TKVideoSmallView *tTeacherVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion) iRootView:nil aVideoRole:EVideoRoleTeacher];
+//            TKVideoSmallView *tTeacherVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion) iRootView:nil aVideoRole:EVideoRoleTeacher];
+            
+            TKVideoSmallView *tTeacherVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(0, 0, _iRightView.width, sTeacherVideoViewHeigh*Proportion) iRootView:nil aVideoRole:EVideoRoleTeacher];
             tTeacherVideoView.iPeerId = @"";
             tTeacherVideoView.iVideoViewTag = VideoViewTag_TeacherVideoView;
             tTeacherVideoView.iEduClassRoomSessionHandle = _iTKEduClassRoomSessionHandle;
@@ -664,7 +703,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         CGFloat tOurVideoViewHeight = (_iRoomType == RoomType_OneToOne)?sTeacherVideoViewHeigh*Proportion:0;
         _iOurVideoView= ({
             
-            TKVideoSmallView *tOurVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(tViewCap,CGRectGetMaxY(_iTeacherVideoView.frame)+tViewCap, tViewWidth, tOurVideoViewHeight) iRootView:nil aVideoRole:EVideoRoleOur];
+//            TKVideoSmallView *tOurVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(tViewCap,CGRectGetMaxY(_iTeacherVideoView.frame)+tViewCap, tViewWidth, tOurVideoViewHeight) iRootView:nil aVideoRole:EVideoRoleOur];
+            
+            TKVideoSmallView *tOurVideoView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_iTeacherVideoView.frame), _iRightView.width, tOurVideoViewHeight) iRootView:nil aVideoRole:EVideoRoleOur];
             tOurVideoView.iPeerId = @"";
              tOurVideoView.iEduClassRoomSessionHandle = _iTKEduClassRoomSessionHandle;
             tOurVideoView.iVideoViewTag = VideoViewTag_OurVideoView;
@@ -749,16 +790,22 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         
         [_iRightView addSubview:_iClassBeginAndRaiseHandButton];
         
-    
+#pragma mark - 隐藏举手按钮
+        _iClassBeginAndRaiseHandButton.hidden = YES;
     
     }
     //聊天
     {
          CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
-         CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)-tChatHeight-tViewCap;
+//         CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)-tChatHeight-tViewCap;
+        
+        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iOurVideoView.frame)-tChatHeight;
+        
+//        _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
         
         
-        _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndRaiseHandButton.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
+        _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iOurVideoView.frame), CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
+
         _iChatTableView.backgroundColor = [UIColor clearColor];
 
         _iChatTableView.separatorColor  = [UIColor clearColor];
@@ -777,7 +824,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         _inputContainer  = ({
             
             TGInputToolBarView *tTollBarView =  [[TGInputToolBarView alloc] initWithFrame:_inputContainerFrame];
-            tTollBarView.backgroundColor       = RGBCOLOR(62,62,62);
+//            tTollBarView.backgroundColor       = RGBCOLOR(62,62,62);
+            tTollBarView.backgroundColor = UICOLOR_FROM_HEX(0xc8c8ce);
             //tTollBarView.layer.backgroundColor = RGBCOLOR(247,247,247).CGColor;
             tTollBarView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
             tTollBarView;
@@ -795,7 +843,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
             TGInputToolBarView *tInputInerContainer  = [[TGInputToolBarView alloc] initWithFrame:tInPutInerContainerRect];
             tInputInerContainer.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-            tInputInerContainer.backgroundColor =  RGBCOLOR(62, 62, 62);
+//            tInputInerContainer.backgroundColor =  RGBCOLOR(62, 62, 62);
+            tInputInerContainer.backgroundColor = UICOLOR_FROM_HEX(0xc8c8ce);
             tInputInerContainer;
             
             
@@ -811,9 +860,15 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
             CGFloat tInPutInerContainerWidth = CGRectGetWidth(_inputInerContainer.frame);
             CGFloat tInPutInerContainerHeigh = CGRectGetHeight(_inputInerContainer.frame);
-            CGRect rectInputFieldFrame = CGRectMake(0, 0, tInPutInerContainerWidth-sSendButtonWidth, tInPutInerContainerHeigh);
+//            CGRect rectInputFieldFrame = CGRectMake(0, 0, tInPutInerContainerWidth-sSendButtonWidth, tInPutInerContainerHeigh);
+            
+            CGRect rectInputFieldFrame = CGRectMake(8, 8, tInPutInerContainerWidth-sSendButtonWidth-8*2, tInPutInerContainerHeigh-8*2);
+            
+            
             TKGrowingTextView *tInputField =  [[TKGrowingTextView alloc] initWithFrame:rectInputFieldFrame];
-            tInputField.internalTextView.backgroundColor = RGBCOLOR(62,62,62);
+//            tInputField.internalTextView.backgroundColor = RGBCOLOR(62,62,62);
+            tInputField.internalTextView.backgroundColor = [UIColor whiteColor];
+
             //tInputField.internalTextView.backgroundColor = [UIColor magentaColor];
             [tInputField.internalTextView setTextColor:RGBACOLOR(168, 168, 168, 1)];
             [tInputField.internalTextView setTintColor:RGBACOLOR(255, 255, 255, 1)];
@@ -834,7 +889,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         
         _replyText                 = ({
             CGFloat tInPutInerContainerHeigh = CGRectGetHeight(_inputInerContainer.frame);
-            CGRect tReplyTextFrame = CGRectMake(0, 0, 100, tInPutInerContainerHeigh);
+//            CGRect tReplyTextFrame = CGRectMake(0, 0, 100, tInPutInerContainerHeigh);
+            
+            CGRect tReplyTextFrame = CGRectMake(8, 8, 100, tInPutInerContainerHeigh-8*2);
+
             UILabel *tReplyText                 = [[UILabel alloc] initWithFrame:tReplyTextFrame];
             //tReplyText.backgroundColor = [UIColor redColor];
             tReplyText.textColor       = RGBCOLOR(99, 99, 99);
@@ -860,7 +918,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             tSendButton.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
             [tSendButton addTarget:self action:@selector(replyAction) forControlEvents:UIControlEventTouchUpInside];
             tSendButton.backgroundColor       = RGBCOLOR(62,62,62);
-            tSendButton.layer.borderColor     = RGBCOLOR(89,89,89).CGColor;
+            
+//            tSendButton.layer.borderColor     = RGBCOLOR(89,89,89).CGColor;
             tSendButton.layer.borderWidth     = 1;
             tSendButton.layer.masksToBounds = YES;
             tSendButton.layer.cornerRadius = 4;
@@ -889,7 +948,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
    
     CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), CGRectGetWidth(_iClassTimeView.frame), (CGRectGetHeight(_iRightView.frame)-sBottomViewHeigh)*Proportion);
     if (_iRoomType == RoomType_OneToOne) {
-        tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), CGRectGetWidth(_iClassTimeView.frame), (CGRectGetHeight(_iRightView.frame))*Proportion);
+//        tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), CGRectGetWidth(_iClassTimeView.frame), (CGRectGetHeight(_iRightView.frame))*Proportion);
+        
+        tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), CGRectGetWidth(_iClassTimeView.frame), (CGRectGetHeight(_iRightView.frame))*Proportion - kBottomDrawHeight);
+
     }
     TKEduClassRoomProperty      *tClassRoomProperty  = _iTKEduClassRoomProperty;
     TKEduClassRoomSessionHandle *tSessonHandle = _iTKEduClassRoomSessionHandle;
@@ -941,7 +1003,70 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         
     } aRootView:self.view];
     [_iScroll addSubview:_iTKEduWhiteBoardView];
+
+#pragma mark -  底部xc_bottomParentView
+    [self init_mas_bottomToolBarParentView];
+
 }
+
+/// 底部xc_bottomParentView
+- (void)init_mas_bottomToolBarParentView
+{
+    // 父view
+    self.xc_bottomToolBarParentView = ({
+        UIView *xc_bottomToolBarParentView = [UIView new];
+        xc_bottomToolBarParentView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+        xc_bottomToolBarParentView;
+    });
+    [_iScroll addSubview:self.xc_bottomToolBarParentView];
+    
+    self.xc_bottomToolBarParentView.frame = CGRectMake(0, _iTKEduWhiteBoardView.bottom, _iTKEduWhiteBoardView.width, (CGRectGetHeight(_iRightView.frame))*Proportion - _iTKEduWhiteBoardView.height);
+    
+    // 分割线
+    UIView *xc_lineView = [UIView new];
+    xc_lineView.backgroundColor = [UIColor whiteColor];
+    [self.xc_bottomToolBarParentView addSubview:xc_lineView];
+    [xc_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.xc_bottomToolBarParentView);
+        make.width.equalTo(@(1));
+        make.center.equalTo(self.xc_bottomToolBarParentView);
+    }];
+    
+    // 子xc_cleanButton
+    self.xc_cleanButton = ({
+        UIButton *xc_cleanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei") forState:UIControlStateNormal];
+        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei_copy") forState:UIControlStateHighlighted];
+        [xc_cleanButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
+        [xc_cleanButton sizeToFit];
+        xc_cleanButton;
+    });
+    [self.xc_bottomToolBarParentView addSubview:self.xc_cleanButton];
+    
+    [self.xc_cleanButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(1.0/2.0);
+        make.centerY.equalTo(self.xc_bottomToolBarParentView);
+    }];
+    
+    // 子xc_drawButton
+    self.xc_drawButton = ({
+        UIButton *xc_drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei") forState:UIControlStateNormal];
+        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei_copy") forState:UIControlStateSelected];
+        [xc_drawButton setFrame:CGRectMake(0, 0, self.xc_bottomToolBarParentView.width/2.0, self.xc_bottomToolBarParentView.height)];
+        [xc_drawButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
+        [xc_drawButton sizeToFit];
+        xc_drawButton;
+    });
+    [self.xc_bottomToolBarParentView addSubview:self.xc_drawButton];
+    
+    [self.xc_drawButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(3.0/2.0);
+        make.centerY.equalTo(self.xc_bottomToolBarParentView);
+    }];
+    
+}
+
 
 -(void)initBottomView{
     _iBottomView = ({
@@ -2491,9 +2616,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     return UIInterfaceOrientationLandscapeLeft;
 }
 #pragma mark 状态栏
-//设置样式
+//设置样式  没效果
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 //设置是否隐藏
