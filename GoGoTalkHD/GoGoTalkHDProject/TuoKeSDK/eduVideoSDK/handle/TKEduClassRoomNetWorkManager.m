@@ -256,9 +256,11 @@
                 int result = [[json objectForKey:@"result"]intValue];
                 
                 if (!result ) {
-                    NSDictionary *tRanslationDic = [json objectForKey:@"trans_result"];
+//                    NSDictionary *tRanslationDic = [json objectForKey:@"trans_result"];
+                    NSArray *tRanslationDic = [json objectForKey:@"trans_result"];
                     if (aTranslationComplete) {
-                        aTranslationComplete(json,[tRanslationDic objectForKey:@"dst"]);
+//                        aTranslationComplete(json,[tRanslationDic objectForKey:@"dst"]);
+                        aTranslationComplete(json,[tRanslationDic[0] objectForKey:@"dst"]);
                     }
                 }
                
