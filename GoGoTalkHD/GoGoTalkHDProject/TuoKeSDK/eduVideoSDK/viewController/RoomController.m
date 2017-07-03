@@ -935,7 +935,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
             
             tSendButton.titleLabel.font = TKFont(10);
-            tSendButton.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+
+#pragma mark - 注销  不然button会移动
+//            tSendButton.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+            
             [tSendButton addTarget:self action:@selector(replyAction2:) forControlEvents:UIControlEventTouchUpInside];
 //            tSendButton.backgroundColor       = RGBCOLOR(62,62,62);
             
@@ -2182,10 +2185,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 
 - (void)replyAction2:(UIButton *)button
 {
-#pragma 有问题
-//    button.selected = YES;
-//    [self.view endEditing:YES];
-//    [self showPopView:button];
+    button.selected = YES;
+    [self.view endEditing:YES];
+    [self showPopView:button];
 }
 
 - (void)showPopView:(UIButton *)button
