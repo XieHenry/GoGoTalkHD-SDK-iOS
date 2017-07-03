@@ -1,0 +1,13668 @@
+{
+"result": 0,
+"msg": "成功",
+"data": [
+{
+"ProvinceId": 51,
+"ProvinceName": "北京市",
+"city": [
+{
+"CityId": 85,
+"CityName": "北京市",
+"district": [
+{
+"DistrictId": 3280,
+"DistrictName": "东城区"
+},
+{
+"DistrictId": 3281,
+"DistrictName": "西城区"
+},
+{
+"DistrictId": 3282,
+"DistrictName": "朝阳区"
+},
+{
+"DistrictId": 3283,
+"DistrictName": "丰台区"
+},
+{
+"DistrictId": 3284,
+"DistrictName": "石景山区"
+},
+{
+"DistrictId": 3285,
+"DistrictName": "海淀区"
+},
+{
+"DistrictId": 3286,
+"DistrictName": "门头沟区"
+},
+{
+"DistrictId": 3287,
+"DistrictName": "房山区"
+},
+{
+"DistrictId": 3288,
+"DistrictName": "通州区"
+},
+{
+"DistrictId": 3289,
+"DistrictName": "顺义区"
+},
+{
+"DistrictId": 3290,
+"DistrictName": "昌平区"
+},
+{
+"DistrictId": 3291,
+"DistrictName": "大兴区"
+},
+{
+"DistrictId": 3292,
+"DistrictName": "怀柔区"
+},
+{
+"DistrictId": 3293,
+"DistrictName": "平谷区"
+},
+{
+"DistrictId": 3294,
+"DistrictName": "密云县"
+},
+{
+"DistrictId": 3295,
+"DistrictName": "延庆县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 52,
+"ProvinceName": "天津市",
+"city": [
+{
+"CityId": 86,
+"CityName": "天津市",
+"district": [
+{
+"DistrictId": 3296,
+"DistrictName": "和平区"
+},
+{
+"DistrictId": 3297,
+"DistrictName": "河东区"
+},
+{
+"DistrictId": 3298,
+"DistrictName": "河西区"
+},
+{
+"DistrictId": 3299,
+"DistrictName": "南开区"
+},
+{
+"DistrictId": 3300,
+"DistrictName": "河北区"
+},
+{
+"DistrictId": 3301,
+"DistrictName": "红桥区"
+},
+{
+"DistrictId": 3302,
+"DistrictName": "东丽区"
+},
+{
+"DistrictId": 3303,
+"DistrictName": "西青区"
+},
+{
+"DistrictId": 3304,
+"DistrictName": "津南区"
+},
+{
+"DistrictId": 3305,
+"DistrictName": "北辰区"
+},
+{
+"DistrictId": 3306,
+"DistrictName": "武清区"
+},
+{
+"DistrictId": 3307,
+"DistrictName": "宝坻区"
+},
+{
+"DistrictId": 3308,
+"DistrictName": "宁河县"
+},
+{
+"DistrictId": 3309,
+"DistrictName": "静海县"
+},
+{
+"DistrictId": 3310,
+"DistrictName": "蓟县"
+},
+{
+"DistrictId": 3311,
+"DistrictName": "滨海新区"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 53,
+"ProvinceName": "河北省",
+"city": [
+{
+"CityId": 87,
+"CityName": "石家庄市",
+"district": [
+{
+"DistrictId": 3312,
+"DistrictName": "长安区"
+},
+{
+"DistrictId": 3313,
+"DistrictName": "桥东区"
+},
+{
+"DistrictId": 3314,
+"DistrictName": "桥西区"
+},
+{
+"DistrictId": 3315,
+"DistrictName": "新华区"
+},
+{
+"DistrictId": 3316,
+"DistrictName": "井陉矿区"
+},
+{
+"DistrictId": 3317,
+"DistrictName": "裕华区"
+},
+{
+"DistrictId": 3318,
+"DistrictName": "井陉县"
+},
+{
+"DistrictId": 3319,
+"DistrictName": "正定县"
+},
+{
+"DistrictId": 3320,
+"DistrictName": "栾城县"
+},
+{
+"DistrictId": 3321,
+"DistrictName": "行唐县"
+},
+{
+"DistrictId": 3322,
+"DistrictName": "灵寿县"
+},
+{
+"DistrictId": 3323,
+"DistrictName": "高邑县"
+},
+{
+"DistrictId": 3324,
+"DistrictName": "深泽县"
+},
+{
+"DistrictId": 3325,
+"DistrictName": "赞皇县"
+},
+{
+"DistrictId": 3326,
+"DistrictName": "无极县"
+},
+{
+"DistrictId": 3327,
+"DistrictName": "平山县"
+},
+{
+"DistrictId": 3328,
+"DistrictName": "元氏县"
+},
+{
+"DistrictId": 3329,
+"DistrictName": "赵县"
+},
+{
+"DistrictId": 3330,
+"DistrictName": "辛集市"
+},
+{
+"DistrictId": 3331,
+"DistrictName": "藁城市"
+},
+{
+"DistrictId": 3332,
+"DistrictName": "晋州市"
+},
+{
+"DistrictId": 3333,
+"DistrictName": "新乐市"
+},
+{
+"DistrictId": 3334,
+"DistrictName": "鹿泉市"
+}
+]
+},
+{
+"CityId": 88,
+"CityName": "唐山市",
+"district": [
+{
+"DistrictId": 3335,
+"DistrictName": "路南区"
+},
+{
+"DistrictId": 3336,
+"DistrictName": "路北区"
+},
+{
+"DistrictId": 3337,
+"DistrictName": "古冶区"
+},
+{
+"DistrictId": 3338,
+"DistrictName": "开平区"
+},
+{
+"DistrictId": 3339,
+"DistrictName": "丰南区"
+},
+{
+"DistrictId": 3340,
+"DistrictName": "丰润区"
+},
+{
+"DistrictId": 3341,
+"DistrictName": "滦县"
+},
+{
+"DistrictId": 3342,
+"DistrictName": "滦南县"
+},
+{
+"DistrictId": 3343,
+"DistrictName": "乐亭县"
+},
+{
+"DistrictId": 3344,
+"DistrictName": "迁西县"
+},
+{
+"DistrictId": 3345,
+"DistrictName": "玉田县"
+},
+{
+"DistrictId": 3346,
+"DistrictName": "遵化市"
+},
+{
+"DistrictId": 3347,
+"DistrictName": "迁安市"
+},
+{
+"DistrictId": 3348,
+"DistrictName": "曹妃甸区"
+}
+]
+},
+{
+"CityId": 89,
+"CityName": "秦皇岛市",
+"district": [
+{
+"DistrictId": 3349,
+"DistrictName": "海港区"
+},
+{
+"DistrictId": 3350,
+"DistrictName": "山海关区"
+},
+{
+"DistrictId": 3351,
+"DistrictName": "北戴河区"
+},
+{
+"DistrictId": 3352,
+"DistrictName": "青龙满族自治县"
+},
+{
+"DistrictId": 3353,
+"DistrictName": "昌黎县"
+},
+{
+"DistrictId": 3354,
+"DistrictName": "抚宁县"
+},
+{
+"DistrictId": 3355,
+"DistrictName": "卢龙县"
+}
+]
+},
+{
+"CityId": 90,
+"CityName": "邯郸市",
+"district": [
+{
+"DistrictId": 3356,
+"DistrictName": "邯山区"
+},
+{
+"DistrictId": 3357,
+"DistrictName": "丛台区"
+},
+{
+"DistrictId": 3358,
+"DistrictName": "复兴区"
+},
+{
+"DistrictId": 3359,
+"DistrictName": "峰峰矿区"
+},
+{
+"DistrictId": 3360,
+"DistrictName": "邯郸县"
+},
+{
+"DistrictId": 3361,
+"DistrictName": "临漳县"
+},
+{
+"DistrictId": 3362,
+"DistrictName": "成安县"
+},
+{
+"DistrictId": 3363,
+"DistrictName": "大名县"
+},
+{
+"DistrictId": 3364,
+"DistrictName": "涉县"
+},
+{
+"DistrictId": 3365,
+"DistrictName": "磁县"
+},
+{
+"DistrictId": 3366,
+"DistrictName": "肥乡县"
+},
+{
+"DistrictId": 3367,
+"DistrictName": "永年县"
+},
+{
+"DistrictId": 3368,
+"DistrictName": "邱县"
+},
+{
+"DistrictId": 3369,
+"DistrictName": "鸡泽县"
+},
+{
+"DistrictId": 3370,
+"DistrictName": "广平县"
+},
+{
+"DistrictId": 3371,
+"DistrictName": "馆陶县"
+},
+{
+"DistrictId": 3372,
+"DistrictName": "魏县"
+},
+{
+"DistrictId": 3373,
+"DistrictName": "曲周县"
+},
+{
+"DistrictId": 3374,
+"DistrictName": "武安市"
+}
+]
+},
+{
+"CityId": 91,
+"CityName": "邢台市",
+"district": [
+{
+"DistrictId": 3375,
+"DistrictName": "桥东区"
+},
+{
+"DistrictId": 3376,
+"DistrictName": "桥西区"
+},
+{
+"DistrictId": 3377,
+"DistrictName": "邢台县"
+},
+{
+"DistrictId": 3378,
+"DistrictName": "临城县"
+},
+{
+"DistrictId": 3379,
+"DistrictName": "内丘县"
+},
+{
+"DistrictId": 3380,
+"DistrictName": "柏乡县"
+},
+{
+"DistrictId": 3381,
+"DistrictName": "隆尧县"
+},
+{
+"DistrictId": 3382,
+"DistrictName": "任县"
+},
+{
+"DistrictId": 3383,
+"DistrictName": "南和县"
+},
+{
+"DistrictId": 3384,
+"DistrictName": "宁晋县"
+},
+{
+"DistrictId": 3385,
+"DistrictName": "巨鹿县"
+},
+{
+"DistrictId": 3386,
+"DistrictName": "新河县"
+},
+{
+"DistrictId": 3387,
+"DistrictName": "广宗县"
+},
+{
+"DistrictId": 3388,
+"DistrictName": "平乡县"
+},
+{
+"DistrictId": 3389,
+"DistrictName": "威县"
+},
+{
+"DistrictId": 3390,
+"DistrictName": "清河县"
+},
+{
+"DistrictId": 3391,
+"DistrictName": "临西县"
+},
+{
+"DistrictId": 3392,
+"DistrictName": "南宫市"
+},
+{
+"DistrictId": 3393,
+"DistrictName": "沙河市"
+}
+]
+},
+{
+"CityId": 92,
+"CityName": "保定市",
+"district": [
+{
+"DistrictId": 3394,
+"DistrictName": "新市区"
+},
+{
+"DistrictId": 3395,
+"DistrictName": "北市区"
+},
+{
+"DistrictId": 3396,
+"DistrictName": "南市区"
+},
+{
+"DistrictId": 3397,
+"DistrictName": "满城县"
+},
+{
+"DistrictId": 3398,
+"DistrictName": "清苑县"
+},
+{
+"DistrictId": 3399,
+"DistrictName": "涞水县"
+},
+{
+"DistrictId": 3400,
+"DistrictName": "阜平县"
+},
+{
+"DistrictId": 3401,
+"DistrictName": "徐水县"
+},
+{
+"DistrictId": 3402,
+"DistrictName": "定兴县"
+},
+{
+"DistrictId": 3403,
+"DistrictName": "唐县"
+},
+{
+"DistrictId": 3404,
+"DistrictName": "高阳县"
+},
+{
+"DistrictId": 3405,
+"DistrictName": "容城县"
+},
+{
+"DistrictId": 3406,
+"DistrictName": "涞源县"
+},
+{
+"DistrictId": 3407,
+"DistrictName": "望都县"
+},
+{
+"DistrictId": 3408,
+"DistrictName": "安新县"
+},
+{
+"DistrictId": 3409,
+"DistrictName": "易县"
+},
+{
+"DistrictId": 3410,
+"DistrictName": "曲阳县"
+},
+{
+"DistrictId": 3411,
+"DistrictName": "蠡县"
+},
+{
+"DistrictId": 3412,
+"DistrictName": "顺平县"
+},
+{
+"DistrictId": 3413,
+"DistrictName": "博野县"
+},
+{
+"DistrictId": 3414,
+"DistrictName": "雄县"
+},
+{
+"DistrictId": 3415,
+"DistrictName": "涿州市"
+},
+{
+"DistrictId": 3416,
+"DistrictName": "定州市"
+},
+{
+"DistrictId": 3417,
+"DistrictName": "安国市"
+},
+{
+"DistrictId": 3418,
+"DistrictName": "高碑店市"
+}
+]
+},
+{
+"CityId": 93,
+"CityName": "张家口市",
+"district": [
+{
+"DistrictId": 3419,
+"DistrictName": "桥东区"
+},
+{
+"DistrictId": 3420,
+"DistrictName": "桥西区"
+},
+{
+"DistrictId": 3421,
+"DistrictName": "宣化区"
+},
+{
+"DistrictId": 3422,
+"DistrictName": "下花园区"
+},
+{
+"DistrictId": 3423,
+"DistrictName": "宣化县"
+},
+{
+"DistrictId": 3424,
+"DistrictName": "张北县"
+},
+{
+"DistrictId": 3425,
+"DistrictName": "康保县"
+},
+{
+"DistrictId": 3426,
+"DistrictName": "沽源县"
+},
+{
+"DistrictId": 3427,
+"DistrictName": "尚义县"
+},
+{
+"DistrictId": 3428,
+"DistrictName": "蔚县"
+},
+{
+"DistrictId": 3429,
+"DistrictName": "阳原县"
+},
+{
+"DistrictId": 3430,
+"DistrictName": "怀安县"
+},
+{
+"DistrictId": 3431,
+"DistrictName": "万全县"
+},
+{
+"DistrictId": 3432,
+"DistrictName": "怀来县"
+},
+{
+"DistrictId": 3433,
+"DistrictName": "涿鹿县"
+},
+{
+"DistrictId": 3434,
+"DistrictName": "赤城县"
+},
+{
+"DistrictId": 3435,
+"DistrictName": "崇礼县"
+}
+]
+},
+{
+"CityId": 94,
+"CityName": "承德市",
+"district": [
+{
+"DistrictId": 3436,
+"DistrictName": "双桥区"
+},
+{
+"DistrictId": 3437,
+"DistrictName": "双滦区"
+},
+{
+"DistrictId": 3438,
+"DistrictName": "鹰手营子矿区"
+},
+{
+"DistrictId": 3439,
+"DistrictName": "承德县"
+},
+{
+"DistrictId": 3440,
+"DistrictName": "兴隆县"
+},
+{
+"DistrictId": 3441,
+"DistrictName": "平泉县"
+},
+{
+"DistrictId": 3442,
+"DistrictName": "滦平县"
+},
+{
+"DistrictId": 3443,
+"DistrictName": "隆化县"
+},
+{
+"DistrictId": 3444,
+"DistrictName": "丰宁满族自治县"
+},
+{
+"DistrictId": 3445,
+"DistrictName": "宽城满族自治县"
+},
+{
+"DistrictId": 3446,
+"DistrictName": "围场满族蒙古族自治县"
+}
+]
+},
+{
+"CityId": 95,
+"CityName": "沧州市",
+"district": [
+{
+"DistrictId": 3447,
+"DistrictName": "新华区"
+},
+{
+"DistrictId": 3448,
+"DistrictName": "运河区"
+},
+{
+"DistrictId": 3449,
+"DistrictName": "沧县"
+},
+{
+"DistrictId": 3450,
+"DistrictName": "青县"
+},
+{
+"DistrictId": 3451,
+"DistrictName": "东光县"
+},
+{
+"DistrictId": 3452,
+"DistrictName": "海兴县"
+},
+{
+"DistrictId": 3453,
+"DistrictName": "盐山县"
+},
+{
+"DistrictId": 3454,
+"DistrictName": "肃宁县"
+},
+{
+"DistrictId": 3455,
+"DistrictName": "南皮县"
+},
+{
+"DistrictId": 3456,
+"DistrictName": "吴桥县"
+},
+{
+"DistrictId": 3457,
+"DistrictName": "献县"
+},
+{
+"DistrictId": 3458,
+"DistrictName": "孟村回族自治县"
+},
+{
+"DistrictId": 3459,
+"DistrictName": "泊头市"
+},
+{
+"DistrictId": 3460,
+"DistrictName": "任丘市"
+},
+{
+"DistrictId": 3461,
+"DistrictName": "黄骅市"
+},
+{
+"DistrictId": 3462,
+"DistrictName": "河间市"
+}
+]
+},
+{
+"CityId": 96,
+"CityName": "廊坊市",
+"district": [
+{
+"DistrictId": 3463,
+"DistrictName": "安次区"
+},
+{
+"DistrictId": 3464,
+"DistrictName": "广阳区"
+},
+{
+"DistrictId": 3465,
+"DistrictName": "固安县"
+},
+{
+"DistrictId": 3466,
+"DistrictName": "永清县"
+},
+{
+"DistrictId": 3467,
+"DistrictName": "香河县"
+},
+{
+"DistrictId": 3468,
+"DistrictName": "大城县"
+},
+{
+"DistrictId": 3469,
+"DistrictName": "文安县"
+},
+{
+"DistrictId": 3470,
+"DistrictName": "大厂回族自治县"
+},
+{
+"DistrictId": 3471,
+"DistrictName": "霸州市"
+},
+{
+"DistrictId": 3472,
+"DistrictName": "三河市"
+}
+]
+},
+{
+"CityId": 97,
+"CityName": "衡水市",
+"district": [
+{
+"DistrictId": 3473,
+"DistrictName": "桃城区"
+},
+{
+"DistrictId": 3474,
+"DistrictName": "枣强县"
+},
+{
+"DistrictId": 3475,
+"DistrictName": "武邑县"
+},
+{
+"DistrictId": 3476,
+"DistrictName": "武强县"
+},
+{
+"DistrictId": 3477,
+"DistrictName": "饶阳县"
+},
+{
+"DistrictId": 3478,
+"DistrictName": "安平县"
+},
+{
+"DistrictId": 3479,
+"DistrictName": "故城县"
+},
+{
+"DistrictId": 3480,
+"DistrictName": "景县"
+},
+{
+"DistrictId": 3481,
+"DistrictName": "阜城县"
+},
+{
+"DistrictId": 3482,
+"DistrictName": "冀州市"
+},
+{
+"DistrictId": 3483,
+"DistrictName": "深州市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 54,
+"ProvinceName": "山西省",
+"city": [
+{
+"CityId": 98,
+"CityName": "太原市",
+"district": [
+{
+"DistrictId": 3484,
+"DistrictName": "小店区"
+},
+{
+"DistrictId": 3485,
+"DistrictName": "迎泽区"
+},
+{
+"DistrictId": 3486,
+"DistrictName": "杏花岭区"
+},
+{
+"DistrictId": 3487,
+"DistrictName": "尖草坪区"
+},
+{
+"DistrictId": 3488,
+"DistrictName": "万柏林区"
+},
+{
+"DistrictId": 3489,
+"DistrictName": "晋源区"
+},
+{
+"DistrictId": 3490,
+"DistrictName": "清徐县"
+},
+{
+"DistrictId": 3491,
+"DistrictName": "阳曲县"
+},
+{
+"DistrictId": 3492,
+"DistrictName": "娄烦县"
+},
+{
+"DistrictId": 3493,
+"DistrictName": "古交市"
+}
+]
+},
+{
+"CityId": 99,
+"CityName": "大同市",
+"district": [
+{
+"DistrictId": 3494,
+"DistrictName": "城区"
+},
+{
+"DistrictId": 3495,
+"DistrictName": "矿区"
+},
+{
+"DistrictId": 3496,
+"DistrictName": "南郊区"
+},
+{
+"DistrictId": 3497,
+"DistrictName": "新荣区"
+},
+{
+"DistrictId": 3498,
+"DistrictName": "阳高县"
+},
+{
+"DistrictId": 3499,
+"DistrictName": "天镇县"
+},
+{
+"DistrictId": 3500,
+"DistrictName": "广灵县"
+},
+{
+"DistrictId": 3501,
+"DistrictName": "灵丘县"
+},
+{
+"DistrictId": 3502,
+"DistrictName": "浑源县"
+},
+{
+"DistrictId": 3503,
+"DistrictName": "左云县"
+},
+{
+"DistrictId": 3504,
+"DistrictName": "大同县"
+}
+]
+},
+{
+"CityId": 100,
+"CityName": "阳泉市",
+"district": [
+{
+"DistrictId": 3505,
+"DistrictName": "城区"
+},
+{
+"DistrictId": 3506,
+"DistrictName": "矿区"
+},
+{
+"DistrictId": 3507,
+"DistrictName": "郊区"
+},
+{
+"DistrictId": 3508,
+"DistrictName": "平定县"
+},
+{
+"DistrictId": 3509,
+"DistrictName": "盂县"
+}
+]
+},
+{
+"CityId": 101,
+"CityName": "长治市",
+"district": [
+{
+"DistrictId": 3510,
+"DistrictName": "城区"
+},
+{
+"DistrictId": 3511,
+"DistrictName": "郊区"
+},
+{
+"DistrictId": 3512,
+"DistrictName": "长治县"
+},
+{
+"DistrictId": 3513,
+"DistrictName": "襄垣县"
+},
+{
+"DistrictId": 3514,
+"DistrictName": "屯留县"
+},
+{
+"DistrictId": 3515,
+"DistrictName": "平顺县"
+},
+{
+"DistrictId": 3516,
+"DistrictName": "黎城县"
+},
+{
+"DistrictId": 3517,
+"DistrictName": "壶关县"
+},
+{
+"DistrictId": 3518,
+"DistrictName": "长子县"
+},
+{
+"DistrictId": 3519,
+"DistrictName": "武乡县"
+},
+{
+"DistrictId": 3520,
+"DistrictName": "沁县"
+},
+{
+"DistrictId": 3521,
+"DistrictName": "沁源县"
+},
+{
+"DistrictId": 3522,
+"DistrictName": "潞城市"
+}
+]
+},
+{
+"CityId": 102,
+"CityName": "晋城市",
+"district": [
+{
+"DistrictId": 3523,
+"DistrictName": "城区"
+},
+{
+"DistrictId": 3524,
+"DistrictName": "沁水县"
+},
+{
+"DistrictId": 3525,
+"DistrictName": "阳城县"
+},
+{
+"DistrictId": 3526,
+"DistrictName": "陵川县"
+},
+{
+"DistrictId": 3527,
+"DistrictName": "泽州县"
+},
+{
+"DistrictId": 3528,
+"DistrictName": "高平市"
+}
+]
+},
+{
+"CityId": 103,
+"CityName": "朔州市",
+"district": [
+{
+"DistrictId": 3529,
+"DistrictName": "朔城区"
+},
+{
+"DistrictId": 3530,
+"DistrictName": "平鲁区"
+},
+{
+"DistrictId": 3531,
+"DistrictName": "山阴县"
+},
+{
+"DistrictId": 3532,
+"DistrictName": "应县"
+},
+{
+"DistrictId": 3533,
+"DistrictName": "右玉县"
+},
+{
+"DistrictId": 3534,
+"DistrictName": "怀仁县"
+}
+]
+},
+{
+"CityId": 104,
+"CityName": "晋中市",
+"district": [
+{
+"DistrictId": 3535,
+"DistrictName": "榆次区"
+},
+{
+"DistrictId": 3536,
+"DistrictName": "榆社县"
+},
+{
+"DistrictId": 3537,
+"DistrictName": "左权县"
+},
+{
+"DistrictId": 3538,
+"DistrictName": "和顺县"
+},
+{
+"DistrictId": 3539,
+"DistrictName": "昔阳县"
+},
+{
+"DistrictId": 3540,
+"DistrictName": "寿阳县"
+},
+{
+"DistrictId": 3541,
+"DistrictName": "太谷县"
+},
+{
+"DistrictId": 3542,
+"DistrictName": "祁县"
+},
+{
+"DistrictId": 3543,
+"DistrictName": "平遥县"
+},
+{
+"DistrictId": 3544,
+"DistrictName": "灵石县"
+},
+{
+"DistrictId": 3545,
+"DistrictName": "介休市"
+}
+]
+},
+{
+"CityId": 105,
+"CityName": "运城市",
+"district": [
+{
+"DistrictId": 3546,
+"DistrictName": "盐湖区"
+},
+{
+"DistrictId": 3547,
+"DistrictName": "临猗县"
+},
+{
+"DistrictId": 3548,
+"DistrictName": "万荣县"
+},
+{
+"DistrictId": 3549,
+"DistrictName": "闻喜县"
+},
+{
+"DistrictId": 3550,
+"DistrictName": "稷山县"
+},
+{
+"DistrictId": 3551,
+"DistrictName": "新绛县"
+},
+{
+"DistrictId": 3552,
+"DistrictName": "绛县"
+},
+{
+"DistrictId": 3553,
+"DistrictName": "垣曲县"
+},
+{
+"DistrictId": 3554,
+"DistrictName": "夏县"
+},
+{
+"DistrictId": 3555,
+"DistrictName": "平陆县"
+},
+{
+"DistrictId": 3556,
+"DistrictName": "芮城县"
+},
+{
+"DistrictId": 3557,
+"DistrictName": "永济市"
+},
+{
+"DistrictId": 3558,
+"DistrictName": "河津市"
+}
+]
+},
+{
+"CityId": 106,
+"CityName": "忻州市",
+"district": [
+{
+"DistrictId": 3559,
+"DistrictName": "忻府区"
+},
+{
+"DistrictId": 3560,
+"DistrictName": "定襄县"
+},
+{
+"DistrictId": 3561,
+"DistrictName": "五台县"
+},
+{
+"DistrictId": 3562,
+"DistrictName": "代县"
+},
+{
+"DistrictId": 3563,
+"DistrictName": "繁峙县"
+},
+{
+"DistrictId": 3564,
+"DistrictName": "宁武县"
+},
+{
+"DistrictId": 3565,
+"DistrictName": "静乐县"
+},
+{
+"DistrictId": 3566,
+"DistrictName": "神池县"
+},
+{
+"DistrictId": 3567,
+"DistrictName": "五寨县"
+},
+{
+"DistrictId": 3568,
+"DistrictName": "岢岚县"
+},
+{
+"DistrictId": 3569,
+"DistrictName": "河曲县"
+},
+{
+"DistrictId": 3570,
+"DistrictName": "保德县"
+},
+{
+"DistrictId": 3571,
+"DistrictName": "偏关县"
+},
+{
+"DistrictId": 3572,
+"DistrictName": "原平市"
+}
+]
+},
+{
+"CityId": 107,
+"CityName": "临汾市",
+"district": [
+{
+"DistrictId": 3573,
+"DistrictName": "尧都区"
+},
+{
+"DistrictId": 3574,
+"DistrictName": "曲沃县"
+},
+{
+"DistrictId": 3575,
+"DistrictName": "翼城县"
+},
+{
+"DistrictId": 3576,
+"DistrictName": "襄汾县"
+},
+{
+"DistrictId": 3577,
+"DistrictName": "洪洞县"
+},
+{
+"DistrictId": 3578,
+"DistrictName": "古县"
+},
+{
+"DistrictId": 3579,
+"DistrictName": "安泽县"
+},
+{
+"DistrictId": 3580,
+"DistrictName": "浮山县"
+},
+{
+"DistrictId": 3581,
+"DistrictName": "吉县"
+},
+{
+"DistrictId": 3582,
+"DistrictName": "乡宁县"
+},
+{
+"DistrictId": 3583,
+"DistrictName": "大宁县"
+},
+{
+"DistrictId": 3584,
+"DistrictName": "隰县"
+},
+{
+"DistrictId": 3585,
+"DistrictName": "永和县"
+},
+{
+"DistrictId": 3586,
+"DistrictName": "蒲县"
+},
+{
+"DistrictId": 3587,
+"DistrictName": "汾西县"
+},
+{
+"DistrictId": 3588,
+"DistrictName": "侯马市"
+},
+{
+"DistrictId": 3589,
+"DistrictName": "霍州市"
+}
+]
+},
+{
+"CityId": 108,
+"CityName": "吕梁市",
+"district": [
+{
+"DistrictId": 3590,
+"DistrictName": "离石区"
+},
+{
+"DistrictId": 3591,
+"DistrictName": "文水县"
+},
+{
+"DistrictId": 3592,
+"DistrictName": "交城县"
+},
+{
+"DistrictId": 3593,
+"DistrictName": "兴县"
+},
+{
+"DistrictId": 3594,
+"DistrictName": "临县"
+},
+{
+"DistrictId": 3595,
+"DistrictName": "柳林县"
+},
+{
+"DistrictId": 3596,
+"DistrictName": "石楼县"
+},
+{
+"DistrictId": 3597,
+"DistrictName": "岚县"
+},
+{
+"DistrictId": 3598,
+"DistrictName": "方山县"
+},
+{
+"DistrictId": 3599,
+"DistrictName": "中阳县"
+},
+{
+"DistrictId": 3600,
+"DistrictName": "交口县"
+},
+{
+"DistrictId": 3601,
+"DistrictName": "孝义市"
+},
+{
+"DistrictId": 3602,
+"DistrictName": "汾阳市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 55,
+"ProvinceName": "内蒙古自治区",
+"city": [
+{
+"CityId": 109,
+"CityName": "呼和浩特市",
+"district": [
+{
+"DistrictId": 3603,
+"DistrictName": "新城区"
+},
+{
+"DistrictId": 3604,
+"DistrictName": "回民区"
+},
+{
+"DistrictId": 3605,
+"DistrictName": "玉泉区"
+},
+{
+"DistrictId": 3606,
+"DistrictName": "赛罕区"
+},
+{
+"DistrictId": 3607,
+"DistrictName": "土默特左旗"
+},
+{
+"DistrictId": 3608,
+"DistrictName": "托克托县"
+},
+{
+"DistrictId": 3609,
+"DistrictName": "和林格尔县"
+},
+{
+"DistrictId": 3610,
+"DistrictName": "清水河县"
+},
+{
+"DistrictId": 3611,
+"DistrictName": "武川县"
+}
+]
+},
+{
+"CityId": 110,
+"CityName": "包头市",
+"district": [
+{
+"DistrictId": 3612,
+"DistrictName": "东河区"
+},
+{
+"DistrictId": 3613,
+"DistrictName": "昆都仑区"
+},
+{
+"DistrictId": 3614,
+"DistrictName": "青山区"
+},
+{
+"DistrictId": 3615,
+"DistrictName": "石拐区"
+},
+{
+"DistrictId": 3616,
+"DistrictName": "白云鄂博矿区"
+},
+{
+"DistrictId": 3617,
+"DistrictName": "九原区"
+},
+{
+"DistrictId": 3618,
+"DistrictName": "土默特右旗"
+},
+{
+"DistrictId": 3619,
+"DistrictName": "固阳县"
+},
+{
+"DistrictId": 3620,
+"DistrictName": "达尔罕茂明安联合旗"
+}
+]
+},
+{
+"CityId": 111,
+"CityName": "乌海市",
+"district": [
+{
+"DistrictId": 3621,
+"DistrictName": "海勃湾区"
+},
+{
+"DistrictId": 3622,
+"DistrictName": "海南区"
+},
+{
+"DistrictId": 3623,
+"DistrictName": "乌达区"
+}
+]
+},
+{
+"CityId": 112,
+"CityName": "赤峰市",
+"district": [
+{
+"DistrictId": 3624,
+"DistrictName": "红山区"
+},
+{
+"DistrictId": 3625,
+"DistrictName": "元宝山区"
+},
+{
+"DistrictId": 3626,
+"DistrictName": "松山区"
+},
+{
+"DistrictId": 3627,
+"DistrictName": "阿鲁科尔沁旗"
+},
+{
+"DistrictId": 3628,
+"DistrictName": "巴林左旗"
+},
+{
+"DistrictId": 3629,
+"DistrictName": "巴林右旗"
+},
+{
+"DistrictId": 3630,
+"DistrictName": "林西县"
+},
+{
+"DistrictId": 3631,
+"DistrictName": "克什克腾旗"
+},
+{
+"DistrictId": 3632,
+"DistrictName": "翁牛特旗"
+},
+{
+"DistrictId": 3633,
+"DistrictName": "喀喇沁旗"
+},
+{
+"DistrictId": 3634,
+"DistrictName": "宁城县"
+},
+{
+"DistrictId": 3635,
+"DistrictName": "敖汉旗"
+}
+]
+},
+{
+"CityId": 113,
+"CityName": "通辽市",
+"district": [
+{
+"DistrictId": 3636,
+"DistrictName": "科尔沁区"
+},
+{
+"DistrictId": 3637,
+"DistrictName": "科尔沁左翼中旗"
+},
+{
+"DistrictId": 3638,
+"DistrictName": "科尔沁左翼后旗"
+},
+{
+"DistrictId": 3639,
+"DistrictName": "开鲁县"
+},
+{
+"DistrictId": 3640,
+"DistrictName": "库伦旗"
+},
+{
+"DistrictId": 3641,
+"DistrictName": "奈曼旗"
+},
+{
+"DistrictId": 3642,
+"DistrictName": "扎鲁特旗"
+},
+{
+"DistrictId": 3643,
+"DistrictName": "霍林郭勒市"
+}
+]
+},
+{
+"CityId": 114,
+"CityName": "鄂尔多斯市",
+"district": [
+{
+"DistrictId": 3644,
+"DistrictName": "东胜区"
+},
+{
+"DistrictId": 3645,
+"DistrictName": "达拉特旗"
+},
+{
+"DistrictId": 3646,
+"DistrictName": "准格尔旗"
+},
+{
+"DistrictId": 3647,
+"DistrictName": "鄂托克前旗"
+},
+{
+"DistrictId": 3648,
+"DistrictName": "鄂托克旗"
+},
+{
+"DistrictId": 3649,
+"DistrictName": "杭锦旗"
+},
+{
+"DistrictId": 3650,
+"DistrictName": "乌审旗"
+},
+{
+"DistrictId": 3651,
+"DistrictName": "伊金霍洛旗"
+}
+]
+},
+{
+"CityId": 115,
+"CityName": "呼伦贝尔市",
+"district": [
+{
+"DistrictId": 3652,
+"DistrictName": "海拉尔区"
+},
+{
+"DistrictId": 3653,
+"DistrictName": "阿荣旗"
+},
+{
+"DistrictId": 3654,
+"DistrictName": "莫力达瓦达斡尔族自治旗"
+},
+{
+"DistrictId": 3655,
+"DistrictName": "鄂伦春自治旗"
+},
+{
+"DistrictId": 3656,
+"DistrictName": "鄂温克族自治旗"
+},
+{
+"DistrictId": 3657,
+"DistrictName": "陈巴尔虎旗"
+},
+{
+"DistrictId": 3658,
+"DistrictName": "新巴尔虎左旗"
+},
+{
+"DistrictId": 3659,
+"DistrictName": "新巴尔虎右旗"
+},
+{
+"DistrictId": 3660,
+"DistrictName": "满洲里市"
+},
+{
+"DistrictId": 3661,
+"DistrictName": "牙克石市"
+},
+{
+"DistrictId": 3662,
+"DistrictName": "扎兰屯市"
+},
+{
+"DistrictId": 3663,
+"DistrictName": "额尔古纳市"
+},
+{
+"DistrictId": 3664,
+"DistrictName": "根河市"
+}
+]
+},
+{
+"CityId": 116,
+"CityName": "巴彦淖尔市",
+"district": [
+{
+"DistrictId": 3665,
+"DistrictName": "临河区"
+},
+{
+"DistrictId": 3666,
+"DistrictName": "五原县"
+},
+{
+"DistrictId": 3667,
+"DistrictName": "磴口县"
+},
+{
+"DistrictId": 3668,
+"DistrictName": "乌拉特前旗"
+},
+{
+"DistrictId": 3669,
+"DistrictName": "乌拉特中旗"
+},
+{
+"DistrictId": 3670,
+"DistrictName": "乌拉特后旗"
+},
+{
+"DistrictId": 3671,
+"DistrictName": "杭锦后旗"
+}
+]
+},
+{
+"CityId": 117,
+"CityName": "乌兰察布市",
+"district": [
+{
+"DistrictId": 3672,
+"DistrictName": "集宁区"
+},
+{
+"DistrictId": 3673,
+"DistrictName": "卓资县"
+},
+{
+"DistrictId": 3674,
+"DistrictName": "化德县"
+},
+{
+"DistrictId": 3675,
+"DistrictName": "商都县"
+},
+{
+"DistrictId": 3676,
+"DistrictName": "兴和县"
+},
+{
+"DistrictId": 3677,
+"DistrictName": "凉城县"
+},
+{
+"DistrictId": 3678,
+"DistrictName": "察哈尔右翼前旗"
+},
+{
+"DistrictId": 3679,
+"DistrictName": "察哈尔右翼中旗"
+},
+{
+"DistrictId": 3680,
+"DistrictName": "察哈尔右翼后旗"
+},
+{
+"DistrictId": 3681,
+"DistrictName": "四子王旗"
+},
+{
+"DistrictId": 3682,
+"DistrictName": "丰镇市"
+}
+]
+},
+{
+"CityId": 118,
+"CityName": "兴安盟",
+"district": [
+{
+"DistrictId": 3683,
+"DistrictName": "乌兰浩特市"
+},
+{
+"DistrictId": 3684,
+"DistrictName": "阿尔山市"
+},
+{
+"DistrictId": 3685,
+"DistrictName": "科尔沁右翼前旗"
+},
+{
+"DistrictId": 3686,
+"DistrictName": "科尔沁右翼中旗"
+},
+{
+"DistrictId": 3687,
+"DistrictName": "扎赉特旗"
+},
+{
+"DistrictId": 3688,
+"DistrictName": "突泉县"
+}
+]
+},
+{
+"CityId": 119,
+"CityName": "锡林郭勒盟",
+"district": [
+{
+"DistrictId": 3689,
+"DistrictName": "二连浩特市"
+},
+{
+"DistrictId": 3690,
+"DistrictName": "锡林浩特市"
+},
+{
+"DistrictId": 3691,
+"DistrictName": "阿巴嘎旗"
+},
+{
+"DistrictId": 3692,
+"DistrictName": "苏尼特左旗"
+},
+{
+"DistrictId": 3693,
+"DistrictName": "苏尼特右旗"
+},
+{
+"DistrictId": 3694,
+"DistrictName": "东乌珠穆沁旗"
+},
+{
+"DistrictId": 3695,
+"DistrictName": "西乌珠穆沁旗"
+},
+{
+"DistrictId": 3696,
+"DistrictName": "太仆寺旗"
+},
+{
+"DistrictId": 3697,
+"DistrictName": "镶黄旗"
+},
+{
+"DistrictId": 3698,
+"DistrictName": "正镶白旗"
+},
+{
+"DistrictId": 3699,
+"DistrictName": "正蓝旗"
+},
+{
+"DistrictId": 3700,
+"DistrictName": "多伦县"
+}
+]
+},
+{
+"CityId": 120,
+"CityName": "阿拉善盟",
+"district": [
+{
+"DistrictId": 3701,
+"DistrictName": "阿拉善左旗"
+},
+{
+"DistrictId": 3702,
+"DistrictName": "阿拉善右旗"
+},
+{
+"DistrictId": 3703,
+"DistrictName": "额济纳旗"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 56,
+"ProvinceName": "辽宁省",
+"city": [
+{
+"CityId": 121,
+"CityName": "沈阳市",
+"district": [
+{
+"DistrictId": 3704,
+"DistrictName": "和平区"
+},
+{
+"DistrictId": 3705,
+"DistrictName": "沈河区"
+},
+{
+"DistrictId": 3706,
+"DistrictName": "大东区"
+},
+{
+"DistrictId": 3707,
+"DistrictName": "皇姑区"
+},
+{
+"DistrictId": 3708,
+"DistrictName": "铁西区"
+},
+{
+"DistrictId": 3709,
+"DistrictName": "苏家屯区"
+},
+{
+"DistrictId": 3710,
+"DistrictName": "东陵区"
+},
+{
+"DistrictId": 3711,
+"DistrictName": "沈北新区"
+},
+{
+"DistrictId": 3712,
+"DistrictName": "于洪区"
+},
+{
+"DistrictId": 3713,
+"DistrictName": "辽中县"
+},
+{
+"DistrictId": 3714,
+"DistrictName": "康平县"
+},
+{
+"DistrictId": 3715,
+"DistrictName": "法库县"
+},
+{
+"DistrictId": 3716,
+"DistrictName": "新民市"
+}
+]
+},
+{
+"CityId": 122,
+"CityName": "大连市",
+"district": [
+{
+"DistrictId": 3717,
+"DistrictName": "中山区"
+},
+{
+"DistrictId": 3718,
+"DistrictName": "西岗区"
+},
+{
+"DistrictId": 3719,
+"DistrictName": "沙河口区"
+},
+{
+"DistrictId": 3720,
+"DistrictName": "甘井子区"
+},
+{
+"DistrictId": 3721,
+"DistrictName": "旅顺口区"
+},
+{
+"DistrictId": 3722,
+"DistrictName": "金州区"
+},
+{
+"DistrictId": 3723,
+"DistrictName": "长海县"
+},
+{
+"DistrictId": 3724,
+"DistrictName": "瓦房店市"
+},
+{
+"DistrictId": 3725,
+"DistrictName": "普兰店市"
+},
+{
+"DistrictId": 3726,
+"DistrictName": "庄河市"
+}
+]
+},
+{
+"CityId": 123,
+"CityName": "鞍山市",
+"district": [
+{
+"DistrictId": 3727,
+"DistrictName": "铁东区"
+},
+{
+"DistrictId": 3728,
+"DistrictName": "铁西区"
+},
+{
+"DistrictId": 3729,
+"DistrictName": "立山区"
+},
+{
+"DistrictId": 3730,
+"DistrictName": "千山区"
+},
+{
+"DistrictId": 3731,
+"DistrictName": "台安县"
+},
+{
+"DistrictId": 3732,
+"DistrictName": "岫岩满族自治县"
+},
+{
+"DistrictId": 3733,
+"DistrictName": "海城市"
+}
+]
+},
+{
+"CityId": 124,
+"CityName": "抚顺市",
+"district": [
+{
+"DistrictId": 3734,
+"DistrictName": "新抚区"
+},
+{
+"DistrictId": 3735,
+"DistrictName": "东洲区"
+},
+{
+"DistrictId": 3736,
+"DistrictName": "望花区"
+},
+{
+"DistrictId": 3737,
+"DistrictName": "顺城区"
+},
+{
+"DistrictId": 3738,
+"DistrictName": "抚顺县"
+},
+{
+"DistrictId": 3739,
+"DistrictName": "新宾满族自治县"
+},
+{
+"DistrictId": 3740,
+"DistrictName": "清原满族自治县"
+}
+]
+},
+{
+"CityId": 125,
+"CityName": "本溪市",
+"district": [
+{
+"DistrictId": 3741,
+"DistrictName": "平山区"
+},
+{
+"DistrictId": 3742,
+"DistrictName": "溪湖区"
+},
+{
+"DistrictId": 3743,
+"DistrictName": "明山区"
+},
+{
+"DistrictId": 3744,
+"DistrictName": "南芬区"
+},
+{
+"DistrictId": 3745,
+"DistrictName": "本溪满族自治县"
+},
+{
+"DistrictId": 3746,
+"DistrictName": "桓仁满族自治县"
+}
+]
+},
+{
+"CityId": 126,
+"CityName": "丹东市",
+"district": [
+{
+"DistrictId": 3747,
+"DistrictName": "元宝区"
+},
+{
+"DistrictId": 3748,
+"DistrictName": "振兴区"
+},
+{
+"DistrictId": 3749,
+"DistrictName": "振安区"
+},
+{
+"DistrictId": 3750,
+"DistrictName": "宽甸满族自治县"
+},
+{
+"DistrictId": 3751,
+"DistrictName": "东港市"
+},
+{
+"DistrictId": 3752,
+"DistrictName": "凤城市"
+}
+]
+},
+{
+"CityId": 127,
+"CityName": "锦州市",
+"district": [
+{
+"DistrictId": 3753,
+"DistrictName": "古塔区"
+},
+{
+"DistrictId": 3754,
+"DistrictName": "凌河区"
+},
+{
+"DistrictId": 3755,
+"DistrictName": "太和区"
+},
+{
+"DistrictId": 3756,
+"DistrictName": "黑山县"
+},
+{
+"DistrictId": 3757,
+"DistrictName": "义县"
+},
+{
+"DistrictId": 3758,
+"DistrictName": "凌海市"
+},
+{
+"DistrictId": 3759,
+"DistrictName": "北镇市"
+}
+]
+},
+{
+"CityId": 128,
+"CityName": "营口市",
+"district": [
+{
+"DistrictId": 3760,
+"DistrictName": "站前区"
+},
+{
+"DistrictId": 3761,
+"DistrictName": "西市区"
+},
+{
+"DistrictId": 3762,
+"DistrictName": "鲅鱼圈区"
+},
+{
+"DistrictId": 3763,
+"DistrictName": "老边区"
+},
+{
+"DistrictId": 3764,
+"DistrictName": "盖州市"
+},
+{
+"DistrictId": 3765,
+"DistrictName": "大石桥市"
+}
+]
+},
+{
+"CityId": 129,
+"CityName": "阜新市",
+"district": [
+{
+"DistrictId": 3766,
+"DistrictName": "海州区"
+},
+{
+"DistrictId": 3767,
+"DistrictName": "新邱区"
+},
+{
+"DistrictId": 3768,
+"DistrictName": "太平区"
+},
+{
+"DistrictId": 3769,
+"DistrictName": "清河门区"
+},
+{
+"DistrictId": 3770,
+"DistrictName": "细河区"
+},
+{
+"DistrictId": 3771,
+"DistrictName": "阜新蒙古族自治县"
+},
+{
+"DistrictId": 3772,
+"DistrictName": "彰武县"
+}
+]
+},
+{
+"CityId": 130,
+"CityName": "辽阳市",
+"district": [
+{
+"DistrictId": 3773,
+"DistrictName": "白塔区"
+},
+{
+"DistrictId": 3774,
+"DistrictName": "文圣区"
+},
+{
+"DistrictId": 3775,
+"DistrictName": "宏伟区"
+},
+{
+"DistrictId": 3776,
+"DistrictName": "弓长岭区"
+},
+{
+"DistrictId": 3777,
+"DistrictName": "太子河区"
+},
+{
+"DistrictId": 3778,
+"DistrictName": "辽阳县"
+},
+{
+"DistrictId": 3779,
+"DistrictName": "灯塔市"
+}
+]
+},
+{
+"CityId": 131,
+"CityName": "盘锦市",
+"district": [
+{
+"DistrictId": 3780,
+"DistrictName": "双台子区"
+},
+{
+"DistrictId": 3781,
+"DistrictName": "兴隆台区"
+},
+{
+"DistrictId": 3782,
+"DistrictName": "大洼县"
+},
+{
+"DistrictId": 3783,
+"DistrictName": "盘山县"
+}
+]
+},
+{
+"CityId": 132,
+"CityName": "铁岭市",
+"district": [
+{
+"DistrictId": 3784,
+"DistrictName": "银州区"
+},
+{
+"DistrictId": 3785,
+"DistrictName": "清河区"
+},
+{
+"DistrictId": 3786,
+"DistrictName": "铁岭县"
+},
+{
+"DistrictId": 3787,
+"DistrictName": "西丰县"
+},
+{
+"DistrictId": 3788,
+"DistrictName": "昌图县"
+},
+{
+"DistrictId": 3789,
+"DistrictName": "调兵山市"
+},
+{
+"DistrictId": 3790,
+"DistrictName": "开原市"
+}
+]
+},
+{
+"CityId": 133,
+"CityName": "朝阳市",
+"district": [
+{
+"DistrictId": 3791,
+"DistrictName": "双塔区"
+},
+{
+"DistrictId": 3792,
+"DistrictName": "龙城区"
+},
+{
+"DistrictId": 3793,
+"DistrictName": "朝阳县"
+},
+{
+"DistrictId": 3794,
+"DistrictName": "建平县"
+},
+{
+"DistrictId": 3795,
+"DistrictName": "喀喇沁左翼蒙古族自治县"
+},
+{
+"DistrictId": 3796,
+"DistrictName": "北票市"
+},
+{
+"DistrictId": 3797,
+"DistrictName": "凌源市"
+}
+]
+},
+{
+"CityId": 134,
+"CityName": "葫芦岛市",
+"district": [
+{
+"DistrictId": 3798,
+"DistrictName": "连山区"
+},
+{
+"DistrictId": 3799,
+"DistrictName": "龙港区"
+},
+{
+"DistrictId": 3800,
+"DistrictName": "南票区"
+},
+{
+"DistrictId": 3801,
+"DistrictName": "绥中县"
+},
+{
+"DistrictId": 3802,
+"DistrictName": "建昌县"
+},
+{
+"DistrictId": 3803,
+"DistrictName": "兴城市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 57,
+"ProvinceName": "吉林省",
+"city": [
+{
+"CityId": 135,
+"CityName": "长春市",
+"district": [
+{
+"DistrictId": 3804,
+"DistrictName": "南关区"
+},
+{
+"DistrictId": 3805,
+"DistrictName": "宽城区"
+},
+{
+"DistrictId": 3806,
+"DistrictName": "朝阳区"
+},
+{
+"DistrictId": 3807,
+"DistrictName": "二道区"
+},
+{
+"DistrictId": 3808,
+"DistrictName": "绿园区"
+},
+{
+"DistrictId": 3809,
+"DistrictName": "双阳区"
+},
+{
+"DistrictId": 3810,
+"DistrictName": "农安县"
+},
+{
+"DistrictId": 3811,
+"DistrictName": "九台市"
+},
+{
+"DistrictId": 3812,
+"DistrictName": "榆树市"
+},
+{
+"DistrictId": 3813,
+"DistrictName": "德惠市"
+}
+]
+},
+{
+"CityId": 136,
+"CityName": "吉林市",
+"district": [
+{
+"DistrictId": 3814,
+"DistrictName": "昌邑区"
+},
+{
+"DistrictId": 3815,
+"DistrictName": "龙潭区"
+},
+{
+"DistrictId": 3816,
+"DistrictName": "船营区"
+},
+{
+"DistrictId": 3817,
+"DistrictName": "丰满区"
+},
+{
+"DistrictId": 3818,
+"DistrictName": "永吉县"
+},
+{
+"DistrictId": 3819,
+"DistrictName": "蛟河市"
+},
+{
+"DistrictId": 3820,
+"DistrictName": "桦甸市"
+},
+{
+"DistrictId": 3821,
+"DistrictName": "舒兰市"
+},
+{
+"DistrictId": 3822,
+"DistrictName": "磐石市"
+}
+]
+},
+{
+"CityId": 137,
+"CityName": "四平市",
+"district": [
+{
+"DistrictId": 3823,
+"DistrictName": "铁西区"
+},
+{
+"DistrictId": 3824,
+"DistrictName": "铁东区"
+},
+{
+"DistrictId": 3825,
+"DistrictName": "梨树县"
+},
+{
+"DistrictId": 3826,
+"DistrictName": "伊通满族自治县"
+},
+{
+"DistrictId": 3827,
+"DistrictName": "公主岭市"
+},
+{
+"DistrictId": 3828,
+"DistrictName": "双辽市"
+}
+]
+},
+{
+"CityId": 138,
+"CityName": "辽源市",
+"district": [
+{
+"DistrictId": 3829,
+"DistrictName": "龙山区"
+},
+{
+"DistrictId": 3830,
+"DistrictName": "西安区"
+},
+{
+"DistrictId": 3831,
+"DistrictName": "东丰县"
+},
+{
+"DistrictId": 3832,
+"DistrictName": "东辽县"
+}
+]
+},
+{
+"CityId": 139,
+"CityName": "通化市",
+"district": [
+{
+"DistrictId": 3833,
+"DistrictName": "东昌区"
+},
+{
+"DistrictId": 3834,
+"DistrictName": "二道江区"
+},
+{
+"DistrictId": 3835,
+"DistrictName": "通化县"
+},
+{
+"DistrictId": 3836,
+"DistrictName": "辉南县"
+},
+{
+"DistrictId": 3837,
+"DistrictName": "柳河县"
+},
+{
+"DistrictId": 3838,
+"DistrictName": "梅河口市"
+},
+{
+"DistrictId": 3839,
+"DistrictName": "集安市"
+}
+]
+},
+{
+"CityId": 140,
+"CityName": "白山市",
+"district": [
+{
+"DistrictId": 3840,
+"DistrictName": "浑江区"
+},
+{
+"DistrictId": 3841,
+"DistrictName": "江源区"
+},
+{
+"DistrictId": 3842,
+"DistrictName": "抚松县"
+},
+{
+"DistrictId": 3843,
+"DistrictName": "长白朝鲜族自治县"
+},
+{
+"DistrictId": 3844,
+"DistrictName": "靖宇县"
+},
+{
+"DistrictId": 3845,
+"DistrictName": "临江市"
+}
+]
+},
+{
+"CityId": 141,
+"CityName": "松原市",
+"district": [
+{
+"DistrictId": 3846,
+"DistrictName": "宁江区"
+},
+{
+"DistrictId": 3847,
+"DistrictName": "前郭尔罗斯蒙古族自治县"
+},
+{
+"DistrictId": 3848,
+"DistrictName": "长岭县"
+},
+{
+"DistrictId": 3849,
+"DistrictName": "乾安县"
+},
+{
+"DistrictId": 3850,
+"DistrictName": "扶余县"
+}
+]
+},
+{
+"CityId": 142,
+"CityName": "白城市",
+"district": [
+{
+"DistrictId": 3851,
+"DistrictName": "洮北区"
+},
+{
+"DistrictId": 3852,
+"DistrictName": "镇赉县"
+},
+{
+"DistrictId": 3853,
+"DistrictName": "通榆县"
+},
+{
+"DistrictId": 3854,
+"DistrictName": "洮南市"
+},
+{
+"DistrictId": 3855,
+"DistrictName": "大安市"
+}
+]
+},
+{
+"CityId": 143,
+"CityName": "延边朝鲜族自治州",
+"district": [
+{
+"DistrictId": 3856,
+"DistrictName": "延吉市"
+},
+{
+"DistrictId": 3857,
+"DistrictName": "图们市"
+},
+{
+"DistrictId": 3858,
+"DistrictName": "敦化市"
+},
+{
+"DistrictId": 3859,
+"DistrictName": "珲春市"
+},
+{
+"DistrictId": 3860,
+"DistrictName": "龙井市"
+},
+{
+"DistrictId": 3861,
+"DistrictName": "和龙市"
+},
+{
+"DistrictId": 3862,
+"DistrictName": "汪清县"
+},
+{
+"DistrictId": 3863,
+"DistrictName": "安图县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 58,
+"ProvinceName": "黑龙江省",
+"city": [
+{
+"CityId": 144,
+"CityName": "哈尔滨市",
+"district": [
+{
+"DistrictId": 3864,
+"DistrictName": "道里区"
+},
+{
+"DistrictId": 3865,
+"DistrictName": "南岗区"
+},
+{
+"DistrictId": 3866,
+"DistrictName": "道外区"
+},
+{
+"DistrictId": 3867,
+"DistrictName": "香坊区"
+},
+{
+"DistrictId": 3868,
+"DistrictName": "平房区"
+},
+{
+"DistrictId": 3869,
+"DistrictName": "松北区"
+},
+{
+"DistrictId": 3870,
+"DistrictName": "呼兰区"
+},
+{
+"DistrictId": 3871,
+"DistrictName": "依兰县"
+},
+{
+"DistrictId": 3872,
+"DistrictName": "方正县"
+},
+{
+"DistrictId": 3873,
+"DistrictName": "宾县"
+},
+{
+"DistrictId": 3874,
+"DistrictName": "巴彦县"
+},
+{
+"DistrictId": 3875,
+"DistrictName": "木兰县"
+},
+{
+"DistrictId": 3876,
+"DistrictName": "通河县"
+},
+{
+"DistrictId": 3877,
+"DistrictName": "延寿县"
+},
+{
+"DistrictId": 3878,
+"DistrictName": "阿城区"
+},
+{
+"DistrictId": 3879,
+"DistrictName": "双城市"
+},
+{
+"DistrictId": 3880,
+"DistrictName": "尚志市"
+},
+{
+"DistrictId": 3881,
+"DistrictName": "五常市"
+}
+]
+},
+{
+"CityId": 145,
+"CityName": "齐齐哈尔市",
+"district": [
+{
+"DistrictId": 3882,
+"DistrictName": "龙沙区"
+},
+{
+"DistrictId": 3883,
+"DistrictName": "建华区"
+},
+{
+"DistrictId": 3884,
+"DistrictName": "铁锋区"
+},
+{
+"DistrictId": 3885,
+"DistrictName": "昂昂溪区"
+},
+{
+"DistrictId": 3886,
+"DistrictName": "富拉尔基区"
+},
+{
+"DistrictId": 3887,
+"DistrictName": "碾子山区"
+},
+{
+"DistrictId": 3888,
+"DistrictName": "梅里斯达斡尔族区"
+},
+{
+"DistrictId": 3889,
+"DistrictName": "龙江县"
+},
+{
+"DistrictId": 3890,
+"DistrictName": "依安县"
+},
+{
+"DistrictId": 3891,
+"DistrictName": "泰来县"
+},
+{
+"DistrictId": 3892,
+"DistrictName": "甘南县"
+},
+{
+"DistrictId": 3893,
+"DistrictName": "富裕县"
+},
+{
+"DistrictId": 3894,
+"DistrictName": "克山县"
+},
+{
+"DistrictId": 3895,
+"DistrictName": "克东县"
+},
+{
+"DistrictId": 3896,
+"DistrictName": "拜泉县"
+},
+{
+"DistrictId": 3897,
+"DistrictName": "讷河市"
+}
+]
+},
+{
+"CityId": 146,
+"CityName": "鸡西市",
+"district": [
+{
+"DistrictId": 3898,
+"DistrictName": "鸡冠区"
+},
+{
+"DistrictId": 3899,
+"DistrictName": "恒山区"
+},
+{
+"DistrictId": 3900,
+"DistrictName": "滴道区"
+},
+{
+"DistrictId": 3901,
+"DistrictName": "梨树区"
+},
+{
+"DistrictId": 3902,
+"DistrictName": "城子河区"
+},
+{
+"DistrictId": 3903,
+"DistrictName": "麻山区"
+},
+{
+"DistrictId": 3904,
+"DistrictName": "鸡东县"
+},
+{
+"DistrictId": 3905,
+"DistrictName": "虎林市"
+},
+{
+"DistrictId": 3906,
+"DistrictName": "密山市"
+}
+]
+},
+{
+"CityId": 147,
+"CityName": "鹤岗市",
+"district": [
+{
+"DistrictId": 3907,
+"DistrictName": "向阳区"
+},
+{
+"DistrictId": 3908,
+"DistrictName": "工农区"
+},
+{
+"DistrictId": 3909,
+"DistrictName": "南山区"
+},
+{
+"DistrictId": 3910,
+"DistrictName": "兴安区"
+},
+{
+"DistrictId": 3911,
+"DistrictName": "东山区"
+},
+{
+"DistrictId": 3912,
+"DistrictName": "兴山区"
+},
+{
+"DistrictId": 3913,
+"DistrictName": "萝北县"
+},
+{
+"DistrictId": 3914,
+"DistrictName": "绥滨县"
+}
+]
+},
+{
+"CityId": 148,
+"CityName": "双鸭山市",
+"district": [
+{
+"DistrictId": 3915,
+"DistrictName": "尖山区"
+},
+{
+"DistrictId": 3916,
+"DistrictName": "岭东区"
+},
+{
+"DistrictId": 3917,
+"DistrictName": "四方台区"
+},
+{
+"DistrictId": 3918,
+"DistrictName": "宝山区"
+},
+{
+"DistrictId": 3919,
+"DistrictName": "集贤县"
+},
+{
+"DistrictId": 3920,
+"DistrictName": "友谊县"
+},
+{
+"DistrictId": 3921,
+"DistrictName": "宝清县"
+},
+{
+"DistrictId": 3922,
+"DistrictName": "饶河县"
+}
+]
+},
+{
+"CityId": 149,
+"CityName": "大庆市",
+"district": [
+{
+"DistrictId": 3923,
+"DistrictName": "萨尔图区"
+},
+{
+"DistrictId": 3924,
+"DistrictName": "龙凤区"
+},
+{
+"DistrictId": 3925,
+"DistrictName": "让胡路区"
+},
+{
+"DistrictId": 3926,
+"DistrictName": "红岗区"
+},
+{
+"DistrictId": 3927,
+"DistrictName": "大同区"
+},
+{
+"DistrictId": 3928,
+"DistrictName": "肇州县"
+},
+{
+"DistrictId": 3929,
+"DistrictName": "肇源县"
+},
+{
+"DistrictId": 3930,
+"DistrictName": "林甸县"
+},
+{
+"DistrictId": 3931,
+"DistrictName": "杜尔伯特蒙古族自治县"
+}
+]
+},
+{
+"CityId": 150,
+"CityName": "伊春市",
+"district": [
+{
+"DistrictId": 3932,
+"DistrictName": "伊春区"
+},
+{
+"DistrictId": 3933,
+"DistrictName": "南岔区"
+},
+{
+"DistrictId": 3934,
+"DistrictName": "友好区"
+},
+{
+"DistrictId": 3935,
+"DistrictName": "西林区"
+},
+{
+"DistrictId": 3936,
+"DistrictName": "翠峦区"
+},
+{
+"DistrictId": 3937,
+"DistrictName": "新青区"
+},
+{
+"DistrictId": 3938,
+"DistrictName": "美溪区"
+},
+{
+"DistrictId": 3939,
+"DistrictName": "金山屯区"
+},
+{
+"DistrictId": 3940,
+"DistrictName": "五营区"
+},
+{
+"DistrictId": 3941,
+"DistrictName": "乌马河区"
+},
+{
+"DistrictId": 3942,
+"DistrictName": "汤旺河区"
+},
+{
+"DistrictId": 3943,
+"DistrictName": "带岭区"
+},
+{
+"DistrictId": 3944,
+"DistrictName": "乌伊岭区"
+},
+{
+"DistrictId": 3945,
+"DistrictName": "红星区"
+},
+{
+"DistrictId": 3946,
+"DistrictName": "上甘岭区"
+},
+{
+"DistrictId": 3947,
+"DistrictName": "嘉荫县"
+},
+{
+"DistrictId": 3948,
+"DistrictName": "铁力市"
+}
+]
+},
+{
+"CityId": 151,
+"CityName": "佳木斯市",
+"district": [
+{
+"DistrictId": 3949,
+"DistrictName": "向阳区"
+},
+{
+"DistrictId": 3950,
+"DistrictName": "前进区"
+},
+{
+"DistrictId": 3951,
+"DistrictName": "东风区"
+},
+{
+"DistrictId": 3952,
+"DistrictName": "郊区"
+},
+{
+"DistrictId": 3953,
+"DistrictName": "桦南县"
+},
+{
+"DistrictId": 3954,
+"DistrictName": "桦川县"
+},
+{
+"DistrictId": 3955,
+"DistrictName": "汤原县"
+},
+{
+"DistrictId": 3956,
+"DistrictName": "抚远县"
+},
+{
+"DistrictId": 3957,
+"DistrictName": "同江市"
+},
+{
+"DistrictId": 3958,
+"DistrictName": "富锦市"
+}
+]
+},
+{
+"CityId": 152,
+"CityName": "七台河市",
+"district": [
+{
+"DistrictId": 3959,
+"DistrictName": "新兴区"
+},
+{
+"DistrictId": 3960,
+"DistrictName": "桃山区"
+},
+{
+"DistrictId": 3961,
+"DistrictName": "茄子河区"
+},
+{
+"DistrictId": 3962,
+"DistrictName": "勃利县"
+}
+]
+},
+{
+"CityId": 153,
+"CityName": "牡丹江市",
+"district": [
+{
+"DistrictId": 3963,
+"DistrictName": "东安区"
+},
+{
+"DistrictId": 3964,
+"DistrictName": "阳明区"
+},
+{
+"DistrictId": 3965,
+"DistrictName": "爱民区"
+},
+{
+"DistrictId": 3966,
+"DistrictName": "西安区"
+},
+{
+"DistrictId": 3967,
+"DistrictName": "东宁县"
+},
+{
+"DistrictId": 3968,
+"DistrictName": "林口县"
+},
+{
+"DistrictId": 3969,
+"DistrictName": "绥芬河市"
+},
+{
+"DistrictId": 3970,
+"DistrictName": "海林市"
+},
+{
+"DistrictId": 3971,
+"DistrictName": "宁安市"
+},
+{
+"DistrictId": 3972,
+"DistrictName": "穆棱市"
+}
+]
+},
+{
+"CityId": 154,
+"CityName": "黑河市",
+"district": [
+{
+"DistrictId": 3973,
+"DistrictName": "爱辉区"
+},
+{
+"DistrictId": 3974,
+"DistrictName": "嫩江县"
+},
+{
+"DistrictId": 3975,
+"DistrictName": "逊克县"
+},
+{
+"DistrictId": 3976,
+"DistrictName": "孙吴县"
+},
+{
+"DistrictId": 3977,
+"DistrictName": "北安市"
+},
+{
+"DistrictId": 3978,
+"DistrictName": "五大连池市"
+}
+]
+},
+{
+"CityId": 155,
+"CityName": "绥化市",
+"district": [
+{
+"DistrictId": 3979,
+"DistrictName": "北林区"
+},
+{
+"DistrictId": 3980,
+"DistrictName": "望奎县"
+},
+{
+"DistrictId": 3981,
+"DistrictName": "兰西县"
+},
+{
+"DistrictId": 3982,
+"DistrictName": "青冈县"
+},
+{
+"DistrictId": 3983,
+"DistrictName": "庆安县"
+},
+{
+"DistrictId": 3984,
+"DistrictName": "明水县"
+},
+{
+"DistrictId": 3985,
+"DistrictName": "绥棱县"
+},
+{
+"DistrictId": 3986,
+"DistrictName": "安达市"
+},
+{
+"DistrictId": 3987,
+"DistrictName": "肇东市"
+},
+{
+"DistrictId": 3988,
+"DistrictName": "海伦市"
+}
+]
+},
+{
+"CityId": 156,
+"CityName": "大兴安岭地区",
+"district": [
+{
+"DistrictId": 3989,
+"DistrictName": "呼玛县"
+},
+{
+"DistrictId": 3990,
+"DistrictName": "塔河县"
+},
+{
+"DistrictId": 3991,
+"DistrictName": "漠河县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 59,
+"ProvinceName": "上海市",
+"city": [
+{
+"CityId": 157,
+"CityName": "上海市",
+"district": [
+{
+"DistrictId": 3992,
+"DistrictName": "黄浦区"
+},
+{
+"DistrictId": 3993,
+"DistrictName": "徐汇区"
+},
+{
+"DistrictId": 3994,
+"DistrictName": "长宁区"
+},
+{
+"DistrictId": 3995,
+"DistrictName": "静安区"
+},
+{
+"DistrictId": 3996,
+"DistrictName": "普陀区"
+},
+{
+"DistrictId": 3997,
+"DistrictName": "闸北区"
+},
+{
+"DistrictId": 3998,
+"DistrictName": "虹口区"
+},
+{
+"DistrictId": 3999,
+"DistrictName": "杨浦区"
+},
+{
+"DistrictId": 4000,
+"DistrictName": "闵行区"
+},
+{
+"DistrictId": 4001,
+"DistrictName": "宝山区"
+},
+{
+"DistrictId": 4002,
+"DistrictName": "嘉定区"
+},
+{
+"DistrictId": 4003,
+"DistrictName": "浦东新区"
+},
+{
+"DistrictId": 4004,
+"DistrictName": "金山区"
+},
+{
+"DistrictId": 4005,
+"DistrictName": "松江区"
+},
+{
+"DistrictId": 4006,
+"DistrictName": "青浦区"
+},
+{
+"DistrictId": 4007,
+"DistrictName": "奉贤区"
+},
+{
+"DistrictId": 4008,
+"DistrictName": "崇明县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 60,
+"ProvinceName": "江苏省",
+"city": [
+{
+"CityId": 158,
+"CityName": "南京市",
+"district": [
+{
+"DistrictId": 4009,
+"DistrictName": "玄武区"
+},
+{
+"DistrictId": 4010,
+"DistrictName": "白下区"
+},
+{
+"DistrictId": 4011,
+"DistrictName": "秦淮区"
+},
+{
+"DistrictId": 4012,
+"DistrictName": "建邺区"
+},
+{
+"DistrictId": 4013,
+"DistrictName": "鼓楼区"
+},
+{
+"DistrictId": 4014,
+"DistrictName": "下关区"
+},
+{
+"DistrictId": 4015,
+"DistrictName": "浦口区"
+},
+{
+"DistrictId": 4016,
+"DistrictName": "栖霞区"
+},
+{
+"DistrictId": 4017,
+"DistrictName": "雨花台区"
+},
+{
+"DistrictId": 4018,
+"DistrictName": "江宁区"
+},
+{
+"DistrictId": 4019,
+"DistrictName": "六合区"
+},
+{
+"DistrictId": 4020,
+"DistrictName": "溧水县"
+},
+{
+"DistrictId": 4021,
+"DistrictName": "高淳县"
+}
+]
+},
+{
+"CityId": 159,
+"CityName": "无锡市",
+"district": [
+{
+"DistrictId": 4022,
+"DistrictName": "崇安区"
+},
+{
+"DistrictId": 4023,
+"DistrictName": "南长区"
+},
+{
+"DistrictId": 4024,
+"DistrictName": "北塘区"
+},
+{
+"DistrictId": 4025,
+"DistrictName": "锡山区"
+},
+{
+"DistrictId": 4026,
+"DistrictName": "惠山区"
+},
+{
+"DistrictId": 4027,
+"DistrictName": "滨湖区"
+},
+{
+"DistrictId": 4028,
+"DistrictName": "江阴市"
+},
+{
+"DistrictId": 4029,
+"DistrictName": "宜兴市"
+}
+]
+},
+{
+"CityId": 160,
+"CityName": "徐州市",
+"district": [
+{
+"DistrictId": 4030,
+"DistrictName": "鼓楼区"
+},
+{
+"DistrictId": 4031,
+"DistrictName": "云龙区"
+},
+{
+"DistrictId": 4032,
+"DistrictName": "贾汪区"
+},
+{
+"DistrictId": 4033,
+"DistrictName": "泉山区"
+},
+{
+"DistrictId": 4034,
+"DistrictName": "丰县"
+},
+{
+"DistrictId": 4035,
+"DistrictName": "沛县"
+},
+{
+"DistrictId": 4036,
+"DistrictName": "铜山区"
+},
+{
+"DistrictId": 4037,
+"DistrictName": "睢宁县"
+},
+{
+"DistrictId": 4038,
+"DistrictName": "新沂市"
+},
+{
+"DistrictId": 4039,
+"DistrictName": "邳州市"
+}
+]
+},
+{
+"CityId": 161,
+"CityName": "常州市",
+"district": [
+{
+"DistrictId": 4040,
+"DistrictName": "天宁区"
+},
+{
+"DistrictId": 4041,
+"DistrictName": "钟楼区"
+},
+{
+"DistrictId": 4042,
+"DistrictName": "戚墅堰区"
+},
+{
+"DistrictId": 4043,
+"DistrictName": "新北区"
+},
+{
+"DistrictId": 4044,
+"DistrictName": "武进区"
+},
+{
+"DistrictId": 4045,
+"DistrictName": "溧阳市"
+},
+{
+"DistrictId": 4046,
+"DistrictName": "金坛市"
+}
+]
+},
+{
+"CityId": 162,
+"CityName": "苏州市",
+"district": [
+{
+"DistrictId": 4047,
+"DistrictName": "姑苏区"
+},
+{
+"DistrictId": 4048,
+"DistrictName": "虎丘区"
+},
+{
+"DistrictId": 4049,
+"DistrictName": "吴中区"
+},
+{
+"DistrictId": 4050,
+"DistrictName": "相城区"
+},
+{
+"DistrictId": 4051,
+"DistrictName": "常熟市"
+},
+{
+"DistrictId": 4052,
+"DistrictName": "张家港市"
+},
+{
+"DistrictId": 4053,
+"DistrictName": "昆山市"
+},
+{
+"DistrictId": 4054,
+"DistrictName": "吴江区"
+},
+{
+"DistrictId": 4055,
+"DistrictName": "太仓市"
+}
+]
+},
+{
+"CityId": 163,
+"CityName": "南通市",
+"district": [
+{
+"DistrictId": 4056,
+"DistrictName": "崇川区"
+},
+{
+"DistrictId": 4057,
+"DistrictName": "港闸区"
+},
+{
+"DistrictId": 4058,
+"DistrictName": "海安县"
+},
+{
+"DistrictId": 4059,
+"DistrictName": "如东县"
+},
+{
+"DistrictId": 4060,
+"DistrictName": "启东市"
+},
+{
+"DistrictId": 4061,
+"DistrictName": "如皋市"
+},
+{
+"DistrictId": 4062,
+"DistrictName": "通州区"
+},
+{
+"DistrictId": 4063,
+"DistrictName": "海门市"
+}
+]
+},
+{
+"CityId": 164,
+"CityName": "连云港市",
+"district": [
+{
+"DistrictId": 4064,
+"DistrictName": "连云区"
+},
+{
+"DistrictId": 4065,
+"DistrictName": "新浦区"
+},
+{
+"DistrictId": 4066,
+"DistrictName": "海州区"
+},
+{
+"DistrictId": 4067,
+"DistrictName": "赣榆县"
+},
+{
+"DistrictId": 4068,
+"DistrictName": "东海县"
+},
+{
+"DistrictId": 4069,
+"DistrictName": "灌云县"
+},
+{
+"DistrictId": 4070,
+"DistrictName": "灌南县"
+}
+]
+},
+{
+"CityId": 165,
+"CityName": "淮安市",
+"district": [
+{
+"DistrictId": 4071,
+"DistrictName": "清河区"
+},
+{
+"DistrictId": 4072,
+"DistrictName": "楚州区"
+},
+{
+"DistrictId": 4073,
+"DistrictName": "淮阴区"
+},
+{
+"DistrictId": 4074,
+"DistrictName": "清浦区"
+},
+{
+"DistrictId": 4075,
+"DistrictName": "涟水县"
+},
+{
+"DistrictId": 4076,
+"DistrictName": "洪泽县"
+},
+{
+"DistrictId": 4077,
+"DistrictName": "盱眙县"
+},
+{
+"DistrictId": 4078,
+"DistrictName": "金湖县"
+}
+]
+},
+{
+"CityId": 166,
+"CityName": "盐城市",
+"district": [
+{
+"DistrictId": 4079,
+"DistrictName": "亭湖区"
+},
+{
+"DistrictId": 4080,
+"DistrictName": "盐都区"
+},
+{
+"DistrictId": 4081,
+"DistrictName": "响水县"
+},
+{
+"DistrictId": 4082,
+"DistrictName": "滨海县"
+},
+{
+"DistrictId": 4083,
+"DistrictName": "阜宁县"
+},
+{
+"DistrictId": 4084,
+"DistrictName": "射阳县"
+},
+{
+"DistrictId": 4085,
+"DistrictName": "建湖县"
+},
+{
+"DistrictId": 4086,
+"DistrictName": "东台市"
+},
+{
+"DistrictId": 4087,
+"DistrictName": "大丰市"
+}
+]
+},
+{
+"CityId": 167,
+"CityName": "扬州市",
+"district": [
+{
+"DistrictId": 4088,
+"DistrictName": "广陵区"
+},
+{
+"DistrictId": 4089,
+"DistrictName": "邗江区"
+},
+{
+"DistrictId": 4090,
+"DistrictName": "江都区"
+},
+{
+"DistrictId": 4091,
+"DistrictName": "宝应县"
+},
+{
+"DistrictId": 4092,
+"DistrictName": "仪征市"
+},
+{
+"DistrictId": 4093,
+"DistrictName": "高邮市"
+},
+{
+"DistrictId": 4094,
+"DistrictName": "江都市"
+}
+]
+},
+{
+"CityId": 168,
+"CityName": "镇江市",
+"district": [
+{
+"DistrictId": 4095,
+"DistrictName": "京口区"
+},
+{
+"DistrictId": 4096,
+"DistrictName": "润州区"
+},
+{
+"DistrictId": 4097,
+"DistrictName": "丹徒区"
+},
+{
+"DistrictId": 4098,
+"DistrictName": "丹阳市"
+},
+{
+"DistrictId": 4099,
+"DistrictName": "扬中市"
+},
+{
+"DistrictId": 4100,
+"DistrictName": "句容市"
+}
+]
+},
+{
+"CityId": 169,
+"CityName": "泰州市",
+"district": [
+{
+"DistrictId": 4101,
+"DistrictName": "海陵区"
+},
+{
+"DistrictId": 4102,
+"DistrictName": "高港区"
+},
+{
+"DistrictId": 4103,
+"DistrictName": "兴化市"
+},
+{
+"DistrictId": 4104,
+"DistrictName": "靖江市"
+},
+{
+"DistrictId": 4105,
+"DistrictName": "泰兴市"
+},
+{
+"DistrictId": 4106,
+"DistrictName": "姜堰市"
+}
+]
+},
+{
+"CityId": 170,
+"CityName": "宿迁市",
+"district": [
+{
+"DistrictId": 4107,
+"DistrictName": "宿城区"
+},
+{
+"DistrictId": 4108,
+"DistrictName": "宿豫区"
+},
+{
+"DistrictId": 4109,
+"DistrictName": "沭阳县"
+},
+{
+"DistrictId": 4110,
+"DistrictName": "泗阳县"
+},
+{
+"DistrictId": 4111,
+"DistrictName": "泗洪县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 61,
+"ProvinceName": "浙江省",
+"city": [
+{
+"CityId": 171,
+"CityName": "杭州市",
+"district": [
+{
+"DistrictId": 4112,
+"DistrictName": "上城区"
+},
+{
+"DistrictId": 4113,
+"DistrictName": "下城区"
+},
+{
+"DistrictId": 4114,
+"DistrictName": "江干区"
+},
+{
+"DistrictId": 4115,
+"DistrictName": "拱墅区"
+},
+{
+"DistrictId": 4116,
+"DistrictName": "西湖区"
+},
+{
+"DistrictId": 4117,
+"DistrictName": "滨江区"
+},
+{
+"DistrictId": 4118,
+"DistrictName": "萧山区"
+},
+{
+"DistrictId": 4119,
+"DistrictName": "余杭区"
+},
+{
+"DistrictId": 4120,
+"DistrictName": "桐庐县"
+},
+{
+"DistrictId": 4121,
+"DistrictName": "淳安县"
+},
+{
+"DistrictId": 4122,
+"DistrictName": "建德市"
+},
+{
+"DistrictId": 4123,
+"DistrictName": "富阳市"
+},
+{
+"DistrictId": 4124,
+"DistrictName": "临安市"
+}
+]
+},
+{
+"CityId": 172,
+"CityName": "宁波市",
+"district": [
+{
+"DistrictId": 4125,
+"DistrictName": "海曙区"
+},
+{
+"DistrictId": 4126,
+"DistrictName": "江东区"
+},
+{
+"DistrictId": 4127,
+"DistrictName": "江北区"
+},
+{
+"DistrictId": 4128,
+"DistrictName": "北仑区"
+},
+{
+"DistrictId": 4129,
+"DistrictName": "镇海区"
+},
+{
+"DistrictId": 4130,
+"DistrictName": "鄞州区"
+},
+{
+"DistrictId": 4131,
+"DistrictName": "象山县"
+},
+{
+"DistrictId": 4132,
+"DistrictName": "宁海县"
+},
+{
+"DistrictId": 4133,
+"DistrictName": "余姚市"
+},
+{
+"DistrictId": 4134,
+"DistrictName": "慈溪市"
+},
+{
+"DistrictId": 4135,
+"DistrictName": "奉化市"
+}
+]
+},
+{
+"CityId": 173,
+"CityName": "温州市",
+"district": [
+{
+"DistrictId": 4136,
+"DistrictName": "鹿城区"
+},
+{
+"DistrictId": 4137,
+"DistrictName": "龙湾区"
+},
+{
+"DistrictId": 4138,
+"DistrictName": "瓯海区"
+},
+{
+"DistrictId": 4139,
+"DistrictName": "洞头县"
+},
+{
+"DistrictId": 4140,
+"DistrictName": "永嘉县"
+},
+{
+"DistrictId": 4141,
+"DistrictName": "平阳县"
+},
+{
+"DistrictId": 4142,
+"DistrictName": "苍南县"
+},
+{
+"DistrictId": 4143,
+"DistrictName": "文成县"
+},
+{
+"DistrictId": 4144,
+"DistrictName": "泰顺县"
+},
+{
+"DistrictId": 4145,
+"DistrictName": "瑞安市"
+},
+{
+"DistrictId": 4146,
+"DistrictName": "乐清市"
+}
+]
+},
+{
+"CityId": 174,
+"CityName": "嘉兴市",
+"district": [
+{
+"DistrictId": 4147,
+"DistrictName": "南湖区"
+},
+{
+"DistrictId": 4148,
+"DistrictName": "秀洲区"
+},
+{
+"DistrictId": 4149,
+"DistrictName": "嘉善县"
+},
+{
+"DistrictId": 4150,
+"DistrictName": "海盐县"
+},
+{
+"DistrictId": 4151,
+"DistrictName": "海宁市"
+},
+{
+"DistrictId": 4152,
+"DistrictName": "平湖市"
+},
+{
+"DistrictId": 4153,
+"DistrictName": "桐乡市"
+}
+]
+},
+{
+"CityId": 175,
+"CityName": "湖州市",
+"district": [
+{
+"DistrictId": 4154,
+"DistrictName": "吴兴区"
+},
+{
+"DistrictId": 4155,
+"DistrictName": "南浔区"
+},
+{
+"DistrictId": 4156,
+"DistrictName": "德清县"
+},
+{
+"DistrictId": 4157,
+"DistrictName": "长兴县"
+},
+{
+"DistrictId": 4158,
+"DistrictName": "安吉县"
+}
+]
+},
+{
+"CityId": 176,
+"CityName": "绍兴市",
+"district": [
+{
+"DistrictId": 4159,
+"DistrictName": "越城区"
+},
+{
+"DistrictId": 4160,
+"DistrictName": "绍兴县"
+},
+{
+"DistrictId": 4161,
+"DistrictName": "新昌县"
+},
+{
+"DistrictId": 4162,
+"DistrictName": "诸暨市"
+},
+{
+"DistrictId": 4163,
+"DistrictName": "上虞市"
+},
+{
+"DistrictId": 4164,
+"DistrictName": "嵊州市"
+}
+]
+},
+{
+"CityId": 177,
+"CityName": "金华市",
+"district": [
+{
+"DistrictId": 4165,
+"DistrictName": "婺城区"
+},
+{
+"DistrictId": 4166,
+"DistrictName": "金东区"
+},
+{
+"DistrictId": 4167,
+"DistrictName": "武义县"
+},
+{
+"DistrictId": 4168,
+"DistrictName": "浦江县"
+},
+{
+"DistrictId": 4169,
+"DistrictName": "磐安县"
+},
+{
+"DistrictId": 4170,
+"DistrictName": "兰溪市"
+},
+{
+"DistrictId": 4171,
+"DistrictName": "义乌市"
+},
+{
+"DistrictId": 4172,
+"DistrictName": "东阳市"
+},
+{
+"DistrictId": 4173,
+"DistrictName": "永康市"
+}
+]
+},
+{
+"CityId": 178,
+"CityName": "衢州市",
+"district": [
+{
+"DistrictId": 4174,
+"DistrictName": "柯城区"
+},
+{
+"DistrictId": 4175,
+"DistrictName": "衢江区"
+},
+{
+"DistrictId": 4176,
+"DistrictName": "常山县"
+},
+{
+"DistrictId": 4177,
+"DistrictName": "开化县"
+},
+{
+"DistrictId": 4178,
+"DistrictName": "龙游县"
+},
+{
+"DistrictId": 4179,
+"DistrictName": "江山市"
+}
+]
+},
+{
+"CityId": 179,
+"CityName": "舟山市",
+"district": [
+{
+"DistrictId": 4180,
+"DistrictName": "定海区"
+},
+{
+"DistrictId": 4181,
+"DistrictName": "普陀区"
+},
+{
+"DistrictId": 4182,
+"DistrictName": "岱山县"
+},
+{
+"DistrictId": 4183,
+"DistrictName": "嵊泗县"
+}
+]
+},
+{
+"CityId": 180,
+"CityName": "台州市",
+"district": [
+{
+"DistrictId": 4184,
+"DistrictName": "椒江区"
+},
+{
+"DistrictId": 4185,
+"DistrictName": "黄岩区"
+},
+{
+"DistrictId": 4186,
+"DistrictName": "路桥区"
+},
+{
+"DistrictId": 4187,
+"DistrictName": "玉环县"
+},
+{
+"DistrictId": 4188,
+"DistrictName": "三门县"
+},
+{
+"DistrictId": 4189,
+"DistrictName": "天台县"
+},
+{
+"DistrictId": 4190,
+"DistrictName": "仙居县"
+},
+{
+"DistrictId": 4191,
+"DistrictName": "温岭市"
+},
+{
+"DistrictId": 4192,
+"DistrictName": "临海市"
+}
+]
+},
+{
+"CityId": 181,
+"CityName": "丽水市",
+"district": [
+{
+"DistrictId": 4193,
+"DistrictName": "莲都区"
+},
+{
+"DistrictId": 4194,
+"DistrictName": "青田县"
+},
+{
+"DistrictId": 4195,
+"DistrictName": "缙云县"
+},
+{
+"DistrictId": 4196,
+"DistrictName": "遂昌县"
+},
+{
+"DistrictId": 4197,
+"DistrictName": "松阳县"
+},
+{
+"DistrictId": 4198,
+"DistrictName": "云和县"
+},
+{
+"DistrictId": 4199,
+"DistrictName": "庆元县"
+},
+{
+"DistrictId": 4200,
+"DistrictName": "景宁畲族自治县"
+},
+{
+"DistrictId": 4201,
+"DistrictName": "龙泉市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 62,
+"ProvinceName": "安徽省",
+"city": [
+{
+"CityId": 182,
+"CityName": "合肥市",
+"district": [
+{
+"DistrictId": 4202,
+"DistrictName": "瑶海区"
+},
+{
+"DistrictId": 4203,
+"DistrictName": "庐阳区"
+},
+{
+"DistrictId": 4204,
+"DistrictName": "蜀山区"
+},
+{
+"DistrictId": 4205,
+"DistrictName": "包河区"
+},
+{
+"DistrictId": 4206,
+"DistrictName": "长丰县"
+},
+{
+"DistrictId": 4207,
+"DistrictName": "肥东县"
+},
+{
+"DistrictId": 4208,
+"DistrictName": "肥西县"
+},
+{
+"DistrictId": 4209,
+"DistrictName": "庐江县"
+},
+{
+"DistrictId": 4210,
+"DistrictName": "巢湖市"
+}
+]
+},
+{
+"CityId": 183,
+"CityName": "芜湖市",
+"district": [
+{
+"DistrictId": 4211,
+"DistrictName": "镜湖区"
+},
+{
+"DistrictId": 4212,
+"DistrictName": "弋江区"
+},
+{
+"DistrictId": 4213,
+"DistrictName": "鸠江区"
+},
+{
+"DistrictId": 4214,
+"DistrictName": "三山区"
+},
+{
+"DistrictId": 4215,
+"DistrictName": "芜湖县"
+},
+{
+"DistrictId": 4216,
+"DistrictName": "繁昌县"
+},
+{
+"DistrictId": 4217,
+"DistrictName": "南陵县"
+},
+{
+"DistrictId": 4218,
+"DistrictName": "无为县"
+}
+]
+},
+{
+"CityId": 184,
+"CityName": "蚌埠市",
+"district": [
+{
+"DistrictId": 4219,
+"DistrictName": "龙子湖区"
+},
+{
+"DistrictId": 4220,
+"DistrictName": "蚌山区"
+},
+{
+"DistrictId": 4221,
+"DistrictName": "禹会区"
+},
+{
+"DistrictId": 4222,
+"DistrictName": "淮上区"
+},
+{
+"DistrictId": 4223,
+"DistrictName": "怀远县"
+},
+{
+"DistrictId": 4224,
+"DistrictName": "五河县"
+},
+{
+"DistrictId": 4225,
+"DistrictName": "固镇县"
+}
+]
+},
+{
+"CityId": 185,
+"CityName": "淮南市",
+"district": [
+{
+"DistrictId": 4226,
+"DistrictName": "大通区"
+},
+{
+"DistrictId": 4227,
+"DistrictName": "田家庵区"
+},
+{
+"DistrictId": 4228,
+"DistrictName": "谢家集区"
+},
+{
+"DistrictId": 4229,
+"DistrictName": "八公山区"
+},
+{
+"DistrictId": 4230,
+"DistrictName": "潘集区"
+},
+{
+"DistrictId": 4231,
+"DistrictName": "凤台县"
+}
+]
+},
+{
+"CityId": 186,
+"CityName": "马鞍山市",
+"district": [
+{
+"DistrictId": 4232,
+"DistrictName": "花山区"
+},
+{
+"DistrictId": 4233,
+"DistrictName": "雨山区"
+},
+{
+"DistrictId": 4234,
+"DistrictName": "博望区"
+},
+{
+"DistrictId": 4235,
+"DistrictName": "当涂县"
+},
+{
+"DistrictId": 4236,
+"DistrictName": "含山县"
+},
+{
+"DistrictId": 4237,
+"DistrictName": "和县"
+}
+]
+},
+{
+"CityId": 187,
+"CityName": "淮北市",
+"district": [
+{
+"DistrictId": 4238,
+"DistrictName": "杜集区"
+},
+{
+"DistrictId": 4239,
+"DistrictName": "相山区"
+},
+{
+"DistrictId": 4240,
+"DistrictName": "烈山区"
+},
+{
+"DistrictId": 4241,
+"DistrictName": "濉溪县"
+}
+]
+},
+{
+"CityId": 188,
+"CityName": "铜陵市",
+"district": [
+{
+"DistrictId": 4242,
+"DistrictName": "铜官山区"
+},
+{
+"DistrictId": 4243,
+"DistrictName": "狮子山区"
+},
+{
+"DistrictId": 4244,
+"DistrictName": "郊区"
+},
+{
+"DistrictId": 4245,
+"DistrictName": "铜陵县"
+}
+]
+},
+{
+"CityId": 189,
+"CityName": "安庆市",
+"district": [
+{
+"DistrictId": 4246,
+"DistrictName": "迎江区"
+},
+{
+"DistrictId": 4247,
+"DistrictName": "大观区"
+},
+{
+"DistrictId": 4248,
+"DistrictName": "宜秀区"
+},
+{
+"DistrictId": 4249,
+"DistrictName": "怀宁县"
+},
+{
+"DistrictId": 4250,
+"DistrictName": "枞阳县"
+},
+{
+"DistrictId": 4251,
+"DistrictName": "潜山县"
+},
+{
+"DistrictId": 4252,
+"DistrictName": "太湖县"
+},
+{
+"DistrictId": 4253,
+"DistrictName": "宿松县"
+},
+{
+"DistrictId": 4254,
+"DistrictName": "望江县"
+},
+{
+"DistrictId": 4255,
+"DistrictName": "岳西县"
+},
+{
+"DistrictId": 4256,
+"DistrictName": "桐城市"
+}
+]
+},
+{
+"CityId": 190,
+"CityName": "黄山市",
+"district": [
+{
+"DistrictId": 4257,
+"DistrictName": "屯溪区"
+},
+{
+"DistrictId": 4258,
+"DistrictName": "黄山区"
+},
+{
+"DistrictId": 4259,
+"DistrictName": "徽州区"
+},
+{
+"DistrictId": 4260,
+"DistrictName": "歙县"
+},
+{
+"DistrictId": 4261,
+"DistrictName": "休宁县"
+},
+{
+"DistrictId": 4262,
+"DistrictName": "黟县"
+},
+{
+"DistrictId": 4263,
+"DistrictName": "祁门县"
+}
+]
+},
+{
+"CityId": 191,
+"CityName": "滁州市",
+"district": [
+{
+"DistrictId": 4264,
+"DistrictName": "琅琊区"
+},
+{
+"DistrictId": 4265,
+"DistrictName": "南谯区"
+},
+{
+"DistrictId": 4266,
+"DistrictName": "来安县"
+},
+{
+"DistrictId": 4267,
+"DistrictName": "全椒县"
+},
+{
+"DistrictId": 4268,
+"DistrictName": "定远县"
+},
+{
+"DistrictId": 4269,
+"DistrictName": "凤阳县"
+},
+{
+"DistrictId": 4270,
+"DistrictName": "天长市"
+},
+{
+"DistrictId": 4271,
+"DistrictName": "明光市"
+}
+]
+},
+{
+"CityId": 192,
+"CityName": "阜阳市",
+"district": [
+{
+"DistrictId": 4272,
+"DistrictName": "颍州区"
+},
+{
+"DistrictId": 4273,
+"DistrictName": "颍东区"
+},
+{
+"DistrictId": 4274,
+"DistrictName": "颍泉区"
+},
+{
+"DistrictId": 4275,
+"DistrictName": "临泉县"
+},
+{
+"DistrictId": 4276,
+"DistrictName": "太和县"
+},
+{
+"DistrictId": 4277,
+"DistrictName": "阜南县"
+},
+{
+"DistrictId": 4278,
+"DistrictName": "颍上县"
+},
+{
+"DistrictId": 4279,
+"DistrictName": "界首市"
+}
+]
+},
+{
+"CityId": 193,
+"CityName": "宿州市",
+"district": [
+{
+"DistrictId": 4280,
+"DistrictName": "埇桥区"
+},
+{
+"DistrictId": 4281,
+"DistrictName": "砀山县"
+},
+{
+"DistrictId": 4282,
+"DistrictName": "萧县"
+},
+{
+"DistrictId": 4283,
+"DistrictName": "灵璧县"
+},
+{
+"DistrictId": 4284,
+"DistrictName": "泗县"
+}
+]
+},
+{
+"CityId": 194,
+"CityName": "六安市",
+"district": [
+{
+"DistrictId": 4285,
+"DistrictName": "金安区"
+},
+{
+"DistrictId": 4286,
+"DistrictName": "裕安区"
+},
+{
+"DistrictId": 4287,
+"DistrictName": "寿县"
+},
+{
+"DistrictId": 4288,
+"DistrictName": "霍邱县"
+},
+{
+"DistrictId": 4289,
+"DistrictName": "舒城县"
+},
+{
+"DistrictId": 4290,
+"DistrictName": "金寨县"
+},
+{
+"DistrictId": 4291,
+"DistrictName": "霍山县"
+}
+]
+},
+{
+"CityId": 195,
+"CityName": "亳州市",
+"district": [
+{
+"DistrictId": 4292,
+"DistrictName": "谯城区"
+},
+{
+"DistrictId": 4293,
+"DistrictName": "涡阳县"
+},
+{
+"DistrictId": 4294,
+"DistrictName": "蒙城县"
+},
+{
+"DistrictId": 4295,
+"DistrictName": "利辛县"
+}
+]
+},
+{
+"CityId": 196,
+"CityName": "池州市",
+"district": [
+{
+"DistrictId": 4296,
+"DistrictName": "贵池区"
+},
+{
+"DistrictId": 4297,
+"DistrictName": "东至县"
+},
+{
+"DistrictId": 4298,
+"DistrictName": "石台县"
+},
+{
+"DistrictId": 4299,
+"DistrictName": "青阳县"
+}
+]
+},
+{
+"CityId": 197,
+"CityName": "宣城市",
+"district": [
+{
+"DistrictId": 4300,
+"DistrictName": "宣州区"
+},
+{
+"DistrictId": 4301,
+"DistrictName": "郎溪县"
+},
+{
+"DistrictId": 4302,
+"DistrictName": "广德县"
+},
+{
+"DistrictId": 4303,
+"DistrictName": "泾县"
+},
+{
+"DistrictId": 4304,
+"DistrictName": "绩溪县"
+},
+{
+"DistrictId": 4305,
+"DistrictName": "旌德县"
+},
+{
+"DistrictId": 4306,
+"DistrictName": "宁国市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 63,
+"ProvinceName": "福建省",
+"city": [
+{
+"CityId": 198,
+"CityName": "福州市",
+"district": [
+{
+"DistrictId": 4307,
+"DistrictName": "鼓楼区"
+},
+{
+"DistrictId": 4308,
+"DistrictName": "台江区"
+},
+{
+"DistrictId": 4309,
+"DistrictName": "仓山区"
+},
+{
+"DistrictId": 4310,
+"DistrictName": "马尾区"
+},
+{
+"DistrictId": 4311,
+"DistrictName": "晋安区"
+},
+{
+"DistrictId": 4312,
+"DistrictName": "闽侯县"
+},
+{
+"DistrictId": 4313,
+"DistrictName": "连江县"
+},
+{
+"DistrictId": 4314,
+"DistrictName": "罗源县"
+},
+{
+"DistrictId": 4315,
+"DistrictName": "闽清县"
+},
+{
+"DistrictId": 4316,
+"DistrictName": "永泰县"
+},
+{
+"DistrictId": 4317,
+"DistrictName": "平潭县"
+},
+{
+"DistrictId": 4318,
+"DistrictName": "福清市"
+},
+{
+"DistrictId": 4319,
+"DistrictName": "长乐市"
+}
+]
+},
+{
+"CityId": 199,
+"CityName": "厦门市",
+"district": [
+{
+"DistrictId": 4320,
+"DistrictName": "思明区"
+},
+{
+"DistrictId": 4321,
+"DistrictName": "海沧区"
+},
+{
+"DistrictId": 4322,
+"DistrictName": "湖里区"
+},
+{
+"DistrictId": 4323,
+"DistrictName": "集美区"
+},
+{
+"DistrictId": 4324,
+"DistrictName": "同安区"
+},
+{
+"DistrictId": 4325,
+"DistrictName": "翔安区"
+}
+]
+},
+{
+"CityId": 200,
+"CityName": "莆田市",
+"district": [
+{
+"DistrictId": 4326,
+"DistrictName": "城厢区"
+},
+{
+"DistrictId": 4327,
+"DistrictName": "涵江区"
+},
+{
+"DistrictId": 4328,
+"DistrictName": "荔城区"
+},
+{
+"DistrictId": 4329,
+"DistrictName": "秀屿区"
+},
+{
+"DistrictId": 4330,
+"DistrictName": "仙游县"
+}
+]
+},
+{
+"CityId": 201,
+"CityName": "三明市",
+"district": [
+{
+"DistrictId": 4331,
+"DistrictName": "梅列区"
+},
+{
+"DistrictId": 4332,
+"DistrictName": "三元区"
+},
+{
+"DistrictId": 4333,
+"DistrictName": "明溪县"
+},
+{
+"DistrictId": 4334,
+"DistrictName": "清流县"
+},
+{
+"DistrictId": 4335,
+"DistrictName": "宁化县"
+},
+{
+"DistrictId": 4336,
+"DistrictName": "大田县"
+},
+{
+"DistrictId": 4337,
+"DistrictName": "尤溪县"
+},
+{
+"DistrictId": 4338,
+"DistrictName": "沙县"
+},
+{
+"DistrictId": 4339,
+"DistrictName": "将乐县"
+},
+{
+"DistrictId": 4340,
+"DistrictName": "泰宁县"
+},
+{
+"DistrictId": 4341,
+"DistrictName": "建宁县"
+},
+{
+"DistrictId": 4342,
+"DistrictName": "永安市"
+}
+]
+},
+{
+"CityId": 202,
+"CityName": "泉州市",
+"district": [
+{
+"DistrictId": 4343,
+"DistrictName": "鲤城区"
+},
+{
+"DistrictId": 4344,
+"DistrictName": "丰泽区"
+},
+{
+"DistrictId": 4345,
+"DistrictName": "洛江区"
+},
+{
+"DistrictId": 4346,
+"DistrictName": "泉港区"
+},
+{
+"DistrictId": 4347,
+"DistrictName": "惠安县"
+},
+{
+"DistrictId": 4348,
+"DistrictName": "安溪县"
+},
+{
+"DistrictId": 4349,
+"DistrictName": "永春县"
+},
+{
+"DistrictId": 4350,
+"DistrictName": "德化县"
+},
+{
+"DistrictId": 4351,
+"DistrictName": "金门县"
+},
+{
+"DistrictId": 4352,
+"DistrictName": "石狮市"
+},
+{
+"DistrictId": 4353,
+"DistrictName": "晋江市"
+},
+{
+"DistrictId": 4354,
+"DistrictName": "南安市"
+}
+]
+},
+{
+"CityId": 203,
+"CityName": "漳州市",
+"district": [
+{
+"DistrictId": 4355,
+"DistrictName": "芗城区"
+},
+{
+"DistrictId": 4356,
+"DistrictName": "龙文区"
+},
+{
+"DistrictId": 4357,
+"DistrictName": "云霄县"
+},
+{
+"DistrictId": 4358,
+"DistrictName": "漳浦县"
+},
+{
+"DistrictId": 4359,
+"DistrictName": "诏安县"
+},
+{
+"DistrictId": 4360,
+"DistrictName": "长泰县"
+},
+{
+"DistrictId": 4361,
+"DistrictName": "东山县"
+},
+{
+"DistrictId": 4362,
+"DistrictName": "南靖县"
+},
+{
+"DistrictId": 4363,
+"DistrictName": "平和县"
+},
+{
+"DistrictId": 4364,
+"DistrictName": "华安县"
+},
+{
+"DistrictId": 4365,
+"DistrictName": "龙海市"
+}
+]
+},
+{
+"CityId": 204,
+"CityName": "南平市",
+"district": [
+{
+"DistrictId": 4366,
+"DistrictName": "延平区"
+},
+{
+"DistrictId": 4367,
+"DistrictName": "顺昌县"
+},
+{
+"DistrictId": 4368,
+"DistrictName": "浦城县"
+},
+{
+"DistrictId": 4369,
+"DistrictName": "光泽县"
+},
+{
+"DistrictId": 4370,
+"DistrictName": "松溪县"
+},
+{
+"DistrictId": 4371,
+"DistrictName": "政和县"
+},
+{
+"DistrictId": 4372,
+"DistrictName": "邵武市"
+},
+{
+"DistrictId": 4373,
+"DistrictName": "武夷山市"
+},
+{
+"DistrictId": 4374,
+"DistrictName": "建瓯市"
+},
+{
+"DistrictId": 4375,
+"DistrictName": "建阳市"
+}
+]
+},
+{
+"CityId": 205,
+"CityName": "龙岩市",
+"district": [
+{
+"DistrictId": 4376,
+"DistrictName": "新罗区"
+},
+{
+"DistrictId": 4377,
+"DistrictName": "长汀县"
+},
+{
+"DistrictId": 4378,
+"DistrictName": "永定县"
+},
+{
+"DistrictId": 4379,
+"DistrictName": "上杭县"
+},
+{
+"DistrictId": 4380,
+"DistrictName": "武平县"
+},
+{
+"DistrictId": 4381,
+"DistrictName": "连城县"
+},
+{
+"DistrictId": 4382,
+"DistrictName": "漳平市"
+}
+]
+},
+{
+"CityId": 206,
+"CityName": "宁德市",
+"district": [
+{
+"DistrictId": 4383,
+"DistrictName": "蕉城区"
+},
+{
+"DistrictId": 4384,
+"DistrictName": "霞浦县"
+},
+{
+"DistrictId": 4385,
+"DistrictName": "古田县"
+},
+{
+"DistrictId": 4386,
+"DistrictName": "屏南县"
+},
+{
+"DistrictId": 4387,
+"DistrictName": "寿宁县"
+},
+{
+"DistrictId": 4388,
+"DistrictName": "周宁县"
+},
+{
+"DistrictId": 4389,
+"DistrictName": "柘荣县"
+},
+{
+"DistrictId": 4390,
+"DistrictName": "福安市"
+},
+{
+"DistrictId": 4391,
+"DistrictName": "福鼎市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 64,
+"ProvinceName": "江西省",
+"city": [
+{
+"CityId": 207,
+"CityName": "南昌市",
+"district": [
+{
+"DistrictId": 4392,
+"DistrictName": "东湖区"
+},
+{
+"DistrictId": 4393,
+"DistrictName": "西湖区"
+},
+{
+"DistrictId": 4394,
+"DistrictName": "青云谱区"
+},
+{
+"DistrictId": 4395,
+"DistrictName": "湾里区"
+},
+{
+"DistrictId": 4396,
+"DistrictName": "青山湖区"
+},
+{
+"DistrictId": 4397,
+"DistrictName": "南昌县"
+},
+{
+"DistrictId": 4398,
+"DistrictName": "新建县"
+},
+{
+"DistrictId": 4399,
+"DistrictName": "安义县"
+},
+{
+"DistrictId": 4400,
+"DistrictName": "进贤县"
+}
+]
+},
+{
+"CityId": 208,
+"CityName": "景德镇市",
+"district": [
+{
+"DistrictId": 4401,
+"DistrictName": "昌江区"
+},
+{
+"DistrictId": 4402,
+"DistrictName": "珠山区"
+},
+{
+"DistrictId": 4403,
+"DistrictName": "浮梁县"
+},
+{
+"DistrictId": 4404,
+"DistrictName": "乐平市"
+}
+]
+},
+{
+"CityId": 209,
+"CityName": "萍乡市",
+"district": [
+{
+"DistrictId": 4405,
+"DistrictName": "安源区"
+},
+{
+"DistrictId": 4406,
+"DistrictName": "湘东区"
+},
+{
+"DistrictId": 4407,
+"DistrictName": "莲花县"
+},
+{
+"DistrictId": 4408,
+"DistrictName": "上栗县"
+},
+{
+"DistrictId": 4409,
+"DistrictName": "芦溪县"
+}
+]
+},
+{
+"CityId": 210,
+"CityName": "九江市",
+"district": [
+{
+"DistrictId": 4410,
+"DistrictName": "庐山区"
+},
+{
+"DistrictId": 4411,
+"DistrictName": "浔阳区"
+},
+{
+"DistrictId": 4412,
+"DistrictName": "九江县"
+},
+{
+"DistrictId": 4413,
+"DistrictName": "武宁县"
+},
+{
+"DistrictId": 4414,
+"DistrictName": "修水县"
+},
+{
+"DistrictId": 4415,
+"DistrictName": "永修县"
+},
+{
+"DistrictId": 4416,
+"DistrictName": "德安县"
+},
+{
+"DistrictId": 4417,
+"DistrictName": "星子县"
+},
+{
+"DistrictId": 4418,
+"DistrictName": "都昌县"
+},
+{
+"DistrictId": 4419,
+"DistrictName": "湖口县"
+},
+{
+"DistrictId": 4420,
+"DistrictName": "彭泽县"
+},
+{
+"DistrictId": 4421,
+"DistrictName": "瑞昌市"
+},
+{
+"DistrictId": 4422,
+"DistrictName": "共青城市"
+}
+]
+},
+{
+"CityId": 211,
+"CityName": "新余市",
+"district": [
+{
+"DistrictId": 4423,
+"DistrictName": "渝水区"
+},
+{
+"DistrictId": 4424,
+"DistrictName": "分宜县"
+}
+]
+},
+{
+"CityId": 212,
+"CityName": "鹰潭市",
+"district": [
+{
+"DistrictId": 4425,
+"DistrictName": "月湖区"
+},
+{
+"DistrictId": 4426,
+"DistrictName": "余江县"
+},
+{
+"DistrictId": 4427,
+"DistrictName": "贵溪市"
+}
+]
+},
+{
+"CityId": 213,
+"CityName": "赣州市",
+"district": [
+{
+"DistrictId": 4428,
+"DistrictName": "章贡区"
+},
+{
+"DistrictId": 4429,
+"DistrictName": "赣县"
+},
+{
+"DistrictId": 4430,
+"DistrictName": "信丰县"
+},
+{
+"DistrictId": 4431,
+"DistrictName": "大余县"
+},
+{
+"DistrictId": 4432,
+"DistrictName": "上犹县"
+},
+{
+"DistrictId": 4433,
+"DistrictName": "崇义县"
+},
+{
+"DistrictId": 4434,
+"DistrictName": "安远县"
+},
+{
+"DistrictId": 4435,
+"DistrictName": "龙南县"
+},
+{
+"DistrictId": 4436,
+"DistrictName": "定南县"
+},
+{
+"DistrictId": 4437,
+"DistrictName": "全南县"
+},
+{
+"DistrictId": 4438,
+"DistrictName": "宁都县"
+},
+{
+"DistrictId": 4439,
+"DistrictName": "于都县"
+},
+{
+"DistrictId": 4440,
+"DistrictName": "兴国县"
+},
+{
+"DistrictId": 4441,
+"DistrictName": "会昌县"
+},
+{
+"DistrictId": 4442,
+"DistrictName": "寻乌县"
+},
+{
+"DistrictId": 4443,
+"DistrictName": "石城县"
+},
+{
+"DistrictId": 4444,
+"DistrictName": "瑞金市"
+},
+{
+"DistrictId": 4445,
+"DistrictName": "南康市"
+}
+]
+},
+{
+"CityId": 214,
+"CityName": "吉安市",
+"district": [
+{
+"DistrictId": 4446,
+"DistrictName": "吉州区"
+},
+{
+"DistrictId": 4447,
+"DistrictName": "青原区"
+},
+{
+"DistrictId": 4448,
+"DistrictName": "吉安县"
+},
+{
+"DistrictId": 4449,
+"DistrictName": "吉水县"
+},
+{
+"DistrictId": 4450,
+"DistrictName": "峡江县"
+},
+{
+"DistrictId": 4451,
+"DistrictName": "新干县"
+},
+{
+"DistrictId": 4452,
+"DistrictName": "永丰县"
+},
+{
+"DistrictId": 4453,
+"DistrictName": "泰和县"
+},
+{
+"DistrictId": 4454,
+"DistrictName": "遂川县"
+},
+{
+"DistrictId": 4455,
+"DistrictName": "万安县"
+},
+{
+"DistrictId": 4456,
+"DistrictName": "安福县"
+},
+{
+"DistrictId": 4457,
+"DistrictName": "永新县"
+},
+{
+"DistrictId": 4458,
+"DistrictName": "井冈山市"
+}
+]
+},
+{
+"CityId": 215,
+"CityName": "宜春市",
+"district": [
+{
+"DistrictId": 4459,
+"DistrictName": "袁州区"
+},
+{
+"DistrictId": 4460,
+"DistrictName": "奉新县"
+},
+{
+"DistrictId": 4461,
+"DistrictName": "万载县"
+},
+{
+"DistrictId": 4462,
+"DistrictName": "上高县"
+},
+{
+"DistrictId": 4463,
+"DistrictName": "宜丰县"
+},
+{
+"DistrictId": 4464,
+"DistrictName": "靖安县"
+},
+{
+"DistrictId": 4465,
+"DistrictName": "铜鼓县"
+},
+{
+"DistrictId": 4466,
+"DistrictName": "丰城市"
+},
+{
+"DistrictId": 4467,
+"DistrictName": "樟树市"
+},
+{
+"DistrictId": 4468,
+"DistrictName": "高安市"
+}
+]
+},
+{
+"CityId": 216,
+"CityName": "抚州市",
+"district": [
+{
+"DistrictId": 4469,
+"DistrictName": "临川区"
+},
+{
+"DistrictId": 4470,
+"DistrictName": "南城县"
+},
+{
+"DistrictId": 4471,
+"DistrictName": "黎川县"
+},
+{
+"DistrictId": 4472,
+"DistrictName": "南丰县"
+},
+{
+"DistrictId": 4473,
+"DistrictName": "崇仁县"
+},
+{
+"DistrictId": 4474,
+"DistrictName": "乐安县"
+},
+{
+"DistrictId": 4475,
+"DistrictName": "宜黄县"
+},
+{
+"DistrictId": 4476,
+"DistrictName": "金溪县"
+},
+{
+"DistrictId": 4477,
+"DistrictName": "资溪县"
+},
+{
+"DistrictId": 4478,
+"DistrictName": "东乡县"
+},
+{
+"DistrictId": 4479,
+"DistrictName": "广昌县"
+}
+]
+},
+{
+"CityId": 217,
+"CityName": "上饶市",
+"district": [
+{
+"DistrictId": 4480,
+"DistrictName": "信州区"
+},
+{
+"DistrictId": 4481,
+"DistrictName": "上饶县"
+},
+{
+"DistrictId": 4482,
+"DistrictName": "广丰县"
+},
+{
+"DistrictId": 4483,
+"DistrictName": "玉山县"
+},
+{
+"DistrictId": 4484,
+"DistrictName": "铅山县"
+},
+{
+"DistrictId": 4485,
+"DistrictName": "横峰县"
+},
+{
+"DistrictId": 4486,
+"DistrictName": "弋阳县"
+},
+{
+"DistrictId": 4487,
+"DistrictName": "余干县"
+},
+{
+"DistrictId": 4488,
+"DistrictName": "鄱阳县"
+},
+{
+"DistrictId": 4489,
+"DistrictName": "万年县"
+},
+{
+"DistrictId": 4490,
+"DistrictName": "婺源县"
+},
+{
+"DistrictId": 4491,
+"DistrictName": "德兴市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 65,
+"ProvinceName": "山东省",
+"city": [
+{
+"CityId": 218,
+"CityName": "济南市",
+"district": [
+{
+"DistrictId": 4492,
+"DistrictName": "历下区"
+},
+{
+"DistrictId": 4493,
+"DistrictName": "市中区"
+},
+{
+"DistrictId": 4494,
+"DistrictName": "槐荫区"
+},
+{
+"DistrictId": 4495,
+"DistrictName": "天桥区"
+},
+{
+"DistrictId": 4496,
+"DistrictName": "历城区"
+},
+{
+"DistrictId": 4497,
+"DistrictName": "长清区"
+},
+{
+"DistrictId": 4498,
+"DistrictName": "平阴县"
+},
+{
+"DistrictId": 4499,
+"DistrictName": "济阳县"
+},
+{
+"DistrictId": 4500,
+"DistrictName": "商河县"
+},
+{
+"DistrictId": 4501,
+"DistrictName": "章丘市"
+}
+]
+},
+{
+"CityId": 219,
+"CityName": "青岛市",
+"district": [
+{
+"DistrictId": 4502,
+"DistrictName": "市南区"
+},
+{
+"DistrictId": 4503,
+"DistrictName": "市北区"
+},
+{
+"DistrictId": 4504,
+"DistrictName": "四方区"
+},
+{
+"DistrictId": 4505,
+"DistrictName": "黄岛区"
+},
+{
+"DistrictId": 4506,
+"DistrictName": "崂山区"
+},
+{
+"DistrictId": 4507,
+"DistrictName": "李沧区"
+},
+{
+"DistrictId": 4508,
+"DistrictName": "城阳区"
+},
+{
+"DistrictId": 4509,
+"DistrictName": "胶州市"
+},
+{
+"DistrictId": 4510,
+"DistrictName": "即墨市"
+},
+{
+"DistrictId": 4511,
+"DistrictName": "平度市"
+},
+{
+"DistrictId": 4512,
+"DistrictName": "胶南市"
+},
+{
+"DistrictId": 4513,
+"DistrictName": "莱西市"
+}
+]
+},
+{
+"CityId": 220,
+"CityName": "淄博市",
+"district": [
+{
+"DistrictId": 4514,
+"DistrictName": "淄川区"
+},
+{
+"DistrictId": 4515,
+"DistrictName": "张店区"
+},
+{
+"DistrictId": 4516,
+"DistrictName": "博山区"
+},
+{
+"DistrictId": 4517,
+"DistrictName": "临淄区"
+},
+{
+"DistrictId": 4518,
+"DistrictName": "周村区"
+},
+{
+"DistrictId": 4519,
+"DistrictName": "桓台县"
+},
+{
+"DistrictId": 4520,
+"DistrictName": "高青县"
+},
+{
+"DistrictId": 4521,
+"DistrictName": "沂源县"
+}
+]
+},
+{
+"CityId": 221,
+"CityName": "枣庄市",
+"district": [
+{
+"DistrictId": 4522,
+"DistrictName": "市中区"
+},
+{
+"DistrictId": 4523,
+"DistrictName": "薛城区"
+},
+{
+"DistrictId": 4524,
+"DistrictName": "峄城区"
+},
+{
+"DistrictId": 4525,
+"DistrictName": "台儿庄区"
+},
+{
+"DistrictId": 4526,
+"DistrictName": "山亭区"
+},
+{
+"DistrictId": 4527,
+"DistrictName": "滕州市"
+}
+]
+},
+{
+"CityId": 222,
+"CityName": "东营市",
+"district": [
+{
+"DistrictId": 4528,
+"DistrictName": "东营区"
+},
+{
+"DistrictId": 4529,
+"DistrictName": "河口区"
+},
+{
+"DistrictId": 4530,
+"DistrictName": "垦利县"
+},
+{
+"DistrictId": 4531,
+"DistrictName": "利津县"
+},
+{
+"DistrictId": 4532,
+"DistrictName": "广饶县"
+}
+]
+},
+{
+"CityId": 223,
+"CityName": "烟台市",
+"district": [
+{
+"DistrictId": 4533,
+"DistrictName": "芝罘区"
+},
+{
+"DistrictId": 4534,
+"DistrictName": "福山区"
+},
+{
+"DistrictId": 4535,
+"DistrictName": "牟平区"
+},
+{
+"DistrictId": 4536,
+"DistrictName": "莱山区"
+},
+{
+"DistrictId": 4537,
+"DistrictName": "长岛县"
+},
+{
+"DistrictId": 4538,
+"DistrictName": "龙口市"
+},
+{
+"DistrictId": 4539,
+"DistrictName": "莱阳市"
+},
+{
+"DistrictId": 4540,
+"DistrictName": "莱州市"
+},
+{
+"DistrictId": 4541,
+"DistrictName": "蓬莱市"
+},
+{
+"DistrictId": 4542,
+"DistrictName": "招远市"
+},
+{
+"DistrictId": 4543,
+"DistrictName": "栖霞市"
+},
+{
+"DistrictId": 4544,
+"DistrictName": "海阳市"
+}
+]
+},
+{
+"CityId": 224,
+"CityName": "潍坊市",
+"district": [
+{
+"DistrictId": 4545,
+"DistrictName": "潍城区"
+},
+{
+"DistrictId": 4546,
+"DistrictName": "寒亭区"
+},
+{
+"DistrictId": 4547,
+"DistrictName": "坊子区"
+},
+{
+"DistrictId": 4548,
+"DistrictName": "奎文区"
+},
+{
+"DistrictId": 4549,
+"DistrictName": "临朐县"
+},
+{
+"DistrictId": 4550,
+"DistrictName": "昌乐县"
+},
+{
+"DistrictId": 4551,
+"DistrictName": "青州市"
+},
+{
+"DistrictId": 4552,
+"DistrictName": "诸城市"
+},
+{
+"DistrictId": 4553,
+"DistrictName": "寿光市"
+},
+{
+"DistrictId": 4554,
+"DistrictName": "安丘市"
+},
+{
+"DistrictId": 4555,
+"DistrictName": "高密市"
+},
+{
+"DistrictId": 4556,
+"DistrictName": "昌邑市"
+}
+]
+},
+{
+"CityId": 225,
+"CityName": "济宁市",
+"district": [
+{
+"DistrictId": 4557,
+"DistrictName": "市中区"
+},
+{
+"DistrictId": 4558,
+"DistrictName": "任城区"
+},
+{
+"DistrictId": 4559,
+"DistrictName": "微山县"
+},
+{
+"DistrictId": 4560,
+"DistrictName": "鱼台县"
+},
+{
+"DistrictId": 4561,
+"DistrictName": "金乡县"
+},
+{
+"DistrictId": 4562,
+"DistrictName": "嘉祥县"
+},
+{
+"DistrictId": 4563,
+"DistrictName": "汶上县"
+},
+{
+"DistrictId": 4564,
+"DistrictName": "泗水县"
+},
+{
+"DistrictId": 4565,
+"DistrictName": "梁山县"
+},
+{
+"DistrictId": 4566,
+"DistrictName": "曲阜市"
+},
+{
+"DistrictId": 4567,
+"DistrictName": "兖州市"
+},
+{
+"DistrictId": 4568,
+"DistrictName": "邹城市"
+}
+]
+},
+{
+"CityId": 226,
+"CityName": "泰安市",
+"district": [
+{
+"DistrictId": 4569,
+"DistrictName": "泰山区"
+},
+{
+"DistrictId": 4570,
+"DistrictName": "岱岳区"
+},
+{
+"DistrictId": 4571,
+"DistrictName": "宁阳县"
+},
+{
+"DistrictId": 4572,
+"DistrictName": "东平县"
+},
+{
+"DistrictId": 4573,
+"DistrictName": "新泰市"
+},
+{
+"DistrictId": 4574,
+"DistrictName": "肥城市"
+}
+]
+},
+{
+"CityId": 227,
+"CityName": "威海市",
+"district": [
+{
+"DistrictId": 4575,
+"DistrictName": "环翠区"
+},
+{
+"DistrictId": 4576,
+"DistrictName": "文登市"
+},
+{
+"DistrictId": 4577,
+"DistrictName": "荣成市"
+},
+{
+"DistrictId": 4578,
+"DistrictName": "乳山市"
+}
+]
+},
+{
+"CityId": 228,
+"CityName": "日照市",
+"district": [
+{
+"DistrictId": 4579,
+"DistrictName": "东港区"
+},
+{
+"DistrictId": 4580,
+"DistrictName": "岚山区"
+},
+{
+"DistrictId": 4581,
+"DistrictName": "五莲县"
+},
+{
+"DistrictId": 4582,
+"DistrictName": "莒县"
+}
+]
+},
+{
+"CityId": 229,
+"CityName": "莱芜市",
+"district": [
+{
+"DistrictId": 4583,
+"DistrictName": "莱城区"
+},
+{
+"DistrictId": 4584,
+"DistrictName": "钢城区"
+}
+]
+},
+{
+"CityId": 230,
+"CityName": "临沂市",
+"district": [
+{
+"DistrictId": 4585,
+"DistrictName": "兰山区"
+},
+{
+"DistrictId": 4586,
+"DistrictName": "罗庄区"
+},
+{
+"DistrictId": 4587,
+"DistrictName": "河东区"
+},
+{
+"DistrictId": 4588,
+"DistrictName": "沂南县"
+},
+{
+"DistrictId": 4589,
+"DistrictName": "郯城县"
+},
+{
+"DistrictId": 4590,
+"DistrictName": "沂水县"
+},
+{
+"DistrictId": 4591,
+"DistrictName": "苍山县"
+},
+{
+"DistrictId": 4592,
+"DistrictName": "费县"
+},
+{
+"DistrictId": 4593,
+"DistrictName": "平邑县"
+},
+{
+"DistrictId": 4594,
+"DistrictName": "莒南县"
+},
+{
+"DistrictId": 4595,
+"DistrictName": "蒙阴县"
+},
+{
+"DistrictId": 4596,
+"DistrictName": "临沭县"
+}
+]
+},
+{
+"CityId": 231,
+"CityName": "德州市",
+"district": [
+{
+"DistrictId": 4597,
+"DistrictName": "德城区"
+},
+{
+"DistrictId": 4598,
+"DistrictName": "陵县"
+},
+{
+"DistrictId": 4599,
+"DistrictName": "宁津县"
+},
+{
+"DistrictId": 4600,
+"DistrictName": "庆云县"
+},
+{
+"DistrictId": 4601,
+"DistrictName": "临邑县"
+},
+{
+"DistrictId": 4602,
+"DistrictName": "齐河县"
+},
+{
+"DistrictId": 4603,
+"DistrictName": "平原县"
+},
+{
+"DistrictId": 4604,
+"DistrictName": "夏津县"
+},
+{
+"DistrictId": 4605,
+"DistrictName": "武城县"
+},
+{
+"DistrictId": 4606,
+"DistrictName": "乐陵市"
+},
+{
+"DistrictId": 4607,
+"DistrictName": "禹城市"
+}
+]
+},
+{
+"CityId": 232,
+"CityName": "聊城市",
+"district": [
+{
+"DistrictId": 4608,
+"DistrictName": "东昌府区"
+},
+{
+"DistrictId": 4609,
+"DistrictName": "阳谷县"
+},
+{
+"DistrictId": 4610,
+"DistrictName": "莘县"
+},
+{
+"DistrictId": 4611,
+"DistrictName": "茌平县"
+},
+{
+"DistrictId": 4612,
+"DistrictName": "东阿县"
+},
+{
+"DistrictId": 4613,
+"DistrictName": "冠县"
+},
+{
+"DistrictId": 4614,
+"DistrictName": "高唐县"
+},
+{
+"DistrictId": 4615,
+"DistrictName": "临清市"
+}
+]
+},
+{
+"CityId": 233,
+"CityName": "滨州市",
+"district": [
+{
+"DistrictId": 4616,
+"DistrictName": "滨城区"
+},
+{
+"DistrictId": 4617,
+"DistrictName": "惠民县"
+},
+{
+"DistrictId": 4618,
+"DistrictName": "阳信县"
+},
+{
+"DistrictId": 4619,
+"DistrictName": "无棣县"
+},
+{
+"DistrictId": 4620,
+"DistrictName": "沾化县"
+},
+{
+"DistrictId": 4621,
+"DistrictName": "博兴县"
+},
+{
+"DistrictId": 4622,
+"DistrictName": "邹平县"
+}
+]
+},
+{
+"CityId": 234,
+"CityName": "荷泽市",
+"district": [
+{
+"DistrictId": 4623,
+"DistrictName": "牡丹区"
+},
+{
+"DistrictId": 4624,
+"DistrictName": "曹县"
+},
+{
+"DistrictId": 4625,
+"DistrictName": "单县"
+},
+{
+"DistrictId": 4626,
+"DistrictName": "成武县"
+},
+{
+"DistrictId": 4627,
+"DistrictName": "巨野县"
+},
+{
+"DistrictId": 4628,
+"DistrictName": "郓城县"
+},
+{
+"DistrictId": 4629,
+"DistrictName": "鄄城县"
+},
+{
+"DistrictId": 4630,
+"DistrictName": "定陶县"
+},
+{
+"DistrictId": 4631,
+"DistrictName": "东明县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 66,
+"ProvinceName": "河南省",
+"city": [
+{
+"CityId": 235,
+"CityName": "郑州市",
+"district": [
+{
+"DistrictId": 4632,
+"DistrictName": "中原区"
+},
+{
+"DistrictId": 4633,
+"DistrictName": "二七区"
+},
+{
+"DistrictId": 4634,
+"DistrictName": "管城回族区"
+},
+{
+"DistrictId": 4635,
+"DistrictName": "金水区"
+},
+{
+"DistrictId": 4636,
+"DistrictName": "上街区"
+},
+{
+"DistrictId": 4637,
+"DistrictName": "惠济区"
+},
+{
+"DistrictId": 4638,
+"DistrictName": "中牟县"
+},
+{
+"DistrictId": 4639,
+"DistrictName": "巩义市"
+},
+{
+"DistrictId": 4640,
+"DistrictName": "荥阳市"
+},
+{
+"DistrictId": 4641,
+"DistrictName": "新密市"
+},
+{
+"DistrictId": 4642,
+"DistrictName": "新郑市"
+},
+{
+"DistrictId": 4643,
+"DistrictName": "登封市"
+}
+]
+},
+{
+"CityId": 236,
+"CityName": "开封市",
+"district": [
+{
+"DistrictId": 4644,
+"DistrictName": "龙亭区"
+},
+{
+"DistrictId": 4645,
+"DistrictName": "顺河回族区"
+},
+{
+"DistrictId": 4646,
+"DistrictName": "鼓楼区"
+},
+{
+"DistrictId": 4647,
+"DistrictName": "禹王台区"
+},
+{
+"DistrictId": 4648,
+"DistrictName": "金明区"
+},
+{
+"DistrictId": 4649,
+"DistrictName": "杞县"
+},
+{
+"DistrictId": 4650,
+"DistrictName": "通许县"
+},
+{
+"DistrictId": 4651,
+"DistrictName": "尉氏县"
+},
+{
+"DistrictId": 4652,
+"DistrictName": "开封县"
+},
+{
+"DistrictId": 4653,
+"DistrictName": "兰考县"
+}
+]
+},
+{
+"CityId": 237,
+"CityName": "洛阳市",
+"district": [
+{
+"DistrictId": 4654,
+"DistrictName": "老城区"
+},
+{
+"DistrictId": 4655,
+"DistrictName": "西工区"
+},
+{
+"DistrictId": 4656,
+"DistrictName": "廛河回族区"
+},
+{
+"DistrictId": 4657,
+"DistrictName": "涧西区"
+},
+{
+"DistrictId": 4658,
+"DistrictName": "吉利区"
+},
+{
+"DistrictId": 4659,
+"DistrictName": "洛龙区"
+},
+{
+"DistrictId": 4660,
+"DistrictName": "孟津县"
+},
+{
+"DistrictId": 4661,
+"DistrictName": "新安县"
+},
+{
+"DistrictId": 4662,
+"DistrictName": "栾川县"
+},
+{
+"DistrictId": 4663,
+"DistrictName": "嵩县"
+},
+{
+"DistrictId": 4664,
+"DistrictName": "汝阳县"
+},
+{
+"DistrictId": 4665,
+"DistrictName": "宜阳县"
+},
+{
+"DistrictId": 4666,
+"DistrictName": "洛宁县"
+},
+{
+"DistrictId": 4667,
+"DistrictName": "伊川县"
+},
+{
+"DistrictId": 4668,
+"DistrictName": "偃师市"
+}
+]
+},
+{
+"CityId": 238,
+"CityName": "平顶山市",
+"district": [
+{
+"DistrictId": 4669,
+"DistrictName": "新华区"
+},
+{
+"DistrictId": 4670,
+"DistrictName": "卫东区"
+},
+{
+"DistrictId": 4671,
+"DistrictName": "石龙区"
+},
+{
+"DistrictId": 4672,
+"DistrictName": "湛河区"
+},
+{
+"DistrictId": 4673,
+"DistrictName": "宝丰县"
+},
+{
+"DistrictId": 4674,
+"DistrictName": "叶县"
+},
+{
+"DistrictId": 4675,
+"DistrictName": "鲁山县"
+},
+{
+"DistrictId": 4676,
+"DistrictName": "郏县"
+},
+{
+"DistrictId": 4677,
+"DistrictName": "舞钢市"
+},
+{
+"DistrictId": 4678,
+"DistrictName": "汝州市"
+}
+]
+},
+{
+"CityId": 239,
+"CityName": "安阳市",
+"district": [
+{
+"DistrictId": 4679,
+"DistrictName": "文峰区"
+},
+{
+"DistrictId": 4680,
+"DistrictName": "北关区"
+},
+{
+"DistrictId": 4681,
+"DistrictName": "殷都区"
+},
+{
+"DistrictId": 4682,
+"DistrictName": "龙安区"
+},
+{
+"DistrictId": 4683,
+"DistrictName": "安阳县"
+},
+{
+"DistrictId": 4684,
+"DistrictName": "汤阴县"
+},
+{
+"DistrictId": 4685,
+"DistrictName": "滑县"
+},
+{
+"DistrictId": 4686,
+"DistrictName": "内黄县"
+},
+{
+"DistrictId": 4687,
+"DistrictName": "林州市"
+}
+]
+},
+{
+"CityId": 240,
+"CityName": "鹤壁市",
+"district": [
+{
+"DistrictId": 4688,
+"DistrictName": "鹤山区"
+},
+{
+"DistrictId": 4689,
+"DistrictName": "山城区"
+},
+{
+"DistrictId": 4690,
+"DistrictName": "淇滨区"
+},
+{
+"DistrictId": 4691,
+"DistrictName": "浚县"
+},
+{
+"DistrictId": 4692,
+"DistrictName": "淇县"
+}
+]
+},
+{
+"CityId": 241,
+"CityName": "新乡市",
+"district": [
+{
+"DistrictId": 4693,
+"DistrictName": "红旗区"
+},
+{
+"DistrictId": 4694,
+"DistrictName": "卫滨区"
+},
+{
+"DistrictId": 4695,
+"DistrictName": "凤泉区"
+},
+{
+"DistrictId": 4696,
+"DistrictName": "牧野区"
+},
+{
+"DistrictId": 4697,
+"DistrictName": "新乡县"
+},
+{
+"DistrictId": 4698,
+"DistrictName": "获嘉县"
+},
+{
+"DistrictId": 4699,
+"DistrictName": "原阳县"
+},
+{
+"DistrictId": 4700,
+"DistrictName": "延津县"
+},
+{
+"DistrictId": 4701,
+"DistrictName": "封丘县"
+},
+{
+"DistrictId": 4702,
+"DistrictName": "长垣县"
+},
+{
+"DistrictId": 4703,
+"DistrictName": "卫辉市"
+},
+{
+"DistrictId": 4704,
+"DistrictName": "辉县市"
+}
+]
+},
+{
+"CityId": 242,
+"CityName": "焦作市",
+"district": [
+{
+"DistrictId": 4705,
+"DistrictName": "解放区"
+},
+{
+"DistrictId": 4706,
+"DistrictName": "中站区"
+},
+{
+"DistrictId": 4707,
+"DistrictName": "马村区"
+},
+{
+"DistrictId": 4708,
+"DistrictName": "山阳区"
+},
+{
+"DistrictId": 4709,
+"DistrictName": "修武县"
+},
+{
+"DistrictId": 4710,
+"DistrictName": "博爱县"
+},
+{
+"DistrictId": 4711,
+"DistrictName": "武陟县"
+},
+{
+"DistrictId": 4712,
+"DistrictName": "温县"
+},
+{
+"DistrictId": 4713,
+"DistrictName": "沁阳市"
+},
+{
+"DistrictId": 4714,
+"DistrictName": "孟州市"
+}
+]
+},
+{
+"CityId": 243,
+"CityName": "濮阳市",
+"district": [
+{
+"DistrictId": 4715,
+"DistrictName": "华龙区"
+},
+{
+"DistrictId": 4716,
+"DistrictName": "清丰县"
+},
+{
+"DistrictId": 4717,
+"DistrictName": "南乐县"
+},
+{
+"DistrictId": 4718,
+"DistrictName": "范县"
+},
+{
+"DistrictId": 4719,
+"DistrictName": "台前县"
+},
+{
+"DistrictId": 4720,
+"DistrictName": "濮阳县"
+}
+]
+},
+{
+"CityId": 244,
+"CityName": "许昌市",
+"district": [
+{
+"DistrictId": 4721,
+"DistrictName": "魏都区"
+},
+{
+"DistrictId": 4722,
+"DistrictName": "许昌县"
+},
+{
+"DistrictId": 4723,
+"DistrictName": "鄢陵县"
+},
+{
+"DistrictId": 4724,
+"DistrictName": "襄城县"
+},
+{
+"DistrictId": 4725,
+"DistrictName": "禹州市"
+},
+{
+"DistrictId": 4726,
+"DistrictName": "长葛市"
+}
+]
+},
+{
+"CityId": 245,
+"CityName": "漯河市",
+"district": [
+{
+"DistrictId": 4727,
+"DistrictName": "源汇区"
+},
+{
+"DistrictId": 4728,
+"DistrictName": "郾城区"
+},
+{
+"DistrictId": 4729,
+"DistrictName": "召陵区"
+},
+{
+"DistrictId": 4730,
+"DistrictName": "舞阳县"
+},
+{
+"DistrictId": 4731,
+"DistrictName": "临颍县"
+}
+]
+},
+{
+"CityId": 246,
+"CityName": "三门峡市",
+"district": [
+{
+"DistrictId": 4732,
+"DistrictName": "市辖区"
+},
+{
+"DistrictId": 4733,
+"DistrictName": "湖滨区"
+},
+{
+"DistrictId": 4734,
+"DistrictName": "渑池县"
+},
+{
+"DistrictId": 4735,
+"DistrictName": "陕县"
+},
+{
+"DistrictId": 4736,
+"DistrictName": "卢氏县"
+},
+{
+"DistrictId": 4737,
+"DistrictName": "义马市"
+},
+{
+"DistrictId": 4738,
+"DistrictName": "灵宝市"
+}
+]
+},
+{
+"CityId": 247,
+"CityName": "南阳市",
+"district": [
+{
+"DistrictId": 4739,
+"DistrictName": "宛城区"
+},
+{
+"DistrictId": 4740,
+"DistrictName": "卧龙区"
+},
+{
+"DistrictId": 4741,
+"DistrictName": "南召县"
+},
+{
+"DistrictId": 4742,
+"DistrictName": "方城县"
+},
+{
+"DistrictId": 4743,
+"DistrictName": "西峡县"
+},
+{
+"DistrictId": 4744,
+"DistrictName": "镇平县"
+},
+{
+"DistrictId": 4745,
+"DistrictName": "内乡县"
+},
+{
+"DistrictId": 4746,
+"DistrictName": "淅川县"
+},
+{
+"DistrictId": 4747,
+"DistrictName": "社旗县"
+},
+{
+"DistrictId": 4748,
+"DistrictName": "唐河县"
+},
+{
+"DistrictId": 4749,
+"DistrictName": "新野县"
+},
+{
+"DistrictId": 4750,
+"DistrictName": "桐柏县"
+},
+{
+"DistrictId": 4751,
+"DistrictName": "邓州市"
+}
+]
+},
+{
+"CityId": 248,
+"CityName": "商丘市",
+"district": [
+{
+"DistrictId": 4752,
+"DistrictName": "梁园区"
+},
+{
+"DistrictId": 4753,
+"DistrictName": "睢阳区"
+},
+{
+"DistrictId": 4754,
+"DistrictName": "民权县"
+},
+{
+"DistrictId": 4755,
+"DistrictName": "睢县"
+},
+{
+"DistrictId": 4756,
+"DistrictName": "宁陵县"
+},
+{
+"DistrictId": 4757,
+"DistrictName": "柘城县"
+},
+{
+"DistrictId": 4758,
+"DistrictName": "虞城县"
+},
+{
+"DistrictId": 4759,
+"DistrictName": "夏邑县"
+},
+{
+"DistrictId": 4760,
+"DistrictName": "永城市"
+}
+]
+},
+{
+"CityId": 249,
+"CityName": "信阳市",
+"district": [
+{
+"DistrictId": 4761,
+"DistrictName": "浉河区"
+},
+{
+"DistrictId": 4762,
+"DistrictName": "平桥区"
+},
+{
+"DistrictId": 4763,
+"DistrictName": "罗山县"
+},
+{
+"DistrictId": 4764,
+"DistrictName": "光山县"
+},
+{
+"DistrictId": 4765,
+"DistrictName": "新县"
+},
+{
+"DistrictId": 4766,
+"DistrictName": "商城县"
+},
+{
+"DistrictId": 4767,
+"DistrictName": "固始县"
+},
+{
+"DistrictId": 4768,
+"DistrictName": "潢川县"
+},
+{
+"DistrictId": 4769,
+"DistrictName": "淮滨县"
+},
+{
+"DistrictId": 4770,
+"DistrictName": "息县"
+}
+]
+},
+{
+"CityId": 250,
+"CityName": "周口市",
+"district": [
+{
+"DistrictId": 4771,
+"DistrictName": "川汇区"
+},
+{
+"DistrictId": 4772,
+"DistrictName": "扶沟县"
+},
+{
+"DistrictId": 4773,
+"DistrictName": "西华县"
+},
+{
+"DistrictId": 4774,
+"DistrictName": "商水县"
+},
+{
+"DistrictId": 4775,
+"DistrictName": "沈丘县"
+},
+{
+"DistrictId": 4776,
+"DistrictName": "郸城县"
+},
+{
+"DistrictId": 4777,
+"DistrictName": "淮阳县"
+},
+{
+"DistrictId": 4778,
+"DistrictName": "太康县"
+},
+{
+"DistrictId": 4779,
+"DistrictName": "鹿邑县"
+},
+{
+"DistrictId": 4780,
+"DistrictName": "项城市"
+}
+]
+},
+{
+"CityId": 251,
+"CityName": "驻马店市",
+"district": [
+{
+"DistrictId": 4781,
+"DistrictName": "驿城区"
+},
+{
+"DistrictId": 4782,
+"DistrictName": "西平县"
+},
+{
+"DistrictId": 4783,
+"DistrictName": "上蔡县"
+},
+{
+"DistrictId": 4784,
+"DistrictName": "平舆县"
+},
+{
+"DistrictId": 4785,
+"DistrictName": "正阳县"
+},
+{
+"DistrictId": 4786,
+"DistrictName": "确山县"
+},
+{
+"DistrictId": 4787,
+"DistrictName": "泌阳县"
+},
+{
+"DistrictId": 4788,
+"DistrictName": "汝南县"
+},
+{
+"DistrictId": 4789,
+"DistrictName": "遂平县"
+},
+{
+"DistrictId": 4790,
+"DistrictName": "新蔡县"
+},
+{
+"DistrictId": 4791,
+"DistrictName": "济源市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 67,
+"ProvinceName": "湖北省",
+"city": [
+{
+"CityId": 252,
+"CityName": "武汉市",
+"district": [
+{
+"DistrictId": 4792,
+"DistrictName": "江岸区"
+},
+{
+"DistrictId": 4793,
+"DistrictName": "江汉区"
+},
+{
+"DistrictId": 4794,
+"DistrictName": "硚口区"
+},
+{
+"DistrictId": 4795,
+"DistrictName": "汉阳区"
+},
+{
+"DistrictId": 4796,
+"DistrictName": "武昌区"
+},
+{
+"DistrictId": 4797,
+"DistrictName": "青山区"
+},
+{
+"DistrictId": 4798,
+"DistrictName": "洪山区"
+},
+{
+"DistrictId": 4799,
+"DistrictName": "东西湖区"
+},
+{
+"DistrictId": 4800,
+"DistrictName": "汉南区"
+},
+{
+"DistrictId": 4801,
+"DistrictName": "蔡甸区"
+},
+{
+"DistrictId": 4802,
+"DistrictName": "江夏区"
+},
+{
+"DistrictId": 4803,
+"DistrictName": "黄陂区"
+},
+{
+"DistrictId": 4804,
+"DistrictName": "新洲区"
+}
+]
+},
+{
+"CityId": 253,
+"CityName": "黄石市",
+"district": [
+{
+"DistrictId": 4805,
+"DistrictName": "黄石港区"
+},
+{
+"DistrictId": 4806,
+"DistrictName": "西塞山区"
+},
+{
+"DistrictId": 4807,
+"DistrictName": "下陆区"
+},
+{
+"DistrictId": 4808,
+"DistrictName": "铁山区"
+},
+{
+"DistrictId": 4809,
+"DistrictName": "阳新县"
+},
+{
+"DistrictId": 4810,
+"DistrictName": "大冶市"
+}
+]
+},
+{
+"CityId": 254,
+"CityName": "十堰市",
+"district": [
+{
+"DistrictId": 4811,
+"DistrictName": "茅箭区"
+},
+{
+"DistrictId": 4812,
+"DistrictName": "张湾区"
+},
+{
+"DistrictId": 4813,
+"DistrictName": "郧县"
+},
+{
+"DistrictId": 4814,
+"DistrictName": "郧西县"
+},
+{
+"DistrictId": 4815,
+"DistrictName": "竹山县"
+},
+{
+"DistrictId": 4816,
+"DistrictName": "竹溪县"
+},
+{
+"DistrictId": 4817,
+"DistrictName": "房县"
+},
+{
+"DistrictId": 4818,
+"DistrictName": "丹江口市"
+}
+]
+},
+{
+"CityId": 255,
+"CityName": "宜昌市",
+"district": [
+{
+"DistrictId": 4819,
+"DistrictName": "西陵区"
+},
+{
+"DistrictId": 4820,
+"DistrictName": "伍家岗区"
+},
+{
+"DistrictId": 4821,
+"DistrictName": "点军区"
+},
+{
+"DistrictId": 4822,
+"DistrictName": "猇亭区"
+},
+{
+"DistrictId": 4823,
+"DistrictName": "夷陵区"
+},
+{
+"DistrictId": 4824,
+"DistrictName": "远安县"
+},
+{
+"DistrictId": 4825,
+"DistrictName": "兴山县"
+},
+{
+"DistrictId": 4826,
+"DistrictName": "秭归县"
+},
+{
+"DistrictId": 4827,
+"DistrictName": "长阳土家族自治县"
+},
+{
+"DistrictId": 4828,
+"DistrictName": "五峰土家族自治县"
+},
+{
+"DistrictId": 4829,
+"DistrictName": "宜都市"
+},
+{
+"DistrictId": 4830,
+"DistrictName": "当阳市"
+},
+{
+"DistrictId": 4831,
+"DistrictName": "枝江市"
+}
+]
+},
+{
+"CityId": 256,
+"CityName": "襄阳市",
+"district": [
+{
+"DistrictId": 4832,
+"DistrictName": "襄城区"
+},
+{
+"DistrictId": 4833,
+"DistrictName": "樊城区"
+},
+{
+"DistrictId": 4834,
+"DistrictName": "襄州区"
+},
+{
+"DistrictId": 4835,
+"DistrictName": "南漳县"
+},
+{
+"DistrictId": 4836,
+"DistrictName": "谷城县"
+},
+{
+"DistrictId": 4837,
+"DistrictName": "保康县"
+},
+{
+"DistrictId": 4838,
+"DistrictName": "老河口市"
+},
+{
+"DistrictId": 4839,
+"DistrictName": "枣阳市"
+},
+{
+"DistrictId": 4840,
+"DistrictName": "宜城市"
+}
+]
+},
+{
+"CityId": 257,
+"CityName": "鄂州市",
+"district": [
+{
+"DistrictId": 4841,
+"DistrictName": "梁子湖区"
+},
+{
+"DistrictId": 4842,
+"DistrictName": "华容区"
+},
+{
+"DistrictId": 4843,
+"DistrictName": "鄂城区"
+}
+]
+},
+{
+"CityId": 258,
+"CityName": "荆门市",
+"district": [
+{
+"DistrictId": 4844,
+"DistrictName": "东宝区"
+},
+{
+"DistrictId": 4845,
+"DistrictName": "掇刀区"
+},
+{
+"DistrictId": 4846,
+"DistrictName": "京山县"
+},
+{
+"DistrictId": 4847,
+"DistrictName": "沙洋县"
+},
+{
+"DistrictId": 4848,
+"DistrictName": "钟祥市"
+}
+]
+},
+{
+"CityId": 259,
+"CityName": "孝感市",
+"district": [
+{
+"DistrictId": 4849,
+"DistrictName": "孝南区"
+},
+{
+"DistrictId": 4850,
+"DistrictName": "孝昌县"
+},
+{
+"DistrictId": 4851,
+"DistrictName": "大悟县"
+},
+{
+"DistrictId": 4852,
+"DistrictName": "云梦县"
+},
+{
+"DistrictId": 4853,
+"DistrictName": "应城市"
+},
+{
+"DistrictId": 4854,
+"DistrictName": "安陆市"
+},
+{
+"DistrictId": 4855,
+"DistrictName": "汉川市"
+}
+]
+},
+{
+"CityId": 260,
+"CityName": "荆州市",
+"district": [
+{
+"DistrictId": 4856,
+"DistrictName": "沙市区"
+},
+{
+"DistrictId": 4857,
+"DistrictName": "荆州区"
+},
+{
+"DistrictId": 4858,
+"DistrictName": "公安县"
+},
+{
+"DistrictId": 4859,
+"DistrictName": "监利县"
+},
+{
+"DistrictId": 4860,
+"DistrictName": "江陵县"
+},
+{
+"DistrictId": 4861,
+"DistrictName": "石首市"
+},
+{
+"DistrictId": 4862,
+"DistrictName": "洪湖市"
+},
+{
+"DistrictId": 4863,
+"DistrictName": "松滋市"
+}
+]
+},
+{
+"CityId": 261,
+"CityName": "黄冈市",
+"district": [
+{
+"DistrictId": 4864,
+"DistrictName": "黄州区"
+},
+{
+"DistrictId": 4865,
+"DistrictName": "团风县"
+},
+{
+"DistrictId": 4866,
+"DistrictName": "红安县"
+},
+{
+"DistrictId": 4867,
+"DistrictName": "罗田县"
+},
+{
+"DistrictId": 4868,
+"DistrictName": "英山县"
+},
+{
+"DistrictId": 4869,
+"DistrictName": "浠水县"
+},
+{
+"DistrictId": 4870,
+"DistrictName": "蕲春县"
+},
+{
+"DistrictId": 4871,
+"DistrictName": "黄梅县"
+},
+{
+"DistrictId": 4872,
+"DistrictName": "麻城市"
+},
+{
+"DistrictId": 4873,
+"DistrictName": "武穴市"
+}
+]
+},
+{
+"CityId": 262,
+"CityName": "咸宁市",
+"district": [
+{
+"DistrictId": 4874,
+"DistrictName": "咸安区"
+},
+{
+"DistrictId": 4875,
+"DistrictName": "嘉鱼县"
+},
+{
+"DistrictId": 4876,
+"DistrictName": "通城县"
+},
+{
+"DistrictId": 4877,
+"DistrictName": "崇阳县"
+},
+{
+"DistrictId": 4878,
+"DistrictName": "通山县"
+},
+{
+"DistrictId": 4879,
+"DistrictName": "赤壁市"
+}
+]
+},
+{
+"CityId": 263,
+"CityName": "随州市",
+"district": [
+{
+"DistrictId": 4880,
+"DistrictName": "曾都区"
+},
+{
+"DistrictId": 4881,
+"DistrictName": "广水市"
+},
+{
+"DistrictId": 4882,
+"DistrictName": "随县"
+}
+]
+},
+{
+"CityId": 264,
+"CityName": "恩施土家族苗族自治州",
+"district": [
+{
+"DistrictId": 4883,
+"DistrictName": "恩施市"
+},
+{
+"DistrictId": 4884,
+"DistrictName": "利川市"
+},
+{
+"DistrictId": 4885,
+"DistrictName": "建始县"
+},
+{
+"DistrictId": 4886,
+"DistrictName": "巴东县"
+},
+{
+"DistrictId": 4887,
+"DistrictName": "宣恩县"
+},
+{
+"DistrictId": 4888,
+"DistrictName": "咸丰县"
+},
+{
+"DistrictId": 4889,
+"DistrictName": "来凤县"
+},
+{
+"DistrictId": 4890,
+"DistrictName": "鹤峰县"
+}
+]
+},
+{
+"CityId": 265,
+"CityName": "神农架",
+"district": [
+{
+"DistrictId": 4891,
+"DistrictName": "仙桃市"
+},
+{
+"DistrictId": 4892,
+"DistrictName": "潜江市"
+},
+{
+"DistrictId": 4893,
+"DistrictName": "天门市"
+},
+{
+"DistrictId": 4894,
+"DistrictName": "神农架林区"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 68,
+"ProvinceName": "湖南省",
+"city": [
+{
+"CityId": 266,
+"CityName": "长沙市",
+"district": [
+{
+"DistrictId": 4895,
+"DistrictName": "芙蓉区"
+},
+{
+"DistrictId": 4896,
+"DistrictName": "天心区"
+},
+{
+"DistrictId": 4897,
+"DistrictName": "岳麓区"
+},
+{
+"DistrictId": 4898,
+"DistrictName": "开福区"
+},
+{
+"DistrictId": 4899,
+"DistrictName": "雨花区"
+},
+{
+"DistrictId": 4900,
+"DistrictName": "长沙县"
+},
+{
+"DistrictId": 4901,
+"DistrictName": "望城区"
+},
+{
+"DistrictId": 4902,
+"DistrictName": "宁乡县"
+},
+{
+"DistrictId": 4903,
+"DistrictName": "浏阳市"
+}
+]
+},
+{
+"CityId": 267,
+"CityName": "株洲市",
+"district": [
+{
+"DistrictId": 4904,
+"DistrictName": "荷塘区"
+},
+{
+"DistrictId": 4905,
+"DistrictName": "芦淞区"
+},
+{
+"DistrictId": 4906,
+"DistrictName": "石峰区"
+},
+{
+"DistrictId": 4907,
+"DistrictName": "天元区"
+},
+{
+"DistrictId": 4908,
+"DistrictName": "株洲县"
+},
+{
+"DistrictId": 4909,
+"DistrictName": "攸县"
+},
+{
+"DistrictId": 4910,
+"DistrictName": "茶陵县"
+},
+{
+"DistrictId": 4911,
+"DistrictName": "炎陵县"
+},
+{
+"DistrictId": 4912,
+"DistrictName": "醴陵市"
+}
+]
+},
+{
+"CityId": 268,
+"CityName": "湘潭市",
+"district": [
+{
+"DistrictId": 4913,
+"DistrictName": "雨湖区"
+},
+{
+"DistrictId": 4914,
+"DistrictName": "岳塘区"
+},
+{
+"DistrictId": 4915,
+"DistrictName": "湘潭县"
+},
+{
+"DistrictId": 4916,
+"DistrictName": "湘乡市"
+},
+{
+"DistrictId": 4917,
+"DistrictName": "韶山市"
+}
+]
+},
+{
+"CityId": 269,
+"CityName": "衡阳市",
+"district": [
+{
+"DistrictId": 4918,
+"DistrictName": "珠晖区"
+},
+{
+"DistrictId": 4919,
+"DistrictName": "雁峰区"
+},
+{
+"DistrictId": 4920,
+"DistrictName": "石鼓区"
+},
+{
+"DistrictId": 4921,
+"DistrictName": "蒸湘区"
+},
+{
+"DistrictId": 4922,
+"DistrictName": "南岳区"
+},
+{
+"DistrictId": 4923,
+"DistrictName": "衡阳县"
+},
+{
+"DistrictId": 4924,
+"DistrictName": "衡南县"
+},
+{
+"DistrictId": 4925,
+"DistrictName": "衡山县"
+},
+{
+"DistrictId": 4926,
+"DistrictName": "衡东县"
+},
+{
+"DistrictId": 4927,
+"DistrictName": "祁东县"
+},
+{
+"DistrictId": 4928,
+"DistrictName": "耒阳市"
+},
+{
+"DistrictId": 4929,
+"DistrictName": "常宁市"
+}
+]
+},
+{
+"CityId": 270,
+"CityName": "邵阳市",
+"district": [
+{
+"DistrictId": 4930,
+"DistrictName": "双清区"
+},
+{
+"DistrictId": 4931,
+"DistrictName": "大祥区"
+},
+{
+"DistrictId": 4932,
+"DistrictName": "北塔区"
+},
+{
+"DistrictId": 4933,
+"DistrictName": "邵东县"
+},
+{
+"DistrictId": 4934,
+"DistrictName": "新邵县"
+},
+{
+"DistrictId": 4935,
+"DistrictName": "邵阳县"
+},
+{
+"DistrictId": 4936,
+"DistrictName": "隆回县"
+},
+{
+"DistrictId": 4937,
+"DistrictName": "洞口县"
+},
+{
+"DistrictId": 4938,
+"DistrictName": "绥宁县"
+},
+{
+"DistrictId": 4939,
+"DistrictName": "新宁县"
+},
+{
+"DistrictId": 4940,
+"DistrictName": "城步苗族自治县"
+},
+{
+"DistrictId": 4941,
+"DistrictName": "武冈市"
+}
+]
+},
+{
+"CityId": 271,
+"CityName": "岳阳市",
+"district": [
+{
+"DistrictId": 4942,
+"DistrictName": "岳阳楼区"
+},
+{
+"DistrictId": 4943,
+"DistrictName": "云溪区"
+},
+{
+"DistrictId": 4944,
+"DistrictName": "君山区"
+},
+{
+"DistrictId": 4945,
+"DistrictName": "岳阳县"
+},
+{
+"DistrictId": 4946,
+"DistrictName": "华容县"
+},
+{
+"DistrictId": 4947,
+"DistrictName": "湘阴县"
+},
+{
+"DistrictId": 4948,
+"DistrictName": "平江县"
+},
+{
+"DistrictId": 4949,
+"DistrictName": "汨罗市"
+},
+{
+"DistrictId": 4950,
+"DistrictName": "临湘市"
+}
+]
+},
+{
+"CityId": 272,
+"CityName": "常德市",
+"district": [
+{
+"DistrictId": 4951,
+"DistrictName": "武陵区"
+},
+{
+"DistrictId": 4952,
+"DistrictName": "鼎城区"
+},
+{
+"DistrictId": 4953,
+"DistrictName": "安乡县"
+},
+{
+"DistrictId": 4954,
+"DistrictName": "汉寿县"
+},
+{
+"DistrictId": 4955,
+"DistrictName": "澧县"
+},
+{
+"DistrictId": 4956,
+"DistrictName": "临澧县"
+},
+{
+"DistrictId": 4957,
+"DistrictName": "桃源县"
+},
+{
+"DistrictId": 4958,
+"DistrictName": "石门县"
+},
+{
+"DistrictId": 4959,
+"DistrictName": "津市市"
+}
+]
+},
+{
+"CityId": 273,
+"CityName": "张家界市",
+"district": [
+{
+"DistrictId": 4960,
+"DistrictName": "永定区"
+},
+{
+"DistrictId": 4961,
+"DistrictName": "武陵源区"
+},
+{
+"DistrictId": 4962,
+"DistrictName": "慈利县"
+},
+{
+"DistrictId": 4963,
+"DistrictName": "桑植县"
+}
+]
+},
+{
+"CityId": 274,
+"CityName": "益阳市",
+"district": [
+{
+"DistrictId": 4964,
+"DistrictName": "资阳区"
+},
+{
+"DistrictId": 4965,
+"DistrictName": "赫山区"
+},
+{
+"DistrictId": 4966,
+"DistrictName": "南县"
+},
+{
+"DistrictId": 4967,
+"DistrictName": "桃江县"
+},
+{
+"DistrictId": 4968,
+"DistrictName": "安化县"
+},
+{
+"DistrictId": 4969,
+"DistrictName": "沅江市"
+}
+]
+},
+{
+"CityId": 275,
+"CityName": "郴州市",
+"district": [
+{
+"DistrictId": 4970,
+"DistrictName": "北湖区"
+},
+{
+"DistrictId": 4971,
+"DistrictName": "苏仙区"
+},
+{
+"DistrictId": 4972,
+"DistrictName": "桂阳县"
+},
+{
+"DistrictId": 4973,
+"DistrictName": "宜章县"
+},
+{
+"DistrictId": 4974,
+"DistrictName": "永兴县"
+},
+{
+"DistrictId": 4975,
+"DistrictName": "嘉禾县"
+},
+{
+"DistrictId": 4976,
+"DistrictName": "临武县"
+},
+{
+"DistrictId": 4977,
+"DistrictName": "汝城县"
+},
+{
+"DistrictId": 4978,
+"DistrictName": "桂东县"
+},
+{
+"DistrictId": 4979,
+"DistrictName": "安仁县"
+},
+{
+"DistrictId": 4980,
+"DistrictName": "资兴市"
+}
+]
+},
+{
+"CityId": 276,
+"CityName": "永州市",
+"district": [
+{
+"DistrictId": 4981,
+"DistrictName": "零陵区"
+},
+{
+"DistrictId": 4982,
+"DistrictName": "冷水滩区"
+},
+{
+"DistrictId": 4983,
+"DistrictName": "祁阳县"
+},
+{
+"DistrictId": 4984,
+"DistrictName": "东安县"
+},
+{
+"DistrictId": 4985,
+"DistrictName": "双牌县"
+},
+{
+"DistrictId": 4986,
+"DistrictName": "道县"
+},
+{
+"DistrictId": 4987,
+"DistrictName": "江永县"
+},
+{
+"DistrictId": 4988,
+"DistrictName": "宁远县"
+},
+{
+"DistrictId": 4989,
+"DistrictName": "蓝山县"
+},
+{
+"DistrictId": 4990,
+"DistrictName": "新田县"
+},
+{
+"DistrictId": 4991,
+"DistrictName": "江华瑶族自治县"
+}
+]
+},
+{
+"CityId": 277,
+"CityName": "怀化市",
+"district": [
+{
+"DistrictId": 4992,
+"DistrictName": "鹤城区"
+},
+{
+"DistrictId": 4993,
+"DistrictName": "中方县"
+},
+{
+"DistrictId": 4994,
+"DistrictName": "沅陵县"
+},
+{
+"DistrictId": 4995,
+"DistrictName": "辰溪县"
+},
+{
+"DistrictId": 4996,
+"DistrictName": "溆浦县"
+},
+{
+"DistrictId": 4997,
+"DistrictName": "会同县"
+},
+{
+"DistrictId": 4998,
+"DistrictName": "麻阳苗族自治县"
+},
+{
+"DistrictId": 4999,
+"DistrictName": "新晃侗族自治县"
+},
+{
+"DistrictId": 5000,
+"DistrictName": "芷江侗族自治县"
+},
+{
+"DistrictId": 5001,
+"DistrictName": "靖州苗族侗族自治县"
+},
+{
+"DistrictId": 5002,
+"DistrictName": "通道侗族自治县"
+},
+{
+"DistrictId": 5003,
+"DistrictName": "洪江市"
+}
+]
+},
+{
+"CityId": 278,
+"CityName": "娄底市",
+"district": [
+{
+"DistrictId": 5004,
+"DistrictName": "娄星区"
+},
+{
+"DistrictId": 5005,
+"DistrictName": "双峰县"
+},
+{
+"DistrictId": 5006,
+"DistrictName": "新化县"
+},
+{
+"DistrictId": 5007,
+"DistrictName": "冷水江市"
+},
+{
+"DistrictId": 5008,
+"DistrictName": "涟源市"
+}
+]
+},
+{
+"CityId": 279,
+"CityName": "湘西土家族苗族自治州",
+"district": [
+{
+"DistrictId": 5009,
+"DistrictName": "吉首市"
+},
+{
+"DistrictId": 5010,
+"DistrictName": "泸溪县"
+},
+{
+"DistrictId": 5011,
+"DistrictName": "凤凰县"
+},
+{
+"DistrictId": 5012,
+"DistrictName": "花垣县"
+},
+{
+"DistrictId": 5013,
+"DistrictName": "保靖县"
+},
+{
+"DistrictId": 5014,
+"DistrictName": "古丈县"
+},
+{
+"DistrictId": 5015,
+"DistrictName": "永顺县"
+},
+{
+"DistrictId": 5016,
+"DistrictName": "龙山县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 69,
+"ProvinceName": "广东省",
+"city": [
+{
+"CityId": 280,
+"CityName": "广州市",
+"district": [
+{
+"DistrictId": 5017,
+"DistrictName": "荔湾区"
+},
+{
+"DistrictId": 5018,
+"DistrictName": "越秀区"
+},
+{
+"DistrictId": 5019,
+"DistrictName": "海珠区"
+},
+{
+"DistrictId": 5020,
+"DistrictName": "天河区"
+},
+{
+"DistrictId": 5021,
+"DistrictName": "白云区"
+},
+{
+"DistrictId": 5022,
+"DistrictName": "黄埔区"
+},
+{
+"DistrictId": 5023,
+"DistrictName": "番禺区"
+},
+{
+"DistrictId": 5024,
+"DistrictName": "花都区"
+},
+{
+"DistrictId": 5025,
+"DistrictName": "南沙区"
+},
+{
+"DistrictId": 5026,
+"DistrictName": "萝岗区"
+},
+{
+"DistrictId": 5027,
+"DistrictName": "增城市"
+},
+{
+"DistrictId": 5028,
+"DistrictName": "从化市"
+}
+]
+},
+{
+"CityId": 281,
+"CityName": "韶关市",
+"district": [
+{
+"DistrictId": 5029,
+"DistrictName": "武江区"
+},
+{
+"DistrictId": 5030,
+"DistrictName": "浈江区"
+},
+{
+"DistrictId": 5031,
+"DistrictName": "曲江区"
+},
+{
+"DistrictId": 5032,
+"DistrictName": "始兴县"
+},
+{
+"DistrictId": 5033,
+"DistrictName": "仁化县"
+},
+{
+"DistrictId": 5034,
+"DistrictName": "翁源县"
+},
+{
+"DistrictId": 5035,
+"DistrictName": "乳源瑶族自治县"
+},
+{
+"DistrictId": 5036,
+"DistrictName": "新丰县"
+},
+{
+"DistrictId": 5037,
+"DistrictName": "乐昌市"
+},
+{
+"DistrictId": 5038,
+"DistrictName": "南雄市"
+}
+]
+},
+{
+"CityId": 282,
+"CityName": "深圳市",
+"district": [
+{
+"DistrictId": 5039,
+"DistrictName": "罗湖区"
+},
+{
+"DistrictId": 5040,
+"DistrictName": "福田区"
+},
+{
+"DistrictId": 5041,
+"DistrictName": "南山区"
+},
+{
+"DistrictId": 5042,
+"DistrictName": "宝安区"
+},
+{
+"DistrictId": 5043,
+"DistrictName": "龙岗区"
+},
+{
+"DistrictId": 5044,
+"DistrictName": "盐田区"
+}
+]
+},
+{
+"CityId": 283,
+"CityName": "珠海市",
+"district": [
+{
+"DistrictId": 5045,
+"DistrictName": "香洲区"
+},
+{
+"DistrictId": 5046,
+"DistrictName": "斗门区"
+},
+{
+"DistrictId": 5047,
+"DistrictName": "金湾区"
+}
+]
+},
+{
+"CityId": 284,
+"CityName": "汕头市",
+"district": [
+{
+"DistrictId": 5048,
+"DistrictName": "龙湖区"
+},
+{
+"DistrictId": 5049,
+"DistrictName": "金平区"
+},
+{
+"DistrictId": 5050,
+"DistrictName": "濠江区"
+},
+{
+"DistrictId": 5051,
+"DistrictName": "潮阳区"
+},
+{
+"DistrictId": 5052,
+"DistrictName": "潮南区"
+},
+{
+"DistrictId": 5053,
+"DistrictName": "澄海区"
+},
+{
+"DistrictId": 5054,
+"DistrictName": "南澳县"
+}
+]
+},
+{
+"CityId": 285,
+"CityName": "佛山市",
+"district": [
+{
+"DistrictId": 5055,
+"DistrictName": "禅城区"
+},
+{
+"DistrictId": 5056,
+"DistrictName": "南海区"
+},
+{
+"DistrictId": 5057,
+"DistrictName": "顺德区"
+},
+{
+"DistrictId": 5058,
+"DistrictName": "三水区"
+},
+{
+"DistrictId": 5059,
+"DistrictName": "高明区"
+}
+]
+},
+{
+"CityId": 286,
+"CityName": "江门市",
+"district": [
+{
+"DistrictId": 5060,
+"DistrictName": "蓬江区"
+},
+{
+"DistrictId": 5061,
+"DistrictName": "江海区"
+},
+{
+"DistrictId": 5062,
+"DistrictName": "新会区"
+},
+{
+"DistrictId": 5063,
+"DistrictName": "台山市"
+},
+{
+"DistrictId": 5064,
+"DistrictName": "开平市"
+},
+{
+"DistrictId": 5065,
+"DistrictName": "鹤山市"
+},
+{
+"DistrictId": 5066,
+"DistrictName": "恩平市"
+}
+]
+},
+{
+"CityId": 287,
+"CityName": "湛江市",
+"district": [
+{
+"DistrictId": 5067,
+"DistrictName": "赤坎区"
+},
+{
+"DistrictId": 5068,
+"DistrictName": "霞山区"
+},
+{
+"DistrictId": 5069,
+"DistrictName": "坡头区"
+},
+{
+"DistrictId": 5070,
+"DistrictName": "麻章区"
+},
+{
+"DistrictId": 5071,
+"DistrictName": "遂溪县"
+},
+{
+"DistrictId": 5072,
+"DistrictName": "徐闻县"
+},
+{
+"DistrictId": 5073,
+"DistrictName": "廉江市"
+},
+{
+"DistrictId": 5074,
+"DistrictName": "雷州市"
+},
+{
+"DistrictId": 5075,
+"DistrictName": "吴川市"
+}
+]
+},
+{
+"CityId": 288,
+"CityName": "茂名市",
+"district": [
+{
+"DistrictId": 5076,
+"DistrictName": "茂南区"
+},
+{
+"DistrictId": 5077,
+"DistrictName": "茂港区"
+},
+{
+"DistrictId": 5078,
+"DistrictName": "电白县"
+},
+{
+"DistrictId": 5079,
+"DistrictName": "高州市"
+},
+{
+"DistrictId": 5080,
+"DistrictName": "化州市"
+},
+{
+"DistrictId": 5081,
+"DistrictName": "信宜市"
+}
+]
+},
+{
+"CityId": 289,
+"CityName": "肇庆市",
+"district": [
+{
+"DistrictId": 5082,
+"DistrictName": "端州区"
+},
+{
+"DistrictId": 5083,
+"DistrictName": "鼎湖区"
+},
+{
+"DistrictId": 5084,
+"DistrictName": "广宁县"
+},
+{
+"DistrictId": 5085,
+"DistrictName": "怀集县"
+},
+{
+"DistrictId": 5086,
+"DistrictName": "封开县"
+},
+{
+"DistrictId": 5087,
+"DistrictName": "德庆县"
+},
+{
+"DistrictId": 5088,
+"DistrictName": "高要市"
+},
+{
+"DistrictId": 5089,
+"DistrictName": "四会市"
+}
+]
+},
+{
+"CityId": 290,
+"CityName": "惠州市",
+"district": [
+{
+"DistrictId": 5090,
+"DistrictName": "惠城区"
+},
+{
+"DistrictId": 5091,
+"DistrictName": "惠阳区"
+},
+{
+"DistrictId": 5092,
+"DistrictName": "博罗县"
+},
+{
+"DistrictId": 5093,
+"DistrictName": "惠东县"
+},
+{
+"DistrictId": 5094,
+"DistrictName": "龙门县"
+}
+]
+},
+{
+"CityId": 291,
+"CityName": "梅州市",
+"district": [
+{
+"DistrictId": 5095,
+"DistrictName": "梅江区"
+},
+{
+"DistrictId": 5096,
+"DistrictName": "梅县"
+},
+{
+"DistrictId": 5097,
+"DistrictName": "大埔县"
+},
+{
+"DistrictId": 5098,
+"DistrictName": "丰顺县"
+},
+{
+"DistrictId": 5099,
+"DistrictName": "五华县"
+},
+{
+"DistrictId": 5100,
+"DistrictName": "平远县"
+},
+{
+"DistrictId": 5101,
+"DistrictName": "蕉岭县"
+},
+{
+"DistrictId": 5102,
+"DistrictName": "兴宁市"
+}
+]
+},
+{
+"CityId": 292,
+"CityName": "汕尾市",
+"district": [
+{
+"DistrictId": 5103,
+"DistrictName": "城区"
+},
+{
+"DistrictId": 5104,
+"DistrictName": "海丰县"
+},
+{
+"DistrictId": 5105,
+"DistrictName": "陆河县"
+},
+{
+"DistrictId": 5106,
+"DistrictName": "陆丰市"
+}
+]
+},
+{
+"CityId": 293,
+"CityName": "河源市",
+"district": [
+{
+"DistrictId": 5107,
+"DistrictName": "源城区"
+},
+{
+"DistrictId": 5108,
+"DistrictName": "紫金县"
+},
+{
+"DistrictId": 5109,
+"DistrictName": "龙川县"
+},
+{
+"DistrictId": 5110,
+"DistrictName": "连平县"
+},
+{
+"DistrictId": 5111,
+"DistrictName": "和平县"
+},
+{
+"DistrictId": 5112,
+"DistrictName": "东源县"
+}
+]
+},
+{
+"CityId": 294,
+"CityName": "阳江市",
+"district": [
+{
+"DistrictId": 5113,
+"DistrictName": "江城区"
+},
+{
+"DistrictId": 5114,
+"DistrictName": "阳西县"
+},
+{
+"DistrictId": 5115,
+"DistrictName": "阳东县"
+},
+{
+"DistrictId": 5116,
+"DistrictName": "阳春市"
+}
+]
+},
+{
+"CityId": 295,
+"CityName": "清远市",
+"district": [
+{
+"DistrictId": 5117,
+"DistrictName": "清城区"
+},
+{
+"DistrictId": 5118,
+"DistrictName": "佛冈县"
+},
+{
+"DistrictId": 5119,
+"DistrictName": "阳山县"
+},
+{
+"DistrictId": 5120,
+"DistrictName": "连山壮族瑶族自治县"
+},
+{
+"DistrictId": 5121,
+"DistrictName": "连南瑶族自治县"
+},
+{
+"DistrictId": 5122,
+"DistrictName": "清新县"
+},
+{
+"DistrictId": 5123,
+"DistrictName": "英德市"
+},
+{
+"DistrictId": 5124,
+"DistrictName": "连州市"
+}
+]
+},
+{
+"CityId": 296,
+"CityName": "东莞市",
+"district": []
+},
+{
+"CityId": 297,
+"CityName": "中山市",
+"district": []
+},
+{
+"CityId": 298,
+"CityName": "潮州市",
+"district": [
+{
+"DistrictId": 5125,
+"DistrictName": "湘桥区"
+},
+{
+"DistrictId": 5126,
+"DistrictName": "潮安县"
+},
+{
+"DistrictId": 5127,
+"DistrictName": "饶平县"
+}
+]
+},
+{
+"CityId": 299,
+"CityName": "揭阳市",
+"district": [
+{
+"DistrictId": 5128,
+"DistrictName": "榕城区"
+},
+{
+"DistrictId": 5129,
+"DistrictName": "揭东县"
+},
+{
+"DistrictId": 5130,
+"DistrictName": "揭西县"
+},
+{
+"DistrictId": 5131,
+"DistrictName": "惠来县"
+},
+{
+"DistrictId": 5132,
+"DistrictName": "普宁市"
+}
+]
+},
+{
+"CityId": 300,
+"CityName": "云浮市",
+"district": [
+{
+"DistrictId": 5133,
+"DistrictName": "云城区"
+},
+{
+"DistrictId": 5134,
+"DistrictName": "新兴县"
+},
+{
+"DistrictId": 5135,
+"DistrictName": "郁南县"
+},
+{
+"DistrictId": 5136,
+"DistrictName": "云安县"
+},
+{
+"DistrictId": 5137,
+"DistrictName": "罗定市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 70,
+"ProvinceName": "广西壮族自治区",
+"city": [
+{
+"CityId": 301,
+"CityName": "南宁市",
+"district": [
+{
+"DistrictId": 5138,
+"DistrictName": "兴宁区"
+},
+{
+"DistrictId": 5139,
+"DistrictName": "青秀区"
+},
+{
+"DistrictId": 5140,
+"DistrictName": "江南区"
+},
+{
+"DistrictId": 5141,
+"DistrictName": "西乡塘区"
+},
+{
+"DistrictId": 5142,
+"DistrictName": "良庆区"
+},
+{
+"DistrictId": 5143,
+"DistrictName": "邕宁区"
+},
+{
+"DistrictId": 5144,
+"DistrictName": "武鸣县"
+},
+{
+"DistrictId": 5145,
+"DistrictName": "隆安县"
+},
+{
+"DistrictId": 5146,
+"DistrictName": "马山县"
+},
+{
+"DistrictId": 5147,
+"DistrictName": "上林县"
+},
+{
+"DistrictId": 5148,
+"DistrictName": "宾阳县"
+},
+{
+"DistrictId": 5149,
+"DistrictName": "横县"
+}
+]
+},
+{
+"CityId": 302,
+"CityName": "柳州市",
+"district": [
+{
+"DistrictId": 5150,
+"DistrictName": "城中区"
+},
+{
+"DistrictId": 5151,
+"DistrictName": "鱼峰区"
+},
+{
+"DistrictId": 5152,
+"DistrictName": "柳南区"
+},
+{
+"DistrictId": 5153,
+"DistrictName": "柳北区"
+},
+{
+"DistrictId": 5154,
+"DistrictName": "柳江县"
+},
+{
+"DistrictId": 5155,
+"DistrictName": "柳城县"
+},
+{
+"DistrictId": 5156,
+"DistrictName": "鹿寨县"
+},
+{
+"DistrictId": 5157,
+"DistrictName": "融安县"
+},
+{
+"DistrictId": 5158,
+"DistrictName": "融水苗族自治县"
+},
+{
+"DistrictId": 5159,
+"DistrictName": "三江侗族自治县"
+}
+]
+},
+{
+"CityId": 303,
+"CityName": "桂林市",
+"district": [
+{
+"DistrictId": 5160,
+"DistrictName": "秀峰区"
+},
+{
+"DistrictId": 5161,
+"DistrictName": "叠彩区"
+},
+{
+"DistrictId": 5162,
+"DistrictName": "象山区"
+},
+{
+"DistrictId": 5163,
+"DistrictName": "七星区"
+},
+{
+"DistrictId": 5164,
+"DistrictName": "雁山区"
+},
+{
+"DistrictId": 5165,
+"DistrictName": "阳朔县"
+},
+{
+"DistrictId": 5166,
+"DistrictName": "临桂县"
+},
+{
+"DistrictId": 5167,
+"DistrictName": "灵川县"
+},
+{
+"DistrictId": 5168,
+"DistrictName": "全州县"
+},
+{
+"DistrictId": 5169,
+"DistrictName": "兴安县"
+},
+{
+"DistrictId": 5170,
+"DistrictName": "永福县"
+},
+{
+"DistrictId": 5171,
+"DistrictName": "灌阳县"
+},
+{
+"DistrictId": 5172,
+"DistrictName": "龙胜各族自治县"
+},
+{
+"DistrictId": 5173,
+"DistrictName": "资源县"
+},
+{
+"DistrictId": 5174,
+"DistrictName": "平乐县"
+},
+{
+"DistrictId": 5175,
+"DistrictName": "荔蒲县"
+},
+{
+"DistrictId": 5176,
+"DistrictName": "恭城瑶族自治县"
+}
+]
+},
+{
+"CityId": 304,
+"CityName": "梧州市",
+"district": [
+{
+"DistrictId": 5177,
+"DistrictName": "万秀区"
+},
+{
+"DistrictId": 5178,
+"DistrictName": "蝶山区"
+},
+{
+"DistrictId": 5179,
+"DistrictName": "长洲区"
+},
+{
+"DistrictId": 5180,
+"DistrictName": "苍梧县"
+},
+{
+"DistrictId": 5181,
+"DistrictName": "藤县"
+},
+{
+"DistrictId": 5182,
+"DistrictName": "蒙山县"
+},
+{
+"DistrictId": 5183,
+"DistrictName": "岑溪市"
+}
+]
+},
+{
+"CityId": 305,
+"CityName": "北海市",
+"district": [
+{
+"DistrictId": 5184,
+"DistrictName": "海城区"
+},
+{
+"DistrictId": 5185,
+"DistrictName": "银海区"
+},
+{
+"DistrictId": 5186,
+"DistrictName": "铁山港区"
+},
+{
+"DistrictId": 5187,
+"DistrictName": "合浦县"
+}
+]
+},
+{
+"CityId": 306,
+"CityName": "防城港市",
+"district": [
+{
+"DistrictId": 5188,
+"DistrictName": "港口区"
+},
+{
+"DistrictId": 5189,
+"DistrictName": "防城区"
+},
+{
+"DistrictId": 5190,
+"DistrictName": "上思县"
+},
+{
+"DistrictId": 5191,
+"DistrictName": "东兴市"
+}
+]
+},
+{
+"CityId": 307,
+"CityName": "钦州市",
+"district": [
+{
+"DistrictId": 5192,
+"DistrictName": "钦南区"
+},
+{
+"DistrictId": 5193,
+"DistrictName": "钦北区"
+},
+{
+"DistrictId": 5194,
+"DistrictName": "灵山县"
+},
+{
+"DistrictId": 5195,
+"DistrictName": "浦北县"
+}
+]
+},
+{
+"CityId": 308,
+"CityName": "贵港市",
+"district": [
+{
+"DistrictId": 5196,
+"DistrictName": "港北区"
+},
+{
+"DistrictId": 5197,
+"DistrictName": "港南区"
+},
+{
+"DistrictId": 5198,
+"DistrictName": "覃塘区"
+},
+{
+"DistrictId": 5199,
+"DistrictName": "平南县"
+},
+{
+"DistrictId": 5200,
+"DistrictName": "桂平市"
+}
+]
+},
+{
+"CityId": 309,
+"CityName": "玉林市",
+"district": [
+{
+"DistrictId": 5201,
+"DistrictName": "玉州区"
+},
+{
+"DistrictId": 5202,
+"DistrictName": "容县"
+},
+{
+"DistrictId": 5203,
+"DistrictName": "陆川县"
+},
+{
+"DistrictId": 5204,
+"DistrictName": "博白县"
+},
+{
+"DistrictId": 5205,
+"DistrictName": "兴业县"
+},
+{
+"DistrictId": 5206,
+"DistrictName": "北流市"
+}
+]
+},
+{
+"CityId": 310,
+"CityName": "百色市",
+"district": [
+{
+"DistrictId": 5207,
+"DistrictName": "右江区"
+},
+{
+"DistrictId": 5208,
+"DistrictName": "田阳县"
+},
+{
+"DistrictId": 5209,
+"DistrictName": "田东县"
+},
+{
+"DistrictId": 5210,
+"DistrictName": "平果县"
+},
+{
+"DistrictId": 5211,
+"DistrictName": "德保县"
+},
+{
+"DistrictId": 5212,
+"DistrictName": "靖西县"
+},
+{
+"DistrictId": 5213,
+"DistrictName": "那坡县"
+},
+{
+"DistrictId": 5214,
+"DistrictName": "凌云县"
+},
+{
+"DistrictId": 5215,
+"DistrictName": "乐业县"
+},
+{
+"DistrictId": 5216,
+"DistrictName": "田林县"
+},
+{
+"DistrictId": 5217,
+"DistrictName": "西林县"
+},
+{
+"DistrictId": 5218,
+"DistrictName": "隆林各族自治县"
+}
+]
+},
+{
+"CityId": 311,
+"CityName": "贺州市",
+"district": [
+{
+"DistrictId": 5219,
+"DistrictName": "八步区"
+},
+{
+"DistrictId": 5220,
+"DistrictName": "昭平县"
+},
+{
+"DistrictId": 5221,
+"DistrictName": "钟山县"
+},
+{
+"DistrictId": 5222,
+"DistrictName": "富川瑶族自治县"
+}
+]
+},
+{
+"CityId": 312,
+"CityName": "河池市",
+"district": [
+{
+"DistrictId": 5223,
+"DistrictName": "金城江区"
+},
+{
+"DistrictId": 5224,
+"DistrictName": "南丹县"
+},
+{
+"DistrictId": 5225,
+"DistrictName": "天峨县"
+},
+{
+"DistrictId": 5226,
+"DistrictName": "凤山县"
+},
+{
+"DistrictId": 5227,
+"DistrictName": "东兰县"
+},
+{
+"DistrictId": 5228,
+"DistrictName": "罗城仫佬族自治县"
+},
+{
+"DistrictId": 5229,
+"DistrictName": "环江毛南族自治县"
+},
+{
+"DistrictId": 5230,
+"DistrictName": "巴马瑶族自治县"
+},
+{
+"DistrictId": 5231,
+"DistrictName": "都安瑶族自治县"
+},
+{
+"DistrictId": 5232,
+"DistrictName": "大化瑶族自治县"
+},
+{
+"DistrictId": 5233,
+"DistrictName": "宜州市"
+}
+]
+},
+{
+"CityId": 313,
+"CityName": "来宾市",
+"district": [
+{
+"DistrictId": 5234,
+"DistrictName": "兴宾区"
+},
+{
+"DistrictId": 5235,
+"DistrictName": "忻城县"
+},
+{
+"DistrictId": 5236,
+"DistrictName": "象州县"
+},
+{
+"DistrictId": 5237,
+"DistrictName": "武宣县"
+},
+{
+"DistrictId": 5238,
+"DistrictName": "金秀瑶族自治县"
+},
+{
+"DistrictId": 5239,
+"DistrictName": "合山市"
+}
+]
+},
+{
+"CityId": 314,
+"CityName": "崇左市",
+"district": [
+{
+"DistrictId": 5240,
+"DistrictName": "江洲区"
+},
+{
+"DistrictId": 5241,
+"DistrictName": "扶绥县"
+},
+{
+"DistrictId": 5242,
+"DistrictName": "宁明县"
+},
+{
+"DistrictId": 5243,
+"DistrictName": "龙州县"
+},
+{
+"DistrictId": 5244,
+"DistrictName": "大新县"
+},
+{
+"DistrictId": 5245,
+"DistrictName": "天等县"
+},
+{
+"DistrictId": 5246,
+"DistrictName": "凭祥市"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 71,
+"ProvinceName": "海南省",
+"city": [
+{
+"CityId": 315,
+"CityName": "海口市",
+"district": [
+{
+"DistrictId": 5247,
+"DistrictName": "秀英区"
+},
+{
+"DistrictId": 5248,
+"DistrictName": "龙华区"
+},
+{
+"DistrictId": 5249,
+"DistrictName": "琼山区"
+},
+{
+"DistrictId": 5250,
+"DistrictName": "美兰区"
+}
+]
+},
+{
+"CityId": 316,
+"CityName": "三沙市",
+"district": [
+{
+"DistrictId": 5251,
+"DistrictName": "五指山市"
+},
+{
+"DistrictId": 5252,
+"DistrictName": "琼海市"
+},
+{
+"DistrictId": 5253,
+"DistrictName": "儋州市"
+},
+{
+"DistrictId": 5254,
+"DistrictName": "文昌市"
+},
+{
+"DistrictId": 5255,
+"DistrictName": "万宁市"
+},
+{
+"DistrictId": 5256,
+"DistrictName": "东方市"
+},
+{
+"DistrictId": 5257,
+"DistrictName": "定安县"
+},
+{
+"DistrictId": 5258,
+"DistrictName": "屯昌县"
+},
+{
+"DistrictId": 5259,
+"DistrictName": "澄迈县"
+},
+{
+"DistrictId": 5260,
+"DistrictName": "临高县"
+},
+{
+"DistrictId": 5261,
+"DistrictName": "白沙黎族自治县"
+},
+{
+"DistrictId": 5262,
+"DistrictName": "昌江黎族自治县"
+},
+{
+"DistrictId": 5263,
+"DistrictName": "乐东黎族自治县"
+},
+{
+"DistrictId": 5264,
+"DistrictName": "陵水黎族自治县"
+},
+{
+"DistrictId": 5265,
+"DistrictName": "保亭黎族苗族自治县"
+},
+{
+"DistrictId": 5266,
+"DistrictName": "琼中黎族苗族自治县"
+},
+{
+"DistrictId": 5267,
+"DistrictName": "西沙群岛"
+},
+{
+"DistrictId": 5268,
+"DistrictName": "南沙群岛"
+},
+{
+"DistrictId": 5269,
+"DistrictName": "中沙群岛的岛礁及其海域"
+}
+]
+},
+{
+"CityId": 317,
+"CityName": "三亚市",
+"district": []
+}
+]
+},
+{
+"ProvinceId": 72,
+"ProvinceName": "重庆市",
+"city": [
+{
+"CityId": 318,
+"CityName": "重庆市",
+"district": [
+{
+"DistrictId": 5270,
+"DistrictName": "万州区"
+},
+{
+"DistrictId": 5271,
+"DistrictName": "涪陵区"
+},
+{
+"DistrictId": 5272,
+"DistrictName": "渝中区"
+},
+{
+"DistrictId": 5273,
+"DistrictName": "大渡口区"
+},
+{
+"DistrictId": 5274,
+"DistrictName": "江北区"
+},
+{
+"DistrictId": 5275,
+"DistrictName": "沙坪坝区"
+},
+{
+"DistrictId": 5276,
+"DistrictName": "九龙坡区"
+},
+{
+"DistrictId": 5277,
+"DistrictName": "南岸区"
+},
+{
+"DistrictId": 5278,
+"DistrictName": "北碚区"
+},
+{
+"DistrictId": 5279,
+"DistrictName": "綦江区"
+},
+{
+"DistrictId": 5280,
+"DistrictName": "大足区"
+},
+{
+"DistrictId": 5281,
+"DistrictName": "渝北区"
+},
+{
+"DistrictId": 5282,
+"DistrictName": "巴南区"
+},
+{
+"DistrictId": 5283,
+"DistrictName": "黔江区"
+},
+{
+"DistrictId": 5284,
+"DistrictName": "长寿区"
+},
+{
+"DistrictId": 5285,
+"DistrictName": "江津区"
+},
+{
+"DistrictId": 5286,
+"DistrictName": "潼南县"
+},
+{
+"DistrictId": 5287,
+"DistrictName": "铜梁县"
+},
+{
+"DistrictId": 5288,
+"DistrictName": "荣昌县"
+},
+{
+"DistrictId": 5289,
+"DistrictName": "璧山县"
+},
+{
+"DistrictId": 5290,
+"DistrictName": "梁平县"
+},
+{
+"DistrictId": 5291,
+"DistrictName": "城口县"
+},
+{
+"DistrictId": 5292,
+"DistrictName": "丰都县"
+},
+{
+"DistrictId": 5293,
+"DistrictName": "垫江县"
+},
+{
+"DistrictId": 5294,
+"DistrictName": "武隆县"
+},
+{
+"DistrictId": 5295,
+"DistrictName": "忠县"
+},
+{
+"DistrictId": 5296,
+"DistrictName": "开县"
+},
+{
+"DistrictId": 5297,
+"DistrictName": "云阳县"
+},
+{
+"DistrictId": 5298,
+"DistrictName": "奉节县"
+},
+{
+"DistrictId": 5299,
+"DistrictName": "巫山县"
+},
+{
+"DistrictId": 5300,
+"DistrictName": "巫溪县"
+},
+{
+"DistrictId": 5301,
+"DistrictName": "石柱土家族自治县"
+},
+{
+"DistrictId": 5302,
+"DistrictName": "秀山土家族苗族自治县"
+},
+{
+"DistrictId": 5303,
+"DistrictName": "酉阳土家族苗族自治县"
+},
+{
+"DistrictId": 5304,
+"DistrictName": "彭水苗族土家族自治县"
+},
+{
+"DistrictId": 5305,
+"DistrictName": "合川区"
+},
+{
+"DistrictId": 5306,
+"DistrictName": "永川区"
+},
+{
+"DistrictId": 5307,
+"DistrictName": "南川区"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 73,
+"ProvinceName": "四川省",
+"city": [
+{
+"CityId": 319,
+"CityName": "成都市",
+"district": [
+{
+"DistrictId": 5308,
+"DistrictName": "锦江区"
+},
+{
+"DistrictId": 5309,
+"DistrictName": "青羊区"
+},
+{
+"DistrictId": 5310,
+"DistrictName": "金牛区"
+},
+{
+"DistrictId": 5311,
+"DistrictName": "武侯区"
+},
+{
+"DistrictId": 5312,
+"DistrictName": "成华区"
+},
+{
+"DistrictId": 5313,
+"DistrictName": "龙泉驿区"
+},
+{
+"DistrictId": 5314,
+"DistrictName": "青白江区"
+},
+{
+"DistrictId": 5315,
+"DistrictName": "新都区"
+},
+{
+"DistrictId": 5316,
+"DistrictName": "温江区"
+},
+{
+"DistrictId": 5317,
+"DistrictName": "金堂县"
+},
+{
+"DistrictId": 5318,
+"DistrictName": "双流县"
+},
+{
+"DistrictId": 5319,
+"DistrictName": "郫县"
+},
+{
+"DistrictId": 5320,
+"DistrictName": "大邑县"
+},
+{
+"DistrictId": 5321,
+"DistrictName": "蒲江县"
+},
+{
+"DistrictId": 5322,
+"DistrictName": "新津县"
+},
+{
+"DistrictId": 5323,
+"DistrictName": "都江堰市"
+},
+{
+"DistrictId": 5324,
+"DistrictName": "彭州市"
+},
+{
+"DistrictId": 5325,
+"DistrictName": "邛崃市"
+},
+{
+"DistrictId": 5326,
+"DistrictName": "崇州市"
+}
+]
+},
+{
+"CityId": 320,
+"CityName": "自贡市",
+"district": [
+{
+"DistrictId": 5327,
+"DistrictName": "自流井区"
+},
+{
+"DistrictId": 5328,
+"DistrictName": "贡井区"
+},
+{
+"DistrictId": 5329,
+"DistrictName": "大安区"
+},
+{
+"DistrictId": 5330,
+"DistrictName": "沿滩区"
+},
+{
+"DistrictId": 5331,
+"DistrictName": "荣县"
+},
+{
+"DistrictId": 5332,
+"DistrictName": "富顺县"
+}
+]
+},
+{
+"CityId": 321,
+"CityName": "攀枝花市",
+"district": [
+{
+"DistrictId": 5333,
+"DistrictName": "东区"
+},
+{
+"DistrictId": 5334,
+"DistrictName": "西区"
+},
+{
+"DistrictId": 5335,
+"DistrictName": "仁和区"
+},
+{
+"DistrictId": 5336,
+"DistrictName": "米易县"
+},
+{
+"DistrictId": 5337,
+"DistrictName": "盐边县"
+}
+]
+},
+{
+"CityId": 322,
+"CityName": "泸州市",
+"district": [
+{
+"DistrictId": 5338,
+"DistrictName": "江阳区"
+},
+{
+"DistrictId": 5339,
+"DistrictName": "纳溪区"
+},
+{
+"DistrictId": 5340,
+"DistrictName": "龙马潭区"
+},
+{
+"DistrictId": 5341,
+"DistrictName": "泸县"
+},
+{
+"DistrictId": 5342,
+"DistrictName": "合江县"
+},
+{
+"DistrictId": 5343,
+"DistrictName": "叙永县"
+},
+{
+"DistrictId": 5344,
+"DistrictName": "古蔺县"
+}
+]
+},
+{
+"CityId": 323,
+"CityName": "德阳市",
+"district": [
+{
+"DistrictId": 5345,
+"DistrictName": "旌阳区"
+},
+{
+"DistrictId": 5346,
+"DistrictName": "中江县"
+},
+{
+"DistrictId": 5347,
+"DistrictName": "罗江县"
+},
+{
+"DistrictId": 5348,
+"DistrictName": "广汉市"
+},
+{
+"DistrictId": 5349,
+"DistrictName": "什邡市"
+},
+{
+"DistrictId": 5350,
+"DistrictName": "绵竹市"
+}
+]
+},
+{
+"CityId": 324,
+"CityName": "绵阳市",
+"district": [
+{
+"DistrictId": 5351,
+"DistrictName": "涪城区"
+},
+{
+"DistrictId": 5352,
+"DistrictName": "游仙区"
+},
+{
+"DistrictId": 5353,
+"DistrictName": "三台县"
+},
+{
+"DistrictId": 5354,
+"DistrictName": "盐亭县"
+},
+{
+"DistrictId": 5355,
+"DistrictName": "安县"
+},
+{
+"DistrictId": 5356,
+"DistrictName": "梓潼县"
+},
+{
+"DistrictId": 5357,
+"DistrictName": "北川羌族自治县"
+},
+{
+"DistrictId": 5358,
+"DistrictName": "平武县"
+},
+{
+"DistrictId": 5359,
+"DistrictName": "江油市"
+}
+]
+},
+{
+"CityId": 325,
+"CityName": "广元市",
+"district": [
+{
+"DistrictId": 5360,
+"DistrictName": "利州区"
+},
+{
+"DistrictId": 5361,
+"DistrictName": "元坝区"
+},
+{
+"DistrictId": 5362,
+"DistrictName": "朝天区"
+},
+{
+"DistrictId": 5363,
+"DistrictName": "旺苍县"
+},
+{
+"DistrictId": 5364,
+"DistrictName": "青川县"
+},
+{
+"DistrictId": 5365,
+"DistrictName": "剑阁县"
+},
+{
+"DistrictId": 5366,
+"DistrictName": "苍溪县"
+}
+]
+},
+{
+"CityId": 326,
+"CityName": "遂宁市",
+"district": [
+{
+"DistrictId": 5367,
+"DistrictName": "船山区"
+},
+{
+"DistrictId": 5368,
+"DistrictName": "安居区"
+},
+{
+"DistrictId": 5369,
+"DistrictName": "蓬溪县"
+},
+{
+"DistrictId": 5370,
+"DistrictName": "射洪县"
+},
+{
+"DistrictId": 5371,
+"DistrictName": "大英县"
+}
+]
+},
+{
+"CityId": 327,
+"CityName": "内江市",
+"district": [
+{
+"DistrictId": 5372,
+"DistrictName": "市中区"
+},
+{
+"DistrictId": 5373,
+"DistrictName": "东兴区"
+},
+{
+"DistrictId": 5374,
+"DistrictName": "威远县"
+},
+{
+"DistrictId": 5375,
+"DistrictName": "资中县"
+},
+{
+"DistrictId": 5376,
+"DistrictName": "隆昌县"
+}
+]
+},
+{
+"CityId": 328,
+"CityName": "乐山市",
+"district": [
+{
+"DistrictId": 5377,
+"DistrictName": "市中区"
+},
+{
+"DistrictId": 5378,
+"DistrictName": "沙湾区"
+},
+{
+"DistrictId": 5379,
+"DistrictName": "五通桥区"
+},
+{
+"DistrictId": 5380,
+"DistrictName": "金口河区"
+},
+{
+"DistrictId": 5381,
+"DistrictName": "犍为县"
+},
+{
+"DistrictId": 5382,
+"DistrictName": "井研县"
+},
+{
+"DistrictId": 5383,
+"DistrictName": "夹江县"
+},
+{
+"DistrictId": 5384,
+"DistrictName": "沐川县"
+},
+{
+"DistrictId": 5385,
+"DistrictName": "峨边彝族自治县"
+},
+{
+"DistrictId": 5386,
+"DistrictName": "马边彝族自治县"
+},
+{
+"DistrictId": 5387,
+"DistrictName": "峨眉山市"
+}
+]
+},
+{
+"CityId": 329,
+"CityName": "南充市",
+"district": [
+{
+"DistrictId": 5388,
+"DistrictName": "顺庆区"
+},
+{
+"DistrictId": 5389,
+"DistrictName": "高坪区"
+},
+{
+"DistrictId": 5390,
+"DistrictName": "嘉陵区"
+},
+{
+"DistrictId": 5391,
+"DistrictName": "南部县"
+},
+{
+"DistrictId": 5392,
+"DistrictName": "营山县"
+},
+{
+"DistrictId": 5393,
+"DistrictName": "蓬安县"
+},
+{
+"DistrictId": 5394,
+"DistrictName": "仪陇县"
+},
+{
+"DistrictId": 5395,
+"DistrictName": "西充县"
+},
+{
+"DistrictId": 5396,
+"DistrictName": "阆中市"
+}
+]
+},
+{
+"CityId": 330,
+"CityName": "眉山市",
+"district": [
+{
+"DistrictId": 5397,
+"DistrictName": "东坡区"
+},
+{
+"DistrictId": 5398,
+"DistrictName": "仁寿县"
+},
+{
+"DistrictId": 5399,
+"DistrictName": "彭山县"
+},
+{
+"DistrictId": 5400,
+"DistrictName": "洪雅县"
+},
+{
+"DistrictId": 5401,
+"DistrictName": "丹棱县"
+},
+{
+"DistrictId": 5402,
+"DistrictName": "青神县"
+}
+]
+},
+{
+"CityId": 331,
+"CityName": "宜宾市",
+"district": [
+{
+"DistrictId": 5403,
+"DistrictName": "翠屏区"
+},
+{
+"DistrictId": 5404,
+"DistrictName": "宜宾县"
+},
+{
+"DistrictId": 5405,
+"DistrictName": "南溪区"
+},
+{
+"DistrictId": 5406,
+"DistrictName": "江安县"
+},
+{
+"DistrictId": 5407,
+"DistrictName": "长宁县"
+},
+{
+"DistrictId": 5408,
+"DistrictName": "高县"
+},
+{
+"DistrictId": 5409,
+"DistrictName": "珙县"
+},
+{
+"DistrictId": 5410,
+"DistrictName": "筠连县"
+},
+{
+"DistrictId": 5411,
+"DistrictName": "兴文县"
+},
+{
+"DistrictId": 5412,
+"DistrictName": "屏山县"
+}
+]
+},
+{
+"CityId": 332,
+"CityName": "广安市",
+"district": [
+{
+"DistrictId": 5413,
+"DistrictName": "广安区"
+},
+{
+"DistrictId": 5414,
+"DistrictName": "岳池县"
+},
+{
+"DistrictId": 5415,
+"DistrictName": "武胜县"
+},
+{
+"DistrictId": 5416,
+"DistrictName": "邻水县"
+},
+{
+"DistrictId": 5417,
+"DistrictName": "华蓥市"
+}
+]
+},
+{
+"CityId": 333,
+"CityName": "达州市",
+"district": [
+{
+"DistrictId": 5418,
+"DistrictName": "通川区"
+},
+{
+"DistrictId": 5419,
+"DistrictName": "达县"
+},
+{
+"DistrictId": 5420,
+"DistrictName": "宣汉县"
+},
+{
+"DistrictId": 5421,
+"DistrictName": "开江县"
+},
+{
+"DistrictId": 5422,
+"DistrictName": "大竹县"
+},
+{
+"DistrictId": 5423,
+"DistrictName": "渠县"
+},
+{
+"DistrictId": 5424,
+"DistrictName": "万源市"
+}
+]
+},
+{
+"CityId": 334,
+"CityName": "雅安市",
+"district": [
+{
+"DistrictId": 5425,
+"DistrictName": "雨城区"
+},
+{
+"DistrictId": 5426,
+"DistrictName": "名山县"
+},
+{
+"DistrictId": 5427,
+"DistrictName": "荥经县"
+},
+{
+"DistrictId": 5428,
+"DistrictName": "汉源县"
+},
+{
+"DistrictId": 5429,
+"DistrictName": "石棉县"
+},
+{
+"DistrictId": 5430,
+"DistrictName": "天全县"
+},
+{
+"DistrictId": 5431,
+"DistrictName": "芦山县"
+},
+{
+"DistrictId": 5432,
+"DistrictName": "宝兴县"
+}
+]
+},
+{
+"CityId": 335,
+"CityName": "巴中市",
+"district": [
+{
+"DistrictId": 5433,
+"DistrictName": "巴州区"
+},
+{
+"DistrictId": 5434,
+"DistrictName": "通江县"
+},
+{
+"DistrictId": 5435,
+"DistrictName": "南江县"
+},
+{
+"DistrictId": 5436,
+"DistrictName": "平昌县"
+}
+]
+},
+{
+"CityId": 336,
+"CityName": "资阳市",
+"district": [
+{
+"DistrictId": 5437,
+"DistrictName": "雁江区"
+},
+{
+"DistrictId": 5438,
+"DistrictName": "安岳县"
+},
+{
+"DistrictId": 5439,
+"DistrictName": "乐至县"
+},
+{
+"DistrictId": 5440,
+"DistrictName": "简阳市"
+}
+]
+},
+{
+"CityId": 337,
+"CityName": "阿坝藏族羌族自治州",
+"district": [
+{
+"DistrictId": 5441,
+"DistrictName": "汶川县"
+},
+{
+"DistrictId": 5442,
+"DistrictName": "理县"
+},
+{
+"DistrictId": 5443,
+"DistrictName": "茂县"
+},
+{
+"DistrictId": 5444,
+"DistrictName": "松潘县"
+},
+{
+"DistrictId": 5445,
+"DistrictName": "九寨沟县"
+},
+{
+"DistrictId": 5446,
+"DistrictName": "金川县"
+},
+{
+"DistrictId": 5447,
+"DistrictName": "小金县"
+},
+{
+"DistrictId": 5448,
+"DistrictName": "黑水县"
+},
+{
+"DistrictId": 5449,
+"DistrictName": "马尔康县"
+},
+{
+"DistrictId": 5450,
+"DistrictName": "壤塘县"
+},
+{
+"DistrictId": 5451,
+"DistrictName": "阿坝县"
+},
+{
+"DistrictId": 5452,
+"DistrictName": "若尔盖县"
+},
+{
+"DistrictId": 5453,
+"DistrictName": "红原县"
+}
+]
+},
+{
+"CityId": 338,
+"CityName": "甘孜藏族自治州",
+"district": [
+{
+"DistrictId": 5454,
+"DistrictName": "康定县"
+},
+{
+"DistrictId": 5455,
+"DistrictName": "泸定县"
+},
+{
+"DistrictId": 5456,
+"DistrictName": "丹巴县"
+},
+{
+"DistrictId": 5457,
+"DistrictName": "九龙县"
+},
+{
+"DistrictId": 5458,
+"DistrictName": "雅江县"
+},
+{
+"DistrictId": 5459,
+"DistrictName": "道孚县"
+},
+{
+"DistrictId": 5460,
+"DistrictName": "炉霍县"
+},
+{
+"DistrictId": 5461,
+"DistrictName": "甘孜县"
+},
+{
+"DistrictId": 5462,
+"DistrictName": "新龙县"
+},
+{
+"DistrictId": 5463,
+"DistrictName": "德格县"
+},
+{
+"DistrictId": 5464,
+"DistrictName": "白玉县"
+},
+{
+"DistrictId": 5465,
+"DistrictName": "石渠县"
+},
+{
+"DistrictId": 5466,
+"DistrictName": "色达县"
+},
+{
+"DistrictId": 5467,
+"DistrictName": "理塘县"
+},
+{
+"DistrictId": 5468,
+"DistrictName": "巴塘县"
+},
+{
+"DistrictId": 5469,
+"DistrictName": "乡城县"
+},
+{
+"DistrictId": 5470,
+"DistrictName": "稻城县"
+},
+{
+"DistrictId": 5471,
+"DistrictName": "得荣县"
+}
+]
+},
+{
+"CityId": 339,
+"CityName": "凉山彝族自治州",
+"district": [
+{
+"DistrictId": 5472,
+"DistrictName": "西昌市"
+},
+{
+"DistrictId": 5473,
+"DistrictName": "木里藏族自治县"
+},
+{
+"DistrictId": 5474,
+"DistrictName": "盐源县"
+},
+{
+"DistrictId": 5475,
+"DistrictName": "德昌县"
+},
+{
+"DistrictId": 5476,
+"DistrictName": "会理县"
+},
+{
+"DistrictId": 5477,
+"DistrictName": "会东县"
+},
+{
+"DistrictId": 5478,
+"DistrictName": "宁南县"
+},
+{
+"DistrictId": 5479,
+"DistrictName": "普格县"
+},
+{
+"DistrictId": 5480,
+"DistrictName": "布拖县"
+},
+{
+"DistrictId": 5481,
+"DistrictName": "金阳县"
+},
+{
+"DistrictId": 5482,
+"DistrictName": "昭觉县"
+},
+{
+"DistrictId": 5483,
+"DistrictName": "喜德县"
+},
+{
+"DistrictId": 5484,
+"DistrictName": "冕宁县"
+},
+{
+"DistrictId": 5485,
+"DistrictName": "越西县"
+},
+{
+"DistrictId": 5486,
+"DistrictName": "甘洛县"
+},
+{
+"DistrictId": 5487,
+"DistrictName": "美姑县"
+},
+{
+"DistrictId": 5488,
+"DistrictName": "雷波县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 74,
+"ProvinceName": "贵州省",
+"city": [
+{
+"CityId": 340,
+"CityName": "贵阳市",
+"district": [
+{
+"DistrictId": 5489,
+"DistrictName": "南明区"
+},
+{
+"DistrictId": 5490,
+"DistrictName": "云岩区"
+},
+{
+"DistrictId": 5491,
+"DistrictName": "花溪区"
+},
+{
+"DistrictId": 5492,
+"DistrictName": "乌当区"
+},
+{
+"DistrictId": 5493,
+"DistrictName": "白云区"
+},
+{
+"DistrictId": 5494,
+"DistrictName": "小河区"
+},
+{
+"DistrictId": 5495,
+"DistrictName": "开阳县"
+},
+{
+"DistrictId": 5496,
+"DistrictName": "息烽县"
+},
+{
+"DistrictId": 5497,
+"DistrictName": "修文县"
+},
+{
+"DistrictId": 5498,
+"DistrictName": "清镇市"
+}
+]
+},
+{
+"CityId": 341,
+"CityName": "六盘水市",
+"district": [
+{
+"DistrictId": 5499,
+"DistrictName": "钟山区"
+},
+{
+"DistrictId": 5500,
+"DistrictName": "六枝特区"
+},
+{
+"DistrictId": 5501,
+"DistrictName": "水城县"
+},
+{
+"DistrictId": 5502,
+"DistrictName": "盘县"
+}
+]
+},
+{
+"CityId": 342,
+"CityName": "遵义市",
+"district": [
+{
+"DistrictId": 5503,
+"DistrictName": "红花岗区"
+},
+{
+"DistrictId": 5504,
+"DistrictName": "汇川区"
+},
+{
+"DistrictId": 5505,
+"DistrictName": "遵义县"
+},
+{
+"DistrictId": 5506,
+"DistrictName": "桐梓县"
+},
+{
+"DistrictId": 5507,
+"DistrictName": "绥阳县"
+},
+{
+"DistrictId": 5508,
+"DistrictName": "正安县"
+},
+{
+"DistrictId": 5509,
+"DistrictName": "道真仡佬族苗族自治县"
+},
+{
+"DistrictId": 5510,
+"DistrictName": "务川仡佬族苗族自治县"
+},
+{
+"DistrictId": 5511,
+"DistrictName": "凤冈县"
+},
+{
+"DistrictId": 5512,
+"DistrictName": "湄潭县"
+},
+{
+"DistrictId": 5513,
+"DistrictName": "余庆县"
+},
+{
+"DistrictId": 5514,
+"DistrictName": "习水县"
+},
+{
+"DistrictId": 5515,
+"DistrictName": "赤水市"
+},
+{
+"DistrictId": 5516,
+"DistrictName": "仁怀市"
+}
+]
+},
+{
+"CityId": 343,
+"CityName": "安顺市",
+"district": [
+{
+"DistrictId": 5517,
+"DistrictName": "西秀区"
+},
+{
+"DistrictId": 5518,
+"DistrictName": "平坝县"
+},
+{
+"DistrictId": 5519,
+"DistrictName": "普定县"
+},
+{
+"DistrictId": 5520,
+"DistrictName": "镇宁布依族苗族自治县"
+},
+{
+"DistrictId": 5521,
+"DistrictName": "关岭布依族苗族自治县"
+},
+{
+"DistrictId": 5522,
+"DistrictName": "紫云苗族布依族自治县"
+}
+]
+},
+{
+"CityId": 344,
+"CityName": "铜仁市",
+"district": [
+{
+"DistrictId": 5523,
+"DistrictName": "碧江区"
+},
+{
+"DistrictId": 5524,
+"DistrictName": "万山区"
+},
+{
+"DistrictId": 5525,
+"DistrictName": "江口县"
+},
+{
+"DistrictId": 5526,
+"DistrictName": "玉屏侗族自治县"
+},
+{
+"DistrictId": 5527,
+"DistrictName": "石阡县"
+},
+{
+"DistrictId": 5528,
+"DistrictName": "思南县"
+},
+{
+"DistrictId": 5529,
+"DistrictName": "印江土家族苗族自治县"
+},
+{
+"DistrictId": 5530,
+"DistrictName": "德江县"
+},
+{
+"DistrictId": 5531,
+"DistrictName": "沿河土家族自治县"
+},
+{
+"DistrictId": 5532,
+"DistrictName": "松桃苗族自治县"
+}
+]
+},
+{
+"CityId": 345,
+"CityName": "黔西南布依族苗族自治州",
+"district": [
+{
+"DistrictId": 5533,
+"DistrictName": "兴义市"
+},
+{
+"DistrictId": 5534,
+"DistrictName": "兴仁县"
+},
+{
+"DistrictId": 5535,
+"DistrictName": "普安县"
+},
+{
+"DistrictId": 5536,
+"DistrictName": "晴隆县"
+},
+{
+"DistrictId": 5537,
+"DistrictName": "贞丰县"
+},
+{
+"DistrictId": 5538,
+"DistrictName": "望谟县"
+},
+{
+"DistrictId": 5539,
+"DistrictName": "册亨县"
+},
+{
+"DistrictId": 5540,
+"DistrictName": "安龙县"
+}
+]
+},
+{
+"CityId": 346,
+"CityName": "毕节市",
+"district": [
+{
+"DistrictId": 5541,
+"DistrictName": "大方县"
+},
+{
+"DistrictId": 5542,
+"DistrictName": "黔西县"
+},
+{
+"DistrictId": 5543,
+"DistrictName": "金沙县"
+},
+{
+"DistrictId": 5544,
+"DistrictName": "织金县"
+},
+{
+"DistrictId": 5545,
+"DistrictName": "纳雍县"
+},
+{
+"DistrictId": 5546,
+"DistrictName": "威宁彝族回族苗族自治县"
+},
+{
+"DistrictId": 5547,
+"DistrictName": "赫章县"
+}
+]
+},
+{
+"CityId": 347,
+"CityName": "黔东南苗族侗族自治州",
+"district": [
+{
+"DistrictId": 5548,
+"DistrictName": "凯里市"
+},
+{
+"DistrictId": 5549,
+"DistrictName": "黄平县"
+},
+{
+"DistrictId": 5550,
+"DistrictName": "施秉县"
+},
+{
+"DistrictId": 5551,
+"DistrictName": "三穗县"
+},
+{
+"DistrictId": 5552,
+"DistrictName": "镇远县"
+},
+{
+"DistrictId": 5553,
+"DistrictName": "岑巩县"
+},
+{
+"DistrictId": 5554,
+"DistrictName": "天柱县"
+},
+{
+"DistrictId": 5555,
+"DistrictName": "锦屏县"
+},
+{
+"DistrictId": 5556,
+"DistrictName": "剑河县"
+},
+{
+"DistrictId": 5557,
+"DistrictName": "台江县"
+},
+{
+"DistrictId": 5558,
+"DistrictName": "黎平县"
+},
+{
+"DistrictId": 5559,
+"DistrictName": "榕江县"
+},
+{
+"DistrictId": 5560,
+"DistrictName": "从江县"
+},
+{
+"DistrictId": 5561,
+"DistrictName": "雷山县"
+},
+{
+"DistrictId": 5562,
+"DistrictName": "麻江县"
+},
+{
+"DistrictId": 5563,
+"DistrictName": "丹寨县"
+}
+]
+},
+{
+"CityId": 348,
+"CityName": "黔南布依族苗族自治州",
+"district": [
+{
+"DistrictId": 5564,
+"DistrictName": "都匀市"
+},
+{
+"DistrictId": 5565,
+"DistrictName": "福泉市"
+},
+{
+"DistrictId": 5566,
+"DistrictName": "荔波县"
+},
+{
+"DistrictId": 5567,
+"DistrictName": "贵定县"
+},
+{
+"DistrictId": 5568,
+"DistrictName": "瓮安县"
+},
+{
+"DistrictId": 5569,
+"DistrictName": "独山县"
+},
+{
+"DistrictId": 5570,
+"DistrictName": "平塘县"
+},
+{
+"DistrictId": 5571,
+"DistrictName": "罗甸县"
+},
+{
+"DistrictId": 5572,
+"DistrictName": "长顺县"
+},
+{
+"DistrictId": 5573,
+"DistrictName": "龙里县"
+},
+{
+"DistrictId": 5574,
+"DistrictName": "惠水县"
+},
+{
+"DistrictId": 5575,
+"DistrictName": "三都水族自治县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 75,
+"ProvinceName": "云南省",
+"city": [
+{
+"CityId": 349,
+"CityName": "昆明市",
+"district": [
+{
+"DistrictId": 5576,
+"DistrictName": "五华区"
+},
+{
+"DistrictId": 5577,
+"DistrictName": "盘龙区"
+},
+{
+"DistrictId": 5578,
+"DistrictName": "官渡区"
+},
+{
+"DistrictId": 5579,
+"DistrictName": "西山区"
+},
+{
+"DistrictId": 5580,
+"DistrictName": "东川区"
+},
+{
+"DistrictId": 5581,
+"DistrictName": "呈贡县"
+},
+{
+"DistrictId": 5582,
+"DistrictName": "晋宁县"
+},
+{
+"DistrictId": 5583,
+"DistrictName": "富民县"
+},
+{
+"DistrictId": 5584,
+"DistrictName": "宜良县"
+},
+{
+"DistrictId": 5585,
+"DistrictName": "石林彝族自治县"
+},
+{
+"DistrictId": 5586,
+"DistrictName": "嵩明县"
+},
+{
+"DistrictId": 5587,
+"DistrictName": "禄劝彝族苗族自治县"
+},
+{
+"DistrictId": 5588,
+"DistrictName": "寻甸回族彝族自治县"
+},
+{
+"DistrictId": 5589,
+"DistrictName": "安宁市"
+}
+]
+},
+{
+"CityId": 350,
+"CityName": "曲靖市",
+"district": [
+{
+"DistrictId": 5590,
+"DistrictName": "麒麟区"
+},
+{
+"DistrictId": 5591,
+"DistrictName": "马龙县"
+},
+{
+"DistrictId": 5592,
+"DistrictName": "陆良县"
+},
+{
+"DistrictId": 5593,
+"DistrictName": "师宗县"
+},
+{
+"DistrictId": 5594,
+"DistrictName": "罗平县"
+},
+{
+"DistrictId": 5595,
+"DistrictName": "富源县"
+},
+{
+"DistrictId": 5596,
+"DistrictName": "会泽县"
+},
+{
+"DistrictId": 5597,
+"DistrictName": "沾益县"
+},
+{
+"DistrictId": 5598,
+"DistrictName": "宣威市"
+}
+]
+},
+{
+"CityId": 351,
+"CityName": "玉溪市",
+"district": [
+{
+"DistrictId": 5599,
+"DistrictName": "红塔区"
+},
+{
+"DistrictId": 5600,
+"DistrictName": "江川县"
+},
+{
+"DistrictId": 5601,
+"DistrictName": "澄江县"
+},
+{
+"DistrictId": 5602,
+"DistrictName": "通海县"
+},
+{
+"DistrictId": 5603,
+"DistrictName": "华宁县"
+},
+{
+"DistrictId": 5604,
+"DistrictName": "易门县"
+},
+{
+"DistrictId": 5605,
+"DistrictName": "峨山彝族自治县"
+},
+{
+"DistrictId": 5606,
+"DistrictName": "新平彝族傣族自治县"
+},
+{
+"DistrictId": 5607,
+"DistrictName": "元江哈尼族彝族傣族自治县"
+}
+]
+},
+{
+"CityId": 352,
+"CityName": "保山市",
+"district": [
+{
+"DistrictId": 5608,
+"DistrictName": "隆阳区"
+},
+{
+"DistrictId": 5609,
+"DistrictName": "施甸县"
+},
+{
+"DistrictId": 5610,
+"DistrictName": "腾冲县"
+},
+{
+"DistrictId": 5611,
+"DistrictName": "龙陵县"
+},
+{
+"DistrictId": 5612,
+"DistrictName": "昌宁县"
+}
+]
+},
+{
+"CityId": 353,
+"CityName": "昭通市",
+"district": [
+{
+"DistrictId": 5613,
+"DistrictName": "昭阳区"
+},
+{
+"DistrictId": 5614,
+"DistrictName": "鲁甸县"
+},
+{
+"DistrictId": 5615,
+"DistrictName": "巧家县"
+},
+{
+"DistrictId": 5616,
+"DistrictName": "盐津县"
+},
+{
+"DistrictId": 5617,
+"DistrictName": "大关县"
+},
+{
+"DistrictId": 5618,
+"DistrictName": "永善县"
+},
+{
+"DistrictId": 5619,
+"DistrictName": "绥江县"
+},
+{
+"DistrictId": 5620,
+"DistrictName": "镇雄县"
+},
+{
+"DistrictId": 5621,
+"DistrictName": "彝良县"
+},
+{
+"DistrictId": 5622,
+"DistrictName": "威信县"
+},
+{
+"DistrictId": 5623,
+"DistrictName": "水富县"
+}
+]
+},
+{
+"CityId": 354,
+"CityName": "丽江市",
+"district": [
+{
+"DistrictId": 5624,
+"DistrictName": "古城区"
+},
+{
+"DistrictId": 5625,
+"DistrictName": "玉龙纳西族自治县"
+},
+{
+"DistrictId": 5626,
+"DistrictName": "永胜县"
+},
+{
+"DistrictId": 5627,
+"DistrictName": "华坪县"
+},
+{
+"DistrictId": 5628,
+"DistrictName": "宁蒗彝族自治县"
+}
+]
+},
+{
+"CityId": 355,
+"CityName": "普洱市",
+"district": [
+{
+"DistrictId": 5629,
+"DistrictName": "思茅区"
+},
+{
+"DistrictId": 5630,
+"DistrictName": "宁洱哈尼族彝族自治县"
+},
+{
+"DistrictId": 5631,
+"DistrictName": "墨江哈尼族自治县"
+},
+{
+"DistrictId": 5632,
+"DistrictName": "景东彝族自治县"
+},
+{
+"DistrictId": 5633,
+"DistrictName": "景谷傣族彝族自治县"
+},
+{
+"DistrictId": 5634,
+"DistrictName": "镇沅彝族哈尼族拉祜族自治县"
+},
+{
+"DistrictId": 5635,
+"DistrictName": "江城哈尼族彝族自治县"
+},
+{
+"DistrictId": 5636,
+"DistrictName": "孟连傣族拉祜族佤族自治县"
+},
+{
+"DistrictId": 5637,
+"DistrictName": "澜沧拉祜族自治县"
+},
+{
+"DistrictId": 5638,
+"DistrictName": "西盟佤族自治县"
+}
+]
+},
+{
+"CityId": 356,
+"CityName": "临沧市",
+"district": [
+{
+"DistrictId": 5639,
+"DistrictName": "临翔区"
+},
+{
+"DistrictId": 5640,
+"DistrictName": "凤庆县"
+},
+{
+"DistrictId": 5641,
+"DistrictName": "云县"
+},
+{
+"DistrictId": 5642,
+"DistrictName": "永德县"
+},
+{
+"DistrictId": 5643,
+"DistrictName": "镇康县"
+},
+{
+"DistrictId": 5644,
+"DistrictName": "双江拉祜族佤族布朗族傣族自治县"
+},
+{
+"DistrictId": 5645,
+"DistrictName": "耿马傣族佤族自治县"
+},
+{
+"DistrictId": 5646,
+"DistrictName": "沧源佤族自治县"
+}
+]
+},
+{
+"CityId": 357,
+"CityName": "楚雄彝族自治州",
+"district": [
+{
+"DistrictId": 5647,
+"DistrictName": "楚雄市"
+},
+{
+"DistrictId": 5648,
+"DistrictName": "双柏县"
+},
+{
+"DistrictId": 5649,
+"DistrictName": "牟定县"
+},
+{
+"DistrictId": 5650,
+"DistrictName": "南华县"
+},
+{
+"DistrictId": 5651,
+"DistrictName": "姚安县"
+},
+{
+"DistrictId": 5652,
+"DistrictName": "大姚县"
+},
+{
+"DistrictId": 5653,
+"DistrictName": "永仁县"
+},
+{
+"DistrictId": 5654,
+"DistrictName": "元谋县"
+},
+{
+"DistrictId": 5655,
+"DistrictName": "武定县"
+},
+{
+"DistrictId": 5656,
+"DistrictName": "禄丰县"
+}
+]
+},
+{
+"CityId": 358,
+"CityName": "红河哈尼族彝族自治州",
+"district": [
+{
+"DistrictId": 5657,
+"DistrictName": "个旧市"
+},
+{
+"DistrictId": 5658,
+"DistrictName": "开远市"
+},
+{
+"DistrictId": 5659,
+"DistrictName": "蒙自县"
+},
+{
+"DistrictId": 5660,
+"DistrictName": "屏边苗族自治县"
+},
+{
+"DistrictId": 5661,
+"DistrictName": "建水县"
+},
+{
+"DistrictId": 5662,
+"DistrictName": "石屏县"
+},
+{
+"DistrictId": 5663,
+"DistrictName": "弥勒县"
+},
+{
+"DistrictId": 5664,
+"DistrictName": "泸西县"
+},
+{
+"DistrictId": 5665,
+"DistrictName": "元阳县"
+},
+{
+"DistrictId": 5666,
+"DistrictName": "红河县"
+},
+{
+"DistrictId": 5667,
+"DistrictName": "金平苗族瑶族傣族自治县"
+},
+{
+"DistrictId": 5668,
+"DistrictName": "绿春县"
+},
+{
+"DistrictId": 5669,
+"DistrictName": "河口瑶族自治县"
+}
+]
+},
+{
+"CityId": 359,
+"CityName": "文山壮族苗族自治州",
+"district": [
+{
+"DistrictId": 5670,
+"DistrictName": "文山市"
+},
+{
+"DistrictId": 5671,
+"DistrictName": "砚山县"
+},
+{
+"DistrictId": 5672,
+"DistrictName": "西畴县"
+},
+{
+"DistrictId": 5673,
+"DistrictName": "麻栗坡县"
+},
+{
+"DistrictId": 5674,
+"DistrictName": "马关县"
+},
+{
+"DistrictId": 5675,
+"DistrictName": "丘北县"
+},
+{
+"DistrictId": 5676,
+"DistrictName": "广南县"
+},
+{
+"DistrictId": 5677,
+"DistrictName": "富宁县"
+}
+]
+},
+{
+"CityId": 360,
+"CityName": "西双版纳傣族自治州",
+"district": [
+{
+"DistrictId": 5678,
+"DistrictName": "景洪市"
+},
+{
+"DistrictId": 5679,
+"DistrictName": "勐海县"
+},
+{
+"DistrictId": 5680,
+"DistrictName": "勐腊县"
+}
+]
+},
+{
+"CityId": 361,
+"CityName": "大理白族自治州",
+"district": [
+{
+"DistrictId": 5681,
+"DistrictName": "大理市"
+},
+{
+"DistrictId": 5682,
+"DistrictName": "漾濞彝族自治县"
+},
+{
+"DistrictId": 5683,
+"DistrictName": "祥云县"
+},
+{
+"DistrictId": 5684,
+"DistrictName": "宾川县"
+},
+{
+"DistrictId": 5685,
+"DistrictName": "弥渡县"
+},
+{
+"DistrictId": 5686,
+"DistrictName": "南涧彝族自治县"
+},
+{
+"DistrictId": 5687,
+"DistrictName": "巍山彝族回族自治县"
+},
+{
+"DistrictId": 5688,
+"DistrictName": "永平县"
+},
+{
+"DistrictId": 5689,
+"DistrictName": "云龙县"
+},
+{
+"DistrictId": 5690,
+"DistrictName": "洱源县"
+},
+{
+"DistrictId": 5691,
+"DistrictName": "剑川县"
+},
+{
+"DistrictId": 5692,
+"DistrictName": "鹤庆县"
+}
+]
+},
+{
+"CityId": 362,
+"CityName": "德宏傣族景颇族自治州",
+"district": [
+{
+"DistrictId": 5693,
+"DistrictName": "瑞丽市"
+},
+{
+"DistrictId": 5694,
+"DistrictName": "芒市"
+},
+{
+"DistrictId": 5695,
+"DistrictName": "梁河县"
+},
+{
+"DistrictId": 5696,
+"DistrictName": "盈江县"
+},
+{
+"DistrictId": 5697,
+"DistrictName": "陇川县"
+}
+]
+},
+{
+"CityId": 363,
+"CityName": "怒江傈僳族自治州",
+"district": [
+{
+"DistrictId": 5698,
+"DistrictName": "泸水县"
+},
+{
+"DistrictId": 5699,
+"DistrictName": "福贡县"
+},
+{
+"DistrictId": 5700,
+"DistrictName": "贡山独龙族怒族自治县"
+},
+{
+"DistrictId": 5701,
+"DistrictName": "兰坪白族普米族自治县"
+}
+]
+},
+{
+"CityId": 364,
+"CityName": "迪庆藏族自治州",
+"district": [
+{
+"DistrictId": 5702,
+"DistrictName": "香格里拉县"
+},
+{
+"DistrictId": 5703,
+"DistrictName": "德钦县"
+},
+{
+"DistrictId": 5704,
+"DistrictName": "维西傈僳族自治县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 76,
+"ProvinceName": "西藏自治区",
+"city": [
+{
+"CityId": 365,
+"CityName": "拉萨市",
+"district": [
+{
+"DistrictId": 5705,
+"DistrictName": "城关区"
+},
+{
+"DistrictId": 5706,
+"DistrictName": "林周县"
+},
+{
+"DistrictId": 5707,
+"DistrictName": "当雄县"
+},
+{
+"DistrictId": 5708,
+"DistrictName": "尼木县"
+},
+{
+"DistrictId": 5709,
+"DistrictName": "曲水县"
+},
+{
+"DistrictId": 5710,
+"DistrictName": "堆龙德庆县"
+},
+{
+"DistrictId": 5711,
+"DistrictName": "达孜县"
+},
+{
+"DistrictId": 5712,
+"DistrictName": "墨竹工卡县"
+}
+]
+},
+{
+"CityId": 366,
+"CityName": "昌都地区",
+"district": [
+{
+"DistrictId": 5713,
+"DistrictName": "昌都县"
+},
+{
+"DistrictId": 5714,
+"DistrictName": "江达县"
+},
+{
+"DistrictId": 5715,
+"DistrictName": "贡觉县"
+},
+{
+"DistrictId": 5716,
+"DistrictName": "类乌齐县"
+},
+{
+"DistrictId": 5717,
+"DistrictName": "丁青县"
+},
+{
+"DistrictId": 5718,
+"DistrictName": "察雅县"
+},
+{
+"DistrictId": 5719,
+"DistrictName": "八宿县"
+},
+{
+"DistrictId": 5720,
+"DistrictName": "左贡县"
+},
+{
+"DistrictId": 5721,
+"DistrictName": "芒康县"
+},
+{
+"DistrictId": 5722,
+"DistrictName": "洛隆县"
+},
+{
+"DistrictId": 5723,
+"DistrictName": "边坝县"
+}
+]
+},
+{
+"CityId": 367,
+"CityName": "山南地区",
+"district": [
+{
+"DistrictId": 5724,
+"DistrictName": "乃东县"
+},
+{
+"DistrictId": 5725,
+"DistrictName": "扎囊县"
+},
+{
+"DistrictId": 5726,
+"DistrictName": "贡嘎县"
+},
+{
+"DistrictId": 5727,
+"DistrictName": "桑日县"
+},
+{
+"DistrictId": 5728,
+"DistrictName": "琼结县"
+},
+{
+"DistrictId": 5729,
+"DistrictName": "曲松县"
+},
+{
+"DistrictId": 5730,
+"DistrictName": "措美县"
+},
+{
+"DistrictId": 5731,
+"DistrictName": "洛扎县"
+},
+{
+"DistrictId": 5732,
+"DistrictName": "加查县"
+},
+{
+"DistrictId": 5733,
+"DistrictName": "隆子县"
+},
+{
+"DistrictId": 5734,
+"DistrictName": "错那县"
+},
+{
+"DistrictId": 5735,
+"DistrictName": "浪卡子县"
+}
+]
+},
+{
+"CityId": 368,
+"CityName": "日喀则地区",
+"district": [
+{
+"DistrictId": 5736,
+"DistrictName": "日喀则市"
+},
+{
+"DistrictId": 5737,
+"DistrictName": "南木林县"
+},
+{
+"DistrictId": 5738,
+"DistrictName": "江孜县"
+},
+{
+"DistrictId": 5739,
+"DistrictName": "定日县"
+},
+{
+"DistrictId": 5740,
+"DistrictName": "萨迦县"
+},
+{
+"DistrictId": 5741,
+"DistrictName": "拉孜县"
+},
+{
+"DistrictId": 5742,
+"DistrictName": "昂仁县"
+},
+{
+"DistrictId": 5743,
+"DistrictName": "谢通门县"
+},
+{
+"DistrictId": 5744,
+"DistrictName": "白朗县"
+},
+{
+"DistrictId": 5745,
+"DistrictName": "仁布县"
+},
+{
+"DistrictId": 5746,
+"DistrictName": "康马县"
+},
+{
+"DistrictId": 5747,
+"DistrictName": "定结县"
+},
+{
+"DistrictId": 5748,
+"DistrictName": "仲巴县"
+},
+{
+"DistrictId": 5749,
+"DistrictName": "亚东县"
+},
+{
+"DistrictId": 5750,
+"DistrictName": "吉隆县"
+},
+{
+"DistrictId": 5751,
+"DistrictName": "聂拉木县"
+},
+{
+"DistrictId": 5752,
+"DistrictName": "萨嘎县"
+},
+{
+"DistrictId": 5753,
+"DistrictName": "岗巴县"
+}
+]
+},
+{
+"CityId": 369,
+"CityName": "那曲地区",
+"district": [
+{
+"DistrictId": 5754,
+"DistrictName": "那曲县"
+},
+{
+"DistrictId": 5755,
+"DistrictName": "嘉黎县"
+},
+{
+"DistrictId": 5756,
+"DistrictName": "比如县"
+},
+{
+"DistrictId": 5757,
+"DistrictName": "聂荣县"
+},
+{
+"DistrictId": 5758,
+"DistrictName": "安多县"
+},
+{
+"DistrictId": 5759,
+"DistrictName": "申扎县"
+},
+{
+"DistrictId": 5760,
+"DistrictName": "索县"
+},
+{
+"DistrictId": 5761,
+"DistrictName": "班戈县"
+},
+{
+"DistrictId": 5762,
+"DistrictName": "巴青县"
+},
+{
+"DistrictId": 5763,
+"DistrictName": "尼玛县"
+}
+]
+},
+{
+"CityId": 370,
+"CityName": "阿里地区",
+"district": [
+{
+"DistrictId": 5764,
+"DistrictName": "普兰县"
+},
+{
+"DistrictId": 5765,
+"DistrictName": "札达县"
+},
+{
+"DistrictId": 5766,
+"DistrictName": "噶尔县"
+},
+{
+"DistrictId": 5767,
+"DistrictName": "日土县"
+},
+{
+"DistrictId": 5768,
+"DistrictName": "革吉县"
+},
+{
+"DistrictId": 5769,
+"DistrictName": "改则县"
+},
+{
+"DistrictId": 5770,
+"DistrictName": "措勤县"
+}
+]
+},
+{
+"CityId": 371,
+"CityName": "林芝地区",
+"district": [
+{
+"DistrictId": 5771,
+"DistrictName": "林芝县"
+},
+{
+"DistrictId": 5772,
+"DistrictName": "工布江达县"
+},
+{
+"DistrictId": 5773,
+"DistrictName": "米林县"
+},
+{
+"DistrictId": 5774,
+"DistrictName": "墨脱县"
+},
+{
+"DistrictId": 5775,
+"DistrictName": "波密县"
+},
+{
+"DistrictId": 5776,
+"DistrictName": "察隅县"
+},
+{
+"DistrictId": 5777,
+"DistrictName": "朗县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 77,
+"ProvinceName": "陕西省",
+"city": [
+{
+"CityId": 372,
+"CityName": "西安市",
+"district": [
+{
+"DistrictId": 5778,
+"DistrictName": "新城区"
+},
+{
+"DistrictId": 5779,
+"DistrictName": "碑林区"
+},
+{
+"DistrictId": 5780,
+"DistrictName": "莲湖区"
+},
+{
+"DistrictId": 5781,
+"DistrictName": "灞桥区"
+},
+{
+"DistrictId": 5782,
+"DistrictName": "未央区"
+},
+{
+"DistrictId": 5783,
+"DistrictName": "雁塔区"
+},
+{
+"DistrictId": 5784,
+"DistrictName": "阎良区"
+},
+{
+"DistrictId": 5785,
+"DistrictName": "临潼区"
+},
+{
+"DistrictId": 5786,
+"DistrictName": "长安区"
+},
+{
+"DistrictId": 5787,
+"DistrictName": "蓝田县"
+},
+{
+"DistrictId": 5788,
+"DistrictName": "周至县"
+},
+{
+"DistrictId": 5789,
+"DistrictName": "户县"
+},
+{
+"DistrictId": 5790,
+"DistrictName": "高陵县"
+}
+]
+},
+{
+"CityId": 373,
+"CityName": "铜川市",
+"district": [
+{
+"DistrictId": 5791,
+"DistrictName": "王益区"
+},
+{
+"DistrictId": 5792,
+"DistrictName": "印台区"
+},
+{
+"DistrictId": 5793,
+"DistrictName": "耀州区"
+},
+{
+"DistrictId": 5794,
+"DistrictName": "宜君县"
+}
+]
+},
+{
+"CityId": 374,
+"CityName": "宝鸡市",
+"district": [
+{
+"DistrictId": 5795,
+"DistrictName": "渭滨区"
+},
+{
+"DistrictId": 5796,
+"DistrictName": "金台区"
+},
+{
+"DistrictId": 5797,
+"DistrictName": "陈仓区"
+},
+{
+"DistrictId": 5798,
+"DistrictName": "凤翔县"
+},
+{
+"DistrictId": 5799,
+"DistrictName": "岐山县"
+},
+{
+"DistrictId": 5800,
+"DistrictName": "扶风县"
+},
+{
+"DistrictId": 5801,
+"DistrictName": "眉县"
+},
+{
+"DistrictId": 5802,
+"DistrictName": "陇县"
+},
+{
+"DistrictId": 5803,
+"DistrictName": "千阳县"
+},
+{
+"DistrictId": 5804,
+"DistrictName": "麟游县"
+},
+{
+"DistrictId": 5805,
+"DistrictName": "凤县"
+},
+{
+"DistrictId": 5806,
+"DistrictName": "太白县"
+}
+]
+},
+{
+"CityId": 375,
+"CityName": "咸阳市",
+"district": [
+{
+"DistrictId": 5807,
+"DistrictName": "秦都区"
+},
+{
+"DistrictId": 5808,
+"DistrictName": "杨凌区"
+},
+{
+"DistrictId": 5809,
+"DistrictName": "渭城区"
+},
+{
+"DistrictId": 5810,
+"DistrictName": "三原县"
+},
+{
+"DistrictId": 5811,
+"DistrictName": "泾阳县"
+},
+{
+"DistrictId": 5812,
+"DistrictName": "乾县"
+},
+{
+"DistrictId": 5813,
+"DistrictName": "礼泉县"
+},
+{
+"DistrictId": 5814,
+"DistrictName": "永寿县"
+},
+{
+"DistrictId": 5815,
+"DistrictName": "彬县"
+},
+{
+"DistrictId": 5816,
+"DistrictName": "长武县"
+},
+{
+"DistrictId": 5817,
+"DistrictName": "旬邑县"
+},
+{
+"DistrictId": 5818,
+"DistrictName": "淳化县"
+},
+{
+"DistrictId": 5819,
+"DistrictName": "武功县"
+},
+{
+"DistrictId": 5820,
+"DistrictName": "兴平市"
+}
+]
+},
+{
+"CityId": 376,
+"CityName": "渭南市",
+"district": [
+{
+"DistrictId": 5821,
+"DistrictName": "临渭区"
+},
+{
+"DistrictId": 5822,
+"DistrictName": "华县"
+},
+{
+"DistrictId": 5823,
+"DistrictName": "潼关县"
+},
+{
+"DistrictId": 5824,
+"DistrictName": "大荔县"
+},
+{
+"DistrictId": 5825,
+"DistrictName": "合阳县"
+},
+{
+"DistrictId": 5826,
+"DistrictName": "澄城县"
+},
+{
+"DistrictId": 5827,
+"DistrictName": "蒲城县"
+},
+{
+"DistrictId": 5828,
+"DistrictName": "白水县"
+},
+{
+"DistrictId": 5829,
+"DistrictName": "富平县"
+},
+{
+"DistrictId": 5830,
+"DistrictName": "韩城市"
+},
+{
+"DistrictId": 5831,
+"DistrictName": "华阴市"
+}
+]
+},
+{
+"CityId": 377,
+"CityName": "延安市",
+"district": [
+{
+"DistrictId": 5832,
+"DistrictName": "宝塔区"
+},
+{
+"DistrictId": 5833,
+"DistrictName": "延长县"
+},
+{
+"DistrictId": 5834,
+"DistrictName": "延川县"
+},
+{
+"DistrictId": 5835,
+"DistrictName": "子长县"
+},
+{
+"DistrictId": 5836,
+"DistrictName": "安塞县"
+},
+{
+"DistrictId": 5837,
+"DistrictName": "志丹县"
+},
+{
+"DistrictId": 5838,
+"DistrictName": "吴起县"
+},
+{
+"DistrictId": 5839,
+"DistrictName": "甘泉县"
+},
+{
+"DistrictId": 5840,
+"DistrictName": "富县"
+},
+{
+"DistrictId": 5841,
+"DistrictName": "洛川县"
+},
+{
+"DistrictId": 5842,
+"DistrictName": "宜川县"
+},
+{
+"DistrictId": 5843,
+"DistrictName": "黄龙县"
+},
+{
+"DistrictId": 5844,
+"DistrictName": "黄陵县"
+}
+]
+},
+{
+"CityId": 378,
+"CityName": "汉中市",
+"district": [
+{
+"DistrictId": 5845,
+"DistrictName": "汉台区"
+},
+{
+"DistrictId": 5846,
+"DistrictName": "南郑县"
+},
+{
+"DistrictId": 5847,
+"DistrictName": "城固县"
+},
+{
+"DistrictId": 5848,
+"DistrictName": "洋县"
+},
+{
+"DistrictId": 5849,
+"DistrictName": "西乡县"
+},
+{
+"DistrictId": 5850,
+"DistrictName": "勉县"
+},
+{
+"DistrictId": 5851,
+"DistrictName": "宁强县"
+},
+{
+"DistrictId": 5852,
+"DistrictName": "略阳县"
+},
+{
+"DistrictId": 5853,
+"DistrictName": "镇巴县"
+},
+{
+"DistrictId": 5854,
+"DistrictName": "留坝县"
+},
+{
+"DistrictId": 5855,
+"DistrictName": "佛坪县"
+}
+]
+},
+{
+"CityId": 379,
+"CityName": "榆林市",
+"district": [
+{
+"DistrictId": 5856,
+"DistrictName": "榆阳区"
+},
+{
+"DistrictId": 5857,
+"DistrictName": "神木县"
+},
+{
+"DistrictId": 5858,
+"DistrictName": "府谷县"
+},
+{
+"DistrictId": 5859,
+"DistrictName": "横山县"
+},
+{
+"DistrictId": 5860,
+"DistrictName": "靖边县"
+},
+{
+"DistrictId": 5861,
+"DistrictName": "定边县"
+},
+{
+"DistrictId": 5862,
+"DistrictName": "绥德县"
+},
+{
+"DistrictId": 5863,
+"DistrictName": "米脂县"
+},
+{
+"DistrictId": 5864,
+"DistrictName": "佳县"
+},
+{
+"DistrictId": 5865,
+"DistrictName": "吴堡县"
+},
+{
+"DistrictId": 5866,
+"DistrictName": "清涧县"
+},
+{
+"DistrictId": 5867,
+"DistrictName": "子洲县"
+}
+]
+},
+{
+"CityId": 380,
+"CityName": "安康市",
+"district": [
+{
+"DistrictId": 5868,
+"DistrictName": "汉滨区"
+},
+{
+"DistrictId": 5869,
+"DistrictName": "汉阴县"
+},
+{
+"DistrictId": 5870,
+"DistrictName": "石泉县"
+},
+{
+"DistrictId": 5871,
+"DistrictName": "宁陕县"
+},
+{
+"DistrictId": 5872,
+"DistrictName": "紫阳县"
+},
+{
+"DistrictId": 5873,
+"DistrictName": "岚皋县"
+},
+{
+"DistrictId": 5874,
+"DistrictName": "平利县"
+},
+{
+"DistrictId": 5875,
+"DistrictName": "镇坪县"
+},
+{
+"DistrictId": 5876,
+"DistrictName": "旬阳县"
+},
+{
+"DistrictId": 5877,
+"DistrictName": "白河县"
+}
+]
+},
+{
+"CityId": 381,
+"CityName": "商洛市",
+"district": [
+{
+"DistrictId": 5878,
+"DistrictName": "商州区"
+},
+{
+"DistrictId": 5879,
+"DistrictName": "洛南县"
+},
+{
+"DistrictId": 5880,
+"DistrictName": "丹凤县"
+},
+{
+"DistrictId": 5881,
+"DistrictName": "商南县"
+},
+{
+"DistrictId": 5882,
+"DistrictName": "山阳县"
+},
+{
+"DistrictId": 5883,
+"DistrictName": "镇安县"
+},
+{
+"DistrictId": 5884,
+"DistrictName": "柞水县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 78,
+"ProvinceName": "甘肃省",
+"city": [
+{
+"CityId": 382,
+"CityName": "兰州市",
+"district": [
+{
+"DistrictId": 5885,
+"DistrictName": "城关区"
+},
+{
+"DistrictId": 5886,
+"DistrictName": "七里河区"
+},
+{
+"DistrictId": 5887,
+"DistrictName": "西固区"
+},
+{
+"DistrictId": 5888,
+"DistrictName": "安宁区"
+},
+{
+"DistrictId": 5889,
+"DistrictName": "红古区"
+},
+{
+"DistrictId": 5890,
+"DistrictName": "永登县"
+},
+{
+"DistrictId": 5891,
+"DistrictName": "皋兰县"
+},
+{
+"DistrictId": 5892,
+"DistrictName": "榆中县"
+}
+]
+},
+{
+"CityId": 383,
+"CityName": "嘉峪关市",
+"district": [
+{
+"DistrictId": 5893,
+"DistrictName": "金川区"
+},
+{
+"DistrictId": 5894,
+"DistrictName": "永昌县"
+},
+{
+"DistrictId": 5895,
+"DistrictName": "金昌市"
+}
+]
+},
+{
+"CityId": 384,
+"CityName": "白银市",
+"district": [
+{
+"DistrictId": 5896,
+"DistrictName": "白银区"
+},
+{
+"DistrictId": 5897,
+"DistrictName": "平川区"
+},
+{
+"DistrictId": 5898,
+"DistrictName": "靖远县"
+},
+{
+"DistrictId": 5899,
+"DistrictName": "会宁县"
+},
+{
+"DistrictId": 5900,
+"DistrictName": "景泰县"
+}
+]
+},
+{
+"CityId": 385,
+"CityName": "天水市",
+"district": [
+{
+"DistrictId": 5901,
+"DistrictName": "秦州区"
+},
+{
+"DistrictId": 5902,
+"DistrictName": "麦积区"
+},
+{
+"DistrictId": 5903,
+"DistrictName": "清水县"
+},
+{
+"DistrictId": 5904,
+"DistrictName": "秦安县"
+},
+{
+"DistrictId": 5905,
+"DistrictName": "甘谷县"
+},
+{
+"DistrictId": 5906,
+"DistrictName": "武山县"
+},
+{
+"DistrictId": 5907,
+"DistrictName": "张家川回族自治县"
+}
+]
+},
+{
+"CityId": 386,
+"CityName": "武威市",
+"district": [
+{
+"DistrictId": 5908,
+"DistrictName": "凉州区"
+},
+{
+"DistrictId": 5909,
+"DistrictName": "民勤县"
+},
+{
+"DistrictId": 5910,
+"DistrictName": "古浪县"
+},
+{
+"DistrictId": 5911,
+"DistrictName": "天祝藏族自治县"
+}
+]
+},
+{
+"CityId": 387,
+"CityName": "张掖市",
+"district": [
+{
+"DistrictId": 5912,
+"DistrictName": "甘州区"
+},
+{
+"DistrictId": 5913,
+"DistrictName": "肃南裕固族自治县"
+},
+{
+"DistrictId": 5914,
+"DistrictName": "民乐县"
+},
+{
+"DistrictId": 5915,
+"DistrictName": "临泽县"
+},
+{
+"DistrictId": 5916,
+"DistrictName": "高台县"
+},
+{
+"DistrictId": 5917,
+"DistrictName": "山丹县"
+}
+]
+},
+{
+"CityId": 388,
+"CityName": "平凉市",
+"district": [
+{
+"DistrictId": 5918,
+"DistrictName": "崆峒区"
+},
+{
+"DistrictId": 5919,
+"DistrictName": "泾川县"
+},
+{
+"DistrictId": 5920,
+"DistrictName": "灵台县"
+},
+{
+"DistrictId": 5921,
+"DistrictName": "崇信县"
+},
+{
+"DistrictId": 5922,
+"DistrictName": "华亭县"
+},
+{
+"DistrictId": 5923,
+"DistrictName": "庄浪县"
+},
+{
+"DistrictId": 5924,
+"DistrictName": "静宁县"
+}
+]
+},
+{
+"CityId": 389,
+"CityName": "酒泉市",
+"district": [
+{
+"DistrictId": 5925,
+"DistrictName": "肃州区"
+},
+{
+"DistrictId": 5926,
+"DistrictName": "金塔县"
+},
+{
+"DistrictId": 5927,
+"DistrictName": "瓜州县"
+},
+{
+"DistrictId": 5928,
+"DistrictName": "肃北蒙古族自治县"
+},
+{
+"DistrictId": 5929,
+"DistrictName": "阿克塞哈萨克族自治县"
+},
+{
+"DistrictId": 5930,
+"DistrictName": "玉门市"
+},
+{
+"DistrictId": 5931,
+"DistrictName": "敦煌市"
+}
+]
+},
+{
+"CityId": 390,
+"CityName": "庆阳市",
+"district": [
+{
+"DistrictId": 5932,
+"DistrictName": "西峰区"
+},
+{
+"DistrictId": 5933,
+"DistrictName": "庆城县"
+},
+{
+"DistrictId": 5934,
+"DistrictName": "环县"
+},
+{
+"DistrictId": 5935,
+"DistrictName": "华池县"
+},
+{
+"DistrictId": 5936,
+"DistrictName": "合水县"
+},
+{
+"DistrictId": 5937,
+"DistrictName": "正宁县"
+},
+{
+"DistrictId": 5938,
+"DistrictName": "宁县"
+},
+{
+"DistrictId": 5939,
+"DistrictName": "镇原县"
+}
+]
+},
+{
+"CityId": 391,
+"CityName": "定西市",
+"district": [
+{
+"DistrictId": 5940,
+"DistrictName": "安定区"
+},
+{
+"DistrictId": 5941,
+"DistrictName": "通渭县"
+},
+{
+"DistrictId": 5942,
+"DistrictName": "陇西县"
+},
+{
+"DistrictId": 5943,
+"DistrictName": "渭源县"
+},
+{
+"DistrictId": 5944,
+"DistrictName": "临洮县"
+},
+{
+"DistrictId": 5945,
+"DistrictName": "漳县"
+},
+{
+"DistrictId": 5946,
+"DistrictName": "岷县"
+}
+]
+},
+{
+"CityId": 392,
+"CityName": "陇南市",
+"district": [
+{
+"DistrictId": 5947,
+"DistrictName": "武都区"
+},
+{
+"DistrictId": 5948,
+"DistrictName": "成县"
+},
+{
+"DistrictId": 5949,
+"DistrictName": "文县"
+},
+{
+"DistrictId": 5950,
+"DistrictName": "宕昌县"
+},
+{
+"DistrictId": 5951,
+"DistrictName": "康县"
+},
+{
+"DistrictId": 5952,
+"DistrictName": "西和县"
+},
+{
+"DistrictId": 5953,
+"DistrictName": "礼县"
+},
+{
+"DistrictId": 5954,
+"DistrictName": "徽县"
+},
+{
+"DistrictId": 5955,
+"DistrictName": "两当县"
+}
+]
+},
+{
+"CityId": 393,
+"CityName": "临夏回族自治州",
+"district": [
+{
+"DistrictId": 5956,
+"DistrictName": "临夏市"
+},
+{
+"DistrictId": 5957,
+"DistrictName": "临夏县"
+},
+{
+"DistrictId": 5958,
+"DistrictName": "康乐县"
+},
+{
+"DistrictId": 5959,
+"DistrictName": "永靖县"
+},
+{
+"DistrictId": 5960,
+"DistrictName": "广河县"
+},
+{
+"DistrictId": 5961,
+"DistrictName": "和政县"
+},
+{
+"DistrictId": 5962,
+"DistrictName": "东乡族自治县"
+},
+{
+"DistrictId": 5963,
+"DistrictName": "积石山保安族东乡族撒拉族自治县"
+}
+]
+},
+{
+"CityId": 394,
+"CityName": "甘南藏族自治州",
+"district": [
+{
+"DistrictId": 5964,
+"DistrictName": "合作市"
+},
+{
+"DistrictId": 5965,
+"DistrictName": "临潭县"
+},
+{
+"DistrictId": 5966,
+"DistrictName": "卓尼县"
+},
+{
+"DistrictId": 5967,
+"DistrictName": "舟曲县"
+},
+{
+"DistrictId": 5968,
+"DistrictName": "迭部县"
+},
+{
+"DistrictId": 5969,
+"DistrictName": "玛曲县"
+},
+{
+"DistrictId": 5970,
+"DistrictName": "碌曲县"
+},
+{
+"DistrictId": 5971,
+"DistrictName": "夏河县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 79,
+"ProvinceName": "青海省",
+"city": [
+{
+"CityId": 395,
+"CityName": "西宁市",
+"district": [
+{
+"DistrictId": 5972,
+"DistrictName": "城东区"
+},
+{
+"DistrictId": 5973,
+"DistrictName": "城中区"
+},
+{
+"DistrictId": 5974,
+"DistrictName": "城西区"
+},
+{
+"DistrictId": 5975,
+"DistrictName": "城北区"
+},
+{
+"DistrictId": 5976,
+"DistrictName": "大通回族土族自治县"
+},
+{
+"DistrictId": 5977,
+"DistrictName": "湟中县"
+},
+{
+"DistrictId": 5978,
+"DistrictName": "湟源县"
+}
+]
+},
+{
+"CityId": 396,
+"CityName": "海东地区",
+"district": [
+{
+"DistrictId": 5979,
+"DistrictName": "平安县"
+},
+{
+"DistrictId": 5980,
+"DistrictName": "民和回族土族自治县"
+},
+{
+"DistrictId": 5981,
+"DistrictName": "乐都县"
+},
+{
+"DistrictId": 5982,
+"DistrictName": "互助土族自治县"
+},
+{
+"DistrictId": 5983,
+"DistrictName": "化隆回族自治县"
+},
+{
+"DistrictId": 5984,
+"DistrictName": "循化撒拉族自治县"
+}
+]
+},
+{
+"CityId": 397,
+"CityName": "海北藏族自治州",
+"district": [
+{
+"DistrictId": 5985,
+"DistrictName": "门源回族自治县"
+},
+{
+"DistrictId": 5986,
+"DistrictName": "祁连县"
+},
+{
+"DistrictId": 5987,
+"DistrictName": "海晏县"
+},
+{
+"DistrictId": 5988,
+"DistrictName": "刚察县"
+}
+]
+},
+{
+"CityId": 398,
+"CityName": "黄南藏族自治州",
+"district": [
+{
+"DistrictId": 5989,
+"DistrictName": "同仁县"
+},
+{
+"DistrictId": 5990,
+"DistrictName": "尖扎县"
+},
+{
+"DistrictId": 5991,
+"DistrictName": "泽库县"
+},
+{
+"DistrictId": 5992,
+"DistrictName": "河南蒙古族自治县"
+}
+]
+},
+{
+"CityId": 399,
+"CityName": "海南藏族自治州",
+"district": [
+{
+"DistrictId": 5993,
+"DistrictName": "共和县"
+},
+{
+"DistrictId": 5994,
+"DistrictName": "同德县"
+},
+{
+"DistrictId": 5995,
+"DistrictName": "贵德县"
+},
+{
+"DistrictId": 5996,
+"DistrictName": "兴海县"
+},
+{
+"DistrictId": 5997,
+"DistrictName": "贵南县"
+}
+]
+},
+{
+"CityId": 400,
+"CityName": "果洛藏族自治州",
+"district": [
+{
+"DistrictId": 5998,
+"DistrictName": "玛沁县"
+},
+{
+"DistrictId": 5999,
+"DistrictName": "班玛县"
+},
+{
+"DistrictId": 6000,
+"DistrictName": "甘德县"
+},
+{
+"DistrictId": 6001,
+"DistrictName": "达日县"
+},
+{
+"DistrictId": 6002,
+"DistrictName": "久治县"
+},
+{
+"DistrictId": 6003,
+"DistrictName": "玛多县"
+}
+]
+},
+{
+"CityId": 401,
+"CityName": "玉树藏族自治州",
+"district": [
+{
+"DistrictId": 6004,
+"DistrictName": "玉树县"
+},
+{
+"DistrictId": 6005,
+"DistrictName": "杂多县"
+},
+{
+"DistrictId": 6006,
+"DistrictName": "称多县"
+},
+{
+"DistrictId": 6007,
+"DistrictName": "治多县"
+},
+{
+"DistrictId": 6008,
+"DistrictName": "囊谦县"
+},
+{
+"DistrictId": 6009,
+"DistrictName": "曲麻莱县"
+}
+]
+},
+{
+"CityId": 402,
+"CityName": "海西蒙古族藏族自治州",
+"district": [
+{
+"DistrictId": 6010,
+"DistrictName": "格尔木市"
+},
+{
+"DistrictId": 6011,
+"DistrictName": "德令哈市"
+},
+{
+"DistrictId": 6012,
+"DistrictName": "乌兰县"
+},
+{
+"DistrictId": 6013,
+"DistrictName": "都兰县"
+},
+{
+"DistrictId": 6014,
+"DistrictName": "天峻县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 80,
+"ProvinceName": "宁夏回族自治区",
+"city": [
+{
+"CityId": 403,
+"CityName": "银川市",
+"district": [
+{
+"DistrictId": 6015,
+"DistrictName": "兴庆区"
+},
+{
+"DistrictId": 6016,
+"DistrictName": "西夏区"
+},
+{
+"DistrictId": 6017,
+"DistrictName": "金凤区"
+},
+{
+"DistrictId": 6018,
+"DistrictName": "永宁县"
+},
+{
+"DistrictId": 6019,
+"DistrictName": "贺兰县"
+},
+{
+"DistrictId": 6020,
+"DistrictName": "灵武市"
+}
+]
+},
+{
+"CityId": 404,
+"CityName": "石嘴山市",
+"district": [
+{
+"DistrictId": 6021,
+"DistrictName": "大武口区"
+},
+{
+"DistrictId": 6022,
+"DistrictName": "惠农区"
+},
+{
+"DistrictId": 6023,
+"DistrictName": "平罗县"
+}
+]
+},
+{
+"CityId": 405,
+"CityName": "吴忠市",
+"district": [
+{
+"DistrictId": 6024,
+"DistrictName": "利通区"
+},
+{
+"DistrictId": 6025,
+"DistrictName": "盐池县"
+},
+{
+"DistrictId": 6026,
+"DistrictName": "同心县"
+},
+{
+"DistrictId": 6027,
+"DistrictName": "青铜峡市"
+},
+{
+"DistrictId": 6028,
+"DistrictName": "红寺堡区"
+}
+]
+},
+{
+"CityId": 406,
+"CityName": "固原市",
+"district": [
+{
+"DistrictId": 6029,
+"DistrictName": "原州区"
+},
+{
+"DistrictId": 6030,
+"DistrictName": "西吉县"
+},
+{
+"DistrictId": 6031,
+"DistrictName": "隆德县"
+},
+{
+"DistrictId": 6032,
+"DistrictName": "泾源县"
+},
+{
+"DistrictId": 6033,
+"DistrictName": "彭阳县"
+}
+]
+},
+{
+"CityId": 407,
+"CityName": "中卫市",
+"district": [
+{
+"DistrictId": 6034,
+"DistrictName": "沙坡头区"
+},
+{
+"DistrictId": 6035,
+"DistrictName": "中宁县"
+},
+{
+"DistrictId": 6036,
+"DistrictName": "海原县"
+}
+]
+}
+]
+},
+{
+"ProvinceId": 81,
+"ProvinceName": "新疆维吾尔自治区",
+"city": [
+{
+"CityId": 408,
+"CityName": "乌鲁木齐市",
+"district": [
+{
+"DistrictId": 6037,
+"DistrictName": "天山区"
+},
+{
+"DistrictId": 6038,
+"DistrictName": "沙依巴克区"
+},
+{
+"DistrictId": 6039,
+"DistrictName": "新市区"
+},
+{
+"DistrictId": 6040,
+"DistrictName": "水磨沟区"
+},
+{
+"DistrictId": 6041,
+"DistrictName": "头屯河区"
+},
+{
+"DistrictId": 6042,
+"DistrictName": "达坂城区"
+},
+{
+"DistrictId": 6043,
+"DistrictName": "米东区"
+},
+{
+"DistrictId": 6044,
+"DistrictName": "乌鲁木齐县"
+}
+]
+},
+{
+"CityId": 409,
+"CityName": "克拉玛依市",
+"district": [
+{
+"DistrictId": 6045,
+"DistrictName": "独山子区"
+},
+{
+"DistrictId": 6046,
+"DistrictName": "克拉玛依区"
+},
+{
+"DistrictId": 6047,
+"DistrictName": "白碱滩区"
+},
+{
+"DistrictId": 6048,
+"DistrictName": "乌尔禾区"
+}
+]
+},
+{
+"CityId": 410,
+"CityName": "吐鲁番地区",
+"district": [
+{
+"DistrictId": 6049,
+"DistrictName": "吐鲁番市"
+},
+{
+"DistrictId": 6050,
+"DistrictName": "鄯善县"
+},
+{
+"DistrictId": 6051,
+"DistrictName": "托克逊县"
+}
+]
+},
+{
+"CityId": 411,
+"CityName": "哈密地区",
+"district": [
+{
+"DistrictId": 6052,
+"DistrictName": "哈密市"
+},
+{
+"DistrictId": 6053,
+"DistrictName": "巴里坤哈萨克自治县"
+},
+{
+"DistrictId": 6054,
+"DistrictName": "伊吾县"
+}
+]
+},
+{
+"CityId": 412,
+"CityName": "昌吉回族自治州",
+"district": [
+{
+"DistrictId": 6055,
+"DistrictName": "昌吉市"
+},
+{
+"DistrictId": 6056,
+"DistrictName": "阜康市"
+},
+{
+"DistrictId": 6057,
+"DistrictName": "呼图壁县"
+},
+{
+"DistrictId": 6058,
+"DistrictName": "玛纳斯县"
+},
+{
+"DistrictId": 6059,
+"DistrictName": "奇台县"
+},
+{
+"DistrictId": 6060,
+"DistrictName": "吉木萨尔县"
+},
+{
+"DistrictId": 6061,
+"DistrictName": "木垒哈萨克自治县"
+}
+]
+},
+{
+"CityId": 413,
+"CityName": "博尔塔拉蒙古自治州",
+"district": [
+{
+"DistrictId": 6062,
+"DistrictName": "博乐市"
+},
+{
+"DistrictId": 6063,
+"DistrictName": "精河县"
+},
+{
+"DistrictId": 6064,
+"DistrictName": "温泉县"
+}
+]
+},
+{
+"CityId": 414,
+"CityName": "巴音郭楞蒙古自治州",
+"district": [
+{
+"DistrictId": 6065,
+"DistrictName": "库尔勒市"
+},
+{
+"DistrictId": 6066,
+"DistrictName": "轮台县"
+},
+{
+"DistrictId": 6067,
+"DistrictName": "尉犁县"
+},
+{
+"DistrictId": 6068,
+"DistrictName": "若羌县"
+},
+{
+"DistrictId": 6069,
+"DistrictName": "且末县"
+},
+{
+"DistrictId": 6070,
+"DistrictName": "焉耆回族自治县"
+},
+{
+"DistrictId": 6071,
+"DistrictName": "和静县"
+},
+{
+"DistrictId": 6072,
+"DistrictName": "和硕县"
+},
+{
+"DistrictId": 6073,
+"DistrictName": "博湖县"
+}
+]
+},
+{
+"CityId": 415,
+"CityName": "阿克苏地区",
+"district": [
+{
+"DistrictId": 6074,
+"DistrictName": "阿克苏市"
+},
+{
+"DistrictId": 6075,
+"DistrictName": "温宿县"
+},
+{
+"DistrictId": 6076,
+"DistrictName": "库车县"
+},
+{
+"DistrictId": 6077,
+"DistrictName": "沙雅县"
+},
+{
+"DistrictId": 6078,
+"DistrictName": "新和县"
+},
+{
+"DistrictId": 6079,
+"DistrictName": "拜城县"
+},
+{
+"DistrictId": 6080,
+"DistrictName": "乌什县"
+},
+{
+"DistrictId": 6081,
+"DistrictName": "阿瓦提县"
+},
+{
+"DistrictId": 6082,
+"DistrictName": "柯坪县"
+}
+]
+},
+{
+"CityId": 416,
+"CityName": "克孜勒苏柯尔克孜自治州",
+"district": [
+{
+"DistrictId": 6083,
+"DistrictName": "阿图什市"
+},
+{
+"DistrictId": 6084,
+"DistrictName": "阿克陶县"
+},
+{
+"DistrictId": 6085,
+"DistrictName": "阿合奇县"
+},
+{
+"DistrictId": 6086,
+"DistrictName": "乌恰县"
+}
+]
+},
+{
+"CityId": 417,
+"CityName": "喀什地区",
+"district": [
+{
+"DistrictId": 6087,
+"DistrictName": "喀什市"
+},
+{
+"DistrictId": 6088,
+"DistrictName": "疏附县"
+},
+{
+"DistrictId": 6089,
+"DistrictName": "疏勒县"
+},
+{
+"DistrictId": 6090,
+"DistrictName": "英吉沙县"
+},
+{
+"DistrictId": 6091,
+"DistrictName": "泽普县"
+},
+{
+"DistrictId": 6092,
+"DistrictName": "莎车县"
+},
+{
+"DistrictId": 6093,
+"DistrictName": "叶城县"
+},
+{
+"DistrictId": 6094,
+"DistrictName": "麦盖提县"
+},
+{
+"DistrictId": 6095,
+"DistrictName": "岳普湖县"
+},
+{
+"DistrictId": 6096,
+"DistrictName": "伽师县"
+},
+{
+"DistrictId": 6097,
+"DistrictName": "巴楚县"
+},
+{
+"DistrictId": 6098,
+"DistrictName": "塔什库尔干塔吉克自治县"
+}
+]
+},
+{
+"CityId": 418,
+"CityName": "和田地区",
+"district": [
+{
+"DistrictId": 6099,
+"DistrictName": "和田市"
+},
+{
+"DistrictId": 6100,
+"DistrictName": "和田县"
+},
+{
+"DistrictId": 6101,
+"DistrictName": "墨玉县"
+},
+{
+"DistrictId": 6102,
+"DistrictName": "皮山县"
+},
+{
+"DistrictId": 6103,
+"DistrictName": "洛浦县"
+},
+{
+"DistrictId": 6104,
+"DistrictName": "策勒县"
+},
+{
+"DistrictId": 6105,
+"DistrictName": "于田县"
+},
+{
+"DistrictId": 6106,
+"DistrictName": "民丰县"
+}
+]
+},
+{
+"CityId": 419,
+"CityName": "伊犁哈萨克自治州",
+"district": [
+{
+"DistrictId": 6107,
+"DistrictName": "伊宁市"
+},
+{
+"DistrictId": 6108,
+"DistrictName": "奎屯市"
+},
+{
+"DistrictId": 6109,
+"DistrictName": "伊宁县"
+},
+{
+"DistrictId": 6110,
+"DistrictName": "察布查尔锡伯自治县"
+},
+{
+"DistrictId": 6111,
+"DistrictName": "霍城县"
+},
+{
+"DistrictId": 6112,
+"DistrictName": "巩留县"
+},
+{
+"DistrictId": 6113,
+"DistrictName": "新源县"
+},
+{
+"DistrictId": 6114,
+"DistrictName": "昭苏县"
+},
+{
+"DistrictId": 6115,
+"DistrictName": "特克斯县"
+},
+{
+"DistrictId": 6116,
+"DistrictName": "尼勒克县"
+}
+]
+},
+{
+"CityId": 420,
+"CityName": "塔城地区",
+"district": [
+{
+"DistrictId": 6117,
+"DistrictName": "塔城市"
+},
+{
+"DistrictId": 6118,
+"DistrictName": "乌苏市"
+},
+{
+"DistrictId": 6119,
+"DistrictName": "额敏县"
+},
+{
+"DistrictId": 6120,
+"DistrictName": "沙湾县"
+},
+{
+"DistrictId": 6121,
+"DistrictName": "托里县"
+},
+{
+"DistrictId": 6122,
+"DistrictName": "裕民县"
+},
+{
+"DistrictId": 6123,
+"DistrictName": "和布克赛尔蒙古自治县"
+}
+]
+},
+{
+"CityId": 421,
+"CityName": "阿勒泰地区",
+"district": [
+{
+"DistrictId": 6124,
+"DistrictName": "阿勒泰市"
+},
+{
+"DistrictId": 6125,
+"DistrictName": "布尔津县"
+},
+{
+"DistrictId": 6126,
+"DistrictName": "富蕴县"
+},
+{
+"DistrictId": 6127,
+"DistrictName": "福海县"
+},
+{
+"DistrictId": 6128,
+"DistrictName": "哈巴河县"
+},
+{
+"DistrictId": 6129,
+"DistrictName": "青河县"
+},
+{
+"DistrictId": 6130,
+"DistrictName": "吉木乃县"
+}
+]
+},
+{
+"CityId": 422,
+"CityName": "石河子市",
+"district": []
+},
+{
+"CityId": 423,
+"CityName": "阿拉尔市",
+"district": []
+},
+{
+"CityId": 424,
+"CityName": "图木舒克市",
+"district": []
+},
+{
+"CityId": 425,
+"CityName": "五家渠市",
+"district": []
+}
+]
+},
+{
+"ProvinceId": 82,
+"ProvinceName": "香港特别行政区",
+"city": [
+{
+"CityId": 426,
+"CityName": "香港特别行政区",
+"district": []
+}
+]
+},
+{
+"ProvinceId": 83,
+"ProvinceName": "澳门特别行政区",
+"city": [
+{
+"CityId": 427,
+"CityName": "澳门特别行政区",
+"district": []
+}
+]
+},
+{
+"ProvinceId": 84,
+"ProvinceName": "台湾省",
+"city": [
+{
+"CityId": 428,
+"CityName": "台湾省",
+"district": []
+}
+]
+}
+]
+}
