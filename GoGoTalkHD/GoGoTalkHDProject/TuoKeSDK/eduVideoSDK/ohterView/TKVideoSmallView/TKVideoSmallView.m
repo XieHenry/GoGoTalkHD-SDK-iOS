@@ -16,7 +16,11 @@
 //214*140  214*120 214*20
 //120*112  120*90  120*22
 
-static const CGFloat sVideoSmallNameLabelHeight = 22;
+
+#pragma mark - 隐藏视频上课老师和学生下面的黑条
+//static const CGFloat sVideoSmallNameLabelHeight = 22;
+static const CGFloat sVideoSmallNameLabelHeight = 0;
+
 
 @interface TKVideoSmallView ()<VideolistProtocol,CAAnimationDelegate>
 @property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
@@ -117,7 +121,11 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             [tButton setTitle:[NSString stringWithFormat:@"%@",@(_iGifNumber)] forState:UIControlStateNormal];
             [tButton setTitleColor:RGBCOLOR(240,207,46)forState:UIControlStateNormal];
             tButton.titleLabel.font = TKFont(11);
-
+            
+#pragma mark - 隐藏礼物图标
+            tButton.hidden = YES;
+            
+            
             tButton;
             
         });
