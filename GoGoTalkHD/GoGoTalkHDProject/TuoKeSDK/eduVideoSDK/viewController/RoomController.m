@@ -2047,11 +2047,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
        
         case MessageType_OtherUer:
         {
-            CGSize titlesize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitHeight:28 Font:TEXT_FONT];
-            CGSize tTranslationSize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitHeight:28 Font:TEXT_FONT];
-            
-            
-            tHeight = titlesize.height+tTranslationSize.height;
+            CGSize titlesize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
+            CGSize tTranslationSize = [TKTeacherMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
+
+            tHeight = titlesize.height+tTranslationSize.height+5+5;
             
         }
             break;
@@ -2063,7 +2062,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
             CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-22*Proportion-10*2*Proportion Font:TKFont(15)];
 
-            tHeight = titlesize.height+tTranslationSize.height;
+            tHeight = titlesize.height+tTranslationSize.height + 5;
         }
             break;
         default:
@@ -2071,7 +2070,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     }
     
     
-    return tHeight + 5 + 5;
+    return tHeight + 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
@@ -2103,8 +2102,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         case MessageType_Me:
         {
              TKStudentMessageTableViewCell* tCell = ( TKStudentMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:sTeacherCellIdentifier forIndexPath:indexPath];
-            tCell.iTimeLabel.text = tMessageModel.iTime;
-            tCell.iNickNameLabel.text = tMessageModel.iUserName;
+
+#pragma mark - 注释掉昵称和时间
+//            tCell.iTimeLabel.text = tMessageModel.iTime;
+//            tCell.iNickNameLabel.text = tMessageModel.iUserName;
             
             tCell.iText = tMessageModel.iMessage;
             [tCell resetView];

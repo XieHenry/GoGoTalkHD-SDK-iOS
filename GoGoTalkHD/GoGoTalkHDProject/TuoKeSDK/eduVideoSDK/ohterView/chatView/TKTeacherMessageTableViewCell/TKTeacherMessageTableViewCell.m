@@ -10,6 +10,10 @@
 #import "TKMacro.h"
 #import "TKUtil.h"
 
+@interface TKTeacherMessageTableViewCell ()
+@property (nonatomic, strong) UIImageView *xc_imgView;
+@end
+
 @implementation TKTeacherMessageTableViewCell
 
 
@@ -64,16 +68,42 @@
     
         _iMessageView = ({
             UIView *tView = [[UIView alloc]initWithFrame:CGRectZero];
-            tView.backgroundColor = RGBCOLOR(48, 48, 48);
+//            tView.backgroundColor = RGBCOLOR(48, 48, 48);
+            tView.backgroundColor = [UIColor clearColor];
             tView;
             
         });
         [self.contentView addSubview:_iMessageView];
         
+        _xc_imgView = ({
+            UIImage* img = UIIMAGE_FROM_NAME(@"student_chat_backgroundImage");//原图
+            // 设置端盖的值
+            CGFloat top = 20;
+            CGFloat left = img.size.width * 0.5;
+            CGFloat bottom = 20;
+            CGFloat right = 20;
+            
+            // 设置端盖的值
+            UIEdgeInsets edgeInsets = UIEdgeInsetsMake(top, left, bottom, right);
+            // 设置拉伸的模式
+            UIImageResizingMode mode = UIImageResizingModeStretch;
+            
+            // 拉伸图片
+            UIImage *newImage = [img resizableImageWithCapInsets:edgeInsets resizingMode:mode];
+            
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectZero];
+            
+            imgView.image = newImage;
+            
+            imgView;
+        });
+        [_iMessageView addSubview:_xc_imgView];
+        
         _iMessageLabel = ({
             
             UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            tLabel.textColor = RGBCOLOR(134, 134, 134);
+//            tLabel.textColor = RGBCOLOR(134, 134, 134);
+            tLabel.textColor = [UIColor blackColor];
             tLabel.backgroundColor = [UIColor clearColor];
             tLabel.font = TKFont(15);
             tLabel.numberOfLines = 0;
@@ -91,6 +121,7 @@
             [tLeftButton setImage: LOADIMAGE(@"btn_translation_normal") forState:UIControlStateNormal];
             [tLeftButton setImage: LOADIMAGE(@"btn_translation_pressed") forState:UIControlStateHighlighted];
             [tLeftButton addTarget:self action:@selector(translationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            tLeftButton.hidden = YES;
             tLeftButton;
                 
         });
@@ -105,6 +136,7 @@
             tLabel.backgroundColor = RGBCOLOR(28, 28, 28);
             tLabel.font            = TKFont(15);
             tLabel.numberOfLines = 0;
+            tLabel.hidden = YES;
             tLabel;
             
         });
@@ -132,9 +164,15 @@
     
     CGSize tMessageLabelsize = [TKTeacherMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:CGRectGetWidth(self.contentView.frame)-22*Proportion-10*2*Proportion Font:TKFont(15)];
     
-    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
+//    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
+//    
+//    _iMessageView.frame = CGRectMake(10, 0, tMessageLabelsize.width+22*Proportion+5, tMessageLabelsize.height+5);
     
-    _iMessageView.frame = CGRectMake(10, 0, tMessageLabelsize.width+22*Proportion+5, tMessageLabelsize.height+5);
+    _iMessageLabel.frame = CGRectMake(5, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
+    
+    _iMessageView.frame = CGRectMake(10, 0, _iMessageLabel.width+5, tMessageLabelsize.height+5);
+    _xc_imgView.frame = CGRectMake(-10, 0, _iMessageView.width+15, _iMessageView.height);
+    
     
     _iTranslationButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-22*Proportion, 0,  22*Proportion,  22*Proportion);
     
