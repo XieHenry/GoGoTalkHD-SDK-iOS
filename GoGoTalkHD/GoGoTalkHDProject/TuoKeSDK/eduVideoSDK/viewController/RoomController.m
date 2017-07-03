@@ -2062,7 +2062,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
             
             CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
             CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tableView.width-50 Font:TEXT_FONT];
-            tHeight = titlesize.height+tTranslationSize.height + 10;
+            tHeight = titlesize.height+tTranslationSize.height;
         }
             break;
         default:
@@ -2070,22 +2070,24 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     }
     
     
-    return tHeight + 5;
+    return tHeight + 5 + 10;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
  
     TKChatMessageModel *tMessageModel = [_iMessageList objectAtIndex:indexPath.row];
-    TKMessageTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:sMessageCellIdentifier forIndexPath:indexPath];
+//    TKMessageTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:sMessageCellIdentifier forIndexPath:indexPath];
 
     __weak typeof(self)weakSelf = self;
     
     switch (tMessageModel.iMessageType) {
         case MessageType_Message:
         {
+            TKMessageTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:sMessageCellIdentifier forIndexPath:indexPath];
             tCell.selectionStyle = UITableViewCellSelectionStyleNone;
             tCell.text = tMessageModel.iMessage;
             [tCell resetView];
+            return tCell;
         }
             break;
         case MessageType_OtherUer:
@@ -2130,7 +2132,7 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     }
     
    
-    return tCell;
+    return nil;
     
     
     
