@@ -60,7 +60,7 @@ DEPENDENCIES:
   - Bugly
   - FLAnimatedImage
   - FMDB
-  - FSCalendar
+  - FSCalendar (= 2.7.8)
   - IQKeyboardManager
   - JPush
   - Masonry
@@ -81,7 +81,7 @@ SPEC CHECKSUMS:
   Bugly: da3c02408c14838d498429320545a8e439392978
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  FSCalendar: 09369a2bf554ba71cd8e8cfb627e2df22a2c2af4
+  FSCalendar: '09369a2bf554ba71cd8e8cfb627e2df22a2c2af4'
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JCore: dff3c50e9a7522a508cd9096ca79165968e1aed3
   JPush: dd0b776998aa705a6242b947bf72e5a640387cfe
@@ -96,6 +96,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 6e751993f864297773415a7f48fb89f3d703ba23
+PODFILE CHECKSUM: b426033e0934746f18532b7d0497b47bdfaaed49
 
 COCOAPODS: 1.2.1
