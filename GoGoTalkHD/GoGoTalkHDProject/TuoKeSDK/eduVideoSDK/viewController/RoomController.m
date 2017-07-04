@@ -2739,12 +2739,18 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 -(BOOL)shouldAutorotate{
     return NO;
 }
+
+//修改旋转方向----在这个界面旋转方向没效果，只要在home页才有
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeLeft;
+    return UIInterfaceOrientationMaskLandscape;
+//    return UIInterfaceOrientationMaskLandscapeLeft;
 }
+
 -(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-    return UIInterfaceOrientationLandscapeLeft;
+//    return UIInterfaceOrientationLandscapeLeft;
+    return UIInterfaceOrientationLandscapeRight;
 }
+
 #pragma mark 状态栏
 //设置样式  没效果
 - (UIStatusBarStyle)preferredStatusBarStyle {
