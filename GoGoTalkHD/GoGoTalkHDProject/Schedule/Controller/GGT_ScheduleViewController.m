@@ -27,7 +27,7 @@
 
 static NSString * const CalendarCellID = @"cell";
 
-@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate>
+@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate,TKEduEnterClassRoomDelegate>
 {
     void * _KVOContext;
 }

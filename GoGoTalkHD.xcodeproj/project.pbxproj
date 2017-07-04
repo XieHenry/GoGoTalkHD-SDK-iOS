@@ -2361,7 +2361,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -2394,7 +2397,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
