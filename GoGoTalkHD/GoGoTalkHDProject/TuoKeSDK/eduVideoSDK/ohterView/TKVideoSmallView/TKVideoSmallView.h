@@ -62,11 +62,11 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)();
 /** *  授权等点击事件 */
 @property(strong,nonatomic)UIButton *_Nonnull iFunctionButton;
 
-@property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
+@property(nonatomic,retain)TKVideoFunctionView * _Nonnull iFunctionView;
 /** *  画笔 */
 @property (nonatomic, strong) UIImageView * _Nullable iDrawImageView;
 /** *  画笔 */
-@property (nonatomic, strong) UIButton *xc_drawButton;
+@property (nonatomic, strong) UIButton * _Nonnull xc_drawButton;
 
 
 
