@@ -100,7 +100,7 @@ static const CGFloat sRightViewChatBarHeight    = 44;
 
 static const CGFloat sSendButtonWidth           = 64;
 
-static CGFloat const kBottomDrawHeight = 68;       // 画笔高度
+static CGFloat const kBottomDrawHeight = 0;       // 画笔高度   //取消底部画笔 放到学生视频头像上面
 
 
 
@@ -221,9 +221,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 @property (nonatomic, assign) NSInteger iGiftCount;
 
 // 底部画笔
-@property (nonatomic) UIView *xc_bottomToolBarParentView;
-@property (nonatomic) UIButton *xc_cleanButton;
-@property (nonatomic) UIButton *xc_drawButton;
+//@property (nonatomic) UIView *xc_bottomToolBarParentView;
+//@property (nonatomic) UIButton *xc_cleanButton;
+//@property (nonatomic) UIButton *xc_drawButton;
 
 
 @end
@@ -313,15 +313,13 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     _iOurVideoView.iFunctionView.hidden = YES;
     
     
+    
     @weakify(self);
-    [[_xc_drawButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        _xc_drawButton.selected = !_xc_drawButton.selected;
+    [[_iOurVideoView.xc_drawButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        _iOurVideoView.xc_drawButton.selected = !_iOurVideoView.xc_drawButton.selected;
         @strongify(self);
-        NSLog(@"hello world");
-        
-        
         if (_iOurVideoView.iFunctionView.iDelegate && [_iOurVideoView.iFunctionView.iDelegate respondsToSelector:@selector(videoSmallbutton1:aVideoRole:)]) {
-            [(id<VideolistProtocol>)_iOurVideoView.iFunctionView.iDelegate videoSmallbutton1:_xc_drawButton aVideoRole:EVideoRoleOur];
+            [(id<VideolistProtocol>)_iOurVideoView.iFunctionView.iDelegate videoSmallbutton1:_iOurVideoView.xc_drawButton aVideoRole:EVideoRoleOur];
         }
         
     }];
@@ -1075,67 +1073,67 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     [_iScroll addSubview:_iTKEduWhiteBoardView];
 
 #pragma mark -  底部xc_bottomParentView
-    [self init_mas_bottomToolBarParentView];
+//    [self init_mas_bottomToolBarParentView];
 
 }
 
 /// 底部xc_bottomParentView
-- (void)init_mas_bottomToolBarParentView
-{
-    // 父view
-    self.xc_bottomToolBarParentView = ({
-        UIView *xc_bottomToolBarParentView = [UIView new];
-        xc_bottomToolBarParentView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-        xc_bottomToolBarParentView;
-    });
-    [_iScroll addSubview:self.xc_bottomToolBarParentView];
-    
-    self.xc_bottomToolBarParentView.frame = CGRectMake(0, _iTKEduWhiteBoardView.bottom, _iTKEduWhiteBoardView.width, (CGRectGetHeight(_iRightView.frame))*Proportion - _iTKEduWhiteBoardView.height);
-    
-    // 分割线
-    UIView *xc_lineView = [UIView new];
-    xc_lineView.backgroundColor = [UIColor whiteColor];
-    [self.xc_bottomToolBarParentView addSubview:xc_lineView];
-    [xc_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.xc_bottomToolBarParentView);
-        make.width.equalTo(@(1));
-        make.center.equalTo(self.xc_bottomToolBarParentView);
-    }];
-    
-    // 子xc_cleanButton
-    self.xc_cleanButton = ({
-        UIButton *xc_cleanButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei") forState:UIControlStateNormal];
-        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei_copy") forState:UIControlStateHighlighted];
-        [xc_cleanButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
-        [xc_cleanButton sizeToFit];
-        xc_cleanButton;
-    });
-    [self.xc_bottomToolBarParentView addSubview:self.xc_cleanButton];
-    
-    [self.xc_cleanButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(1.0/2.0);
-        make.centerY.equalTo(self.xc_bottomToolBarParentView);
-    }];
-    
-    // 子xc_drawButton
-    self.xc_drawButton = ({
-        UIButton *xc_drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei") forState:UIControlStateNormal];
-        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei_copy") forState:UIControlStateSelected];
-        [xc_drawButton setFrame:CGRectMake(0, 0, self.xc_bottomToolBarParentView.width/2.0, self.xc_bottomToolBarParentView.height)];
-        [xc_drawButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
-        [xc_drawButton sizeToFit];
-        xc_drawButton;
-    });
-    [self.xc_bottomToolBarParentView addSubview:self.xc_drawButton];
-    
-    [self.xc_drawButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(3.0/2.0);
-        make.centerY.equalTo(self.xc_bottomToolBarParentView);
-    }];
-    
-}
+//- (void)init_mas_bottomToolBarParentView
+//{
+//    // 父view
+//    self.xc_bottomToolBarParentView = ({
+//        UIView *xc_bottomToolBarParentView = [UIView new];
+//        xc_bottomToolBarParentView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+//        xc_bottomToolBarParentView;
+//    });
+//    [_iScroll addSubview:self.xc_bottomToolBarParentView];
+//    
+//    self.xc_bottomToolBarParentView.frame = CGRectMake(0, _iTKEduWhiteBoardView.bottom, _iTKEduWhiteBoardView.width, (CGRectGetHeight(_iRightView.frame))*Proportion - _iTKEduWhiteBoardView.height);
+//    
+//    // 分割线
+//    UIView *xc_lineView = [UIView new];
+//    xc_lineView.backgroundColor = [UIColor whiteColor];
+//    [self.xc_bottomToolBarParentView addSubview:xc_lineView];
+//    [xc_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.bottom.equalTo(self.xc_bottomToolBarParentView);
+//        make.width.equalTo(@(1));
+//        make.center.equalTo(self.xc_bottomToolBarParentView);
+//    }];
+//    
+//    // 子xc_cleanButton
+//    self.xc_cleanButton = ({
+//        UIButton *xc_cleanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei") forState:UIControlStateNormal];
+//        [xc_cleanButton setImage:UIIMAGE_FROM_NAME(@"cexiao_wei_copy") forState:UIControlStateHighlighted];
+//        [xc_cleanButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
+//        [xc_cleanButton sizeToFit];
+//        xc_cleanButton;
+//    });
+//    [self.xc_bottomToolBarParentView addSubview:self.xc_cleanButton];
+//    
+//    [self.xc_cleanButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(1.0/2.0);
+//        make.centerY.equalTo(self.xc_bottomToolBarParentView);
+//    }];
+//    
+//    // 子xc_drawButton
+//    self.xc_drawButton = ({
+//        UIButton *xc_drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei") forState:UIControlStateNormal];
+//        [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei_copy") forState:UIControlStateSelected];
+//        [xc_drawButton setFrame:CGRectMake(0, 0, self.xc_bottomToolBarParentView.width/2.0, self.xc_bottomToolBarParentView.height)];
+//        [xc_drawButton setBackgroundColor:UICOLOR_FROM_HEX(ColorF2F2F2)];
+//        [xc_drawButton sizeToFit];
+//        xc_drawButton;
+//    });
+//    [self.xc_bottomToolBarParentView addSubview:self.xc_drawButton];
+//    
+//    [self.xc_drawButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.xc_bottomToolBarParentView.mas_centerX).multipliedBy(3.0/2.0);
+//        make.centerY.equalTo(self.xc_bottomToolBarParentView);
+//    }];
+//    
+//}
 
 
 -(void)initBottomView{
