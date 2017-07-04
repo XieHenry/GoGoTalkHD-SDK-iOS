@@ -21,7 +21,7 @@ inhibit_all_warnings!   #可能产生其他问题
     
     pod 'Bugly'
     pod 'IQKeyboardManager'
-    pod 'FSCalendar'
+    pod 'FSCalendar', '2.7.8'
     pod 'ZFPlayer'
     pod 'FLAnimatedImage'
     
