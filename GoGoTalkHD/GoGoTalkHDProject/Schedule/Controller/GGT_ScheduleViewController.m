@@ -630,28 +630,6 @@ static NSString * const CalendarCellID = @"cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    GGT_ScheduleStudyingCell *cell1 = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_CourseCellModel *model = cell1.xc_cellModel;
-    NSDictionary *tDict = @{
-                            @"serial"   :@"755158726",
-                            @"host"    :model.host,
-                            // @"userid"  : @"1111",
-                            @"port"    :model.port,
-                            @"nickname":model.nickname,    // 学生密码567
-                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                            };
-    TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
-    shareRoom.xc_roomPassword = model.stuPwd;
-    shareRoom.xc_roomName = model.LessonName;
-    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-
-    // 记录日志
-    [XCLogManager xc_redirectNSlogToDocumentFolder];
-
-    return;
-    
-    
     GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus) {
