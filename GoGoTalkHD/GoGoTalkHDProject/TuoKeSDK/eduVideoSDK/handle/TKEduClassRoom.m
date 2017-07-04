@@ -316,7 +316,8 @@ TKNavigationController* _iEduNavigationController = nil;
 
         }
         
-        if (ret == CONNECT_RESULE_PasswordError || ret == CONNECT_RESULE_NeedPassword)
+//        if (ret == CONNECT_RESULE_PasswordError || ret == CONNECT_RESULE_NeedPassword)
+        if (ret == CONNECT_RESULE_NeedPassword) // 不能添加密码错误的判断  要不会死循环
         {
 #pragma mark - 需要延迟操作 否则会崩溃
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

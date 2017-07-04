@@ -17,9 +17,10 @@
 
 #import "GGT_PreviewCourseAlertView.h"
 
-#import "GGT_ClassRoomViewController.h"
+#import "TKEduClassRoom.h"      // 测试拓课
+#import "TKMacro.h"
 
-@interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate>
+@interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
 @property (nonatomic, strong) GGT_HomeLeftView *xc_leftView;
 @property (nonatomic, strong) GGT_ScheduleViewController *scheduleVC;
 @property (nonatomic, strong) GGT_MineSplitViewController  *mineVc;
@@ -163,11 +164,22 @@
         @strongify(self);
         NSLog(@"---进入教室---消失了---%@", self);
         
-        // 进入教室
-        GGT_ClassRoomViewController *vc = [GGT_ClassRoomViewController new];
-        vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        vc.xc_model = model;
-        [self presentViewController:vc animated:YES completion:nil];
+        NSDictionary *tDict = @{
+                                @"serial"   :model.serial,
+                                @"host"    :model.host,
+                                // @"userid"  : @"1111",
+                                @"port"    :model.port,
+                                @"nickname":model.nickname,    // 学生密码567
+                                @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                                };
+        TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+        shareRoom.xc_roomPassword = model.stuPwd;
+        shareRoom.xc_roomName = model.LessonName;
+        [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+        
+        // 记录log日志
+        [XCLogManager xc_redirectNSlogToDocumentFolder];
+        
     }];
 }
 
@@ -282,6 +294,38 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPopoverCourseAlterViewNotification object:nil];
+}
+
+#pragma mark TKEduEnterClassRoomDelegate
+//error.code  Description:error.description
+- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
+    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
+        
+    } else {
+        TKLog(@"-----onEnterRoomFailed");
+        [XCLogManager xc_readDataFromeFile];
+    }
+}
+- (void) onKitout:(EKickOutReason)reason{
+    TKLog(@"-----onKitout");
+}
+- (void) joinRoomComplete{
+    TKLog(@"-----joinRoomComplete");
+    [XCLogManager xc_readDataFromeFile];
+}
+- (void) leftRoomComplete{
+    TKLog(@"-----leftRoomComplete");
+    [XCLogManager xc_deleteLogData];
+}
+- (void) onClassBegin{
+    TKLog(@"-----onClassBegin");
+}
+- (void) onClassDismiss{
+    NSLog(@"-----onClassDismiss");
+    [TKEduClassRoom leftRoom];
+}
+- (void) onCameraDidOpenError{
+    TKLog(@"-----onCameraDidOpenError");
 }
 
 

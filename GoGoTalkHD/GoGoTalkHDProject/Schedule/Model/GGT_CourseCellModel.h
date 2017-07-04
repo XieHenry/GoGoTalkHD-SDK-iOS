@@ -32,6 +32,15 @@
 @property (nonatomic, assign) NSInteger IsComment;
 @property (nonatomic, assign) NSInteger IsStuComment;
 
+// 直播上课的信息
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, strong) NSString *port;
+@property (nonatomic, strong) NSString *serial;
+@property (nonatomic, strong) NSString *stuPwd;
+@property (nonatomic, strong) NSString *userid;
+@property (nonatomic, strong) NSString *userrole;
+
 @end
 
 /*
@@ -52,5 +61,14 @@
  StuScore = 0;      老师对学生的评价
  SturememberStar = 3;
  TotalStar = 5;     老师对学生评价的总星星个数
+ 
+ 
+ host = "global.talk-cloud.com";
+ nickname = student;
+ port = 443;
+ serial = 495009715;
+ stuPwd = 2222;
+ userid = 413508;
+ userrole = 2;
 
  */

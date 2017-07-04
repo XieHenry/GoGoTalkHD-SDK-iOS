@@ -51,6 +51,7 @@
 #import "UILabel+XCHelper.h"
 #import "UITableView+XCPlaceholderView.h"
 #import "NSTimer+BlockSupport.h"
+#import "XCLogManager.h"
 
 
 

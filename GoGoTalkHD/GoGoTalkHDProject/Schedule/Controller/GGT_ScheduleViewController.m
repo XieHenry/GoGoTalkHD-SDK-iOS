@@ -15,7 +15,6 @@
 
 #import "GGT_PlaceHolderView.h"
 
-#import "GGT_ClassRoomViewController.h"
 #import "GGT_PreviewDemoCourseVC.h"
 //#import "GGT_PreviewCoursewareVC.h"
 
@@ -24,10 +23,11 @@
 #import "MZTimerLabel.h"
 
 #import "TKEduClassRoom.h"      // 测试拓课
+#import "TKMacro.h"
 
 static NSString * const CalendarCellID = @"cell";
 
-@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate>
+@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate, TKEduEnterClassRoomDelegate>
 {
     void * _KVOContext;
 }
@@ -632,26 +632,27 @@ static NSString * const CalendarCellID = @"cell";
 {
     
     GGT_ScheduleStudyingCell *cell1 = [tableView cellForRowAtIndexPath:indexPath];
+    GGT_CourseCellModel *model = cell1.xc_cellModel;
     NSDictionary *tDict = @{
-                            
                             @"serial"   :@"755158726",
-                            //@"host"    :@"192.168.0.66",
-                            @"host"    :@"global.talk-cloud.com",
+                            @"host"    :model.host,
                             // @"userid"  : @"1111",
-                            @"port"    :@"443",
-                            @"nickname":@"test",    // 学生密码567
-                            @"userrole":@(2)    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            @"port"    :model.port,
+                            @"nickname":model.nickname,    // 学生密码567
+                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                             };
     TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
-    shareRoom.xc_roomPassword = @"567";
-    shareRoom.xc_roomName = cell1.xc_cellModel.LessonName;
+    shareRoom.xc_roomPassword = model.stuPwd;
+    shareRoom.xc_roomName = model.LessonName;
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-    
+
+    // 记录日志
+    [XCLogManager xc_redirectNSlogToDocumentFolder];
+
     return;
     
+    
     GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus) {
         // 增加判断  （0：已经预约 1：即将上课 2：正在上课 3：已经结束 待评价 4：已经结束 已评价 5：已经结束 缺席）
@@ -665,7 +666,6 @@ static NSString * const CalendarCellID = @"cell";
     }
     
 }
-
 
 - (void)getLessonWithCourseModel:(GGT_CourseCellModel *)courseModel tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
@@ -777,10 +777,23 @@ static NSString * const CalendarCellID = @"cell";
                 // 进pdf界面
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
-                GGT_ClassRoomViewController *vc = [GGT_ClassRoomViewController new];
-                vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                vc.xc_model = model;
-                [self presentViewController:vc animated:YES completion:nil];
+                
+                NSDictionary *tDict = @{
+                                        @"serial"   :model.serial,
+                                        @"host"    :model.host,
+                                        // @"userid"  : @"1111",
+                                        @"port"    :model.port,
+                                        @"nickname":model.nickname,    // 学生密码567
+                                        @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                                        };
+                TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+                shareRoom.xc_roomPassword = model.stuPwd;
+                shareRoom.xc_roomName = model.LessonName;
+                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+
+                // 记录日志
+                [XCLogManager xc_redirectNSlogToDocumentFolder];
+
             }
             
         }
@@ -793,10 +806,23 @@ static NSString * const CalendarCellID = @"cell";
                 // 进pdf界面
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
-                GGT_ClassRoomViewController *vc = [GGT_ClassRoomViewController new];
-                vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                vc.xc_model = model;
-                [self presentViewController:vc animated:YES completion:nil];
+                
+                NSDictionary *tDict = @{
+                                        @"serial"   :model.serial,
+                                        @"host"    :model.host,
+                                        // @"userid"  : @"1111",
+                                        @"port"    :model.port,
+                                        @"nickname":model.nickname,    // 学生密码567
+                                        @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                                        };
+                TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+                shareRoom.xc_roomPassword = model.stuPwd;
+                shareRoom.xc_roomName = model.LessonName;
+                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+
+                // 记录日志
+                [XCLogManager xc_redirectNSlogToDocumentFolder];
+                
             }
         }
             break;
@@ -1073,6 +1099,39 @@ static NSString * const CalendarCellID = @"cell";
 //弹框消失时调用的方法
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
     NSLog(@"弹框已经消失");
+}
+
+
+#pragma mark TKEduEnterClassRoomDelegate
+//error.code  Description:error.description
+- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
+    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
+        
+    } else {
+        TKLog(@"-----onEnterRoomFailed");
+        [XCLogManager xc_readDataFromeFile];
+    }
+}
+- (void) onKitout:(EKickOutReason)reason{
+    TKLog(@"-----onKitout");
+}
+- (void) joinRoomComplete{
+    TKLog(@"-----joinRoomComplete");
+    [XCLogManager xc_readDataFromeFile];
+}
+- (void) leftRoomComplete{
+    TKLog(@"-----leftRoomComplete");
+    [XCLogManager xc_deleteLogData];
+}
+- (void) onClassBegin{
+    TKLog(@"-----onClassBegin");
+}
+- (void) onClassDismiss{
+    NSLog(@"-----onClassDismiss");
+    [TKEduClassRoom leftRoom];
+}
+- (void) onCameraDidOpenError{
+    TKLog(@"-----onCameraDidOpenError");
 }
 
 

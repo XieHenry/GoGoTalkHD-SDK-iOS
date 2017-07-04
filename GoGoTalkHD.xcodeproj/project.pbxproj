@@ -80,7 +80,6 @@
 		D627DCF21ED4196E00076FBD /* XCNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF11ED4196E00076FBD /* XCNormalHeader.m */; };
 		D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF41ED41AD000076FBD /* XCNormalFooter.m */; };
 		D627DCF91ED432C800076FBD /* GGT_CalendarCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */; };
-		D6353E0E1EE8DED8004E1288 /* GGT_ClassRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E0D1EE8DED8004E1288 /* GGT_ClassRoomViewController.m */; };
 		D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */; };
 		D6353E171EE8E250004E1288 /* GGT_PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E161EE8E250004E1288 /* GGT_PopoverCell.m */; };
 		D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E211EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m */; };
@@ -198,7 +197,6 @@
 		D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */; };
 		D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */; };
 		D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */; };
-		D69427451EC955E90048FD2C /* GGT_PreviewCoursewareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427441EC955E90048FD2C /* GGT_PreviewCoursewareVC.m */; };
 		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
@@ -234,6 +232,7 @@
 		D6E0A5901EC2DBB3006A003D /* GGT_LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A5881EC2DBB3006A003D /* GGT_LoginView.m */; };
 		D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A58A1EC2DBB3006A003D /* GGT_RegisterView.m */; };
 		D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A59B1EC2FAC6006A003D /* BaseService.m */; };
+		D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E868F81F0B6F2900B48A5E /* XCLogManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,8 +372,6 @@
 		D627DCF41ED41AD000076FBD /* XCNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNormalFooter.m; sourceTree = "<group>"; };
 		D627DCF71ED432C800076FBD /* GGT_CalendarCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CalendarCellModel.h; sourceTree = "<group>"; };
 		D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CalendarCellModel.m; sourceTree = "<group>"; };
-		D6353E0C1EE8DED8004E1288 /* GGT_ClassRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ClassRoomViewController.h; sourceTree = "<group>"; };
-		D6353E0D1EE8DED8004E1288 /* GGT_ClassRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ClassRoomViewController.m; sourceTree = "<group>"; };
 		D6353E121EE8E20A004E1288 /* GGT_PopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverController.h; sourceTree = "<group>"; };
 		D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PopoverController.m; sourceTree = "<group>"; };
 		D6353E151EE8E250004E1288 /* GGT_PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverCell.h; sourceTree = "<group>"; };
@@ -612,8 +609,6 @@
 		D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeLeftView.m; sourceTree = "<group>"; };
 		D69427361EC94CD30048FD2C /* GGT_HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeViewController.h; sourceTree = "<group>"; };
 		D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeViewController.m; sourceTree = "<group>"; };
-		D69427431EC955E90048FD2C /* GGT_PreviewCoursewareVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCoursewareVC.h; sourceTree = "<group>"; };
-		D69427441EC955E90048FD2C /* GGT_PreviewCoursewareVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCoursewareVC.m; sourceTree = "<group>"; };
 		D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCourseAlertView.h; sourceTree = "<group>"; };
 		D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCourseAlertView.m; sourceTree = "<group>"; };
 		D6AB90CC1ECEBC22009D8758 /* GGT_PlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PlaceHolderView.h; sourceTree = "<group>"; };
@@ -689,6 +684,8 @@
 		D6E0A59A1EC2FAC6006A003D /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
 		D6E0A59B1EC2FAC6006A003D /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
 		D6E0A59C1EC2FAC6006A003D /* GGT_Request_URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_Request_URL.h; sourceTree = "<group>"; };
+		D6E868F71F0B6F2900B48A5E /* XCLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCLogManager.h; sourceTree = "<group>"; };
+		D6E868F81F0B6F2900B48A5E /* XCLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLogManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1000,8 +997,6 @@
 		D66FCBEB1EEA424F00792A6C /* 正课详情-vc */ = {
 			isa = PBXGroup;
 			children = (
-				D69427431EC955E90048FD2C /* GGT_PreviewCoursewareVC.h */,
-				D69427441EC955E90048FD2C /* GGT_PreviewCoursewareVC.m */,
 				D64096831EEFE39E0038A0CC /* GGT_PreCoursewareVC.h */,
 				D64096841EEFE39E0038A0CC /* GGT_PreCoursewareVC.m */,
 			);
@@ -1015,15 +1010,6 @@
 				D603AAEC1ECD3AE7003ECC20 /* GGT_EvaluationPopViewController.m */,
 			);
 			name = "课程列表-弹框-vc";
-			sourceTree = "<group>";
-		};
-		D66FCBED1EEA427900792A6C /* 正在上课-vc */ = {
-			isa = PBXGroup;
-			children = (
-				D6353E0C1EE8DED8004E1288 /* GGT_ClassRoomViewController.h */,
-				D6353E0D1EE8DED8004E1288 /* GGT_ClassRoomViewController.m */,
-			);
-			name = "正在上课-vc";
 			sourceTree = "<group>";
 		};
 		D66FCBEE1EEA428400792A6C /* 课程详情弹框-vc */ = {
@@ -1052,7 +1038,6 @@
 				D66FCBEB1EEA424F00792A6C /* 正课详情-vc */,
 				D66FCBE91EEA423500792A6C /* 体验课详情-vc */,
 				D66FCBEC1EEA426900792A6C /* 课程列表-弹框-vc */,
-				D66FCBED1EEA427900792A6C /* 正在上课-vc */,
 				D66FCBEE1EEA428400792A6C /* 课程详情弹框-vc */,
 			);
 			path = Controller;
@@ -1718,6 +1703,8 @@
 				D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */,
 				D6C150F01EE7A0C50038841B /* UICollectionView+XCPlaceholderView.h */,
 				D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */,
+				D6E868F71F0B6F2900B48A5E /* XCLogManager.h */,
+				D6E868F81F0B6F2900B48A5E /* XCLogManager.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2086,7 +2073,6 @@
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,
 				D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */,
 				D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */,
-				D69427451EC955E90048FD2C /* GGT_PreviewCoursewareVC.m in Sources */,
 				5BD5165A1ECAD32E0015D694 /* GGT_MineClassTableViewCell.m in Sources */,
 				D68775261F0A07CA008687C2 /* TKVideoFunctionView.m in Sources */,
 				D68775111F0A07CA008687C2 /* TKGrowingTextView.m in Sources */,
@@ -2110,6 +2096,7 @@
 				D687753D1F0A07CA008687C2 /* BITHockeyManager.m in Sources */,
 				D6E0A58B1EC2DBB3006A003D /* GGT_ForgotPasswordViewController.m in Sources */,
 				D68775431F0A07CA008687C2 /* BITUpdateViewController.m in Sources */,
+				D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */,
 				D687755E1F0A07CA008687C2 /* TKMediaDocModel.m in Sources */,
 				D63DA94D1ED595CF00EFA686 /* GGT_CourseCellModel.m in Sources */,
 				5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */,
@@ -2187,7 +2174,6 @@
 				D687751F1F0A07CA008687C2 /* TKNavigationController.m in Sources */,
 				D63DA9491ED5554400EFA686 /* NSDictionary+Log.m in Sources */,
 				D68775441F0A07CA008687C2 /* BITWebTableViewCell.m in Sources */,
-				D6353E0E1EE8DED8004E1288 /* GGT_ClassRoomViewController.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
 				D687752D1F0A07CA008687C2 /* BITAuthenticationViewController.m in Sources */,
 				D687754B1F0A07CA008687C2 /* TKAFSecurityPolicy.m in Sources */,
