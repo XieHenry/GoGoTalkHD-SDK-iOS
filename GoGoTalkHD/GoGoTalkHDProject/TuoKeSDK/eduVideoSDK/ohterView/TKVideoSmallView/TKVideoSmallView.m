@@ -172,8 +172,21 @@ static const CGFloat sVideoSmallNameLabelHeight = 0;
             
         });
         [self addSubview:_iFunctionButton];
+        
+        
+        // 添加xc_drawButton
+        self.xc_drawButton = ({
+            UIButton *xc_drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            UIImage *img = UIIMAGE_FROM_NAME(@"huabi_wei");
+            [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei") forState:UIControlStateNormal];
+            [xc_drawButton setImage:UIIMAGE_FROM_NAME(@"huabi_wei_copy") forState:UIControlStateSelected];
+            [xc_drawButton setFrame:CGRectMake(0, _iFunctionButton.height-img.size.height, img.size.width, img.size.height)];
+            [xc_drawButton sizeToFit];
+            xc_drawButton;
+        });
+        if (aVideoRole != EVideoRoleTeacher) {[_iFunctionButton addSubview:self.xc_drawButton];}
 
-
+        
     }
     return self;
 }
