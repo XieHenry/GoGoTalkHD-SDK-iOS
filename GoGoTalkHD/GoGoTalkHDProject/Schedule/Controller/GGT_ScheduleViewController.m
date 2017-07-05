@@ -530,6 +530,10 @@ static NSString * const CalendarCellID = @"cell";
     // 请求最近一次上课时间
     [self getRecentCourse];
     
+    // 用户是否进入教室的标识
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    single.isInRoom = NO;
+    
 }
 
 - (void)addRightBarButtonItem
@@ -995,7 +999,14 @@ static NSString * const CalendarCellID = @"cell";
             messageDic = @{xc_message : @""};
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPopoverCourseAlterViewNotification object:nil userInfo:messageDic];
+        GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+        if (single.isInRoom) {  // 在教室不发送通知
+            
+        } else {
+            // 进入教室后 不弹框
+            [[NSNotificationCenter defaultCenter] postNotificationName:kPopoverCourseAlterViewNotification object:nil userInfo:messageDic];
+        }
+        
     }
 }
 

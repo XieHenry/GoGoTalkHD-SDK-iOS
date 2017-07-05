@@ -259,6 +259,10 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self setNeedsStatusBarAppearanceUpdate];
     
+    // 添加进入教室的标识
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    single.isInRoom = YES;
+    
     // Do any additional setup after loading the view, typically from a nib.
     CGRect tFrame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -1687,7 +1691,9 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
      }
     
     
-    
+    // 退出教室
+     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+     single.isInRoom = NO;
     
 }
 
