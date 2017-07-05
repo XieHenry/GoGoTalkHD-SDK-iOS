@@ -53,7 +53,12 @@
     
     [[BaseService share] sendGetRequestWithPath:URL_GetTesting token:NO viewController:self showMBProgress:NO success:^(id responseObject) {
 
-        //不会走1的情况，可不处理。。。
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        sin.isAuditStatus = NO;
+        
+        UIButton *button = [self.view viewWithTag:102];
+        button.hidden = NO;
+        
     } failure:^(NSError *error) {
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         
