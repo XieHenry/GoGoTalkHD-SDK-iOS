@@ -191,7 +191,6 @@
 		D68775621F0A0853008687C2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775611F0A0853008687C2 /* CoreMedia.framework */; };
 		D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775631F0A085F008687C2 /* libc++.tbd */; };
 		D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775651F0A086A008687C2 /* libicucore.tbd */; };
-		D68DC9031ED2949C0069F385 /* GGT_PreviewCoursewareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC9021ED2949C0069F385 /* GGT_PreviewCoursewareCell.m */; };
 		D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC9051ED299910069F385 /* GGT_TeachEvaCell.m */; };
 		D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94B1ED2B6B70069F385 /* GGT_CourseDetailCell.m */; };
 		D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */; };
@@ -597,8 +596,6 @@
 		D68775611F0A0853008687C2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D68775631F0A085F008687C2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		D68775651F0A086A008687C2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		D68DC9011ED2949C0069F385 /* GGT_PreviewCoursewareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCoursewareCell.h; sourceTree = "<group>"; };
-		D68DC9021ED2949C0069F385 /* GGT_PreviewCoursewareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCoursewareCell.m; sourceTree = "<group>"; };
 		D68DC9041ED299910069F385 /* GGT_TeachEvaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_TeachEvaCell.h; sourceTree = "<group>"; };
 		D68DC9051ED299910069F385 /* GGT_TeachEvaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_TeachEvaCell.m; sourceTree = "<group>"; };
 		D68DC94A1ED2B6B70069F385 /* GGT_CourseDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CourseDetailCell.h; sourceTree = "<group>"; };
@@ -883,7 +880,6 @@
 				D66FCBE31EEA417600792A6C /* 课程列表table-暂时不用 */,
 				D66FCBE41EEA418D00792A6C /* 课程列表-cell */,
 				D66FCBE51EEA419B00792A6C /* 课程详情-cell */,
-				D66FCBE61EEA41A900792A6C /* 正课课件-cell */,
 				D66FCBE71EEA41BB00792A6C /* 体验课-测评报告-cell */,
 				D66FCBE81EEA41D100792A6C /* 正课外教评价-cell */,
 			);
@@ -943,15 +939,6 @@
 				D68DC94B1ED2B6B70069F385 /* GGT_CourseDetailCell.m */,
 			);
 			name = "课程详情-cell";
-			sourceTree = "<group>";
-		};
-		D66FCBE61EEA41A900792A6C /* 正课课件-cell */ = {
-			isa = PBXGroup;
-			children = (
-				D68DC9011ED2949C0069F385 /* GGT_PreviewCoursewareCell.h */,
-				D68DC9021ED2949C0069F385 /* GGT_PreviewCoursewareCell.m */,
-			);
-			name = "正课课件-cell";
 			sourceTree = "<group>";
 		};
 		D66FCBE71EEA41BB00792A6C /* 体验课-测评报告-cell */ = {
@@ -2184,7 +2171,6 @@
 				5BC473AD1EC9A380003B8154 /* GGT_ChangePassWordViewController.m in Sources */,
 				D68775331F0A07CA008687C2 /* BITFeedbackComposeViewController.m in Sources */,
 				D68775351F0A07CA008687C2 /* BITFeedbackListViewController.m in Sources */,
-				D68DC9031ED2949C0069F385 /* GGT_PreviewCoursewareCell.m in Sources */,
 				D687755A1F0A07CA008687C2 /* TKAVPlayerViewController.m in Sources */,
 				D687753B1F0A07CA008687C2 /* BITHockeyBaseViewController.m in Sources */,
 				D67D55EF1EC58E47009D3CC5 /* GGT_CalendarCell.m in Sources */,

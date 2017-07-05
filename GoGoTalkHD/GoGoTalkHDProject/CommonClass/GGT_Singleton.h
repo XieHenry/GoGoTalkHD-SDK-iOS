@@ -27,6 +27,8 @@
  **/
 @property (nonatomic) BOOL isAuditStatus;
 
+// 学生是否在教室
+@property (nonatomic) BOOL isInRoom;
 
 
 
