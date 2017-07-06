@@ -245,8 +245,11 @@ static BOOL isProduction = true;
             [UserDefaults() setObject:registrationID forKey:K_registerID];
             [UserDefaults() synchronize];
             
-            [JPUSHService setTags:[NSSet setWithObject:@"GoGoTalk"] alias:registrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+            //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
+            [JPUSHService setTags:[NSSet setWithObject:@"GoGoTalk"] completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                NSLog(@"rescode: %ld, \ntags: %@, \nalias: %ld\n", (long)iResCode, iTags , (long)seq);
 
+            } seq:0];
         }
         else{
             NSLog(@"registrationID获取失败，code：%d",resCode);
@@ -256,10 +259,14 @@ static BOOL isProduction = true;
 
 }
 
+/*
+  [JPUSHService setTags:[NSSet setWithObject:@"GoGoTalk"] alias:registrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+ 
 - (void)tagsAliasCallback:(int)iResCode  tags:(NSSet*)tags alias:(NSString*)alias {
     
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
+ */
 
 //注册APNs成功并上报DeviceToken （向苹果服务器注册该设备，注册成功过后会回调）
 - (void)application:(UIApplication *)application
