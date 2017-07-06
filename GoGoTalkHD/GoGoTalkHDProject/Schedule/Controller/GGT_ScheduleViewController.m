@@ -647,6 +647,8 @@ static NSString * const CalendarCellID = @"cell";
 //    shareRoom.xc_roomPassword = @"567";
 //    shareRoom.xc_roomName = @"test-6";
 //    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+//    // 记录日志
+//    [XCLogManager xc_redirectNSlogToDocumentFolder];
 //    return;
     
     
