@@ -634,6 +634,22 @@ static NSString * const CalendarCellID = @"cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+//    NSDictionary *tDict = @{
+//                            @"serial"   :@"755158726",
+//                            @"host"    :@"global.talk-cloud.com",
+//                            // @"userid"  : @"1111",
+//                            @"port"    :@"443",
+//                            @"nickname":@"test-6",    // 学生密码567
+//                            @"userrole":@"2"    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+//                            };
+//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+//    shareRoom.xc_roomPassword = @"567";
+//    shareRoom.xc_roomName = @"test-6";
+//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+//    return;
+    
+    
     GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus) {

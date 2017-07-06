@@ -10,6 +10,7 @@
 
 @interface GGT_PopoverCell ()
 @property (nonatomic, strong) UILabel *xc_titleLabel;
+@property (nonatomic, strong) UIView *xc_lineView;
 @end
 
 @implementation GGT_PopoverCell
@@ -39,7 +40,7 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = UICOLOR_FROM_RGB_ALPHA(255, 255, 255, 0.8);
+        self.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
         [self configView];
     }
     return self;
@@ -50,6 +51,7 @@
     self.xc_titleLabel = ({
         UILabel *label = [UILabel new];
         label.textColor = UICOLOR_FROM_HEX(Color1A1A1A);
+        label.backgroundColor = [UIColor clearColor];
         label.font = Font(18);
         label;
     });
@@ -58,6 +60,20 @@
     [self.xc_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(margin30));
         make.centerY.equalTo(self);
+    }];
+    
+    self.xc_lineView = ({
+        UIView *lineView = [UIView new];
+        lineView.backgroundColor = UICOLOR_FROM_HEX(ColorD8D8D8);
+        lineView;
+    });
+    [self addSubview:self.xc_lineView];
+    
+    [self.xc_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(margin20);
+        make.right.equalTo(self).offset(-margin20);
+        make.bottom.equalTo(self);
+        make.height.equalTo(@(0.5));
     }];
 }
 

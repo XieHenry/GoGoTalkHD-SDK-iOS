@@ -225,6 +225,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
 //@property (nonatomic) UIButton *xc_cleanButton;
 //@property (nonatomic) UIButton *xc_drawButton;
 
+@property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
+
 
 @end
 
@@ -327,7 +329,27 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
         }
         
     }];
+    
+    [self xc_loadPhraseData];
    
+}
+
+/// 获取聊天界面 常用语数据
+- (void)xc_loadPhraseData
+{
+    self.xc_phraseMuArray = [NSMutableArray array];
+    
+    [[BaseService share] sendGetRequestWithPath:URL_GetContrastInfo token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+        NSArray *data = responseObject[@"data"];
+        [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            GGT_CoursePhraseModel *model = [GGT_CoursePhraseModel yy_modelWithDictionary:obj];
+            [self.xc_phraseMuArray addObject:model];
+        }];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)videoSmallbutton1:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
@@ -2256,6 +2278,8 @@ static NSString *const sTeacherCellIdentifier           = @"teacherCellIdentifie
     vc.popoverPresentationController.sourceRect = button.bounds;
     vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     vc.popoverPresentationController.delegate = self;
+    
+    vc.xc_phraseMuArray = self.xc_phraseMuArray;
     
     // 修改弹出视图的size 在控制器内部修改更好
     //    vc.preferredContentSize = CGSizeMake(100, 100);
