@@ -1040,7 +1040,7 @@
 			children = (
 				D603AAF11ECD5353003ECC20 /* 日历cell */,
 				D603AAF21ECD536C003ECC20 /* 课程cell */,
-				D68DC9501ED2BD340069F385 /* 自定义弹框 */,
+				D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */,
 				D68DC9511ED2BD450069F385 /* 点评view */,
 				D68DC9521ED2BD500069F385 /* 没有数据view */,
 				D68DC9041ED299910069F385 /* GGT_TeachEvaCell.h */,
@@ -1510,13 +1510,13 @@
 			path = WhiteBoardModel;
 			sourceTree = "<group>";
 		};
-		D68DC9501ED2BD340069F385 /* 自定义弹框 */ = {
+		D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */ = {
 			isa = PBXGroup;
 			children = (
 				D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */,
 				D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */,
 			);
-			name = "自定义弹框";
+			name = "开课前一分钟弹框";
 			sourceTree = "<group>";
 		};
 		D68DC9511ED2BD450069F385 /* 点评view */ = {
