@@ -12,4 +12,5 @@ typedef void(^PopViewDismissBlock)(NSString *selectString);
 
 @interface GGT_PopoverController : BaseViewController
 @property (nonatomic, copy) PopViewDismissBlock dismissBlock;
+@property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
 @end

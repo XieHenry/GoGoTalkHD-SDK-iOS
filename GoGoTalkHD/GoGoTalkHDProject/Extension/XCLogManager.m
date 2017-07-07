@@ -66,6 +66,7 @@
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     // 发送网络请求
+    [self sendLogNetworkWithContent:result];
 }
 
 
@@ -83,15 +84,32 @@
     if (!blHave) {
         NSLog(@"文件不存在");
         return ;
-    }else {
+    } else {
         NSLog(@"存在");
         BOOL blDele= [fileManager removeItemAtPath:logFilePath error:nil];
         if (blDele) {
             NSLog(@"删除成功");
-        }else {
+        } else {
             NSLog(@"删除失败");
         }
     }
+}
+
+/// 发送日志的网络请求
++ (void)sendLogNetworkWithContent:(NSString *)content
+{
+    
+    content = [content stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"strContent"] = content;
+    
+    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [[BaseService share] sendPostRequestWithPath:URL_PostLog parameters:param token:YES viewController:vc showMBProgress:NO success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

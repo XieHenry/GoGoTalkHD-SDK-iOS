@@ -102,6 +102,7 @@
 		D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67D55EA1EC58E47009D3CC5 /* GGT_ScheduleViewController.m */; };
 		D67D55EF1EC58E47009D3CC5 /* GGT_CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D67D55ED1EC58E47009D3CC5 /* GGT_CalendarCell.m */; };
 		D67D55F81EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D67D55F51EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m */; };
+		D685D7661F0E04DE00987BB4 /* GGT_CoursePhraseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D685D7651F0E04DE00987BB4 /* GGT_CoursePhraseModel.m */; };
 		D687750A1F0A07CA008687C2 /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D68774391F0A07CA008687C2 /* TKEduClassRoom.m */; };
 		D687750B1F0A07CA008687C2 /* TKEduClassRoomNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D687743B1F0A07CA008687C2 /* TKEduClassRoomNetWorkManager.m */; };
 		D687750C1F0A07CA008687C2 /* TKEduClassRoomSession.m in Sources */ = {isa = PBXBuildFile; fileRef = D687743D1F0A07CA008687C2 /* TKEduClassRoomSession.m */; };
@@ -413,6 +414,8 @@
 		D67D55ED1EC58E47009D3CC5 /* GGT_CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CalendarCell.m; sourceTree = "<group>"; };
 		D67D55F41EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ScheduleStudyingCell.h; sourceTree = "<group>"; };
 		D67D55F51EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ScheduleStudyingCell.m; sourceTree = "<group>"; };
+		D685D7641F0E04DE00987BB4 /* GGT_CoursePhraseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CoursePhraseModel.h; sourceTree = "<group>"; };
+		D685D7651F0E04DE00987BB4 /* GGT_CoursePhraseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CoursePhraseModel.m; sourceTree = "<group>"; };
 		D68774371F0A07CA008687C2 /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
 		D68774381F0A07CA008687C2 /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
 		D68774391F0A07CA008687C2 /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
@@ -897,6 +900,8 @@
 				D67ACCC51EE173E00027031C /* GGT_ResultModel.m */,
 				D66FCBF61EEA9A4400792A6C /* GGT_EvaReportModel.h */,
 				D66FCBF71EEA9A4400792A6C /* GGT_EvaReportModel.m */,
+				D685D7641F0E04DE00987BB4 /* GGT_CoursePhraseModel.h */,
+				D685D7651F0E04DE00987BB4 /* GGT_CoursePhraseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -999,13 +1004,13 @@
 			name = "课程列表-弹框-vc";
 			sourceTree = "<group>";
 		};
-		D66FCBEE1EEA428400792A6C /* 课程详情弹框-vc */ = {
+		D66FCBEE1EEA428400792A6C /* 直播上课常用语弹框-vc */ = {
 			isa = PBXGroup;
 			children = (
 				D6353E121EE8E20A004E1288 /* GGT_PopoverController.h */,
 				D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */,
 			);
-			name = "课程详情弹框-vc";
+			name = "直播上课常用语弹框-vc";
 			sourceTree = "<group>";
 		};
 		D67D55E71EC58E47009D3CC5 /* Schedule */ = {
@@ -1025,7 +1030,7 @@
 				D66FCBEB1EEA424F00792A6C /* 正课详情-vc */,
 				D66FCBE91EEA423500792A6C /* 体验课详情-vc */,
 				D66FCBEC1EEA426900792A6C /* 课程列表-弹框-vc */,
-				D66FCBEE1EEA428400792A6C /* 课程详情弹框-vc */,
+				D66FCBEE1EEA428400792A6C /* 直播上课常用语弹框-vc */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1035,15 +1040,23 @@
 			children = (
 				D603AAF11ECD5353003ECC20 /* 日历cell */,
 				D603AAF21ECD536C003ECC20 /* 课程cell */,
-				D68DC9501ED2BD340069F385 /* 自定义弹框 */,
+				D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */,
 				D68DC9511ED2BD450069F385 /* 点评view */,
 				D68DC9521ED2BD500069F385 /* 没有数据view */,
 				D68DC9041ED299910069F385 /* GGT_TeachEvaCell.h */,
 				D68DC9051ED299910069F385 /* GGT_TeachEvaCell.m */,
+				D685D7671F0E088D00987BB4 /* 直播上课界面常用语cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D685D7671F0E088D00987BB4 /* 直播上课界面常用语cell */ = {
+			isa = PBXGroup;
+			children = (
 				D6353E151EE8E250004E1288 /* GGT_PopoverCell.h */,
 				D6353E161EE8E250004E1288 /* GGT_PopoverCell.m */,
 			);
-			path = View;
+			name = "直播上课界面常用语cell";
 			sourceTree = "<group>";
 		};
 		D68774341F0A07C9008687C2 /* TuoKeSDK */ = {
@@ -1497,13 +1510,13 @@
 			path = WhiteBoardModel;
 			sourceTree = "<group>";
 		};
-		D68DC9501ED2BD340069F385 /* 自定义弹框 */ = {
+		D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */ = {
 			isa = PBXGroup;
 			children = (
 				D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */,
 				D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */,
 			);
-			name = "自定义弹框";
+			name = "开课前一分钟弹框";
 			sourceTree = "<group>";
 		};
 		D68DC9511ED2BD450069F385 /* 点评view */ = {
@@ -2080,6 +2093,7 @@
 				D6E0A5351EC2D9AE006A003D /* BaseViewController.m in Sources */,
 				D687752B1F0A07CA008687C2 /* BITAppVersionMetaInfo.m in Sources */,
 				5BC473621EC95C39003B8154 /* GGT_FeedbackViewController.m in Sources */,
+				D685D7661F0E04DE00987BB4 /* GGT_CoursePhraseModel.m in Sources */,
 				D687753D1F0A07CA008687C2 /* BITHockeyManager.m in Sources */,
 				D6E0A58B1EC2DBB3006A003D /* GGT_ForgotPasswordViewController.m in Sources */,
 				D68775431F0A07CA008687C2 /* BITUpdateViewController.m in Sources */,

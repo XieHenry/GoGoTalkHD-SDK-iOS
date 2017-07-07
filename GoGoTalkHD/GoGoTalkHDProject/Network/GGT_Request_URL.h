@@ -71,5 +71,11 @@ static NSString * const URL_GetLessonByLessonId = @"api/APP/GetLessonByLessonId"
 // 获取最近上课信息
 static NSString * const URL_AppStuLatelyLesson = @"api/APP/AppStuLatelyLesson";
 
+// 获取常用语句
+static NSString * const URL_GetContrastInfo = @"api/APP/GetContrastInfo";
+
+// 发送log日志
+static NSString * const URL_PostLog = @"api/APP/Applog";
+
 
 #endif /* GGT_Request_URL_h */

@@ -7,12 +7,12 @@
 //
 
 #import "GGT_CourseDetailCell.h"
-#import "OYCountDownManager.h"
 #import "XCStarView.h"
+#import "MZTimerLabel.h"
 
 static NSString * const xc_CountDownTitleName = @"正在上课";
 
-@interface GGT_CourseDetailCell ()
+@interface GGT_CourseDetailCell ()<MZTimerLabelDelegate>
 
 
 // 整体布局
@@ -34,7 +34,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 
 // 顶部 上课前倒计时
 @property (nonatomic, strong) UIView *xc_topCountDownParentView;    // 新增
-@property (nonatomic, strong) UILabel *xc_countDownLabel;
+@property (nonatomic, strong) MZTimerLabel *xc_countDownLabel;
 @property (nonatomic, strong) FLAnimatedImageView *xc_countDownImageView;
 
 // 顶部 正在上课
@@ -81,9 +81,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
         [self configView];
-        
-        // 监听通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(countDownNotification) name:kCountDownNotification object:nil];
     }
     return self;
 }
@@ -138,10 +135,11 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     [self.xc_topView addSubview:self.xc_topCountDownParentView];
     
     self.xc_countDownLabel = ({
-        UILabel *xc_timelabel = [UILabel new];
+        MZTimerLabel *xc_timelabel = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeTimer];
         xc_timelabel.text = @"00:00";
         xc_timelabel.textColor = UICOLOR_FROM_HEX(kThemeColor);
         xc_timelabel.font = Font(14);
+        xc_timelabel.delegate = self;
         xc_timelabel;
     });
     [self.xc_topCountDownParentView addSubview:self.xc_countDownLabel];
@@ -246,6 +244,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         xc_enterRoomButton.frame = CGRectMake(0, 0, 88, 30);
         xc_enterRoomButton.titleLabel.font = Font(14);
         [xc_enterRoomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        xc_enterRoomButton.hidden = YES;
         xc_enterRoomButton;
     });
     [self.xc_bodyView addSubview:self.xc_courseButton];
@@ -457,7 +456,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = NO;
     
     [self courseButtonWithImage:@"Button_gray" title:@"取消预约" titleColor:UICOLOR_FROM_HEX(Color777777)];
     [self courseNotStartOrFinishedLabelWithText:@"" textColor:UICOLOR_FROM_HEX(Color777777) imageName:@"weikaike"];
@@ -469,24 +467,9 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = NO;
     self.xc_topNotStartOrFinishedParentView.hidden = YES;
-    self.xc_courseButton.hidden = NO;
     
     [self courseButtonWithImage:@"anniu" title:@"进入教室" titleColor:[UIColor whiteColor]];
     self.xc_countDownImageView.image = UIIMAGE_FROM_NAME(@"jishiqi");
-    
-//    self.xc_timeCount = [NSString stringWithFormat:@"%ld",self.xc_cellModel.CountDown];
-    
-    
-    NSInteger countDown = [self.xc_timeCount integerValue] - kCountDownManager.timeInterval;
-    if (countDown <= 0) {
-        // 可能需要更新status
-        NSString *pathString = [[NSBundle mainBundle] pathForResource:@"having_Class.gif" ofType:nil];
-        NSURL *url = [NSURL fileURLWithPath:pathString];
-        [self.xc_countDownImageView sd_setImageWithURL:url placeholderImage:nil];
-    } else {
-        [self.xc_countDownImageView sd_setImageWithURL:nil placeholderImage:UIIMAGE_FROM_NAME(@"jishiqi")];
-    }
-    
 }
 
 // 正在上课
@@ -495,7 +478,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = NO;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = YES;
-    self.xc_courseButton.hidden = NO;
     
     [self courseButtonWithImage:@"anniu" title:@"进入教室" titleColor:[UIColor whiteColor]];
 }
@@ -506,7 +488,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = NO;
     
     [self courseButtonWithImage:@"Button_red" title:@"待评价" titleColor:UICOLOR_FROM_HEX(kThemeColor)];
     [self courseNotStartOrFinishedLabelWithText:@"" textColor:UICOLOR_FROM_HEX(Color777777)imageName:@"yiwancheng"];
@@ -518,7 +499,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = NO;
     
     [self courseButtonWithImage:@"Button_gray" title:@"已评价" titleColor:UICOLOR_FROM_HEX(Color777777)];
     [self courseNotStartOrFinishedLabelWithText:@"" textColor:UICOLOR_FROM_HEX(Color777777) imageName:@"yiwancheng"];
@@ -530,7 +510,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = YES;
     
     [self courseNotStartOrFinishedLabelWithText:@"缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
 }
@@ -573,61 +552,14 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     
 }
 
-#pragma mark - 倒计时通知回调
-- (void)countDownNotification {
-    /// 判断是否需要倒计时 -- 可能有的cell不需要倒计时,根据真实需求来进行判断
-    if (0) {
-        return;
-    }
-    
-    if (self.xc_cellModel.CountDown > 30 * 60 || self.xc_cellModel.CountDown < 0) return;
-    
-    /// 计算倒计时
-    NSInteger countDown = [self.xc_timeCount integerValue] - kCountDownManager.timeInterval;
-    if (countDown < 0) return;
-    if (countDown > 30 * 60) return;
-    /// 重新赋值
-    self.xc_countDownLabel.text = [NSString stringWithFormat:@"%02zd分%02zd秒", (countDown/60)%60, countDown%60];
-    /// 当倒计时到了进行回调
-    if (countDown == 0) {
-        self.xc_countDownLabel.text = xc_CountDownTitleName;
-        // 可以添加block
-        //        if (self.countDownZero) {
-        //            self.countDownZero();
-        //        }
-        
-        // 可能需要更新status
-        NSString *pathString = [[NSBundle mainBundle] pathForResource:@"having_Class.gif" ofType:nil];
-        NSURL *url = [NSURL fileURLWithPath:pathString];
-        [self.xc_countDownImageView sd_setImageWithURL:url placeholderImage:nil];
-    }
-
-    
-    
-    if ([self.xc_cellModel.Status integerValue] == 5) {
-        self.xc_courseButton.hidden = YES;
-    } else {
-        if (self.xc_cellModel.IsDemo == 1) {    // 体验课10分钟前 才显示进入教室button
-            if (countDown < 10*60) {
-                self.xc_courseButton.hidden = NO;
-            } else {
-                self.xc_courseButton.hidden = YES;
-            }
-        } else {
-            if (countDown > 30*60) {
-                self.xc_courseButton.hidden = YES;
-            } else {
-                self.xc_courseButton.hidden = NO;
-            }
-        }
-    }
-}
-
 - (void)setXc_timeCount:(NSString *)xc_timeCount
 {
     _xc_timeCount = xc_timeCount;
-    // 手动调用通知的回调
-    [self countDownNotification];
+    
+    [self.xc_countDownLabel setCountDownTime:[xc_timeCount integerValue]+0.5];
+    self.xc_countDownLabel.timeFormat = @"mm:ss";
+    [self.xc_countDownLabel start];
+    
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
@@ -636,8 +568,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 - (void)setXc_cellModel:(GGT_CourseCellModel *)xc_cellModel
 {
     _xc_cellModel = xc_cellModel;
-    
-//    xc_cellModel.CountDown = 610;
     
     // 公用的
     // 上课时间  头像  课程名称  外教名称
@@ -748,10 +678,14 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
                 self.xc_courseButton.hidden = YES;
             }
         } else {
-            if (self.xc_cellModel.CountDown <= 30 * 60) {
-                self.xc_courseButton.hidden = NO;
+            if ([xc_cellModel.Status integerValue] == 1 || [xc_cellModel.Status integerValue] == 2) {
+                if (self.xc_cellModel.CountDown <= 30 * 60) {
+                    self.xc_courseButton.hidden = NO;
+                } else {
+                    self.xc_courseButton.hidden = YES;
+                }
             } else {
-                self.xc_courseButton.hidden = YES;
+                self.xc_courseButton.hidden = NO;
             }
         }
     }
@@ -763,5 +697,30 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     
     
 }
+
+#pragma mark - MZTimerLabelDelegate
+-(void)timerLabel:(MZTimerLabel*)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType
+{
+    int i = floor(time);
+    NSLog(@"%d", i);
+    if ([self.xc_cellModel.Status integerValue] == 5) {
+        self.xc_courseButton.hidden = YES;
+    } else {
+        if (self.xc_cellModel.IsDemo == 1) {    // 体验课10分钟前 才显示进入教室button
+            if (i < 10*60) {
+                self.xc_courseButton.hidden = NO;
+            } else {
+                self.xc_courseButton.hidden = YES;
+            }
+        } else {
+            if (i > 30*60) {
+                self.xc_courseButton.hidden = YES;
+            } else {
+                self.xc_courseButton.hidden = NO;
+            }
+        }
+    }
+}
+
 
 @end
