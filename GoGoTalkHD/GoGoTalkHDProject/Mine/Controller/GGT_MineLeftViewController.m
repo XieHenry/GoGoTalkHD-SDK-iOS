@@ -17,7 +17,7 @@
 #import "GGT_MineLeftModel.h"
 #import "GGT_CourseDetailsViewController.h"
 
-static BOOL isShowTestReportVc;
+static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进来的，和平常的要区分开）
 
 @interface GGT_MineLeftViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -134,6 +134,10 @@ static BOOL isShowTestReportVc;
         _model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
         [_headerView getResultModel:_model];
 
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        sin.leftTotalCount = [NSString stringWithFormat:@"%ld",(long)_model.totalCount];
+        
+        
     } failure:^(NSError *error) {
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
 
