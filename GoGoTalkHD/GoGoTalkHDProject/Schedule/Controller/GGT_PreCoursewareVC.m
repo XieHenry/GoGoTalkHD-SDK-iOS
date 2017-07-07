@@ -67,14 +67,6 @@
     self.xc_topView = ({
         GGT_CourseDetailCell *view = [[GGT_CourseDetailCell alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 130)];
         view.xc_cellModel = self.xc_model;
-        
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        if (sin.isAuditStatus) {
-            view.xc_courseButton.hidden = YES;
-        } else {
-            view.xc_courseButton.hidden = NO;
-        }
-        
         view;
     });
     [self.xc_contentView addSubview:self.xc_topView];

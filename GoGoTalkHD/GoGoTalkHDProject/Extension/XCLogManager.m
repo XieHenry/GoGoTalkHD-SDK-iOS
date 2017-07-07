@@ -18,7 +18,7 @@
 #ifdef DEBUG
     // 不做处理
     
-//#else
+#else
     // 记录日志
     //document文件夹
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -84,12 +84,12 @@
     if (!blHave) {
         NSLog(@"文件不存在");
         return ;
-    }else {
+    } else {
         NSLog(@"存在");
         BOOL blDele= [fileManager removeItemAtPath:logFilePath error:nil];
         if (blDele) {
             NSLog(@"删除成功");
-        }else {
+        } else {
             NSLog(@"删除失败");
         }
     }
@@ -105,7 +105,7 @@
     param[@"strContent"] = content;
     
     UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    [[BaseService share] sendPostRequestWithPath:URL_PostLog parameters:nil token:YES viewController:vc showMBProgress:NO success:^(id responseObject) {
+    [[BaseService share] sendPostRequestWithPath:URL_PostLog parameters:param token:YES viewController:vc showMBProgress:NO success:^(id responseObject) {
         
     } failure:^(NSError *error) {
         

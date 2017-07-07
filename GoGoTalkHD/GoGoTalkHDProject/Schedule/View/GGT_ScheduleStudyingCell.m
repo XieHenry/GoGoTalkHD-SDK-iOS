@@ -421,7 +421,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = NO;
+    
     
     [self courseButtonWithImage:@"Button_gray" title:@"取消预约" titleColor:UICOLOR_FROM_HEX(Color777777)];
     [self courseNotStartOrFinishedLabelWithText:@"" textColor:UICOLOR_FROM_HEX(Color777777) imageName:@"weikaike"];
@@ -433,7 +433,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = NO;
     self.xc_topNotStartOrFinishedParentView.hidden = YES;
-    self.xc_courseButton.hidden = NO;
+    
     
     [self courseButtonWithImage:@"anniu" title:@"进入教室" titleColor:[UIColor whiteColor]];
     self.xc_countDownImageView.image = UIIMAGE_FROM_NAME(@"jishiqi");
@@ -460,7 +460,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = NO;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = YES;
-    self.xc_courseButton.hidden = NO;
+    
     
     [self courseButtonWithImage:@"anniu" title:@"进入教室" titleColor:[UIColor whiteColor]];
 }
@@ -483,7 +483,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = NO;
+    
     
     [self courseButtonWithImage:@"Button_gray" title:@"已评价" titleColor:UICOLOR_FROM_HEX(Color777777)];
     [self courseNotStartOrFinishedLabelWithText:@"" textColor:UICOLOR_FROM_HEX(Color777777) imageName:@"yiwancheng"];
@@ -495,7 +495,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
-    self.xc_courseButton.hidden = YES;
+    
     
     [self courseNotStartOrFinishedLabelWithText:@"缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
 }
@@ -570,12 +570,6 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         NSURL *url = [NSURL fileURLWithPath:pathString];
         [self.xc_countDownImageView sd_setImageWithURL:url placeholderImage:nil];
     }
-    
-    // 倒计时剩下1分钟时  发送通知
-//    if (countDown == 1*60) {
-//        NSDictionary *messageDic = @{xc_message : self.xc_cellModel};
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kPopoverCourseAlterViewNotification object:nil userInfo:messageDic];
-//    }
     
     
     if ([self.xc_cellModel.Status integerValue] == 5) {
@@ -714,10 +708,14 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
                 self.xc_courseButton.hidden = YES;
             }
         } else {
-            if (self.xc_cellModel.CountDown <= 30 * 60) {
-                self.xc_courseButton.hidden = NO;
+            if ([xc_cellModel.Status integerValue] == 1 || [xc_cellModel.Status integerValue] == 2) {
+                if (self.xc_cellModel.CountDown <= 30 * 60) {
+                    self.xc_courseButton.hidden = NO;
+                } else {
+                    self.xc_courseButton.hidden = YES;
+                }
             } else {
-                self.xc_courseButton.hidden = YES;
+                self.xc_courseButton.hidden = NO;
             }
         }
     }
