@@ -18,7 +18,7 @@
 #import "TKEduClassRoom.h"      // 测试拓课
 #import "TKMacro.h"
 
-@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, UIWebViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
+@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
 @property (nonatomic, strong) UIScrollView *xc_scrollView;
 @property (nonatomic, strong) UIView *xc_contentView;
 @property (nonatomic, strong) GGT_CourseDetailCell *xc_topView;
@@ -142,7 +142,6 @@
 
 - (void)configData
 {
-    
     if ([self.xc_model.FilePath isKindOfClass:[NSString class]] && self.xc_model.FilePath.length > 0) {
         NSString *urlStr = [self.xc_model.FilePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:urlStr];
@@ -388,21 +387,21 @@
     NSLog(@"弹框已经消失");
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     [MBProgressHUD showLoading:self.view];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     [MBProgressHUD hideHUDForView:self.view];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     [MBProgressHUD hideHUDForView:self.view];
 }
-
 
 #pragma mark TKEduEnterClassRoomDelegate
 //error.code  Description:error.description
