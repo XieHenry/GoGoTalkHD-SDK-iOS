@@ -45,6 +45,19 @@
     
 }
 
+- (void)dealloc
+{
+    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+    
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        
+        // Done
+        
+    }];
+}
+
 //-(void)viewWillAppear:(BOOL)animated
 //{
 //    [super viewWillAppear:animated];
