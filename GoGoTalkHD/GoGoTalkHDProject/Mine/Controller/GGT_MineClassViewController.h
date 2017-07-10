@@ -10,4 +10,5 @@
 
 @interface GGT_MineClassViewController : BaseViewController
 
+
 @end

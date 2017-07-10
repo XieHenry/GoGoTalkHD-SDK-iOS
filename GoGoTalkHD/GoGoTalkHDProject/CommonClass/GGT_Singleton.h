@@ -21,6 +21,8 @@
 //麦克风权限
 @property (nonatomic) BOOL micStatus;
 
+//我的-我的课时课程数量
+@property (nonatomic, copy) NSString *leftTotalCount;
 
 /**
  @abstract 是否在审核状态,YES是审核状态

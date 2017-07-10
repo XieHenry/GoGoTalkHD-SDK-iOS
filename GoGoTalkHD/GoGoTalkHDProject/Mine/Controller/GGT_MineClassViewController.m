@@ -83,6 +83,16 @@
             for (NSDictionary *dic in listGoodsArr) {
                 [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"剩余%@课时",dic[@"SurplusCount"]],@"rightTitle":@""}];
                 [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"总共%@课时",dic[@"TotalCount"]],@"rightTitle":[NSString stringWithFormat:@"有效期至:%@",dic[@"ExpireTime"]]}];
+          
+               //判断是否操作课时，如果操作，进行刷新left的数据
+                GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+                
+                //数据不一样，进行刷新，因为在修改姓名的时候，有一个通知，再次直接用那个了
+                if ([[NSString stringWithFormat:@"%@",dic[@"SurplusCount"]] isEqualToString:sin.leftTotalCount] == NO) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil];
+                }
+
+                
             }
             
         

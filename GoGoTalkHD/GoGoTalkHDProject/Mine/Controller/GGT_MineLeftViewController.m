@@ -17,7 +17,7 @@
 #import "GGT_MineLeftModel.h"
 #import "GGT_CourseDetailsViewController.h"
 
-static BOOL isShowTestReportVc;
+static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进来的，和平常的要区分开）
 
 @interface GGT_MineLeftViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -82,7 +82,6 @@ static BOOL isShowTestReportVc;
     [self getLoadData];
     
 
-    
 }
 
 #pragma mark 获取左边的名称和icon
@@ -100,22 +99,7 @@ static BOOL isShowTestReportVc;
 
         [_tableView reloadData];
         
-    } failure:^(NSError *error) {
-        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
-        
-    }];
-}
-
-
-#pragma mark 获取网络请求，添加到view上
-- (void)getLoadData {
-    
-    [[BaseService share] sendGetRequestWithPath:URL_GetLessonStatistics token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
-        
-        _model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
-        [_headerView getResultModel:_model];
-        [_tableView reloadData];
-        
+        //先刷新数据，再选中cell
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         if (sin.isAuditStatus == YES ) {
             if (isShowTestReportVc == YES) {
@@ -133,7 +117,27 @@ static BOOL isShowTestReportVc;
             }
         }
         
+        
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+        
+    }];
+}
 
+
+#pragma mark 获取网络请求，添加到view上
+- (void)getLoadData {
+    
+    [[BaseService share] sendGetRequestWithPath:URL_GetLessonStatistics token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+        _model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
+        [_headerView getResultModel:_model];
+
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        sin.leftTotalCount = [NSString stringWithFormat:@"%ld",(long)_model.totalCount];
+        
+        
     } failure:^(NSError *error) {
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
 

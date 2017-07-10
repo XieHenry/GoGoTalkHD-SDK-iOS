@@ -50,15 +50,21 @@
 #ifdef DEBUG
                     [self showExceptionDialog:@"未知网络"];
 #endif
+                    
                     break;
                     
                 case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
+                {
                     self.netWorkStaus = AFNetworkReachabilityStatusNotReachable;
                     singleton.netStatus = NO;
-                    
-#ifdef DEBUG
                     [self showExceptionDialog:@"没有网络(断网)"];
-#endif
+                    
+                    
+                    UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"没有网络" message:@"" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alertV show];
+                    
+                }
+                    
                     break;
                     
                 case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
@@ -104,7 +110,7 @@
     
     urlStr = [BASE_REQUEST_URL stringByAppendingPathComponent:urlStr];
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        NSLog(@"打印token----%@",[UserDefaults() objectForKey:K_userToken]);
+    //        NSLog(@"打印token----%@",[UserDefaults() objectForKey:K_userToken]);
     
     
     [MBProgressHUD hideHUDForView:viewController.view];
@@ -381,16 +387,16 @@
     [self.manager POST:urlStr parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"result"] isEqual:@1]) {
-
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                            
+                
                 [UserDefaults() setObject:responseObject[@"data"][@"dicRes"][@"userToken"] forKey:K_userToken];
                 [UserDefaults() setObject:[NSString stringWithFormat:@"%@",responseObject[@"data"][@"dicRes"][@"studentName"]] forKey:K_studentName];
                 [UserDefaults() synchronize];
-  
-            //重新请求
-            [self requestWithPath:url method:method parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
-   });
+                
+                //重新请求
+                [self requestWithPath:url method:method parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
+            });
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
