@@ -254,6 +254,8 @@
     [dateFormatter setDateFormat:_timeFormat];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSString *strDate = [dateFormatter stringFromDate:timeToShow];
+    strDate = [strDate stringByAppendingString:@"秒"];
+    strDate = [strDate stringByReplacingOccurrencesOfString:@":" withString:@"分"];
     _timeLabel.text = strDate;
     
 }

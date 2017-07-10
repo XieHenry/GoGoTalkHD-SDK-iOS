@@ -73,6 +73,8 @@
 {
     _xc_model = xc_model;
     
+    // result = 1 成功 2 即将上课 3 待测试 4 缺席 0 失败
+    
     // 不明所以
     xc_model.msg = [xc_model.msg stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     

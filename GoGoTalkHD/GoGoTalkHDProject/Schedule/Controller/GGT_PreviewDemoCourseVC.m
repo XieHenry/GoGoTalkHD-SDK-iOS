@@ -172,15 +172,6 @@
         GGT_CourseDetailCell *cell = [GGT_CourseDetailCell cellWithTableView:tableView forIndexPath:indexPath];
         cell.xc_cellModel = self.xc_model;
         [cell.xc_courseButton addTarget:self action:@selector(cellButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // 判断审核状态
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        if (sin.isAuditStatus) {
-            cell.xc_courseButton.hidden = YES;
-        } else {
-            cell.xc_courseButton.hidden = NO;
-        }
-        
         return cell;
     } else {
         GGT_PreviewDemoCourseCell *cell = [GGT_PreviewDemoCourseCell cellWithTableView:tableView forIndexPath:indexPath];
