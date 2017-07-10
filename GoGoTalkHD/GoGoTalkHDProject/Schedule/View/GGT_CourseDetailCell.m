@@ -702,16 +702,23 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 -(void)timerLabel:(MZTimerLabel*)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType
 {
     int i = floor(time);
-    NSLog(@"%d", i);
+//    NSLog(@"%d", i);
     if ([self.xc_cellModel.Status integerValue] == 5) {
         self.xc_courseButton.hidden = YES;
     } else {
         if (self.xc_cellModel.IsDemo == 1) {    // 体验课10分钟前 才显示进入教室button
-            if (i < 10*60) {
-                self.xc_courseButton.hidden = NO;
-            } else {
+           
+            //0：已经预约 1：即将上课 2：正在上课 3：已经结束 待评价 4：已经结束 已评价 5：已经结束 缺席）
+            if ([self.xc_cellModel.Status integerValue] == 0 || [self.xc_cellModel.Status integerValue] == 3 || [self.xc_cellModel.Status integerValue] == 4) {
                 self.xc_courseButton.hidden = YES;
+            } else {
+                if (i < 10*60) {
+                    self.xc_courseButton.hidden = NO;
+                } else {
+                    self.xc_courseButton.hidden = YES;
+                }
             }
+            
         } else {
             if (i > 30*60) {
                 self.xc_courseButton.hidden = YES;
