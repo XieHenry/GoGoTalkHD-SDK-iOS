@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) UIButton *xc_scrollTopButton;
 
+@property (nonatomic) CGPoint tempContentOffset;
+
 @end
 
 @implementation GGT_PreCoursewareVC
@@ -41,6 +43,30 @@
     
     [self configData];
     
+}
+
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    self.xc_scrollView.contentOffset = CGPointZero;
+//}
+//
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    self.xc_scrollView.contentOffset = CGPointZero;
+//}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tempContentOffset = self.xc_scrollView.contentOffset;
+    self.xc_scrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.xc_scrollView.contentOffset = self.tempContentOffset;
 }
 
 - (void)configView
