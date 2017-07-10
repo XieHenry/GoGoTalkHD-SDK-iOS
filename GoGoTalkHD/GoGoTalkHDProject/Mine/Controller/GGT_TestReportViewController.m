@@ -73,15 +73,12 @@
     } failure:^(NSError *error) {
         
         //result返回1 为成功 2：即将上课 3：待测评 4 ：缺席 0 ：失败   UserInfo={msg=失败, result=0}
-        //        第一张是未参与体验课、参与体验课但课程换位结束、体验课结束但是用户缺席的情况下的缺省图
-        //        第二张是用户参与了体验课，且体验课已结束但还未生成测评报告时的状态
+        //只分为两种，1是成功，2是剩下的全部状态都使用一种提醒。
         
-        if ([error.userInfo[@"result"] isEqual:@4] || [error.userInfo[@"result"] isEqual:@2] || [error.userInfo[@"result"] isEqual:@0]){
-            [self showStatusView:error.userInfo[@"msg"] method:ClassNotStartStatus];
+        if ([error.userInfo[@"result"] isEqual:@0] || [error.userInfo[@"result"] isEqual:@2] || [error.userInfo[@"result"] isEqual:@3] || [error.userInfo[@"result"] isEqual:@4]){
+            [self showStatusView:@"参与体验课，获得英语水平测评报告！" method:ClassNotStartStatus];
             
-        } else if ([error.userInfo[@"result"] isEqual:@3]) {
-            [self showStatusView:error.userInfo[@"msg"] method:ClassOverAndNoTestReportStatus];
-        } else {
+        }else {
             [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
             
         }
@@ -112,7 +109,7 @@
         }
             break;
             
-        case ClassOverAndNoTestReportStatus:  {
+        case ClassOverAndNoTestReportStatus:  { //暂未使用
             
             self.mineClassPlaceholderView = [[GGT_MineClassPlaceholderView alloc]initWithFrame:CGRectMake(0, 0, marginMineRight,  SCREEN_HEIGHT()-64) method:ClassOverAndNoTestReportStatus alertStr:alertStr];
             self.mineClassPlaceholderView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
