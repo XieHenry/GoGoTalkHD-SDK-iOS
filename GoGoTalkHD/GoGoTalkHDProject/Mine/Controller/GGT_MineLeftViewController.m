@@ -18,6 +18,7 @@
 #import "GGT_CourseDetailsViewController.h"
 
 static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进来的，和平常的要区分开）
+static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 @interface GGT_MineLeftViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -41,6 +42,7 @@ static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进�
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTestReportWithNotification:) name:@"testReport2" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushChangeNameWithNotification:) name:@"changeNameStatus" object:nil];
+
     
 }
 
@@ -54,12 +56,22 @@ static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进�
 #pragma mark - pushMessageAction
 - (void)pushTestReportWithNotification:(NSNotification *)noti {
     isShowTestReportVc = YES;
-    [self getLoadData];
+//    [self getLoadData];
+    //推送过来消息，进行切换cell的控制器
+    [self getLeftName];
 
 }
 
 //在个人信息页面修改中文名称之后，会发送通知刷新数据。
 - (void)pushChangeNameWithNotification:(NSNotification *)noti {
+    
+    if ([[noti.userInfo objectForKey:@"isRefresh"] isEqualToString:@"YES"]) {
+        isRefreshMyClassVc = YES;
+    } else {
+        isRefreshMyClassVc = NO;
+    }
+    
+    
     [self getLoadData];
     
 }
@@ -136,6 +148,17 @@ static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进�
 
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         sin.leftTotalCount = [NSString stringWithFormat:@"%ld",(long)_model.totalCount];
+        
+        
+        if (sin.isAuditStatus == NO) {
+            if (isRefreshMyClassVc == YES) {
+                //刷新我的课时cell数据，更改课时的显示，并选中这一个cell
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+                [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                
+                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+            }
+        }
         
         
     } failure:^(NSError *error) {

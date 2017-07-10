@@ -89,7 +89,7 @@
                 
                 //数据不一样，进行刷新，因为在修改姓名的时候，有一个通知，再次直接用那个了
                 if ([[NSString stringWithFormat:@"%@",dic[@"SurplusCount"]] isEqualToString:sin.leftTotalCount] == NO) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil userInfo:@{@"isRefresh":@"YES"}];
                 }
 
                 
@@ -101,7 +101,7 @@
             for (NSDictionary *dic in listArray) {
                 //1 🐶麦课时 2报名课时  3返还课时
                 if ([dic[@"types"] isEqual:@1]) {
-                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
 
                 } else if ([dic[@"types"] isEqual:@2]) {
                     [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"报名%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];

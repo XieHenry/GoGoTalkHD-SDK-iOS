@@ -27,6 +27,7 @@
     //头像
     self.headImgView = [[UIImageView alloc]init];
     self.headImgView.image = UIIMAGE_FROM_NAME(@"me_default_avatar");
+    self.headImgView.layer.masksToBounds = YES;
     [self.headImgView addBorderForViewWithBorderWidth:3.0 BorderColor:UICOLOR_FROM_HEX(ColorC40016) CornerRadius:38];
     [self addSubview:self.headImgView];
     
@@ -251,7 +252,7 @@
 
 - (void)getResultModel:(GGT_MineLeftModel *)model {
     
-    //头像
+    //头像  http://teacher.gogo-talk.com/headimages/5141_20170316181829721.jpg
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.ImageUrl] placeholderImage:UIIMAGE_FROM_NAME(@"me_default_avatar")];
     
     CGSize nameSize = [model.Name boundingRectWithSize:CGSizeMake(LineW(350), 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:Font(20)} context:nil].size;
