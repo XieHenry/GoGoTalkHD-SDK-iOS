@@ -295,14 +295,19 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 // ios 10 support 处于前台时接收到通知  如果处于前台时需要自定义弹框或者弹出alert，可以看一下http://www.jianshu.com/p/d2a42072fad9 这篇文章
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
 
-    NSDictionary * userInfo = notification.request.content.userInfo;
+    NSDictionary *userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         [self pushInfoMationWithUserInfo:userInfo];
     }
     completionHandler((UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert)); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 
-
+    // 获取推送的角标值
+    NSInteger count = [userInfo[@"data"][@"Key"][@"sendno"] intValue];
+    // 设置相关的属性
+    [UIApplication sharedApplication].applicationIconBadgeNumber = count;
+    
+    
     /*
      UNNotificationRequest *request = notification.request; // 收到推送的请求
      UNNotificationContent *content = request.content; // 收到推送的消息内容
@@ -340,7 +345,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [self pushInfoMationWithUserInfo:userInfo];
         
     }
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
     completionHandler();  // 系统要求执行这个方法
 
 }

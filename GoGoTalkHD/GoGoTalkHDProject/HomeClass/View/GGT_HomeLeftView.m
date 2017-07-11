@@ -60,7 +60,9 @@
     [self.optionsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
         make.top.equalTo(self.mas_top).with.offset(LineY(163));
-        make.height.mas_offset(LineH(166)); //329 - 163
+//        make.height.mas_offset(LineH(166)); //329 - 163
+        make.height.mas_offset(LineH(277)); //329 - 163
+
     }];
     
  
@@ -83,14 +85,33 @@
         make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(55)));
     }];
     
-
+    // 约课按钮
+    UIButton *bookClassButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bookClassButton setTitle:@"约课" forState:UIControlStateNormal];
+    bookClassButton.frame = CGRectMake(0, 0, LineW(88), LineH(55));
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"kebiao_wei") forState:UIControlStateNormal];
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"kebiao") forState:UIControlStateSelected];
+    bookClassButton.tag = 101;
+    bookClassButton.selected = NO;
+    [bookClassButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self initButton:bookClassButton];
+    [self.optionsView addSubview:bookClassButton];
+    
+    
+    [bookClassButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.optionsView.mas_centerX);
+        make.top.equalTo(scheduleButton.mas_bottom).with.offset(56);
+        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(55)));
+    }];
+    
+    
     // 我的按钮
     UIButton *mineButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mineButton setTitle:@"我的" forState:UIControlStateNormal];
     mineButton.frame = CGRectMake(0, 0, LineW(88), LineH(57));
     [mineButton setImage:UIIMAGE_FROM_NAME(@"wode") forState:UIControlStateNormal];
     [mineButton setImage:UIIMAGE_FROM_NAME(@"wode_yi") forState:UIControlStateSelected];
-    mineButton.tag = 101;
+    mineButton.tag = 102;
     mineButton.selected = NO;
     [mineButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self initButton:mineButton];
@@ -108,7 +129,7 @@
     // 检测按钮
     UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkButton setImage:UIIMAGE_FROM_NAME(@"jiance") forState:UIControlStateNormal];
-    checkButton.tag = 102;
+    checkButton.tag = 103;
     [checkButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:checkButton];
     checkButton.hidden = YES;
@@ -125,7 +146,7 @@
     UIButton *phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [phoneButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [phoneButton setImage:[UIImage imageNamed:@"kefu"] forState:(UIControlStateNormal)];
-    phoneButton.tag = 103;
+    phoneButton.tag = 104;
     [phoneButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:phoneButton];
     

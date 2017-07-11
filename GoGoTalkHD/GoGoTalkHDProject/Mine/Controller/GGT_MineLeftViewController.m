@@ -56,7 +56,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 #pragma mark - pushMessageAction
 - (void)pushTestReportWithNotification:(NSNotification *)noti {
     isShowTestReportVc = YES;
-//    [self getLoadData];
+
     //推送过来消息，进行切换cell的控制器
     [self getLeftName];
 

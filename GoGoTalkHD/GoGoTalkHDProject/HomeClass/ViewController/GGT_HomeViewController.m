@@ -10,6 +10,7 @@
 #import "GGT_HomeLeftView.h"
 #import "GGT_ScheduleViewController.h"
 #import "GGT_MineSplitViewController.h"
+#import "GGT_OrderCourseViewController.h"
 #import "BaseNavigationController.h"
 
 //检查设备
@@ -23,8 +24,13 @@
 @interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
 @property (nonatomic, strong) GGT_HomeLeftView *xc_leftView;
 @property (nonatomic, strong) GGT_ScheduleViewController *scheduleVC;
-@property (nonatomic, strong) GGT_MineSplitViewController  *mineVc;
+@property (nonatomic, strong) GGT_OrderCourseViewController *orderCourseVc;
+@property (nonatomic, strong) GGT_MineSplitViewController *mineVc;
+
+
 @property (nonatomic, strong) BaseNavigationController *xc_nav;
+@property (nonatomic, strong) BaseNavigationController *xc_nav1;
+
 @property (nonatomic, strong) UIViewController *currentVC;
 @end
 
@@ -56,7 +62,7 @@
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         sin.isAuditStatus = NO;
         
-        UIButton *button = [self.view viewWithTag:102];
+        UIButton *button = [self.view viewWithTag:103];
         button.hidden = NO;
         
     } failure:^(NSError *error) {
@@ -69,7 +75,7 @@
         }else {
             sin.isAuditStatus = NO;
             
-            UIButton *button = [self.view viewWithTag:102];
+            UIButton *button = [self.view viewWithTag:103];
             button.hidden = NO;
         }
     }];
@@ -85,7 +91,7 @@
     UIButton *button1 = [self.xc_leftView viewWithTag:100];
     button1.selected = YES;
     
-    UIButton *button = [self.xc_leftView viewWithTag:101];
+    UIButton *button = [self.xc_leftView viewWithTag:102];
     button.selected = NO;
     
     //  点击处于当前页面的按钮,直接跳出
@@ -97,7 +103,7 @@
 }
 
 - (void)pushMineWithNotification:(NSNotification *)noti {
-    UIButton *button = [self.xc_leftView viewWithTag:101];
+    UIButton *button = [self.xc_leftView viewWithTag:102];
     button.selected = YES;
     
     UIButton *button1 = [self.xc_leftView viewWithTag:100];
@@ -115,7 +121,7 @@
 }
 
 - (void)pushTestReportWithNotification:(NSNotification *)noti {
-    UIButton *button = [self.xc_leftView viewWithTag:101];
+    UIButton *button = [self.xc_leftView viewWithTag:102];
     button.selected = YES;
     
     UIButton *button1 = [self.xc_leftView viewWithTag:100];
@@ -194,6 +200,11 @@
     [self.xc_nav.view setFrame:CGRectMake(self.xc_leftView.width, 0, SCREEN_WIDTH()-self.xc_leftView.width, SCREEN_HEIGHT())];
     [self addChildViewController:self.xc_nav];
     
+    
+    self.orderCourseVc = [GGT_OrderCourseViewController new];
+    self.xc_nav1 = [[BaseNavigationController alloc] initWithRootViewController:self.orderCourseVc];
+    [self.xc_nav1.view setFrame:CGRectMake(self.xc_leftView.width, 0, SCREEN_WIDTH()-self.xc_leftView.width, SCREEN_HEIGHT())];
+    
     self.mineVc = [[GGT_MineSplitViewController alloc] init];
     [self.mineVc.view setFrame:CGRectMake(self.xc_leftView.width, 0, SCREEN_WIDTH()-self.xc_leftView.width, SCREEN_HEIGHT())];
     
@@ -239,7 +250,7 @@
         switch (button.tag) {
             case 100:
             {
-                //  点击处于当前页面的按钮,直接跳出
+                //点击处于当前页面的按钮,直接跳出
                 if (self.currentVC == self.xc_nav) {
                     return;
                 } else {
@@ -249,6 +260,15 @@
                 break;
             case 101:
             {
+                if (self.currentVC == self.xc_nav1) {
+                    return;
+                } else {
+                    [self replaceController:self.currentVC newController:self.xc_nav1];
+                }
+            }
+                break;
+            case 102:
+            {
                 if (self.currentVC == self.mineVc) {
                     return;
                 } else {
@@ -256,7 +276,7 @@
                 }
             }
                 break;
-            case 102:
+            case 103:
             {
                 
                 GGT_CheckDevicePopViewController *vc = [GGT_CheckDevicePopViewController new];
@@ -273,7 +293,7 @@
                 
             }
                 break;
-            case 103:
+            case 104:
             {
                 
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"请拨打电话 ：400-8787-276" preferredStyle:UIAlertControllerStyleAlert];
