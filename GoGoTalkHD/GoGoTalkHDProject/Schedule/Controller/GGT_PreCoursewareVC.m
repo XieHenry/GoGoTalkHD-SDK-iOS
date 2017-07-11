@@ -18,7 +18,7 @@
 #import "TKEduClassRoom.h"      // 测试拓课
 #import "TKMacro.h"
 
-@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, UIWebViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
+@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
 @property (nonatomic, strong) UIScrollView *xc_scrollView;
 @property (nonatomic, strong) UIView *xc_contentView;
 @property (nonatomic, strong) GGT_CourseDetailCell *xc_topView;
@@ -26,6 +26,8 @@
 @property (nonatomic, strong) WKWebView *xc_webView;
 
 @property (nonatomic, strong) UIButton *xc_scrollTopButton;
+
+@property (nonatomic) CGPoint tempContentOffset;
 
 @end
 
@@ -41,6 +43,43 @@
     
     [self configData];
     
+}
+
+- (void)dealloc
+{
+    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+    
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        
+        // Done
+        
+    }];
+}
+
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    self.xc_scrollView.contentOffset = CGPointZero;
+//}
+//
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    self.xc_scrollView.contentOffset = CGPointZero;
+//}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tempContentOffset = self.xc_scrollView.contentOffset;
+    self.xc_scrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.xc_scrollView.contentOffset = self.tempContentOffset;
 }
 
 - (void)configView
@@ -142,7 +181,6 @@
 
 - (void)configData
 {
-    
     if ([self.xc_model.FilePath isKindOfClass:[NSString class]] && self.xc_model.FilePath.length > 0) {
         NSString *urlStr = [self.xc_model.FilePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:urlStr];
@@ -388,21 +426,21 @@
     NSLog(@"弹框已经消失");
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     [MBProgressHUD showLoading:self.view];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     [MBProgressHUD hideHUDForView:self.view];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     [MBProgressHUD hideHUDForView:self.view];
 }
-
 
 #pragma mark TKEduEnterClassRoomDelegate
 //error.code  Description:error.description

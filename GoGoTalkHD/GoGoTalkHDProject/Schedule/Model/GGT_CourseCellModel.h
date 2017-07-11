@@ -41,6 +41,9 @@
 @property (nonatomic, strong) NSString *userid;
 @property (nonatomic, strong) NSString *userrole;
 
+@property (nonatomic, strong) NSString *StuRemark;
+@property (nonatomic, assign) NSInteger IsShowBooking;
+
 @end
 
 /*

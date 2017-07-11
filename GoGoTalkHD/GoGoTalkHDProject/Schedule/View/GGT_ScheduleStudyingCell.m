@@ -675,8 +675,13 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     } else {  // 0:正课  正课可以取消预约 体验课不能取消预约
         
         if ([self.xc_cellModel.Status integerValue] == 0 || [self.xc_cellModel.Status integerValue] == 1) {
+            if (self.xc_cellModel.IsShowBooking == 1) {
+                self.xc_courseTypeLabel.hidden = NO;
+            } else {
+                self.xc_courseTypeLabel.hidden = YES;
+            }
             self.xc_courseTypeLabel.text = @"预习课件";
-            self.xc_courseTypeLabel.hidden = NO;
+            
         } else {
             self.xc_courseTypeLabel.hidden = YES;
         }

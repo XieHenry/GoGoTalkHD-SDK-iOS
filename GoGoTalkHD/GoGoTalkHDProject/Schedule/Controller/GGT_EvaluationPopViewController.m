@@ -81,8 +81,8 @@ static NSString * const textViewPlaceholdString = @"请输入您对本节课程�
     self.xc_evaTeachView.userInteractionEnabled = NO;
     self.xc_evaCourseView.userInteractionEnabled = NO;
     
-    if ([self.xc_model.Remark isKindOfClass:[NSString class]]) {
-        self.xc_textView.text = self.xc_model.Remark;
+    if ([self.xc_model.StuRemark isKindOfClass:[NSString class]] && self.xc_model.StuRemark.length > 0) {
+        self.xc_textView.text = self.xc_model.StuRemark;
     } else {
         self.xc_textView.text = @" ";
     }
