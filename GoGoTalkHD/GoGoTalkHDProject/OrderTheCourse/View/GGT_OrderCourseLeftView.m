@@ -25,7 +25,7 @@
     [self addSubview:dayLabel];
     
     [dayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).with.offset(LineY(10));
+        make.top.equalTo(self.mas_top).with.offset(LineY(20.5));
         make.centerX.equalTo(self.mas_centerX);
         make.height.equalTo(@(LineH(22)));
     }];
@@ -39,10 +39,10 @@
     
     
     [dayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(dayLabel.mas_bottom).with.offset(LineY(20));
+        make.top.equalTo(dayLabel.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-0);
-        make.height.equalTo(@(LineH(200)));
+        make.height.equalTo(@(LineH(154.5)));
     }];
     
     
