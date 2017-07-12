@@ -220,9 +220,6 @@
 }
 
 
-
-
-
 //取消某item
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
   
@@ -237,7 +234,7 @@
 //选中某item
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"11111-%ld---%ld----%@",(long)indexPath.section,(long)indexPath.row,@(indexPath.row).description);
+    NSLog(@"11111-%ld-------%@",(long)indexPath.section,@(indexPath.row).description);
     
 }
 
