@@ -11,6 +11,7 @@
 
 @interface GGT_DetailsOfTeacherViewController ()
 
+@property (nonatomic, strong) GGT_DetailsOfTeacherView *detailsOfTeacherView;
 @end
 
 @implementation GGT_DetailsOfTeacherViewController
@@ -21,15 +22,18 @@
     self.navigationItem.title = @"老师详情";
     
     [self setLeftBackButton];
+    self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    
+    
 
     
-    self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-
-    GGT_DetailsOfTeacherView *View = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT()-64)];
+    GGT_DetailsOfTeacherView *View = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, marginFocusOn, LineH(124))];
+    View.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     [self.view addSubview:View];
     
-    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

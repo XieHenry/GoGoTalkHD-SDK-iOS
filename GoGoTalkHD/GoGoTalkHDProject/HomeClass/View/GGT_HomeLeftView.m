@@ -90,7 +90,7 @@
     [bookClassButton setTitle:@"约课" forState:UIControlStateNormal];
     bookClassButton.frame = CGRectMake(0, 0, LineW(88), LineH(55));
     [bookClassButton setImage:UIIMAGE_FROM_NAME(@"kebiao_wei") forState:UIControlStateNormal];
-    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"kebiao") forState:UIControlStateSelected];
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke") forState:UIControlStateSelected];
     bookClassButton.tag = 101;
     bookClassButton.selected = NO;
     [bookClassButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
