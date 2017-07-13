@@ -15,8 +15,6 @@
 #define magnification 1.15f  //头像放大倍数
 #define headPortraitW 62.5f  //头像宽度
 
-//#define magnification 1.2f  //头像放大倍数
-//#define headPortraitW 50.0f  //头像宽度
 
 @interface GGT_OrderCourseOfFocusViewController () <OTPageScrollViewDataSource,OTPageScrollViewDelegate>
 
@@ -24,7 +22,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) GGT_FocusOnOfPageView *PScrollView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, strong) UILabel *nameLabel;
 
 
 @end
@@ -37,9 +35,19 @@
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
     
+//    GGT_NoMoreDateAlertView *nodataView = [[GGT_NoMoreDateAlertView alloc]init];
+//    [nodataView imageString:@"weichuxi" andAlertString:@"您还没有开通课时，开通后即可预约课程！\n 客服电话：400-8787-276"];
+//    nodataView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+//    [self.view addSubview:nodataView];
+//    
+//    [nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_top).with.offset(0);
+//        make.left.equalTo(self.view.mas_left).with.offset(0);
+//        make.right.equalTo(self.view.mas_right).with.offset(-80);
+//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-64);
+//    }];
+//    
     
-    //    GGT_NoMoreDateAlertView *nodataView = [[GGT_NoMoreDateAlertView alloc]initWithFrame:CGRectMake(0, LineY(180), SCREEN_WIDTH(), LineW(180)) andImageString:@"wudingdan_wode" andAlertString:@"您暂时没有关注任何外教"];
-    //    [self.view addSubview:nodataView];
     
     
     
@@ -120,16 +128,16 @@
     
     
     
-    UILabel *nameLabel = [[UILabel alloc]init];
-    nameLabel.frame = CGRectMake(0, 0, cellSize.width, 19);
-    nameLabel.text = @"Runsun";
-    nameLabel.textColor = UICOLOR_FROM_HEX(Color333333);
-    nameLabel.font = Font(15);
-    [nameView addSubview:nameLabel];
+    self.nameLabel = [[UILabel alloc]init];
+    self.nameLabel.frame = CGRectMake(0, 0, cellSize.width, 19);
+    self.nameLabel.text = @"Runsun";
+    self.nameLabel.textColor = UICOLOR_FROM_HEX(Color333333);
+    self.nameLabel.font = Font(15);
+    [nameView addSubview:self.nameLabel];
     
     
     UIButton *focusOnBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    focusOnBtn.frame = CGRectMake(nameLabel.x+nameLabel.width+10, 0,LineW(36), LineH(19));
+    focusOnBtn.frame = CGRectMake(self.nameLabel.x+self.nameLabel.width+10, 0,LineW(36), LineH(19));
     [focusOnBtn setTitle:@"已关注" forState:(UIControlStateNormal)];
     focusOnBtn.titleLabel.font = Font(10);
     [focusOnBtn setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:(UIControlStateNormal)];
@@ -160,9 +168,14 @@
     cell.tag = 100 +index;
     
     
-    //    UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
-    //    iconImgView.image = UIIMAGE_FROM_NAME(@"wode_top");
-    //    [cell addSubview:iconImgView];
+    UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    iconImgView.image = UIIMAGE_FROM_NAME(@"headPortrait_default_avatar");
+    [cell addSubview:iconImgView];
+
+    self.nameLabel.text = self.dataArray[index];
+    
+    NSLog(@"----%@",self.dataArray[index]);
+    
     
     return cell;
 }

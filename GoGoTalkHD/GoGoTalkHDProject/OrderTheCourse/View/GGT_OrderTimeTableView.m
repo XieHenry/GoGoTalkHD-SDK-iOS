@@ -80,7 +80,7 @@
         UILabel *monthLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, LineY(15), LineW(104), LineH(15))];
         monthLabel.text = self.yearsArray[i];
         monthLabel.textAlignment = NSTextAlignmentCenter;
-        monthLabel.font = Font(12);
+        monthLabel.font = Font(15);
         monthLabel.textColor = UICOLOR_FROM_HEX(Color333333);
         [headerView addSubview:monthLabel];
 
@@ -100,7 +100,7 @@
 #pragma mark 创建UICollectionView
 - (void)initContentView {
     _bgScrollerView = [[UIScrollView alloc]init];
-    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,31*LineH(42)+LineH(20));
+    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,31*LineH(42)+LineH(40));
     _bgScrollerView.scrollEnabled = YES;
     _bgScrollerView.showsVerticalScrollIndicator = NO;
     _bgScrollerView.showsHorizontalScrollIndicator = NO;
@@ -123,14 +123,12 @@
 //     layout.minimumLineSpacing = LineY(5); //上下的间距 可以设置0看下效果
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2, 0, LineW(728), 31*LineH(42)) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2, LineY(10), LineW(728), 31*LineH(42)) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource =self;
     _collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     _collectionView.scrollEnabled = NO;
     [_bgScrollerView addSubview:_collectionView];
-    
-    
     [_collectionView registerClass:[GGT_OrderTimeCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     
@@ -229,3 +227,29 @@
 
 
 @end
+
+
+
+
+@implementation GGT_OrderTimeCollectionViewCell
+
+-(id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        self.timeLabel.textAlignment = NSTextAlignmentCenter;
+        self.timeLabel.font = Font(15);
+        self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);
+        [self addSubview:self.timeLabel];
+    }
+    
+    return self;
+}
+
+
+
+@end
+
+
+
