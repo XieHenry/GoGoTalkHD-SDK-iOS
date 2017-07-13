@@ -12,6 +12,6 @@
 
 + (instancetype)cellWithCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath;
 
-@property (nonatomic, strong) GGT_TestModel *xc_model;
+@property (nonatomic, strong) GGT_HomeDateModel *xc_model;
 
 @end

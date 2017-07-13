@@ -258,6 +258,7 @@
 		D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AEE1F1756CF00A79011 /* GGT_OrderClassPopVC.m */; };
 		D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AF11F1767D800A79011 /* GGT_ChooseCoursewareVC.m */; };
 		D6FD8AF51F176B1000A79011 /* GGT_ChooseCoursewareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AF41F176B1000A79011 /* GGT_ChooseCoursewareCell.m */; };
+		D6FD8AF81F17811C00A79011 /* GGT_HomeDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AF71F17811C00A79011 /* GGT_HomeDateModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -761,6 +762,8 @@
 		D6FD8AF11F1767D800A79011 /* GGT_ChooseCoursewareVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ChooseCoursewareVC.m; sourceTree = "<group>"; };
 		D6FD8AF31F176B1000A79011 /* GGT_ChooseCoursewareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ChooseCoursewareCell.h; sourceTree = "<group>"; };
 		D6FD8AF41F176B1000A79011 /* GGT_ChooseCoursewareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ChooseCoursewareCell.m; sourceTree = "<group>"; };
+		D6FD8AF61F17811C00A79011 /* GGT_HomeDateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeDateModel.h; sourceTree = "<group>"; };
+		D6FD8AF71F17811C00A79011 /* GGT_HomeDateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeDateModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1038,6 +1041,8 @@
 			children = (
 				D6134B041F16247000B4405E /* GGT_TestModel.h */,
 				D6134B051F16247000B4405E /* GGT_TestModel.m */,
+				D6FD8AF61F17811C00A79011 /* GGT_HomeDateModel.h */,
+				D6FD8AF71F17811C00A79011 /* GGT_HomeDateModel.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -2243,6 +2248,7 @@
 				D687754F1F0A07CA008687C2 /* TKProgressHUD.m in Sources */,
 				D68775361F0A07CA008687C2 /* BITFeedbackManager.m in Sources */,
 				D68775401F0A07CA008687C2 /* BITStoreButton.m in Sources */,
+				D6FD8AF81F17811C00A79011 /* GGT_HomeDateModel.m in Sources */,
 				D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */,
 				5B9E05A21F14AABA0050CEDB /* GGT_AllWithNoDateView.m in Sources */,
 				D64096851EEFE39E0038A0CC /* GGT_PreCoursewareVC.m in Sources */,

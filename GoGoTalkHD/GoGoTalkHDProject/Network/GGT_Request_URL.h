@@ -77,5 +77,8 @@ static NSString * const URL_GetContrastInfo = @"api/APP/GetContrastInfo";
 // 发送log日志
 static NSString * const URL_PostLog = @"api/APP/Applog";
 
+// 获取上课日期
+static NSString * const URL_GetDate = @"api/APP/GetDate";
+
 
 #endif /* GGT_Request_URL_h */

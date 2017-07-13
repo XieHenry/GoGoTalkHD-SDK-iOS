@@ -40,8 +40,10 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 //    [self initView];
     
     [self buildData];
-//    [self buildUI];
-    [self buildUI1];
+
+    [self buildUI];
+    
+    [self xc_loadData];
 }
 
 - (void)buildData
@@ -49,12 +51,12 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     // i=1当前选中 i=0不可选 其他都可选
     self.xc_dateMuArray = [NSMutableArray array];
     self.xc_timeMuArray = [NSMutableArray array];
-    for (int i = 0; i < 100; i++) {
-        NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
-        
-        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-        [self.xc_dateMuArray addObject:model];
-    }
+//    for (int i = 0; i < 100; i++) {
+//        NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
+//        
+//        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
+//        [self.xc_dateMuArray addObject:model];
+//    }
     
     for (int i = 0; i < 100; i++) {
         NSDictionary *dic = @{@"time":[NSString stringWithFormat:@"%d:00", i],@"type":@(i)};
@@ -64,7 +66,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 }
 
 
-- (void)buildUI1
+- (void)buildUI
 {
     UICollectionViewFlowLayout *xc_topLayout = [[UICollectionViewFlowLayout alloc] init];
     xc_topLayout.itemSize = CGSizeMake(xc_cellWidth, xc_topCellHeight);
@@ -125,6 +127,24 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     
 }
 
+- (void)xc_loadData
+{
+    [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:self success:^(id responseObject) {
+       
+        NSArray *dataArray = responseObject[@"data"];
+        if ([dataArray isKindOfClass:[NSArray class]] && dataArray.count > 0) {
+            [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_HomeDateModel *model = [GGT_HomeDateModel yy_modelWithDictionary:obj];
+                [self.xc_dateMuArray addObject:model];
+                [self.xc_topCollectionView reloadData];
+            }];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 // 组数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -174,8 +194,8 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         GGT_DateCollectionCell *cell = [GGT_DateCollectionCell cellWithCollectionView:collectionView indexPath:indexPath];
         cell.xc_model = self.xc_dateMuArray[indexPath.row];
         
-        GGT_TestModel *model = self.xc_dateMuArray[indexPath.row];
-        if (model.type == 1) {
+        GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
+        if (model.isHaveClass == XCSelectOrder) {
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
         
@@ -238,8 +258,8 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.xc_topCollectionView) {
-        GGT_TestModel *model = self.xc_dateMuArray[indexPath.row];
-        if (model.type == 0) {
+        GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
+        if (model.isHaveClass == XCDoNotOrder) {
             return NO;
         } else {
             return YES;
@@ -261,8 +281,8 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.xc_topCollectionView) {
-        GGT_TestModel *model = self.xc_dateMuArray[indexPath.row];
-        model.type = 1;
+        GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
+        model.isHaveClass = XCSelectOrder;
         GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
         [collectionView reloadData];
@@ -282,8 +302,8 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.xc_topCollectionView) {
-        GGT_TestModel *model = self.xc_dateMuArray[indexPath.row];
-        model.type = 2;
+        GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
+        model.isHaveClass = XCCanOrder;
         GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
         [self.xc_dateMuArray replaceObjectAtIndex:indexPath.row withObject:model];
