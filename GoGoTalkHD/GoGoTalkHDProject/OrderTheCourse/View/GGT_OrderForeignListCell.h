@@ -13,17 +13,9 @@
 
 @interface GGT_OrderForeignListCell : UITableViewCell
 
-//头像
-@property (nonatomic, strong) UIImageView *iconImageView;
-//姓名
-@property (nonatomic, strong) UILabel *nameLabel;
-//关注
-@property (nonatomic, strong) UIButton *focusButton;
-//次数img
-@property (nonatomic, strong) UIImageView *orderNumImageView;
-//次数
-@property (nonatomic, strong) UILabel *orderNumLabel;
++ (instancetype)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath;
+
 //预约按钮
-@property (nonatomic, strong) UIButton *orderButton;
+@property (nonatomic, strong) UIButton *xc_orderButton;
 
 @end

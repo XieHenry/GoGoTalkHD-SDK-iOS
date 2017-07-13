@@ -8,18 +8,40 @@
 
 #import "GGT_OrderForeignListCell.h"
 
+@interface GGT_OrderForeignListCell ()
+
+//头像
+@property (nonatomic, strong) UIImageView *xc_iconImageView;
+//姓名
+@property (nonatomic, strong) UILabel *xc_nameLabel;
+//次数
+@property (nonatomic, strong) UILabel *xc_orderNumLabel;
+// 年龄
+@property (nonatomic, strong) UILabel *xc_teachAgeLabel;
+//关注
+@property (nonatomic, strong) UIButton *xc_focusButton;
+
+
+@end
+
 @implementation GGT_OrderForeignListCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *GGT_OrderForeignListCellID = NSStringFromClass([self class]);
+    GGT_OrderForeignListCell *cell = [tableView dequeueReusableCellWithIdentifier:GGT_OrderForeignListCellID forIndexPath:indexPath];
+    if (cell==nil) {
+        cell=[[GGT_OrderForeignListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:GGT_OrderForeignListCellID];
+    }
+    return cell;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        
+
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-
-        
-
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initCellView];
-        
     }
     return self;
 }
@@ -27,116 +49,112 @@
 - (void)initCellView {
     
     //头像
-    self.iconImageView = [[UIImageView alloc]init];
-//    self.iconImageView.image = [UIImage imageNamed:@""];
-//    self.iconImageView.backgroundColor = UICOLOR_RANDOM_COLOR();
-    self.iconImageView.layer.masksToBounds = YES;
-    self.iconImageView.layer.cornerRadius = LineW(25);
-    self.iconImageView.layer.borderWidth = LineW(0.5);
-    self.iconImageView.layer.borderColor = UICOLOR_FROM_HEX(ColorF2F2F2).CGColor;
-    [self.contentView addSubview:self.iconImageView];
-    
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(LineX(15));
-        make.top.equalTo(self.contentView.mas_top).with.offset(LineY(10));
-        make.size.mas_offset(CGSizeMake(LineW(50), LineW(50)));
-    }];
-    
-    
+    self.xc_iconImageView = ({
+        UIImageView *imgView = [UIImageView new];
+        imgView.backgroundColor = [UIColor orangeColor];
+        imgView;
+    });
+    [self.contentView addSubview:self.xc_iconImageView];
     
     //姓名
-    self.nameLabel = [[UILabel alloc]init];
-    self.nameLabel.text = @"bo";
-    self.nameLabel.font = Font(16);
-    self.nameLabel.textColor = UICOLOR_FROM_HEX(Color333333);
-    [self.contentView addSubview:self.nameLabel];
+    self.xc_nameLabel = ({
+        UILabel *label = [UILabel new];
+        label.textColor = UICOLOR_FROM_HEX(Color333333);
+        label.font = Font(15);
+        label;
+    });
+    [self.contentView addSubview:self.xc_nameLabel];
+    
+    // 次数
+    self.xc_orderNumLabel = ({
+        UILabel *label = [UILabel new];
+        label.textColor = UICOLOR_FROM_HEX(Color666666);
+        label.font = Font(12);
+        label;
+    });
+    [self.contentView addSubview:self.xc_orderNumLabel];
+    
+    // 年龄
+    self.xc_teachAgeLabel = ({
+        UILabel *label = [UILabel new];
+        label.textColor = UICOLOR_FROM_HEX(Color666666);
+        label.font = Font(12);
+        label;
+    });
+    [self.contentView addSubview:self.xc_teachAgeLabel];
+    
+    // 关注按钮
+    self.xc_focusButton = ({
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundColor:[UIColor orangeColor]];
+        button;
+    });
+    [self.contentView addSubview:self.xc_focusButton];
+    
+    // 预约按钮
+    self.xc_orderButton= ({
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"预约" forState:(UIControlStateNormal)];
+        [button setTitleColor:UICOLOR_FROM_HEX(kThemeColor) forState:UIControlStateNormal];
+        button.titleLabel.font = Font(20);
+        button.backgroundColor = [UIColor whiteColor];
+        button;
+    });
+    [self.contentView addSubview:self.xc_orderButton];
     
     
-    //关注
-    self.focusButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//    [self.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:(UIControlStateNormal)];
-    self.focusButton.backgroundColor = UICOLOR_RANDOM_COLOR();
-    [self.contentView addSubview:self.focusButton];
-    
-    
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImageView.mas_right).with.offset(LineX(10));
-        make.right.equalTo(self.focusButton.mas_left).with.offset(-LineX(15));
-        make.top.equalTo(self.contentView.mas_top).with.offset(LineY(20));
-        make.height.mas_offset(LineW(18));
+    // 布局
+    // 头像
+    [self.xc_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).with.offset(LineX(15));
+        make.top.equalTo(self.contentView.mas_top).with.offset(margin15);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-margin15);
+        make.width.equalTo(self.xc_iconImageView.mas_height);
     }];
     
+    // 姓名
+    [self.xc_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_iconImageView.mas_right).with.offset(LineX(14));
+        make.top.equalTo(self.contentView.mas_top).with.offset(LineY(27));
+    }];
     
-    [self.focusButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLabel.mas_right).with.offset(LineX(15));
-        make.bottom.equalTo(self.nameLabel.mas_bottom);
+    // 次数
+    [self.xc_orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_nameLabel.mas_left);
+        make.centerY.equalTo(self.xc_iconImageView);
+    }];
+    
+    // 年龄
+    [self.xc_teachAgeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_orderNumLabel.mas_right).offset(margin10);
+        make.centerY.equalTo(self.xc_orderNumLabel);
+    }];
+    
+    // 关注
+    [self.xc_focusButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_nameLabel);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-LineY(27));
         make.size.mas_offset(CGSizeMake(LineW(30), LineW(15)));
     }];
     
-    
-    
-    //次数img
-    self.orderNumImageView = [[UIImageView alloc]init];
-    self.orderNumImageView.image = [UIImage imageNamed:@"shangkecishu_yueke_liebiao"];
-    [self.contentView addSubview:self.orderNumImageView];
-    
-
-    //次数
-    self.orderNumLabel = [[UILabel alloc]init];
-    self.orderNumLabel.text = @"236次";
-    self.orderNumLabel.font = Font(10);
-    self.orderNumLabel.textColor = UICOLOR_FROM_HEX(Color999999);
-    [self.contentView addSubview:self.orderNumLabel];
-    
-    [self.orderNumImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImageView.mas_right).with.offset(LineX(10));
-        make.right.equalTo(self.orderNumLabel.mas_left).with.offset(-LineX(5));
-        make.top.equalTo(self.nameLabel.mas_bottom).with.offset(LineY(10));
-        make.size.mas_offset(CGSizeMake(LineW(10), LineW(10)));
-    }];
-    
-    [self.orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.orderNumImageView.mas_right).with.offset(LineX(5));
-        make.top.equalTo(self.nameLabel.mas_bottom).with.offset(LineY(10));
-        make.height.mas_offset(LineW(12));
-    }];
-    
-    
-  
-    
-  
-   //预约按钮
-    self.orderButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [self.orderButton setTitle:@"预约" forState:(UIControlStateNormal)];
-    [self.orderButton setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:(UIControlStateNormal)];
-    self.orderButton.titleLabel.font = Font(12);
-    self.orderButton.backgroundColor = UICOLOR_FROM_HEX(kThemeColor);
-    self.orderButton.layer.masksToBounds = YES;
-    self.orderButton.layer.cornerRadius = LineH(12);
-    [self.contentView addSubview:self.orderButton];
-    
-    
-    [self.orderButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    // 预约按钮
+    [self.xc_orderButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(-LineX(15));
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(54), LineW(24)));
+        make.size.mas_offset(CGSizeMake(LineW(232.0f/2), LineW(76.0f/2)));
     }];
     
     
-    //底部的分割线
-    UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-    [self.contentView addSubview:lineView];
+    self.xc_nameLabel.text = @"123";
+    self.xc_orderNumLabel.text = @"123";
+    self.xc_teachAgeLabel.text = @"123";
     
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(LineX(10));
-        make.right.equalTo(self.contentView.mas_right).with.offset(-0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-0);;
-        make.height.mas_offset(LineW(0.5));
-    }];
-    
-    
-    
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [self.xc_iconImageView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:self.xc_iconImageView.height/2];
+    [self.xc_orderButton addBorderForViewWithBorderWidth:1.0 BorderColor:UICOLOR_FROM_HEX(kThemeColor) CornerRadius:self.xc_orderButton.height/2];
 }
 
 

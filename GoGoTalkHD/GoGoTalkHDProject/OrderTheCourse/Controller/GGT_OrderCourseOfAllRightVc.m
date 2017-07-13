@@ -12,15 +12,19 @@
 #import "GGT_ConfirmBookingAlertView.h"
 #import "GGT_SelectCoursewareViewController.h"
 #import "GGT_AllWithNoDateView.h"
+#import "GGT_OrderPlaceholderView.h"
+
+static CGFloat const xc_cellHeight = 208.0f/2 + 7;
+static CGFloat const xc_tableViewMargin = 7.0f;
 
 
 @interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *xc_tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic,strong) GGT_AllWithNoDateView *allWithNoDateView;
+@property (nonatomic, strong) GGT_AllWithNoDateView *allWithNoDateView;
 
-
+@property (nonatomic, strong) GGT_OrderPlaceholderView *xc_placeholderView;
 @end
 
 @implementation GGT_OrderCourseOfAllRightVc
@@ -28,10 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UICOLOR_RANDOM_COLOR();
-    
-    
-    
+    self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
     //新建tap手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture)];
@@ -42,99 +43,119 @@
     
     [self initTableView];
     
-    
-    @weakify(self);
-    _tableView.mj_header = [XCNormalHeader headerWithRefreshingBlock:^{
-        @strongify(self);
-        self.dataArray = [NSMutableArray array];
-        
-        [self getLoadData];
-        [self.tableView.mj_header endRefreshing];
-        
-    }];
-    [self.tableView.mj_header beginRefreshing];
-    
-    
-    // 设置自动切换透明度(在导航栏下面自动隐藏)
-    //    _tableView.mj_header.automaticallyChangeAlpha = YES;
-    
-    _tableView.mj_footer = [XCNormalFooter footerWithRefreshingBlock:^{
-        @strongify(self);
-        
-        [self.tableView.mj_footer endRefreshing];
-        
-        
-        
-    }];
-    
-    
 }
 
 - (void)getLoadData {
     
     self.dataArray = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8", nil];
-    [self.tableView reloadData];
+    [self.xc_tableView reloadData];
 }
 
 
 - (void)initTableView {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(LineX(5), LineY(5),marginMineRight-LineW(10), SCREEN_HEIGHT()-LineH(10)-64) style:(UITableViewStylePlain)];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-    [self.view addSubview:self.tableView];
     
+    self.xc_tableView = ({
+        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView;
+    });
+    [self.view addSubview:self.xc_tableView];
+    
+    [self.xc_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.view);
+        make.left.equalTo(@(xc_tableViewMargin));
+        make.right.equalTo(@(-xc_tableViewMargin));
+    }];
     
     _allWithNoDateView = [[GGT_AllWithNoDateView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT()-49-64-LineH(54))];
-    [_tableView addSubview:_allWithNoDateView];
+    [self.xc_tableView addSubview:_allWithNoDateView];
     _allWithNoDateView.hidden = YES;
+    
+    
+    [self.xc_tableView registerClass:[GGT_OrderForeignListCell class] forCellReuseIdentifier:NSStringFromClass([GGT_OrderForeignListCell class])];
+    
+    
+    @weakify(self);
+    self.xc_tableView.mj_header = [XCNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self);
+        self.dataArray = [NSMutableArray array];
+        [self getLoadData];
+        [self.xc_tableView.mj_header endRefreshing];
+    }];
+    [self.xc_tableView.mj_header beginRefreshing];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    //    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    self.xc_tableView.mj_footer = [XCNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self);
+        
+        [self.xc_tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    [self.view layoutIfNeeded];
+    
+#pragma mark - 添加xc_placeholderView
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-xc_tableViewMargin*2-350, self.xc_tableView.height)];
+    view.backgroundColor = [UIColor orangeColor];
+    
+    
+    self.xc_placeholderView = [[GGT_OrderPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-350-home_leftView_width, self.view.height)];
+    self.xc_tableView.enablePlaceHolderView = YES;
+    self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderView;
     
 }
 
 #pragma mark tableview的代理
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellStr = @"cell";
-    GGT_OrderForeignListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
-    if (!cell) {
-        cell= [[GGT_OrderForeignListCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:cellStr];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    
+    GGT_OrderForeignListCell *cell = [GGT_OrderForeignListCell cellWithTableView:tableView forIndexPath:indexPath];
     
     /****预约***/
-    [cell.orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     /****关注***/
-    [cell.focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [cell.focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     
     return cell;
     
-    
 }
 
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
-    //    return 1;
-    
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [UIView new];
+    view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    return view;
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return LineH(70);
-    //如果没有数据，就展示这个高度
-    //    return self.tableView.height;
+    return LineH(xc_cellHeight);
 }
-
-
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 7;
 }
 
 #pragma mark   预约
@@ -196,8 +217,6 @@
 #pragma mark   关注
 - (void)focusButtonClick {
     NSLog(@"关注");
-    
-    
 }
 
 
@@ -247,13 +266,6 @@
         return NO;
     }
     return YES;
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
