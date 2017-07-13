@@ -10,6 +10,5 @@
 
 @interface GGT_OrderCourseViewController : BaseViewController
 
-- (void)changeNav;
 
 @end
