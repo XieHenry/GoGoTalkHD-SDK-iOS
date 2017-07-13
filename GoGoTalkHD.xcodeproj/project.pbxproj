@@ -256,6 +256,7 @@
 		D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A58A1EC2DBB3006A003D /* GGT_RegisterView.m */; };
 		D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A59B1EC2FAC6006A003D /* BaseService.m */; };
 		D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E868F81F0B6F2900B48A5E /* XCLogManager.m */; };
+		D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -755,6 +756,8 @@
 		D6E0A59C1EC2FAC6006A003D /* GGT_Request_URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_Request_URL.h; sourceTree = "<group>"; };
 		D6E868F71F0B6F2900B48A5E /* XCLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCLogManager.h; sourceTree = "<group>"; };
 		D6E868F81F0B6F2900B48A5E /* XCLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLogManager.m; sourceTree = "<group>"; };
+		D6FD8AE91F17525300A79011 /* GGT_OrderPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderPlaceholderView.h; sourceTree = "<group>"; };
+		D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderPlaceholderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -886,16 +889,11 @@
 				5B9E057C1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m */,
 				5B9E057D1F149C390050CEDB /* GGT_OrderCourseViewController.h */,
 				5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */,
-				5B9E05881F14A8760050CEDB /* GGT_OrderCourseSplitViewController.h */,
-				5B9E05891F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m */,
-				5B9E05821F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.h */,
-				5B9E05831F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m */,
-				5B9E05851F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.h */,
-				5B9E05861F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m */,
 				5B9E058B1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.h */,
 				5B9E058C1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m */,
 				5B9E05B21F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.h */,
 				5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */,
+				D6FD8AEC1F17562D00A79011 /* 约课首页 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -903,7 +901,7 @@
 		5B9E05781F149C300050CEDB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D6134AF61F15F86A00B4405E /* New Group */,
+				D6134AF61F15F86A00B4405E /* 约课首页cell */,
 				5B9E058E1F14AABA0050CEDB /* GGT_AllWithNoDateView.h */,
 				5B9E058F1F14AABA0050CEDB /* GGT_AllWithNoDateView.m */,
 				5B9E05921F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.h */,
@@ -1015,7 +1013,7 @@
 			name = "课程cell";
 			sourceTree = "<group>";
 		};
-		D6134AF61F15F86A00B4405E /* New Group */ = {
+		D6134AF61F15F86A00B4405E /* 约课首页cell */ = {
 			isa = PBXGroup;
 			children = (
 				D6134AF71F15F8B700B4405E /* GGT_DateCollectionCell.h */,
@@ -1026,8 +1024,10 @@
 				D6134AFE1F16138500B4405E /* GGT_DateAndTimeHeaderView.m */,
 				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
 				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
+				D6FD8AE91F17525300A79011 /* GGT_OrderPlaceholderView.h */,
+				D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */,
 			);
-			name = "New Group";
+			name = "约课首页cell";
 			sourceTree = "<group>";
 		};
 		D6134B031F16247000B4405E /* Mode */ = {
@@ -1941,6 +1941,19 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		D6FD8AEC1F17562D00A79011 /* 约课首页 */ = {
+			isa = PBXGroup;
+			children = (
+				5B9E05881F14A8760050CEDB /* GGT_OrderCourseSplitViewController.h */,
+				5B9E05891F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m */,
+				5B9E05821F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.h */,
+				5B9E05831F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m */,
+				5B9E05851F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.h */,
+				5B9E05861F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m */,
+			);
+			name = "约课首页";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2342,6 +2355,7 @@
 				5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */,
 				D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */,
 				D6134AF91F15F8B700B4405E /* GGT_DateCollectionCell.m in Sources */,
+				D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */,
 				D68775251F0A07CA008687C2 /* TKTimer.m in Sources */,
 				D67D55F81EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m in Sources */,
 				5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */,

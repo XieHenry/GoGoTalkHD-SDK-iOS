@@ -20,8 +20,7 @@
 @property (nonatomic, strong) UILabel *xc_teachAgeLabel;
 //关注
 @property (nonatomic, strong) UIButton *xc_focusButton;
-//预约按钮
-@property (nonatomic, strong) UIButton *xc_orderButton;
+
 
 @end
 

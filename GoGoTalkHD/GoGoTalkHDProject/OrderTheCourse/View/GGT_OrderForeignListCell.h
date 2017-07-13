@@ -15,4 +15,7 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath;
 
+//预约按钮
+@property (nonatomic, strong) UIButton *xc_orderButton;
+
 @end

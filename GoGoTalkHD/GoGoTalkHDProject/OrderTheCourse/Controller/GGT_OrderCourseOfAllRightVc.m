@@ -12,17 +12,19 @@
 #import "GGT_ConfirmBookingAlertView.h"
 #import "GGT_SelectCoursewareViewController.h"
 #import "GGT_AllWithNoDateView.h"
+#import "GGT_OrderPlaceholderView.h"
 
 static CGFloat const xc_cellHeight = 208.0f/2 + 7;
+static CGFloat const xc_tableViewMargin = 7.0f;
 
 
 @interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *xc_tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic,strong) GGT_AllWithNoDateView *allWithNoDateView;
+@property (nonatomic, strong) GGT_AllWithNoDateView *allWithNoDateView;
 
-
+@property (nonatomic, strong) GGT_OrderPlaceholderView *xc_placeholderView;
 @end
 
 @implementation GGT_OrderCourseOfAllRightVc
@@ -64,8 +66,8 @@ static CGFloat const xc_cellHeight = 208.0f/2 + 7;
     
     [self.xc_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.view);
-        make.left.equalTo(@7);
-        make.right.equalTo(@(-7));
+        make.left.equalTo(@(xc_tableViewMargin));
+        make.right.equalTo(@(-xc_tableViewMargin));
     }];
     
     _allWithNoDateView = [[GGT_AllWithNoDateView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT()-49-64-LineH(54))];
@@ -74,7 +76,6 @@ static CGFloat const xc_cellHeight = 208.0f/2 + 7;
     
     
     [self.xc_tableView registerClass:[GGT_OrderForeignListCell class] forCellReuseIdentifier:NSStringFromClass([GGT_OrderForeignListCell class])];
-    
     
     
     @weakify(self);
@@ -96,6 +97,18 @@ static CGFloat const xc_cellHeight = 208.0f/2 + 7;
         
     }];
     
+    [self.view layoutIfNeeded];
+    
+#pragma mark - 添加xc_placeholderView
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-xc_tableViewMargin*2-350, self.xc_tableView.height)];
+    view.backgroundColor = [UIColor orangeColor];
+    
+    
+    self.xc_placeholderView = [[GGT_OrderPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-350-home_leftView_width, self.view.height)];
+    self.xc_tableView.enablePlaceHolderView = YES;
+    self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderView;
+    
 }
 
 #pragma mark tableview的代理
@@ -113,7 +126,7 @@ static CGFloat const xc_cellHeight = 208.0f/2 + 7;
     GGT_OrderForeignListCell *cell = [GGT_OrderForeignListCell cellWithTableView:tableView forIndexPath:indexPath];
     
     /****预约***/
-//    [cell.orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     /****关注***/
 //    [cell.focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
