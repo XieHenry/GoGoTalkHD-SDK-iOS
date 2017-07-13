@@ -18,8 +18,6 @@
 @property (nonatomic, strong) UILabel *xc_orderNumLabel;
 // 年龄
 @property (nonatomic, strong) UILabel *xc_teachAgeLabel;
-//关注
-@property (nonatomic, strong) UIButton *xc_focusButton;
 
 
 @end
@@ -86,7 +84,8 @@
     // 关注按钮
     self.xc_focusButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:[UIColor orangeColor]];
+        [button setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateNormal];
+//        [button setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
         button;
     });
     [self.contentView addSubview:self.xc_focusButton];

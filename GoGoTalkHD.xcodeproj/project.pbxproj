@@ -915,10 +915,6 @@
 				5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */,
 				5B9E05981F14AABA0050CEDB /* GGT_FocusOnOfPageView.h */,
 				5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */,
-				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
-				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
-				5B9E059C1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.h */,
-				5B9E059D1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m */,
 				5B9E059E1F14AABA0050CEDB /* GGT_OrderTimeTableView.h */,
 				5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */,
 				5B9E05A01F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.h */,
@@ -1021,14 +1017,14 @@
 		D6134AF61F15F86A00B4405E /* 约课首页cell */ = {
 			isa = PBXGroup;
 			children = (
+				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
+				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
 				D6134AF71F15F8B700B4405E /* GGT_DateCollectionCell.h */,
 				D6134AF81F15F8B700B4405E /* GGT_DateCollectionCell.m */,
 				D6134AFA1F1610D400B4405E /* GGT_TimeCollectionCell.h */,
 				D6134AFB1F1610D400B4405E /* GGT_TimeCollectionCell.m */,
 				D6134AFD1F16138500B4405E /* GGT_DateAndTimeHeaderView.h */,
 				D6134AFE1F16138500B4405E /* GGT_DateAndTimeHeaderView.m */,
-				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
-				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
 				D6FD8AE91F17525300A79011 /* GGT_OrderPlaceholderView.h */,
 				D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */,
 				D6FD8AF31F176B1000A79011 /* GGT_ChooseCoursewareCell.h */,
