@@ -13,12 +13,13 @@
 #import "GGT_SelectCoursewareViewController.h"
 #import "GGT_AllWithNoDateView.h"
 #import "GGT_OrderPlaceholderView.h"
+#import "GGT_OrderClassPopVC.h"
 
 static CGFloat const xc_cellHeight = 208.0f/2 + 7;
 static CGFloat const xc_tableViewMargin = 7.0f;
 
 
-@interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+@interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *xc_tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -160,6 +161,24 @@ static CGFloat const xc_tableViewMargin = 7.0f;
 
 #pragma mark   预约
 - (void)orderButtonClick {
+    
+    
+    
+    
+    GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
+    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    nav.popoverPresentationController.delegate = self;
+    //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    // 修改弹出视图的size 在控制器内部修改更好
+    //    vc.preferredContentSize = CGSizeMake(100, 100);
+    [self presentViewController:nav animated:YES completion:nil];
+    
+    return;
+    
+    
+    
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT())];
     bgView.backgroundColor = [UIColor blackColor];
     bgView.alpha = 0.5;
