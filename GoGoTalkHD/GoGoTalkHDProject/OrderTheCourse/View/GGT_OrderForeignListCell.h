@@ -18,4 +18,7 @@
 //预约按钮
 @property (nonatomic, strong) UIButton *xc_orderButton;
 
+//关注
+@property (nonatomic, strong) UIButton *xc_focusButton;
+
 @end
