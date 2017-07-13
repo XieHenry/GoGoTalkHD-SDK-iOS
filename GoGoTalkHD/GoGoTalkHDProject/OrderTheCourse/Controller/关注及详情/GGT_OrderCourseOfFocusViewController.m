@@ -91,8 +91,10 @@
     _PScrollView.pageScrollView.padding = 40;
     _PScrollView.pageScrollView.leftRightOffset = 0;
     _PScrollView.pageScrollView.frame = CGRectMake((SCREEN_WIDTH() - home_leftView_width - headPortraitW - 40)/2, 0, headPortraitW + 40, 72); //62.5
-    _dataArray = [NSMutableArray array];
+    [_headerView addSubview:_PScrollView];
     
+    
+    _dataArray = [NSMutableArray array];
     _dataArray = [NSMutableArray arrayWithObjects:
                   @"0",
                   @"1",
@@ -116,7 +118,6 @@
                   @"19",
                   nil];
     [_PScrollView.pageScrollView reloadData];
-    [_headerView addSubview:_PScrollView];
     
     
     CGSize cellSize=[@"Runsun" boundingRectWithSize:CGSizeMake(800, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:Font(15)} context:nil].size;
@@ -144,6 +145,9 @@
     focusOnBtn.backgroundColor = UICOLOR_FROM_HEX(ColorCCCCCC);
     [focusOnBtn addTarget:self action:@selector(focusOnBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [nameView addSubview:focusOnBtn];
+    
+    
+    
     
 }
 
@@ -173,8 +177,6 @@
     [cell addSubview:iconImgView];
 
     self.nameLabel.text = self.dataArray[index];
-    
-    NSLog(@"----%@",self.dataArray[index]);
     
     
     return cell;

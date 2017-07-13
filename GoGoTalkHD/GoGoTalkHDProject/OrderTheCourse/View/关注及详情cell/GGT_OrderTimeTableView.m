@@ -185,7 +185,7 @@
 //取消某item
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    //    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+//        NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
     
     
     //    GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
@@ -198,7 +198,8 @@
 
 //选中某item
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+            NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+
     GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
     deselectedCell.layer.cornerRadius = LineW(5);
     deselectedCell.layer.masksToBounds = YES;

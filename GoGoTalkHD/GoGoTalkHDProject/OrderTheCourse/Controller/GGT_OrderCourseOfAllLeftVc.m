@@ -7,7 +7,6 @@
 //
 
 #import "GGT_OrderCourseOfAllLeftVc.h"
-//#import "GGT_OrderCourseLeftView.h"
 #import "GGT_DateCollectionCell.h"
 #import "GGT_TimeCollectionCell.h"
 #import "GGT_DateAndTimeHeaderView.h"

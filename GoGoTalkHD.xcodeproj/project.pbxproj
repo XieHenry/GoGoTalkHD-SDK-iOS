@@ -19,23 +19,16 @@
 		5B8337CE1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8337CD1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m */; };
 		5B8337D11ED3DFEB005EE004 /* GGT_ChoicePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8337D01ED3DFEB005EE004 /* GGT_ChoicePickView.m */; };
 		5B8F1F5B1EE143CA00149368 /* GGT_MineClassPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1F5A1EE143CA00149368 /* GGT_MineClassPlaceholderView.m */; };
-		5B9E05801F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E057C1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m */; };
 		5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */; };
 		5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05831F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m */; };
 		5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05861F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m */; };
 		5B9E058A1F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05891F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m */; };
-		5B9E058D1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E058C1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m */; };
 		5B9E05A21F14AABA0050CEDB /* GGT_AllWithNoDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E058F1F14AABA0050CEDB /* GGT_AllWithNoDateView.m */; };
 		5B9E05A41F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05931F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.m */; };
-		5B9E05A51F14AABA0050CEDB /* GGT_DetailsOfTeacherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05951F14AABA0050CEDB /* GGT_DetailsOfTeacherView.m */; };
-		5B9E05A61F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */; };
-		5B9E05A71F14AABA0050CEDB /* GGT_FocusOnOfPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */; };
 		5B9E05A81F14AABA0050CEDB /* GGT_OrderForeignListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */; };
-		5B9E05AA1F14AABA0050CEDB /* GGT_OrderTimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */; };
 		5B9E05AB1F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */; };
 		5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */; };
 		5B9E05B41F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */; };
-		5B9E05B71F14D2650050CEDB /* GGT_OrderCourseLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05B61F14D2650050CEDB /* GGT_OrderCourseLeftView.m */; };
 		5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA56DC1ED829E20085DEEE /* GGT_MineLeftModel.m */; };
 		5BC4735F1EC95C12003B8154 /* GGT_MineClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4735E1EC95C12003B8154 /* GGT_MineClassViewController.m */; };
 		5BC473621EC95C39003B8154 /* GGT_FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC473611EC95C39003B8154 /* GGT_FeedbackViewController.m */; };
@@ -46,6 +39,12 @@
 		5BD5165A1ECAD32E0015D694 /* GGT_MineClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD516591ECAD32E0015D694 /* GGT_MineClassTableViewCell.m */; };
 		5BD5165D1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5165C1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.m */; };
 		5BE8F9811ED6A4B300958AED /* AddressList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BE8F9801ED6A4B300958AED /* AddressList.txt */; };
+		5BF1CBC11F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBBE1F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m */; };
+		5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBC01F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m */; };
+		5BF1CBCB1F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBC41F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m */; };
+		5BF1CBCC1F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBC61F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m */; };
+		5BF1CBCD1F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBC81F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m */; };
+		5BF1CBCE1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1CBCA1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m */; };
 		5BF3A6A21EEAC3B100491CC2 /* shebeijianche_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF3A6791EEAC3B100491CC2 /* shebeijianche_0.png */; };
 		5BF3A6A31EEAC3B100491CC2 /* shebeijianche_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF3A67A1EEAC3B100491CC2 /* shebeijianche_1.png */; };
 		5BF3A6A41EEAC3B100491CC2 /* shebeijianche_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF3A67B1EEAC3B100491CC2 /* shebeijianche_10.png */; };
@@ -316,8 +315,6 @@
 		5B8337D01ED3DFEB005EE004 /* GGT_ChoicePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ChoicePickView.m; sourceTree = "<group>"; };
 		5B8F1F591EE143CA00149368 /* GGT_MineClassPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineClassPlaceholderView.h; sourceTree = "<group>"; };
 		5B8F1F5A1EE143CA00149368 /* GGT_MineClassPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineClassPlaceholderView.m; sourceTree = "<group>"; };
-		5B9E057B1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseOfFocusViewController.h; sourceTree = "<group>"; };
-		5B9E057C1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseOfFocusViewController.m; sourceTree = "<group>"; };
 		5B9E057D1F149C390050CEDB /* GGT_OrderCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseViewController.h; sourceTree = "<group>"; };
 		5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseViewController.m; sourceTree = "<group>"; };
 		5B9E05821F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseOfAllLeftVc.h; sourceTree = "<group>"; };
@@ -326,30 +323,18 @@
 		5B9E05861F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseOfAllRightVc.m; sourceTree = "<group>"; };
 		5B9E05881F14A8760050CEDB /* GGT_OrderCourseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseSplitViewController.h; sourceTree = "<group>"; };
 		5B9E05891F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseSplitViewController.m; sourceTree = "<group>"; };
-		5B9E058B1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_DetailsOfTeacherViewController.h; sourceTree = "<group>"; };
-		5B9E058C1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_DetailsOfTeacherViewController.m; sourceTree = "<group>"; };
 		5B9E058E1F14AABA0050CEDB /* GGT_AllWithNoDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_AllWithNoDateView.h; sourceTree = "<group>"; };
 		5B9E058F1F14AABA0050CEDB /* GGT_AllWithNoDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_AllWithNoDateView.m; sourceTree = "<group>"; };
 		5B9E05921F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ConfirmBookingAlertView.h; sourceTree = "<group>"; };
 		5B9E05931F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ConfirmBookingAlertView.m; sourceTree = "<group>"; };
-		5B9E05941F14AABA0050CEDB /* GGT_DetailsOfTeacherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_DetailsOfTeacherView.h; sourceTree = "<group>"; };
-		5B9E05951F14AABA0050CEDB /* GGT_DetailsOfTeacherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_DetailsOfTeacherView.m; sourceTree = "<group>"; };
-		5B9E05961F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FocusOnOfPageScrollView.h; sourceTree = "<group>"; };
-		5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusOnOfPageScrollView.m; sourceTree = "<group>"; };
-		5B9E05981F14AABA0050CEDB /* GGT_FocusOnOfPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FocusOnOfPageView.h; sourceTree = "<group>"; };
-		5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusOnOfPageView.m; sourceTree = "<group>"; };
 		5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderForeignListCell.h; sourceTree = "<group>"; };
 		5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderForeignListCell.m; sourceTree = "<group>"; };
-		5B9E059E1F14AABA0050CEDB /* GGT_OrderTimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderTimeTableView.h; sourceTree = "<group>"; };
-		5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderTimeTableView.m; sourceTree = "<group>"; };
 		5B9E05A01F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_SelectCoursewareViewCell.h; sourceTree = "<group>"; };
 		5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelectCoursewareViewCell.m; sourceTree = "<group>"; };
 		5B9E05AC1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_NoMoreDateAlertView.h; sourceTree = "<group>"; };
 		5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_NoMoreDateAlertView.m; sourceTree = "<group>"; };
 		5B9E05B21F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_SelectCoursewareViewController.h; sourceTree = "<group>"; };
 		5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelectCoursewareViewController.m; sourceTree = "<group>"; };
-		5B9E05B51F14D2650050CEDB /* GGT_OrderCourseLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseLeftView.h; sourceTree = "<group>"; };
-		5B9E05B61F14D2650050CEDB /* GGT_OrderCourseLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseLeftView.m; sourceTree = "<group>"; };
 		5BBA56DB1ED829E20085DEEE /* GGT_MineLeftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineLeftModel.h; sourceTree = "<group>"; };
 		5BBA56DC1ED829E20085DEEE /* GGT_MineLeftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineLeftModel.m; sourceTree = "<group>"; };
 		5BC4735D1EC95C12003B8154 /* GGT_MineClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineClassViewController.h; sourceTree = "<group>"; };
@@ -369,6 +354,18 @@
 		5BD5165B1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineLeftTableViewCell.h; sourceTree = "<group>"; };
 		5BD5165C1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineLeftTableViewCell.m; sourceTree = "<group>"; };
 		5BE8F9801ED6A4B300958AED /* AddressList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddressList.txt; sourceTree = "<group>"; };
+		5BF1CBBD1F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_DetailsOfTeacherViewController.h; sourceTree = "<group>"; };
+		5BF1CBBE1F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_DetailsOfTeacherViewController.m; sourceTree = "<group>"; };
+		5BF1CBBF1F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseOfFocusViewController.h; sourceTree = "<group>"; };
+		5BF1CBC01F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseOfFocusViewController.m; sourceTree = "<group>"; };
+		5BF1CBC31F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_DetailsOfTeacherView.h; sourceTree = "<group>"; };
+		5BF1CBC41F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_DetailsOfTeacherView.m; sourceTree = "<group>"; };
+		5BF1CBC51F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FocusOnOfPageScrollView.h; sourceTree = "<group>"; };
+		5BF1CBC61F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusOnOfPageScrollView.m; sourceTree = "<group>"; };
+		5BF1CBC71F176D2A00BB1CDA /* GGT_FocusOnOfPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FocusOnOfPageView.h; sourceTree = "<group>"; };
+		5BF1CBC81F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusOnOfPageView.m; sourceTree = "<group>"; };
+		5BF1CBC91F176D2A00BB1CDA /* GGT_OrderTimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderTimeTableView.h; sourceTree = "<group>"; };
+		5BF1CBCA1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderTimeTableView.m; sourceTree = "<group>"; };
 		5BF3A6791EEAC3B100491CC2 /* shebeijianche_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shebeijianche_0.png; sourceTree = "<group>"; };
 		5BF3A67A1EEAC3B100491CC2 /* shebeijianche_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shebeijianche_1.png; sourceTree = "<group>"; };
 		5BF3A67B1EEAC3B100491CC2 /* shebeijianche_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shebeijianche_10.png; sourceTree = "<group>"; };
@@ -879,14 +876,7 @@
 		5B9E05761F149C300050CEDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5B9E057B1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.h */,
-				5B9E057C1F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m */,
-				5B9E057D1F149C390050CEDB /* GGT_OrderCourseViewController.h */,
-				5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */,
-				5B9E058B1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.h */,
-				5B9E058C1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m */,
-				5B9E05B21F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.h */,
-				5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */,
+				5BF1CBBC1F176B9C00BB1CDA /* 关注及详情 */,
 				D6FD8AEC1F17562D00A79011 /* 约课首页 */,
 			);
 			path = Controller;
@@ -895,29 +885,36 @@
 		5B9E05781F149C300050CEDB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5BF1CBBB1F176B9000BB1CDA /* 关注及详情cell */,
 				D6134AF61F15F86A00B4405E /* 约课首页cell */,
-				5B9E058E1F14AABA0050CEDB /* GGT_AllWithNoDateView.h */,
-				5B9E058F1F14AABA0050CEDB /* GGT_AllWithNoDateView.m */,
-				5B9E05921F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.h */,
-				5B9E05931F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.m */,
-				5B9E05941F14AABA0050CEDB /* GGT_DetailsOfTeacherView.h */,
-				5B9E05951F14AABA0050CEDB /* GGT_DetailsOfTeacherView.m */,
-				5B9E05961F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.h */,
-				5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */,
-				5B9E05981F14AABA0050CEDB /* GGT_FocusOnOfPageView.h */,
-				5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */,
-				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
-				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
-				5B9E059C1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.h */,
-				5B9E059D1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m */,
-				5B9E059E1F14AABA0050CEDB /* GGT_OrderTimeTableView.h */,
-				5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */,
-				5B9E05A01F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.h */,
-				5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */,
-				5B9E05B51F14D2650050CEDB /* GGT_OrderCourseLeftView.h */,
-				5B9E05B61F14D2650050CEDB /* GGT_OrderCourseLeftView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5BF1CBBB1F176B9000BB1CDA /* 关注及详情cell */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1CBC31F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.h */,
+				5BF1CBC41F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m */,
+				5BF1CBC51F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.h */,
+				5BF1CBC61F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m */,
+				5BF1CBC71F176D2A00BB1CDA /* GGT_FocusOnOfPageView.h */,
+				5BF1CBC81F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m */,
+				5BF1CBC91F176D2A00BB1CDA /* GGT_OrderTimeTableView.h */,
+				5BF1CBCA1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m */,
+			);
+			path = "关注及详情cell";
+			sourceTree = "<group>";
+		};
+		5BF1CBBC1F176B9C00BB1CDA /* 关注及详情 */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1CBBD1F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.h */,
+				5BF1CBBE1F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m */,
+				5BF1CBBF1F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.h */,
+				5BF1CBC01F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m */,
+			);
+			path = "关注及详情";
 			sourceTree = "<group>";
 		};
 		5BF3A6781EEAC3B100491CC2 /* 设备检测 */ = {
@@ -1012,14 +1009,20 @@
 		D6134AF61F15F86A00B4405E /* 约课首页cell */ = {
 			isa = PBXGroup;
 			children = (
+				5B9E058E1F14AABA0050CEDB /* GGT_AllWithNoDateView.h */,
+				5B9E058F1F14AABA0050CEDB /* GGT_AllWithNoDateView.m */,
+				5B9E05921F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.h */,
+				5B9E05931F14AABA0050CEDB /* GGT_ConfirmBookingAlertView.m */,
+				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
+				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
+				5B9E05A01F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.h */,
+				5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */,
 				D6134AF71F15F8B700B4405E /* GGT_DateCollectionCell.h */,
 				D6134AF81F15F8B700B4405E /* GGT_DateCollectionCell.m */,
 				D6134AFA1F1610D400B4405E /* GGT_TimeCollectionCell.h */,
 				D6134AFB1F1610D400B4405E /* GGT_TimeCollectionCell.m */,
 				D6134AFD1F16138500B4405E /* GGT_DateAndTimeHeaderView.h */,
 				D6134AFE1F16138500B4405E /* GGT_DateAndTimeHeaderView.m */,
-				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
-				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
 				D6FD8AE91F17525300A79011 /* GGT_OrderPlaceholderView.h */,
 				D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */,
 			);
@@ -1938,6 +1941,10 @@
 		D6FD8AEC1F17562D00A79011 /* 约课首页 */ = {
 			isa = PBXGroup;
 			children = (
+				5B9E057D1F149C390050CEDB /* GGT_OrderCourseViewController.h */,
+				5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */,
+				5B9E05B21F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.h */,
+				5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */,
 				5B9E05881F14A8760050CEDB /* GGT_OrderCourseSplitViewController.h */,
 				5B9E05891F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m */,
 				5B9E05821F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.h */,
@@ -2235,6 +2242,7 @@
 				D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */,
 				5B9E05A21F14AABA0050CEDB /* GGT_AllWithNoDateView.m in Sources */,
 				D64096851EEFE39E0038A0CC /* GGT_PreCoursewareVC.m in Sources */,
+				5BF1CBCE1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m in Sources */,
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,
 				D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */,
 				D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */,
@@ -2249,6 +2257,7 @@
 				D68775491F0A07CA008687C2 /* TKAFNetworkActivityIndicatorManager.m in Sources */,
 				D687750B1F0A07CA008687C2 /* TKEduClassRoomNetWorkManager.m in Sources */,
 				D67ACCC61EE173E00027031C /* GGT_ResultModel.m in Sources */,
+				5BF1CBCC1F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m in Sources */,
 				D68775481F0A07CA008687C2 /* TKAFHTTPSessionManager.m in Sources */,
 				D68775551F0A07CA008687C2 /* TKEduWhiteBoardHandle.m in Sources */,
 				D68775591F0A07CA008687C2 /* TKAVPlayerView.m in Sources */,
@@ -2277,6 +2286,7 @@
 				D6E0A5421EC2D9C1006A003D /* XCStarView.m in Sources */,
 				D687750D1F0A07CA008687C2 /* TKEduClassRoomSessionHandle.m in Sources */,
 				D68775291F0A07CA008687C2 /* TKGTMBase64.m in Sources */,
+				5BF1CBCB1F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m in Sources */,
 				D68775371F0A07CA008687C2 /* BITFeedbackMessage.m in Sources */,
 				D68775231F0A07CA008687C2 /* TKDrogView.m in Sources */,
 				D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */,
@@ -2284,11 +2294,11 @@
 				D687750F1F0A07CA008687C2 /* TKEduClassRoomProperty.m in Sources */,
 				5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */,
 				D64096881EEFF5720038A0CC /* GGT_PreTeachEvaView.m in Sources */,
+				5BF1CBC11F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m in Sources */,
 				D68775141F0A07CA008687C2 /* TKWeakDelegate.m in Sources */,
 				D6E0A55E1EC2D9CD006A003D /* UIView+Layout.m in Sources */,
 				D627DCF21ED4196E00076FBD /* XCNormalHeader.m in Sources */,
 				D68775451F0A07CA008687C2 /* HockeySDKPrivate.m in Sources */,
-				5B9E05A51F14AABA0050CEDB /* GGT_DetailsOfTeacherView.m in Sources */,
 				D6E0A5311EC2D9AE006A003D /* BaseBackViewController.m in Sources */,
 				D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */,
 				D68775201F0A07CA008687C2 /* TKNONetWorkView.m in Sources */,
@@ -2297,13 +2307,12 @@
 				D60FA5191EC987AE00838DE4 /* FLAnimatedImageView+WebCache.m in Sources */,
 				D687755B1F0A07CA008687C2 /* TKProgressSlider.m in Sources */,
 				5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */,
-				5B9E05AA1F14AABA0050CEDB /* GGT_OrderTimeTableView.m in Sources */,
-				5B9E05B71F14D2650050CEDB /* GGT_OrderCourseLeftView.m in Sources */,
 				D66FCBF81EEA9A4400792A6C /* GGT_EvaReportModel.m in Sources */,
 				D6E0A5771EC2DB15006A003D /* GGT_Singleton.m in Sources */,
 				5B9E05AB1F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m in Sources */,
 				5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */,
 				5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */,
+				5BF1CBCD1F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m in Sources */,
 				D68775421F0A07CA008687C2 /* BITUpdateManager.m in Sources */,
 				D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */,
 				D687750A1F0A07CA008687C2 /* TKEduClassRoom.m in Sources */,
@@ -2314,7 +2323,6 @@
 				D68775241F0A07CA008687C2 /* TKMessageTipView.m in Sources */,
 				5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */,
 				D68775211F0A07CA008687C2 /* TKPickViewTextField.m in Sources */,
-				5B9E05801F149C390050CEDB /* GGT_OrderCourseOfFocusViewController.m in Sources */,
 				5BC473AA1EC99FA7003B8154 /* GGT_MineHeaderView.m in Sources */,
 				D68775501F0A07CA008687C2 /* TKRCGlobalConfig.m in Sources */,
 				D6E0A55B1EC2D9CD006A003D /* UIButton+XCHelperBlock.m in Sources */,
@@ -2322,10 +2330,8 @@
 				D6E0A5401EC2D9C1006A003D /* OYCountDownManager.m in Sources */,
 				D687752C1F0A07CA008687C2 /* BITAttributedLabel.m in Sources */,
 				D687751B1F0A07CA008687C2 /* TKClassTimeView.m in Sources */,
-				5B9E05A61F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m in Sources */,
 				3538EF571ED2B6AD00078971 /* GGT_SelfInfoTableViewCell.m in Sources */,
 				D6E0A47C1EC2C200006A003D /* main.m in Sources */,
-				5B9E058D1F14A9D80050CEDB /* GGT_DetailsOfTeacherViewController.m in Sources */,
 				5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */,
 				D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */,
 				D68775581F0A07CA008687C2 /* TKAudioPlayer.m in Sources */,
@@ -2338,7 +2344,6 @@
 				D6134AFC1F1610D400B4405E /* GGT_TimeCollectionCell.m in Sources */,
 				5BC473681EC95C8A003B8154 /* GGT_SettingViewController.m in Sources */,
 				D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */,
-				5B9E05A71F14AABA0050CEDB /* GGT_FocusOnOfPageView.m in Sources */,
 				D68775171F0A07CA008687C2 /* TKStudentMessageTableViewCell.m in Sources */,
 				D68775221F0A07CA008687C2 /* TKButton.m in Sources */,
 				D6E0A5601EC2D9CD006A003D /* UIView+XCHelper.m in Sources */,
@@ -2358,6 +2363,7 @@
 				D68775441F0A07CA008687C2 /* BITWebTableViewCell.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
 				D687752D1F0A07CA008687C2 /* BITAuthenticationViewController.m in Sources */,
+				5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */,
 				D687754B1F0A07CA008687C2 /* TKAFSecurityPolicy.m in Sources */,
 				D6E0A5411EC2D9C1006A003D /* PlaceholderTextView.m in Sources */,
 				5B743D271EC5A435004E744A /* GGT_MineLeftViewController.m in Sources */,
