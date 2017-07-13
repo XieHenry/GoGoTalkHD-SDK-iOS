@@ -31,11 +31,9 @@
 		5B9E05A61F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */; };
 		5B9E05A71F14AABA0050CEDB /* GGT_FocusOnOfPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */; };
 		5B9E05A81F14AABA0050CEDB /* GGT_OrderForeignListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */; };
-		5B9E05A91F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E059D1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m */; };
 		5B9E05AA1F14AABA0050CEDB /* GGT_OrderTimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */; };
 		5B9E05AB1F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */; };
 		5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */; };
-		5B9E05B11F14ABAC0050CEDB /* OrderTimeTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05AF1F14ABAC0050CEDB /* OrderTimeTagsView.m */; };
 		5B9E05B41F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */; };
 		5B9E05B71F14D2650050CEDB /* GGT_OrderCourseLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05B61F14D2650050CEDB /* GGT_OrderCourseLeftView.m */; };
 		5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA56DC1ED829E20085DEEE /* GGT_MineLeftModel.m */; };
@@ -345,16 +343,12 @@
 		5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusOnOfPageView.m; sourceTree = "<group>"; };
 		5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderForeignListCell.h; sourceTree = "<group>"; };
 		5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderForeignListCell.m; sourceTree = "<group>"; };
-		5B9E059C1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderTimeCollectionViewCell.h; sourceTree = "<group>"; };
-		5B9E059D1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderTimeCollectionViewCell.m; sourceTree = "<group>"; };
 		5B9E059E1F14AABA0050CEDB /* GGT_OrderTimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderTimeTableView.h; sourceTree = "<group>"; };
 		5B9E059F1F14AABA0050CEDB /* GGT_OrderTimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderTimeTableView.m; sourceTree = "<group>"; };
 		5B9E05A01F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_SelectCoursewareViewCell.h; sourceTree = "<group>"; };
 		5B9E05A11F14AABA0050CEDB /* GGT_SelectCoursewareViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelectCoursewareViewCell.m; sourceTree = "<group>"; };
 		5B9E05AC1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_NoMoreDateAlertView.h; sourceTree = "<group>"; };
 		5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_NoMoreDateAlertView.m; sourceTree = "<group>"; };
-		5B9E05AE1F14ABAC0050CEDB /* OrderTimeTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTimeTagsView.h; sourceTree = "<group>"; };
-		5B9E05AF1F14ABAC0050CEDB /* OrderTimeTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTimeTagsView.m; sourceTree = "<group>"; };
 		5B9E05B21F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_SelectCoursewareViewController.h; sourceTree = "<group>"; };
 		5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelectCoursewareViewController.m; sourceTree = "<group>"; };
 		5B9E05B51F14D2650050CEDB /* GGT_OrderCourseLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseLeftView.h; sourceTree = "<group>"; };
@@ -921,6 +915,8 @@
 				5B9E05971F14AABA0050CEDB /* GGT_FocusOnOfPageScrollView.m */,
 				5B9E05981F14AABA0050CEDB /* GGT_FocusOnOfPageView.h */,
 				5B9E05991F14AABA0050CEDB /* GGT_FocusOnOfPageView.m */,
+				5B9E059A1F14AABA0050CEDB /* GGT_OrderForeignListCell.h */,
+				5B9E059B1F14AABA0050CEDB /* GGT_OrderForeignListCell.m */,
 				5B9E059C1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.h */,
 				5B9E059D1F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m */,
 				5B9E059E1F14AABA0050CEDB /* GGT_OrderTimeTableView.h */,
@@ -1891,8 +1887,6 @@
 			children = (
 				5B9E05AC1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.h */,
 				5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */,
-				5B9E05AE1F14ABAC0050CEDB /* OrderTimeTagsView.h */,
-				5B9E05AF1F14ABAC0050CEDB /* OrderTimeTagsView.m */,
 				D63DA9411ED5554400EFA686 /* 打印中文 */,
 				D6E0A5711EC2DB15006A003D /* GGT_Singleton.h */,
 				D6E0A5721EC2DB15006A003D /* GGT_Singleton.m */,
@@ -2237,7 +2231,6 @@
 				D6E0A55D1EC2D9CD006A003D /* UIImage+Category.m in Sources */,
 				D627DCEF1ED411FD00076FBD /* GGT_ScheduleTableView.m in Sources */,
 				D66FCBDF1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m in Sources */,
-				5B9E05A91F14AABA0050CEDB /* GGT_OrderTimeCollectionViewCell.m in Sources */,
 				D67ACCC31EE15C7A0027031C /* UILabel+XCHelper.m in Sources */,
 				D68775561F0A07CA008687C2 /* TKEduWhiteBoardNetWorkManager.m in Sources */,
 				D687751C1F0A07CA008687C2 /* TKDocumentListView.m in Sources */,
@@ -2302,7 +2295,6 @@
 				D687750D1F0A07CA008687C2 /* TKEduClassRoomSessionHandle.m in Sources */,
 				D68775291F0A07CA008687C2 /* TKGTMBase64.m in Sources */,
 				D68775371F0A07CA008687C2 /* BITFeedbackMessage.m in Sources */,
-				5B9E05B11F14ABAC0050CEDB /* OrderTimeTagsView.m in Sources */,
 				D68775231F0A07CA008687C2 /* TKDrogView.m in Sources */,
 				D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */,
 				D6E0A55F1EC2D9CD006A003D /* UIView+XCCornerRadius.m in Sources */,

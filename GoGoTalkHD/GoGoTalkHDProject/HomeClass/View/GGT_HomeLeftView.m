@@ -62,7 +62,6 @@
         make.top.equalTo(self.mas_top).with.offset(LineY(163));
 //        make.height.mas_offset(LineH(166)); //329 - 163
         make.height.mas_offset(LineH(277)); //329 - 163
-
     }];
     
  
@@ -89,8 +88,8 @@
     UIButton *bookClassButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [bookClassButton setTitle:@"约课" forState:UIControlStateNormal];
     bookClassButton.frame = CGRectMake(0, 0, LineW(88), LineH(55));
-    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"kebiao_wei") forState:UIControlStateNormal];
-    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke") forState:UIControlStateSelected];
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke") forState:UIControlStateNormal];
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke-yi") forState:UIControlStateSelected];
     bookClassButton.tag = 101;
     bookClassButton.selected = NO;
     [bookClassButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];

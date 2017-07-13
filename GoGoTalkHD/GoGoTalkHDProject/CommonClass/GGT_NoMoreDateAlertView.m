@@ -10,44 +10,62 @@
 
 @implementation GGT_NoMoreDateAlertView
 
-- (instancetype)initWithFrame:(CGRect)frame andImageString:(NSString *)imageString andAlertString:(NSString *)alertString {
+
+- (instancetype)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
     if (self) {
-        
-        [self configureUIWithImageString:imageString andAlertString:alertString];
+        [self initView];
     }
     
     return self;
-    
 }
 
-- (void)configureUIWithImageString:(NSString *)imageString andAlertString:(NSString *)alertString {
+- (void)initView {
     
-    self.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    self.placeImgView = ({
+        UIImageView *imgView = [UIImageView new];
+        imgView.frame = CGRectMake(0, 0, 260, 160);
+        imgView.contentMode = UIViewContentModeCenter;
+        imgView;
+    });
+    [self addSubview:self.placeImgView];
     
-    //wudingdan_wode
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = [UIImage imageNamed:imageString];
-    [self addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_offset(CGSizeMake(LineW(101.5), LineH(155)));
-        make.top.mas_equalTo(self.mas_top).with.offset(0);
-        make.centerX.mas_equalTo(self.mas_centerX);
+    [self.placeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(250);
+        make.width.equalTo(@(260));
+        make.height.equalTo(@(160));
+        make.centerX.equalTo(self.mas_centerX);
     }];
-
+ 
     
-    UILabel *label = [[UILabel alloc] init];
-    label.text = alertString;
-    label.font = Font(14);
-    label.textColor = UICOLOR_FROM_HEX(Color666666);
-    [self addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(imageView);
-        make.top.mas_equalTo(imageView.mas_bottom).with.offset(LineY(10));
+    
+    
+    self.placeLabel = ({
+        UILabel *label = [UILabel new];
+        label.font = Font(15);
+        label.textColor = UICOLOR_FROM_HEX(Color777777);
+        label.text = @" ";
+        [label changeLineSpaceWithSpace:10.0];
+        // 需要放到设置行间距的后面
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
+        label;
+    });
+    [self addSubview:self.placeLabel];
+    
+    
+    [self.placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.placeImgView.mas_bottom).offset(margin30);
+        make.centerX.equalTo(self.mas_centerX);
     }];
-    
 }
+
+- (void)imageString:(NSString *)imageString andAlertString:(NSString *)alertString {
+    self.placeImgView.image = [UIImage imageNamed:imageString];
+    self.placeLabel.text = alertString;
+}
+
 
 
 @end

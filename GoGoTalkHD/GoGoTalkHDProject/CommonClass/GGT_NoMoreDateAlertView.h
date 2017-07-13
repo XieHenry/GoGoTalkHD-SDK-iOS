@@ -10,6 +10,11 @@
 
 @interface GGT_NoMoreDateAlertView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andImageString:(NSString *)imageString andAlertString:(NSString *)alertString;
+
+@property (nonatomic, strong) UIImageView *placeImgView;
+@property (nonatomic, strong) UILabel *placeLabel;
+
+- (void)imageString:(NSString *)imageString andAlertString:(NSString *)alertString;
+
 
 @end

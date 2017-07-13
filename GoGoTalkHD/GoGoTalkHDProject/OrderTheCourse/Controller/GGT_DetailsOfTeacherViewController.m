@@ -24,13 +24,23 @@
     [self setLeftBackButton];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
+    self.navigationController.navigationBar.translucent = NO;
     
-
     
-    GGT_DetailsOfTeacherView *View = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, marginFocusOn, LineH(124))];
+    
+    GGT_DetailsOfTeacherView *View = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH() - home_leftView_width, 124)];
     View.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+    View.focusButtonBlock = ^(UIButton *btn) {
+        NSLog(@"关注");
+    };
     [self.view addSubview:View];
     
+
+    GGT_OrderTimeTableView *orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, 129, marginFocusOn, SCREEN_HEIGHT()-129)];
+    orderTimeView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:orderTimeView];
+    
+
 }
 
 

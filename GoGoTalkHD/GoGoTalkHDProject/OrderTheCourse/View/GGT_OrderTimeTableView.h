@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GGT_OrderTimeCollectionViewCell.h"
 
 @interface GGT_OrderTimeTableView : UIView <UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
@@ -27,7 +26,11 @@
 //展示多少天的数据
 @property (nonatomic, assign) NSInteger sectionRow;
 
+@end
 
 
+
+@interface GGT_OrderTimeCollectionViewCell : UICollectionViewCell
+@property (nonatomic, strong) UILabel *timeLabel;
 
 @end
