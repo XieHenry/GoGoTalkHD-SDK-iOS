@@ -61,6 +61,7 @@
 #import "GGT_ResultModel.h"
 #import "GGT_EvaReportModel.h"
 #import "GGT_CoursePhraseModel.h"
+#import "GGT_TestModel.h"
 
 
 static NSString * const xc_returnCode = @"result";
