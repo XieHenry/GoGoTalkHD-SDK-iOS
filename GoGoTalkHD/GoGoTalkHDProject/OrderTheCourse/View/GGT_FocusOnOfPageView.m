@@ -10,8 +10,7 @@
 
 @implementation GGT_FocusOnOfPageView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.pageScrollView = [[GGT_FocusOnOfPageScrollView alloc] init];

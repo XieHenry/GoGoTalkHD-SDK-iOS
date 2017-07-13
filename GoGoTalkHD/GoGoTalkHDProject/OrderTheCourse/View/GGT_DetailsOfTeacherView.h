@@ -11,9 +11,6 @@
 
 @interface GGT_DetailsOfTeacherView : UIView
 
-
-//教师的基本信息
-@property (nonatomic, strong) UIView *teacherInfoView;
 //头像
 @property (nonatomic, strong) UIImageView *iconImageView;
 //姓名

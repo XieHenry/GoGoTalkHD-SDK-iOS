@@ -19,6 +19,11 @@ static CGFloat const margin44 = 44.0f;
 static CGFloat const home_leftView_width = 88.0f;
 //《我的》右边的控制器宽度---绝对宽度
 static CGFloat const marginMineRight = 586.0f;
+//约课中关注的全部宽度
+static CGFloat const marginFocusOn = 936.0f;
+
+
+
 
 #define kThemeColor                     0xC40016
 #define kCalendar_EventColor            0x88c5fb

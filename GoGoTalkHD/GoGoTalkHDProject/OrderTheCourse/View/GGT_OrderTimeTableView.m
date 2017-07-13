@@ -32,11 +32,6 @@
     self.weeksArray = [NSMutableArray array];
     
     
-    //获取当前设备语言 en-US（英文） zh-Hans-US（中文）
-    //    NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    //    NSString *languageName = [appLanguages objectAtIndex:0];
-    
-    
     //获取2周的数据
     for (int i = 0; i < self.sectionRow; i ++) {
         //从现在开始的24小时
@@ -51,69 +46,61 @@
         [weekFormatter setDateFormat:@"EEE"];//星期几 @"HH:mm 'on' EEEE MMMM d"];
         NSString *weekStr = [weekFormatter stringFromDate:curDate];
         
-        
-        //        if ([languageName isEqualToString:@"zh-Hans-US"]) {
-        //            [self.weeksArray addObject:weekStr];
-        //        } else {//英文语言
-        //            //转换英文为中文
-        //            NSString *chinaWeekStr = [self cTransformFromE:weekStr];
-        //            [self.weeksArray addObject:chinaWeekStr];
-        //        }
-        
-        
         //组合时间
         [self.yearsArray addObject:dateStr];
         [self.weeksArray addObject:weekStr];
     }
     
-    //14天时间 85*14
+    
+    //7天时间 89*7
     _headerScrollerView = [[UIScrollView alloc]init];
-    _headerScrollerView.contentSize = CGSizeMake(LineW(85)*self.sectionRow,LineH(44));
+    //    _headerScrollerView.contentSize = CGSizeMake(LineW(85)*self.sectionRow,LineH(60));
     _headerScrollerView.scrollEnabled = YES;
     _headerScrollerView.showsVerticalScrollIndicator = NO;
     _headerScrollerView.showsHorizontalScrollIndicator = NO;
     _headerScrollerView.pagingEnabled = NO;
     _headerScrollerView.bounces = NO;
     _headerScrollerView.delegate = self;
-    _headerScrollerView.backgroundColor = UICOLOR_FROM_HEX(0xF9F9F9);
+    _headerScrollerView.backgroundColor = UICOLOR_FROM_HEX(0xEBEBEB);
     [self addSubview:_headerScrollerView];
     
     [_headerScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(0);
-            make.right.equalTo(self.mas_right).with.offset(-0);
-            make.top.equalTo(self.mas_top).with.offset(0);
-            make.height.mas_offset(LineH(44));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-0);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.height.mas_offset(LineH(60));
     }];
     
     
     
     for (NSUInteger i =  0; i < self.weeksArray.count; i++) {
-        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(LineW(85)*i, 0, LineW(85), LineH(44))];
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2 +LineW(104)*i, 0, LineW(104), LineH(60))];
         [_headerScrollerView addSubview:headerView];
         
-        
-        UILabel *weekLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, LineY(10), LineW(85), LineH(12))];
-        weekLabel.text = self.weeksArray[i];
-        weekLabel.textAlignment = NSTextAlignmentCenter;
-        weekLabel.font = Font(12);
-        weekLabel.textColor = UICOLOR_FROM_HEX(Color666666);
-        [headerView addSubview:weekLabel];
-        
-        
-        UILabel *monthLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,weekLabel.y+weekLabel.height+LineY(8), LineW(85), LineH(11))];
+        UILabel *monthLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, LineY(15), LineW(104), LineH(15))];
         monthLabel.text = self.yearsArray[i];
         monthLabel.textAlignment = NSTextAlignmentCenter;
         monthLabel.font = Font(12);
-        weekLabel.textColor = UICOLOR_FROM_HEX(Color999999);
+        monthLabel.textColor = UICOLOR_FROM_HEX(Color333333);
         [headerView addSubview:monthLabel];
+
+        
+        UILabel *weekLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,monthLabel.y+monthLabel.height+LineY(6), LineW(104), LineH(12))];
+        weekLabel.text = self.weeksArray[i];
+        weekLabel.textAlignment = NSTextAlignmentCenter;
+        weekLabel.font = Font(15);
+        weekLabel.textColor = UICOLOR_FROM_HEX(Color666666);
+        [headerView addSubview:weekLabel];
+        
     }
     
 }
+
+
 #pragma mark 创建UICollectionView
 - (void)initContentView {
-    //14天时间 85*14
     _bgScrollerView = [[UIScrollView alloc]init];
-    _bgScrollerView.contentSize = CGSizeMake(LineW(85)*self.sectionRow,31*LineH(52)+LineH(20));
+    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,31*LineH(42)+LineH(20));
     _bgScrollerView.scrollEnabled = YES;
     _bgScrollerView.showsVerticalScrollIndicator = NO;
     _bgScrollerView.showsHorizontalScrollIndicator = NO;
@@ -133,14 +120,10 @@
     
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    //设置每个item的大小
-    layout.itemSize = CGSizeMake(LineW(85), LineH(52));
-    layout.minimumInteritemSpacing = 1;
-    layout.minimumLineSpacing = 1; //上下的间距 可以设置0看下效果
-    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//     layout.minimumLineSpacing = LineY(5); //上下的间距 可以设置0看下效果
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, LineY(20), LineW(85)*self.sectionRow, 31*LineH(52)) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2, 0, LineW(728), 31*LineH(42)) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource =self;
     _collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
@@ -154,34 +137,14 @@
     _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00",@"22:30"];
     
     
-        [_collectionView reloadData];
+    [_collectionView reloadData];
 }
 
-//设置两个UIScrollView联动
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    if(scrollView == self.headerScrollerView) {
-        
-        CGFloat offsetX = self.headerScrollerView.contentOffset.x;
-        CGPoint offset = self.bgScrollerView.contentOffset;
-        offset.x = offsetX;
-        self.bgScrollerView.contentOffset = offset;
-        
-        
-    } else {
-        CGFloat offsetX = self.bgScrollerView.contentOffset.x;
-        CGPoint offset = self.headerScrollerView.contentOffset;
-        offset.x = offsetX;
-        self.headerScrollerView.contentOffset = offset;
-        
-    }
-    
-}
 
 #pragma mark -- UICollectionViewDelegate-------------
 //返回分区个数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 32;
+    return 7;
 }
 
 //返回每个分区的item个数
@@ -192,55 +155,64 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";
     GGT_OrderTimeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
-
+    
     if (!cell) {
         NSLog(@"-----------------");
     }
-
+    
     cell.timeLabel.text = _alltimeArray[indexPath.row];
-
+//    cell.backgroundColor = UICOLOR_RANDOM_COLOR();
     return cell;
 }
 
 
 //设置每个 UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(LineW(85), LineH(52));
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(LineW(84), LineH(32));
 }
 
 //定义每个UICollectionView 的间距
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 0, 0,0);
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+
+    return UIEdgeInsetsMake(LineY(5), LineX(10), LineY(5), LineX(10));
+  
 }
 
 //定义每个UICollectionView 的纵向间距
--(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 1;
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return LineY(10);
 }
 
 
 //取消某item
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-  
-    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
-//    ChoiceCityCollectionViewCell * deselectedCell =(ChoiceCityCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
-//
-//    deselectedCell.nameLabel.textColor = [UIColor colorWithHexString:@"#666666"];
-//    deselectedCell.contentView.backgroundColor = [UIColor colorWithHexString:@"f3f4f8"];
+    
+    //    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+    
+    
+    //    GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
+    //    deselectedCell.layer.cornerRadius = LineW(0);
+    //    deselectedCell.layer.masksToBounds = NO;
+    //    deselectedCell.layer.borderColor = [UIColor clearColor].CGColor;
+    //    deselectedCell.layer.borderWidth = LineW(0);
     
 }
 
 //选中某item
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"11111-%ld-------%@",(long)indexPath.section,@(indexPath.row).description);
+    GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
+    deselectedCell.layer.cornerRadius = LineW(5);
+    deselectedCell.layer.masksToBounds = YES;
+    deselectedCell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+    deselectedCell.layer.borderWidth = LineW(0.5);
+    deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
     
 }
 
 
 
--(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
     
 }
@@ -253,31 +225,6 @@
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-
-
-
-//转换英文为中文
-//-(NSString *)cTransformFromE:(NSString *)theWeek{
-//    NSString *chinaStr;
-//    if(theWeek){
-//        if([theWeek isEqualToString:@"Mon"]){
-//            chinaStr = @"周一";
-//        }else if([theWeek isEqualToString:@"Tue"]){
-//            chinaStr = @"周二";
-//        }else if([theWeek isEqualToString:@"Wed"]){
-//            chinaStr = @"周三";
-//        }else if([theWeek isEqualToString:@"Thu"]){
-//            chinaStr = @"周四";
-//        }else if([theWeek isEqualToString:@"Fri"]){
-//            chinaStr = @"周五";
-//        }else if([theWeek isEqualToString:@"Sat"]){
-//            chinaStr = @"周六";
-//        }else if([theWeek isEqualToString:@"Sun"]){
-//            chinaStr = @"周日";
-//        }
-//    }
-//    return chinaStr;
-//}
 
 
 

@@ -8,6 +8,8 @@
 
 #import "GGT_FocusOnOfPageScrollView.h"
 
+#define magnification 1.15f  //头像放大倍数
+
 @interface GGT_FocusOnOfPageScrollView()
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) NSMutableArray * viewsInPage;
@@ -19,19 +21,16 @@
 //消除警告
 @dynamic delegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
         [self initializeValue];
         [self reloadData];
     }
     return self;
 }
 
-- (void)initializeValue
-{
+- (void)initializeValue {
     self.clipsToBounds = YES;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
@@ -40,13 +39,10 @@
     self.multipleTouchEnabled = NO;
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     [self addGestureRecognizer:self.tapGesture];
-    
-    
-    
+  
 }
 
-- (void)reloadData
-{
+- (void)reloadData {
     if (!self.delegate || ![self.delegate respondsToSelector:@selector(numberOfPageInPageScrollView:)]) {
         return;
     }
@@ -76,9 +72,9 @@
         
         if (_numberOfCell > 3) {
             if (i == 2) {
-                cell.layer.borderColor = [UIColor redColor].CGColor;
-                cell.layer.borderWidth = 2;
-                cell.transform = CGAffineTransformMakeScale(1 + 0.2, 1  + 0.2);
+                cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+                cell.layer.borderWidth = 1;
+                cell.transform = CGAffineTransformMakeScale(magnification, magnification);
                 
                 self.contentOffset = CGPointMake(startX - self.padding/2, 0);
             }
@@ -95,8 +91,7 @@
     
 }
 
-- (UIView*)viewForRowAtIndex:(NSInteger)index
-{
+- (UIView*)viewForRowAtIndex:(NSInteger)index {
     if (index < self.viewsInPage.count) {
         return self.viewsInPage[index];
     }
@@ -105,16 +100,14 @@
 
 #pragma mark - Properties
 
-- (NSMutableArray*)viewsInPage
-{
+- (NSMutableArray*)viewsInPage {
     if (!_viewsInPage) {
         _viewsInPage = [NSMutableArray array];
     }
     return _viewsInPage;
 }
 
-- (UITapGestureRecognizer*)tapGesture
-{
+- (UITapGestureRecognizer*)tapGesture {
     if (!_tapGesture) {
         _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
         [_tapGesture setNumberOfTapsRequired:1];
@@ -125,15 +118,14 @@
 }
 
 
-- (float)leftRightOffset
-{
+- (float)leftRightOffset {
     if (!_leftRightOffset) {
         return (self.frame.size.width - _cellSize.width)/2;
     }
     return _leftRightOffset;
 }
 
-- (CGFloat)padding{
+- (CGFloat)padding {
     if (!_padding) {
         return 10;
     }
@@ -141,8 +133,7 @@
 }
 
 #pragma mark - Action
-- (void)handleTapGesture:(UITapGestureRecognizer*)tapGesture
-{
+- (void)handleTapGesture:(UITapGestureRecognizer*)tapGesture {
     CGPoint tapPoint = [tapGesture locationInView:self];
     
     float topY   = (self.frame.size.height - _cellSize.height)/2;
