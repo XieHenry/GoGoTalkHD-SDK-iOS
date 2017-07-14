@@ -234,23 +234,20 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@?lessonID=%@", URL_GetBookList_Home, self.xc_model.LessonId];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
         if ([responseObject[@"msg"] isKindOfClass:[NSString class]]) {
-            [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
+            [MBProgressHUD showMessage:responseObject[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
         
     } failure:^(NSError *error) {
         
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
         NSDictionary *dic = error.userInfo;
         if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
-            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+            [MBProgressHUD showMessage:dic[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-
     }];
 }
 
