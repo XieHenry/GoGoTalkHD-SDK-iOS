@@ -152,8 +152,11 @@ typedef enum : NSUInteger {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GGT_HomeTeachModel *model = [self.xc_dataMuArray safe_objectAtIndex:indexPath.row];
+    
     GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
+    vc.pushModel = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

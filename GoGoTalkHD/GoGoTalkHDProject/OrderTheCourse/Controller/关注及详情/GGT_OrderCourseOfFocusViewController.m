@@ -14,13 +14,14 @@
 #import "GGT_FocusImgModel.h"
 #import "GGT_TimeCollectionModel.h"
 #import "GGT_HomeDateModel.h"
+#import "GGT_OrderClassPopVC.h"
 
 
 #define magnification 1.15f  //头像放大倍数
 #define headPortraitW 62.5f  //头像宽度
 
 
-@interface GGT_OrderCourseOfFocusViewController () <OTPageScrollViewDataSource,OTPageScrollViewDelegate>
+@interface GGT_OrderCourseOfFocusViewController () <OTPageScrollViewDataSource,OTPageScrollViewDelegate,UIPopoverPresentationControllerDelegate>
 
 /***上部分头像***/
 //上面部分头像部分
@@ -80,8 +81,6 @@
     [self initHeaderView];
     
     
-    [self getDayAndWeekLoadData];
-    
     //请求上部分头像的数据
     self.iconDataArray = [NSMutableArray array];
     self.page = 1;
@@ -90,27 +89,8 @@
     
     
     //下面的课表模块
-    [self initCollectionView];
+//    [self initCollectionView];
 }
-
-- (void)getDayAndWeekLoadData {
-    [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:self success:^(id responseObject) {
-        
-        NSArray *dataArray = responseObject[@"data"];
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        NSMutableArray *tempArr = [NSMutableArray array];
-        
-        for (NSDictionary *dic in dataArray) {
-            GGT_HomeDateModel *model = [GGT_HomeDateModel yy_modelWithDictionary:dic];
-            [tempArr addObject:model];
-        }
-        
-        sin.orderCourse_dateMuArray = tempArr;
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
 
 
 #pragma mark 请求上部分头像的数据
@@ -223,15 +203,7 @@
 
 #pragma mark 关注按钮
 - (void)focusOnBtnClick {
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
     NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_GetAttention,[NSString stringWithFormat:@"%ld",(long)model.TeacherId],@"1"];
@@ -354,6 +326,22 @@
     
     self.orderTimeView = [[GGT_OrderTimeTableView alloc]init];
     self.orderTimeView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+    
+    
+    
+    __weak GGT_OrderCourseOfFocusViewController *weakSelf = self;
+    
+    self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *model1, GGT_HomeDateModel *model2) {
+        GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
+        BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.popoverPresentationController.delegate = weakSelf;
+        
+//        GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
+//        vc.xc_model = model;
+        
+        [weakSelf presentViewController:nav animated:YES completion:nil];
+    };
     [self.view addSubview:self.orderTimeView];
     
     [self.orderTimeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -367,6 +355,16 @@
 
 
 - (void)getOrderTimeTableViewLoadData {
+        for (UIView *view in self.view.subviews) {
+            if ([view isKindOfClass:[GGT_OrderTimeTableView class]]) {
+                GGT_OrderTimeTableView *cell = (GGT_OrderTimeTableView *)view;
+                [cell removeFromSuperview];
+            }
+        }
+    
+    
+    
+    
     GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
     NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@",URL_GetTimeByTeacherId,[NSString stringWithFormat:@"%ld",(long)model.TeacherId]];
@@ -436,7 +434,11 @@
         [self.timeDataArray addObject:classListGArr];
 
         //cell获得数据
+        
+        [self initCollectionView];
+
         [self.orderTimeView getCellArr:self.timeDataArray];
+
         
     } failure:^(NSError *error) {
         
