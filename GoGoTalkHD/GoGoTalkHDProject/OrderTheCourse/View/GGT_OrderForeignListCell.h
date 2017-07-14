@@ -21,4 +21,6 @@
 //关注
 @property (nonatomic, strong) UIButton *xc_focusButton;
 
+@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+
 @end

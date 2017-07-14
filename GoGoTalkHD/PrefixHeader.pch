@@ -63,6 +63,7 @@
 #import "GGT_CoursePhraseModel.h"
 #import "GGT_HomeDateModel.h"
 #import "GGT_HomeTimeModel.h"
+#import "GGT_HomeTeachModel.h"
 
 
 static NSString * const xc_returnCode = @"result";

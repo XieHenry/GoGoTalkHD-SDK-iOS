@@ -10,6 +10,8 @@
 
 @interface GGT_OrderForeignListCell ()
 
+// 父view
+@property (nonatomic, strong) UIView *xc_contentView;
 //头像
 @property (nonatomic, strong) UIImageView *xc_iconImageView;
 //姓名
@@ -18,7 +20,8 @@
 @property (nonatomic, strong) UILabel *xc_orderNumLabel;
 // 年龄
 @property (nonatomic, strong) UILabel *xc_teachAgeLabel;
-
+// 灰线
+@property (nonatomic, strong) UIView *xc_lineView;
 
 @end
 
@@ -34,25 +37,52 @@
     return cell;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initCellView];
     }
     return self;
 }
 
-- (void)initCellView {
+- (void)initCellView
+{
+    
+    // 线
+    self.xc_lineView = ({
+        UIView *view = [UIView new];
+        view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+        view;
+    });
+    [self addSubview:self.xc_lineView];
+    
+    [self.xc_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self);
+        make.height.equalTo(@(7));
+    }];
+    
+    // 父view
+    self.xc_contentView = ({
+        UIView *view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
+        view;
+    });
+    [self addSubview:self.xc_contentView];
+    
+    [self.xc_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self);
+        make.top.equalTo(self.xc_lineView.mas_bottom);
+    }];
+    
+
     
     //头像
     self.xc_iconImageView = ({
         UIImageView *imgView = [UIImageView new];
-        imgView.backgroundColor = [UIColor orangeColor];
         imgView;
     });
-    [self.contentView addSubview:self.xc_iconImageView];
+    [self.xc_contentView addSubview:self.xc_iconImageView];
     
     //姓名
     self.xc_nameLabel = ({
@@ -61,7 +91,7 @@
         label.font = Font(15);
         label;
     });
-    [self.contentView addSubview:self.xc_nameLabel];
+    [self.xc_contentView addSubview:self.xc_nameLabel];
     
     // 次数
     self.xc_orderNumLabel = ({
@@ -70,7 +100,7 @@
         label.font = Font(12);
         label;
     });
-    [self.contentView addSubview:self.xc_orderNumLabel];
+    [self.xc_contentView addSubview:self.xc_orderNumLabel];
     
     // 年龄
     self.xc_teachAgeLabel = ({
@@ -79,7 +109,7 @@
         label.font = Font(12);
         label;
     });
-    [self.contentView addSubview:self.xc_teachAgeLabel];
+    [self.xc_contentView addSubview:self.xc_teachAgeLabel];
     
     // 关注按钮
     self.xc_focusButton = ({
@@ -88,7 +118,7 @@
 //        [button setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
         button;
     });
-    [self.contentView addSubview:self.xc_focusButton];
+    [self.xc_contentView addSubview:self.xc_focusButton];
     
     // 预约按钮
     self.xc_orderButton= ({
@@ -99,22 +129,22 @@
         button.backgroundColor = [UIColor whiteColor];
         button;
     });
-    [self.contentView addSubview:self.xc_orderButton];
+    [self.xc_contentView addSubview:self.xc_orderButton];
     
     
     // 布局
     // 头像
     [self.xc_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(LineX(15));
-        make.top.equalTo(self.contentView.mas_top).with.offset(margin15);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-margin15);
+        make.left.equalTo(self.xc_contentView.mas_left).with.offset(LineX(15));
+        make.top.equalTo(self.xc_contentView.mas_top).with.offset(margin15);
+        make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-margin15);
         make.width.equalTo(self.xc_iconImageView.mas_height);
     }];
     
     // 姓名
     [self.xc_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_iconImageView.mas_right).with.offset(LineX(14));
-        make.top.equalTo(self.contentView.mas_top).with.offset(LineY(27));
+        make.top.equalTo(self.xc_contentView.mas_top).with.offset(LineY(27));
     }];
     
     // 次数
@@ -132,14 +162,14 @@
     // 关注
     [self.xc_focusButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_nameLabel);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-LineY(27));
+        make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-LineY(27));
         make.size.mas_offset(CGSizeMake(LineW(30), LineW(15)));
     }];
     
     // 预约按钮
     [self.xc_orderButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).with.offset(-LineX(15));
-        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.right.equalTo(self.xc_contentView.mas_right).with.offset(-LineX(15));
+        make.centerY.equalTo(self.xc_contentView.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(232.0f/2), LineW(76.0f/2)));
     }];
     
@@ -154,6 +184,28 @@
 {
     [self.xc_iconImageView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:self.xc_iconImageView.height/2];
     [self.xc_orderButton addBorderForViewWithBorderWidth:1.0 BorderColor:UICOLOR_FROM_HEX(kThemeColor) CornerRadius:self.xc_orderButton.height/2];
+}
+
+- (void)setXc_model:(GGT_HomeTeachModel *)xc_model
+{
+    _xc_model = xc_model;
+    
+    if ([xc_model.TeacherName isKindOfClass:[NSString class]]) {
+        self.xc_nameLabel.text = xc_model.TeacherName;
+    } else {
+        self.xc_nameLabel.text = @"";
+    }
+    
+    self.xc_orderNumLabel.text = [NSString stringWithFormat:@"%ld次", xc_model.LessonCount];
+    
+    self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", xc_model.Age];
+    
+    if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
+         NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        [self.xc_iconImageView sd_setImageWithURL:url placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+    }
+    
 }
 
 
