@@ -90,19 +90,24 @@
         make.height.equalTo(@(1.0f));
     }];
     
-    
-    self.xc_nameLabel.text = @"122";
-    
 }
 
-//- (void)setXc_model:(GGT_TestModel *)xc_model
-//{
-//    _xc_model = xc_model;
-//    if (xc_model.type == 1) {
-//        self.xc_chooseButton.selected = YES;
-//    } else {
-//        self.xc_chooseButton.selected = NO;
-//    }
-//}
+- (void)setXc_model:(GGT_CoursewareModel *)xc_model
+{
+    _xc_model = xc_model;
+    
+    if ([xc_model.FileTittle isKindOfClass:[NSString class]]) {
+        self.xc_nameLabel.text = xc_model.FileTittle;
+    } else {
+        self.xc_nameLabel.text = @"";
+    }
+    
+    
+    if (xc_model.xc_isSelected == YES) {
+        self.xc_chooseButton.selected = YES;
+    } else {
+        self.xc_chooseButton.selected = NO;
+    }
+}
 
 @end

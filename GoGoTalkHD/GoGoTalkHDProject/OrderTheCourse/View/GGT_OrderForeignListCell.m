@@ -80,6 +80,7 @@
     //头像
     self.xc_iconImageView = ({
         UIImageView *imgView = [UIImageView new];
+        imgView.image = UIIMAGE_FROM_NAME(@"headPortrait_default_avatar");
         imgView;
     });
     [self.xc_contentView addSubview:self.xc_iconImageView];

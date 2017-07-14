@@ -124,6 +124,7 @@
 		D685D7661F0E04DE00987BB4 /* GGT_CoursePhraseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D685D7651F0E04DE00987BB4 /* GGT_CoursePhraseModel.m */; };
 		D6869CC01F18651500C5390C /* GGT_HomeTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6869CBF1F18651500C5390C /* GGT_HomeTimeModel.m */; };
 		D6869CC31F18897700C5390C /* GGT_HomeTeachModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6869CC21F18897700C5390C /* GGT_HomeTeachModel.m */; };
+		D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6869CC51F18AA2400C5390C /* GGT_CoursewareModel.m */; };
 		D687750A1F0A07CA008687C2 /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D68774391F0A07CA008687C2 /* TKEduClassRoom.m */; };
 		D687750B1F0A07CA008687C2 /* TKEduClassRoomNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D687743B1F0A07CA008687C2 /* TKEduClassRoomNetWorkManager.m */; };
 		D687750C1F0A07CA008687C2 /* TKEduClassRoomSession.m in Sources */ = {isa = PBXBuildFile; fileRef = D687743D1F0A07CA008687C2 /* TKEduClassRoomSession.m */; };
@@ -484,6 +485,8 @@
 		D6869CBF1F18651500C5390C /* GGT_HomeTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeTimeModel.m; sourceTree = "<group>"; };
 		D6869CC11F18897700C5390C /* GGT_HomeTeachModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeTeachModel.h; sourceTree = "<group>"; };
 		D6869CC21F18897700C5390C /* GGT_HomeTeachModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeTeachModel.m; sourceTree = "<group>"; };
+		D6869CC41F18AA2400C5390C /* GGT_CoursewareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CoursewareModel.h; sourceTree = "<group>"; };
+		D6869CC51F18AA2400C5390C /* GGT_CoursewareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CoursewareModel.m; sourceTree = "<group>"; };
 		D68774371F0A07CA008687C2 /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
 		D68774381F0A07CA008687C2 /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
 		D68774391F0A07CA008687C2 /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
@@ -1055,6 +1058,8 @@
 				D6869CBF1F18651500C5390C /* GGT_HomeTimeModel.m */,
 				D6869CC11F18897700C5390C /* GGT_HomeTeachModel.h */,
 				D6869CC21F18897700C5390C /* GGT_HomeTeachModel.m */,
+				D6869CC41F18AA2400C5390C /* GGT_CoursewareModel.h */,
+				D6869CC51F18AA2400C5390C /* GGT_CoursewareModel.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -2381,6 +2386,7 @@
 				5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */,
 				D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */,
 				D6134AF91F15F8B700B4405E /* GGT_DateCollectionCell.m in Sources */,
+				D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */,
 				D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */,
 				D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */,
 				D68775251F0A07CA008687C2 /* TKTimer.m in Sources */,

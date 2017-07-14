@@ -17,6 +17,7 @@
 
 static CGFloat const xc_cellHeight = 208.0f/2 + 7;
 static CGFloat const xc_tableViewMargin = 7.0f;
+static NSInteger const xc_pageSizeNum = 10;
 
 typedef enum : NSUInteger {
     XCLoadNewData,
@@ -56,7 +57,7 @@ typedef enum : NSUInteger {
 
 - (void)initData
 {
-    self.xc_pageSize = 1;
+    self.xc_pageSize = xc_pageSizeNum;
     self.xc_pageIndex = 1;
     self.xc_dataMuArray = [NSMutableArray array];
 }
@@ -131,8 +132,10 @@ typedef enum : NSUInteger {
 {
     GGT_OrderForeignListCell *cell = [GGT_OrderForeignListCell cellWithTableView:tableView forIndexPath:indexPath];
     
+    cell.xc_orderButton.tag = 100+indexPath.row;
+    
     /****预约***/
-    [cell.xc_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     /****关注***/
     [cell.xc_focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -154,13 +157,16 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark   预约
-- (void)orderButtonClick
+- (void)xc_orderButtonClick:(UIButton *)button
 {
     GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     nav.popoverPresentationController.delegate = self;
     //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
+    vc.xc_model = model;
     
     // 修改弹出视图的size 在控制器内部修改更好
     //    vc.preferredContentSize = CGSizeMake(100, 100);

@@ -11,15 +11,15 @@
 @interface GGT_HomeTeachModel : NSObject
 
 @property (nonatomic, assign) NSInteger Age;
-@property (nonatomic, assign) NSInteger BookingId;
+@property (nonatomic, strong) NSString *BookingId;
 @property (nonatomic, strong) NSString *FileTittle;
 @property (nonatomic, strong) NSString *ImageUrl;
 @property (nonatomic, strong) NSString *IsFollow;
 @property (nonatomic, assign) NSInteger LessonCount;
-@property (nonatomic, assign) NSInteger LessonId;
+@property (nonatomic, strong) NSString *LessonId;
 @property (nonatomic, strong) NSString *Sex;
 @property (nonatomic, strong) NSString *StartTime;
-@property (nonatomic, assign) NSInteger *TeacherId;
+@property (nonatomic, strong) NSString *TeacherId;
 @property (nonatomic, strong) NSString *TeacherName;
 
 @end

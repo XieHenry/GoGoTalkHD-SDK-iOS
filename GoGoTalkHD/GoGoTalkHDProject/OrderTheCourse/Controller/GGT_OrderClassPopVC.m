@@ -101,7 +101,7 @@
     // 教师头像
     self.xc_teachImgView = ({
         UIImageView *imgView = [UIImageView new];
-        imgView.backgroundColor = [UIColor orangeColor];
+        imgView.image = UIIMAGE_FROM_NAME(@"headPortrait_default_avatar");
         imgView;
     });
     [self.view addSubview:self.xc_teachImgView];
@@ -174,9 +174,30 @@
     
     
     
-    self.xc_teachNameLabel.text = @"123";
-    self.xc_timeLabel.text = @"123";
-    [self.xc_chooseCourseButton setTitle:@"123" forState:UIControlStateNormal];
+    if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
+        NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        [self.xc_teachImgView sd_setImageWithURL:url placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+    }
+    
+    if ([self.xc_model.TeacherName isKindOfClass:[NSString class]]) {
+        self.xc_teachNameLabel.text = self.xc_model.TeacherName;
+    } else {
+        self.xc_teachNameLabel.text = @"";
+    }
+    
+    if ([self.xc_model.StartTime isKindOfClass:[NSString class]]) {
+        self.xc_timeLabel.text = self.xc_model.StartTime;
+    } else {
+        self.xc_timeLabel.text = @"";
+    }
+    
+    [self.xc_chooseCourseButton setTitle:@"选择重上课程>>" forState:UIControlStateNormal];
+    
+    
+    [self.view layoutIfNeeded];
+    
+    [self.xc_sureButton xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:self.xc_sureButton.height];
     
 }
 
@@ -193,16 +214,44 @@
     [[self.xc_chooseCourseButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
         GGT_ChooseCoursewareVC *vc = [GGT_ChooseCoursewareVC new];
+        vc.xc_model = self.xc_model;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
     // 确认预约事件
     [[self.xc_sureButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        [self sendNetwork];
+    
     }];
     
-    
+}
+
+// 约课
+- (void)sendNetwork
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@?lessonID=%@", URL_GetBookList_Home, self.xc_model.LessonId];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        if ([responseObject[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+
+    }];
 }
 
 
