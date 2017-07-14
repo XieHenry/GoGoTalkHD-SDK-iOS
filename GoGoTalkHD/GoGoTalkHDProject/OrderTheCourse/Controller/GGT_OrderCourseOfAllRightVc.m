@@ -18,6 +18,11 @@
 static CGFloat const xc_cellHeight = 208.0f/2 + 7;
 static CGFloat const xc_tableViewMargin = 7.0f;
 
+typedef enum : NSUInteger {
+    XCLoadNewData,
+    XCLoadMoreData,
+} XCLoadType;
+
 
 @interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate>
 
@@ -29,6 +34,10 @@ static CGFloat const xc_tableViewMargin = 7.0f;
 @property (nonatomic, strong) NSString *xc_date;
 @property (nonatomic, strong) NSString *xc_time;
 
+@property (nonatomic, assign) NSInteger xc_total;
+
+@property (nonatomic, assign) XCLoadType xc_loadType;
+
 @end
 
 @implementation GGT_OrderCourseOfAllRightVc
@@ -38,6 +47,8 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
+    self.xc_loadType = XCLoadNewData;
+    
     
     [self buildUI];
     [self initData];
@@ -45,7 +56,7 @@ static CGFloat const xc_tableViewMargin = 7.0f;
 
 - (void)initData
 {
-    self.xc_pageSize = 10;
+    self.xc_pageSize = 1;
     self.xc_pageIndex = 1;
     self.xc_dataMuArray = [NSMutableArray array];
 }
@@ -84,6 +95,9 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     self.xc_tableView.mj_header = [XCNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
         
+        self.xc_pageIndex = 1;
+        self.xc_loadType = XCLoadNewData;
+        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
         
         [self.xc_tableView.mj_header endRefreshing];
     }];
@@ -94,6 +108,12 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     
     self.xc_tableView.mj_footer = [XCNormalFooter footerWithRefreshingBlock:^{
         @strongify(self);
+        
+        if (self.xc_dataMuArray.count < self.xc_total) {
+            self.xc_pageIndex++;
+            self.xc_loadType = XCLoadMoreData;
+            [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+        }
         
         [self.xc_tableView.mj_footer endRefreshing];
         
@@ -162,7 +182,9 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@&time=%@&pageIndex=%ld&pageSize=%ld", URL_GetPageTeacherLessonApp, self.xc_date, self.xc_time, self.xc_pageIndex, self.xc_pageSize];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
-        [self.xc_dataMuArray removeAllObjects];
+        if (self.xc_loadType == XCLoadNewData) {
+            [self.xc_dataMuArray removeAllObjects];
+        }
         
         NSArray *dataArray = responseObject[@"data"];
         if ([dataArray isKindOfClass:[NSArray class]] && dataArray.count > 0) {
@@ -172,11 +194,21 @@ static CGFloat const xc_tableViewMargin = 7.0f;
             }];
         }
         
+        self.xc_total = [responseObject[@"total"] integerValue];
         [self.xc_tableView reloadData];
         
+        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:responseObject];
+        self.xc_placeholderView.xc_model = model;
+        
     } failure:^(NSError *error) {
+        
         [self.xc_dataMuArray removeAllObjects];
         [self.xc_tableView reloadData];
+        
+        NSDictionary *dic = error.userInfo;
+        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
+        self.xc_placeholderView.xc_model = model;
+       
     }];
 }
 

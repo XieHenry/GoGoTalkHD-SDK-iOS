@@ -60,4 +60,12 @@
     
 }
 
+- (void)setXc_model:(GGT_ResultModel *)xc_model
+{
+    _xc_model = xc_model;
+    if ([xc_model.msg isKindOfClass:[NSString class]]) {
+        self.xc_placeholderLabel.text = xc_model.msg;
+    }
+}
+
 @end
