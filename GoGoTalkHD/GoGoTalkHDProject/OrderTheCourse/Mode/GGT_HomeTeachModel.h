@@ -24,6 +24,7 @@
 
 @end
 
+//IsFollow":1,      （是否关注 0：未关注 1：已关注）
 /*
  Age = 22;
  BookingId = 57;

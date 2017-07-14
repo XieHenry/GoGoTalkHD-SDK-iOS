@@ -197,6 +197,16 @@
         self.xc_nameLabel.text = @"";
     }
     
+    //IsFollow":1, （是否关注 0：未关注 1：已关注）
+    if ([xc_model.IsFollow isEqualToString:@"0"]) {
+        [self.xc_focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateNormal];
+        [self.xc_focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateHighlighted];
+    } else {
+        [self.xc_focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
+        [self.xc_focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateHighlighted];
+    }
+    
+    
     self.xc_orderNumLabel.text = [NSString stringWithFormat:@"%ld次", xc_model.LessonCount];
     
     self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", xc_model.Age];

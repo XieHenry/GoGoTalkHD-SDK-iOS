@@ -95,5 +95,11 @@ static NSString * const URL_GetBookList = @"api/APP/GetBookList";
 // 重上课程
 static NSString * const URL_AgainLesson = @"api/APP/AgainLesson";
 
+// 关注教师
+static NSString * const URL_Attention_Home = @"api/APP/Attention";
+
+// 点击预约按钮判断外教是否被其他人预约
+static NSString * const URL_GetIsSureClass = @"api/APP/GetIsSureClass";
+
 
 #endif /* GGT_Request_URL_h */

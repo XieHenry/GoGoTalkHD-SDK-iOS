@@ -133,12 +133,13 @@ typedef enum : NSUInteger {
     GGT_OrderForeignListCell *cell = [GGT_OrderForeignListCell cellWithTableView:tableView forIndexPath:indexPath];
     
     cell.xc_orderButton.tag = 100+indexPath.row;
+    cell.xc_focusButton.tag = 1000+indexPath.row;
     
     /****预约***/
     [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     /****关注***/
-    [cell.xc_focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_focusButton addTarget:self action:@selector(xc_focusButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
     
     cell.xc_model = self.xc_dataMuArray[indexPath.row];
     
@@ -159,18 +160,54 @@ typedef enum : NSUInteger {
 #pragma mark   预约
 - (void)xc_orderButtonClick:(UIButton *)button
 {
-    GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
-    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
-    nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    nav.popoverPresentationController.delegate = self;
-    //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
     GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
-    vc.xc_model = model;
     
-    // 修改弹出视图的size 在控制器内部修改更好
-    //    vc.preferredContentSize = CGSizeMake(100, 100);
-    [self presentViewController:nav animated:YES completion:nil];
+    // 进行网络请求判断
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, model.TeacherId, model.StartTime];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
+        BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.popoverPresentationController.delegate = self;
+        //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        vc.xc_model = model;
+        // 修改弹出视图的size 在控制器内部修改更好
+        //    vc.preferredContentSize = CGSizeMake(100, 100);
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        
+    }];
+    
+}
+
+#pragma mark - 关注
+- (void)xc_focusButtonClick:(UIButton *)button
+{
+    GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag-1000];
+    
+    if ([model.IsFollow isEqualToString:@"0"]) {
+        model.IsFollow = @"1";
+    } else {
+        model.IsFollow = @"0";
+    }
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@", URL_Attention_Home, model.TeacherId, model.IsFollow];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
+        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        cell.xc_model = model;
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - GGT_OrderCourseOfAllLeftVcDelegate
