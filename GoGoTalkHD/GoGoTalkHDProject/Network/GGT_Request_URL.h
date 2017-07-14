@@ -96,5 +96,20 @@ static NSString * const URL_PostLog = @"api/APP/Applog";
 // 获取上课日期
 static NSString * const URL_GetDate = @"api/APP/GetDate";
 
+// 获取时间
+static NSString * const URL_GetTime = @"api/APP/GetTime";
+
+// 获取所有教师列表
+static NSString * const URL_GetPageTeacherLessonApp = @"api/APP/GetPageTeacherLessonApp";
+
+// 约课
+static NSString * const URL_GetBookList_Home = @"api/APP/GetBookList";
+
+// 获得教材列表
+static NSString * const URL_GetBookList = @"api/APP/GetBookList";
+
+// 重上课程
+static NSString * const URL_AgainLesson = @"api/APP/AgainLesson";
+
 
 #endif /* GGT_Request_URL_h */

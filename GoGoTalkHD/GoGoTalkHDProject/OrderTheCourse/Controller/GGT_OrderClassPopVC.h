@@ -10,4 +10,6 @@
 
 @interface GGT_OrderClassPopVC : BaseViewController
 
+@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+
 @end

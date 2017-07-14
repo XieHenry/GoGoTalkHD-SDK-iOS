@@ -51,26 +51,32 @@
     self.xc_timeLabel.text = @"08:00";
 }
 
-- (void)setXc_model:(GGT_TestModel *)xc_model
+- (void)setXc_model:(GGT_HomeTimeModel *)xc_model
 {
     _xc_model = xc_model;
-    switch (xc_model.type) {
-        case 0:     // 不可选中
+    
+    if ([xc_model.name isKindOfClass:[NSString class]]) {
+        self.xc_timeLabel.text = xc_model.name;
+    }
+    
+    //0：不能预约 1:可以预约 2：默认选中
+    switch (xc_model.pic) {
+        case XCTimeDoNotOrder:     // 不可选中
         {
             self.contentView.backgroundColor = [UIColor whiteColor];
             self.xc_timeLabel.textColor = UICOLOR_FROM_HEX(Color999999);
         }
             break;
-        case 1:     // 当前选中
-        {
-            self.contentView.backgroundColor = UICOLOR_FROM_HEX(kThemeColor);
-            self.xc_timeLabel.textColor = [UIColor whiteColor];
-        }
-            break;
-        case 2:     // 未选中状态
+        case XCTimeCanOrder:     // 可预约
         {
             self.contentView.backgroundColor = [UIColor whiteColor];
             self.xc_timeLabel.textColor = UICOLOR_FROM_HEX(Color333333);
+        }
+            break;
+        case XCTimeSelectOrder:     // 选中状态
+        {
+            self.contentView.backgroundColor = UICOLOR_FROM_HEX(kThemeColor);
+            self.xc_timeLabel.textColor = [UIColor whiteColor];
         }
             break;
             

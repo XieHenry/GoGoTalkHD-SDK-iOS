@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIButton *xc_leftItemButton;
 @property (nonatomic, strong) UIButton *xc_rightItemButton;
 @property (nonatomic, strong) NSMutableArray *xc_dataMuArray;
+@property (nonatomic, strong) GGT_CoursewareModel *xc_coursewareModel;
 @end
 
 @implementation GGT_ChooseCoursewareVC
@@ -21,11 +22,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.xc_dataMuArray = [NSMutableArray array];
+    
     [self buildUI];
     
     [self buildAction];
     
-    [self buildData];
+    [self xc_loadData];
+}
+
+- (void)xc_loadData
+{
+    [[BaseService share] sendGetRequestWithPath:URL_GetBookList token:YES viewController:self success:^(id responseObject) {
+        
+        NSArray *dataArray = responseObject[@"data"];
+        if ([dataArray isKindOfClass:[NSArray class]] && dataArray.count > 0) {
+            [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_CoursewareModel *model = [GGT_CoursewareModel yy_modelWithDictionary:obj];
+                model.xc_isSelected = NO;
+                [self.xc_dataMuArray addObject:model];
+            }];
+        }
+        [self.xc_tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)buildUI
@@ -86,32 +108,65 @@
     
     [[self.xc_rightItemButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        // 发送网络请求
+        [self sendNetwork];
+        
     }];
 }
 
-- (void)buildData
+- (void)sendNetwork
 {
-    self.xc_dataMuArray = [NSMutableArray array];
-    for (int i = 0; i < 100; i++) {
-        NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
+    /*
+     lessonId课程ID  
+     bId 教材详情ID
+     beId 单元ID
+     */
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"lessonId"] = self.xc_model.LessonId;
+    dic[@"bId"] = self.xc_coursewareModel.BookingId;
+    dic[@"beId"] = self.xc_coursewareModel.BDEId;
+//    [[BaseService share] sendGetRequestWithPath:URL_AgainLesson token:YES viewController:self success:^(id responseObject) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+    
+    [[BaseService share] sendPostRequestWithPath:URL_AgainLesson parameters:dic token:YES viewController:self success:^(id responseObject) {
         
-        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-        [self.xc_dataMuArray addObject:model];
-    }
+        if ([responseObject[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
+        }
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.xc_dataMuArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [GGT_ChooseCoursewareCell cellWithTableView:tableView forIndexPath:indexPath];
     cell.xc_model = self.xc_dataMuArray[indexPath.row];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    if (model.type == 1) {
+    GGT_CoursewareModel *model = self.xc_dataMuArray[indexPath.row];
+    if (model.xc_isSelected == YES) {
         [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
     return cell;
@@ -120,16 +175,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    model.type = 1;
+    GGT_CoursewareModel *model = self.xc_dataMuArray[indexPath.row];
+    model.xc_isSelected = YES;
     cell.xc_model = model;
+    self.xc_coursewareModel = model;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    model.type = 2;
+    GGT_CoursewareModel *model = self.xc_dataMuArray[indexPath.row];
+    model.xc_isSelected = NO;
     cell.xc_model = model;
 }
 

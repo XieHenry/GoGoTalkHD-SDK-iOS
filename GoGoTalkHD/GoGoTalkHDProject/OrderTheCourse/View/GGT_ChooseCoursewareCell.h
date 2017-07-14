@@ -12,6 +12,6 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath;
 
-@property (nonatomic, strong) GGT_TestModel *xc_model;
+@property (nonatomic, strong) GGT_CoursewareModel *xc_model;
 
 @end

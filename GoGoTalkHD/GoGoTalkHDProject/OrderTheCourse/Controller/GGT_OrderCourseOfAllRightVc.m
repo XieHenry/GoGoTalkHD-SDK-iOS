@@ -11,21 +11,34 @@
 #import "GGT_OrderForeignListCell.h"
 #import "GGT_ConfirmBookingAlertView.h"
 #import "GGT_SelectCoursewareViewController.h"
-#import "GGT_AllWithNoDateView.h"
+
 #import "GGT_OrderPlaceholderView.h"
 #import "GGT_OrderClassPopVC.h"
 
 static CGFloat const xc_cellHeight = 208.0f/2 + 7;
 static CGFloat const xc_tableViewMargin = 7.0f;
+static NSInteger const xc_pageSizeNum = 10;
+
+typedef enum : NSUInteger {
+    XCLoadNewData,
+    XCLoadMoreData,
+} XCLoadType;
 
 
 @interface GGT_OrderCourseOfAllRightVc () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate>
 
-@property (nonatomic, strong) UITableView *xc_tableView;
-@property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) GGT_AllWithNoDateView *allWithNoDateView;
-
 @property (nonatomic, strong) GGT_OrderPlaceholderView *xc_placeholderView;
+@property (nonatomic, strong) UITableView *xc_tableView;
+@property (nonatomic, strong) NSMutableArray *xc_dataMuArray;
+@property (nonatomic, assign) NSInteger xc_pageSize;
+@property (nonatomic, assign) NSInteger xc_pageIndex;
+@property (nonatomic, strong) NSString *xc_date;
+@property (nonatomic, strong) NSString *xc_time;
+
+@property (nonatomic, assign) NSInteger xc_total;
+
+@property (nonatomic, assign) XCLoadType xc_loadType;
+
 @end
 
 @implementation GGT_OrderCourseOfAllRightVc
@@ -35,26 +48,22 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
-    //新建tap手势
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture)];
-    tapGesture.cancelsTouchesInView = NO;
-    tapGesture.delegate = self;
-    [self.view addGestureRecognizer:tapGesture];
+    self.xc_loadType = XCLoadNewData;
     
     
-    [self initTableView];
-    
+    [self buildUI];
+    [self initData];
 }
 
-- (void)getLoadData {
-    
-    self.dataArray = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8", nil];
-    [self.xc_tableView reloadData];
+- (void)initData
+{
+    self.xc_pageSize = xc_pageSizeNum;
+    self.xc_pageIndex = 1;
+    self.xc_dataMuArray = [NSMutableArray array];
 }
 
-
-- (void)initTableView {
-    
+- (void)buildUI
+{
     self.xc_tableView = ({
         UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         tableView.delegate = self;
@@ -71,19 +80,26 @@ static CGFloat const xc_tableViewMargin = 7.0f;
         make.right.equalTo(@(-xc_tableViewMargin));
     }];
     
-    _allWithNoDateView = [[GGT_AllWithNoDateView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT()-49-64-LineH(54))];
-    [self.xc_tableView addSubview:_allWithNoDateView];
-    _allWithNoDateView.hidden = YES;
-    
     
     [self.xc_tableView registerClass:[GGT_OrderForeignListCell class] forCellReuseIdentifier:NSStringFromClass([GGT_OrderForeignListCell class])];
     
     
+    
+#pragma mark - 添加xc_placeholderView
+    self.xc_placeholderView = [[GGT_OrderPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-350-home_leftView_width, self.view.height)];
+    self.xc_tableView.enablePlaceHolderView = YES;
+    self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderView;
+    
+    [self.view layoutIfNeeded];
+    
     @weakify(self);
     self.xc_tableView.mj_header = [XCNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
-        self.dataArray = [NSMutableArray array];
-        [self getLoadData];
+        
+        self.xc_pageIndex = 1;
+        self.xc_loadType = XCLoadNewData;
+        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+        
         [self.xc_tableView.mj_header endRefreshing];
     }];
     [self.xc_tableView.mj_header beginRefreshing];
@@ -94,55 +110,43 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     self.xc_tableView.mj_footer = [XCNormalFooter footerWithRefreshingBlock:^{
         @strongify(self);
         
+        if (self.xc_dataMuArray.count < self.xc_total) {
+            self.xc_pageIndex++;
+            self.xc_loadType = XCLoadMoreData;
+            [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+        }
+        
         [self.xc_tableView.mj_footer endRefreshing];
         
     }];
     
-    [self.view layoutIfNeeded];
-    
-#pragma mark - 添加xc_placeholderView
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-xc_tableViewMargin*2-350, self.xc_tableView.height)];
-    view.backgroundColor = [UIColor orangeColor];
-    
-    
-    self.xc_placeholderView = [[GGT_OrderPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width-350-home_leftView_width, self.view.height)];
-    self.xc_tableView.enablePlaceHolderView = YES;
-    self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderView;
-    
 }
 
 #pragma mark tableview的代理
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    return self.xc_dataMuArray.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     GGT_OrderForeignListCell *cell = [GGT_OrderForeignListCell cellWithTableView:tableView forIndexPath:indexPath];
     
+    cell.xc_orderButton.tag = 100+indexPath.row;
+    
     /****预约***/
-    [cell.xc_orderButton addTarget:self action:@selector(orderButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     /****关注***/
     [cell.xc_focusButton addTarget:self action:@selector(focusButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     
+    cell.xc_model = self.xc_dataMuArray[indexPath.row];
+    
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIView *view = [UIView new];
-    view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-    return view;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return LineH(xc_cellHeight);
 }
 
@@ -152,139 +156,67 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 7;
-}
-
 #pragma mark   预约
-- (void)orderButtonClick {
-    
-    
-    
-    
+- (void)xc_orderButtonClick:(UIButton *)button
+{
     GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     nav.popoverPresentationController.delegate = self;
     //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
+    vc.xc_model = model;
+    
     // 修改弹出视图的size 在控制器内部修改更好
     //    vc.preferredContentSize = CGSizeMake(100, 100);
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark - GGT_OrderCourseOfAllLeftVcDelegate
+- (void)leftSendToRightDate:(NSString *)date time:(NSString *)time
+{
+    // 进行网络请求
+    self.xc_date = date;
+    self.xc_time = time;
     
-    return;
-    
-    
-    
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH(), SCREEN_HEIGHT())];
-    bgView.backgroundColor = [UIColor blackColor];
-    bgView.alpha = 0.5;
-    [self.view.window addSubview:bgView];
-    
-    GGT_ConfirmBookingAlertView *alertView = [[GGT_ConfirmBookingAlertView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH()-LineW(277))/2, (SCREEN_HEIGHT()-LineH(327))/2, LineW(277), LineH(327))];
-    
-    __weak GGT_ConfirmBookingAlertView *weakview = alertView;
-    alertView.buttonBlock = ^(UIButton *button) {
-        switch (button.tag) {
-            case 800:
-                //关闭
-                [bgView removeFromSuperview];
-                [weakview removeFromSuperview];
-                break;
-            case 801:
-            {
-                
-                //更换课件
-//                GGT_SelectCoursewareViewController *vc = [[GGT_SelectCoursewareViewController alloc]init];
-//                vc.hidesBottomBarWhenPushed = YES;
-//                vc.changeBlock = ^(NSString *str) {
-//                    
-//                    weakview.hidden = NO;
-//                    bgView.hidden = NO;
-//                    
-//                    weakview.kejianField.text = str;
-//                    
-//                };
-//                weakview.hidden = YES;
-//                bgView.hidden = YES;
-//                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 802:
-                //确认
-                [bgView removeFromSuperview];
-                [weakview removeFromSuperview];
-                break;
-                
-            default:
-                break;
+    [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+}
+
+- (void)xc_loadDataWithDate:(NSString *)date timge:(NSString *)time pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@&time=%@&pageIndex=%ld&pageSize=%ld", URL_GetPageTeacherLessonApp, self.xc_date, self.xc_time, self.xc_pageIndex, self.xc_pageSize];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        if (self.xc_loadType == XCLoadNewData) {
+            [self.xc_dataMuArray removeAllObjects];
         }
         
+        NSArray *dataArray = responseObject[@"data"];
+        if ([dataArray isKindOfClass:[NSArray class]] && dataArray.count > 0) {
+            [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_HomeTeachModel *model = [GGT_HomeTeachModel yy_modelWithDictionary:obj];
+                [self.xc_dataMuArray addObject:model];
+            }];
+        }
         
+        self.xc_total = [responseObject[@"total"] integerValue];
+        [self.xc_tableView reloadData];
         
-    };
-    
-    [self.view.window addSubview:alertView];
-    
-    
+        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:responseObject];
+        self.xc_placeholderView.xc_model = model;
+        
+    } failure:^(NSError *error) {
+        
+        [self.xc_dataMuArray removeAllObjects];
+        [self.xc_tableView reloadData];
+        
+        NSDictionary *dic = error.userInfo;
+        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
+        self.xc_placeholderView.xc_model = model;
+       
+    }];
 }
-
-
-#pragma mark   关注
-- (void)focusButtonClick {
-    NSLog(@"关注");
-}
-
-
-
-
-
-
-
-
-- (void)initDataSource:(NSString *)dayStr timeStr:(NSString *)timeStr {
-    //    pageIndex string  第几页
-    //    pageSize string 每页条数
-    //    date string 日期
-    //    time string 时间
-    
-    
-    
-    //     NSString *urlStr = [NSString stringWithFormat:@"%@?pageIndex=%@&pageSize=%@&date=%@&time=%@",URL_GetPageTeacherLesson,@"1",@"20",dayStr,timeStr];
-    //     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
-    //
-    //     } failure:^(NSError *error) {
-    //
-    //     }];
-    
-    //    NSDictionary *postDic = @{@"pageIndex":@"1",@"pageSize":@"20",@"date":dayStr,@"time":timeStr};
-    //    [[BaseService share] sendPostRequestWithPath:URL_GetPageTeacherLesson parameters:postDic token:YES viewController:self success:^(id responseObject) {
-    //
-    //    } failure:^(NSError *error) {
-    //
-    //    }];
-    
-    
-    
-}
-
-
-//轻击手势触发方法----点击空白处，消除弹出框
--(void)tapGesture {
-    UIView *view1 = [self.view viewWithTag:888];
-    [view1 removeFromSuperview];
-}
-
-//解决手势和按钮冲突
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    if ([touch.view isKindOfClass:[UIButton class]]){
-        return NO;
-    }
-    return YES;
-}
-
 
 
 @end

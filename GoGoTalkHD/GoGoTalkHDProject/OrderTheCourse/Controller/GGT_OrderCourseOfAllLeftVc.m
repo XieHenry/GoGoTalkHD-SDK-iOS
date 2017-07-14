@@ -24,7 +24,15 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 @property (nonatomic, strong) UICollectionView *xc_topCollectionView;
 @property (nonatomic, strong) UICollectionView *xc_bottomCollectionView;
 @property (nonatomic, strong) NSMutableArray *xc_dateMuArray;
-@property (nonatomic, strong) NSMutableArray *xc_timeMuArray;
+//@property (nonatomic, strong) NSMutableArray *xc_timeMuArray;
+
+@property (nonatomic, strong) NSMutableArray *xc_timeTopMuArray;
+@property (nonatomic, strong) NSMutableArray *xc_timeMiddleMuArray;
+@property (nonatomic, strong) NSMutableArray *xc_timeBottomMuArray;
+
+@property (nonatomic, strong) GGT_HomeDateModel *xc_dateModel;
+@property (nonatomic, strong) GGT_HomeTimeModel *xc_timeModel;
+
 @end
 
 @implementation GGT_OrderCourseOfAllLeftVc
@@ -49,7 +57,13 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 {
     // i=1当前选中 i=0不可选 其他都可选
     self.xc_dateMuArray = [NSMutableArray array];
-    self.xc_timeMuArray = [NSMutableArray array];
+//    self.xc_timeMuArray = [NSMutableArray array];
+    
+    self.xc_timeTopMuArray = [NSMutableArray array];
+    self.xc_timeMiddleMuArray = [NSMutableArray array];
+    self.xc_timeBottomMuArray = [NSMutableArray array];
+    
+    
 //    for (int i = 0; i < 100; i++) {
 //        NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
 //        
@@ -57,11 +71,11 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 //        [self.xc_dateMuArray addObject:model];
 //    }
     
-    for (int i = 0; i < 100; i++) {
-        NSDictionary *dic = @{@"time":[NSString stringWithFormat:@"%d:00", i],@"type":@(i)};
-        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-        [self.xc_timeMuArray addObject:model];
-    }
+//    for (int i = 0; i < 100; i++) {
+//        NSDictionary *dic = @{@"time":[NSString stringWithFormat:@"%d:00", i],@"type":@(i)};
+//        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
+//        [self.xc_timeMuArray addObject:model];
+//    }
 }
 
 
@@ -126,6 +140,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     
 }
 
+// 获取上部日期数据
 - (void)xc_loadData
 {
     [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:self success:^(id responseObject) {
@@ -135,8 +150,72 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
             [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 GGT_HomeDateModel *model = [GGT_HomeDateModel yy_modelWithDictionary:obj];
                 [self.xc_dateMuArray addObject:model];
-                [self.xc_topCollectionView reloadData];
+                
+                if (model.isHaveClass == XCDateSelectOrder) {
+                    [self xc_loadTimeDataWithDate:model.date];
+                    self.xc_dateModel = model;
+                }
+                
             }];
+        }
+        
+        [self.xc_topCollectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+// 获取下部时间数据
+- (void)xc_loadTimeDataWithDate:(NSString *)date
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@", URL_GetTime, date];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        
+        [self.xc_timeTopMuArray removeAllObjects];
+        [self.xc_timeMiddleMuArray removeAllObjects];
+        [self.xc_timeBottomMuArray removeAllObjects];
+        
+        NSDictionary *dataDic = responseObject[@"data"];
+        if ([dataDic isKindOfClass:[NSDictionary class]]) {
+            
+            // dataDic字典中中存放着三个数组
+            // buttomList centerList topList
+            
+            NSArray *topList = dataDic[@"topList"];
+            [topList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_HomeTimeModel *model = [GGT_HomeTimeModel yy_modelWithDictionary:obj];
+                [self.xc_timeTopMuArray addObject:model];
+                if (model.pic == XCTimeSelectOrder) {
+                    self.xc_timeModel = model;
+                }
+            }];
+            
+            NSArray *centerList = dataDic[@"centerList"];
+            [centerList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_HomeTimeModel *model = [GGT_HomeTimeModel yy_modelWithDictionary:obj];
+                [self.xc_timeMiddleMuArray addObject:model];
+                if (model.pic == XCTimeSelectOrder) {
+                    self.xc_timeModel = model;
+                }
+            }];
+            
+            NSArray *buttomList = dataDic[@"buttomList"];
+            [buttomList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GGT_HomeTimeModel *model = [GGT_HomeTimeModel yy_modelWithDictionary:obj];
+                [self.xc_timeBottomMuArray addObject:model];
+                if (model.pic == XCTimeSelectOrder) {
+                    self.xc_timeModel = model;
+                }
+            }];
+        }
+        
+        [self.xc_bottomCollectionView reloadData];
+        
+        // 传送数据到右侧界面
+        if ([self.delegate respondsToSelector:@selector(leftSendToRightDate:time:)]) {
+            [self.delegate leftSendToRightDate:self.xc_dateModel.date time:self.xc_timeModel.name];
         }
         
     } failure:^(NSError *error) {
@@ -150,7 +229,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     if (collectionView == self.xc_topCollectionView) {
         return 1;
     } else {
-        return 1;
+        return 3;
     }
 }
 
@@ -160,7 +239,17 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     if (collectionView == self.xc_topCollectionView) {
         return self.xc_dateMuArray.count;
     } else {
-        return self.xc_timeMuArray.count;
+//        return self.xc_timeMuArray.count;
+        if (section == 0) {
+            return self.xc_timeTopMuArray.count;
+        }
+        if (section == 1) {
+            return self.xc_timeMiddleMuArray.count;
+        }
+        if (section == 2) {
+            return self.xc_timeBottomMuArray.count;
+        }
+        return 0;
     }
 }
 
@@ -194,7 +283,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         cell.xc_model = self.xc_dateMuArray[indexPath.row];
         
         GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
-        if (model.isHaveClass == XCSelectOrder) {
+        if (model.isHaveClass == XCDateSelectOrder) {
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
         
@@ -202,10 +291,21 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     }
     if (collectionView == self.xc_bottomCollectionView) {
         GGT_TimeCollectionCell *cell = [GGT_TimeCollectionCell cellWithCollectionView:collectionView indexPath:indexPath];
-        cell.xc_model = self.xc_timeMuArray[indexPath.row];
         
-        GGT_TestModel *model = self.xc_timeMuArray[indexPath.row];
-        if (model.type == 1) {
+        GGT_HomeTimeModel *model = nil;
+        if (indexPath.section == 0) {
+            model = self.xc_timeTopMuArray[indexPath.row];
+        }
+        if (indexPath.section == 1) {
+            model = self.xc_timeMiddleMuArray[indexPath.row];
+        }
+        if (indexPath.section == 2) {
+            model = self.xc_timeBottomMuArray[indexPath.row];
+        }
+        
+        cell.xc_model = model;
+    
+        if (model.pic == XCTimeSelectOrder) {
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
         
@@ -258,7 +358,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 {
     if (collectionView == self.xc_topCollectionView) {
         GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
-        if (model.isHaveClass == XCDoNotOrder) {
+        if (model.isHaveClass == XCDateDoNotOrder) {
             return NO;
         } else {
             return YES;
@@ -266,8 +366,19 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     }
     
     if (collectionView == self.xc_bottomCollectionView) {
-        GGT_TestModel *model = self.xc_timeMuArray[indexPath.row];
-        if (model.type == 0) {
+        
+        GGT_HomeTimeModel *model = nil;
+        if (indexPath.section == 0) {
+            model = self.xc_timeTopMuArray[indexPath.row];
+        }
+        if (indexPath.section == 1) {
+            model = self.xc_timeMiddleMuArray[indexPath.row];
+        }
+        if (indexPath.section == 2) {
+            model = self.xc_timeBottomMuArray[indexPath.row];
+        }
+        
+        if (model.pic == XCTimeDoNotOrder) {
             return NO;
         } else {
             return YES;
@@ -281,20 +392,57 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 {
     if (collectionView == self.xc_topCollectionView) {
         GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
-        model.isHaveClass = XCSelectOrder;
-        GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        model.isHaveClass = XCDateSelectOrder;
+//        GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
         [collectionView reloadData];
+        
+        
+        // 选中上面的cell时 要刷新下面数据 请求接口
+        [self xc_loadTimeDataWithDate:model.date];
+        
+        self.xc_dateModel = model;
+        
     }
     
     if (collectionView == self.xc_bottomCollectionView) {
-        GGT_TestModel *model = self.xc_timeMuArray[indexPath.row];
-        model.type = 1;
-        GGT_TimeCollectionCell *cell = (GGT_TimeCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        GGT_HomeTimeModel *model = nil;
+        if (indexPath.section == 0) {
+            model = self.xc_timeTopMuArray[indexPath.row];
+        }
+        if (indexPath.section == 1) {
+            model = self.xc_timeMiddleMuArray[indexPath.row];
+        }
+        if (indexPath.section == 2) {
+            model = self.xc_timeBottomMuArray[indexPath.row];
+        }
+        
+        model.pic = XCTimeSelectOrder;
+        
+//        GGT_TimeCollectionCell *cell = (GGT_TimeCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
-        [self.xc_timeMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        
+        if (indexPath.section == 0) {
+            [self.xc_timeTopMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+        if (indexPath.section == 1) {
+            [self.xc_timeMiddleMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+        if (indexPath.section == 2) {
+            [self.xc_timeBottomMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+        
         [collectionView reloadData];
+        
+        self.xc_timeModel = model;
+        
+        // 传送数据
+        if ([self.delegate respondsToSelector:@selector(leftSendToRightDate:time:)]) {
+            [self.delegate leftSendToRightDate:self.xc_dateModel.date time:self.xc_timeModel.name];
+        }
     }
+    
 }
 
 // 取消选中cell的时候
@@ -302,17 +450,39 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 {
     if (collectionView == self.xc_topCollectionView) {
         GGT_HomeDateModel *model = self.xc_dateMuArray[indexPath.row];
-        model.isHaveClass = XCCanOrder;
-        GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        model.isHaveClass = XCDateCanOrder;
+//        GGT_DateCollectionCell *cell = (GGT_DateCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
         [self.xc_dateMuArray replaceObjectAtIndex:indexPath.row withObject:model];
     }
     if (collectionView == self.xc_bottomCollectionView) {
-        GGT_TestModel *model = self.xc_timeMuArray[indexPath.row];
-        model.type = 2;
-        GGT_TimeCollectionCell *cell = (GGT_TimeCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        GGT_HomeTimeModel *model = nil;
+        if (indexPath.section == 0) {
+            model = self.xc_timeTopMuArray[indexPath.row];
+        }
+        if (indexPath.section == 1) {
+            model = self.xc_timeMiddleMuArray[indexPath.row];
+        }
+        if (indexPath.section == 2) {
+            model = self.xc_timeBottomMuArray[indexPath.row];
+        }
+        
+        model.pic = XCTimeCanOrder;
+        
+//        GGT_TimeCollectionCell *cell = (GGT_TimeCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //        cell.xc_model = model;
-        [self.xc_timeMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        
+        if (indexPath.section == 0) {
+            [self.xc_timeTopMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+        if (indexPath.section == 1) {
+            [self.xc_timeMiddleMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+        if (indexPath.section == 2) {
+            [self.xc_timeBottomMuArray replaceObjectAtIndex:indexPath.row withObject:model];
+        }
+    
     }
 }
 

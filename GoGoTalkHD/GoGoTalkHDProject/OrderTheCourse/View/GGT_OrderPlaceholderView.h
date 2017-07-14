@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GGT_OrderPlaceholderView : UIView
-
+@property (nonatomic, strong) GGT_ResultModel *xc_model;
 @end
