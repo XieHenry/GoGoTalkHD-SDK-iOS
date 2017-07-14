@@ -194,13 +194,13 @@ typedef enum : NSUInteger {
     
     //（是否关注 0：未关注 1：已关注）
     if ([model.IsFollow isEqualToString:@"0"]) {
-        model.IsFollow = @"1";
-        
+       
         [self sendFocusNetworkWithHomeTeachModel:model button:button];
+//         model.IsFollow = @"1";
         
     } else {
         
-        model.IsFollow = @"0";
+//        model.IsFollow = @"0";
         
         // 在可以取消约课的情况下 弹框
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消本次预约课程" preferredStyle:UIAlertControllerStyleAlert];
@@ -231,13 +231,19 @@ typedef enum : NSUInteger {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
         GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        if ([model.IsFollow isEqualToString:@"0"]) {
+            model.IsFollow = @"1";
+        } else {
+            model.IsFollow = @"0";
+        }
+        
         cell.xc_model = model;
         
     } failure:^(NSError *error) {
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
-        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
-        cell.xc_model = model;
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
+//        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+//        cell.xc_model = model;
         
     }];
 }
