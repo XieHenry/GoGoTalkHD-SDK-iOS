@@ -53,29 +53,18 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     [self xc_loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)buildData
 {
-    // i=1当前选中 i=0不可选 其他都可选
     self.xc_dateMuArray = [NSMutableArray array];
-//    self.xc_timeMuArray = [NSMutableArray array];
     
     self.xc_timeTopMuArray = [NSMutableArray array];
     self.xc_timeMiddleMuArray = [NSMutableArray array];
     self.xc_timeBottomMuArray = [NSMutableArray array];
-    
-    
-//    for (int i = 0; i < 100; i++) {
-//        NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
-//        
-//        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-//        [self.xc_dateMuArray addObject:model];
-//    }
-    
-//    for (int i = 0; i < 100; i++) {
-//        NSDictionary *dic = @{@"time":[NSString stringWithFormat:@"%d:00", i],@"type":@(i)};
-//        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-//        [self.xc_timeMuArray addObject:model];
-//    }
 }
 
 
@@ -90,7 +79,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:xc_topLayout];
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        collectionView.alwaysBounceVertical = YES;
+//        collectionView.alwaysBounceVertical = YES;
         collectionView.showsVerticalScrollIndicator = NO;
         collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         collectionView;
@@ -113,7 +102,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:xc_bottomLayout];
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        collectionView.alwaysBounceVertical = YES;
+//        collectionView.alwaysBounceVertical = YES;
         collectionView.showsVerticalScrollIndicator = NO;
         collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         collectionView;
