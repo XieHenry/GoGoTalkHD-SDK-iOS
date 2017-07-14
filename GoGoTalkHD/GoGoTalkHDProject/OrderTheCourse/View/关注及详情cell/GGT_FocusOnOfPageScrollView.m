@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) NSMutableArray * viewsInPage;
 @property (nonatomic, assign) NSInteger numberOfCell;
+
 @end
 
 @implementation GGT_FocusOnOfPageScrollView
@@ -24,6 +25,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+
         [self initializeValue];
         [self reloadData];
     }
@@ -70,8 +72,26 @@
         cell.frame = CGRectMake(startX, topY, _cellSize.width, _cellSize.height);
         [self addSubview:cell];
         
-        if (_numberOfCell > 3) {
-            if (i == 2) {
+        //默认选中哪个cell
+        if ([self.status isEqualToString:@"center1"]) {
+            if (i == 4) {
+                cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+                cell.layer.borderWidth = 1;
+                cell.transform = CGAffineTransformMakeScale(magnification, magnification);
+                
+                self.contentOffset = CGPointMake(startX - self.padding/2, 0);
+            }
+        } else if ([self.status isEqualToString:@"center2"]) {
+            if (i == _numberOfCell/2) {
+                cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+                cell.layer.borderWidth = 1;
+                cell.transform = CGAffineTransformMakeScale(magnification, magnification);
+                
+                self.contentOffset = CGPointMake(startX - self.padding/2, 0);
+            }
+
+        } else if ([self.status isEqualToString:@"last"]) {
+            if (i == (self.page*10)-1) {
                 cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
                 cell.layer.borderWidth = 1;
                 cell.transform = CGAffineTransformMakeScale(magnification, magnification);
@@ -90,6 +110,7 @@
     
     
 }
+
 
 - (UIView*)viewForRowAtIndex:(NSInteger)index {
     if (index < self.viewsInPage.count) {

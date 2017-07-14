@@ -72,13 +72,18 @@
     }];
     
     
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    NSLog(@"---%@",sin.orderCourse_dateMuArray);
     
-    for (NSUInteger i =  0; i < self.weeksArray.count; i++) {
+    
+    for (NSUInteger i =  0; i < sin.orderCourse_dateMuArray.count; i++) {
+        GGT_HomeDateModel *model = [sin.orderCourse_dateMuArray safe_objectAtIndex:i];
+        
         UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2 +LineW(104)*i, 0, LineW(104), LineH(60))];
         [_headerScrollerView addSubview:headerView];
         
         UILabel *monthLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, LineY(15), LineW(104), LineH(15))];
-        monthLabel.text = self.yearsArray[i];
+        monthLabel.text = model.date;
         monthLabel.textAlignment = NSTextAlignmentCenter;
         monthLabel.font = Font(15);
         monthLabel.textColor = UICOLOR_FROM_HEX(Color333333);
@@ -86,7 +91,7 @@
 
         
         UILabel *weekLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,monthLabel.y+monthLabel.height+LineY(6), LineW(104), LineH(12))];
-        weekLabel.text = self.weeksArray[i];
+        weekLabel.text = model.week;
         weekLabel.textAlignment = NSTextAlignmentCenter;
         weekLabel.font = Font(15);
         weekLabel.textColor = UICOLOR_FROM_HEX(Color666666);
@@ -131,35 +136,36 @@
     [_bgScrollerView addSubview:_collectionView];
     [_collectionView registerClass:[GGT_OrderTimeCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
-    
-    _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00",@"22:30"];
-    
-    
-    [_collectionView reloadData];
 }
 
 
 #pragma mark -- UICollectionViewDelegate-------------
 //返回分区个数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 7;
+    return self.alltimeArray.count;
 }
 
 //返回每个分区的item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return _alltimeArray.count;
+    return [self.alltimeArray[section] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";
     GGT_OrderTimeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     
-    if (!cell) {
-        NSLog(@"-----------------");
+    for (UIView *subView in cell.contentView.subviews) {
+        [subView removeFromSuperview];
     }
+
     
-    cell.timeLabel.text = _alltimeArray[indexPath.row];
-//    cell.backgroundColor = UICOLOR_RANDOM_COLOR();
+    GGT_TimeCollectionModel *model = [[_alltimeArray safe_objectAtIndex:indexPath.section] safe_objectAtIndex:indexPath.row];
+    
+    
+//    pic 0:不可预约 1：可以预约 2：默认选中
+    [cell getTextModel:model];
+
+    
     return cell;
 }
 
@@ -182,33 +188,18 @@
 }
 
 
-//取消某item
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-//        NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
-    
-    
-    //    GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
-    //    deselectedCell.layer.cornerRadius = LineW(0);
-    //    deselectedCell.layer.masksToBounds = NO;
-    //    deselectedCell.layer.borderColor = [UIColor clearColor].CGColor;
-    //    deselectedCell.layer.borderWidth = LineW(0);
-    
-}
-
 //选中某item
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-            NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
 
     GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
     deselectedCell.layer.cornerRadius = LineW(5);
     deselectedCell.layer.masksToBounds = YES;
     deselectedCell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
-    deselectedCell.layer.borderWidth = LineW(0.5);
-    deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
-    
+    deselectedCell.layer.borderWidth = LineW(0);
+    deselectedCell.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+    deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorFFFFFF);
 }
-
 
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -225,30 +216,85 @@
     return YES;
 }
 
-
+#pragma mark 获取数据
+- (void)getCellArr:(NSMutableArray *)dataArray {
+    self.alltimeArray =  [NSMutableArray array];
+//    _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00",@"22:30"];
+    
+    self.alltimeArray = dataArray;
+    
+    [_collectionView reloadData];
+    
+}
 
 @end
 
 
 
-
+#pragma mark  GGT_OrderTimeCollectionViewCell
 @implementation GGT_OrderTimeCollectionViewCell
 
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        self.timeLabel = [[UILabel alloc]init];
         self.timeLabel.textAlignment = NSTextAlignmentCenter;
         self.timeLabel.font = Font(15);
-        self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);
         [self addSubview:self.timeLabel];
+        
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).with.offset(0);
+            make.right.equalTo(self.mas_right).with.offset(-0);
+            make.top.equalTo(self.mas_top).with.offset(0);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-LineH(2));
+        }];
+        
+        
+        
+        self.lineView = [[UIView alloc]init];
+        self.lineView.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+        [self addSubview:self.lineView];
+        self.lineView.hidden = YES;
+        
+        
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).with.offset(0);
+            make.right.equalTo(self.mas_right).with.offset(-0);
+            make.top.equalTo(self.mas_bottom).with.offset(-LineH(2));
+            make.height.equalTo(@(LineH(2)));
+        }];
     }
     
     return self;
 }
 
+- (void)getTextModel:(GGT_TimeCollectionModel *)model {
+    
+    NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)model.pic];
 
+    self.timeLabel.text = model.name;
+    
+    if ([statusStr isEqualToString:@"0"]) {
+        self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);
+        self.userInteractionEnabled = NO;
+        
+    } else if ([statusStr isEqualToString:@"1"]) {
+        
+        self.layer.cornerRadius = LineW(5);
+        self.layer.masksToBounds = YES;
+        self.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+        self.layer.borderWidth = LineW(0.5);
+        self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
+        
+    } else if ([statusStr isEqualToString:@"2"]) {
+        
+        self.lineView.hidden = NO;
+        self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);
+        self.userInteractionEnabled = NO;
+    }
+
+}
 
 @end
 

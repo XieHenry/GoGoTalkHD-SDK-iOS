@@ -30,6 +30,8 @@
 		5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05AD1F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m */; };
 		5B9E05B41F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */; };
 		5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA56DC1ED829E20085DEEE /* GGT_MineLeftModel.m */; };
+		5BBB2D481F185A1200393B68 /* GGT_FocusImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB2D471F185A1200393B68 /* GGT_FocusImgModel.m */; };
+		5BBB2D4B1F189EAF00393B68 /* GGT_TimeCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB2D4A1F189EAF00393B68 /* GGT_TimeCollectionModel.m */; };
 		5BC4735F1EC95C12003B8154 /* GGT_MineClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4735E1EC95C12003B8154 /* GGT_MineClassViewController.m */; };
 		5BC473621EC95C39003B8154 /* GGT_FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC473611EC95C39003B8154 /* GGT_FeedbackViewController.m */; };
 		5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC473641EC95C5C003B8154 /* GGT_TestReportViewController.m */; };
@@ -343,6 +345,10 @@
 		5B9E05B31F14ABDD0050CEDB /* GGT_SelectCoursewareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelectCoursewareViewController.m; sourceTree = "<group>"; };
 		5BBA56DB1ED829E20085DEEE /* GGT_MineLeftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineLeftModel.h; sourceTree = "<group>"; };
 		5BBA56DC1ED829E20085DEEE /* GGT_MineLeftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineLeftModel.m; sourceTree = "<group>"; };
+		5BBB2D461F185A1200393B68 /* GGT_FocusImgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FocusImgModel.h; sourceTree = "<group>"; };
+		5BBB2D471F185A1200393B68 /* GGT_FocusImgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_FocusImgModel.m; sourceTree = "<group>"; };
+		5BBB2D491F189EAF00393B68 /* GGT_TimeCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_TimeCollectionModel.h; sourceTree = "<group>"; };
+		5BBB2D4A1F189EAF00393B68 /* GGT_TimeCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_TimeCollectionModel.m; sourceTree = "<group>"; };
 		5BC4735D1EC95C12003B8154 /* GGT_MineClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineClassViewController.h; sourceTree = "<group>"; };
 		5BC4735E1EC95C12003B8154 /* GGT_MineClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineClassViewController.m; sourceTree = "<group>"; };
 		5BC473601EC95C39003B8154 /* GGT_FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_FeedbackViewController.h; sourceTree = "<group>"; };
@@ -1054,6 +1060,10 @@
 			children = (
 				D6FD8AF61F17811C00A79011 /* GGT_HomeDateModel.h */,
 				D6FD8AF71F17811C00A79011 /* GGT_HomeDateModel.m */,
+				5BBB2D461F185A1200393B68 /* GGT_FocusImgModel.h */,
+				5BBB2D471F185A1200393B68 /* GGT_FocusImgModel.m */,
+				5BBB2D491F189EAF00393B68 /* GGT_TimeCollectionModel.h */,
+				5BBB2D4A1F189EAF00393B68 /* GGT_TimeCollectionModel.m */,
 				D6869CBE1F18651500C5390C /* GGT_HomeTimeModel.h */,
 				D6869CBF1F18651500C5390C /* GGT_HomeTimeModel.m */,
 				D6869CC11F18897700C5390C /* GGT_HomeTeachModel.h */,
@@ -2264,6 +2274,7 @@
 				D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */,
 				D6869CC01F18651500C5390C /* GGT_HomeTimeModel.m in Sources */,
 				D687754A1F0A07CA008687C2 /* TKAFNetworkReachabilityManager.m in Sources */,
+				5BBB2D4B1F189EAF00393B68 /* GGT_TimeCollectionModel.m in Sources */,
 				D68775301F0A07CA008687C2 /* BITCrashManager.m in Sources */,
 				D687753E1F0A07CA008687C2 /* BITHTTPOperation.m in Sources */,
 				D68775321F0A07CA008687C2 /* BITFeedbackActivity.m in Sources */,
@@ -2419,6 +2430,7 @@
 				D6E0A55A1EC2D9CD006A003D /* UIButton+timer.m in Sources */,
 				D687754D1F0A07CA008687C2 /* TKAFURLResponseSerialization.m in Sources */,
 				D6E0A5321EC2D9AE006A003D /* BaseNavigationController.m in Sources */,
+				5BBB2D481F185A1200393B68 /* GGT_FocusImgModel.m in Sources */,
 				D68775341F0A07CA008687C2 /* BITFeedbackListViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

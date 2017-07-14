@@ -29,9 +29,14 @@
 @property (nonatomic, assign) CGSize  cellSize;
 @property (nonatomic, assign) CGFloat padding;
 @property (nonatomic, assign) float leftRightOffset;
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, assign) NSInteger selectedIndex; //点击选中的第几个
 @property (nonatomic, weak) id<OTPageScrollViewDataSource> dataSource;
 @property (nonatomic, weak) id<OTPageScrollViewDelegate> delegate;
+@property BOOL isfirst;
+//选中的状态
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, assign) NSInteger page;
+
 
 - (void)reloadData;
 - (UIView*)viewForRowAtIndex:(NSInteger)index;
