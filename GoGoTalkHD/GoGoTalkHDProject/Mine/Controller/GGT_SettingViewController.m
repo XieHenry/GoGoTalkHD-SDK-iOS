@@ -336,8 +336,6 @@
     [alert addAction:clernAction];
     [self presentViewController:alert animated:YES completion:nil];
     
-    
-    
 }
 
 #pragma mark 计算缓存大小

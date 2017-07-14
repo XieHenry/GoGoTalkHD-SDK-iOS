@@ -23,7 +23,6 @@
     
     //头像
     self.iconImageView = [[UIImageView alloc]init];
-    self.iconImageView.image = [UIImage imageNamed:@"headPortrait_default_avatar"];
     self.iconImageView.layer.masksToBounds = YES;
     self.iconImageView.layer.cornerRadius = LineW(36);
     self.iconImageView.layer.borderWidth = LineW(1);
@@ -41,14 +40,12 @@
     
     //姓名
     self.nameLabel = [[UILabel alloc]init];
-    self.nameLabel.text = @"Runsun";
     self.nameLabel.font = Font(15);
     self.nameLabel.textColor = UICOLOR_FROM_HEX(Color333333);
     [self addSubview:self.nameLabel];
     
     //关注
     self.focusButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [self.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
     self.focusButton.titleLabel.font = Font(10);
     [self.focusButton setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:(UIControlStateNormal)];
     self.focusButton.backgroundColor = UICOLOR_FROM_HEX(ColorCCCCCC);
@@ -75,7 +72,6 @@
     
     //性别
     self.sexLabel = [[UILabel alloc]init];
-    self.sexLabel.text = @"男";
     self.sexLabel.font = Font(12);
     self.sexLabel.textColor = UICOLOR_FROM_HEX(Color666666);
     [self addSubview:self.sexLabel];
@@ -90,7 +86,6 @@
     
     //年龄
     self.ageLabel = [[UILabel alloc]init];
-    self.ageLabel.text = @"25岁";
     self.ageLabel.font = Font(12);
     self.ageLabel.textColor = UICOLOR_FROM_HEX(Color666666);
     [self addSubview:self.ageLabel];
@@ -107,7 +102,6 @@
     
     //次数
     self.orderNumLabel = [[UILabel alloc]init];
-    self.orderNumLabel.text = @"上课: 235次";
     self.orderNumLabel.font = Font(12);
     self.orderNumLabel.textColor = UICOLOR_FROM_HEX(Color666666);
     [self addSubview:self.orderNumLabel];
@@ -119,8 +113,7 @@
         make.height.mas_offset(LineH(14));
     }];
     
-    
-    
+
 }
 
 - (void)focusOnBtnClick:(UIButton *)btn {
@@ -128,6 +121,32 @@
         self.focusButtonBlock(btn);
     }
 }
+
+
+
+- (void)getModel:(GGT_HomeTeachModel *)model {
+    //头像
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.ImageUrl] placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+    
+    
+    self.nameLabel.text = model.TeacherName;
+    
+    //是否关注 0：未关注 1：已关注)
+    if ([model.IsFollow isEqual:@0]) {
+        [self.focusButton setTitle:@"未关注" forState:(UIControlStateNormal)];
+    } else {
+        [self.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
+    }
+    
+    self.sexLabel.text = model.Sex;
+
+
+    self.ageLabel.text = [NSString stringWithFormat:@"%ld岁",(long)model.Age];
+    
+    self.orderNumLabel.text = [NSString stringWithFormat:@"上课: %ld",(long)model.LessonCount];
+
+}
+
 
 
 @end

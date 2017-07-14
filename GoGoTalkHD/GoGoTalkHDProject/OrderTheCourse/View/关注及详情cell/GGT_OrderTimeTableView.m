@@ -25,33 +25,7 @@
 
 #pragma mark 创建顶部数据
 - (void)initDataSource {
-    
-    //对头部的时间数据进行创建
-    self.yearsArray = [NSMutableArray array];
-    //对头部的周几数据进行创建
-    self.weeksArray = [NSMutableArray array];
-    
-    
-    //获取2周的数据
-    for (int i = 0; i < self.sectionRow; i ++) {
-        //从现在开始的24小时
-        NSTimeInterval secondsPerDay = i * 24*60*60;
-        NSDate *curDate = [NSDate dateWithTimeIntervalSinceNow:secondsPerDay];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM-dd"];
-        NSString *dateStr = [dateFormatter stringFromDate:curDate];//几月几号
-        
-        NSDateFormatter *weekFormatter = [[NSDateFormatter alloc] init];
-        [weekFormatter setDateFormat:@"EEE"];//星期几 @"HH:mm 'on' EEEE MMMM d"];
-        NSString *weekStr = [weekFormatter stringFromDate:curDate];
-        
-        //组合时间
-        [self.yearsArray addObject:dateStr];
-        [self.weeksArray addObject:weekStr];
-    }
-    
-    
+
     //7天时间 89*7
     _headerScrollerView = [[UIScrollView alloc]init];
     //    _headerScrollerView.contentSize = CGSizeMake(LineW(85)*self.sectionRow,LineH(60));
@@ -73,8 +47,6 @@
     
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-    NSLog(@"---%@",sin.orderCourse_dateMuArray);
-    
     
     for (NSUInteger i =  0; i < sin.orderCourse_dateMuArray.count; i++) {
         GGT_HomeDateModel *model = [sin.orderCourse_dateMuArray safe_objectAtIndex:i];
@@ -190,7 +162,13 @@
 
 //选中某item
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+//    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
+
+    GGT_TimeCollectionModel *timeCollectionModel = [[_alltimeArray safe_objectAtIndex:indexPath.section] safe_objectAtIndex:indexPath.row];
+    
+    
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    GGT_HomeDateModel *homeDateModel = [sin.orderCourse_dateMuArray safe_objectAtIndex:indexPath.section];
 
     GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:indexPath];
     deselectedCell.layer.cornerRadius = LineW(5);
@@ -199,6 +177,14 @@
     deselectedCell.layer.borderWidth = LineW(0);
     deselectedCell.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
     deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+    
+
+    
+    if (self.orderBlick) {
+        self.orderBlick(timeCollectionModel,homeDateModel);
+    }
+    
+    
 }
 
 

@@ -10,4 +10,6 @@
 
 @interface GGT_DetailsOfTeacherViewController : BaseViewController
 
+@property (nonatomic, strong) GGT_HomeTeachModel *pushModel;
+
 @end

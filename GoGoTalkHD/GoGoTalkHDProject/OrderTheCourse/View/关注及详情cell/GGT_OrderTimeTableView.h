@@ -10,6 +10,8 @@
 #import "GGT_TimeCollectionModel.h"
 #import "GGT_HomeDateModel.h"
 
+
+typedef void(^OrderBlick)(GGT_TimeCollectionModel *model1,GGT_HomeDateModel *model2);
 @interface GGT_OrderTimeTableView : UIView <UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
 
@@ -27,6 +29,8 @@
 @property (nonatomic, strong) NSArray *alltimeArray;
 //展示多少天的数据
 @property (nonatomic, assign) NSInteger sectionRow;
+
+@property (nonatomic, copy) OrderBlick orderBlick;
 
 
 - (void)getCellArr:(NSMutableArray *)dataArray;

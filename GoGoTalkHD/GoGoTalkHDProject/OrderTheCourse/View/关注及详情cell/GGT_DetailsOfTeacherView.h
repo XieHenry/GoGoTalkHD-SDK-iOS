@@ -27,4 +27,7 @@ typedef void(^FocusButtonBlock)(UIButton *btn);
 @property (nonatomic, strong) UIButton *focusButton;
 
 @property (nonatomic, copy) FocusButtonBlock focusButtonBlock;
+
+- (void)getModel:(GGT_HomeTeachModel *)model;
+
 @end
