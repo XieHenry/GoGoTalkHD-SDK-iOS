@@ -51,12 +51,18 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
     [self buildUI];
     
     [self xc_loadData];
+    
+    // 添加通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xc_refreshData) name:kEnterForeground object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)xc_refreshData
 {
-    [super viewWillAppear:animated];
+    [self.xc_dateMuArray removeAllObjects];
+    [self xc_loadData];
 }
+
+
 
 - (void)buildData
 {
@@ -102,7 +108,7 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:xc_bottomLayout];
         collectionView.delegate = self;
         collectionView.dataSource = self;
-//        collectionView.alwaysBounceVertical = YES;
+        collectionView.alwaysBounceVertical = YES;
         collectionView.showsVerticalScrollIndicator = NO;
         collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         collectionView;

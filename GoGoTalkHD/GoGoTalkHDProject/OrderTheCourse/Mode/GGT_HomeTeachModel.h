@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *LessonId;
 @property (nonatomic, strong) NSString *Sex;
 @property (nonatomic, strong) NSString *StartTime;
-@property (nonatomic, assign) NSInteger TeacherId;
+@property (nonatomic, strong) NSString *TeacherId;
 @property (nonatomic, strong) NSString *TeacherName;
 
 @end
