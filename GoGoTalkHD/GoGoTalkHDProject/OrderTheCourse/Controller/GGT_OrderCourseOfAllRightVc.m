@@ -192,12 +192,40 @@ typedef enum : NSUInteger {
 {
     GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag-1000];
     
+    //（是否关注 0：未关注 1：已关注）
     if ([model.IsFollow isEqualToString:@"0"]) {
         model.IsFollow = @"1";
+        
+        [self sendFocusNetworkWithHomeTeachModel:model button:button];
+        
     } else {
+        
         model.IsFollow = @"0";
+        
+        // 在可以取消约课的情况下 弹框
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消本次预约课程" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self sendFocusNetworkWithHomeTeachModel:model button:button];
+        }];
+        
+        cancleAction.textColor = UICOLOR_FROM_HEX(Color777777);
+        sureAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+        [alertController addAction:cancleAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
     }
-    
+
+}
+
+#pragma mark - 关注网络请求
+- (void)sendFocusNetworkWithHomeTeachModel:(GGT_HomeTeachModel *)model button:(UIButton *)button
+{
     NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@", URL_Attention_Home, model.TeacherId, model.IsFollow];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
@@ -207,8 +235,13 @@ typedef enum : NSUInteger {
         
     } failure:^(NSError *error) {
         
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
+        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        cell.xc_model = model;
+        
     }];
 }
+
 
 #pragma mark - GGT_OrderCourseOfAllLeftVcDelegate
 - (void)leftSendToRightDate:(NSString *)date time:(NSString *)time
