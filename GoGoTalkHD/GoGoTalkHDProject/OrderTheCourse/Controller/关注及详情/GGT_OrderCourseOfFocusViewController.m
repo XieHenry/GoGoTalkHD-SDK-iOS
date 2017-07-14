@@ -56,14 +56,27 @@
 @implementation GGT_OrderCourseOfFocusViewController
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTimeTableColor:) name:@"changeTimeTableColor" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
+}
+
+- (void)changeTimeTableColor:(NSNotification *)noti {
+    [self.orderTimeView  ClernColor];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
     
-    
     self.nodataView = [[GGT_NoMoreDateAlertView alloc]init];
-    [self.nodataView imageString:@"weichuxi" andAlertString:@"您还没有开通课时，开通后即可预约课程！\n 客服电话：400-8787-276"];
     self.nodataView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [self.view addSubview:self.nodataView];
     self.nodataView.hidden = YES;
@@ -155,6 +168,13 @@
 
     } failure:^(NSError *error) {
         
+        NSDictionary *dic = error.userInfo;
+        self.nodataView.hidden = NO;
+        self.headerView.hidden = YES;
+        self.orderTimeView.hidden = YES;
+        
+        [self.nodataView imageString:@"weichuxi" andAlertString:dic[@"msg"]];
+
     }];
 }
 
@@ -331,14 +351,52 @@
     
     __weak GGT_OrderCourseOfFocusViewController *weakSelf = self;
     
-    self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *model1, GGT_HomeDateModel *model2) {
+    self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
         GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = weakSelf;
         
-//        GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
-//        vc.xc_model = model;
+//        BDEId = 75;
+//        BookingId = 53;
+//        CreateTime = "2017-02-19T21:39:20.653";
+//        CreatorId = 18;
+//        EooReturnId = "<null>";
+//        FilePath = "/UploadFiles/Book/201702192137594824.pdf";
+//        FileTittle = "FFPhonics1_2";
+//        OrderId = 2;
+//        Status = 1;
+//        ThirdReturnId = 2521;
+//        Type = 1;
+//        UpdateTime = "2017-02-19T21:39:20.653";
+//        UpdatorId = 18;
+        
+        
+        GGT_FocusImgModel *focusImgModel = [weakSelf.iconDataArray safe_objectAtIndex:weakSelf.selectedIndex];
+
+        
+//        07月13日（星期三）18:30
+        GGT_HomeTeachModel *model = [[GGT_HomeTeachModel alloc]init];
+        model.TeacherName = focusImgModel.TeacherName;
+        model.TeacherId = focusImgModel.TeacherId;
+        model.ImageUrl = focusImgModel.ImageUrl;
+        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.name];
+        
+        
+//        @property (nonatomic, assign) NSInteger Age;
+//        @property (nonatomic, strong) NSString *BookingId;
+//        @property (nonatomic, strong) NSString *FileTittle;
+//        @property (nonatomic, strong) NSString *ImageUrl;
+//        @property (nonatomic, strong) NSString *IsFollow;
+//        @property (nonatomic, assign) NSInteger LessonCount;
+//        @property (nonatomic, strong) NSString *LessonId;
+//        @property (nonatomic, strong) NSString *Sex;
+//        @property (nonatomic, strong) NSString *StartTime;
+//        @property (nonatomic, assign) NSInteger TeacherId;
+//        @property (nonatomic, strong) NSString *TeacherName;
+
+        
+        vc.xc_model = model;
         
         [weakSelf presentViewController:nav animated:YES completion:nil];
     };

@@ -11,7 +11,7 @@
 #import "GGT_HomeDateModel.h"
 
 
-typedef void(^OrderBlick)(GGT_TimeCollectionModel *model1,GGT_HomeDateModel *model2);
+typedef void(^OrderBlick)(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel);
 @interface GGT_OrderTimeTableView : UIView <UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
 
@@ -31,7 +31,11 @@ typedef void(^OrderBlick)(GGT_TimeCollectionModel *model1,GGT_HomeDateModel *mod
 @property (nonatomic, assign) NSInteger sectionRow;
 
 @property (nonatomic, copy) OrderBlick orderBlick;
+//选中的cell
+@property (nonatomic, strong) NSIndexPath *didSelectedPath;
 
+
+- (void)ClernColor;
 
 - (void)getCellArr:(NSMutableArray *)dataArray;
 @end

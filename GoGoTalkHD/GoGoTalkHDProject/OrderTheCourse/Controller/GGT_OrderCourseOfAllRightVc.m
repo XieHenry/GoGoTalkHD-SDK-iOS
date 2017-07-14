@@ -166,7 +166,7 @@ typedef enum : NSUInteger {
     GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
     
     // 进行网络请求判断
-    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, model.TeacherId, model.StartTime];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass, (long)model.TeacherId, model.StartTime];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
