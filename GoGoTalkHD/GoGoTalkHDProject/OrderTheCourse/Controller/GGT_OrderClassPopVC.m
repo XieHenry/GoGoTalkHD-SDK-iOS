@@ -231,8 +231,12 @@
 // 约课
 - (void)sendNetwork
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@?lessonID=%@", URL_GetBookList_Home, self.xc_model.LessonId];
-    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"lessonId"] = self.xc_model.LessonId;
+    dic[@"bId"] = @"0";
+    dic[@"beId"] = @"0";
+    
+    [[BaseService share] sendPostRequestWithPath:URL_AgainLesson parameters:dic token:YES viewController:self success:^(id responseObject) {
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -248,6 +252,7 @@
         if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
             [MBProgressHUD showMessage:dic[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
+        
     }];
 }
 
