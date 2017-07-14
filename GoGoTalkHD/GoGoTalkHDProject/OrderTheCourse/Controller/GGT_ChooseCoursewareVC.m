@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIButton *xc_rightItemButton;
 @property (nonatomic, strong) NSMutableArray *xc_dataMuArray;
 @property (nonatomic, strong) GGT_CoursewareModel *xc_coursewareModel;
+@property (nonatomic, strong) UILabel *xc_placeholderLabel;
 @end
 
 @implementation GGT_ChooseCoursewareVC
@@ -45,7 +46,13 @@
         }
         [self.xc_tableView reloadData];
         
+        self.xc_placeholderLabel.text = responseObject[@"msg"];
+        
+        
     } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        self.xc_placeholderLabel.text = dic[@"msg"];
         
     }];
 }
@@ -95,6 +102,13 @@
         button;
     });
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.xc_rightItemButton];
+    
+    
+#pragma mark - 添加xc_placeholderView
+    self.xc_placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 462, 368)];
+    self.xc_placeholderLabel.textAlignment = NSTextAlignmentCenter;
+    self.xc_tableView.enablePlaceHolderView = YES;
+    self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderLabel;
     
 }
 
