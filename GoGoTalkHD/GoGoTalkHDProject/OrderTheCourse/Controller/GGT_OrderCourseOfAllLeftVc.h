@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GGT_OrderCourseOfAllLeftVc : BaseViewController
+@protocol GGT_OrderCourseOfAllLeftVcDelegate <NSObject>
+- (void)leftSendToRightDate:(NSString *)date time:(NSString *)time;
+@end
 
+@interface GGT_OrderCourseOfAllLeftVc : BaseViewController
+@property (nonatomic, weak) id <GGT_OrderCourseOfAllLeftVcDelegate> delegate;
 @end

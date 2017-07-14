@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
-@interface GGT_OrderCourseOfAllRightVc : BaseViewController
+#import "GGT_OrderCourseOfAllLeftVc.h"
+
+@interface GGT_OrderCourseOfAllRightVc : BaseViewController<GGT_OrderCourseOfAllLeftVcDelegate>
 
 @end

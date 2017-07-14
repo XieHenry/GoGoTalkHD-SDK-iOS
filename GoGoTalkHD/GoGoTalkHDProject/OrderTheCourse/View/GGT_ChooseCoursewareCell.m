@@ -95,14 +95,14 @@
     
 }
 
-- (void)setXc_model:(GGT_TestModel *)xc_model
-{
-    _xc_model = xc_model;
-    if (xc_model.type == 1) {
-        self.xc_chooseButton.selected = YES;
-    } else {
-        self.xc_chooseButton.selected = NO;
-    }
-}
+//- (void)setXc_model:(GGT_TestModel *)xc_model
+//{
+//    _xc_model = xc_model;
+//    if (xc_model.type == 1) {
+//        self.xc_chooseButton.selected = YES;
+//    } else {
+//        self.xc_chooseButton.selected = NO;
+//    }
+//}
 
 @end

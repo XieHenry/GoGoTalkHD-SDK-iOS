@@ -96,8 +96,8 @@
     for (int i = 0; i < 100; i++) {
         NSDictionary *dic = @{@"date":[NSString stringWithFormat:@"08月0%d日", i], @"time":@"09:56", @"type":@(i)};
         
-        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
-        [self.xc_dataMuArray addObject:model];
+//        GGT_TestModel *model = [GGT_TestModel yy_modelWithDictionary:dic];
+//        [self.xc_dataMuArray addObject:model];
     }
 }
 
@@ -109,28 +109,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [GGT_ChooseCoursewareCell cellWithTableView:tableView forIndexPath:indexPath];
-    cell.xc_model = self.xc_dataMuArray[indexPath.row];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    if (model.type == 1) {
-        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    }
+//    cell.xc_model = self.xc_dataMuArray[indexPath.row];
+//    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
+//    if (model.type == 1) {
+//        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+//    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    model.type = 1;
-    cell.xc_model = model;
+//    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
+//    model.type = 1;
+//    cell.xc_model = model;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     GGT_ChooseCoursewareCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
-    model.type = 2;
-    cell.xc_model = model;
+//    GGT_TestModel *model = self.xc_dataMuArray[indexPath.row];
+//    model.type = 2;
+//    cell.xc_model = model;
 }
 
 

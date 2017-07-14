@@ -26,6 +26,10 @@ static CGFloat const xc_tableViewMargin = 7.0f;
 @property (nonatomic, strong) GGT_AllWithNoDateView *allWithNoDateView;
 
 @property (nonatomic, strong) GGT_OrderPlaceholderView *xc_placeholderView;
+
+@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, assign) NSInteger pageIndex;
+
 @end
 
 @implementation GGT_OrderCourseOfAllRightVc
@@ -42,7 +46,10 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     [self.view addGestureRecognizer:tapGesture];
     
     
-    [self initTableView];
+    [self buildUI];
+    
+    self.pageSize = 10;
+    self.pageIndex = 1;
     
 }
 
@@ -53,8 +60,8 @@ static CGFloat const xc_tableViewMargin = 7.0f;
 }
 
 
-- (void)initTableView {
-    
+- (void)buildUI
+{
     self.xc_tableView = ({
         UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         tableView.delegate = self;
@@ -110,6 +117,16 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     self.xc_tableView.enablePlaceHolderView = YES;
     self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderView;
     
+}
+
+- (void)xc_loadData
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@&time=%@&pageIndex=%d&pageSize=%d", URL_GetPageTeacherLessonApp];
+    [[BaseService share] sendGetRequestWithPath:nil token:YES viewController:self success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark tableview的代理
@@ -285,6 +302,11 @@ static CGFloat const xc_tableViewMargin = 7.0f;
     return YES;
 }
 
+#pragma mark - GGT_OrderCourseOfAllLeftVcDelegate
+- (void)leftSendToRightDate:(NSString *)date time:(NSString *)time
+{
+    
+}
 
 
 @end

@@ -29,6 +29,8 @@
     //使用UISplitViewController前，第一步要做的是设置ViewControllers数组，再设置控制器的其他属性
     self.delegate = self;
     
+    LeftVC.delegate = RightVc;
+    
 }
 
 - (void)didReceiveMemoryWarning {

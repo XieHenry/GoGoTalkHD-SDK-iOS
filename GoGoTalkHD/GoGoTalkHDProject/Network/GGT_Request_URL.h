@@ -80,5 +80,11 @@ static NSString * const URL_PostLog = @"api/APP/Applog";
 // 获取上课日期
 static NSString * const URL_GetDate = @"api/APP/GetDate";
 
+// 获取时间
+static NSString * const URL_GetTime = @"api/APP/GetTime";
+
+// 获取所有教师列表
+static NSString * const URL_GetPageTeacherLessonApp = @"api/APP/GetPageTeacherLessonApp";
+
 
 #endif /* GGT_Request_URL_h */

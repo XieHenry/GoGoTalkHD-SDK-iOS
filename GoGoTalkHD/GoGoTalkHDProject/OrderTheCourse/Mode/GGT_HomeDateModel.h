@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
-    XCDoNotOrder,   // 0
-    XCCanOrder,     // 1
-    XCSelectOrder,  // 2
-} XCOrder;
+    XCDateDoNotOrder,   // 0
+    XCDateCanOrder,     // 1
+    XCDateSelectOrder,  // 2
+} XCDateOrder;
 
 @interface GGT_HomeDateModel : NSObject
 
