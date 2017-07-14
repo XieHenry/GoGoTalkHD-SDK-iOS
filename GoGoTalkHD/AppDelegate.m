@@ -56,6 +56,10 @@ static BOOL isProduction = true;
     //对照相机和麦克风进行授权
     [self initCameraAndMic];
     
+    
+    //提前获取日期数据，3个地方需要用到
+    [self getDayAndWeekLoadData];
+    
     return YES;
 }
 
@@ -470,6 +474,26 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
     
     return str;
+}
+
+
+#pragma mark 提前获取日期数据，3个地方需要用到
+- (void)getDayAndWeekLoadData {
+    [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:nil success:^(id responseObject) {
+        
+        NSArray *dataArray = responseObject[@"data"];
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        NSMutableArray *tempArr = [NSMutableArray array];
+        
+        for (NSDictionary *dic in dataArray) {
+            GGT_HomeDateModel *model = [GGT_HomeDateModel yy_modelWithDictionary:dic];
+            [tempArr addObject:model];
+        }
+        
+        sin.orderCourse_dateMuArray = tempArr;
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

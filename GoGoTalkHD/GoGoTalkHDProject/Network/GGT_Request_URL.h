@@ -23,6 +23,22 @@ static NSString * const URL_GetChangePasswordSMS = @"/api/APP/AppSendChangePwdSM
 static NSString * const URL_ChangePwdByCode = @"/api/APP/AppChangePwdByCode";
 
 
+
+
+
+
+/*约课*/
+//获取学生关注的教师信息
+static NSString * const URL_GetTeacherFollowApp = @"/api/APP/GetTeacherFollowApp";
+//学员关注、取消关注 教师
+static NSString * const URL_GetAttention = @"/api/APP/Attention";
+//获取关注的老师一周的排课情况
+static NSString * const URL_GetTimeByTeacherId = @"/api/APP/GetTimeByTeacherId";
+//获取教师排课日历
+static NSString * const URL_GetTeacherBulkApp = @"/api/APP/GetTeacherBulkApp";
+
+
+
 /*我的*/
 //修改密码（根据旧密码修改新密码）
 static NSString * const URL_ChangePwdByOldPwd = @"/api/APP/AppChangePwdByOldPwd";

@@ -32,6 +32,8 @@
 // 学生是否在教室
 @property (nonatomic) BOOL isInRoom;
 
+//获取7天的上课时间
+@property (nonatomic, strong) NSArray *orderCourse_dateMuArray;
 
 
 @end

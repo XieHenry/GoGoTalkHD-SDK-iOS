@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GGT_TimeCollectionModel.h"
+#import "GGT_HomeDateModel.h"
 
 @interface GGT_OrderTimeTableView : UIView <UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
@@ -26,11 +28,17 @@
 //展示多少天的数据
 @property (nonatomic, assign) NSInteger sectionRow;
 
+
+- (void)getCellArr:(NSMutableArray *)dataArray;
 @end
 
 
 
 @interface GGT_OrderTimeCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIView *lineView;
+
+
+- (void)getTextModel:(GGT_TimeCollectionModel *)model;
 
 @end
