@@ -203,7 +203,7 @@ typedef enum : NSUInteger {
 //        model.IsFollow = @"0";
         
         // 在可以取消约课的情况下 弹框
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消本次预约课程" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消关注吗" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
