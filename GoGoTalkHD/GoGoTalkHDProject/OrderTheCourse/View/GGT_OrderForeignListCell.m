@@ -210,9 +210,10 @@
     self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", xc_model.Age];
     
     if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
-         NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:urlStr];
         [self.xc_iconButton sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+        [self.xc_iconButton sd_setImageWithURL:url forState:UIControlStateHighlighted placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
     }
 }
 

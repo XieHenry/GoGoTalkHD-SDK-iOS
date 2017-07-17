@@ -74,6 +74,7 @@
     self.xc_cancleButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:UIIMAGE_FROM_NAME(@"Shut_down") forState:UIControlStateNormal];
+        [button setImage:UIIMAGE_FROM_NAME(@"Shut_down") forState:UIControlStateHighlighted];
         button;
     });
     [self.view addSubview:self.xc_cancleButton];
