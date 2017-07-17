@@ -328,7 +328,7 @@
     [self requestWithPath:url method:XCHttpRequestGet parameters:nil token:isLoadToken viewController:viewController success:success failure:failure];
 }
 
-#pragma mark - POST 不带MBP
+#pragma mark - POST 判断是否带MBP带MBP
 - (void)sendPostRequestWithPath:(NSString *)url
                      parameters:(NSDictionary *)parameters
                           token:(BOOL)isLoadToken
@@ -341,7 +341,7 @@
     [self requestWithPath:url method:XCHttpRequestPost parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
 }
 
-#pragma mark - GET 不带MBP
+#pragma mark - GET 判断是否带MBP带MBP
 - (void)sendGetRequestWithPath:(NSString *)url
                          token:(BOOL)isLoadToken
                 viewController:(UIViewController *)viewController
