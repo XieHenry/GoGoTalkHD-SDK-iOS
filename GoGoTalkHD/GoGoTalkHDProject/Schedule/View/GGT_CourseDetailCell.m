@@ -577,7 +577,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         self.xc_courseNameLabel.text = @"";
     }
     
-    if ([xc_cellModel.FilePath isKindOfClass:[NSString class]] && xc_cellModel.FilePath.length > 0) {
+    if ([xc_cellModel.ImageUrl isKindOfClass:[NSString class]] && xc_cellModel.ImageUrl.length > 0) {
         [self.xc_headPortraitImgView sd_setImageWithURL:[NSURL URLWithString:xc_cellModel.ImageUrl] placeholderImage:UIIMAGE_FROM_NAME(@"default_avatar")];
     }
     
