@@ -316,6 +316,11 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
 
     if (kind == UICollectionElementKindSectionHeader) {
         GGT_DateAndTimeHeaderView *headerView = [GGT_DateAndTimeHeaderView headerWithCollectionView:collectionView indexPath:indexPath];
+        if (collectionView == self.xc_topCollectionView) {
+            headerView.xc_titleLabel.text = @"日期";
+        } else {
+            headerView.xc_titleLabel.text = @"时间";
+        }
         return headerView;
     } else {
         UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
