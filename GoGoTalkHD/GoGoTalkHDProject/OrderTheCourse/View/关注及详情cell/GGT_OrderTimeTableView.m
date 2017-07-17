@@ -77,7 +77,6 @@
 #pragma mark 创建UICollectionView
 - (void)initContentView {
     _bgScrollerView = [[UIScrollView alloc]init];
-    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,31*LineH(42)+LineH(40));
     _bgScrollerView.scrollEnabled = YES;
     _bgScrollerView.showsVerticalScrollIndicator = NO;
     _bgScrollerView.showsHorizontalScrollIndicator = NO;
@@ -97,10 +96,9 @@
     
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-//     layout.minimumLineSpacing = LineY(5); //上下的间距 可以设置0看下效果
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2, LineY(10), LineW(728), 31*LineH(42)) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource =self;
     _collectionView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
@@ -134,7 +132,7 @@
     GGT_TimeCollectionModel *model = [[_alltimeArray safe_objectAtIndex:indexPath.section] safe_objectAtIndex:indexPath.row];
     
     
-//    pic 0:不可预约 1：可以预约 2：默认选中
+//    isHaveClass 0:不可预约 1：可以预约 2：默认选中
     [cell getTextModel:model];
 
     
@@ -188,7 +186,7 @@
 }
 
 - (void)ClernColor {
-        NSLog(@"what-%ld---%ld",(long)self.didSelectedPath.section,(long)self.didSelectedPath.row);
+//        NSLog(@"what-%ld---%ld",(long)self.didSelectedPath.section,(long)self.didSelectedPath.row);
 
     GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:self.didSelectedPath];
     deselectedCell.layer.cornerRadius = LineW(5);
@@ -216,16 +214,21 @@
 #pragma mark 获取数据
 - (void)getCellArr:(NSMutableArray *)dataArray {
     self.alltimeArray =  [NSMutableArray array];
-//    _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00",@"22:30"];
+//    _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00"];
+    
     
     self.alltimeArray = dataArray;
+
+    //更新坐标
+    NSInteger count = [[self.alltimeArray safe_objectAtIndex:0] count];
+    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,(count * LineH(42)) + LineH(18));
+    _collectionView.frame = CGRectMake((marginFocusOn-LineW(728))/2, LineY(8), LineW(728),(count * LineH(42)));
     
     [_collectionView reloadData];
-    
+
 }
 
 @end
-
 
 
 #pragma mark  GGT_OrderTimeCollectionViewCell
@@ -270,7 +273,7 @@
     
     NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)model.isHaveClass];
 
-    self.timeLabel.text = model.date;
+    self.timeLabel.text = model.time;
     
     if ([statusStr isEqualToString:@"0"]) {
         self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);

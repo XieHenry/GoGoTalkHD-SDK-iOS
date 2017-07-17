@@ -46,7 +46,6 @@
     
     //关注
     self.focusButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.focusButton.titleLabel.font = Font(10);
     [self.focusButton setTitleColor:[UIColor clearColor] forState:(UIControlStateNormal)];
     [self.focusButton addTarget:self action:@selector(focusOnBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:self.focusButton];

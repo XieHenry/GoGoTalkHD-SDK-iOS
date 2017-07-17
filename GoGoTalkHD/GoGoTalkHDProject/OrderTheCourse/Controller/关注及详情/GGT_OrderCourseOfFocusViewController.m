@@ -20,7 +20,7 @@
 #define magnification 1.15f  //头像放大倍数
 #define headPortraitW 62.5f  //头像宽度
 
-
+static BOOL isGetNotificationCenter;
 @interface GGT_OrderCourseOfFocusViewController () <OTPageScrollViewDataSource,OTPageScrollViewDelegate,UIPopoverPresentationControllerDelegate>
 
 /***上部分头像***/
@@ -37,14 +37,11 @@
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) NSInteger page;
-@property BOOL isrefreshMore;
 
 /***下部分时间表格***/
 @property (nonatomic, strong) NSMutableArray *dayAndWeekArray;
 @property (nonatomic, strong) NSMutableArray *timeDataArray;
 @property (nonatomic, strong)  GGT_OrderTimeTableView *orderTimeView;
-
-
 
 
 /***缺省图***/
@@ -59,15 +56,34 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTimeTableColor:) name:@"changeTimeTableColor" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFocusClick:) name:@"refreshFocus" object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshFocus" object:nil];
 }
 
+
+#pragma mark 点击时间弹出GGT_OrderClassPopVC，如果点击了取消，需要发送通知，对cell的颜色进行恢复
 - (void)changeTimeTableColor:(NSNotification *)noti {
     [self.orderTimeView  ClernColor];
+}
+
+#pragma mark 在别的界面如果点击了关注，在这里刷新
+- (void)refreshFocusClick:(NSNotification *)noti {
+   
+    isGetNotificationCenter = YES;
+    
+    [self initHeaderView];
+    
+    NSLog(@"---------");
+    //请求上部分头像的数据
+    self.iconDataArray = [NSMutableArray array];
+    self.page = 1;
+    [self getTeacherFollowLoadData];
+
 }
 
 
@@ -76,6 +92,7 @@
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
     
+    //缺省图
     self.nodataView = [[GGT_NoMoreDateAlertView alloc]init];
     self.nodataView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [self.view addSubview:self.nodataView];
@@ -90,19 +107,24 @@
     }];
     
     
-    //头部滚动头像
-    [self initHeaderView];
+    NSLog(@"=--===%d",isGetNotificationCenter);
     
     
-    //请求上部分头像的数据
-    self.iconDataArray = [NSMutableArray array];
-    self.page = 1;
-    self.isrefreshMore = NO;
-    [self getTeacherFollowLoadData];
+    if (isGetNotificationCenter == NO) {
+        //头部滚动头像
+        [self initHeaderView];
+        
+        
+        //请求上部分头像的数据
+        self.iconDataArray = [NSMutableArray array];
+        self.page = 1;
+        [self getTeacherFollowLoadData];
+    } else {
+     
+    }
     
+
     
-    //下面的课表模块
-//    [self initCollectionView];
 }
 
 
@@ -145,7 +167,14 @@
                 [self reloadFocusOnImgFrame:model.TeacherName];
                 self.selectedIndex = 4;
                 _PScrollView.pageScrollView.status = @"center1";
-            } else {
+            } else if(self.iconDataArray.count == 1){
+                GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.iconDataArray.count/2];
+                self.nameLabel.text = model.TeacherName;
+                [self reloadFocusOnImgFrame:model.TeacherName];
+                self.selectedIndex = 0;
+                _PScrollView.pageScrollView.status = @"first";
+                
+            }else {
                 GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.iconDataArray.count/2];
                 self.nameLabel.text = model.TeacherName;
                 [self reloadFocusOnImgFrame:model.TeacherName];
@@ -226,20 +255,32 @@
 #pragma mark 关注按钮
 - (void)focusOnBtnClick {
 
+   
+    
     GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
-    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_GetAttention,[NSString stringWithFormat:@"%ld",(long)model.TeacherId],@"1"];
+    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%ld&state=%@",URL_GetAttention,(long)model.TeacherId,@"1"];
     
-    NSLog(@"%ld----%@",(long)self.selectedIndex,url);
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
-        //先从本地数组删除这个数据
-        [self.iconDataArray removeObjectAtIndex:self.selectedIndex];
-        [_PScrollView.pageScrollView reloadData];
-
-        //刷新UI
-        [self reloadIconImageView:self.selectedIndex];
+        //如果是只有一个，删除之后，刷新一下界面。
+        if (self.iconDataArray.count <= 1) {
+            //请求上部分头像的数据
+            self.iconDataArray = [NSMutableArray array];
+            self.page = 1;
+            [self getTeacherFollowLoadData];
+            
+        } else {
+            //先从本地数组删除这个数据
+            [self.iconDataArray removeObjectAtIndex:self.selectedIndex];
+            [_PScrollView.pageScrollView reloadData];
+            
+            //刷新UI
+            [self reloadIconImageView:self.selectedIndex];
+        }
+        
+        
 
         
     } failure:^(NSError *error) {
@@ -307,7 +348,7 @@
 - (void)reloadIconImageView:(NSInteger )index {
     //如果是点击的最后一个，才会加载最新的数据，page++
     if (self.iconDataArray.count < 10) {
-        
+       
     } else if (self.iconDataArray.count == 10) {
         if (index == self.iconDataArray.count-1) {
             self.page ++;
@@ -344,53 +385,64 @@
     
     //获取时间表格数据
     [self getOrderTimeTableViewLoadData];
+    
+
+    
   
 }
 
+#pragma mark   是否可以预约
+- (void)isCanOrderTheCourseData:(GGT_TimeCollectionModel *)timeCollectionModel homeDateModel:(GGT_HomeDateModel *)homeDateModel{
+    
+    GGT_FocusImgModel *focusImgModel = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
+    
+    // 进行网络请求判断
+    NSString *dayStr;
+    if ([homeDateModel.date xc_isContainString:@"月"] || [homeDateModel.date xc_isContainString:@"日"]) {
+        dayStr = [homeDateModel.date stringByReplacingOccurrencesOfString:@"月" withString:@"-"];
+        dayStr = [dayStr stringByReplacingOccurrencesOfString:@"日" withString:@""];
 
-#pragma mark ---以下为数据表格的数据操作---
-- (void)initCollectionView {
+    }
+//    StartTime = "17-07-14 19:00";
+
+    NSLog(@"%@===============%@",dayStr,timeCollectionModel.date);
     
-    self.orderTimeView = [[GGT_OrderTimeTableView alloc]init];
-    self.orderTimeView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-    
-    
-    
-    __weak GGT_OrderCourseOfFocusViewController *weakSelf = self;
-    
-    self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass,focusImgModel.TeacherId,timeCollectionModel.date];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+
         GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
-        nav.popoverPresentationController.delegate = weakSelf;
-    
+        nav.popoverPresentationController.delegate = self;
         
-        GGT_FocusImgModel *focusImgModel = [weakSelf.iconDataArray safe_objectAtIndex:weakSelf.selectedIndex];
-        
-//        07月13日（星期三）18:30
+        //        07月13日（星期三）18:30
         GGT_HomeTeachModel *model = [[GGT_HomeTeachModel alloc]init];
         model.TeacherName = focusImgModel.TeacherName;
         model.TeacherId = [NSString stringWithFormat:@"%ld",(long)focusImgModel.TeacherId];
         model.ImageUrl = focusImgModel.ImageUrl;
-        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.date];
-        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.week];
+        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
+        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.lessonID];
         
         vc.xc_model = model;
-        [weakSelf presentViewController:nav animated:YES completion:nil];
-    };
-    [self.view addSubview:self.orderTimeView];
-    
-    [self.orderTimeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(129);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(-0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-0);
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        
+        [self.orderTimeView  ClernColor];
+
     }];
     
 }
 
 
 - (void)getOrderTimeTableViewLoadData {
+    //先删除以前的GGT_OrderTimeTableView
         for (UIView *view in self.view.subviews) {
             if ([view isKindOfClass:[GGT_OrderTimeTableView class]]) {
                 GGT_OrderTimeTableView *cell = (GGT_OrderTimeTableView *)view;
@@ -467,11 +519,18 @@
         
         [self.timeDataArray addObject:classListGArr];
 
-        //cell获得数据
-        
-        [self initCollectionView];
 
+        self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, LineH(129), marginFocusOn, SCREEN_HEIGHT()-LineH(129)-64)];
+        self.orderTimeView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         [self.orderTimeView getCellArr:self.timeDataArray];
+        __weak GGT_OrderCourseOfFocusViewController *weakSelf = self;
+        self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
+            
+            //先判断是否可预约
+            [weakSelf isCanOrderTheCourseData:timeCollectionModel homeDateModel:homeDateModel];
+        };
+        [self.view addSubview:self.orderTimeView];
+        
 
         
     } failure:^(NSError *error) {
@@ -483,6 +542,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*
+ #pragma mark ---以下为数据表格的数据操作---
+ - (void)initCollectionView {
+ 
+ self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, LineH(129), marginFocusOn, SCREEN_HEIGHT()-LineH(129)-64)];
+ self.orderTimeView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+ 
+ __weak GGT_OrderCourseOfFocusViewController *weakSelf = self;
+ self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
+ 
+ //先判断是否可预约
+ [weakSelf isCanOrderTheCourseData:timeCollectionModel homeDateModel:homeDateModel];
+ };
+ [self.view addSubview:self.orderTimeView];
+ 
+ }
+ */
 
 
 @end

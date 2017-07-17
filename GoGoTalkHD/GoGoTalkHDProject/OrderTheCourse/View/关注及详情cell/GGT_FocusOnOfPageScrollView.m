@@ -81,7 +81,16 @@
                 
                 self.contentOffset = CGPointMake(startX - self.padding/2, 0);
             }
-        } else if ([self.status isEqualToString:@"center2"]) {
+        }else if ([self.status isEqualToString:@"first"]) {
+            if (i == 0) {
+                cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+                cell.layer.borderWidth = 1;
+                cell.transform = CGAffineTransformMakeScale(magnification, magnification);
+                
+                self.contentOffset = CGPointMake(startX - self.padding/2, 0);
+            }
+            
+        }  else if ([self.status isEqualToString:@"center2"]) {
             if (i == _numberOfCell/2) {
                 cell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
                 cell.layer.borderWidth = 1;

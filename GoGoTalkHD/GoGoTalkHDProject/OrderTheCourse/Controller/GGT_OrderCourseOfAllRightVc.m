@@ -157,6 +157,7 @@ typedef enum : NSUInteger {
     GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.pushModel = model;
+    //刷新关注的cell
     vc.refreshCellBlick = ^(NSString *statusStr) {
 
         GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
@@ -169,6 +170,14 @@ typedef enum : NSUInteger {
         cell.xc_model = model;
         
     };
+    
+    //刷新整个数据
+    vc.refreshLoadDataBlock = ^(BOOL isYes) {
+        self.xc_pageIndex = 1;
+        self.xc_loadType = XCLoadNewData;
+        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+    };
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -244,6 +253,9 @@ typedef enum : NSUInteger {
     NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@", URL_Attention_Home, model.TeacherId, model.IsFollow];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
+        //对关注界面进行数据刷新
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshFocus" object:nil];
+        
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
         GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
         if ([model.IsFollow isEqualToString:@"0"]) {
@@ -254,6 +266,8 @@ typedef enum : NSUInteger {
         
         cell.xc_model = model;
         
+        
+
     } failure:^(NSError *error) {
         
 //        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];

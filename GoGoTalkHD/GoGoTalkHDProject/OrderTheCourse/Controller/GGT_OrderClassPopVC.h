@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^isOrderCourse)(BOOL  yes);
 @interface GGT_OrderClassPopVC : BaseViewController
 
 @property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
 
+@property (nonatomic, copy) isOrderCourse orderCourse;
 @end

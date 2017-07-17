@@ -245,6 +245,11 @@
             [MBProgressHUD showMessage:responseObject[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
+        //预约了课程
+        if (self.orderCourse) {
+            self.orderCourse(YES);
+        }
+        
     } failure:^(NSError *error) {
         
         [self dismissViewControllerAnimated:YES completion:nil];

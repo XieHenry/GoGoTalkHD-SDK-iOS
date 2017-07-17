@@ -8,8 +8,9 @@
 
 #import "GGT_DetailsOfTeacherViewController.h"
 #import "GGT_DetailsOfTeacherView.h"
+#import "GGT_OrderClassPopVC.h"
 
-@interface GGT_DetailsOfTeacherViewController ()
+@interface GGT_DetailsOfTeacherViewController () <UIPopoverPresentationControllerDelegate>
 
 @property (nonatomic, strong) GGT_DetailsOfTeacherView *detailsOfTeacherView;
 @property (nonatomic, strong)  GGT_OrderTimeTableView *orderTimeView;
@@ -18,30 +19,53 @@
 
 @implementation GGT_DetailsOfTeacherViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTimeTableColor:) name:@"changeTimeTableColor" object:nil];
+}
+
+
+- (void)changeTimeTableColor:(NSNotification *)noti {
+    [self.orderTimeView  ClernColor];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"老师详情";
+    self.navigationItem.title = @"外教详情";
     
     [self setLeftBackButton];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     
     self.navigationController.navigationBar.translucent = NO;
     
-    [self getOrderTimeTableViewLoadData];
+
+    //外教详情
+    [self initHeaderView];
 
     
+    //布局时间列表
+    [self initOrderTimeView];
+
     
-    self.detailsOfTeacherView = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH() - home_leftView_width, 124)];
+    //获取时间列表数据
+    [self getOrderTimeTableViewLoadData];
+}
+
+
+
+#pragma mark 外教详情
+- (void)initHeaderView {
+    
+    self.detailsOfTeacherView = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH() - home_leftView_width, LineH(124))];
     self.detailsOfTeacherView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     [self.detailsOfTeacherView getModel:self.pushModel];
     
     __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
     self.detailsOfTeacherView.focusButtonBlock = ^(UIButton *btn) {
-//        NSLog(@"关注按钮的状态---%@",btn.titleLabel.text);
         
         if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
-
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确认要取消关注吗？" preferredStyle:UIAlertControllerStyleAlert];
             
@@ -49,7 +73,7 @@
             
             UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [weakSelf focusOnBtnClick:@"1"];
-
+                
             }];
             cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
             sureAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
@@ -60,16 +84,9 @@
         } else if ([btn.titleLabel.text isEqualToString:@"未关注"]) {
             [weakSelf focusOnBtnClick:@"0"];
         }
-    
+        
     };
     [self.view addSubview:self.detailsOfTeacherView];
-    
-    
-    
-    self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, 129, marginFocusOn, SCREEN_HEIGHT()-129)];
-    self.orderTimeView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.orderTimeView];
-    
     
 }
 
@@ -79,9 +96,11 @@
     NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_GetAttention,self.pushModel.TeacherId,statusStr];
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
+        //对关注界面进行数据刷新
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshFocus" object:nil];
         
         if ([statusStr isEqualToString:@"0"]) {
-            
+     
             [self.detailsOfTeacherView.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
             [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
             [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateHighlighted];
@@ -91,7 +110,10 @@
             if (self.refreshCellBlick) {
                 self.refreshCellBlick(@"1");
             }
+            
+           
         } else {
+            
             [self.detailsOfTeacherView.focusButton setTitle:@"未关注" forState:(UIControlStateNormal)];
             [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateNormal];
             [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateHighlighted];
@@ -101,6 +123,7 @@
             if (self.refreshCellBlick) {
                 self.refreshCellBlick(@"0");
             }
+
         }
         
         
@@ -111,6 +134,51 @@
 }
 
 
+#pragma mark 时间列表
+- (void)initOrderTimeView {
+    self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, LineH(129), marginFocusOn, SCREEN_HEIGHT()-LineH(129)-64)];
+    self.orderTimeView.backgroundColor = [UIColor clearColor];
+    
+    __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
+    
+    self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
+        
+        //点击之后判断是否可以预约
+        [weakSelf isCanOrderTheCourseData];
+    };
+    [self.view addSubview:self.orderTimeView];
+}
+
+#pragma mark   是否可以预约
+- (void)isCanOrderTheCourseData {
+    
+    // 进行网络请求判断
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, self.pushModel.TeacherId, self.pushModel.StartTime];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
+        
+        GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
+        BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.popoverPresentationController.delegate = self;
+        vc.xc_model = self.pushModel;
+        //预约了课程的回调
+        vc.orderCourse = ^(BOOL yes) {
+            if (self.refreshLoadDataBlock) {
+                self.refreshLoadDataBlock(YES);
+            }
+        };
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        
+    }];
+    
+}
 
 #pragma mark ---以下为数据表格的数据操作---
 - (void)getOrderTimeTableViewLoadData {
@@ -185,6 +253,12 @@
 
     }];
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
