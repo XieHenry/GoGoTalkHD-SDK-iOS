@@ -396,16 +396,6 @@ static BOOL isGetNotificationCenter;
     
     GGT_FocusImgModel *focusImgModel = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
-    // 进行网络请求判断
-    NSString *dayStr;
-    if ([homeDateModel.date xc_isContainString:@"月"] || [homeDateModel.date xc_isContainString:@"日"]) {
-        dayStr = [homeDateModel.date stringByReplacingOccurrencesOfString:@"月" withString:@"-"];
-        dayStr = [dayStr stringByReplacingOccurrencesOfString:@"日" withString:@""];
-
-    }
-//    StartTime = "17-07-14 19:00";
-
-    NSLog(@"%@===============%@",dayStr,timeCollectionModel.date);
     
     NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass,focusImgModel.TeacherId,timeCollectionModel.date];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {

@@ -155,35 +155,6 @@ typedef enum : NSUInteger {
     return LineH(xc_cellHeight);
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.pushModel = model;
-    //刷新关注的cell
-    vc.refreshCellBlick = ^(NSString *statusStr) {
-
-        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
-        if ([model.IsFollow isEqualToString:@"0"]) {
-            model.IsFollow = @"1";
-        } else {
-            model.IsFollow = @"0";
-        }
-        
-        cell.xc_model = model;
-        
-    };
-    
-    //刷新整个数据
-    vc.refreshLoadDataBlock = ^(BOOL isYes) {
-        self.xc_pageIndex = 1;
-        self.xc_loadType = XCLoadNewData;
-        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
-    };
-    
-    [self.navigationController pushViewController:vc animated:YES];
-
-}
 
 #pragma mark   预约
 - (void)xc_orderButtonClick:(UIButton *)button
@@ -271,7 +242,16 @@ typedef enum : NSUInteger {
         cell.xc_model = model;
         
     };
+    
+    //刷新整个数据
+    vc.refreshLoadDataBlock = ^(BOOL isYes) {
+        self.xc_pageIndex = 1;
+        self.xc_loadType = XCLoadNewData;
+        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+    };
+    
     [self.navigationController pushViewController:vc animated:YES];
+ 
 }
 
 #pragma mark - 关注网络请求
