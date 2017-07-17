@@ -37,6 +37,9 @@ typedef void(^OrderBlick)(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeD
 
 - (void)ClernColor;
 
+- (void)orderCourse;
+
+
 - (void)getCellArr:(NSMutableArray *)dataArray;
 @end
 

@@ -185,8 +185,8 @@
     
 }
 
+#pragma mark 取消预约---重置颜色
 - (void)ClernColor {
-//        NSLog(@"what-%ld---%ld",(long)self.didSelectedPath.section,(long)self.didSelectedPath.row);
 
     GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:self.didSelectedPath];
     deselectedCell.layer.cornerRadius = LineW(5);
@@ -196,6 +196,21 @@
     deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
     deselectedCell.backgroundColor = [UIColor clearColor];
 }
+
+#pragma mark 已经预约---设置不可选中
+- (void)orderCourse {
+      GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:self.didSelectedPath];
+    
+    deselectedCell.layer.cornerRadius = 0;
+    deselectedCell.layer.masksToBounds = NO;
+    deselectedCell.layer.borderColor = [UIColor clearColor].CGColor;
+    deselectedCell.layer.borderWidth = 0;
+    deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);
+    deselectedCell.backgroundColor = [UIColor clearColor];
+    deselectedCell.lineView.hidden = NO;
+    deselectedCell.userInteractionEnabled = NO;
+}
+
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;

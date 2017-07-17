@@ -209,7 +209,8 @@
     [[self.xc_cancleButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
         [self dismissViewControllerAnimated:YES completion:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"cancle"}];
+
     }];
     
     // 选择课件
@@ -251,6 +252,8 @@
             self.orderCourse(YES);
         }
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
+
     } failure:^(NSError *error) {
         
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -143,6 +143,8 @@
             [MBProgressHUD showMessage:responseObject[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
+
     } failure:^(NSError *error) {
         
         [self dismissViewControllerAnimated:YES completion:nil];
