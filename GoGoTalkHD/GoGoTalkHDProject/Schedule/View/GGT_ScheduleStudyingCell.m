@@ -616,7 +616,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     if ([xc_cellModel.StartTime isKindOfClass:[NSString class]] && xc_cellModel.StartTime.length > 0) {
         self.xc_courseTimeLabel.text = xc_cellModel.StartTime;
     }
-    if ([xc_cellModel.FilePath isKindOfClass:[NSString class]] && xc_cellModel.FilePath.length > 0) {
+    if ([xc_cellModel.ImageUrl isKindOfClass:[NSString class]] && xc_cellModel.ImageUrl.length > 0) {
         [self.xc_headPortraitImgView sd_setImageWithURL:[NSURL URLWithString:xc_cellModel.ImageUrl] placeholderImage:UIIMAGE_FROM_NAME(@"default_avatar")];
     }
     if ([xc_cellModel.LessonName isKindOfClass:[NSString class]] && xc_cellModel.LessonName.length > 0) {
