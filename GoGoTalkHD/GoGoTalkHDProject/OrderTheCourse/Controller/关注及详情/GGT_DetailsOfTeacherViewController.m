@@ -38,23 +38,21 @@
     
     __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
     self.detailsOfTeacherView.focusButtonBlock = ^(UIButton *btn) {
-        NSLog(@"关注按钮的状态---%@",btn.titleLabel.text);
+//        NSLog(@"关注按钮的状态---%@",btn.titleLabel.text);
         
         if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
 
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确认要取消关注吗？" preferredStyle:UIAlertControllerStyleAlert];
-            alert.titleColor = UICOLOR_FROM_HEX(0x000000);
             
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleCancel handler:nil];
-            cancelAction.textColor = UICOLOR_FROM_HEX(ColorC40016);
             
             UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [weakSelf focusOnBtnClick:@"1"];
 
             }];
-            sureAction.textColor = UICOLOR_FROM_HEX(Color777777);
-
+            cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
+            sureAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
             [alert addAction:cancelAction];
             [alert addAction:sureAction];
             [weakSelf presentViewController:alert animated:YES completion:nil];
@@ -80,25 +78,38 @@
     
     NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_GetAttention,self.pushModel.TeacherId,statusStr];
     
-    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
         if ([statusStr isEqualToString:@"0"]) {
             
+            [self.detailsOfTeacherView.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
             [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
+            [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateHighlighted];
+
+            [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
             
+            if (self.refreshCellBlick) {
+                self.refreshCellBlick(@"1");
+            }
         } else {
-            [self performSelector:@selector(backClick) withObject:nil afterDelay:1.0f];
+            [self.detailsOfTeacherView.focusButton setTitle:@"未关注" forState:(UIControlStateNormal)];
+            [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateNormal];
+            [self.detailsOfTeacherView.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateHighlighted];
+
+            [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
+
+            if (self.refreshCellBlick) {
+                self.refreshCellBlick(@"0");
+            }
         }
         
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+
     }];
 }
 
-- (void)backClick {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 #pragma mark ---以下为数据表格的数据操作---
@@ -170,7 +181,8 @@
         [self.orderTimeView getCellArr:self.timeDataArray];
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+
     }];
 }
 

@@ -12,9 +12,9 @@
 //时间
 @property (nonatomic, copy) NSString *date;
 //LessonId
-@property (nonatomic, copy) NSString *week;
+@property (nonatomic, assign) NSInteger week;
 //状态
-@property (nonatomic, copy) NSString *isHaveClass;
+@property (nonatomic, assign) NSInteger isHaveClass;
 
 
 @end

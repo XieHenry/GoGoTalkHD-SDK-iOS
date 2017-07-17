@@ -157,6 +157,18 @@ typedef enum : NSUInteger {
     GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.pushModel = model;
+    vc.refreshCellBlick = ^(NSString *statusStr) {
+
+        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        if ([model.IsFollow isEqualToString:@"0"]) {
+            model.IsFollow = @"1";
+        } else {
+            model.IsFollow = @"0";
+        }
+        
+        cell.xc_model = model;
+        
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -166,7 +178,7 @@ typedef enum : NSUInteger {
     GGT_HomeTeachModel *model = self.xc_dataMuArray[button.tag - 100];
     
     // 进行网络请求判断
-    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass, (long)model.TeacherId, model.StartTime];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, model.TeacherId, model.StartTime];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];

@@ -8,8 +8,10 @@
 
 #import "BaseViewController.h"
 
+typedef void(^RefreshCellBlick)(NSString *statusStr);
 @interface GGT_DetailsOfTeacherViewController : BaseViewController
 
 @property (nonatomic, strong) GGT_HomeTeachModel *pushModel;
 
+@property (nonatomic, copy) RefreshCellBlick refreshCellBlick;
 @end

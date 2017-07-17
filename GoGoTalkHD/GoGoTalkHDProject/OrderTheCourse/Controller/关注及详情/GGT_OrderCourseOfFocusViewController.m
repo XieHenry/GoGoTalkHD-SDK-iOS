@@ -306,11 +306,16 @@
 //点击或滑动头像，刷新UI和数据
 - (void)reloadIconImageView:(NSInteger )index {
     //如果是点击的最后一个，才会加载最新的数据，page++
-    if (index == self.iconDataArray.count-1) {
-        self.page ++;
-        //获取数据
-        [self getTeacherFollowLoadData];
+    if (self.iconDataArray.count < 10) {
+        
+    } else if (self.iconDataArray.count == 10) {
+        if (index == self.iconDataArray.count-1) {
+            self.page ++;
+            //获取数据
+            [self getTeacherFollowLoadData];
+        }
     }
+    
     
     
     //刷新UI

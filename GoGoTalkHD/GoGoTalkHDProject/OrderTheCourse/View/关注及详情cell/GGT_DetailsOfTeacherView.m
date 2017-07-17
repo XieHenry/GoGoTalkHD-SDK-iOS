@@ -151,7 +151,7 @@
 
     self.ageLabel.text = [NSString stringWithFormat:@"%ld岁",(long)model.Age];
     
-    self.orderNumLabel.text = [NSString stringWithFormat:@"上课: %ld",(long)model.LessonCount];
+    self.orderNumLabel.text = [NSString stringWithFormat:@"上课: %ld次",(long)model.LessonCount];
 
 }
 
