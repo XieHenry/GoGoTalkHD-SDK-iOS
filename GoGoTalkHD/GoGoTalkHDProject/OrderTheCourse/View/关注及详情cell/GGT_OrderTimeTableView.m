@@ -163,9 +163,10 @@
 //选中某item
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"what-%ld---%ld",(long)indexPath.section,(long)indexPath.row);
-
+   
     GGT_TimeCollectionModel *timeCollectionModel = [[_alltimeArray safe_objectAtIndex:indexPath.section] safe_objectAtIndex:indexPath.row];
     
+    self.didSelectedPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section];
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     GGT_HomeDateModel *homeDateModel = [sin.orderCourse_dateMuArray safe_objectAtIndex:indexPath.section];
@@ -178,7 +179,6 @@
     deselectedCell.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
     deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     
-
     
     if (self.orderBlick) {
         self.orderBlick(timeCollectionModel,homeDateModel);
@@ -187,6 +187,17 @@
     
 }
 
+- (void)ClernColor {
+        NSLog(@"what-%ld---%ld",(long)self.didSelectedPath.section,(long)self.didSelectedPath.row);
+
+    GGT_OrderTimeCollectionViewCell * deselectedCell =(GGT_OrderTimeCollectionViewCell *) [_collectionView cellForItemAtIndexPath:self.didSelectedPath];
+    deselectedCell.layer.cornerRadius = LineW(5);
+    deselectedCell.layer.masksToBounds = YES;
+    deselectedCell.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
+    deselectedCell.layer.borderWidth = LineW(0.5);
+    deselectedCell.timeLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
+    deselectedCell.backgroundColor = [UIColor clearColor];
+}
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;

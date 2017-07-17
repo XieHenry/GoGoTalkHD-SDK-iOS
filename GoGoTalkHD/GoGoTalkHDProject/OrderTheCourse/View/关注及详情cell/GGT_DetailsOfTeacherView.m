@@ -132,7 +132,7 @@
     self.nameLabel.text = model.TeacherName;
     
     //是否关注 0：未关注 1：已关注)
-    if ([model.IsFollow isEqual:@0]) {
+    if ([model.IsFollow isEqual:@1]) {
         [self.focusButton setTitle:@"未关注" forState:(UIControlStateNormal)];
     } else {
         [self.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
