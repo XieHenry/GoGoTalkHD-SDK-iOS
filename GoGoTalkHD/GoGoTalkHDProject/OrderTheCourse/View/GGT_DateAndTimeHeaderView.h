@@ -12,4 +12,6 @@
 
 + (instancetype)headerWithCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath;
 
+@property (nonatomic, strong) UILabel *xc_titleLabel;
+
 @end

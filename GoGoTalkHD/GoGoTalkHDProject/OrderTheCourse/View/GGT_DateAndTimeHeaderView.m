@@ -9,8 +9,7 @@
 #import "GGT_DateAndTimeHeaderView.h"
 
 @interface GGT_DateAndTimeHeaderView ()
-@property (nonatomic, strong) UILabel *xc_titleLabel;
-@property (nonatomic, strong) NSIndexPath *xc_indexPath;
+
 @end
 
 @implementation GGT_DateAndTimeHeaderView
@@ -22,7 +21,6 @@
                                                                          withReuseIdentifier:GGT_DateAndTimeHeaderViewID
                                                                                 forIndexPath:indexPath];
     
-    headerView.xc_indexPath = indexPath;
     return headerView;
 }
 
@@ -52,14 +50,5 @@
     }];
 }
 
-- (void)setXc_indexPath:(NSIndexPath *)xc_indexPath
-{
-    _xc_indexPath = xc_indexPath;
-    if (xc_indexPath.section == 0) {
-        self.xc_titleLabel.text = @"日期";
-    } else {
-        self.xc_titleLabel.text = @"时间";
-    }
-}
 
 @end
