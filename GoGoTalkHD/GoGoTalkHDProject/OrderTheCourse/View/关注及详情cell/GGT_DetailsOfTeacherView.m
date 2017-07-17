@@ -47,8 +47,7 @@
     //关注
     self.focusButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.focusButton.titleLabel.font = Font(10);
-    [self.focusButton setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:(UIControlStateNormal)];
-    self.focusButton.backgroundColor = UICOLOR_FROM_HEX(ColorCCCCCC);
+    [self.focusButton setTitleColor:[UIColor clearColor] forState:(UIControlStateNormal)];
     [self.focusButton addTarget:self action:@selector(focusOnBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:self.focusButton];
     
@@ -131,12 +130,21 @@
     
     self.nameLabel.text = model.TeacherName;
     
+    
     //是否关注 0：未关注 1：已关注)
-    if ([model.IsFollow isEqual:@1]) {
+    if ([model.IsFollow isEqualToString:@"0"]) {
+        
         [self.focusButton setTitle:@"未关注" forState:(UIControlStateNormal)];
+        [self.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateNormal];
+        [self.focusButton setImage:UIIMAGE_FROM_NAME(@"jiaguanzhu_yueke") forState:UIControlStateHighlighted];
     } else {
+        
         [self.focusButton setTitle:@"已关注" forState:(UIControlStateNormal)];
+        [self.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateNormal];
+        [self.focusButton setImage:UIIMAGE_FROM_NAME(@"yiguanzhu_yueke") forState:UIControlStateHighlighted];
     }
+    
+  
     
     self.sexLabel.text = model.Sex;
 

@@ -10,8 +10,11 @@
 
 @interface GGT_TimeCollectionModel : NSObject
 //时间
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *date;
+//LessonId
+@property (nonatomic, copy) NSString *week;
 //状态
-@property (nonatomic, assign) NSInteger pic;
+@property (nonatomic, copy) NSString *isHaveClass;
+
 
 @end

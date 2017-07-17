@@ -268,9 +268,9 @@
 
 - (void)getTextModel:(GGT_TimeCollectionModel *)model {
     
-    NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)model.pic];
+    NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)model.isHaveClass];
 
-    self.timeLabel.text = model.name;
+    self.timeLabel.text = model.date;
     
     if ([statusStr isEqualToString:@"0"]) {
         self.timeLabel.textColor = UICOLOR_FROM_HEX(ColorCCCCCC);

@@ -117,6 +117,8 @@
         
         //如果数组为空，证明是没关注，加载缺省图
         if (IsArrEmpty(dataArr)) {
+            [self.nodataView imageString:@"weichuxi" andAlertString:responseObject[@"msg"]];
+
             self.nodataView.hidden = NO;
             self.headerView.hidden = YES;
             self.orderTimeView.hidden = YES;
@@ -356,48 +358,19 @@
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = weakSelf;
-        
-//        BDEId = 75;
-//        BookingId = 53;
-//        CreateTime = "2017-02-19T21:39:20.653";
-//        CreatorId = 18;
-//        EooReturnId = "<null>";
-//        FilePath = "/UploadFiles/Book/201702192137594824.pdf";
-//        FileTittle = "FFPhonics1_2";
-//        OrderId = 2;
-//        Status = 1;
-//        ThirdReturnId = 2521;
-//        Type = 1;
-//        UpdateTime = "2017-02-19T21:39:20.653";
-//        UpdatorId = 18;
-        
+    
         
         GGT_FocusImgModel *focusImgModel = [weakSelf.iconDataArray safe_objectAtIndex:weakSelf.selectedIndex];
-
         
 //        07月13日（星期三）18:30
         GGT_HomeTeachModel *model = [[GGT_HomeTeachModel alloc]init];
         model.TeacherName = focusImgModel.TeacherName;
-        model.TeacherId = focusImgModel.TeacherId;
+        model.TeacherId = [NSString stringWithFormat:@"%ld",(long)focusImgModel.TeacherId];
         model.ImageUrl = focusImgModel.ImageUrl;
-        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.name];
-        
-        
-//        @property (nonatomic, assign) NSInteger Age;
-//        @property (nonatomic, strong) NSString *BookingId;
-//        @property (nonatomic, strong) NSString *FileTittle;
-//        @property (nonatomic, strong) NSString *ImageUrl;
-//        @property (nonatomic, strong) NSString *IsFollow;
-//        @property (nonatomic, assign) NSInteger LessonCount;
-//        @property (nonatomic, strong) NSString *LessonId;
-//        @property (nonatomic, strong) NSString *Sex;
-//        @property (nonatomic, strong) NSString *StartTime;
-//        @property (nonatomic, assign) NSInteger TeacherId;
-//        @property (nonatomic, strong) NSString *TeacherName;
-
+        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.date];
+        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.week];
         
         vc.xc_model = model;
-        
         [weakSelf presentViewController:nav animated:YES completion:nil];
     };
     [self.view addSubview:self.orderTimeView];
@@ -419,9 +392,7 @@
                 [cell removeFromSuperview];
             }
         }
-    
-    
-    
+
     
     GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
