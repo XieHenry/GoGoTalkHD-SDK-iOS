@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, HttpRequestType) {
                        failure:(AFNFailureResponse)failure;
 
 
-/// POST 不带MBP
+/// POST 判断是否带MBP
 - (void)sendPostRequestWithPath:(NSString *)url
                      parameters:(NSDictionary *)parameters
                           token:(BOOL)isLoadToken
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, HttpRequestType) {
                         success:(AFNSuccessResponse)success
                         failure:(AFNFailureResponse)failure;
 
-/// GET 不带MBP
+/// GET 判断是否带MBP
 - (void)sendGetRequestWithPath:(NSString *)url
                          token:(BOOL)isLoadToken
                 viewController:(UIViewController *)viewController
