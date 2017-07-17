@@ -117,5 +117,8 @@ static NSString * const URL_Attention_Home = @"api/APP/Attention";
 // 点击预约按钮判断外教是否被其他人预约
 static NSString * const URL_GetIsSureClass = @"api/APP/GetIsSureClass";
 
+// 新用户 判断是否可约课
+static NSString * const URL_getStudentClassHour = @"api/APP/getStudentClassHour";
+
 
 #endif /* GGT_Request_URL_h */

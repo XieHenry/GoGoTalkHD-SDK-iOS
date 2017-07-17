@@ -45,7 +45,11 @@
     self.xc_placeholderLabel = ({
         UILabel *label = [UILabel new];
         label.textColor = UICOLOR_FROM_HEX(Color333333);
-        label.font = Font(15);
+        label.font = Font(17);
+        label.text = @" ";
+        [label changeLineSpaceWithSpace:10];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
         label;
     });
     [self addSubview:self.xc_placeholderLabel];
@@ -54,9 +58,6 @@
         make.centerX.equalTo(self.xc_placeholderImgView);
         make.top.equalTo(self.xc_placeholderImgView.mas_bottom).offset(27);
     }];
-    
-    
-    self.xc_placeholderLabel.text = @"1234123";
     
 }
 
