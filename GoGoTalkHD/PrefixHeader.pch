@@ -25,7 +25,7 @@
 #import "MBProgressHUD+Extension.h"
 #import "UIImageView+WebCache.h"
 #import "FLAnimatedImageView+WebCache.h"
-
+#import <SDWebImage/UIButton+WebCache.h>
 
 
 #import "AppInformation.h"

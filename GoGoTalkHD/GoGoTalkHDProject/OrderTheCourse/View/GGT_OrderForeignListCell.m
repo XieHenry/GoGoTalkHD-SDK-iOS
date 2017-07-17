@@ -12,8 +12,6 @@
 
 // 父view
 @property (nonatomic, strong) UIView *xc_contentView;
-//头像
-@property (nonatomic, strong) UIImageView *xc_iconImageView;
 //姓名
 @property (nonatomic, strong) UILabel *xc_nameLabel;
 //次数
@@ -78,12 +76,12 @@
 
     
     //头像
-    self.xc_iconImageView = ({
-        UIImageView *imgView = [UIImageView new];
-        imgView.image = UIIMAGE_FROM_NAME(@"headPortrait_default_avatar");
-        imgView;
+    self.xc_iconButton = ({
+        UIButton *button = [UIButton new];
+        [button setImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar") forState:UIControlStateNormal];
+        button;
     });
-    [self.xc_contentView addSubview:self.xc_iconImageView];
+    [self.xc_contentView addSubview:self.xc_iconButton];
     
     //姓名
     self.xc_nameLabel = ({
@@ -135,23 +133,23 @@
     
     // 布局
     // 头像
-    [self.xc_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.xc_iconButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_contentView.mas_left).with.offset(LineX(15));
         make.top.equalTo(self.xc_contentView.mas_top).with.offset(margin15);
         make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-margin15);
-        make.width.equalTo(self.xc_iconImageView.mas_height);
+        make.width.equalTo(self.xc_iconButton.mas_height);
     }];
     
     // 姓名
     [self.xc_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.xc_iconImageView.mas_right).with.offset(LineX(14));
+        make.left.equalTo(self.xc_iconButton.mas_right).with.offset(LineX(14));
         make.top.equalTo(self.xc_contentView.mas_top).with.offset(LineY(27));
     }];
     
     // 次数
     [self.xc_orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_nameLabel.mas_left);
-        make.centerY.equalTo(self.xc_iconImageView);
+        make.centerY.equalTo(self.xc_iconButton);
     }];
     
     // 年龄
@@ -183,7 +181,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self.xc_iconImageView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:self.xc_iconImageView.height/2];
+    [self.xc_iconButton xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:self.xc_iconButton.height/2];
     [self.xc_orderButton addBorderForViewWithBorderWidth:1.0 BorderColor:UICOLOR_FROM_HEX(kThemeColor) CornerRadius:self.xc_orderButton.height/2];
 }
 
@@ -212,11 +210,11 @@
     self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", xc_model.Age];
     
     if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
-         NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:urlStr];
-        [self.xc_iconImageView sd_setImageWithURL:url placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+        [self.xc_iconButton sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
+        [self.xc_iconButton sd_setImageWithURL:url forState:UIControlStateHighlighted placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
     }
-    
 }
 
 

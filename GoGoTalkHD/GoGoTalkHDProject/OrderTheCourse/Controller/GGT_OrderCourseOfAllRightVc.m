@@ -134,12 +134,16 @@ typedef enum : NSUInteger {
     
     cell.xc_orderButton.tag = 100+indexPath.row;
     cell.xc_focusButton.tag = 1000+indexPath.row;
+    cell.xc_iconButton.tag = 10000+indexPath.row;
     
     /****预约***/
     [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     /****关注***/
-    [cell.xc_focusButton addTarget:self action:@selector(xc_focusButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.xc_focusButton addTarget:self action:@selector(xc_focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    /****头像***/
+    [cell.xc_iconButton addTarget:self action:@selector(xc_iconButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.xc_model = self.xc_dataMuArray[indexPath.row];
     
@@ -152,7 +156,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GGT_HomeTeachModel *model = [self.xc_dataMuArray safe_objectAtIndex:indexPath.row];
     
     GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
@@ -179,6 +182,7 @@ typedef enum : NSUInteger {
     };
     
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 #pragma mark   预约
@@ -245,6 +249,29 @@ typedef enum : NSUInteger {
         
     }
 
+}
+
+#pragma mark - 头像按钮
+- (void)xc_iconButtonClick:(UIButton *)button
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag-10000 inSection:0];
+    GGT_HomeTeachModel *model = [self.xc_dataMuArray safe_objectAtIndex:indexPath.row];
+    GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.pushModel = model;
+    vc.refreshCellBlick = ^(NSString *statusStr) {
+        
+        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        if ([model.IsFollow isEqualToString:@"0"]) {
+            model.IsFollow = @"1";
+        } else {
+            model.IsFollow = @"0";
+        }
+        
+        cell.xc_model = model;
+        
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 关注网络请求

@@ -9,6 +9,7 @@
 #import "GGT_OrderCourseViewController.h"
 #import "GGT_OrderCourseOfFocusViewController.h"
 #import "GGT_OrderCourseSplitViewController.h"
+#import "GGT_OrderPlaceholderView.h"
 
 @interface GGT_OrderCourseViewController ()
 @property (nonatomic, strong) GGT_OrderCourseOfFocusViewController  *focusVc;
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UIView *animaView;
 
+@property (nonatomic, strong) GGT_OrderPlaceholderView *xc_placeholderView;
 
 @end
 
@@ -37,6 +39,23 @@
     //添加2个子视图
     [self setUpNewController];
     
+    [self buildUI];
+    
+}
+
+- (void)buildUI
+{
+    self.xc_placeholderView = ({
+        GGT_OrderPlaceholderView *view = [GGT_OrderPlaceholderView new];
+        view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+        view.hidden = YES;
+        view;
+    });
+    [self.view addSubview:self.xc_placeholderView];
+    
+    [self.xc_placeholderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(self.view);
+    }];
 }
 
 - (void)setUpNewController {
@@ -81,6 +100,8 @@
             
         }
     }];
+    
+    [self.view bringSubviewToFront:self.xc_placeholderView];
 }
 
 
@@ -191,11 +212,30 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self sendNetwork];
 }
 
+- (void)sendNetwork
+{
+    [[BaseService share] sendGetRequestWithPath:URL_getStudentClassHour token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+        // 成功  不展示
+        self.xc_placeholderView.hidden = YES;
+        
+    } failure:^(NSError *error) {
+        
+        // 失败  展示
+        self.xc_placeholderView.hidden = NO;
+        NSDictionary *dic = error.userInfo;
+        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
+        self.xc_placeholderView.xc_model = model;
+        
+    }];
+}
 
 
 @end

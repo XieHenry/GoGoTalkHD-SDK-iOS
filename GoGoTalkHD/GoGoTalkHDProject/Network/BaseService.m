@@ -106,6 +106,8 @@
 {
     
     self.manager = [AFHTTPSessionManager manager];
+    self.manager.requestSerializer.timeoutInterval = 10.f;
+    
     NSString *pinjieUrlStr = urlStr;
     
     urlStr = [BASE_REQUEST_URL stringByAppendingPathComponent:urlStr];
