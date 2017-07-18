@@ -26,7 +26,15 @@
 
 
 - (void)changeTimeTableColor:(NSNotification *)noti {
-    [self.orderTimeView  ClernColor];
+    
+    NSDictionary *dic = noti.userInfo;
+    if ([[dic objectForKey:@"statusColor"] isEqualToString:@"order"]) {
+        [self.orderTimeView  orderCourse];
+
+    } else {
+        
+        [self.orderTimeView  ClernColor];
+    }
 }
 
 
@@ -143,17 +151,19 @@
     
     self.orderTimeView.orderBlick = ^(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeDateModel *homeDateModel) {
         
+        
         //点击之后判断是否可以预约
-        [weakSelf isCanOrderTheCourseData];
+        [weakSelf isCanOrderTheCourseData:timeCollectionModel homeDateModel:homeDateModel];
+        
     };
     [self.view addSubview:self.orderTimeView];
 }
 
 #pragma mark   是否可以预约
-- (void)isCanOrderTheCourseData {
+- (void)isCanOrderTheCourseData:(GGT_TimeCollectionModel *)timeCollectionModel homeDateModel:(GGT_HomeDateModel *)homeDateModel {
     
     // 进行网络请求判断
-    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, self.pushModel.TeacherId, self.pushModel.StartTime];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%@&dateTime=%@", URL_GetIsSureClass, self.pushModel.TeacherId, timeCollectionModel.date];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         GGT_OrderClassPopVC *vc = [GGT_OrderClassPopVC new];
@@ -161,11 +171,16 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = self;
         vc.xc_model = self.pushModel;
+        
+        //改变预约时间值
+        vc.xc_model.StartTime = timeCollectionModel.date;
+        
         //预约了课程的回调
         vc.orderCourse = ^(BOOL yes) {
             if (self.refreshLoadDataBlock) {
                 self.refreshLoadDataBlock(YES);
             }
+            
         };
         [self presentViewController:nav animated:YES completion:nil];
         
@@ -176,6 +191,7 @@
             [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
         }
         
+        [self.orderTimeView  ClernColor];
     }];
     
 }
