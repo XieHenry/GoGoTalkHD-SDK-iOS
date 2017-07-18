@@ -708,6 +708,7 @@ static NSString * const CalendarCellID = @"cell";
                             // 刷新日历 可能红色的不见了
                             // 此处不能使用xc_selectedDate
                             [self loadCalendarDataWithDate:[NSDate date] showMBP:YES];
+                            [self loadCourseDataWithStime:self.xc_selectedDate showMBP:YES];
                         };
                     }
                     
@@ -872,6 +873,7 @@ static NSString * const CalendarCellID = @"cell";
             // 刷新日历 可能红色的不见了
             // 此处不能使用xc_selectedDate
             [self loadCalendarDataWithDate:[NSDate date] showMBP:YES];
+            [self loadCourseDataWithStime:self.xc_selectedDate showMBP:YES];
            
             
         } failure:^(NSError *error) {

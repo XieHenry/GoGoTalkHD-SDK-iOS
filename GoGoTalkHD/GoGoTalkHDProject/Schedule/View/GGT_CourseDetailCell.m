@@ -659,6 +659,9 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         } else {
             self.xc_courseTypeLabel.hidden = YES;
         }
+        
+        // 正课不显示 预习课件
+        self.xc_courseTypeLabel.hidden = YES;
     }
     
     // 判断是否显示courseButton
