@@ -490,14 +490,18 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 }
 
 // 已完成 缺席
-- (void)finishedAbsent
+- (void)finishedAbsentWithType:(NSInteger)status
 {
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
     
+    if (status == 5) {
+        [self courseNotStartOrFinishedLabelWithText:@"缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
+    } else {
+        [self courseNotStartOrFinishedLabelWithText:@"老师缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
+    }
     
-    [self courseNotStartOrFinishedLabelWithText:@"缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
 }
 
 
@@ -657,10 +661,15 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
             [self finishedWithEva];
         }
             break;
-        case 5:     // 已经结束 缺席
+        case 5:     // 已经结束 缺席  学生缺席
         {
-            [self finishedAbsent];
+            [self finishedAbsentWithType:5];
         }
+        case 6:     // 已经结束 缺席  老师缺席
+        {
+            [self finishedAbsentWithType:6];
+        }
+            
             break;
             
         default:
@@ -674,7 +683,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         self.xc_courseTypeLabel.hidden = NO;
     } else {  // 0:正课  正课可以取消预约 体验课不能取消预约
         
-        if ([self.xc_cellModel.Status integerValue] == 0 || [self.xc_cellModel.Status integerValue] == 1) {
+        if ([self.xc_cellModel.Status integerValue] == 0 || [self.xc_cellModel.Status integerValue] == 1 || [self.xc_cellModel.Status integerValue] == 2) {
             if (self.xc_cellModel.IsShowBooking == 1) {
                 self.xc_courseTypeLabel.hidden = NO;
             } else {
@@ -697,7 +706,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     
     
     // 判断是否显示courseButton
-    if ([self.xc_cellModel.Status integerValue] == 5) {
+    if ([self.xc_cellModel.Status integerValue] == 5 || [self.xc_cellModel.Status integerValue] == 6) {
         self.xc_courseButton.hidden = YES;
     } else {
         if (xc_cellModel.IsDemo == 1) {
