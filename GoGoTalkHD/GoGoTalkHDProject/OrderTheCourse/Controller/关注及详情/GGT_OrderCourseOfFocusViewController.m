@@ -36,6 +36,11 @@
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) NSInteger page;
+//关注老师的总数
+@property (nonatomic, assign) NSInteger totalCount;
+
+
+
 
 /***下部分时间表格***/
 @property (nonatomic, strong) NSMutableArray *dayAndWeekArray;
@@ -138,6 +143,8 @@
         self.orderTimeView.hidden = NO;
         
         NSArray *dataArr = responseObject[@"data"];
+        self.totalCount = (long)responseObject[@"total"];
+        
         //加载头像数据
         NSMutableArray *tempArr = [NSMutableArray array];
         
@@ -359,7 +366,9 @@
         NSLog(@"------1");
         if (index == self.iconDataArray.count-1) {
             NSLog(@"------2");
-
+//           int p =  self.totalCount%10;
+          
+            
             self.page ++;
             //获取数据
             [self getTeacherFollowLoadData];
@@ -418,7 +427,7 @@
         model.TeacherName = focusImgModel.TeacherName;
         model.TeacherId = [NSString stringWithFormat:@"%ld",(long)focusImgModel.TeacherId];
         model.ImageUrl = focusImgModel.ImageUrl;
-        model.StartTime = [NSString stringWithFormat:@"%@ (%@) %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
+        model.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
         model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.lessonID];
         
         vc.xc_model = model;

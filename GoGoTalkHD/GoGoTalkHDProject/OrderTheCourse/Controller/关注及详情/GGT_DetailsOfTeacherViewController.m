@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"外教详情";
+    self.navigationItem.title = @"老师详情";
     
     [self setLeftBackButton];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
@@ -171,10 +171,9 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = self;
         vc.xc_model = self.pushModel;
-        
         //改变预约时间值
-        vc.xc_model.StartTime = timeCollectionModel.date;
-        
+        vc.xc_model.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
+
         //预约了课程的回调
         vc.orderCourse = ^(BOOL yes) {
             if (self.refreshLoadDataBlock) {
