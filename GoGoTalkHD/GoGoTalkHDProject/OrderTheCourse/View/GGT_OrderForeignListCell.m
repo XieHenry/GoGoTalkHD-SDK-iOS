@@ -161,8 +161,8 @@
     // 关注
     [self.xc_focusButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_nameLabel);
-        make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-LineY(27));
-        make.size.mas_offset(CGSizeMake(LineW(30), LineW(15)));
+        make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-LineY(20));
+        make.size.mas_offset(CGSizeMake(LineW(36), LineW(18)));
     }];
     
     // 预约按钮

@@ -207,7 +207,7 @@
     shake.toValue = [NSNumber numberWithFloat:2];
     shake.duration = 0.1;//执行时间
     shake.autoreverses = YES; //是否重复
-    shake.repeatCount = 2;//次数
+    shake.repeatCount = 1;//次数
     [_animaView.layer addAnimation:shake forKey:@"shakeAnimation"];
 
 }

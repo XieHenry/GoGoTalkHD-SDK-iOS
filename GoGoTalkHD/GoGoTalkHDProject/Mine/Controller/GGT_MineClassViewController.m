@@ -99,12 +99,12 @@
             
             NSMutableArray *contentArray = [NSMutableArray array];
             for (NSDictionary *dic in listArray) {
-                //1 🐶麦课时 2报名课时  3返还课时
+                //1 购买课时 2获赠课时  3返还课时
                 if ([dic[@"types"] isEqual:@1]) {
                     [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
 
                 } else if ([dic[@"types"] isEqual:@2]) {
-                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"报名%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
 
                 } else if ([dic[@"types"] isEqual:@3]) {
                     [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"返还%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];

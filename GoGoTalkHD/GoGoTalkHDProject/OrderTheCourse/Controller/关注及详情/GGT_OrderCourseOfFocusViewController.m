@@ -20,7 +20,6 @@
 #define magnification 1.15f  //头像放大倍数
 #define headPortraitW 62.5f  //头像宽度
 
-static BOOL isGetNotificationCenter;
 @interface GGT_OrderCourseOfFocusViewController () <OTPageScrollViewDataSource,OTPageScrollViewDelegate,UIPopoverPresentationControllerDelegate>
 
 /***上部分头像***/
@@ -53,17 +52,7 @@ static BOOL isGetNotificationCenter;
 @implementation GGT_OrderCourseOfFocusViewController
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTimeTableColor:) name:@"changeTimeTableColor" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFocusClick:) name:@"refreshFocus" object:nil];
-}
 
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshFocus" object:nil];
-}
 
 
 #pragma mark 点击时间弹出GGT_OrderClassPopVC，如果点击了取消，需要发送通知，对cell的颜色进行恢复
@@ -81,18 +70,17 @@ static BOOL isGetNotificationCenter;
 #pragma mark 在别的界面如果点击了关注，在这里刷新
 - (void)refreshFocusClick:(NSNotification *)noti {
     
-    isGetNotificationCenter = YES;
-    
     //先删除以前的GGT_OrderTimeTableView
-    for (UIView *view in self.view.subviews) {
-        if ([view isKindOfClass:[UIView class]]) {
-            UIView *cell = (UIView *)view;
-            [cell removeFromSuperview];
-        }
-    }
+//    for (UIView *view in self.view.subviews) {
+//        if ([view isKindOfClass:[UIView class]]) {
+//            UIView *cell = (UIView *)view;
+//            [cell removeFromSuperview];
+//        }
+//    }
     
+
     
-    NSLog(@"1111111");
+    NSLog(@"isGetNotificationCenter");
     //请求上部分头像的数据
     self.iconDataArray = [NSMutableArray array];
     self.page = 1;
@@ -104,6 +92,10 @@ static BOOL isGetNotificationCenter;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTimeTableColor:) name:@"changeTimeTableColor" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFocusClick:) name:@"refreshFocus" object:nil];
+    
     
     
     //缺省图
@@ -120,9 +112,6 @@ static BOOL isGetNotificationCenter;
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-64);
     }];
     
-    
-    
-    NSLog(@"2222222");
     
     //头部滚动头像
     [self initHeaderView];
@@ -143,19 +132,12 @@ static BOOL isGetNotificationCenter;
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
+        //如果全部取消关注的时候，会全部隐藏，所以这里需要显示一下
+        self.nodataView.hidden = YES;
+        self.headerView.hidden = NO;
+        self.orderTimeView.hidden = NO;
+        
         NSArray *dataArr = responseObject[@"data"];
-        
-        //如果数组为空，证明是没关注，加载缺省图
-        if (IsArrEmpty(dataArr)) {
-            [self.nodataView imageString:@"weichuxi" andAlertString:responseObject[@"msg"]];
-            
-            self.nodataView.hidden = NO;
-            self.headerView.hidden = YES;
-            self.orderTimeView.hidden = YES;
-            return ;
-        }
-        
-        
         //加载头像数据
         NSMutableArray *tempArr = [NSMutableArray array];
         
@@ -165,7 +147,17 @@ static BOOL isGetNotificationCenter;
         }
         [self.iconDataArray addObjectsFromArray:tempArr];
         
-        
+        //如果数组为空，证明是没关注，加载缺省图
+        if (IsArrEmpty(dataArr) && IsArrEmpty(self.iconDataArray)) {
+            [self.nodataView imageString:@"weichuxi" andAlertString:responseObject[@"msg"]];
+            
+            self.nodataView.hidden = NO;
+            self.headerView.hidden = YES;
+            self.orderTimeView.hidden = YES;
+            return ;
+        }
+
+
         //让头像居中显示---这个必须和GGT_FocusOnOfPageScrollView中的74行内容保持一致
         if (self.page == 1) {
             
@@ -296,7 +288,10 @@ static BOOL isGetNotificationCenter;
         
         
     } failure:^(NSError *error) {
-        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
     }];
 }
 
@@ -360,8 +355,11 @@ static BOOL isGetNotificationCenter;
     //如果是点击的最后一个，才会加载最新的数据，page++
     if (self.iconDataArray.count < 10) {
         
-    } else if (self.iconDataArray.count == 10) {
+    } else if (self.iconDataArray.count == 10) { //需要后台加一个字段，是否还有新的page。
+        NSLog(@"------1");
         if (index == self.iconDataArray.count-1) {
+            NSLog(@"------2");
+
             self.page ++;
             //获取数据
             [self getTeacherFollowLoadData];
@@ -537,7 +535,10 @@ static BOOL isGetNotificationCenter;
         
         
     } failure:^(NSError *error) {
-        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
     }];
 }
 
@@ -545,6 +546,14 @@ static BOOL isGetNotificationCenter;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshFocus" object:nil];
+    NSLog(@"控制器--%@--销毁了", [self class]);
+
+}
+
 
 
 @end

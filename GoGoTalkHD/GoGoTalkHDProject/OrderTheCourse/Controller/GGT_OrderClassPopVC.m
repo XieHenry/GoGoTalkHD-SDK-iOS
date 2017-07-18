@@ -103,6 +103,8 @@
     self.xc_teachImgView = ({
         UIImageView *imgView = [UIImageView new];
         imgView.image = UIIMAGE_FROM_NAME(@"headPortrait_default_avatar");
+        imgView.layer.masksToBounds = YES;
+        imgView.layer.cornerRadius = 36;
         imgView;
     });
     [self.view addSubview:self.xc_teachImgView];

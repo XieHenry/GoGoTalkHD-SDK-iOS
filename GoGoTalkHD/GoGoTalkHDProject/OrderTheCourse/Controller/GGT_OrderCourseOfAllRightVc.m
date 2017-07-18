@@ -9,9 +9,6 @@
 #import "GGT_OrderCourseOfAllRightVc.h"
 #import "GGT_DetailsOfTeacherViewController.h"
 #import "GGT_OrderForeignListCell.h"
-#import "GGT_ConfirmBookingAlertView.h"
-#import "GGT_SelectCoursewareViewController.h"
-
 #import "GGT_OrderPlaceholderView.h"
 #import "GGT_OrderClassPopVC.h"
 
@@ -202,7 +199,7 @@ typedef enum : NSUInteger {
 //        model.IsFollow = @"0";
         
         // 在可以取消约课的情况下 弹框
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消关注吗" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确认要取消关注吗" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
