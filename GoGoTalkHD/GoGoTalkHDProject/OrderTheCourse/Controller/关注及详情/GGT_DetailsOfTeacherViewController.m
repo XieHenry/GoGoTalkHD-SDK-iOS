@@ -171,6 +171,7 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = self;
         vc.xc_model = self.pushModel;
+        vc.xc_model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.TLId];
         //改变预约时间值
         vc.xc_model.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
 
@@ -271,6 +272,8 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
+    NSLog(@"控制器--%@--销毁了", [self class]);
+
     
 }
 

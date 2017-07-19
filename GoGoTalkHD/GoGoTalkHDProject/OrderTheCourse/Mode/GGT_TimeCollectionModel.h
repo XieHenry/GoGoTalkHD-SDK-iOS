@@ -15,7 +15,7 @@
 //状态
 @property (nonatomic, assign) NSInteger isHaveClass;
 //LessonId
-@property (nonatomic, assign) NSInteger lessonID;
+@property (nonatomic, assign) NSInteger TLId;
 //时间
 @property (nonatomic, copy) NSString *time;
 
@@ -23,7 +23,7 @@
 //{
 //    date = "2017-07-17 11:30";
 //    isHaveClass = 1;
-//    lessonID = 5988228;
+//    TLId = 5988228;
 //    time = "11:30";
 //},
 
