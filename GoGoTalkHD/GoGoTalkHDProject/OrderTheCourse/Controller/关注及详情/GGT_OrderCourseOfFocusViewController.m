@@ -74,18 +74,7 @@
 
 #pragma mark 在别的界面如果点击了关注，在这里刷新
 - (void)refreshFocusClick:(NSNotification *)noti {
-    
-    //先删除以前的GGT_OrderTimeTableView
-//    for (UIView *view in self.view.subviews) {
-//        if ([view isKindOfClass:[UIView class]]) {
-//            UIView *cell = (UIView *)view;
-//            [cell removeFromSuperview];
-//        }
-//    }
-    
 
-    
-    NSLog(@"isGetNotificationCenter");
     //请求上部分头像的数据
     self.iconDataArray = [NSMutableArray array];
     self.page = 1;
@@ -102,8 +91,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFocusClick:) name:@"refreshFocus" object:nil];
     
     
-    
-    //缺省图
     self.nodataView = [[GGT_NoMoreDateAlertView alloc]init];
     self.nodataView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [self.view addSubview:self.nodataView];
@@ -143,8 +130,9 @@
         self.orderTimeView.hidden = NO;
         
         NSArray *dataArr = responseObject[@"data"];
-        self.totalCount = (long)responseObject[@"total"];
+        self.totalCount = [responseObject[@"total"] integerValue];
         
+
         //加载头像数据
         NSMutableArray *tempArr = [NSMutableArray array];
         
@@ -362,16 +350,17 @@
     //如果是点击的最后一个，才会加载最新的数据，page++
     if (self.iconDataArray.count < 10) {
         
-    } else if (self.iconDataArray.count == 10) { //需要后台加一个字段，是否还有新的page。
-        NSLog(@"------1");
+    } else if (self.iconDataArray.count == 10) { //在每一页的最后一个头像加载新的数据
+        //如果点击的是最后一个，加载新的数据,防止点击以前的加载新数据
         if (index == self.iconDataArray.count-1) {
-            NSLog(@"------2");
-//           int p =  self.totalCount%10;
-          
-            
-            self.page ++;
-            //获取数据
-            [self getTeacherFollowLoadData];
+            //计算一共多少页
+            NSInteger totalPage = (self.totalCount + 10 -1) / 10;
+            //如果总页数大于当前的页数，需要加载新的
+            if (totalPage > self.page) {
+                self.page ++;
+                //获取数据
+                [self getTeacherFollowLoadData];
+            }
         }
     }
     
@@ -428,7 +417,7 @@
         model.TeacherId = [NSString stringWithFormat:@"%ld",(long)focusImgModel.TeacherId];
         model.ImageUrl = focusImgModel.ImageUrl;
         model.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
-        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.lessonID];
+        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.TLId];
         
         vc.xc_model = model;
         

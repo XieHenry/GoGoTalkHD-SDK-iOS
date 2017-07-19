@@ -147,6 +147,9 @@
 
     } failure:^(NSError *error) {
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"cancle"}];
+
+        
         [self dismissViewControllerAnimated:YES completion:nil];
         
         NSDictionary *dic = error.userInfo;

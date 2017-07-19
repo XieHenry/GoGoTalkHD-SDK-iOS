@@ -349,7 +349,7 @@
     //获取所有文件的数组
     NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachePath];
     
-//    NSLog(@"文件地址：%@",cachePath);
+    NSLog(@"文件地址：%@",cachePath);
     
     for(NSString *path in files) {
         
