@@ -194,7 +194,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     self.xc_notStartOrFinishedLabel = ({
         UILabel *label = [UILabel new];
         label.font = Font(14);
-        label.text = @"迟到五分钟";
+        label.text = @"";
         label;
     });
     [self.xc_topNotStartOrFinishedParentView addSubview:self.xc_notStartOrFinishedLabel];
