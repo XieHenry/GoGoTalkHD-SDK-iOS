@@ -206,6 +206,7 @@ static NSString * const textViewPlaceholdString = @"请输入您对本节课程�
             NSArray *data = responseObject[@"data"];
             [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 GGT_CourseCellModel *model = [GGT_CourseCellModel yy_modelWithDictionary:obj];
+                model.StuRemark = self.xc_textView.text;
                 [muArray addObject:model];
             }];
             
