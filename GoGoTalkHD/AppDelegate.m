@@ -40,6 +40,8 @@ static BOOL isProduction = false;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self getBaseURL];
   
     [self initKeyWindow];
     
@@ -61,6 +63,16 @@ static BOOL isProduction = false;
     [self getDayAndWeekLoadData];
     
     return YES;
+}
+
+/// 获取BaseURL
+- (void)getBaseURL
+{
+    [[BaseService share] sendGetRequestWithPath:URL_GetUrl token:NO viewController:[UIApplication sharedApplication].keyWindow.rootViewController showMBProgress:NO success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)initVideo
