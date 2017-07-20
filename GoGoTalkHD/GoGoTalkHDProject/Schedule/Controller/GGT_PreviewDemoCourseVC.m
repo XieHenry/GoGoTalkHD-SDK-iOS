@@ -238,6 +238,8 @@
 
             // 记录日志
             [XCLogManager xc_redirectNSlogToDocumentFolder];
+            
+            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             
         }
@@ -260,6 +262,8 @@
 
             // 记录日志
             [XCLogManager xc_redirectNSlogToDocumentFolder];
+            
+            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             
         }
@@ -283,6 +287,20 @@
         default:
             break;
     }
+}
+
+// 进入教室调用接口
+- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"LessonId"] = model.LessonId;
+    
+    NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
+    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

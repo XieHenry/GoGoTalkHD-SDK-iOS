@@ -121,7 +121,10 @@
     
     NSString *pinjieUrlStr = urlStr;
     
-    urlStr = [BASE_REQUEST_URL stringByAppendingPathComponent:urlStr];
+    
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    
+    urlStr = [single.base_url stringByAppendingPathComponent:urlStr];
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //        NSLog(@"打印token----%@",[UserDefaults() objectForKey:K_userToken]);
     
@@ -189,11 +192,15 @@
 #ifdef DEBUG
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1002 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #endif
                 
             }];
@@ -257,11 +264,15 @@
 #ifdef DEBUG
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1002 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #endif
                 
             }];
@@ -386,7 +397,11 @@
     //使用af原生请求，防止弹出MBProgressHUD动画。
     self.manager = [BaseService sharedHTTPSession];
     self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
-    NSString *urlStr = [BASE_REQUEST_URL stringByAppendingPathComponent:URL_Login];
+    
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    
+    
+    NSString *urlStr = [single.base_url stringByAppendingPathComponent:URL_Login];
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     

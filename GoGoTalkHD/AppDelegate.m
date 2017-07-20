@@ -40,7 +40,36 @@ static BOOL isProduction = false;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-  
+    
+//    [self initKeyWindow];
+    
+    [self getBaseURLWithOptions:launchOptions];
+    
+    return YES;
+}
+
+/// 获取BaseURL
+- (void)getBaseURLWithOptions:(NSDictionary *)launchOptions
+{
+    
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    single.base_url = BASE_REQUEST_URL;
+    
+    [[BaseService share] sendGetRequestWithPath:URL_GetUrl token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
+        
+        single.base_url = responseObject[@"data"];
+        [self configWithOptions:launchOptions];
+        
+    } failure:^(NSError *error) {
+
+        single.base_url = BASE_REQUEST_URL;
+        [self configWithOptions:launchOptions];
+        
+    }];
+}
+
+- (void)configWithOptions:(NSDictionary *)launchOptions
+{
     [self initKeyWindow];
     
     [self initIQKeyboardManager];
@@ -59,8 +88,6 @@ static BOOL isProduction = false;
     
     //提前获取日期数据，3个地方需要用到
     [self getDayAndWeekLoadData];
-    
-    return YES;
 }
 
 - (void)initVideo
@@ -458,7 +485,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 #pragma mark 提前获取日期数据，3个地方需要用到
 - (void)getDayAndWeekLoadData {
-    [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:nil success:^(id responseObject) {
+    
+    [[BaseService share] sendGetRequestWithPath:URL_GetDate token:YES viewController:nil showMBProgress:NO success:^(id responseObject) {
         
         NSArray *dataArray = responseObject[@"data"];
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
@@ -470,6 +498,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         }
         
         sin.orderCourse_dateMuArray = tempArr;
+        
     } failure:^(NSError *error) {
         
     }];
