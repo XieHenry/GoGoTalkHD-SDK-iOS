@@ -298,11 +298,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     }
     completionHandler((UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert)); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 
-    // 获取推送的角标值
-    NSInteger count = [userInfo[@"data"][@"Key"][@"sendno"] intValue];
-    // 设置相关的属性
-    [UIApplication sharedApplication].applicationIconBadgeNumber = count;
-    
     
     /*
      UNNotificationRequest *request = notification.request; // 收到推送的请求
@@ -419,22 +414,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
      */
     
     
-    
     /*
-     data｛
-     Key:{"sendno":"9","msg_id":"2001662602","errcode":0,"errmsg":"Succeed"},
-     Type:1,
-     title:标题,
-     content:单独推送杨宏彬Gogotalk教你学英语呢 
-     ｝
-     
-     data{Key:{"sendno":"9","msg_id":"2001662602","errcode":0,"errmsg":"Succeed"},Type:1,title:标题,content:单独推送杨宏彬Gogotalk教你学英语呢 }
-     
-     */
+      {"data":{"Key":"","Type":"1","title":"","Apns":{"content":{"platform":"all","audience":{"alias":["191e35f7e07278860e4"]},"notification":{"alert":"您预约的外教在线一对一体验课定于今日11:00-11:25，请提前安排好时间准时上课，祝您体验愉快！"},"options":{"apns_production":false}}}}}
+    */
+    
     
     //数据给的比较模糊-------待测试
     NSDictionary *apsDic = msgDic[@"data"];
-    NSString *titleStr = [NSString stringWithFormat:@"%@",apsDic[@"Type"]];
+    NSString *titleStr = apsDic[@"Type"];
     
     if ([titleStr isEqualToString:@"1"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"kebiao" object:self userInfo:msgDic];
