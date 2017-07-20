@@ -21,14 +21,14 @@
 
 //极光推送--GoGoHD
 //测试版
-//static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
-//static NSString *channel = @"Publish channel";
-//static BOOL isProduction = false;
-
-//商店版
 static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
 static NSString *channel = @"Publish channel";
-static BOOL isProduction = true;
+static BOOL isProduction = false;
+
+//商店版
+//static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
+//static NSString *channel = @"Publish channel";
+//static BOOL isProduction = true;
 
 
 @interface AppDelegate ()
@@ -250,8 +250,9 @@ static BOOL isProduction = true;
             [UserDefaults() synchronize];
             
             //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
-            [JPUSHService addTags:[NSSet setWithObject:registrationID] completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-                NSLog(@"rescode: %ld, \ntags: %@, \nalias: %ld\n", (long)iResCode, iTags , (long)seq);
+            [JPUSHService setAlias:registrationID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                NSLog(@"rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+
             } seq:0];
             
         }
@@ -263,15 +264,6 @@ static BOOL isProduction = true;
 
 }
 
-
-/*
-  [JPUSHService setTags:[NSSet setWithObject:@"GoGoTalk"] alias:registrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-
-- (void)tagsAliasCallback:(int)iResCode  tags:(NSSet*)tags alias:(NSString*)alias {
-    
-    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
-}
-*/
 
 
 //注册APNs成功并上报DeviceToken （向苹果服务器注册该设备，注册成功过后会回调）
