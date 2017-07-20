@@ -35,5 +35,8 @@
 //获取7天的上课时间
 @property (nonatomic, strong) NSArray *orderCourse_dateMuArray;
 
+//BASE_URL
+@property (nonatomic, strong) NSString *base_url;
+
 
 @end

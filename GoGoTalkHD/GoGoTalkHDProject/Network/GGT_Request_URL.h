@@ -9,7 +9,7 @@
 #ifndef GGT_Request_URL_h
 #define GGT_Request_URL_h
 
-static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
+static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 //static NSString * const BASE_REQUEST_URL = @"http://yiyuanyan.f3322.org:8000/index.php/Index/index/get_categorys";
 
 /*登录注册*/
