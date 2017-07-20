@@ -123,5 +123,8 @@ static NSString * const URL_getStudentClassHour = @"api/APP/getStudentClassHour"
 // 获取baseURL
 static NSString * const URL_GetUrl = @"api/APP/GetUrl";
 
+// 进入教室前调用
+static NSString * const URL_ModifyLessonStatus = @"api/APP/ModifyLessonStatus";
+
 
 #endif /* GGT_Request_URL_h */

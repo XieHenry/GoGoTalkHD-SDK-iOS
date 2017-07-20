@@ -41,6 +41,8 @@ static BOOL isProduction = false;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    [self initKeyWindow];
+    
     [self getBaseURLWithOptions:launchOptions];
     
     return YES;
