@@ -199,9 +199,10 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    GGT_MineLeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    static NSString *cellStr = @"Cell";
+    GGT_MineLeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (!cell) {
-        cell = [[GGT_MineLeftTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"Cell"];
+        cell = [[GGT_MineLeftTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:cellStr];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
         cell.selectedBackgroundView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
         
@@ -209,8 +210,8 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     
     cell.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-    cell.leftTitleLabel.text = _dataArray[indexPath.row];
-    cell.iconName = _iconArray[indexPath.row];
+    cell.leftTitleLabel.text = [_dataArray safe_objectAtIndex:indexPath.row];
+    cell.iconName = [_iconArray safe_objectAtIndex:indexPath.row];
 
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
@@ -298,7 +299,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 break;
                 
             default:
-                vc = [UIViewController new];
+                vc = [[UIViewController alloc]init];
                 break;
         }
     } else {
@@ -335,7 +336,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 break;
                 
             default:
-                vc = [UIViewController new];
+                vc = [[UIViewController alloc]init];
                 break;
         }
     }

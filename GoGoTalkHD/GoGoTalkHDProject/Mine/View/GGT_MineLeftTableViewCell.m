@@ -44,29 +44,17 @@
     }];
     
     //剩余课时
-    self.leftSubTitleLabel = [UILabel new];
+    self.leftSubTitleLabel = [[UILabel alloc]init];
     self.leftSubTitleLabel.font = Font(14);
-    self.leftSubTitleLabel.textColor = UICOLOR_FROM_HEX(0x777777);
+    self.leftSubTitleLabel.textColor = UICOLOR_FROM_HEX(Color777777);
     [self.contentView addSubview:self.leftSubTitleLabel];
+    
     [self.leftSubTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(-LineX(21));
         make.centerY.equalTo(self.contentView.mas_centerY);
+        make.height.mas_offset(LineH(20));
     }];
-    
-    self.classCountLabel = [[UILabel alloc]init];
-    self.classCountLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:self.classCountLabel];
-    
-    
-    
-    [self.classCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_left).with.offset(-LineX(15));
-        make.centerY.equalTo(self.contentView.mas_centerY);
-        make.height.mas_offset(LineH(22));
-    }];
-    
-    
-    
+
     //分割线
     UIView *lineView = [[UIView alloc]init];
     lineView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
