@@ -222,6 +222,7 @@
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
 		D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */; };
+		D6D7CBED1F2199C80087DDA0 /* GGT_LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */; };
 		D6E0A47C1EC2C200006A003D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A47B1EC2C200006A003D /* main.m */; };
 		D6E0A47F1EC2C200006A003D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A47E1EC2C200006A003D /* AppDelegate.m */; };
 		D6E0A4871EC2C200006A003D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6E0A4861EC2C200006A003D /* Assets.xcassets */; };
@@ -684,6 +685,8 @@
 		D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XCPlaceholderView.m"; sourceTree = "<group>"; };
 		D6C150F01EE7A0C50038841B /* UICollectionView+XCPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+XCPlaceholderView.h"; sourceTree = "<group>"; };
 		D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+XCPlaceholderView.m"; sourceTree = "<group>"; };
+		D6D7CBEB1F2199C80087DDA0 /* GGT_LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_LaunchViewController.h; sourceTree = "<group>"; };
+		D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_LaunchViewController.m; sourceTree = "<group>"; };
 		D6E0A4771EC2C200006A003D /* GoGoTalkHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoTalkHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E0A47B1EC2C200006A003D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6E0A47D1EC2C200006A003D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1740,6 +1743,15 @@
 			path = "GoGoTalk-Gif";
 			sourceTree = "<group>";
 		};
+		D6D7CBEA1F2199C80087DDA0 /* LanchVC */ = {
+			isa = PBXGroup;
+			children = (
+				D6D7CBEB1F2199C80087DDA0 /* GGT_LaunchViewController.h */,
+				D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */,
+			);
+			path = LanchVC;
+			sourceTree = "<group>";
+		};
 		D6E0A46E1EC2C200006A003D = {
 			isa = PBXGroup;
 			children = (
@@ -1821,6 +1833,7 @@
 				D6E0A57A1EC2DBB3006A003D /* LogAndRegister */,
 				D69427311EC94CD30048FD2C /* HomeClass */,
 				D67D55E71EC58E47009D3CC5 /* Schedule */,
+				D6D7CBEA1F2199C80087DDA0 /* LanchVC */,
 			);
 			path = GoGoTalkHDProject;
 			sourceTree = "<group>";
@@ -2264,6 +2277,7 @@
 				D6FD8AF81F17811C00A79011 /* GGT_HomeDateModel.m in Sources */,
 				D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */,
 				D64096851EEFE39E0038A0CC /* GGT_PreCoursewareVC.m in Sources */,
+				D6D7CBED1F2199C80087DDA0 /* GGT_LaunchViewController.m in Sources */,
 				5BF1CBCE1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m in Sources */,
 				D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */,
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,

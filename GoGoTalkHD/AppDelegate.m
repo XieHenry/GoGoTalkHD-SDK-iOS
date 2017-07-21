@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GGT_HomeViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "GGT_LaunchViewController.h"
 
 
 #define kBuglyAppId      @"ab92f40c75"
@@ -30,7 +31,6 @@ static BOOL isProduction = false;
 //static NSString *channel = @"Publish channel";
 //static BOOL isProduction = true;
 
-
 @interface AppDelegate ()
 
 @end
@@ -39,33 +39,63 @@ static BOOL isProduction = false;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    [self xc_configKeyWindow];
     
-//    [self initKeyWindow];
-    
-    [self getBaseURLWithOptions:launchOptions];
-    
+    [self xc_changeKeyWindowWithOptions:launchOptions];
+
     return YES;
 }
 
+- (void)xc_configKeyWindow
+{
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    GGT_LaunchViewController *vc = [GGT_LaunchViewController new];
+    self.window.rootViewController = vc;
+    [self.window makeKeyAndVisible];
+}
+
 /// 获取BaseURL
-- (void)getBaseURLWithOptions:(NSDictionary *)launchOptions
+- (void)xc_changeKeyWindowWithOptions:(NSDictionary *)launchOptions
 {
     
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.base_url = BASE_REQUEST_URL;
-    
+
     [[BaseService share] sendGetRequestWithPath:URL_GetUrl token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
         
-        single.base_url = responseObject[@"data"];
-        [self configWithOptions:launchOptions];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // 进行版本号判断
+            // 获取应用版本号
+//            NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
+//            NSString *currentVersion = infoDict[(NSString *)kCFBundleVersionKey];
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            
+            
+            // 后台写死版本号
+            
+            // 判断版本号
+            // 版本号小于后台返回的版本号 正式接口
+            // 版本号等于后台返回的版本号 测试接口
+            
+            // 新版本上线后
+            // 后台版本号加1
+            
+            // 逻辑后台处理
+            
+            single.base_url = responseObject[@"data"];
+            [self configWithOptions:launchOptions];
+        });
         
     } failure:^(NSError *error) {
-
+        
         single.base_url = BASE_REQUEST_URL;
         [self configWithOptions:launchOptions];
         
     }];
+    
 }
 
 - (void)configWithOptions:(NSDictionary *)launchOptions
@@ -84,7 +114,6 @@ static BOOL isProduction = false;
     
     //对照相机和麦克风进行授权
     [self initCameraAndMic];
-    
     
     //提前获取日期数据，3个地方需要用到
     [self getDayAndWeekLoadData];
@@ -127,7 +156,7 @@ static BOOL isProduction = false;
 #pragma mark 初始化UIWindow
 - (void)initKeyWindow
 {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
     GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
@@ -157,7 +186,7 @@ static BOOL isProduction = false;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    [self.window makeKeyAndVisible];
+//    [self.window makeKeyAndVisible];
 }
 
 #pragma mark 初始化IQKeyboardManager

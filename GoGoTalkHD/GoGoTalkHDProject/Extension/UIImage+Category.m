@@ -83,9 +83,34 @@
     
     UIGraphicsEndImageContext();
     
-    
-    
     return image;
-    
 }
+
++ (UIImage *)xc_getLaunchImage
+{
+    NSString *viewOrientation = @"Portrait";
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+        viewOrientation = @"Landscape";
+    }
+    NSString *launchImageName = nil;
+    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    
+//    UIWindow *currentWindow = [[UIApplication sharedApplication].windows firstObject];
+//    CGSize viewSize = currentWindow.bounds.size;
+    for (NSDictionary* dict in imagesDict)
+    {
+//        CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
+        
+//        if (CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]])
+//        {
+//            launchImageName = dict[@"UILaunchImageName"];
+//        }
+        if ([viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]])
+        {
+            launchImageName = dict[@"UILaunchImageName"];
+        }
+    }
+    return [UIImage imageNamed:launchImageName];
+}
+
 @end
