@@ -101,7 +101,7 @@
 #pragma mark 关注按钮 (long)self.pushModel.TeacherId
 - (void)focusOnBtnClick:(NSString *)statusStr {
     
-    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_GetAttention,self.pushModel.TeacherId,statusStr];
+    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%@&state=%@",URL_Attention_Home,self.pushModel.TeacherId,statusStr];
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         //对关注界面进行数据刷新

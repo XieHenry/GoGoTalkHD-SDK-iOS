@@ -16,7 +16,5 @@
 
 @property (nonatomic, strong) UILabel *leftSubTitleLabel;  //剩余课时
 
-@property (nonatomic, strong) UILabel *classCountLabel;
-
 @property (nonatomic, strong) NSString *iconName;
 @end

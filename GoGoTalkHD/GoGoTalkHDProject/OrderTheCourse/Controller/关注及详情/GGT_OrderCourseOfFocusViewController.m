@@ -271,7 +271,7 @@
     
     GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
-    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%ld&state=%@",URL_GetAttention,(long)model.TeacherId,@"1"];
+    NSString *url = [NSString stringWithFormat:@"%@?teacherId=%ld&state=%@",URL_Attention_Home,(long)model.TeacherId,@"1"];
     
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {

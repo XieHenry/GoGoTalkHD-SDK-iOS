@@ -10,7 +10,7 @@
 #define GGT_Request_URL_h
 
 static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
-//static NSString * const BASE_REQUEST_URL = @"http://yiyuanyan.f3322.org:8000/index.php/Index/index/get_categorys";
+
 
 /*登录注册*/
 //注册
@@ -26,16 +26,29 @@ static NSString * const URL_ChangePwdByCode = @"/api/APP/AppChangePwdByCode";
 
 
 
-
 /*约课*/
 //获取学生关注的教师信息
 static NSString * const URL_GetTeacherFollowApp = @"/api/APP/GetTeacherFollowApp";
-//学员关注、取消关注 教师
-static NSString * const URL_GetAttention = @"/api/APP/Attention";
 //获取关注的老师一周的排课情况
 static NSString * const URL_GetTimeByTeacherId = @"/api/APP/GetTimeByTeacherId";
 //获取教师排课日历
 static NSString * const URL_GetTeacherBulkApp = @"/api/APP/GetTeacherBulkApp";
+//获取上课日期
+static NSString * const URL_GetDate = @"api/APP/GetDate";
+//获取时间
+static NSString * const URL_GetTime = @"api/APP/GetTime";
+//获取所有教师列表
+static NSString * const URL_GetPageTeacherLessonApp = @"api/APP/GetPageTeacherLessonApp";
+//获得教材列表
+static NSString * const URL_GetBookList = @"api/APP/GetBookList";
+//重上课程
+static NSString * const URL_AgainLesson = @"api/APP/AgainLesson";
+//关注教师  学员关注、取消关注 教师
+static NSString * const URL_Attention_Home = @"api/APP/Attention";
+//点击预约按钮判断外教是否被其他人预约
+static NSString * const URL_GetIsSureClass = @"api/APP/GetIsSureClass";
+//新用户 判断是否可约课
+static NSString * const URL_getStudentClassHour = @"api/APP/getStudentClassHour";
 
 
 
@@ -56,75 +69,45 @@ static NSString * const URL_OpinionFeedback = @"/api/APP/OpinionFeedback";
 static NSString * const URL_GetReportsList = @"/api/APP/AppGetReportsList";
 //关于我们
 static NSString * const URL_GetAboutUs = @"/ipad/abouts/wlh_about.html";
-//检测token是否过期
-static NSString * const URL_GetTokenInvalid = @"/api/APP/GetTokenInvalid";
-//是否审核状态
-static NSString * const URL_GetTesting = @"/api/APP/GetTesting";
 //获取左侧选项数据
 static NSString * const URL_GetInfo = @"/api/APP/GetInfo";
 
 
 
-
-// 日历Calendar
+/*课表*/
+//日历Calendar
 static NSString * const URL_LessonList = @"api/APP/AppStuLessonList";
-
-// 日历下面数据Course
+//日历下面数据Course
 static NSString * const URL_GetMyLesson = @"api/APP/AppGetMyLesson";
-
-// 学生对教师的评价
+//学生对教师的评价
 static NSString * const URL_AppStudentEvaluateTeacher = @"api/APP/AppStudentEvaluateTeacher";
-
-// 取消约课
+//取消约课
 static NSString * const URL_DelLesson = @"api/APP/DelLesson";
-
-// 预约试听课
+//预约试听课
 static NSString * const URL_AddDemoMsg = @"api/APP/AddDemoMsg";
-
-// 获取课程详情
+//获取课程详情
 static NSString * const URL_GetLessonByLessonId = @"api/APP/GetLessonByLessonId";
-
-// 获取最近上课信息
+//获取最近上课信息
 static NSString * const URL_AppStuLatelyLesson = @"api/APP/AppStuLatelyLesson";
-
-// 获取常用语句
+//获取常用语句
 static NSString * const URL_GetContrastInfo = @"api/APP/GetContrastInfo";
-
-// 发送log日志
+//发送log日志
 static NSString * const URL_PostLog = @"api/APP/Applog";
+//进入教室前调用
+static NSString * const URL_ModifyLessonStatus = @"api/APP/ModifyLessonStatus";
 
-// 获取上课日期
-static NSString * const URL_GetDate = @"api/APP/GetDate";
 
-// 获取时间
-static NSString * const URL_GetTime = @"api/APP/GetTime";
 
-// 获取所有教师列表
-static NSString * const URL_GetPageTeacherLessonApp = @"api/APP/GetPageTeacherLessonApp";
-
-// 约课
-static NSString * const URL_GetBookList_Home = @"api/APP/GetBookList";
-
-// 获得教材列表
-static NSString * const URL_GetBookList = @"api/APP/GetBookList";
-
-// 重上课程
-static NSString * const URL_AgainLesson = @"api/APP/AgainLesson";
-
-// 关注教师
-static NSString * const URL_Attention_Home = @"api/APP/Attention";
-
-// 点击预约按钮判断外教是否被其他人预约
-static NSString * const URL_GetIsSureClass = @"api/APP/GetIsSureClass";
-
-// 新用户 判断是否可约课
-static NSString * const URL_getStudentClassHour = @"api/APP/getStudentClassHour";
-
+/*特殊接口*/
+//检测token是否过期
+static NSString * const URL_GetTokenInvalid = @"/api/APP/GetTokenInvalid";
+//是否审核状态
+static NSString * const URL_GetTesting = @"/api/APP/GetTesting";
 // 获取baseURL
 static NSString * const URL_GetUrl = @"api/APP/GetUrl";
 
-// 进入教室前调用
-static NSString * const URL_ModifyLessonStatus = @"api/APP/ModifyLessonStatus";
+
+
 
 
 #endif /* GGT_Request_URL_h */
