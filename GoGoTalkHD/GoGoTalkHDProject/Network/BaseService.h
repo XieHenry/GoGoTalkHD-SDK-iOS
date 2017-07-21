@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, HttpRequestType) {
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 + (instancetype)share;
++ (AFHTTPSessionManager *)sharedHTTPSession; //解决AF内存泄漏
 
 - (void)requestWithPath:(NSString *)url
                  method:(NSInteger)method

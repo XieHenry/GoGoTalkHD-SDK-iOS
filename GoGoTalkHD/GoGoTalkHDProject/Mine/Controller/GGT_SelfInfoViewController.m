@@ -228,7 +228,7 @@
                 __weak GGT_ChoicePickView *weakview = view;
                 view.SexBlock = ^(NSString *dateStr) {
                     //默认选中是男
-                    [self changePickViewData:dateStr IDStr:nil type:@"sexType"];
+                    [self changePickViewData:dateStr IDStr:@"" type:@"sexType"];
                     [weakview removeFromSuperview];
                 };
                 [self.view addSubview:view];
@@ -251,7 +251,7 @@
                 __weak GGT_ChoicePickView *weakview = view;
                 
                 view.DateBlock = ^(NSString *dateStr) {
-                    [self changePickViewData:dateStr IDStr:nil type:@"birthdayType"];
+                    [self changePickViewData:dateStr IDStr:@"" type:@"birthdayType"];
                     
                     //默认打印日期是当前日期，今日日期， 2017年05月27日
                     [weakview removeFromSuperview];

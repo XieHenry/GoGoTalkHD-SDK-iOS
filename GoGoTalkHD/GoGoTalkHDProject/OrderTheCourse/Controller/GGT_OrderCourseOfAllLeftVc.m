@@ -283,8 +283,8 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         }
         
         return cell;
-    }
-    if (collectionView == self.xc_bottomCollectionView) {
+        
+    } else if (collectionView == self.xc_bottomCollectionView) {
         GGT_TimeCollectionCell *cell = [GGT_TimeCollectionCell cellWithCollectionView:collectionView indexPath:indexPath];
         
         GGT_HomeTimeModel *model = nil;
@@ -305,8 +305,12 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         }
         
         return cell;
+        
+    } else {
+        
+        NSLog(@"解决内存泄漏--Some exception message for unexpected tableView");
+        abort();
     }
-    return nil;
 }
 
 // 设置header和footer

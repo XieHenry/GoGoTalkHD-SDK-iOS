@@ -19,8 +19,7 @@
 
 @implementation BaseService
 
-+ (instancetype)share
-{
++ (instancetype)share {
     static BaseService *shareInstance = nil;
     
     static dispatch_once_t onceToken;
@@ -30,6 +29,19 @@
     
     return shareInstance;
 }
+
++ (AFHTTPSessionManager *)sharedHTTPSession {
+    static AFHTTPSessionManager *manager = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [AFHTTPSessionManager manager];
+        manager.requestSerializer.timeoutInterval = 10.f;
+        
+    });
+    return manager;
+}
+
 
 - (instancetype)init
 {
@@ -105,8 +117,7 @@
                 failure:(AFNFailureResponse)failure
 {
     
-    self.manager = [AFHTTPSessionManager manager];
-    self.manager.requestSerializer.timeoutInterval = 10.f;
+    self.manager = [BaseService sharedHTTPSession];
     
     NSString *pinjieUrlStr = urlStr;
     
@@ -170,10 +181,7 @@
                     NSLog(@"%@-Get请求地址:\n%@---success日志:\n%@",[viewController class],urlStr,error);
                     //                    NSDictionary *userInfoDic = error.userInfo;
                     //                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
-                    
-                    //暂时不需要进行跳转处理，因为有的状态是提醒。
-                    // [self performSelector:@selector(turnToHomeClick:) withObject:viewController afterDelay:0.0f];
-                    
+
                 }
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -243,10 +251,6 @@
                     
                     //                    NSDictionary *userInfoDic = error.userInfo;
                     //                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
-                    
-                    //暂时不需要进行跳转处理，因为有的状态是提醒。
-                    //[self performSelector:@selector(turnToHomeClick:) withObject:viewController afterDelay:0.0f];
-                    
                 }
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -391,7 +395,7 @@
     
     
     //使用af原生请求，防止弹出MBProgressHUD动画。
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [BaseService sharedHTTPSession];
     self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
     
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
@@ -420,21 +424,6 @@
         
     }];
     
-}
-
-
-#pragma mark token过期，重新登录
-- (void)turnToHomeClick :(UIViewController *)viewController {
-    [MBProgressHUD showMessage:@"登录过期，请重新登录" toView:viewController.view];
-    
-    [self performSelector:@selector(turnToLoginClick:) withObject:viewController afterDelay:1.0f];
-    
-}
-
-- (void)turnToLoginClick :(UIViewController *)viewController{
-    GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
-    BaseNavigationController *mainVc = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
-    viewController.view.window.rootViewController = mainVc;
 }
 
 
