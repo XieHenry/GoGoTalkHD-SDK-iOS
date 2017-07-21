@@ -74,6 +74,17 @@ static BOOL isProduction = false;
 //            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             
             
+            // 后台写死版本号
+            
+            // 判断版本号
+            // 版本号小于后台返回的版本号 正式接口
+            // 版本号等于后台返回的版本号 测试接口
+            
+            // 新版本上线后
+            // 后台版本号加1
+            
+            // 逻辑后台处理
+            
             single.base_url = responseObject[@"data"];
             [self configWithOptions:launchOptions];
         });
