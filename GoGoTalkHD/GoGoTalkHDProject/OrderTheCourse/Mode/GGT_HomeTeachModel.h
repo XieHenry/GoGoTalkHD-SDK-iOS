@@ -21,8 +21,12 @@
 @property (nonatomic, strong) NSString *StartTime;
 @property (nonatomic, strong) NSString *TeacherId;
 @property (nonatomic, strong) NSString *TeacherName;
+@property (nonatomic, strong) NSString *ReturnTime;
 
 @end
+
+// StartTime用于展示
+// ReturnTime用于传参
 
 //IsFollow":1,      （是否关注 0：未关注 1：已关注）
 /*
