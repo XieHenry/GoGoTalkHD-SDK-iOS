@@ -218,6 +218,7 @@
         JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
         entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
         [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+        //突然想到还有一种方法，就是直接添加删除alias
     }else {
         
         [sender setOn:NO animated:NO];
@@ -314,6 +315,7 @@
     }
     return NO;
 }
+
 #pragma mark 退出登录
 - (void)logOutButtonClick {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -323,6 +325,11 @@
     cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
     
     UIAlertAction *clernAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            NSLog(@"注销---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+        } seq:0];
+    
         GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
         [UserDefaults() setObject:@"no" forKey:@"login"];
         [UserDefaults() setObject:@"" forKey:K_userToken];

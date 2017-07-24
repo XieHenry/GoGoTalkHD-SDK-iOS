@@ -261,23 +261,27 @@
 {
     
     if (self.type == SexType) {
+        
         return  [self.sexDataArray count];
+        
     } else if (self.type == AddressType) {
         
         if (component == 0) {
+            
             return [self.shengDataArray count];
             
         } else if(component == 1){
             
             NSInteger rowProvince = [pickerView selectedRowInComponent:0];
-            return [self.shiDataArray[rowProvince] count];
+            return [[self.shiDataArray safe_objectAtIndex:rowProvince] count];
+
         }
         else {
             NSInteger rowProvince = [pickerView selectedRowInComponent:0];
             NSInteger rowCity = [pickerView selectedRowInComponent:1];
             
-            return [self.quDataArray[rowProvince][rowCity] count];
-            
+            return [[[self.quDataArray safe_objectAtIndex:rowProvince] safe_objectAtIndex:rowCity] count];
+
         }
         
     }
@@ -288,18 +292,22 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     
     if (self.type == SexType) {
-        NSString *hourString = [self.sexDataArray objectAtIndex:row];
+        NSString *hourString = [self.sexDataArray safe_objectAtIndex:row];
+
         return hourString;
+        
     } else if (self.type == AddressType) {
         
         if (component == 0) {
-            return self.shengDataArray[row];
             
+            return [self.shengDataArray safe_objectAtIndex:row];
+
         } else if(component == 1){
             
             NSInteger rowProvince = [pickerView selectedRowInComponent:0];
-            return self.shiDataArray[rowProvince][row];
-            
+
+            return [[self.shiDataArray safe_objectAtIndex:rowProvince] safe_objectAtIndex:row];
+
         }
         else {
             NSInteger rowProvince = [pickerView selectedRowInComponent:0];
@@ -307,10 +315,13 @@
             
             
             //如果为空，显示上级或@“”，不为空，显示原来的信息
-            if ( IsStrEmpty(self.quDataArray[rowProvince][rowCity][row])) {
-                return self.shiDataArray[rowProvince][row];
+            if ( IsStrEmpty([[[self.quDataArray safe_objectAtIndex:rowProvince] safe_objectAtIndex:rowCity] safe_objectAtIndex:row])) {
+
+                return [[self.shiDataArray safe_objectAtIndex:rowProvince] safe_objectAtIndex:row];
+
             } else {
-                return self.quDataArray[rowProvince][rowCity][row];
+                return [[[self.quDataArray safe_objectAtIndex:rowProvince] safe_objectAtIndex:rowCity] safe_objectAtIndex:row];
+
 
             }
             
@@ -327,7 +338,7 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     if (self.type == SexType) { //1:男   0:女
-        self.choiceDateStr = self.sexDataArray[row];
+        self.choiceDateStr = [self.sexDataArray safe_objectAtIndex:row];
         if ([self.choiceDateStr isEqualToString:@"男"]) {
             self.choiceDateStr = @"1";
         }else {
@@ -352,10 +363,12 @@
         NSInteger selectThree = [pickerView selectedRowInComponent:2];
         
         //地区
-        NSString *oneStr = self.shengDataArray[selectOne];
-        NSString *twoStr = self.shiDataArray[selectOne][selectTwo];
-        NSString *threeStr = self.quDataArray[selectOne][selectTwo][selectThree];
-        if (IsStrEmpty(self.quDataArray[selectOne][selectTwo][selectThree])) {
+        NSString *oneStr = [self.shengDataArray safe_objectAtIndex:selectOne];
+        NSString *twoStr = [[self.shiDataArray safe_objectAtIndex:selectOne] safe_objectAtIndex:selectTwo];
+        NSString *threeStr = [[[self.quDataArray safe_objectAtIndex:selectOne] safe_objectAtIndex:selectTwo] safe_objectAtIndex:selectThree];
+
+        
+        if (IsStrEmpty([[[self.quDataArray safe_objectAtIndex:selectOne] safe_objectAtIndex:selectTwo] safe_objectAtIndex:selectThree])) {
             threeStr = twoStr;
         }
 
@@ -367,9 +380,11 @@
 
         
         //地区id
-        NSString *oneIdStr = self.shengIdDataArray[selectOne];
-        NSString *twoIdStr = self.shiIdDataArray[selectOne][selectTwo];
-        NSString *threeIdStr = self.quIdDataArray[selectOne][selectTwo][selectThree];
+        NSString *oneIdStr = [self.shengIdDataArray safe_objectAtIndex:selectOne];
+        NSString *twoIdStr = [[self.shiIdDataArray safe_objectAtIndex:selectOne] safe_objectAtIndex:selectTwo];
+        NSString *threeIdStr = [[[self.quIdDataArray safe_objectAtIndex:selectOne] safe_objectAtIndex:selectTwo] safe_objectAtIndex:selectThree];
+
+        
         if ([[NSString stringWithFormat:@"%@",threeIdStr] isEqualToString:@"0"]) {
             threeIdStr = twoIdStr;
         }

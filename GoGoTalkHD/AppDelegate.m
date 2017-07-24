@@ -176,8 +176,14 @@ static BOOL isProduction = false;
         self.window.rootViewController = homeVc;
         
     } else {
-        BaseNavigationController *mainVc = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
         
+        /**
+         *  卸载重装后或第一次或重新登录进入应用角标置0
+         */
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        [JPUSHService setBadge:0];
+        
+        BaseNavigationController *mainVc = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
         self.window.rootViewController = mainVc;
     }
     
@@ -304,12 +310,7 @@ static BOOL isProduction = false;
             NSLog(@"registrationID获取成功：%@",registrationID);
             [UserDefaults() setObject:registrationID forKey:K_registerID];
             [UserDefaults() synchronize];
-            
-            //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
-            [JPUSHService setAlias:registrationID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-                NSLog(@"rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
 
-            } seq:0];
             
         }
         else{

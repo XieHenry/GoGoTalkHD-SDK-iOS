@@ -33,7 +33,7 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(LineX(359));
         make.centerY.equalTo(self.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(72), LineH(72)));
+        make.size.mas_offset(CGSizeMake(LineW(72), LineW(72)));
     }];
     
     

@@ -11,7 +11,7 @@
 #import "GGT_RegisterViewController.h"
 #import "GGT_LoginView.h"
 #import "GGT_HomeViewController.h"
-
+#import "JPUSHService.h"
 
 
 @interface GGT_LoginViewController ()
@@ -110,11 +110,17 @@
     }
     
     
-    NSDictionary *postDic = @{@"UserName":self.loginView.phoneAccountField.text,@"PassWord":self.loginView.passwordField.text,@"OrgLink":IsStrEmpty([UserDefaults() objectForKey:K_registerID])?@"":[UserDefaults() objectForKey:K_registerID]};
+    NSString *OrgLinkStr = IsStrEmpty([UserDefaults() objectForKey:K_registerID])?@"":[UserDefaults() objectForKey:K_registerID];
+    
+    NSDictionary *postDic = @{@"UserName":self.loginView.phoneAccountField.text,@"PassWord":self.loginView.passwordField.text,@"OrgLink":OrgLinkStr};
 
-                                                                                                                                                    
     [[BaseService share] sendPostRequestWithPath:URL_Login parameters:postDic token:NO viewController:self success:^(id responseObject) {
-                
+        
+        //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
+        [JPUSHService setAlias:OrgLinkStr completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            NSLog(@"注册---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+        } seq:0];
+        
         [UserDefaults() setObject:responseObject[@"data"][@"dicRes"][@"userToken"] forKey:K_userToken];
         [UserDefaults() setObject:[NSString stringWithFormat:@"%@",responseObject[@"data"][@"dicRes"][@"studentName"]] forKey:K_studentName];
         [UserDefaults() setObject:self.loginView.phoneAccountField.text forKey:@"phoneNumber"];
