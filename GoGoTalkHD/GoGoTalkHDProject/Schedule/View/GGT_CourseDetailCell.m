@@ -551,7 +551,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         }
         
     } else {
-        self.xc_notStartOrFinishedLabel.text = @"缺席";
+        self.xc_notStartOrFinishedLabel.text = text;
     }
     
 }
@@ -675,7 +675,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     }
     
     // 判断是否显示courseButton
-    if ([self.xc_cellModel.Status integerValue] == 5) {
+    if ([self.xc_cellModel.Status integerValue] == 5 || [self.xc_cellModel.Status integerValue] == 6) {
         self.xc_courseButton.hidden = YES;
     } else {
         if (xc_cellModel.IsDemo == 1) {
