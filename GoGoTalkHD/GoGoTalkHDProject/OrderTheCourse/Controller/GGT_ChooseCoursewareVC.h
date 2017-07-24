@@ -10,6 +10,7 @@
 
 @interface GGT_ChooseCoursewareVC : BaseViewController
 
-@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+//@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+@property (nonatomic, copy) NSString *LessonId;
 
 @end

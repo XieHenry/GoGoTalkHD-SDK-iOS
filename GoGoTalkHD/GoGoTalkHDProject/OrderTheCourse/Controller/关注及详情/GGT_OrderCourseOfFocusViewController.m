@@ -411,15 +411,12 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = self;
         
-        //        07月13日（星期三）18:30
-        GGT_HomeTeachModel *model = [[GGT_HomeTeachModel alloc]init];
-        model.TeacherName = focusImgModel.TeacherName;
-        model.TeacherId = [NSString stringWithFormat:@"%ld",(long)focusImgModel.TeacherId];
-        model.ImageUrl = focusImgModel.ImageUrl;
-        model.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
-        model.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.TLId];
         
-        vc.xc_model = model;
+        vc.ImageUrl = focusImgModel.ImageUrl;
+        vc.TeacherName = focusImgModel.TeacherName;
+        vc.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
+        vc.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.TLId];
+        
         
         //预约了课程的回调
         vc.orderCourse = ^(BOOL yes) {

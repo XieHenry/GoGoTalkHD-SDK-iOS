@@ -166,8 +166,14 @@ typedef enum : NSUInteger {
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.popoverPresentationController.delegate = self;
-        //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        vc.xc_model = model;
+        
+        //重写model数据，详情和关注中会修改数据，返回后会造成错误
+        vc.ImageUrl = model.ImageUrl;
+        vc.TeacherName = model.TeacherName;
+        vc.StartTime = model.StartTime;
+        vc.LessonId = model.LessonId;
+        
+        
         // 修改弹出视图的size 在控制器内部修改更好
         //    vc.preferredContentSize = CGSizeMake(100, 100);
         [self presentViewController:nav animated:YES completion:nil];
