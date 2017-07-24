@@ -162,6 +162,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.xc_dataMuArray.count == 0) {
+        self.xc_rightItemButton.hidden = YES;
+    } else {
+        self.xc_rightItemButton.hidden = NO;
+    }
     return self.xc_dataMuArray.count;
 }
 

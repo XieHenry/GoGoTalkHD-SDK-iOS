@@ -289,6 +289,9 @@ typedef enum : NSUInteger {
     self.xc_date = date;
     self.xc_time = time;
     
+    self.xc_pageIndex = 1;
+    self.xc_loadType = XCLoadNewData;
+    
     [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
 }
 
@@ -311,6 +314,11 @@ typedef enum : NSUInteger {
         
         self.xc_total = [responseObject[@"total"] integerValue];
         [self.xc_tableView reloadData];
+        
+        
+        if (self.xc_loadType == XCLoadNewData) {
+            [self.xc_tableView setContentOffset:CGPointZero animated:YES];
+        }
         
         GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:responseObject];
         self.xc_placeholderView.xc_model = model;
