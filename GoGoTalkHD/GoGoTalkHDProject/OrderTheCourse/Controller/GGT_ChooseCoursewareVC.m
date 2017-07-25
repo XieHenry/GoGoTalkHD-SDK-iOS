@@ -40,7 +40,11 @@
         if ([dataArray isKindOfClass:[NSArray class]] && dataArray.count > 0) {
             [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 GGT_CoursewareModel *model = [GGT_CoursewareModel yy_modelWithDictionary:obj];
-                model.xc_isSelected = NO;
+                if (idx == 0) {
+                    model.xc_isSelected = YES;
+                } else {
+                    model.xc_isSelected = NO;
+                }
                 [self.xc_dataMuArray addObject:model];
             }];
         }
