@@ -490,13 +490,13 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 }
 
 // 已完成 缺席
-- (void)finishedAbsentWithType:(NSInteger)status
+- (void)finishedAbsent
 {
     self.xc_topHavingClassParentView.hidden = YES;
     self.xc_topCountDownParentView.hidden = YES;
     self.xc_topNotStartOrFinishedParentView.hidden = NO;
     
-    if (status == 5) {
+    if ([self.xc_cellModel.Status integerValue] == 5) {
         [self courseNotStartOrFinishedLabelWithText:@"缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
     } else {
         [self courseNotStartOrFinishedLabelWithText:@"老师缺席" textColor:UICOLOR_FROM_HEX(kThemeColor) imageName:@"yiwancheng"];
@@ -663,11 +663,11 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
             break;
         case 5:     // 已经结束 缺席  学生缺席
         {
-            [self finishedAbsentWithType:5];
+            [self finishedAbsent];
         }
         case 6:     // 已经结束 缺席  老师缺席
         {
-            [self finishedAbsentWithType:6];
+            [self finishedAbsent];
         }
             
             break;
