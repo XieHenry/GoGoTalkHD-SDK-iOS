@@ -34,7 +34,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>weibo</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wb221400771</string>
