@@ -51,12 +51,17 @@
         [self.xc_tableView reloadData];
         
         self.xc_placeholderLabel.text = responseObject[@"msg"];
-        
+        [self.xc_placeholderLabel changeLineSpaceWithSpace:5.0f];
+        self.xc_placeholderLabel.textAlignment = NSTextAlignmentCenter;
+        self.xc_placeholderLabel.center = self.view.center;
         
     } failure:^(NSError *error) {
         
         NSDictionary *dic = error.userInfo;
         self.xc_placeholderLabel.text = dic[@"msg"];
+        [self.xc_placeholderLabel changeLineSpaceWithSpace:5.0f];
+        self.xc_placeholderLabel.textAlignment = NSTextAlignmentCenter;
+        self.xc_placeholderLabel.center = self.view.center;
         
     }];
 }
@@ -110,7 +115,11 @@
     
 #pragma mark - 添加xc_placeholderView
     self.xc_placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 462, 368)];
-    self.xc_placeholderLabel.textAlignment = NSTextAlignmentCenter;
+    self.xc_placeholderLabel.text = @" ";
+    self.xc_placeholderLabel.font = Font(14);
+    self.xc_placeholderLabel.textColor = UICOLOR_FROM_HEX(Color333333);
+    self.xc_placeholderLabel.numberOfLines = 0;
+    
     self.xc_tableView.enablePlaceHolderView = YES;
     self.xc_tableView.xc_PlaceHolderView = self.xc_placeholderLabel;
     
