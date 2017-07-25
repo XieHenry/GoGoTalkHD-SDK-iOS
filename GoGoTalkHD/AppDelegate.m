@@ -404,8 +404,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
     [self pushInfoMationWithUserInfo:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
 
 }
 
