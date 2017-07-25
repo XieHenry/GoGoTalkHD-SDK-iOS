@@ -116,11 +116,12 @@
 
     [[BaseService share] sendPostRequestWithPath:URL_Login parameters:postDic token:NO viewController:self success:^(id responseObject) {
         
-        //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
-        [JPUSHService setAlias:OrgLinkStr completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-            NSLog(@"注册---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
-        } seq:0];
-        
+//        //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
+//        [JPUSHService setAlias:OrgLinkStr completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//            NSLog(@"注册---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+//        } seq:0];
+//        [UserDefaults() setObject:@"YES" forKey:@"isPush" ];
+
         [UserDefaults() setObject:responseObject[@"data"][@"dicRes"][@"userToken"] forKey:K_userToken];
         [UserDefaults() setObject:[NSString stringWithFormat:@"%@",responseObject[@"data"][@"dicRes"][@"studentName"]] forKey:K_studentName];
         [UserDefaults() setObject:self.loginView.phoneAccountField.text forKey:@"phoneNumber"];

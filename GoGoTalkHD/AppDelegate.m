@@ -311,7 +311,11 @@ static BOOL isProduction = false;
             [UserDefaults() setObject:registrationID forKey:K_registerID];
             [UserDefaults() synchronize];
 
-            
+            //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
+            [JPUSHService setAlias:registrationID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                NSLog(@"注册---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+            } seq:0];
+
         }
         else{
             NSLog(@"registrationID获取失败，code：%d",resCode);
@@ -344,7 +348,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 #pragma mark- JPUSHRegisterDelegate
-
 // ios 10 support 处于前台时接收到通知  如果处于前台时需要自定义弹框或者弹出alert，可以看一下http://www.jianshu.com/p/d2a42072fad9 这篇文章
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
 
@@ -423,8 +426,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)pushInfoMationWithUserInfo:(NSDictionary *)userInfo  {
 
     NSLog(@"获取推送接收到的信息---%@",userInfo);
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
     
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) { //程序当前正处于前台
         NSLog(@"/***************程序处于前台状态，无法显示在通知栏内。不需要做处理***************/");
@@ -433,13 +434,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         //程序已经关闭或者在后台运行
         [self pushToViewControllerWhenClickPushMessageWith:userInfo];
-        
-        
-        
+
     }
-    
-
-
 }
 
 

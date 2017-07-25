@@ -333,10 +333,6 @@
     cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
     
     UIAlertAction *clernAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-            NSLog(@"注销---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
-        } seq:0];
     
         GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
         [UserDefaults() setObject:@"no" forKey:@"login"];
