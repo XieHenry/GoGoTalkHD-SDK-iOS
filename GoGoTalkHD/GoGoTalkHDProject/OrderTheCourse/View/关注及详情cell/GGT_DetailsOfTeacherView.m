@@ -18,17 +18,16 @@
     return self;
 }
 
+- (void)drawRect:(CGRect)rect {
+    [self.iconImageView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:LineW(36.0f)];
+    [self.iconImageView addBorderForViewWithBorderWidth:1.0 BorderColor:UICOLOR_FROM_HEX(ColorC40016) CornerRadius:LineW(36.0f)];
+}
 
 - (void)setUpContentView {
     
     //头像
     self.iconImageView = [[UIImageView alloc]init];
-    self.iconImageView.layer.masksToBounds = YES;
-    self.iconImageView.layer.cornerRadius = LineW(36);
-    self.iconImageView.layer.borderWidth = LineW(1);
-    self.iconImageView.layer.borderColor = UICOLOR_FROM_HEX(ColorC40016).CGColor;
     [self addSubview:self.iconImageView];
-    
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(LineX(359));

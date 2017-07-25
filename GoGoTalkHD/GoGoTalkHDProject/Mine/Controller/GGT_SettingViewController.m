@@ -15,7 +15,7 @@
 #import "JPUSHService.h" //JPUSHRegisterDelegate
 
 
-@interface GGT_SettingViewController () <UITableViewDelegate,UITableViewDataSource,JPUSHRegisterDelegate>
+@interface GGT_SettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -196,13 +196,13 @@
     }
 }
 //不做任何处理，消除警告---极光的代理
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-    
-}
-
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-    
-}
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+//    
+//}
+//
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+//    
+//}
 
 - (void)openPushWithSwitch:(UISwitch *)sender {
     
@@ -215,9 +215,14 @@
         [UserDefaults() setObject:@"YES" forKey:@"isPush" ];
         
         
-        JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-        [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+        //方法更新了，seq（请求时传入的序列号，会在回调时原样返回）是随便设置的，待测试
+        [JPUSHService setAlias:[UserDefaults() objectForKey:K_registerID] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            NSLog(@"注册---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+        } seq:0];
+        
+//        JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//        [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
         //突然想到还有一种方法，就是直接添加删除alias
     }else {
         
@@ -270,7 +275,7 @@
         [sender setOn:YES animated:NO];
         [UserDefaults() setObject:@"YES" forKey:@"isPush" ];
         
-        
+       
     }];
     cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
     
@@ -278,7 +283,10 @@
         [UserDefaults() setObject:@"NO" forKey:@"isPush" ];
         [MBProgressHUD showMessage:@"已关闭消息推送" toView:self.view];
         //注销通知
-        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+//        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            NSLog(@"注销---rescode: %ld, \n iAlias: %@, \n alias: %ld\n", (long)iResCode, iAlias , (long)seq);
+        } seq:0];
     }];
     clernAction.textColor = UICOLOR_FROM_HEX(ColorC40016);
     

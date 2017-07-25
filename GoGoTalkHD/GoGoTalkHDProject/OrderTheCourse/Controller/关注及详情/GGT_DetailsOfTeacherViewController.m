@@ -173,7 +173,7 @@
 
         vc.ImageUrl = self.pushModel.ImageUrl;
         vc.TeacherName = self.pushModel.TeacherName;
-        vc.StartTime = self.pushModel.StartTime;
+        vc.StartTime = [NSString stringWithFormat:@"%@ (%@)  %@", homeDateModel.date, homeDateModel.week, timeCollectionModel.time];
         vc.LessonId = [NSString stringWithFormat:@"%ld",(long)timeCollectionModel.TLId];
 
         //预约了课程的回调
