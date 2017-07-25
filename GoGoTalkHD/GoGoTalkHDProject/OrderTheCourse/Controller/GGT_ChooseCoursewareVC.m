@@ -136,7 +136,7 @@
 - (void)sendNetwork
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    dic[@"lessonId"] = self.xc_model.LessonId;
+    dic[@"lessonId"] = self.LessonId;
     dic[@"bId"] = self.xc_coursewareModel.BookingId;
     dic[@"beId"] = self.xc_coursewareModel.BDEId;
 

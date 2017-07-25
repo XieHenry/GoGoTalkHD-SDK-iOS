@@ -11,7 +11,14 @@
 typedef void(^isOrderCourse)(BOOL  yes);
 @interface GGT_OrderClassPopVC : BaseViewController
 
-@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+//因为3个地方需要改model，所以会造成混乱，现在暂时先单个赋值
+//@property (nonatomic, strong) GGT_HomeTeachModel *xc_model;
+
+@property (nonatomic, copy) NSString *ImageUrl;
+@property (nonatomic, copy) NSString *TeacherName;
+@property (nonatomic, copy) NSString *StartTime;
+@property (nonatomic, copy) NSString *LessonId;
+
 
 @property (nonatomic, copy) isOrderCourse orderCourse;
 @end

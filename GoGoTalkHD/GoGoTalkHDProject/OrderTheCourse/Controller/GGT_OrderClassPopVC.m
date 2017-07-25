@@ -177,20 +177,20 @@
     
     
     
-    if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
-        NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if ([self.ImageUrl isKindOfClass:[NSString class]]) {
+        NSString *urlStr = [self.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:urlStr];
         [self.xc_teachImgView sd_setImageWithURL:url placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
     }
     
-    if ([self.xc_model.TeacherName isKindOfClass:[NSString class]]) {
-        self.xc_teachNameLabel.text = self.xc_model.TeacherName;
+    if ([self.TeacherName isKindOfClass:[NSString class]]) {
+        self.xc_teachNameLabel.text = self.TeacherName;
     } else {
         self.xc_teachNameLabel.text = @"";
     }
     
-    if ([self.xc_model.StartTime isKindOfClass:[NSString class]]) {
-        self.xc_timeLabel.text = self.xc_model.StartTime;
+    if ([self.StartTime isKindOfClass:[NSString class]]) {
+        self.xc_timeLabel.text = self.StartTime;
     } else {
         self.xc_timeLabel.text = @"";
     }
@@ -219,7 +219,7 @@
     [[self.xc_chooseCourseButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
         GGT_ChooseCoursewareVC *vc = [GGT_ChooseCoursewareVC new];
-        vc.xc_model = self.xc_model;
+        vc.LessonId = self.LessonId;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
@@ -237,7 +237,7 @@
 - (void)sendNetwork
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    dic[@"lessonId"] = self.xc_model.LessonId;
+    dic[@"lessonId"] = self.LessonId;
     dic[@"bId"] = @"0";
     dic[@"beId"] = @"0";
     
