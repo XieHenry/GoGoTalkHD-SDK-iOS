@@ -22,14 +22,14 @@
 
 //极光推送--GoGoHD
 //测试版
-static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
-static NSString *channel = @"Publish channel";
-static BOOL isProduction = false;
-
-//商店版
 //static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
 //static NSString *channel = @"Publish channel";
-//static BOOL isProduction = true;
+//static BOOL isProduction = false;
+
+//商店版
+static NSString *appKey = @"a78ae3e4b5af959cf01b2240";
+static NSString *channel = @"Publish channel";
+static BOOL isProduction = true;
 
 @interface AppDelegate ()
 
