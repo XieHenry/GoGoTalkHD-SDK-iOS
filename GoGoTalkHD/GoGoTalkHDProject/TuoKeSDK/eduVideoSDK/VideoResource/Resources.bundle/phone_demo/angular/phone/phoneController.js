@@ -1,5 +1,5 @@
-var GLOBAL = GLOBAL || {} ;
-wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$rootScope , $window, ServiceLiterally  , ServiceAynamicPPT  , ServiceTools) {
+﻿var GLOBAL = GLOBAL || {} ;
+tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$rootScope , $window, ServiceLiterally  , ServiceNewPptAynamicPPT  , ServiceTools) {
 	$(function(){
 		$scope.phone = {
 			func:{}
@@ -241,10 +241,10 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 						$timeout(function () {
                             if(!data.params.data.ismedia) {
                                 if(!data.params.data.aynamicPPT){
+                                	$rootScope.roomPage.flag.isShow.isCourseFile = true ;                                                                   
                                     $rootScope.page.saveLcStackToStorage();
                                     $rootScope.page.setLcFileAttr(data.params.data.filedata);
                                     $rootScope.page.pageOperation(null, false);
-                                    $rootScope.roomPage.flag.isShow.isCourseFile = true ;
                                     $("#prev_page_phone").show();
                                     $("#next_page_phone").show();
                                     $("#add_literally_page_phone").hide();
@@ -252,11 +252,6 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                                     $("#next_page_phone_slide").hide();
                                 }else{
                                     $rootScope.roomPage.flag.isShow.isCourseFile = false ;
-                                    $("#prev_page_phone_slide").show();
-                                    $("#next_page_phone_slide").show();
-                                    $("#prev_page_phone").hide();
-                                    $("#next_page_phone").hide();
-                                    $("#add_literally_page_phone").hide();
                                     var isremote = true ;
                                     var isOpenPPT  = false;
                                     var pptslide = data.params.data.filedata.pptslide ;
@@ -269,22 +264,34 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                                         $rootScope.page.recoverLcData();
 									}
                                     $(document).trigger("uploadAynamicPptProgress" , [ pptslide , pptstep  , pptfileid , isOpenPPT , isremote   ] );
+                                    $("#prev_page_phone_slide").show();
+                                    $("#next_page_phone_slide").show();
+                                    $("#prev_page_phone").hide();
+                                    $("#next_page_phone").hide();
+                                    $("#add_literally_page_phone").hide();
                                 }
                             } 
-                            $scope.showPageTime = $scope.showPageTime != undefined ? $scope.showPageTime : null;
-                            $timeout.cancel($scope.showPageTime);
-                            $scope.showPageTime = $timeout(function() {
-                                $(window).trigger("resize");
-                            }, 1000);
                         },0);           
 	        			break;
 					case "ClassBegin": //上课
 						$rootScope.isClassBegin = true; //上课状态
                         $(document).trigger("onStartAttend");
                         if($rootScope.isClassBegin &&  !($rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant)  ){
-                            $("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled");
+//                      	$rootScope.roomPage.flag.isShow.isCourseFile = true;
+//                      	$("#page_wrap").removeClass("no-permission");
+                            $("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled").attr("data-set-disabled" ,'no');
                         }
 						break;
+					case "NewPptTriggerActionClick": //动态PPT动作		
+					    console.log("NewPptTriggerActionClick" , data.params);
+                        if($rootScope.roomPage.flag.isShow.isCourseFile === false &&  $rootScope.hasRole.roleChairman === false  ){		
+//                      	clearTimeout(ServiceNewPptAynamicPPT.newPptTriggerActionClickTimer);
+//          				ServiceNewPptAynamicPPT.newPptTriggerActionClickTimer = setTimeout(function () {
+								ServiceNewPptAynamicPPT.postMessage(data.params.data);   
+//							},300);
+                        }
+						break;
+						
 	        		default:
 	        			break;
 	        	}
@@ -376,6 +383,14 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                         } else {
                             $rootScope.shapeJson["ClassBegin"].push(resultData[x]);
                         }
+                    }else if(resultData[x].name == "NewPptTriggerActionClick"){//动态PPT动作	
+                    	 if($rootScope.shapeJson["NewPptTriggerActionClick"] == null || $rootScope.shapeJson["NewPptTriggerActionClick"] == undefined) {
+                            $rootScope.shapeJson["NewPptTriggerActionClick"] = [];
+                            $rootScope.shapeJson["NewPptTriggerActionClick"].push(resultData[x]);
+                        } else {
+                            $rootScope.shapeJson["NewPptTriggerActionClick"].push(resultData[x]);
+                        }
+					    
                     }
 	            }
 	        	
@@ -397,11 +412,24 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                         $rootScope.isClassBegin = true; //已经上课
                         $(document).trigger("onStartAttend");
                         if($rootScope.isClassBegin &&  !($rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant)  ){
-                            $("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled");
+//                      	$rootScope.roomPage.flag.isShow.isCourseFile = true;
+//                      	$("#page_wrap").removeClass("no-permission");
+                            $("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled").attr("data-set-disabled" ,'no');
                         }
                     }
                 }
-
+				
+													
+				/*动态ppt触发器动作数据*/
+				var newPptTriggerActionClickArr = $rootScope.shapeJson["NewPptTriggerActionClick"];
+				if(newPptTriggerActionClickArr != null && newPptTriggerActionClickArr != undefined && newPptTriggerActionClickArr.length > 0) {
+					if(newPptTriggerActionClickArr[newPptTriggerActionClickArr.length - 1].name == "NewPptTriggerActionClick") {
+						newPptTriggerActionClickArr[newPptTriggerActionClickArr.length - 1].data["form"] = "messageListReceivedHandler" ;									
+						ServiceNewPptAynamicPPT.remoteActionData = newPptTriggerActionClickArr[newPptTriggerActionClickArr.length - 1].data ;  								
+					}
+				}
+				$rootScope.shapeJson["NewPptTriggerActionClick"] = null ;
+						
 				//最后打开的文档文件和媒体文件	 
         		var lastDoucmentFileData = null,
 					lastMediaFileData = null;
@@ -419,33 +447,41 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	            
             	//打开文件列表中的一个
 				if(lastDoucmentFileData != undefined && lastDoucmentFileData != null) {
-					if(!lastDoucmentFileData.ismedia) {
-						if(!lastDoucmentFileData.aynamicPPT){
-							$rootScope.page.saveLcStackToStorage();
-							$rootScope.page.setLcFileAttr(lastDoucmentFileData.filedata);
-							$rootScope.page.pageOperation(null, false);
-							$rootScope.roomPage.flag.isShow.isCourseFile = true ;
-						}else{
-							$rootScope.roomPage.flag.isShow.isCourseFile = false ;
-                            var isremote = true ;
-                            var isOpenPPT  = true;
-                            var pptslide = lastDoucmentFileData.filedata.pptslide ;
-                            var pptstep = lastDoucmentFileData.filedata.pptstep ;
-                            var pptfileid = lastDoucmentFileData.filedata.fileid ;
-                            $rootScope.page.saveLcStackToStorage();
-                            $rootScope.page.setLcFileAttr(lastDoucmentFileData.filedata);
-                            $rootScope.page.recoverLcData();
-                            $(document).trigger("uploadAynamicPptProgress" , [ pptslide , pptstep  , pptfileid , isOpenPPT , isremote ] );
+					$timeout(function(){
+						if(!lastDoucmentFileData.ismedia) {
+							if(!lastDoucmentFileData.aynamicPPT){
+								$rootScope.page.saveLcStackToStorage();
+								$rootScope.page.setLcFileAttr(lastDoucmentFileData.filedata);
+								$rootScope.page.pageOperation(null, false);
+								$rootScope.roomPage.flag.isShow.isCourseFile = true ;
+							}else{
+								$rootScope.roomPage.flag.isShow.isCourseFile = false ;
+	                            var isremote = true ;
+	                            var isOpenPPT  = true;
+	                            var pptslide = lastDoucmentFileData.filedata.pptslide ;
+	                            var pptstep = lastDoucmentFileData.filedata.pptstep ;
+	                            var pptfileid = lastDoucmentFileData.filedata.fileid ;
+	                            $rootScope.page.saveLcStackToStorage();
+	                            $rootScope.page.setLcFileAttr(lastDoucmentFileData.filedata);
+	                            $rootScope.page.recoverLcData();
+	                            $(document).trigger("uploadAynamicPptProgress" , [ pptslide , pptstep  , pptfileid , isOpenPPT , isremote ] );
+							}
 						}
-					}
-					$("#file_list_"+lastDoucmentFileData.filedata.fileid).removeClass("active").addClass("active")
-						.find(".t-open-container").addClass("on")
-						.end().siblings("li").removeClass("active").find(".t-open-container").removeClass("on");
-				} 
-	            
-	            
+						$("#file_list_"+lastDoucmentFileData.filedata.fileid).removeClass("active").addClass("active")
+							.find(".t-open-container").addClass("on")
+							.end().siblings("li").removeClass("active").find(".t-open-container").removeClass("on");
+					},0);
+			
+				} 	  
+				
+				
 			};
 	    };
+		
+		
+	
+
+                    
 		
 		/*白板处理函数*/
 	    $scope.phone.func.literallyHandle = function(){
@@ -465,27 +501,169 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
    			/*动态PPT相关处理方法*/
             $scope.excuteAynamicPPTFunction = function () {
                 $scope.callController.func.aynamicPPTHandler = function(options){ //创建动态PPT处理对象
-                    ServiceAynamicPPT.clearAll();
-                    /*TODO 动态PPT助教可以翻页时候发送数据，那么老师和学生都可以发送动态PPT翻页数据，那就乱了*/
+                    // ServiceAynamicPPT.clearAll();
+                    ServiceNewPptAynamicPPT.clearAll();
                     if($rootScope.joinMeetingMessage && ($rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant || $rootScope.hasRole.roleStudent) ){
                         var sendMessagePermission = true ;
-                        ServiceAynamicPPT.setSendMessagePermission(sendMessagePermission);
+                        // ServiceAynamicPPT.setSendMessagePermission(sendMessagePermission);
+                        ServiceNewPptAynamicPPT.setSendMessagePermission(sendMessagePermission);
                     }
-                    ServiceAynamicPPT.newDopPresentation(options);
+                    // ServiceAynamicPPT.newDopPresentation(options);
+                    ServiceNewPptAynamicPPT.newDopPresentation(options);
+
+                    /*接收IFrame框架的消息*/
+                    ServiceNewPptAynamicPPT.remoteIframeOrigin = $rootScope.loginController.necessary.serviceUrl+":"+ $rootScope.loginController.necessary.servicePort ;
+                    // ServiceNewPptAynamicPPT.remoteIframeOrigin = "https://192.168.1.182:8443" ;
+                    $(window).off('message');
+                    ServiceTools.tool.addEvent(window ,'message' , function(event){    //给当前window建立message监听函数
+                        try{
+                            // 通过origin属性判断消息来源地址
+                            console.log("receive remote iframe data form "+ event.origin +":",  event);
+                            //if (ServiceNewPptAynamicPPT.remoteIframeOrigin.toString().indexOf(event.origin) != -1 ) {
+                                if( event.data ){
+                                    var data =  JSON.parse( event.data) ;
+                                    if(data.sendAuthor === "newppt_iframe_children") {
+                                    	var INITEVENT = "initEvent" ;
+	                                    var SLIDECHANGEEVENT = "slideChangeEvent" ;
+	                                    var STEPCHANGEEVENT = "stepChangeEvent" ;
+	                                    var AUTOPLAYVIDEOINNEWPPT = "autoPlayVideoInNewPpt" ;   
+	                                   	var CLICKNEWPPTTRIGGEREVENT = "clickNewpptTriggerEvent" ;
+	                                    switch (data.action){
+	                                        case INITEVENT :
+	                                            ServiceNewPptAynamicPPT.remoteData.view = data.view ;	                                            
+	                                            ServiceNewPptAynamicPPT.remoteData.slidesCount = data.slidesCount ;
+	                                            ServiceNewPptAynamicPPT.remoteData.slide = data.slide ;
+	                                            ServiceNewPptAynamicPPT.remoteData.step = data.step ;
+	                                            ServiceNewPptAynamicPPT.remoteData.stepTotal = data.stepTotal ;
+	                                            ServiceNewPptAynamicPPT.recvInitEventHandler(data.slide ,data.step );                                        
+	                                            break ;
+	                                        case SLIDECHANGEEVENT :
+	                                            ServiceNewPptAynamicPPT.remoteData.slide = data.slide ;
+	                                            ServiceNewPptAynamicPPT.remoteData.step = data.step ;
+	                                            ServiceNewPptAynamicPPT.remoteData.stepTotal = data.stepTotal ;
+	                                            ServiceNewPptAynamicPPT.recvSlideChangeEventHandler( data.slide );
+	                                            var $videoEle = $("#phone_video_play_newppt");
+	                                            console.log("SLIDECHANGEEVENT source size:" ,$videoEle.find("source").length );
+												if($videoEle && $videoEle.length > 0 &&  ServiceNewPptAynamicPPT.playVideo ){		
+													switch ( $rootScope.initPageParameterFormPhone.mClientType){
+										                case 2://ios
+										                	window.GLOBAL.phone.closeNewPptVideo();
+										                	if(window.webkit && window.webkit.messageHandlers ){
+										                		var tmpData = {action:"closeNewPptVideo" , elementId:$videoEle.attr("id") } ;
+										                		tmpData = JSON.stringify(tmpData);										                		
+										                		window.webkit.messageHandlers.closeNewPptVideo.postMessage({"data":tmpData});
+										                	}else{
+										                		console.error("没有方法window.webkit.messageHandlers.closeNewPptVideo.postMessage");
+										                	}
+										                    break;
+										                case 3://android
+										                	window.GLOBAL.phone.closeNewPptVideo();
+										                    break;
+										                default:
+										                	console.error("没有设备类型，无法区分发送给手机的方法");
+										                    break;
+										            }
+													ServiceNewPptAynamicPPT.playVideo = false ;
+												}
+	                                            break ;
+	                                        case STEPCHANGEEVENT:
+	                                            ServiceNewPptAynamicPPT.remoteData.slide = data.slide ;
+	                                            ServiceNewPptAynamicPPT.remoteData.step = data.step ;
+	                                            ServiceNewPptAynamicPPT.remoteData.stepTotal = data.stepTotal ;
+	                                            ServiceNewPptAynamicPPT.recvStepChangeEventHandler(data.step);
+	                                            break ;
+	                                        case AUTOPLAYVIDEOINNEWPPT:	                                        
+												if(!data.isPC){
+													ServiceNewPptAynamicPPT.playVideo = true ;
+													var $videoEle = $("#phone_video_play_newppt");
+													$videoEle.removeAttr("src").find("source").remove();
+													for (var i=0 ; i<data.resouceEleArr.length ; i++) {
+														var resouceJson = data.resouceEleArr[i];
+														var attrStr = "" ;
+														for (var x in resouceJson) {
+															var urlStr = "" ;
+															if(x == "src"){						
+//																resouceJson[x] = ServiceNewPptAynamicPPT.rPathAddress+resouceJson[x]+'?ts='+new Date().getTime() ;																
+																resouceJson[x] = ServiceNewPptAynamicPPT.rPathAddress+resouceJson[x]  ;																
+															}
+                              								urlStr = resouceJson[x] ;
+															attrStr += (x+'='+'"'+urlStr+'"  ') ;
+														}
+														
+														if($rootScope.initPageParameterFormPhone.mClientType !== 2){
+															$videoEle.append("<source "+attrStr+ " ></source>");		
+														}
+														
+													}
+												
+													try{
+									                	var videoData = JSON.stringify( data );
+										        	    switch ( $rootScope.initPageParameterFormPhone.mClientType){
+											            	case 2://ios
+											            		try{
+											            			$videoEle[0].pause();
+										            				$videoEle.hide();
+												            		if(window.webkit && window.webkit.messageHandlers ){
+												                		window.webkit.messageHandlers.onJsPlay.postMessage({"data":videoData});
+												                	}else{
+												                		console.error("没有方法window.webkit.messageHandlers.onJsPlay.postMessage");
+												                	}
+											            		}catch(e8){
+											            			console.error("动态PPT视频不能执行暂停pause方法！" , e8);
+											            		}													            															            	
+											                    break;
+											                case 3://android
+											                	$videoEle[0].load();
+											                	if(window.JSWhitePadInterface){
+											                    	window.JSWhitePadInterface.onJsPlay( videoData );
+											                	}else{
+											                		console.error("没有方法window.JSWhitePadInterface.onJsPlay");
+											                	}
+											                default:
+											                    break;
+											            }
+								                	}catch(e7){
+								                		console.error("autoPlayVideoInNewPpt  Canplay Event:" , e7);
+								                	}   																					               	
+												}	                                       
+	                                            break ;
+	                                        case CLICKNEWPPTTRIGGEREVENT:
+	                                       	 	if($rootScope.roomPage.flag.isShow.isCourseFile === false &&  $rootScope.hasRole.roleChairman  ){							
+													var testData = data  , signallingName = "NewPptTriggerActionClick" , assignId = "NewPptTriggerActionClick";
+	                                            	$(document).trigger("sendDataToLiterallyEvent",[ null , testData , signallingName , assignId , true]);
+						                        }	                                        	
+	                                            break ;	                                            
+	                                    }
+                                    }                                    
+                                }
+                            //}
+						}catch(e3){
+                            console.error("message Event form iframe's parent :" , e3);
+                        }
+                    } , false  );
                 };
+
+          
                 $scope.callController.func.openAynamicPPTHandler = function(isSetUrl,isSend){ //打开动态PPT
-                    $rootScope.roomPage.flag.isShow.isCourseFile = false ;
-                    ServiceAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
+                 	$rootScope.roomPage.flag.isShow.isCourseFile = false ;
+                    ServiceNewPptAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
                     ServiceLiterally.isOpenLcFile = $rootScope.roomPage.flag.isShow.isCourseFile ;
                     isSetUrl = isSetUrl!=undefined ? isSetUrl : true ;
                     isSend = isSend!=undefined ? isSend : true ;
+                    ServiceLiterally.resetLcDefault();
+
+                    ServiceLiterally.ele.find(".background-canvas").hide();
+                    $("#big_literally_vessel").removeClass("aynamic-ppt-lc").addClass("aynamic-ppt-lc");
+                    $(document).trigger("checkAynamicPptClickEvent",[]);
+
                     var  fileId = parseInt(  ServiceLiterally.ele.attr("data-file-id") ) ;
                     var swfPath = ServiceLiterally.ele.attr("data-file-swfpath");
                     var pptSlide = parseInt( ServiceLiterally.ele.attr("data-ppt-slide") );
                     var pptStep = parseInt( ServiceLiterally.ele.attr("data-ppt-step") );
                     var options = {
-                        rPathAddress:$rootScope.loginController.necessary.serviceUrl+":"+ $rootScope.loginController.necessary.servicePort + swfPath +"/data/" ,
-                        PresAddress:"pres" ,
+	                     rPathAddress:   $rootScope.loginController.necessary.serviceUrl+":"+ $rootScope.loginController.necessary.servicePort + swfPath+"/"  ,
+                     	//rPathAddress:   "http://192.168.1.182:80" + swfPath+"/"  ,
+                        PresAddress:"newppt.html?remoteHost="+window.location.host+"&remoteProtocol="+window.location.protocol+"&mClientType="+$rootScope.initPageParameterFormPhone.mClientType +"&deviceType="+$rootScope.initPageParameterFormPhone.deviceType+"&ts="+new Date().getTime(),
                         slideIndex:pptSlide ,
                         stepIndex:pptStep ,
                         fileid:fileId
@@ -493,31 +671,29 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                     console.log("openAynamicPPTHandler options" , JSON.stringify(options) );
                     if(isSend && $rootScope.isClassBegin && $rootScope.joinMeetingMessage && ( $rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant ) ){
                         var action = {action:"show"};
-                        var data  = {};
+                        var data  = {
+                        	slide:pptSlide,
+                            step:pptStep ,
+						};
                         for(var x in action){
                             data[x] = action[x];
                         }
-                        data["total"] = ServiceAynamicPPT.presSettings.TotalSlides ;
+                        data["total"] = ServiceNewPptAynamicPPT.slidesCount;
                         $(document).trigger("sendPPTMessageEvent",[data]);
                     }
                     if(isSetUrl){
-                    	ServiceLiterally.closeLoading();
+                        ServiceLiterally.closeLoading();
                         $scope.callController.func.updateLcScaleWhenAynicPPTInitHandler( 16 / 9  );
-                        ServiceAynamicPPT.setRPathAndPres(options);
-                        $timeout(function(){
-                        	$(window).trigger("resize");
-                        },300);
+                        ServiceNewPptAynamicPPT.setRPathAndPres(options);
                     }
                 };
                 $scope.callController.func.AynamicPPTJumpToAnim = function (slide , step) { //跳转到PPT的某一页的某一个帧
-                    ServiceAynamicPPT.jumpToAnim(slide , step );
+                    ServiceNewPptAynamicPPT.jumpToAnim(slide , step );
                 };
                 $scope.callController.func.updateLcScaleWhenAynicPPTInitHandler = function (lcLitellyScalc) {
                     ServiceLiterally.lcLitellyScalc = lcLitellyScalc;
                     ServiceLiterally.lc.watermarkImage = null ;
                     ServiceLiterally.setBackgroundWatermarkImage("");
-                    $("#big_literally_vessel").removeClass("aynamic-ppt-lc").addClass("aynamic-ppt-lc");
-                    $(document).trigger("checkAynamicPptClickEvent",[]);
                 };
             };
 
@@ -525,9 +701,8 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
         	/*发送PPT数据给其它人*/
             $(document).off("sendPPTMessageEvent");
             $(document).on("sendPPTMessageEvent",function (event , data ) {
-//              if( $rootScope.isClassBegin &&  $rootScope.joinMeetingMessage && $rootScope.hasRole && ( $rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant ) ){
-//              if( $rootScope.isClassBegin &&  $rootScope.joinMeetingMessage){
-					
+                // if( $rootScope.isClassBegin &&  $rootScope.joinMeetingMessage && ( $rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant ) ){
+                if(  $rootScope.joinMeetingMessage &&  $rootScope.hasRole.roleChairman  ){
                 	if(data){
                         var signallingName = "ShowPage" ;
                         var assignId = 'DocumentFilePage_ShowPage';
@@ -556,57 +731,47 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                             action:action ,
                             filedata:filedata
                         };
-                        // if(ServiceAynamicPPT.recvAynamicPptData){
-                        //     console.log("ServiceAynamicPPT.recvAynamicPptData" , ServiceAynamicPPT.recvAynamicPptData , filedata);
-                        //     if(ServiceAynamicPPT.recvAynamicPptData.fileid === filedata.fileid && ServiceAynamicPPT.recvAynamicPptData.slide === filedata.pptslide &&  ServiceAynamicPPT.recvAynamicPptData.step === filedata.pptstep  ){
-                        //         // ServiceAynamicPPT.resetRecvAynamicPptData();
-                        //     	return ;
-							// }else{
-                        //         $(document).trigger("sendDataToLiterallyEvent",[ null , testData , signallingName , assignId]);
-                        //         // ServiceAynamicPPT.resetRecvAynamicPptData();
-							// }
-                        //
-                        // }
-						console.log("ServiceAynamicPPT.recvCount" , ServiceAynamicPPT.recvCount);
-						if( ServiceAynamicPPT.recvCount > 0){
+                        ServiceNewPptAynamicPPT.recvCount = 0 ;
+                        console.log("ServiceNewPptAynamicPPT.recvCount" , ServiceNewPptAynamicPPT.recvCount);
+						if( ServiceNewPptAynamicPPT.recvCount > 0){
                            return ;
 						}else{
                             $(document).trigger("sendDataToLiterallyEvent",[ null , testData , signallingName , assignId]);
 						}
 					}
-//              }
+                }
             });
-            
                 
          	/*更新动态PPT的进度*/
 	        $(document).off("uploadAynamicPptProgress");
 	        $(document).on("uploadAynamicPptProgress" , function(event , slide , step ,  fileid  , openPPT , isRemote){ //绑定事件，更新动态PPT的进度
-	            ServiceAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
-	            ServiceLiterally.isOpenLcFile = $rootScope.roomPage.flag.isShow.isCourseFile ;
-	            if(isRemote){
-	                ServiceAynamicPPT.recvCount ++ ;
-	            	var data = {
-	                    fileid: fileid ,
+	            // ServiceAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
+                ServiceNewPptAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
+                ServiceLiterally.isOpenLcFile = $rootScope.roomPage.flag.isShow.isCourseFile ;
+                if(isRemote){
+                    ServiceNewPptAynamicPPT.recvCount ++ ;
+                	var data = {
+                        fileid: fileid ,
 						slide: slide ,
 						step:step
 					};
-	                ServiceAynamicPPT.changeRecvAynamicPptData(data);
+                    ServiceNewPptAynamicPPT.changeRecvAynamicPptData(data);
 				};
 				/*  ServiceAynamicPPT.recvRemoteDataing = isremote ;
 				 $timeout(function(){
 				 ServiceAynamicPPT.recvRemoteDataing = false ;
 				 },200);*/
-	            if(openPPT){
-	                $scope.callController.func.openAynamicPPTHandler(true , false);
-	                return ;
-	            }
-	            if( ServiceLiterally.ele.attr("data-file-id") == fileid.toString() ){
-	                try{
-	                    $scope.callController.func.AynamicPPTJumpToAnim(slide,step);
-	                }catch(e) {
-	                    $scope.callController.func.openAynamicPPTHandler(true, false);
-	                }
-	            }
+                if(openPPT){
+                    $scope.callController.func.openAynamicPPTHandler(true , false);
+                    return ;
+                }
+                if( ServiceLiterally.ele.attr("data-file-id") == fileid.toString() ){
+                    try{
+                        $scope.callController.func.AynamicPPTJumpToAnim(slide,step);
+                    }catch(e) {
+                        $scope.callController.func.openAynamicPPTHandler(true, false);
+                    }
+                }
 	        });
 	
 			/*绑定动态PPT更新白板尺寸事件*/
@@ -615,7 +780,7 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				console.log("updateLcScaleWhenAynicPPTInit" , data);
 				if(data && data.Width && data.Height){
 	                $scope.callController.func.updateLcScaleWhenAynicPPTInitHandler( data.Width / data.Height );
-				}
+				}				
 			});
 	
 			/*绑定动态PPT更新白板当前页画笔数据事件*/
@@ -634,22 +799,23 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 			/*检测参与者能否点击事件*/
 	        $(document).off("checkAynamicPptClickEvent");
 	        $(document).on("checkAynamicPptClickEvent",function (event,data) {
-	            if( ServiceAynamicPPT.isOpenPptFile && ServiceLiterally.getIsDrawAble()){
-	                if(  $("#tool_mouse").hasClass("active-tool")  ){
-	                    $("#aynamic_ppt_click").show();
-	                }else{
-	                    $("#aynamic_ppt_click").hide();
-	                }
-	            }else{
-	                $("#aynamic_ppt_click").hide();
-	            }
+	           if( ServiceNewPptAynamicPPT.isOpenPptFile  && ($rootScope.hasRole.roleChairman ||  $rootScope.hasRole.roleTeachingAssistant )  ){
+                    if(  $("#tool_mouse").hasClass("active-tool") && ServiceLiterally.getIsDrawAble() ){
+                        $("#scroll_literally_container").hide();
+                    }else{
+                        $("#scroll_literally_container").show();
+                        ServiceLiterally.resizeHandler(ServiceLiterally);
+                    }
+                }else{
+                    $("#scroll_literally_container").show();
+                }
 	        });
             
             /*更新白板的缩放比例*/
             $(document).off("updateLcScale");
             $(document).on("updateLcScale" , function(event , data){
            		ServiceLiterally.eleWHPercent = data ;
-           		$(window).trigger("resize");
+           		ServiceLiterally.resizeHandler(ServiceLiterally);
             });
               
              /*取消绑定的事件*/
@@ -738,18 +904,48 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 		            $rootScope.page.pageOperation(true,true);
 	        	}
 	        },
-            pageOperation:function(isNext,isSend , isSetPlayUrl){
+            pageOperation:function(isNext,isSend , isSetPlayUrl , isRemote){
+            	/*手机特有代码 start*/
+            	var $videoEle = $("#phone_video_play_newppt");
+				if($videoEle && $videoEle.length > 0 && ServiceNewPptAynamicPPT.playVideo ){				
+					switch ( $rootScope.initPageParameterFormPhone.mClientType){
+		                case 2://ios
+                    	window.GLOBAL.phone.closeNewPptVideo();
+		                	if(window.webkit && window.webkit.messageHandlers ){
+		                		var tmpData = {action:"closeNewPptVideo" , elementId:$videoEle.attr("id") } ;
+		                		tmpData = JSON.stringify(tmpData);
+		                		window.webkit.messageHandlers.closeNewPptVideo.postMessage({"data":tmpData});
+		                	}else{
+		                		console.error("没有方法window.webkit.messageHandlers.closeNewPptVideo.postMessage");
+		                	}
+		                    break;
+		                case 3://android
+		                	window.GLOBAL.phone.closeNewPptVideo();
+		                    break;
+		                default:
+		                	console.error("没有设备类型，无法区分发送给手机的方法");
+		                    break;
+		            }
+					ServiceNewPptAynamicPPT.playVideo = false ;
+				}				        		
+	            /*手机特有代码 end*/  
+	              
+                $rootScope.roomPage.flag.isShow.isCourseFile = true ;
+                // ServiceAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
+                ServiceNewPptAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
+                ServiceLiterally.isOpenLcFile = $rootScope.roomPage.flag.isShow.isCourseFile ;
+                isSend = (isSend!=null && isSend!=undefined ) ?isSend:true ;
+                isSetPlayUrl = (isSetPlayUrl!=null && isSetPlayUrl!=undefined ) ?isSetPlayUrl:true ;
                 $("#big_literally_vessel").removeClass("aynamic-ppt-lc") ;
                 $("#aynamic_ppt_click").hide();
                 $("#resizer").html("");
                 $("#preloader").css("display" , 'none');
-                ServiceAynamicPPT.stop();
-                $rootScope.roomPage.flag.isShow.isCourseFile = true ;
-                ServiceAynamicPPT.isOpenPptFile = !$rootScope.roomPage.flag.isShow.isCourseFile ;
-                ServiceLiterally.isOpenLcFile = $rootScope.roomPage.flag.isShow.isCourseFile ;
-                isSend = (isSend!=null && isSend!=undefined ) ?isSend:true ;
-                isSetPlayUrl = (isSetPlayUrl!=null && isSetPlayUrl!=undefined ) ?isSetPlayUrl:true ;
-				
+                ServiceLiterally.ele.find(".background-canvas").show();
+                //ServiceAynamicPPT.stop();
+                ServiceNewPptAynamicPPT.setNewPptFrameSrc("");
+                ServiceLiterally.resetLcDefault();
+				$(document).trigger("checkAynamicPptClickEvent",[]);
+				 
 				var  $prevPageBtnPhone = $("#content").find("#prev_page_phone") ;
 	            var  $nextPageBtnPhone = $("#content").find("#next_page_phone") ;
 	            var  $addPageBtnPhone = $("#content").find("#add_literally_page_phone") ;
@@ -832,6 +1028,7 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                     if(isSetPlayUrl) {
                         ServiceLiterally.setBackgroundWatermarkImage("");
                     }
+                    ServiceLiterally.ele.find(".background-canvas").hide();
                 }else{
                 	if ($rootScope.initPageParameterFormPhone.deviceType === 1 ) {
 						$addPageBtn.hide();
@@ -871,6 +1068,7 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                 $scope.page.variable.pageNum = currPageNum ;
                 $("#page_wrap").find("#curr_page").html(currPageNum);
                 $("#page_wrap").find("#all_page").html(allPageNum);
+                
                 if( isSend ){
                     var signallingName = "ShowPage" ;
                     var assignId = "DocumentFilePage_ShowPage";
@@ -901,10 +1099,10 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                 ServiceLiterally.lc.redoStack.length = 0 ;
                 ServiceLiterally.lc.undoStack.length = 0 ;
                 var undoStack = ServiceLiterally.stackStorage[ "undoStack_"+fileId+"_"+currPageNum ] ;
-                var redoStack = ServiceLiterally.stackStorage[ "redoStack_"+fileId+"_"+currPageNum ] ;
+                var redoStack = ServiceLiterally.stackStorage[ "redoStack_"+fileId+"_"+currPageNum ] ;               
                 if(undoStack && undoStack.length>0){
                     for (var i=0 ; i<undoStack.length; i++) {
-                        var action =  undoStack[i] ;
+                        var action =  undoStack[i] ;                      
                         if(action.constructor.name === "AddShapeAction"){
                             ServiceLiterally.lc.saveShape( action.shape  , false  , null , false);
                         }else if(action.constructor.name === "ClearAction"){
@@ -942,14 +1140,15 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                 }
                 
                 if($rootScope.isClassBegin &&  !($rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant)  ){
-                	$("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled");
+                	$("#ppt_next_page_slide , #ppt_prev_page_slide , #next_page , #prev_page , #add_literally_page").addClass("disabled").attr("disabled","disabled").attr("data-set-disabled" ,'no');
 				}
             },
             saveLcStackToStorage:function(){
-                if( ServiceLiterally.ele ){
+                if( ServiceLiterally.ele ){                	 
                     if( ServiceLiterally.ele.attr("data-curr-page")!=undefined && ServiceLiterally.ele.attr("data-curr-page")!=""   && ServiceLiterally.ele.attr("data-file-id")!=undefined  && ServiceLiterally.ele.attr("data-file-id")!="" ){
                         var  currPageNum =  parseInt( ServiceLiterally.ele.attr("data-curr-page")  )  ;
                         var  fileId = parseInt( ServiceLiterally.ele.attr("data-file-id") ) ;
+                    
                         ServiceLiterally.stackStorage["undoStack_"+fileId+"_"+currPageNum]  = ServiceLiterally.lc.undoStack.slice(0) ;
                         if($rootScope.joinMeetingMessage && $rootScope.joinMeetingMessage.roomrole === $rootScope.role.roleChairman){
                             ServiceLiterally.stackStorage["redoStack_"+fileId+"_"+currPageNum]  = ServiceLiterally.lc.redoStack.slice(0)  ;
@@ -985,16 +1184,25 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	            }
 	        }
 	    };
-	
+		
+		
 	    /*执行页面功能函数*/
 		$scope.phone.func.execute = function(){
 			var root =  document.getElementById("all_root");
 	       /*动态更改html的font-size*/
-	        $(window).resize(function () {
+	        $(window).off("resize");
+	        $(window).resize(function (event , triggerTypeJson , notTriggerTypeJson) {
 	           var baseSize = 15.8 ; 
-//	           var baseSize = 13.34 ; 
 	           var defalutFontSize = window.innerWidth / baseSize;
 	           root.style.fontSize = defalutFontSize+ 'px';
+	            var LC = "lc" ;
+                if( notTriggerTypeJson ){
+                	if(!notTriggerTypeJson[LC] ){
+                        ServiceLiterally.resizeHandler(ServiceLiterally);
+					}
+				}else{
+                    ServiceLiterally.resizeHandler(ServiceLiterally);
+				}
 	        });
 	    	/*执行白板处理函数*/
 			$scope.phone.func.literallyHandle();	
@@ -1027,11 +1235,11 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	                default:
 	                	console.error("没有设备类型，无法区分发送给手机的方法");
 	                    break;
-	            }
+	            };           
             });
            
 		}
-		
+
 		GLOBAL.phone = {
 			flag:{
 				isInit:false 
@@ -1056,14 +1264,14 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				
 			} , 
 			pageTurningPermission:function(isPageTurning){ //翻页权限控制，true-可翻页， false-不可翻页
-				GLOBAL.phone.logMessage( {method:'pageTurningPermission',isPageTurning:isPageTurning} , "ios");
-				
+				GLOBAL.phone.logMessage( {method:'pageTurningPermission',isPageTurning:isPageTurning} , "ios");				
 				if($rootScope.initPageParameterFormPhone.deviceType === 1){ //ipad
 //					console.error(isPageTurning);
 					if(isPageTurning){
 						$("#page_wrap.ipad").removeClass("no-permission");
 					}else{
-						$("#page_wrap.ipad").removeClass("no-permission").addClass("no-permission");			
+//						$("#page_wrap.ipad").removeClass("no-permission").addClass("no-permission");
+						$("#page_wrap.ipad").addClass("disabled").attr("disabled");
 					}
 				}else{
 					console.error(isPageTurning);
@@ -1072,14 +1280,15 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 					}else{//不可翻页时隐藏
 						$("#content.lc-container").find(".lc-tool-icon-wrap.page-phone").addClass("no-permission");
 					}
-				}			
+				}
 			} ,
 			setInitPageParameterFormPhone:function (data){ //设置初始化手机端参数
 				var that = this ;
 				GLOBAL.phone.logMessage( {method:'setInitPageParameterFormPhone',data:data} , "ios");
 				if (data.deviceType === 0) {
 					$("#ppt_page_wrap,#page_wrap").hide();
-					//$("#lc_full_btn,#ppt_lc_full_btn").hide();
+				}else if (data.deviceType === 1) {
+					$("#page_wrap").removeClass("no-permission");
 				}
 				if(!GLOBAL.phone.flag.isInit){
 					GLOBAL.phone.flag.isInit = true ;
@@ -1131,155 +1340,48 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                     }
 					if($rootScope.initPageParameterFormPhone.deviceType!=undefined  && $rootScope.initPageParameterFormPhone.deviceType === 1){
 						/*ipad 白板工具代码*/
+						$("#prev_page_phone,#next_page_phone,#add_literally_page_phone,#prev_page_phone_slide,#next_page_phone_slide").hide();
 						$scope.drawingBandle = function () {
-							var color = $(".t1-color button[data-color='']");
-							var pencilWidth = "5";
-							var eraserWidth = "5";
+							//var color = $(".t1-color button[data-color='']");
+							var pencilWidth = "";
+							var eraserWidth = "";
 							$scope.settingSize = function () {
-								$scope.customLc.uploadColor('primary' , "#"+ color );//设置画笔颜色
 								$scope.customLc.lc.toolStatus.pencilWidth = parseFloat( pencilWidth ) ;//设置画笔尺寸
-                         //      console.log($scope.customLc.lc.toolStatus.pencilWidth);
 				    			$scope.customLc.lc.toolStatus.eraserWidth = parseFloat( eraserWidth ) ;//设置橡皮尺寸
 				    			if(  $("#tool_eraser").hasClass("active-tool") ){
 				                	$scope.customLc.uploadEraserWidth();
-				                }else{
-				    	//			console.log(11111111111111);
+				               	}else{
 				                	$scope.customLc.uploadPencilWidth();
 				                }
 							}
-							$("#header_tool_vessel>li").children(".btn-tool:not(.not-active)").click(function (e) {
-		                        $(this).parent().find(".tool-extend li[data-select=true] , .tool-font-extend li[data-select=true]").trigger("click");
-								$(this).addClass("active");
-								if ($(this).hasClass("pencil-tool")||$(this).hasClass("font-tool")||$(this).hasClass("shape-tool")) {
-									$(this).next().toggle();
-									$(this).parent().siblings("li").children("div").hide();
-								} else if ($(this).hasClass("color-tool")) {/*展开颜色div*/
-									$(this).next().next().toggle();
-									$(this).parent().siblings("li").children("div").hide();
-								} else{
-									$(this).parent().siblings("li").children("div").hide();
-								}
-								if( $(this).attr("id") == "tool_stroke_color_vessel" ){
-//		                            $liParent.siblings("li").find(".header-tool-extend").stop().slideUp(0);
-		                        }else{
-		                        	$(this).parent().siblings("li").children("button").removeClass("active");
-		                        }
-
-							});
 							
-							
-							$(".tool-box>li .tool-extend li , .tool-box>li .tool-font-extend li").click(function(event ,isSlideDown){
-		                        $(this).addClass("active-color").attr("data-select",true).siblings("li").removeClass("active-color").attr("data-select",false);
-		                        return false ;
-		                    });
-
-							$(".tool-box .t1-tool").click(function () {
-								$(this).siblings(".t1-tool").removeClass("active");
+							$("#tool_mouse,#tool_pencil,#tool_eraser").click(function () {
+								$(this).parent().siblings(".tl-tool").children("button").removeClass("active");
 								$(this).addClass("active");
-                            })
+                            });
 							
 							/*选择尺寸：*/
-							$(".tool-color-top .tool-pencil-size span").click(function () {
-								// $(this).siblings("span").removeClass("active");
-								// $(this).addClass("active");
-								pencilWidth = $(this).parent().attr("data-pencil-size");/*保存画笔尺寸*/
-						    //	console.log('321',pencilWidth);
-								eraserWidth = $(this).parent().attr("data-eraser-size");/*保存橡皮尺寸*/
+							$(".tool-color-top .tool-pencil-size").click(function () {
+								pencilWidth = $(this).attr("data-pencil-size");/*保存画笔尺寸*/
+								eraserWidth = $(this).attr("data-eraser-size");/*保存橡皮尺寸*/
                                 $scope.settingSize();
+                                $(this).parent().siblings(".tool-color-top").removeClass("active");
+                                $(this).parent().addClass("active");
 							});
-                            $(".tool-color-top").click(function () {
-                                $(this).siblings(".tool-color-top").removeClass("active");
-                                $(this).addClass("active");
-                            });
 
 							/*选择颜色：*/
-							$(".t1-color").click(function () {
-								$(this).siblings(".t1-color").removeClass("active");
-								$(this).addClass("active");
-
-							});
-
                             $(".t1-color button").click(function () {
                                 $scope.customLc.uploadColor('primary' , "#"+$(this).attr("data-color") );
-                            })
-							
-							/*点击确定消失，才能确定颜色和尺寸*/
-							// $(".tool-color-bottom .tool-color-btn").click(function (e) {
-							// 	$scope.settingSize();
-							// 	$(".tool-color-extend").hide();
-							// });
-
-							/*笔的类型：*/
-							$("#header_tool_vessel").find(".tool-pencil-extend li").click(function () {
-								$(this).parent().parent().hide();
-//								$scope.settingSize();
-								$scope.pencil=false;
-								$scope.highlighter=false;
-								$scope.line=false;
-								$scope.arrow=false;
-								switch ($(this).index()){
-									case 0:
-										$scope.pencil=true;
-										break;
-									case 1:
-										$scope.highlighter=true;
-										break;
-									case 2:
-										$scope.line=true;
-										break;
-									case 3:
-										$scope.arrow=true;
-										break;
-									default:
-										break;
-								}
-								$scope.$apply();
-								return false;
-							});
-							/*图形的类型：*/
-							$("#header_tool_vessel").find(".tool-shape-extend li").click(function () {
-								$(this).parent().parent().hide();
-//								$scope.settingSize();
-								$scope.rectangleEmpty=false;
-								$scope.rectangle=false;
-								$scope.ellipseEmpty=false;
-								$scope.ellipse=false;
-								switch ($(this).index()){
-									case 0:
-										$scope.rectangleEmpty=true;
-										break;
-									case 1:
-										$scope.rectangle=true;
-										break;
-									case 2:
-										$scope.ellipseEmpty=true;
-										break;
-									case 3:
-										$scope.ellipse=true;
-										break;
-									default:
-										break;
-								}
-								$scope.$apply();
-							});
-							/*文字的类型*/
-							$("#header_tool_vessel").find(".tool-font-extend li").click(function () {
-								$(this).parent().parent().hide();
-//								$scope.settingSize();
-							});
+                                $(this).parent().siblings(".t1-color").removeClass("active");
+								$(this).parent().addClass("active");
+                            });
 						}
-						$(document).click(function (e) {
-							if ($("#header_tool_vessel *").is(e.target) == false) {
-								$("#header_tool_vessel>li>div").hide();
-							}
-						});
 						$scope.drawingBandle();
 
-
-						// $(".tool-box>li[data-color='FBCF17']").trigger("click");
-						$(".tool-color-top .tool-pencil-size span[data-pencil-size='5']").trigger("click");
+						$(".tool-color-top .tool-pencil-size[data-pencil-size='5']").trigger("click");//初始尺寸为5
 						// $(".tool-color-bottom .tool-color-btn").trigger("click");
-			
+						$("#tool_mouse").trigger("click");
+
 					}else if($rootScope.initPageParameterFormPhone.deviceType!=undefined &&  $rootScope.initPageParameterFormPhone.deviceType === 0 ){
 					   /*=========Phone 涂鸦工具 start =====================*/
 						$("#lc_tool_container").on("click",".tl-color button",function () { //颜色添加点击事件
@@ -1344,7 +1446,26 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				var obj = {params:params};
 				$(document).trigger(eventName,[obj]);
 			},
-			logMessage:function(message,clientType){ //日志接口
+			phonePage:function(date){
+				GLOBAL.phone.logMessage( {method:'phonePage',date:date} , "ios");
+				if (typeof date == "string") {
+					var date = JSON.parse(date);
+				}
+				if (date.isDynamicPPt == true) {
+					if (date.action == 'left') {
+						$("#prev_page_phone_slide").trigger("click");
+					}else if(date.action == 'right'){
+						$("#next_page_phone_slide").trigger("click");
+					}
+				}else {
+					if (date.action == 'left') {
+						$rootScope.page.prevPage();
+					}else if(date.action == 'right'){
+						$rootScope.page.nextPage();
+					}
+				}
+			},
+			logMessage:function(message,clientType){ //日志接口				
 				console.info("logMessage:" , message , clientType);
 				message = JSON.stringify(message);
 				var typeNum  = null ;
@@ -1381,19 +1502,68 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	            }
 			},
 			clearLcAllData:function(){ //清除白板所有数据
+				GLOBAL.phone.logMessage( {method:'clearLcAllData'} , "ios");
 				ServiceLiterally.lc.clear(false);
 			    ServiceLiterally.lc.redoStack.length = 0 ;
 			    ServiceLiterally.lc.undoStack.length = 0 ;
 			    ServiceLiterally.stackStorage = {} ;//白板数据栈对象
 			},
 			roleSettingPage:function(role){ //角色决定ipad页面
+				GLOBAL.phone.logMessage( {method:'roleSettingPage' , role:role} , "ios");
 				if(role === $rootScope.role.roleStudent){
 					$(".role-student-hide").css({"display":"none !important"});
 				}
+			} , 
+			newPptAutoPlay:function(videoDataJson){ //动态PPT自动播放		
+				GLOBAL.phone.logMessage( {method:'newPptAutoPlay' , videoDataJson:videoDataJson} , "ios");
+				try{
+					if(typeof videoDataJson  ==  "string"){
+						videoDataJson = JSON.parse(videoDataJson);
+					}
+					var videoData = videoDataJson.videoData ;
+					if(typeof videoData  ==  "string"){
+						videoData = JSON.parse(videoData);						
+					}
+					if(videoData.action === "autoPlayVideoInNewPpt" && videoData.videoElementId ){				
+						var $videoEle = $("#phone_video_play_newppt");
+						$videoEle.show();
+						if($videoEle && $videoEle.length > 0  && $videoEle.find("source").length>0 ){
+							$videoEle[0].currentTime = 0 ;
+							if(videoData.isPlay){
+								$videoEle[0].play();
+							}else{
+								$videoEle[0].pause();
+							}	
+						}
+					}					
+				}catch(e){
+					console.error("newPptAutoPlay error:" ,e);
+				}							
+			},
+			closeNewPptVideo:function(data){
+				GLOBAL.phone.logMessage( {method:'closeNewPptVideo' , data:data} , "ios");
+				var $videoEle = $("#phone_video_play_newppt");
+	        	if($videoEle && $videoEle.length > 0 && ServiceNewPptAynamicPPT.playVideo){
+	        		$videoEle.removeAttr("src").hide().find("source").remove();
+	        	 	$videoEle[0].currentTime = 0 ;
+					$videoEle[0].pause();				
+	        	}    
+			},
+			resizeNewpptHandler:function(data){ //改变动态ppt大小
+				GLOBAL.phone.logMessage( {method:'resizeNewpptHandler' , data:data} , "ios");
+               if(ServiceNewPptAynamicPPT.remoteData  ){
+			      	if(typeof data == "string"){
+			      		data = JSON.parse(data);
+			      	}
+			      	data.action = "resizeHandler" ;
+               		ServiceNewPptAynamicPPT.postMessage(data);               
+               	}else{
+              		console.error("phone resizeHandler error:" , ServiceNewPptAynamicPPT.remoteData);
+                }              	
 			}
-		}
-	
-	  		
+
+		}	
+	  	
 		$scope.bindDocumentEvent();
 		$scope.phone.func.execute();
   	
@@ -1407,18 +1577,6 @@ wy_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 		
 		GLOBAL.phone.drawPermission(false);
 		GLOBAL.phone.pageTurningPermission(false);
-		
-		/*TODO 模拟数据*/
-//		var testData = {
-//			addPagePermission:true , 
-//			mClientType:3 , 
-//			deviceType:1 ,
-//			
-//		}
-//		GLOBAL.phone.setInitPageParameterFormPhone(testData);
-//		GLOBAL.phone.drawPermission(true);
-//		GLOBAL.phone.pageTurningPermission(true);
-//		GLOBAL.phone.roleSettingPage(1);
   		
 	});
 });

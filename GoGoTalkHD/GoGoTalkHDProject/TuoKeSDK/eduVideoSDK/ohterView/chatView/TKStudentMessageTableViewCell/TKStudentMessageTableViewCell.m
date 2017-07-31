@@ -10,16 +10,11 @@
 #import "TKMacro.h"
 #import "TKUtil.h"
 
-@interface TKStudentMessageTableViewCell ()
-@property (nonatomic, strong) UIImageView *xc_imgView;
-@end
-
 @implementation TKStudentMessageTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupView];
     }
     return self;
@@ -32,19 +27,21 @@
 - (void)setupView
 {
     
-    
-    
     CGFloat tViewCap = 10 *Proportion;
+    CGFloat tContentWidth = CGRectGetWidth(self.contentView.frame);
+    CGFloat tContentHigh = CGRectGetHeight(self.contentView.frame);
+    CGFloat tTimeLabelWidth = 50*Proportion;
+    CGFloat tTimeLabelHeigh = 16*Proportion;
+    CGFloat tTranslateLabelHeigh = 22*Proportion;
     //头
     {
-        
+       
         _iTimeLabel = ({
-             CGRect tFrame = CGRectMake(tViewCap,0,  36*Proportion, 16*Proportion);
-           
+            CGRect tFrame = CGRectMake(tViewCap,0,  tTimeLabelWidth, tTimeLabelHeigh);
             UILabel *tLabel = [[UILabel alloc] initWithFrame:tFrame];
             tLabel.textColor = RGBCOLOR(143, 143, 143);
             tLabel.backgroundColor = [UIColor clearColor];
-            tLabel.font = TKFont(14);
+            tLabel.font = TKFont(10);
             tLabel;
             
         });
@@ -52,12 +49,12 @@
         
         _iNickNameLabel = ({
             
-            CGRect tFrame = CGRectMake(CGRectGetWidth(self.contentView.frame)-36*Proportion-tViewCap, 0, CGRectGetWidth(self.contentView.frame)-36*Proportion, 16*Proportion);
-            
+            CGRect tFrame = CGRectMake(tContentWidth-tTimeLabelWidth-tViewCap, 0, tContentWidth-tTimeLabelWidth, tTimeLabelHeigh);
             UILabel *tLabel = [[UILabel alloc] initWithFrame:tFrame];
             tLabel.textColor = RGBCOLOR(255, 255, 255);
+            _iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
             tLabel.backgroundColor = [UIColor clearColor];
-            tLabel.font = TKFont(15);
+            tLabel.font = TKFont(10);
             tLabel;
             
         });
@@ -68,46 +65,19 @@
     {
         
         _iMessageView = ({
-            UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 16*Proportion, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame)-16*Proportion)];
-            
-//            tView.backgroundColor = RGBCOLOR(48, 48, 48);
-            tView.backgroundColor = [UIColor clearColor];
+            UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(_iNickNameLabel.frame), tContentWidth, tContentHigh-CGRectGetMaxY(_iNickNameLabel.frame)-5)];
+            tView.backgroundColor = RGBCOLOR(48, 48, 48);
             tView;
+            
         });
         [self.contentView addSubview:_iMessageView];
-        
-        _xc_imgView = ({
-            UIImage* img = UIIMAGE_FROM_NAME(@"teacher_chat_backgroundImage");//原图
-            
-            // 设置端盖的值
-            CGFloat top = 20;
-            CGFloat left = img.size.width * 0.5;
-            CGFloat bottom = 20;
-            CGFloat right = img.size.width * 0.5;
-            
-            // 设置端盖的值
-            UIEdgeInsets edgeInsets = UIEdgeInsetsMake(top, left, bottom, right);
-            // 设置拉伸的模式
-            UIImageResizingMode mode = UIImageResizingModeStretch;
-            
-            // 拉伸图片
-            UIImage *newImage = [img resizableImageWithCapInsets:edgeInsets resizingMode:mode];
-            
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-            
-            imgView.image = newImage;
-            
-            imgView;
-        });
-        [_iMessageView addSubview:_xc_imgView];
-        
-        
+       
+
         _iMessageLabel = ({
             
-            UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,CGRectGetWidth(_iMessageView.frame)-22*Proportion, CGRectGetHeight(_iMessageView.frame))];
+            UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,CGRectGetWidth(_iMessageView.frame)-tTranslateLabelHeigh, CGRectGetHeight(_iMessageView.frame))];
             
-//            tLabel.textColor = RGBCOLOR(134, 134, 134);
-            tLabel.textColor = [UIColor whiteColor];
+            tLabel.textColor = RGBCOLOR(134, 134, 134);
             tLabel.backgroundColor = [UIColor clearColor];
             tLabel.font = TKFont(15);
             tLabel.numberOfLines = 0;
@@ -115,32 +85,32 @@
             
         });
         [_iMessageView addSubview:_iMessageLabel];
-        
+      
         _iTranslationButton = ({
             UIButton *tLeftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            tLeftButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-22*Proportion, 0, 22*Proportion, 22*Proportion);
+            tLeftButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-tTranslateLabelHeigh, 0, tTranslateLabelHeigh, tTranslateLabelHeigh);
             //        tLeftButton.center = CGPointMake(25+8, _titleView.center.y);
             tLeftButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
             
             [tLeftButton setImage: LOADIMAGE(@"btn_translation_normal") forState:UIControlStateNormal];
             [tLeftButton setImage: LOADIMAGE(@"btn_translation_pressed") forState:UIControlStateHighlighted];
             [tLeftButton addTarget:self action:@selector(translationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-            tLeftButton.hidden = YES;
+            tLeftButton.enabled = NO;
             tLeftButton;
             
         });
+      
         [_iMessageView addSubview:_iTranslationButton];
         
         
-        
+      
         _iMessageTranslationLabel = ({
             
-            UILabel *tLabel        = [[UILabel alloc] initWithFrame:CGRectZero];
+            UILabel *tLabel        = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_iNickNameLabel.frame)+5+CGRectGetHeight(_iMessageView.frame), tContentWidth, tContentHigh-tTimeLabelHeigh-CGRectGetMaxY(_iMessageView.frame)-5)];
             tLabel.textColor       = RGBCOLOR(225, 225, 225);
             tLabel.backgroundColor = RGBCOLOR(28, 28, 28);
             tLabel.font            = TKFont(15);
             tLabel.numberOfLines = 0;
-            tLabel.hidden = YES;
             tLabel;
             
         });
@@ -149,13 +119,35 @@
     }
     
     self.contentView.backgroundColor = [UIColor clearColor];
+
     self.backgroundColor             = [UIColor clearColor];
+   
     
 }
 - (void)resetView
 {
+//    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:_iText];
+//    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+//    style.lineSpacing = 10;
+//    
+//    [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, _iText.length)];
+//    [attributeString addAttribute:NSFontAttributeName value:TKFont(15) range:NSMakeRange(0, _iText.length)];
+//    
+//    NSMutableAttributedString *attributeString2 = [[NSMutableAttributedString alloc] initWithString:_iText];
+//    NSMutableParagraphStyle *style2 = [[NSMutableParagraphStyle alloc] init];
+//    style.lineSpacing = 10;
+//   
+//    [attributeString2 addAttribute:NSParagraphStyleAttributeName value:style2 range:NSMakeRange(0, _iText.length)];
+//    [attributeString2 addAttribute:NSFontAttributeName value:TKFont(15) range:NSMakeRange(0, _iText.length)];
+//    _iMessageTranslationLabel.attributedText = attributeString2;
+//    
+//    _iMessageLabel.attributedText = attributeString;
     _iMessageLabel.text = _iText;
     _iMessageTranslationLabel.text = _iTranslationtext;
+     NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[_iNickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+    _iNickNameLabel.text = attrStr.string;
+    _iTimeLabel.text =  _iTime;
+     [self layoutSubviews];
     
 }
 
@@ -164,25 +156,62 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    
-    CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:CGRectGetWidth(self.contentView.frame)-22*Proportion-10*2*Proportion Font:TKFont(15)];
-    
-    
-    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5+5, tMessageLabelsize.height+5);
-    
-    _iMessageView.frame = CGRectMake(CGRectGetWidth(self.frame)-_iMessageLabel.width-5, 0, _iMessageLabel.width, _iMessageLabel.height);
+     CGFloat tViewCap = 10 *Proportion;
+     CGFloat tContentWidth = CGRectGetWidth(self.contentView.frame);
+     CGFloat tTimeLabelWidth = 80*Proportion;
+     CGFloat tTimeLabelHeigh = 16*Proportion;
+     CGFloat tTranslateLabelHeigh = 22*Proportion;
+    //
+    //MessageType_Teacher  MessageType_OtherUer  MessageType_Message
+    //之前是MessageType_Me
+    // _iMessageType == MessageType_Teacher || _iMessageType == MessageType_OtherUer || _iMessageType == MessageType_Message
+    if (_iMessageType == MessageType_Teacher || _iMessageType == MessageType_OtherUer || _iMessageType == MessageType_Message) {
+        _iTimeLabel.frame = CGRectMake(tViewCap,0,tTimeLabelWidth ,tTimeLabelHeigh);
+        _iNickNameLabel.frame =  CGRectMake(CGRectGetMaxX(_iTimeLabel.frame), 0, tContentWidth-tTimeLabelWidth-tViewCap, tTimeLabelHeigh);
 
+        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        _iNickNameLabel.textAlignment =  NSTextAlignmentRight;
+        _iTimeLabel.textAlignment = NSTextAlignmentLeft;
+        _iMessageView.frame  = CGRectMake(tViewCap, CGRectGetHeight(_iNickNameLabel.frame)+5, tMessageLabelsize.width+tTranslateLabelHeigh+5, tMessageLabelsize.height+5);
+        
+        _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
+        _iTranslationButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-tTranslateLabelHeigh, 0,  tTranslateLabelHeigh,  tTranslateLabelHeigh);
+        CGSize tTranslationMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iTranslationtext withLimitWidth:tContentWidth-2*tViewCap Font:TKFont(15)];
+        
+        _iMessageTranslationLabel.frame = CGRectMake(tViewCap, CGRectGetMaxY(_iMessageView.frame), tTranslationMessageLabelsize.width+5, tTranslationMessageLabelsize.height+5);
+        _iMessageTranslationLabel.hidden = ([_iTranslationtext isEqualToString:@""] || !_iTranslationtext);
+  
+        NSLog(@"_iMessageTranslationLabel:%@",_iMessageTranslationLabel.hidden?@"yinchang":@"wu");
+        
+
+        
+        
+    }else{
+         _iNickNameLabel.frame = CGRectMake(tViewCap,0,tTimeLabelWidth ,tTimeLabelHeigh);
+        _iTimeLabel.frame =  CGRectMake(CGRectGetMaxX(_iNickNameLabel.frame), 0, tContentWidth-tTimeLabelWidth-tViewCap, tTimeLabelHeigh);
+       
+        _iNickNameLabel.textAlignment = NSTextAlignmentLeft ;
+        _iTimeLabel.textAlignment = NSTextAlignmentRight;
+        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        
+        _iMessageView.frame  = CGRectMake(tContentWidth-tMessageLabelsize.width-5-tViewCap*2-tTranslateLabelHeigh, CGRectGetHeight(_iNickNameLabel.frame)+5, tMessageLabelsize.width+tTranslateLabelHeigh+5, tMessageLabelsize.height+5);
+        
+        _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+5, tMessageLabelsize.height+5);
+        
+        _iTranslationButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-tTranslateLabelHeigh, 0,  tTranslateLabelHeigh,  tTranslateLabelHeigh);
+        
+        CGSize tTranslationMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iTranslationtext withLimitWidth:tContentWidth-2*tViewCap Font:TKFont(15)];
+        
+        _iMessageTranslationLabel.frame = CGRectMake(tContentWidth-tTranslationMessageLabelsize.width-5-2*tViewCap, CGRectGetMaxY(_iMessageView.frame), tTranslationMessageLabelsize.width+5, tTranslationMessageLabelsize.height+5);
+        _iMessageTranslationLabel.hidden = ([_iTranslationtext isEqualToString:@""]|| !_iTranslationtext);
+   
+        NSLog(@"_iMessageTranslationLabel:%@",_iMessageTranslationLabel.hidden?@"yinchang":@"wu");
+    }
+ 
+    [TKUtil setHeight:self.contentView To:CGRectGetHeight(_iTimeLabel.frame)+CGRectGetHeight(_iMessageView.frame)+CGRectGetHeight(_iMessageTranslationLabel.frame)+10];
     
-    _xc_imgView.frame = CGRectMake(-5, 0, _iMessageView.width+10, _iMessageView.height);
-    
-    _iTranslationButton.frame = CGRectMake(CGRectGetWidth(_iMessageView.frame)-22*Proportion, 0,  22*Proportion,  22*Proportion);
-    
-    CGSize tTranslationMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageTranslationLabel.text withLimitWidth:CGRectGetWidth(self.contentView.frame) Font:TKFont(15)];
-    
-    _iMessageTranslationLabel.frame = CGRectMake(0, CGRectGetMaxY(_iMessageLabel.frame), tTranslationMessageLabelsize.width+5, tTranslationMessageLabelsize.height+5);
-    
-    
+    [TKUtil setHeight:self To:CGRectGetHeight(_iTimeLabel.frame)+CGRectGetHeight(_iMessageView.frame)+CGRectGetHeight(_iMessageTranslationLabel.frame)+10];
+
     
 }
 
@@ -193,16 +222,13 @@
         _iTranslationButtonClicked(_iTranslationtext);
     }
 }
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
+
 
 + (CGSize)sizeFromText:(NSString *)text withLimitWidth:(CGFloat)width Font:(UIFont*)aFont
 {
     //    CGSize size = [text sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(180, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     NSDictionary *attribute = @{NSFontAttributeName: aFont};
+    
     CGSize size = [text boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     return size;
 }
@@ -219,4 +245,7 @@
     CGFloat height = [self sizeFromText:text withLimitWidth:width Font:TEXT_FONT].height;
     return height;
 }
+
+
+
 @end

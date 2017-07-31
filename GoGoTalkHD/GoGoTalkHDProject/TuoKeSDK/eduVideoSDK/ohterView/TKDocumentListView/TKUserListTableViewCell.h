@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TKMacro.h"
-@class TKMediaDocModel,TKDocmentDocModel;
+@class TKMediaDocModel,TKDocmentDocModel,RoomUser;
 
 @protocol listProtocol <NSObject>
 
@@ -34,6 +34,7 @@
 @property (nonatomic, strong) NSString *text;
 @property (strong, nonatomic) TKMediaDocModel *iMediaDocModel;
 @property (strong, nonatomic) TKDocmentDocModel *iDocmentDocModel;
+@property (strong, nonatomic) RoomUser *iRoomUserModel;
 @property (strong, nonatomic) NSIndexPath *iIndexPath;
 
 

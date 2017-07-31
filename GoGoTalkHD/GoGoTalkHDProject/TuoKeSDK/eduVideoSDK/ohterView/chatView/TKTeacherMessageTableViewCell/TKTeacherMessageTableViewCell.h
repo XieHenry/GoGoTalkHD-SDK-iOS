@@ -22,6 +22,7 @@ typedef void(^bTranslationButtonClicked)(NSString *aTranslationString);
 
 
 @property (nonatomic, strong) NSString *iText;
+@property (nonatomic, strong) NSString *iDate;
 @property (nonatomic, strong) NSString *iTranslationtext;
 @property (nonatomic, strong) UIImageView *backgroudImageView;
 

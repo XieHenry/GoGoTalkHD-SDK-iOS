@@ -21,7 +21,7 @@
 #import "TKEduClassRoom.h"      // 测试拓课
 #import "TKMacro.h"
 
-@interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate, TKEduEnterClassRoomDelegate>
+@interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate, TKEduRoomDelegate>
 @property (nonatomic, strong) GGT_HomeLeftView *xc_leftView;
 @property (nonatomic, strong) GGT_ScheduleViewController *scheduleVC;
 @property (nonatomic, strong) GGT_OrderCourseViewController *orderCourseVc;
@@ -183,7 +183,7 @@
                                 @"nickname":model.nickname,    // 学生密码567
                                 @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                                 };
-        TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+        TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
         shareRoom.xc_roomPassword = model.stuPwd;
         shareRoom.xc_roomName = model.LessonName;
         [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];

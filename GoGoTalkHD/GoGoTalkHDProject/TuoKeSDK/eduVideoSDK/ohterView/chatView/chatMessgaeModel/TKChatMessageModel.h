@@ -19,8 +19,6 @@
 @property (nonatomic, assign) MessageType iMessageType;
 @property (nonatomic, strong) UIColor *  iMessageTypeColor;
 
-
-
 - (instancetype)initWithFromid:(NSString *)aFromid aTouid:(NSString *)aTouid iMessageType:(MessageType)aMessageType aMessage:(NSString *) aMessage aUserName:(NSString *)aUserName aTime:(NSString*)aTime;
 
 

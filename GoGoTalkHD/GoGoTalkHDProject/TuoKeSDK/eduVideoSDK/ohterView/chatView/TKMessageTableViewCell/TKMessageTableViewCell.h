@@ -10,7 +10,7 @@
 
 @interface TKMessageTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *iMessageLabel;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *iMessageText;
 @property (nonatomic, strong) UIImageView *backgroudImageView;
 - (void)resetView;
 + (CGFloat)heightFromText:(NSString *)text withLimitWidth:(CGFloat)width;

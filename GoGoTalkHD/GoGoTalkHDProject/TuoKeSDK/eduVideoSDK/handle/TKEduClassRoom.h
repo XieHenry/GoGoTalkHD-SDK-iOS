@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger,EKickOutReason) {
 };
 static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDisappear";
 #pragma mark TKEduEnterClassRoomDelegate
-@protocol TKEduEnterClassRoomDelegate <NSObject>
+@protocol TKEduRoomDelegate <NSObject>
 @optional
 
 
@@ -29,11 +29,12 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 - (void) onCameraDidOpenError;
 
 @end
+
 @interface TKEduClassRoom : NSObject
 
 +(int)joinRoomWithParamDic:(NSDictionary*)paramDic
            ViewController:(UIViewController*)controller
-                 Delegate:(id<TKEduEnterClassRoomDelegate>)delegate;
+                 Delegate:(id<TKEduRoomDelegate>)delegate;
 /**
  *  获取会议控制器
  *
@@ -42,8 +43,9 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 
 +(UIViewController *)currentViewController;
 +(void)leftRoom;
++(UIViewController *)currentRoomViewController;
 
-+(instancetype )shareTKEduClassRoomInstance;
++(instancetype )shareInstance;
 
 // 需要密码 title
 @property (nonatomic, strong) NSString *xc_roomPassword;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TKMacro.h"
 #import "TKUtil.h"
+#import "RoomUser.h"
 @protocol VideolistProtocol <NSObject>
 
 -(void)videoSmallbutton1:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
@@ -19,7 +20,8 @@
 @end
 @interface TKVideoFunctionView : UIView
 @property (nonatomic,weak)id<VideolistProtocol>iDelegate;
--(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole;
+@property (nonatomic,strong)RoomUser *iRoomUer;
+-(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer;
 
 
 @end

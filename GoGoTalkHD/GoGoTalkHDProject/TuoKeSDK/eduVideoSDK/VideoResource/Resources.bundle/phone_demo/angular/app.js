@@ -2,10 +2,10 @@
  * @author Raquel Díaz González
  */
 var GLOBAL = GLOBAL || {} ;
-var wy_room = angular.module('wy_room', []);
+var tk_room = angular.module('tk_room', []);
 
 /*
-wy_room.config(function ($routeProvider) {
+tk_room.config(function ($routeProvider) {
 
     $routeProvider
             .when('/', {

@@ -41,6 +41,9 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+        
+        self.backgroundColor = UICOLOR_FROM_RGB(62, 62, 62);
+        
         [self configView];
     }
     return self;
@@ -52,6 +55,9 @@
         UILabel *label = [UILabel new];
         label.textColor = UICOLOR_FROM_HEX(Color1A1A1A);
         label.backgroundColor = [UIColor clearColor];
+        
+        label.textColor = [UIColor whiteColor];
+        
         label.font = Font(18);
         label;
     });

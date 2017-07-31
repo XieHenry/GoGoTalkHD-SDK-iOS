@@ -1,3 +1,4 @@
+<!--@versions  v1.0.1-->
 <!DOCTYPE html>
 <html lang="en" style="font-size: 100px;" id="all_root">
 
@@ -25,7 +26,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
 <!-- Custom CSS styles -->
-<link type="text/css" rel="stylesheet" href="./css/room_phone_custom.css?t=2017050802" />
+<link type="text/css" rel="stylesheet" href="./css/room_phone_custom.css?t=2017072803" />
 
 <!--Literally CSS style-->
 <link type="text/css" rel="stylesheet" href="./plugs/literally/css/literallycanvas.css" charset="UTF-8">
@@ -42,21 +43,20 @@
 <script type="text/javascript"  charset="UTF-8" src="js/angular.min.js"></script>
 
 <!--Literally JavaScript dependencies-->
-<script  type="text/javascript"  charset="UTF-8" src="./plugs/literally/js/literallycanvas-core.js?t=2017050802"></script>
-<script  type="text/javascript"  charset="UTF-8" src="./plugs/dynamicPPT/lib/common/script.js?t=2017050802"></script>
+<script  type="text/javascript"  charset="UTF-8" src="./plugs/literally/js/literallycanvas-core.js?t=2017072803"></script>
 
 <!-- Custom JavaScript dependencies -->
-<script  type="text/javascript"  charset="UTF-8" src="./js/tool.js?t=2017050802"></script>
-<script  type="text/javascript"  charset="UTF-8" src="./plugs/literally/js/literally-custom.js?t=2017050802"></script>
-<script  type="text/javascript"  charset="UTF-8" src="./plugs/dynamicPPT/js/pptPlay-custom.js?t=2017050802"></script>
-<script type="text/javascript"  charset="UTF-8" src="./angular/app.js?t=2017050802" ></script>
-<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceLiterally.js?t=2017050802" ></script>
-<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceAynamicPPT.js?t=2017050802" ></script>
-<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceTool.js?t=2017050802" ></script>
+<script  type="text/javascript"  charset="UTF-8" src="./js/tool.js?t=2017072803"></script>
+<script  type="text/javascript"  charset="UTF-8" src="./plugs/literally/js/literally-custom.js?t=2017072803"></script>
+<script  type="text/javascript"  charset="UTF-8" src="./plugs/newPpt/js/newPpt-custom.js?t=2017072803"></script>
+<script type="text/javascript"  charset="UTF-8" src="./angular/app.js?t=2017072803" ></script>
+<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceLiterally.js?t=2017072803" ></script>
+<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceNewPptAynamicPPT.js?t=2017072803" ></script>
+<script type="text/javascript"  charset="UTF-8" src="./angular/services/serviceTool.js?t=2017072803" ></script>
 
 </head>
 
-<body ng-app="wy_room"  ng-controller="phoneController" >
+<body ng-app="tk_room"  ng-controller="phoneController" >
 	<!--display the view (phone) with route system-->
 	<section id="room">
 	    <article  class="all-wrap clear-float" id="all_wrap">
@@ -66,21 +66,22 @@
 	                <div  style="display: none;" id="main-video"><!--big videos--></div>
 	                <div id="white_board_outer_layout" class="white-board-outer-layout" > <!--白板最外层包裹-->
 						<div id="big_literally_wrap" class="big-literally-wrap">  <!--白板内层包裹区域-->
-							<div id="big_literally_vessel" ></div><!--白板区域-->
+							<div  id="scroll_literally_container" class="overflow-hidden aaa" style="display: none;"  >
+								<div id="big_literally_vessel" ></div><!--白板区域-->
+							</div>
+					
 							
-							<!--动态PPT-->
-							<div id="aynamic_ppt"  ng-show="!roomPage.flag.isShow.isCourseFile" class="aynamic-ppt-conwrap add-position-absolute-top0-left0 opacity-init">
-								<div class="ppt-vessel" id="ppt_vessel">
-									<div class="ppt-zoom-container" id="ppt_zoom_container">
-										<div  id="contentHolder" class="aynamic-ppt-container">
-											<div id="resizer" class="aynamic-ppt-resizer">
+							<!--动态PPT插件-is-->
+							<div   ng-show="!roomPage.flag.isShow.isCourseFile" class="aynamic-ppt-conwrap add-position-absolute-top0-left0" id="aynamic_ppt_newppt"  >
+								<div class="ppt-vessel" id="ppt_vessel_newppt">
+									<div class="ppt-zoom-container" id="ppt_zoom_container_newppt" >
+										<div id="contentHolderNewppt"  class="aynamic-ppt-container"  style="width: 100%;height: 100%;" >
+											<video id="phone_video_play_newppt" class="phone-video-play-newppt-container"  poster="./plugs/literally/lib/img/transparent_bg.png"   ></video>
+											<iframe id="newppt_frame" src="" name="myframe" width="100%" height="100%"  style="width: 100%;height: 100%;" ></iframe>
+											<div id="preloader_newppt" class="ppt-loading-container add-position-absolute-top0-left0" style="display: none;">
 											</div>
-
-											<div id="preloader" class="ppt-loading-container add-position-absolute-top0-left0">
-											</div>
-											<div id="ppt_not_click" class="add-position-absolute-top0-left0" style="width: 100%;height: 100%;z-index: 99;display: none;"></div>
+											<div id="ppt_not_click_newppt" class="add-position-absolute-top0-left0" style="width: 100%;height: 100%;z-index: 99;display: none;"></div>
 										</div>
-										<div class="click-next-or-prev-container add-position-absolute-top0-left0"  style="display: none;"  id="aynamic_ppt_click" ></div>
 									</div>
 								</div>
 							</div>
@@ -93,16 +94,16 @@
 	                	<div class="h-page-container"  >
 	                		<div class="h-page-next-prev-container">
 	                			<span class="lc-tool-wrap">
-	                				<button class="lc-tool-icon-wrap page-ipad add-fl arrow-wrap lc-prev-page "  ng-click="page.prevPage()" disabled="disabled" id="prev_page" >
+	                				<button class="lc-tool-icon-wrap page-ipad add-fl arrow-wrap lc-prev-page " data-set-disabled="yes" ng-click="page.prevPage()" disabled="disabled" id="prev_page" >
 										<span class="lc-tool-icon-text add-nowrap" ></span>
 									</button>
 									<div class="lc-tool-icon-wrap  page-ipad add-fl page-print not-active">
 										<span class="page-print-content"><span id="curr_page" class="curr-page" >1</span><span class="h-page-print-oblique">/</span><span id="all_page">1</span></span>
 									</div>
-									<button class="lc-tool-icon-wrap page-ipad  page-ipad add-fl arrow-wrap lc-next-page  "     disabled="disabled" ng-click="page.nextPage()" id="next_page">
+									<button class="lc-tool-icon-wrap page-ipad  page-ipad add-fl arrow-wrap lc-next-page  "   data-set-disabled="yes"  disabled="disabled" ng-click="page.nextPage()" id="next_page">
 										<span class="lc-tool-icon-text add-nowrap" ></span>
 									</button>
-									<button class=" lc-tool-icon-wrap   page-ipad add-fl add-page lc-add-page   "  style="display: none;"  id="add_literally_page"   ng-click="page.literallyAddPage()" >
+									<button class=" lc-tool-icon-wrap   page-ipad add-fl add-page lc-add-page   "  data-set-disabled="yes" style="display: none;"  id="add_literally_page"   ng-click="page.literallyAddPage()" >
 										<span class="lc-tool-icon-text add-nowrap" ></span>
 									</button>
 	                			</span>
@@ -119,17 +120,17 @@
 	                	<div class="h-page-container"  >
 	                		<div class="h-page-next-prev-container">
 	                			<span class="lc-tool-wrap">
-	                				<button class="lc-tool-icon-wrap page-ipad add-fl arrow-wrap lc-prev-page " id="ppt_prev_page_slide"  ng-click="page.prevPptPage()" disabled="disabled"  >
+	                				<button class="lc-tool-icon-wrap page-ipad add-fl arrow-wrap lc-prev-page " id="ppt_prev_page_slide"  data-plugs="newppt" data-set-disabled="yes" ng-click="page.prevPptPage()" disabled="disabled"  >
 										<span class="lc-tool-icon-text add-nowrap" ></span>
 									</button>
 									<div class="lc-tool-icon-wrap  page-ipad add-fl page-print not-active">
 										<span class="page-print-content"><span id="curr_ppt_page" class="curr-page" >1</span><span class="h-page-print-oblique">/</span><span id="all_ppt_page">1</span></span>
 									</div>
-									<button class="lc-tool-icon-wrap page-ipad  page-ipad add-fl arrow-wrap lc-next-page  "     disabled="disabled" ng-click="page.nextPptPage()" id="ppt_next_page_slide">
+									<button class="lc-tool-icon-wrap page-ipad  page-ipad add-fl arrow-wrap lc-next-page  "   data-plugs="newppt" data-set-disabled="yes" disabled="disabled" ng-click="page.nextPptPage()" id="ppt_next_page_slide">
 										<span class="lc-tool-icon-text add-nowrap" ></span>
 									</button>
 	                			</span>
-								<button class=" lc-tool-icon-wrap  page-ipad lc-full no"  id="ppt_lc_full_btn"  ng-click="lc.lcLaunchFullscreen()" >
+								<button class=" lc-tool-icon-wrap  page-ipad lc-full no"  id="ppt_lc_full_btn"  data-plugs="newppt" ng-click="lc.lcLaunchFullscreen()" >
 									<span class="lc-tool-icon-text add-nowrap" ></span>
 								</button>
 	                		</div>
@@ -140,16 +141,22 @@
 					<!--白板工具-->
 					<div id="pad-draw-tool" class="pad-draw-tool no-permission">
 						<ul class="tool-box"  id="header_tool_vessel">
-							<li class="role-student-hide" style="display: none;">
+				<!--			<li class="role-student-hide" style="display: none;">
 								<button class="btn-tool laser-tool" id="tool_laser"></button>
-							</li>
+							</li>-->
 							<li class="tl-tool" >
-								<button class="btn-tool tool-pencil  active"  data-tool="pencilPhone"    data-open="false"  data-change-ico="true"    data-lc-event = "tool_pencil_phone" id="tool_pencil"    >
+								<button class="btn-tool tool-mouse active"  data-tool="mousePhone"    data-open="false"  data-change-ico="true"    data-lc-event = "tool_mouse_phone" id="tool_mouse"    >
+									<span class="tool-img-wrap tool-mouse-icon" ></span>
+								</button>
+							</li>
+
+							<li class="tl-tool" >
+								<button class="btn-tool tool-pencil  "  data-tool="pencilPhone"    data-open="false"  data-change-ico="true"    data-lc-event = "tool_pencil_phone" id="tool_pencil"    >
 									<span class="tool-img-wrap tool-pencil-icon" ></span>
 								</button>
 							</li>
 
-							<li class="t1-tool">
+							<li class="tl-tool">
 								<button class="btn-tool eraser-tool" id="tool_eraser"></button>
 							</li>
 							<li class="t1-color">
@@ -187,21 +194,21 @@
 					</div>
 				
 	                <!--手机端翻页按钮-->
-	                <button class="lc-tool-icon-wrap page-phone no-permission  arrow-wrap lc-prev-page opacity-init"  style=" z-index: 101;"  ng-click="page.prevPage()" disabled="disabled" id="prev_page_phone" >
+	                <button class="lc-tool-icon-wrap page-phone no-permission  arrow-wrap lc-prev-page opacity-init page-phone-none"  data-set-disabled="yes"  style=" z-index: 101;"  ng-click="page.prevPage()" disabled="disabled" id="prev_page_phone" >
 						<span class="lc-tool-icon-text add-nowrap" ></span>
 					</button>
-					<button class="lc-tool-icon-wrap page-phone  no-permission  arrow-wrap lc-next-page opacity-init"  style=" z-index: 101;" ng-click="page.nextPage()"  disabled="disabled" id="next_page_phone" >
+					<button class="lc-tool-icon-wrap page-phone  no-permission  arrow-wrap lc-next-page opacity-init page-phone-none" data-set-disabled="yes" style=" z-index: 101;" ng-click="page.nextPage()"  disabled="disabled" id="next_page_phone" >
 						<span class="lc-tool-icon-text add-nowrap" ></span>
 					</button>
-					<button class=" lc-tool-icon-wrap page-phone  no-permission   add-page lc-add-page opacity-init"  style="display: none; z-index: 101;"  id="add_literally_page_phone"   ng-click="page.literallyAddPage()" >
+					<button class=" lc-tool-icon-wrap page-phone  no-permission   add-page lc-add-page opacity-init page-phone-none"  data-set-disabled="yes" style="display: none; z-index: 101;"  id="add_literally_page_phone"   ng-click="page.literallyAddPage()" >
 						<span class="lc-tool-icon-text add-nowrap"  ></span>
 					</button>
 					
 					<!--手机端动态ppt翻页按钮-->
-	                <button class="lc-tool-icon-wrap page-phone no-permission  arrow-wrap lc-prev-page opacity-init"  style=" z-index: 101;" id="prev_page_phone_slide" >
+	                <button class="lc-tool-icon-wrap page-phone no-permission  arrow-wrap lc-prev-page opacity-init page-phone-none" data-set-disabled="yes" data-plugs="newppt"  disabled="disabled"  style=" z-index: 110;" id="prev_page_phone_slide" >
 						<span class="lc-tool-icon-text add-nowrap" ></span>
 					</button>
-					<button class="lc-tool-icon-wrap page-phone  no-permission  arrow-wrap lc-next-page opacity-init"  style=" z-index: 101;"  id="next_page_phone_slide" >
+					<button class="lc-tool-icon-wrap page-phone  no-permission  arrow-wrap lc-next-page opacity-init page-phone-none" data-set-disabled="yes" data-plugs="newppt"  disabled="disabled" style=" z-index: 110;"  id="next_page_phone_slide" >
 						<span class="lc-tool-icon-text add-nowrap" ></span>
 					</button>
 					
@@ -247,7 +254,7 @@
 	</section>
 
 
-	<script type="text/javascript"  charset="UTF-8" src="./angular/phone/phoneController.js?t=2017050802" ></script>
+	<script type="text/javascript"  charset="UTF-8" src="./angular/phone/phoneController.js?t=2017072803" ></script>
 
 </body>
 </html>

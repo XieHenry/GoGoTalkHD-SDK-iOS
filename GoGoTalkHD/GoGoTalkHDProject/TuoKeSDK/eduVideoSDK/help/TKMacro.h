@@ -20,9 +20,11 @@
 
 
 
-#define RGBACOLOR_teacherTextColor_Red  RGBCOLOR(208, 59, 7)
-#define RGBACOLOR_studentTextColor_Yellow  RGBCOLOR(244, 209, 12)
-
+#define RGBACOLOR_teacherTextColor_Red      RGBCOLOR(208, 59, 7)
+#define RGBACOLOR_studentTextColor_Yellow   RGBCOLOR(244, 209, 12)
+#define RGBACOLOR_ClassBegin_RedDeep        RGBCOLOR(207,65, 21)
+#define RGBACOLOR_ClassEnd_Red              RGBCOLOR(121, 69, 67)
+#define RGBACOLOR_Title_White               RGBCOLOR(115, 115, 115)
 
 #define TKFont(s) [UIFont fontWithName:@"PingFang-SC-Light" size:s]
 
@@ -52,7 +54,7 @@
 static NSString *const sAPP_ID = @"20170605000052251";
 static NSString *const sSECURITY_KEY = @"sYlf3rTdnEGTOKr1FuT1";
 static NSString *const sTRANS_API_HOST = @"http://api.fanyi.baidu.com/api/trans/vip/translate";
-
+static NSString *const sTapTableNotification = @"tapTableNotification";
 
 typedef NS_ENUM(NSInteger, SpeakStatus) {
     m_RequestSpeak_Disable= 0,//没发言
@@ -93,14 +95,6 @@ enum KickReason
 };
 
 
-
-//tuyy add
-typedef NS_ENUM(NSInteger, UserVideoFocusStatus) {
-    UserVideoFocusStatusNormal,
-    UserVideoFocusStatusSip,
-    UserVideoFocusStatusCloudRecord
-};
-
 typedef NS_ENUM(NSInteger, MessageType) {
     MessageType_Teacher,		    //老师
     MessageType_Me,                 //我
@@ -119,27 +113,17 @@ typedef NS_ENUM(NSInteger, UserType) {
     UserType_Assistant =1,           //助教
     UserType_Student   =2            //学生
 };
+
 typedef NS_ENUM(NSInteger, RoomType) {
     RoomType_OneToOne   = 0,		    //小班
     RoomType_OneToMore  = 1,           //大班
 };
 
-typedef NS_ENUM(NSInteger, VideoViewTag) {
-    VideoViewTag_TeacherVideoView       =0,		    //老师视频
-    VideoViewTag_OurVideoView           =1,		    //我视频
-    VideoViewTag_OurVideoBottomView     =2,		    //我
-    VideoViewTag_Student1VideoView      =3,		    //学生1
-    VideoViewTag_Student2VideoView      =4,		    //学生2
-    VideoViewTag_Student3VideoView      =5,         //学生3
-    VideoViewTag_Student4VideoView      =6,		    //学生4
-    VideoViewTag_Student5VideoView      =7,		    //学生5
-};
-
 typedef NS_ENUM(NSInteger, EVideoRole)
 {
-    EVideoRoleTeacher,
-    EVideoRoleOur,
-    EVideoRoleOther
+    EVideoRoleTeacher,//老师视频
+    EVideoRoleOur,//我的视频
+    EVideoRoleOther//其他人
 };
 
 typedef NS_ENUM(NSInteger, MediaProgressAction) {
@@ -157,14 +141,29 @@ typedef NS_ENUM(NSInteger, FileListType) {
     FileListTypeDocument,        // 文档列表
     FileListTypeUserList         //用户列表
 };
+#define RGBACOLOR_PromptWhite       RGBCOLOR(249, 249, 249)
+#define RGBACOLOR_PromptRed         RGBCOLOR(215, 0, 0)
+#define RGBACOLOR_PromptYellow      RGBCOLOR(155, 136, 58)
+#define RGBACOLOR_PromptYellowDeep  RGBCOLOR(206, 203, 48)
+#define RGBACOLOR_PromptBlue        RGBCOLOR(78, 100, 196)
+typedef NS_ENUM(NSInteger, PromptType) {
+    PromptTypeStartReady1Minute,  //距离上课还有1分钟,White 249,249,249
+    PromptTypeStartPass1Minute,   //超过上课时间,White 249,249,249,blue:78,100,196
+    PromptTypeEndWill1Minute,         //距离下课还1分钟,Yellow 155,136 58
+    PromptTypeEndPass,             //超时,Red 215 0 0
+    PromptTypeEndPass5Minute,     //超时5分钟,Red
+    PromptTypeEndPass3Minute     //超时3分钟,Red,
+   
+};
+
 static  NSString *const sChairmancontrol            = @"chairmancontrol";
 static  NSString *const sClassBegin                 = @"ClassBegin";
 static  NSString *const sWBPageCount                = @"WBPageCount";
 static  NSString *const sShowPage                   = @"ShowPage";
 static  NSString *const sDocumentFilePage_ShowPage  = @"DocumentFilePage_ShowPage";
-
-static  NSString *const sSharpsChange          = @"SharpsChange";
-static  NSString *const sDocumentChange        = @"DocumentChange";
+static  NSString *const sActionShow                 = @"show";
+static  NSString *const sSharpsChange               = @"SharpsChange";
+static  NSString *const sDocumentChange            = @"DocumentChange";
 
 static  NSString *const sUpdateTime          = @"UpdateTime";
 static  NSString *const sMuteAudio           = @"MuteAudio";
@@ -181,6 +180,8 @@ static  NSString *const sDeleteBoardData     = @"deleteBoardData";
 static  NSString *const sOnPageFinished      = @"onPageFinished";
 static  NSString *const sPrintLogMessage     = @"printLogMessage";
 static  NSString *const sfullScreenToLc      = @"fullScreenToLc";
+static  NSString *const sOnJsPlay            = @"onJsPlay";
+static  NSString *const sCloseNewPptVideo    = @"closeNewPptVideo";
 //播放mp3，mp4
 static  NSString *const sVideo_MediaFilePage_ShowPage   = @"Video_MediaFilePage_ShowPage";
 static  NSString *const sAudio_MediaFilePage_ShowPage   = @"Audio_MediaFilePage_ShowPage";
@@ -188,6 +189,7 @@ static  NSString *const sMediaProgress                  = @"MediaProgress";
 static  NSString *const sMediaProgress_video_1          = @"MediaProgress_video_1";
 static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_1";
 //#define Debug 1;
+#define Realese 1;
 static  NSString *const sHttp   = @"https";
 
 
@@ -205,5 +207,10 @@ static  NSString *const sHttp   = @"https";
 #define KEY_HIDESELF @"m_HideSelf"
 #define KEY_HASVIDEO @"m_HasVideo"
 #define KEY_HASAUDIO @"m_HasAudio"
-
+#define iOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define iOS7Later ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f)
+#define iOS8Later ([UIDevice currentDevice].systemVersion.floatValue >= 8.0f)
+#define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
+#define iOS9_1Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.1f)
+#define iOS10_0Later ([UIDevice currentDevice].systemVersion.floatValue >= 10.0f)
 #endif /* TKMacro_h */

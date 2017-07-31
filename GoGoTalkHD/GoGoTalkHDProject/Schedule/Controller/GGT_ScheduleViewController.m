@@ -27,7 +27,7 @@
 
 static NSString * const CalendarCellID = @"cell";
 
-@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate, TKEduEnterClassRoomDelegate>
+@interface GGT_ScheduleViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate, MZTimerLabelDelegate, TKEduRoomDelegate>
 {
     void * _KVOContext;
 }
@@ -770,6 +770,10 @@ static NSString * const CalendarCellID = @"cell";
     GGT_ScheduleStudyingCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
     GGT_CourseCellModel *model = cell.xc_cellModel;
     
+//#warning 写死暂时
+//    model.serial = @"755158726";
+//    model.stuPwd = @"567";
+    
     switch ([model.Status integerValue]) {
         case 0:     // 已经预约  // 点击按钮可以取消预约
         {
@@ -792,7 +796,7 @@ static NSString * const CalendarCellID = @"cell";
                                         @"nickname":model.nickname,    // 学生密码567
                                         @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                                         };
-                TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+                TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
                 shareRoom.xc_roomPassword = model.stuPwd;
                 shareRoom.xc_roomName = model.LessonName;
                 [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
@@ -823,7 +827,7 @@ static NSString * const CalendarCellID = @"cell";
                                         @"nickname":model.nickname,    // 学生密码567
                                         @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                                         };
-                TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+                TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
                 shareRoom.xc_roomPassword = model.stuPwd;
                 shareRoom.xc_roomName = model.LessonName;
                 [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];

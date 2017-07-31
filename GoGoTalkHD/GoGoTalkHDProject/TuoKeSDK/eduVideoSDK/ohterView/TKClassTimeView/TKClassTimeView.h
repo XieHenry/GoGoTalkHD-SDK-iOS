@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TKMacro.h"
 @interface TKClassTimeView : UIView
 
 
 -(void)setClassTime:(NSTimeInterval)aLocalTime;
--(void)startClassBeginTimer;
--(void)invalidateClassBeginTime;
+-(void)showPromte:(PromptType)aPromptType aPassEndTime:(int)aPassEndTime aPromptTime:(int)aPromptTime;
+-(void)hidePromptView;
 @end

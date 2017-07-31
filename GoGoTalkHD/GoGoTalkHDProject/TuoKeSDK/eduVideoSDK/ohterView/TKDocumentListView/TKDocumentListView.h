@@ -8,20 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "TKMacro.h"
-#import "TKEduWhiteBoardHandle.h"
-#import "TKEduClassRoomSessionHandle.h"
-#import "TKEduClassRoomProperty.h"
+#import "TKEduBoardHandle.h"
+#import "TKEduSessionHandle.h"
+#import "TKEduRoomProperty.h"
 @class RoomController;
 
 
 
 @interface TKDocumentListView : UIView<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,weak)RoomController*  delegate;
-
--(instancetype)initWithFrame:(CGRect)frame withWhiteBoardHandel:(TKEduWhiteBoardHandle *)aWhiteBoardHandle withClassRoomSessionHandle:(TKEduClassRoomSessionHandle *)aClassRoomSessionHandle withClassRoomProperty:(TKEduClassRoomProperty *)ahClassRoomProperty;
-
+-(instancetype)initWithFrame:(CGRect)frame;
 
 -(void)show:(FileListType)aFileListType aFileList:(NSArray *)aFileList isClassBegin:(BOOL)isClassBegin;
 -(void)hide;
+-(void)clearVideo:(BOOL)isPublish;
+
+-(void)prepareVideoOrAudio:(TKMediaDocModel*)aMediaDocModel SendToOther:(BOOL)send;
+-(void)playOrPauseVideoOrAudio:(BOOL)aPlay;
+- (void)setCurrentTime:(double)time SendToOther:(BOOL)send;
 
 @end

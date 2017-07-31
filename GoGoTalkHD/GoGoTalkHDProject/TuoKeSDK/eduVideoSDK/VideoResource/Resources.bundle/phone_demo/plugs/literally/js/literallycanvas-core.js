@@ -52,6 +52,7 @@ module.exports = LiterallyCanvas = (function() {
     this.watermarkImage = opts.watermarkImage;
     this.watermarkScale = opts.watermarkScale || 1;
     this.backgroundCanvas = document.createElement('canvas');
+    this.backgroundCanvas.className = "background-canvas" ;
     this.backgroundCtx = this.backgroundCanvas.getContext('2d');
     this.canvas = document.createElement('canvas');
     this.canvas.style['background-color'] = 'transparent';
@@ -69,6 +70,7 @@ module.exports = LiterallyCanvas = (function() {
     /*TODO 添加是否可以在白板上画*/
     this.isDrawAble = true ; //默认可以画
     this.isTmpDrawAble = true ; //临时权限，默认可以画
+	this.rotateDeg = 0 ;  //旋转角度
     this.position = {
       x: 0,
       y: 0
@@ -158,9 +160,34 @@ module.exports = LiterallyCanvas = (function() {
   };
 
   LiterallyCanvas.prototype.clientCoordsToDrawingCoords = function(x, y) {
+    var x1 , y1 ;
+    var canvasWidth  = this.canvas.width ;
+    var canvasHeight  = this.canvas.height ;
+    switch (this.rotateDeg){
+        case 0:
+          x1 = x ;
+          y1 = y ;
+          break;
+        case 90:
+          x1 = y ;
+          y1 = canvasHeight - x ;
+          break;
+        case 180:
+            x1 = canvasWidth - x ;
+            y1 = canvasHeight - y ;
+          break;
+        case 270:
+            x1 = canvasWidth - y ;
+            y1 = x;
+          break;
+        default:
+            x1 = x ;
+            y1 = y ;
+            break
+    }
     return {
-      x: (x * this.backingScale - this.position.x) / this.getRenderScale(),
-      y: (y * this.backingScale - this.position.y) / this.getRenderScale()
+      x: (x1 * this.backingScale - this.position.x) / this.getRenderScale(),
+      y: (y1 * this.backingScale - this.position.y) / this.getRenderScale()
     };
   };
 
@@ -3604,8 +3631,7 @@ initWithoutGUI = function(el, opts) {
   var drawPermission =  document.createElement('div');
   drawPermission.className = "draw-permission" ;
   el.appendChild(drawPermission);
-
-
+  
   var temporaryDrawPermission =  document.createElement('div');
   temporaryDrawPermission.className = "temporary-draw-permission" ;
   el.appendChild(temporaryDrawPermission);
@@ -3614,13 +3640,10 @@ initWithoutGUI = function(el, opts) {
   laserSpan.className = "laser-mark" ;
   el.appendChild (laserSpan) ;
 
-    var roleControlDrawPermission =  document.createElement('div');
-    roleControlDrawPermission.id = 'role_control_draw_permission';
-    roleControlDrawPermission.className = 'role-control-draw-permission';
-    el.appendChild(roleControlDrawPermission);
     var literallyDataLoadingWrap =  document.createElement('div');
-    literallyDataLoadingWrap.id = 'literally_data_loading_wrap';
-    literallyDataLoadingWrap.className = 'literally-data-loading-wrap';
+    literallyDataLoadingWrap.className = "literally-data-loading-wrap" ;
+    literallyDataLoadingWrap.style.zIndex = 100 ;
+    literallyDataLoadingWrap.id = "literally_data_loading_wrap" ;
     el.appendChild(literallyDataLoadingWrap);
 
   lc = new LiterallyCanvasModel(drawingViewElement, opts);

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TKEduClassRoomSessionHandle.h"
-@class TKEduClassRoomProperty;
+#import "TKEduSessionHandle.h"
+@class TKEduRoomProperty;
 
 @interface RoomController : UIViewController
 @property (nonatomic, strong) UIView *iTKEduWhiteBoardView;
-- (instancetype)initWithDelegate:(id<TKEduEnterClassRoomDelegate>)aTKEduEnterClassRoomdelegate aParamDic:(NSDictionary *)aParamDic aRoomName:(NSString *)aRoomName aClassRoomProperty:(TKEduClassRoomProperty *)aClassRoomProperty;
+- (instancetype)initWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
+                       aParamDic:(NSDictionary *)aParamDic
+                       aRoomName:(NSString *)aRoomName
+                   aRoomProperty:(TKEduRoomProperty *)aRoomProperty;
 -(void)prepareForLeave:(BOOL)aQuityourself;
 @end

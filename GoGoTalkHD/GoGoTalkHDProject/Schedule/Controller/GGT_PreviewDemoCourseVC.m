@@ -13,7 +13,7 @@
 #import "TKEduClassRoom.h"      // 测试拓课
 #import "TKMacro.h"
 
-@interface GGT_PreviewDemoCourseVC ()<UITableViewDelegate, UITableViewDataSource, GGT_PreviewDemoCourseCellDelegate, UIScrollViewDelegate, TKEduEnterClassRoomDelegate>
+@interface GGT_PreviewDemoCourseVC ()<UITableViewDelegate, UITableViewDataSource, GGT_PreviewDemoCourseCellDelegate, UIScrollViewDelegate, TKEduRoomDelegate>
 @property (nonatomic, strong) UITableView *xc_tableView;
 @property (nonatomic, assign) float webViewCellHeight;
 @property (nonatomic, strong) WKWebView *xc_webView;
@@ -231,7 +231,7 @@
                                     @"nickname":model.nickname,    // 学生密码567
                                     @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                                     };
-            TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+            TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
             shareRoom.xc_roomPassword = model.stuPwd;
             shareRoom.xc_roomName = model.LessonName;
             [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
@@ -255,7 +255,7 @@
                                     @"nickname":model.nickname,    // 学生密码567
                                     @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                                     };
-            TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
+            TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
             shareRoom.xc_roomPassword = model.stuPwd;
             shareRoom.xc_roomName = model.LessonName;
             [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];

@@ -1,4 +1,7 @@
 @charset "utremf-8";
+/**{
+	-webkit-transform: translateZ(0);
+}*/
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td , figure , article , section , header , nav , footer{
     margin:0;
     padding:0;
@@ -155,28 +158,23 @@ div.role-control-draw-permission{
 	z-index: 5;
 	width: 0.44rem;
 	height: 0.44rem;
-	background: #626262 url(../img/call_layout/btn/btn_full.png) no-repeat center center;
 	background-size: 100% 100%;
 	border-radius: 50%;
 	top: 50%;
 	margin-top: -0.22rem;
 }
 .lc-container .lc-btn.lc-btn-full{
-	background-image: url(../img/call_layout/btn/btn_full.png) ;
 	right: 0.1rem;
 	top: 0.1rem;
 	margin-top: 0;
 }
 .lc-container .lc-btn.lc-btn-prev{
-	background-image: url(../img/call_layout/btn/btn_left.png) ;
 	left: 0.1rem;
 }
 .lc-container .lc-btn.lc-btn-next ,.lc-container .lc-btn.lc-btn-add  {
-	background-image: url(../img/call_layout/btn/btn_right.png) ;
 	right: 0.1rem;
 } 
 .lc-container button.lc-btn.lc-btn-add{
-	background-image: url(../img/call_layout/btn/btn_full.png) ;
 }
 
 .lc-container.phone{
@@ -198,6 +196,9 @@ div.role-control-draw-permission{
 	display: none !important; 
 	pointer-events: none;
 	cursor: default !important;
+}
+.page-phone-none{
+	/*display: none !important;*/
 }
 .lc-container .lc-tool-icon-wrap.lc-prev-page{
 	left: 0.2rem;
@@ -292,15 +293,13 @@ div.role-control-draw-permission{
 	left: 0.042rem;
 	top: 0.042rem;
 }
-.lc-container .pad-draw-tool li.active button .tool-img-wrap.tool-pencil-icon {
-	background-image: url(../img/phone/btn_pencil_pressed@2x.png);
-}
+
 
 .lc-container .pad-draw-tool .tool-pencil {
 	display: block;
 	width: 0.5rem;
 	height: 0.5rem;
-	background: url(../img/phone/btn_pencil_normal@2x.png) no-repeat center center;
+	background: url(../img/phone/tools/btn_pencil_normal@2x.png) no-repeat center center;
 	background-size: 0.5rem 0.5rem;
 }
 /*pad*/
@@ -392,8 +391,18 @@ div.role-control-draw-permission{
 	position: absolute;
 	z-index: 100;
 	top: 0%;
-	left: 50%
+	/*left: 50%*/
+	left: 0%;
 }
+.aynamic-ppt-container iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border:none;
+	top: 0;
+	left: 0;
+}
+
 .aynamic-ppt-resizer{
 	left: 0;
     top: 0;
@@ -453,6 +462,13 @@ div.role-control-draw-permission{
 }
 .aynamic-ppt-lc.literally , .aynamic-ppt-lc.literally .lc-drawing {
 	background-color: transparent !important;
+}
+.phone-video-play-newppt-container{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 50;
+	display: none;
 }
 /*动态ppt end*/
 
@@ -638,257 +654,40 @@ div.role-control-draw-permission{
 	width: 0.6rem;
 	height: 0.6rem;
 }
-/*默认：*/
-.tool-box li .laser-tool{
-	background: url(../img/phone/tools/btn_cursor_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool{
-	background: url(../img/phone/tools/btn_pencil_normal.png) no-repeat;
-	background-size: 100%;
-}
-/*点击选择笔的类型：*/
-.tool-box li .pencil-tool.pencil {
-	background: url(../img/phone/tools/btn_pencil_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.highlighter{
-	background: url(../img/phone/tools/btn_highlighter_normal-.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.line{
-	background: url(../img/phone/tools/btn_line_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.arrow{
-	background: url(../img/phone/tools/btn_arrow_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .font-tool{
-	background: url(../img/phone/tools/btn_fonts_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool{
-	background: url(../img/phone/tools/btn_rectangle_01_normal.png) no-repeat;
-	background-size: 100%;
-}
-/*点击选择形状的类型：*/
-.tool-box li .shape-tool.rectangle_empty{
-	background: url(../img/phone/tools/btn_rectangle_01_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.rectangle{
-	background: url(../img/phone/tools/btn_rectangle_02_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.ellipse_empty{
-	background: url(../img/phone/tools/btn_round_01_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.ellipse{
-	background: url(../img/phone/tools/btn_round_02_normal.png) no-repeat;
-	background-size: 100%;
-}
 
-.tool-box li .revoke-tool{
-	background: url(../img/phone/tools/btn_revoked_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .revoke-tool.disabled{
-		background-image: url(../img/phone/tools/btn_revoked_disabled.png);
-}
-.tool-box li .recover-tool{
-	background: url(../img/phone/tools/btn_recover_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .recover-tool.disabled{
-	background-image: url(../img/phone/tools/btn_recover_disabled.png);
-}
+
 .tool-box li .eraser-tool{
-	background: url(../img/phone/tools/btn_eraser_normal.png) no-repeat;
-	background-size: 100%;
+	 background: url(../img/phone/tools/btn_eraser_normal@2x.png) no-repeat;
+	 background-size: 100% auto;
+ }
+.tool-box li .tool-mouse{
+	background: url(../img/phone/tools/icon_mouse_normal.png) no-repeat;
+	background-size: 100% auto;
 }
-.tool-box li .delete-tool{
-	background: url(../img/phone/tools/btn_delete_normal.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .delete-tool.disabled{
-	background-image: url(../img/phone/tools/btn_delete_normal.png);
-}
+
 /*激活状态：*/
-.tool-box li .laser-tool.active{
-	background: url(../img/phone/tools/btn_cursor_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.active{
-	background: url(../img/phone/tools/btn_pencil_pressed.png) no-repeat;
-	background-size: 100%;
-}
 .tool-box li .tool-pencil.active{
-	background: url(../img/phone/btn_pencil_pressed@2x.png) no-repeat;
-	background-size: 100%;
+	background: url(../img/phone/tools/btn_pencil_pressed@2x.png) no-repeat;
+	background-size: 100% auto;
 }
+
 /*点击选择激活笔的类型：*/
-.tool-box li .pencil-tool.active.pencil{
-	background: url(../img/phone/tools/btn_pencil_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.active.highlighter{
-	background: url(../img/phone/tools/btn_highlighter_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.active.line{
-	background: url(../img/phone/tools/btn_line_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .pencil-tool.active.arrow{
-	background: url(../img/phone/tools/btn_arrow_pressed.png) no-repeat;
-	background-size: 100%;
-}
-
-.tool-box li .font-tool.active{
-	background: url(../img/phone/tools/btn_fonts_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.active{
-	background: url(../img/phone/tools/btn_rectangle_01_pressed.png) no-repeat;
-	background-size: 100%;
-}
-/*点击选择激活形状的类型：*/
-.tool-box li .shape-tool.active.rectangle_empty{
-	background: url(../img/phone/tools/btn_rectangle_01_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.active.rectangle{
-	background: url(../img/phone/tools/btn_rectangle_02_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.active.ellipse_empty{
-	background: url(../img/phone/tools/btn_round_01_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .shape-tool.active.ellipse{
-	background: url(../img/phone/tools/btn_round_02_pressed.png) no-repeat;
-	background-size: 100%;
-}
-
-.tool-box li .revoke-tool.active{
-	background: url(../img/phone/tools/btn_revoked_pressed.png) no-repeat;
-	background-size: 100%;
-}
-.tool-box li .recover-tool.active{
-	background: url(../img/phone/tools/btn_recover_pressed.png) no-repeat;
-	background-size: 100%;
-}
 .tool-box li .eraser-tool.active{
-	background: url(../img/phone/tools/btn_eraser_pressed.png) no-repeat;
-	background-size: 100%;
+	background: url(../img/phone/tools/btn_eraser_pressed@2x.png) no-repeat;
+	background-size: 100% auto;
 }
-.tool-box li .delete-tool.active{
-	background: url(../img/phone/tools/btn_delete_pressed.png) no-repeat;
-	background-size: 100%;
+.tool-box li .tool-mouse.active{
+	background: url(../img/phone/tools/icon_mouse_pressed.png) no-repeat;
+	background-size: 100% auto;
 }
 /*.tool-box>li .color-tool{*/
 	/*width: 0.38rem;*/
 	/*height: 0.38rem;*/
 	/*box-sizing: border-box;*/
 /*}*/
-.tool-box>li .triangle{
-	border: 0.04rem solid #fff;
-	border-top-color: transparent;
-	border-left-color: transparent;
-	position: absolute;
-	right: 0.1rem;
-	bottom: 0.1rem;
-}
-/*==二级选择工具：==*/
-/*笔和图形：*/
-.tool-box>li .tool-extend{
-	width: 3.2rem;
-	height: 4.03rem;
-	color: #fff;
-	position: absolute;
-	right: 100%;
-	top: 0;
-	background: rgba(0,0,0,0.9);
-	display: none;
-}
-.tool-box>li .tool-extend li{
-	height: 1.01rem;
-	width: 100%;
-	box-sizing: border-box;
-	border-bottom: 0.01rem solid #3B3B3B;
-	padding-left: 1rem;
-	position: relative;
-	line-height: 1rem;
-}
-.tool-box>li .tool-extend li:last-child{
-	border: none;
-}
-.tool-box>li .tool-extend li>span{
-	width: 0.6rem;
-	height: 0.6rem;
-	position: absolute;
-	top: 0.2rem;
-	left: 0.2rem;
-}
 
-.tool-pencil-extend li:nth-child(1)>span{
-	background: url(../img/phone/tools/icon_pencil.png) no-repeat;
-	background-size: 100%;
-}
-.tool-pencil-extend li:nth-child(2)>span{
-	background: url(../img/phone/tools/icon_highlighter.png) no-repeat;
-	background-size: 100%;
-}
-.tool-pencil-extend li:nth-child(3)>span{
-	background: url(../img/phone/tools/icon_line.png) no-repeat;
-	background-size: 100%;
-}
-.tool-pencil-extend li:nth-child(4)>span{
-	background: url(../img/phone/tools/icon_arrow.png) no-repeat;
-	background-size: 100%;
-}
 
-.tool-shape-extend li:nth-child(1)>span{
-	background: url(../img/phone/tools/icon_rectangle_01.png) no-repeat;
-	background-size: 100%;
-}
-.tool-shape-extend li:nth-child(2)>span{
-	background: url(../img/phone/tools/icon_rectangle_02.png) no-repeat;
-	background-size: 100%;
-}
-.tool-shape-extend li:nth-child(3)>span{
-	background: url(../img/phone/tools/icon_round_01.png) no-repeat;
-	background-size: 100%;
-}
-.tool-shape-extend li:nth-child(4)>span{
-	background: url(../img/phone/tools/icon_round_02.png) no-repeat;
-	background-size: 100%;
-}
-/*字体：*/
-.tool-font-extend{
-	width: 3.2rem;
-	height: 3.03rem;
-	color: #fff;
-	position: absolute;
-	right: 100%;
-	top: 0;
-	background: rgba(0,0,0,0.9);
-	display: none;
-}
-.tool-font-extend li{
-	height: 1.01rem;
-	width: 100%;
-	box-sizing: border-box;
-	border-bottom: 0.01rem solid #3B3B3B;
-	padding-left: 0.4rem;
-	position: relative;
-	line-height: 1rem;
-}
-.tool-font-extend li:last-child{
-	border: none;
-}
+
 /*颜色*/
 .tool-color-extend{
 	width: 5.4rem;
@@ -943,134 +742,7 @@ div.role-control-draw-permission{
 	width: 0.18rem;
 	height: 0.18rem;
 }
-/*颜色上部:*/
-/*.tool-color-top{*/
-	/*width: 100%;*/
-	/*height: 1.97rem;*/
-	/*box-sizing: border-box;*/
-	/*padding: 0.3rem;*/
-	/*border-bottom: 0.01rem solid #3B3B3B;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size{*/
-	/*width: 100%;*/
-	/*height: 0.6rem;*/
-	/*margin-top: 0.39rem;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span{*/
-	/*width: 0.6rem;*/
-	/*height: 0.6rem;*/
-	/*margin-right: 1rem;*/
-	/*box-sizing: border-box;*/
-	/*position: relative;*/
-	/*display: block;*/
-	/*float: left;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span.active{*/
-	/*border: 0.02rem solid #fff;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span:after{*/
-	/*content: "";*/
-	/*position: absolute;*/
-	/*top: 50%;*/
-	/*left: 50%;*/
-	/*transform: translate(-50%,-50%);*/
-	/*display: block;*/
-	/*background: #fff;*/
-	/*border-radius: 50%;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span:nth-child(1):after{*/
-	/*width: 0.08rem;*/
-	/*height: 0.08rem;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span:nth-child(2):after{*/
-	/*width: 0.12rem;*/
-	/*height: 0.12rem;*/
-/*}*/
-/*.tool-color-top .tool-pencil-size span:nth-child(3):after{*/
-	/*width: 0.18rem;*/
-	/*height: 0.18rem;*/
-/*}*/
-/*颜色下部:*/
-/*.tool-color-bottom{*/
-	/*width: 100%;*/
-	/*height: 3.83rem;*/
-	/*box-sizing: border-box;*/
-	/*padding: 0.3rem 0.3rem 0 0.3rem;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box{*/
-	/*width: 100%;*/
-	/*height: 2rem;*/
-	/*margin:0.15rem 0;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li{*/
-	/*width: 0.6rem;*/
-	/*height: 0.6rem;*/
-	/*margin: 0.2rem;*/
-	/*position: relative;*/
-	/*float: left;*/
-	/*box-sizing: border-box;*/
-	/*border: 0.02rem solid transparent;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li.active{*/
-	/*border: 0.02rem solid #fff;*/
-/*}*/
 
-/*.tool-color-bottom .tool-color-box li span{*/
-	/*width: 0.4rem;*/
-	/*height: 0.4rem;*/
-	/*position: absolute;*/
-	/*top: 0.08rem;*/
-	/*left: 0.08rem;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(5n+1){*/
-	/*margin-left: 0.1rem;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(5n){*/
-	/*margin-right: 0.1rem;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(1) span{*/
-	/*background: #FBCF17;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(2) span{*/
-	/*background: #F96B0B;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(3) span{*/
-	/*background: #FB0706;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(4) span{*/
-	/*background: #F30F8C;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(5) span{*/
-	/*background: #AA13D6;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(6) span{*/
-	/*background: #3F1EF0;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(7) span{*/
-	/*background: #1088F6;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(8) span{*/
-	/*background: #04DBA4;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(9) span{*/
-	/*background: #00C737;*/
-/*}*/
-/*.tool-color-bottom .tool-color-box li:nth-child(10) span{*/
-	/*background: #99C617;*/
-/*}*/
-/*.tool-color-bottom .tool-color-btn{*/
-	/*width: 4.4rem;*/
-	/*height: 0.6rem;*/
-	/*box-sizing: border-box;*/
-	/*border: 0.01rem solid #fff;*/
-	/*background: rgba(0,0,0,0.8);*/
-	/*line-height: 0.6rem;*/
-	/*text-align: center;*/
-	/*color: #fff;*/
-	/*border-radius: 0.05rem;*/
-	/*margin: 0.1rem 0 0 0.2rem;*/
-	/*font-size: 0.3rem;*/
-/*}*/
 /*翻页*/
 .ipad.header-left-page-time-container {
 	width: auto;
@@ -1078,7 +750,7 @@ div.role-control-draw-permission{
 	position: absolute;
 	bottom: 0.1rem;
 	left: 50%;
-	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 	background-color: #3b3b3b;
 }
 .ipad.header-left-page-time-container .h-page-container .h-page-next-prev-container {

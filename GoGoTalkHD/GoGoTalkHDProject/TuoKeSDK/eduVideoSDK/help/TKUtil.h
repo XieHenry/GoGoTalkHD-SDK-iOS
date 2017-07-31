@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import <Security/Security.h>
+#import "TKRCGlobalConfig.h"
 #define EMMIOSVER ([[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue])
 
 #ifndef GETDICVALUE
@@ -51,6 +52,7 @@
 +(UIView *)setCornerForView:(UIView * )aView;
 #pragma mark 获取是否是媒体文件
 +(BOOL)getIsMedia:(NSString*)filetype;
++(BOOL)isVideo:(NSString *)filetype;
 +(NSString *)docmentOrMediaImage:(NSString*)aType;
 #pragma mark 获取字符串长度
 + (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight fontSize:(CGFloat)tSize;
@@ -62,5 +64,12 @@
 +(NSString *) md5HexDigest:(NSString *)aString;
 #pragma mark 获取当前时间
 +(NSString *)currentTime;
-
+#pragma mark 只能是数字
++ (BOOL)validateNumber:(NSString*)number;
+#pragma mark globle
++ (void)showMessage:(NSString *)message ;
+#pragma mark 几位数
++(NSInteger)numberBit:(NSInteger)aNumber;
+#pragma mark 判断当前语言
++(BOOL)isEnglishLanguage;
 @end

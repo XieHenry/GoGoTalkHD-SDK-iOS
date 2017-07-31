@@ -256,20 +256,28 @@
     return tIsMedia;
 
 }
++(BOOL)isVideo:(NSString *)filetype{
+    BOOL tIsVideo = false;
+    if ([filetype isEqualToString:@"mp4"]) {
+        tIsVideo = true;
+    }
+    return tIsVideo;
+}
+
 +(NSString *)docmentOrMediaImage:(NSString*)aType{
     NSString *tString = @"icon_user";
     if ([aType isEqualToString:@""]) {
         tString = @"icon_empty";
         
-    }else if ([aType isEqualToString:@"excel"]){
+    }else if ([aType isEqualToString:@"xls"]||[aType isEqualToString:@"xlsx"]||[aType isEqualToString:@"xlt"]||[aType isEqualToString:@"xlsm"]){
         tString = @"icon_excel";
-    }else if ([aType isEqualToString:@"image"]){
+    }else if ([aType isEqualToString:@"jpg"]|| [aType isEqualToString:@"jpeg"]||[aType isEqualToString:@"png"] ||[aType isEqualToString:@"gif"] || [aType isEqualToString:@"bmp"]){
         tString = @"icon_images";
     }
-    else if ([aType isEqualToString:@"ppt"]){
+    else if ([aType isEqualToString:@"ppt"] || [aType isEqualToString:@"pptx"] || [aType isEqualToString:@"pps"]){
         tString = @"icon_ppt";
     }
-    else if ([aType isEqualToString:@"docx"]){
+    else if ([aType isEqualToString:@"docx"]|| [aType isEqualToString:@"doc"]){
         tString = @"icon_word";
     }
     else if ([aType isEqualToString:@"txt"]){
@@ -304,9 +312,50 @@
     return [hash lowercaseString];
 }
 
++ (BOOL)validateNumber:(NSString*)number {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
 
++ (void)showMessage:(NSString *)message {
+    NSArray *array = [UIApplication sharedApplication].windows;
+    int count = (int)array.count;
+    [TKRCGlobalConfig HUDShowMessage:message addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
+}
++(NSInteger)numberBit:(NSInteger)aNumber{
+    int sum=0;
 
-
-
-
+    while(aNumber){
+        sum++;
+        aNumber/=10;
+    }
+    return sum;
+}
++(BOOL)isEnglishLanguage{
+    /*
+     en-CN,
+     zh-Hans-CN,
+     en
+     
+     zh-Hans-CN,
+     en-CN,
+     
+     */
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSLog ( @"----%@" , currentLanguage); //打印结果： en 用获取到的当前语言，和支持的语言做字符串对比，就可以知道是那种语言了。
+    if([currentLanguage isEqualToString:@"en-CN"]) { return YES; }
+    return NO;
+}
 @end

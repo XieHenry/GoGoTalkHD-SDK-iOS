@@ -13,23 +13,35 @@
 #import "TKMediaDocModel.h"
 #import "TKDocmentDocModel.h"
 #import "RoomUser.h"
-#import "TKAVPlayerViewController.h"
 #import "RoomController.h"
-#import "TKAudioPlayer.h"
+#import "TKProgressHUD.h"
+#import "TKEduNetManager.h"
+#import "TKAudioVideoPlayerView.h"
+#import "TKAudioPlayerView.h"
+#import "TKAudioVideoPlayerView.h"
+#import "TKAudioPlayerView.h"
 
-@interface TKDocumentListView ()<listProtocol>
+
+
+@interface TKDocumentListView ()<listProtocol,mediaProtocol>
 @property (nonatomic,retain)UILabel  *iFileHeadLabel;
 @property (nonatomic,assign)FileListType  iFileListType;
 @property (nonatomic,retain)NSMutableArray *iFileMutableArray;
 @property (nonatomic,retain)UITableView    *iFileTableView;
-@property (nonatomic, strong) TKEduWhiteBoardHandle *iTKEduWhiteBoardHandle;
-@property (nonatomic, strong) TKEduClassRoomSessionHandle *iTKEduClassRoomSessionHandle;
-@property (nonatomic, strong) TKEduClassRoomProperty *iTKEduClassRoomProperty;
+
 @property (nonatomic,assign)BOOL  isClassBegin;
+@property (nonatomic,strong)UIButton*  iCurrrentButton;
+@property (nonatomic,strong)UIButton*  iPreButton;
+@property (nonatomic,strong) TKAudioVideoPlayerView *iAudioVideoPlayerView;     // 代替iAVPlayerVideoController
+@property (nonatomic,strong) TKAudioPlayerView *iAudioPlayerView;               // 代替iAudioPlayer
+
+@property (nonatomic,strong)TKProgressHUD*  iVideoPlayerHud;
+
 @end
 
 @implementation TKDocumentListView
--(instancetype)initWithFrame:(CGRect)frame withWhiteBoardHandel:(TKEduWhiteBoardHandle *)aWhiteBoardHandle withClassRoomSessionHandle:(TKEduClassRoomSessionHandle *)aClassRoomSessionHandle withClassRoomProperty:(TKEduClassRoomProperty *)aClassRoomProperty{
+-(instancetype)initWithFrame:(CGRect)frame{
+    
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = RGBACOLOR(35, 35, 35, 0.6);
         _iFileTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame)) style:UITableViewStyleGrouped];
@@ -43,7 +55,7 @@
         _iFileHeadLabel = ({
             UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), 60)];
             
-            tLabel.text = MTLocalized(@"用户列表（1人）");
+            tLabel.text = MTLocalized(@"Title.UserList.two");
             tLabel.font = TEXT_FONT;
             tLabel.textAlignment = NSTextAlignmentCenter;
             tLabel.textColor = RGBCOLOR(225, 225, 225);
@@ -54,19 +66,14 @@
         [_iFileTableView registerClass:[TKUserListTableViewCell class] forCellReuseIdentifier:@"Cell"];
         
         [self addSubview:_iFileTableView];
-        _iTKEduWhiteBoardHandle       = aWhiteBoardHandle;
-        _iTKEduClassRoomSessionHandle = aClassRoomSessionHandle;
-        _iTKEduClassRoomProperty      = aClassRoomProperty;
+
          [[UIApplication sharedApplication].keyWindow addSubview:self];
         
     }
     return self;
 }
 //382
--(instancetype)initWithFrame:(CGRect)frame{
-    
-    return [self initWithFrame:frame withWhiteBoardHandel:nil withClassRoomSessionHandle:nil withClassRoomProperty:nil];
-}
+
 #pragma mark tableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -88,8 +95,8 @@
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
-            NSString *tString = [NSString stringWithFormat:@"影音列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //@"影音列表"
+            _iFileHeadLabel.text = MTLocalized(@"Title.MediaList");
              TKMediaDocModel *tMediaDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
            
             [tCell configaration:tMediaDocModel withFileListType:FileListTypeAudioAndVideo isClassBegin:_isClassBegin];
@@ -98,8 +105,9 @@
             break;
         case FileListTypeDocument:
         {
-            NSString *tString = [NSString stringWithFormat:@"文档列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //文档列表
+           // NSString *tString = [NSString stringWithFormat:@"文档列表"];
+            _iFileHeadLabel.text =MTLocalized(@"Title.DocumentList");;
               TKDocmentDocModel *tMediaDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
            
             [tCell configaration:tMediaDocModel withFileListType:FileListTypeDocument isClassBegin:_isClassBegin];
@@ -108,7 +116,7 @@
             break;
         case FileListTypeUserList:
         {
-            NSString *tString = [NSString stringWithFormat:@"用户列表(%@人)",@([_iFileMutableArray count])];
+             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             tCell.iIndexPath = indexPath;
             RoomUser *tRoomUser = [_iFileMutableArray objectAtIndex:indexPath.row];
@@ -130,25 +138,23 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+      [self hide];
     TKLog(@"%@",@(indexPath.row));
     if ((indexPath.row == 0)&&(_iFileListType == FileListTypeDocument)) {
          TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
-        NSDictionary *tDocmentDocModelDic = @{
-                                              @"fileid":tDocmentDocModel.fileid,
-                                              
-                                              @"ismedia":@(false),
-                                              @"filedata":@{
-                                                       @"fileid":tDocmentDocModel.fileid,
-                                                       @"currpage":tDocmentDocModel.currpage,
-                                                       @"pagenum":tDocmentDocModel.pagenum,
-                                                       @"filetype":tDocmentDocModel.filetype,
-                                                       @"filename":tDocmentDocModel.filename,
-                                                       @"swfpath":tDocmentDocModel.swfpath
-                                                      }
-                                              };
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-        [_iTKEduClassRoomSessionHandle sessionHandlePubMsg:sShowPage ID:sShowPage To:sTellAll Data:jsonString Save:false completion:nil];
+        if (_isClassBegin) {
+            [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender];
+ 
+        }else{
+            [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
+         
+        }
+        
+        if(_iPreButton) {
+            [_iPreButton setSelected:NO];
+            _iPreButton = nil;
+            
+        }
         
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -178,6 +184,20 @@
     
     [UIView commitAnimations];
 }
+-(void)clearVideo:(BOOL)isPublish{
+    
+    if (_iAudioVideoPlayerView) {
+        [_iAudioVideoPlayerView clearPublishMedia:[TKEduSessionHandle shareInstance].iCurrentMediaDocModel isPublish:isPublish];
+        _iAudioVideoPlayerView = nil;
+    }
+    
+    if (_iAudioPlayerView) {
+        [_iAudioPlayerView clearPublishMedia:[TKEduSessionHandle shareInstance].iCurrentMediaDocModel isPublish:isPublish];
+        _iAudioPlayerView = nil;
+    }
+
+}
+
 -(void)refreshData:(FileListType)aFileListType aFileList:(NSArray *)aFileList isClassBegin:(BOOL)isClassBegin{
     _iFileMutableArray = [aFileList mutableCopy];
     _iFileListType    = aFileListType;
@@ -185,19 +205,19 @@
     switch (aFileListType) {
         case FileListTypeAudioAndVideo:
         {
-            NSString *tString = [NSString stringWithFormat:@"影音列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //@"影音列表"
+            _iFileHeadLabel.text = MTLocalized(@"Title.MediaList");
         }
             break;
         case FileListTypeDocument:
         {
-            NSString *tString = [NSString stringWithFormat:@"文档列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //@"文档列表"
+          _iFileHeadLabel.text = MTLocalized(@"Title.DocumentList");
         }
             break;
         case FileListTypeUserList:
         {
-            NSString *tString = [NSString stringWithFormat:@"用户列表(%@人)",@([_iFileMutableArray count])];
+            NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"), @([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             
         }
@@ -208,18 +228,101 @@
     [_iFileTableView reloadData];
 }
 
-
-#pragma mark  listProtocol
--(void)listButton1:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
+-(void)prepareVideoOrAudio:(TKMediaDocModel*)aMediaDocModel SendToOther:(BOOL)send{
+    if (!_iVideoPlayerHud) {
+        _iVideoPlayerHud = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
+        [[UIApplication sharedApplication].keyWindow addSubview:_iVideoPlayerHud];
+        _iVideoPlayerHud.dimBackground = YES;
+        _iVideoPlayerHud.removeFromSuperViewOnHide = YES;
+        
+    }
+    [_iVideoPlayerHud show:NO];
     
+   //@"影音列表"
+     _iFileHeadLabel.text = MTLocalized(@"Title.MediaList");
+    [self clearVideo:_isClassBegin];
+    BOOL tBool = [TKUtil isVideo:aMediaDocModel.filetype];
+    if ([TKEduSessionHandle shareInstance].iCurrentMediaDocModel) {
+        [TKEduSessionHandle shareInstance].iPreMediaDocModel = [TKEduSessionHandle shareInstance].iCurrentMediaDocModel;
+    }
+    
+    //清零
+    if (send) {
+         aMediaDocModel.currentTime = @(0);
+    }
+   
+    [TKEduSessionHandle shareInstance].iCurrentMediaDocModel = aMediaDocModel;
+    if (_isClassBegin) {
+        [[TKEduSessionHandle shareInstance] publishtMediaDocModel:aMediaDocModel add:true To:sTellAllExpectSender];
+    }
+    
+  
+    TKEduRoomProperty *tRoomProperty = [TKEduSessionHandle shareInstance].iRoomProperties;
+    if (tBool) {
+        
+        _iAudioVideoPlayerView = [[TKAudioVideoPlayerView alloc] initWithMediaDocModel:aMediaDocModel
+                                                                 aRoomProperty:tRoomProperty
+                                                                           SendToOther:send
+                                                                                 frame:CGRectMake(0, 0, ScreenW, ScreenH)];
+        _iAudioVideoPlayerView.delegate = self;
+        [_delegate.view addSubview:_iAudioVideoPlayerView];
+
+    }else{
+        _iAudioPlayerView = [[TKAudioPlayerView alloc] initWithMediaDocModel:aMediaDocModel
+                                                       aRoomProperty:tRoomProperty
+                                                                 SendToOther:send
+                                                                       frame:CGRectMake(0, CGRectGetHeight(_delegate.iTKEduWhiteBoardView.frame)-57, CGRectGetWidth(_delegate.iTKEduWhiteBoardView.frame), 57)];
+        _iAudioPlayerView.delegate = self;
+        [_delegate.iTKEduWhiteBoardView addSubview:_iAudioPlayerView];
+        
+    }
+    
+    if (![TKEduSessionHandle shareInstance].iPreMediaDocModel) {
+        [TKEduSessionHandle shareInstance].iPreMediaDocModel = aMediaDocModel;
+    }else{
+        [TKEduSessionHandle shareInstance].iPreMediaDocModel =  [TKEduSessionHandle shareInstance].iCurrentMediaDocModel;
+    }
+    
+    [TKEduSessionHandle shareInstance].iCurrentMediaDocModel = aMediaDocModel;
+}
+
+-(void)playOrPauseVideoOrAudio:(BOOL)aPlay{
+    
+    if (_iAudioPlayerView) {
+        [_iAudioPlayerView playAction:aPlay];
+    }
+    
+    if (_iAudioVideoPlayerView) {
+        [_iAudioVideoPlayerView playAction:aPlay];
+    }
+}
+//设置跳转到当前播放时间
+- (void)setCurrentTime:(double)time SendToOther:(BOOL)send{
+
+    if (_iAudioPlayerView) {
+        [_iAudioPlayerView setCurrentTime:time SendToOther:send];
+    }
+    
+    if (_iAudioVideoPlayerView) {
+        [_iAudioVideoPlayerView setCurrentTime:time SendToOther:send];
+    }
+    
+}
+#pragma mark  listProtocol
+//举手标志
+-(void)listButton1:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
 
 }
+//上台
 -(void)listButton2:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
+    [self hide];
+   // TKUserListTableViewCell *tCell = [_iFileTableView cellForRowAtIndexPath:aIndexPath];
+    
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
-            NSString *tString = [NSString stringWithFormat:@"影音列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //@"影音列表"
+            _iFileHeadLabel.text = MTLocalized(@"Title.MediaList");
             TKMediaDocModel *tMediaDocModel =  [_iFileMutableArray objectAtIndex:aIndexPath.row];
             tMediaDocModel.isPlay =@( aButton.selected);
             
@@ -227,18 +330,32 @@
             break;
         case FileListTypeDocument:
         {
-            NSString *tString = [NSString stringWithFormat:@"文档列表"];
-            TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
-            
-            _iFileHeadLabel.text = MTLocalized(tString);
+            //文档列表
+           
+            //TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
+            _iFileHeadLabel.text = MTLocalized(@"Title.DocumentList");
         }
             break;
         case FileListTypeUserList:
         {
-            NSString *tString = [NSString stringWithFormat:@"用户列表(%@人)",@([_iFileMutableArray count])];
+           NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"), @([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
-            [_iTKEduClassRoomSessionHandle sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(aButton.selected) completion:nil];
+            int isSucess = [[TKEduSessionHandle shareInstance]addPendingButton:tRoomUser];
+            if (!isSucess) {break;}
+            PublishState tState = tRoomUser.publishState;
+            BOOL isShowVideo = tRoomUser.publishState >1;
+            if (isShowVideo) {
+                tState = PublishState_NONE;
+                [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+
+                
+            }else{
+                tState = PublishState_BOTH;
+            }
+            
+            [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(false) completion:nil];
+            [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:tRoomUser.peerID Publish:tState completion:nil];
             
         }
             break;
@@ -246,308 +363,232 @@
             break;
     }
 }
+
+//切换动态ppt，音视频
 -(void)listButton3:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
+   
+  [self hide];
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
-            NSString *tString = [NSString stringWithFormat:@"影音列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
             TKMediaDocModel *tMediaDocModel =  [_iFileMutableArray objectAtIndex:aIndexPath.row];
-            tMediaDocModel.isPlay =@( aButton.selected);
+//            if ([TKEduWhiteBoardHandle shareTKEduWhiteBoardHandleInstance].iCurrentMediaDocModel
+//                && [tMediaDocModel.fileid intValue] == [[TKEduWhiteBoardHandle shareTKEduWhiteBoardHandleInstance].iCurrentMediaDocModel.fileid intValue])
+//                return;
             
-            NSDictionary *tMediaDocModelDic = @{
-                                                  @"fileid":tMediaDocModel.fileid,
-                                                  @"page":tMediaDocModel.page?tMediaDocModel.page:@(1),
-                                                  @"ismedia":@(true),
-                                                  @"filedata":@{
-                                                           @"fileid":tMediaDocModel.fileid,
-                                                           @"currpage":@(1),
-                                                           @"pagenum":tMediaDocModel.pagenum?tMediaDocModel.pagenum:@(1),
-                                                           @"filetype":tMediaDocModel.filetype,
-                                                           @"filename":tMediaDocModel.filename,
-                                                            @"swfpath":tMediaDocModel.swfpath
-                                                          }
-                                                  };
-            _iFileHeadLabel.text = MTLocalized(tString);
-            NSString *tIdString = [tMediaDocModel.filetype isEqualToString:@"video"]?sVideo_MediaFilePage_ShowPage:sAudio_MediaFilePage_ShowPage ;
+            aButton.selected = YES;
+            [self prepareVideoOrAudio:tMediaDocModel SendToOther:YES];
 
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tMediaDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            if (aButton.selected) {
-                [_iTKEduClassRoomSessionHandle sessionHandlePubMsg:sShowPage ID:tIdString To:sTellAllExpectSender Data:jsonString Save:false completion:nil];
-            }else{
-                [_iTKEduClassRoomSessionHandle sessionHandleDelMsg:sShowPage ID:tIdString To:sTellAllExpectSender Data:jsonString completion:nil];
-            }
-            if ([tMediaDocModel.filetype isEqualToString:@"video"]) {
-                TKAVPlayerViewController *tall = [[TKAVPlayerViewController alloc]initWithMediaDocModel:tMediaDocModel aEduClassRoomProperty:_iTKEduClassRoomProperty];
-                [_delegate presentViewController:tall animated:YES completion:^{
-                    
-                }];
-            }else{
-                
-                TKAudioPlayer *tAudioPlayer = [[TKAudioPlayer alloc]initWithMediaDocModel:tMediaDocModel aEduClassRoomProperty:_iTKEduClassRoomProperty];
-                [_delegate.iTKEduWhiteBoardView addSubview:[tAudioPlayer audioPlayerView:CGRectMake(0, CGRectGetHeight(_delegate.iTKEduWhiteBoardView.frame)-57, CGRectGetWidth(_delegate.iTKEduWhiteBoardView.frame), 57)] ];
-                
-            }
            
+            
+        }
+            break;
+        case FileListTypeDocument:
+        {
+            //文档列表
+             _iFileHeadLabel.text = MTLocalized(@"Title.DocumentList");
+            [aButton setSelected:YES];
+            if (aButton == _iPreButton) {
+                return;
+            }
+
+            TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
+        
+            if (_isClassBegin) {
+                [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender];
+                
+            }else{
+                [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
+              
+            }
+
+            
+            _iCurrrentButton = aButton;
+            if (_iPreButton) {
+                [_iPreButton setSelected:NO];
+            }
+            
+            _iPreButton = _iCurrrentButton;
+        }
+            break;
+        case FileListTypeUserList:
+        {
+             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
+            _iFileHeadLabel.text = MTLocalized(tString);
+            RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
+            PublishState tState = tRoomUser.publishState;
+            switch (tRoomUser.publishState) {
+                    
+                case PublishState_AUDIOONLY:
+                {
+                    tState = PublishState_NONE;
+                    
+                }
+                    break;
+                case PublishState_BOTH:
+                {
+                    tState = PublishState_VIDEOONLY;
+                }
+                    break;
+                case PublishState_NONE:
+                {
+                    tState = PublishState_AUDIOONLY;
+                    
+                }
+                    break;
+                case PublishState_VIDEOONLY:
+                {
+                    tState = PublishState_BOTH;
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+            [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(false) completion:nil];
+            [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:tRoomUser.peerID Publish:tState completion:nil];
+           
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+//涂鸦，删除文件，影音
+-(void)listButton4:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
+    //[self hide];
+      TKEduRoomProperty *tRoomProperty = [TKEduSessionHandle shareInstance].iRoomProperties;
+    switch (_iFileListType) {
+        case FileListTypeAudioAndVideo:
+        {
+            //@"影音列表"
+            _iFileHeadLabel.text = MTLocalized(@"Title.MediaList");
+            TKMediaDocModel *tMediaDocModel =  [_iFileMutableArray objectAtIndex:aIndexPath.row];
+          
+            [TKEduNetManager delRoomFile:tRoomProperty.iRoomId docid:[NSString stringWithFormat:@"%@",tMediaDocModel.fileid] isMedia:false aHost:tRoomProperty.sWebIp aPort:tRoomProperty.sWebPort  aDelComplete:^int(id  _Nullable response) {
+                
+                [[TKEduSessionHandle shareInstance] deleteaMediaDocModel:tMediaDocModel To:sTellAllExpectSender];
+                
+                if ([[TKEduSessionHandle shareInstance].iCurrentMediaDocModel.fileid integerValue] == [tMediaDocModel.fileid integerValue]) {
+
+                    /*
+                     if (_iAVPlayerVidewController) {
+                     //[_iAVPlayerVidewController clearPublishMedia:tMediaDocModel isPublish:YES];
+                     [_iAVPlayerVidewController clearPublishMedia:tMediaDocModel isPublish:YES aIsDismissViewController:NO];
+                     
+                     }
+                     if (_iAudioPlayer) {
+                     [_iAudioPlayer clearPublishMedia:tMediaDocModel isPublish:YES];
+                     _iAudioPlayer = nil;
+                     }
+                     */
+                    
+                    if ([TKEduSessionHandle shareInstance].isClassBegin) {
+                        
+                    }
+                    if (_iAudioVideoPlayerView) {
+                        [_iAudioVideoPlayerView clearPublishMedia:tMediaDocModel isPublish:YES];
+                    }
+
+                    if (_iAudioPlayerView) {
+                        [_iAudioPlayerView clearPublishMedia:tMediaDocModel isPublish:YES];
+                    }
+
+                  
+                }
+                
+                
+                [[TKEduSessionHandle shareInstance] delMediaArray:tMediaDocModel];
+                _iFileMutableArray = [[[TKEduSessionHandle shareInstance] mediaArray]mutableCopy];
+                [_iFileTableView reloadData];
+                return 1;
+            }];
+
+            
           
             
-           
-            
-            
-            
         }
             break;
         case FileListTypeDocument:
         {
-            /*
-             
-             
-             filedata =     {
-             currpage = 1;
-             fileid = 649;
-             filename = "\U6dfb\U52a0\U5242 .docx";
-             filetype = docx;
-             pagenum = 1;
-             swfpath = "/upload/20170516_115957_icteekor.jpg";
-             };
-             fileid = 649;
-             ismedia = 0;
-             
-             
-             */
-            NSString *tString = [NSString stringWithFormat:@"文档列表"];
+            //@"文档列表"
+            _iFileHeadLabel.text = MTLocalized(@"Title.DocumentList");
             TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
-           
-            NSDictionary *tDocmentDocModelDic = @{
-                                                  @"fileid":tDocmentDocModel.fileid,
-                                                  
-                                                  @"ismedia":@(false),
-                                                  @"filedata":@{
-                                                          @"fileid":tDocmentDocModel.fileid,
-                                                          @"currpage":tDocmentDocModel.currpage?tDocmentDocModel.currpage:@(1),
-                                                          @"pagenum":tDocmentDocModel.pagenum?tDocmentDocModel.pagenum:@(1),
-                                                          @"filetype":tDocmentDocModel.filetype,
-                                                          @"filename":tDocmentDocModel.filename,
-                                                          @"swfpath":tDocmentDocModel.swfpath
-                                                          }
-                                                  };
-            
-            if ([tDocmentDocModel.dynamicppt boolValue]) {
-                bool tIsAynamicPPT = true;
-               tDocmentDocModelDic = @{
-                                                      @"action":@"show",
-                                                      @"aynamicPPT":@(tIsAynamicPPT),
-                                                      
-                                                      @"ismedia":@(false),
-                                                      @"filedata":@{
-                                                              @"fileid":tDocmentDocModel.fileid,
-                                                              @"currpage":tDocmentDocModel.currpage?tDocmentDocModel.currpage:@(1),
-                                                              @"pagenum":tDocmentDocModel.pagenum?tDocmentDocModel.pagenum:@(0),
-                                                              @"filetype":tDocmentDocModel.filetype,
-                                                              @"filename":tDocmentDocModel.filename,
-                                                              @"swfpath":tDocmentDocModel.swfpath
-                                                              }
-                                                      };
-            }
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
-             NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            _iFileHeadLabel.text = MTLocalized(tString);
-            if (aButton.selected) {
-                  [_iTKEduClassRoomSessionHandle sessionHandlePubMsg:sShowPage ID:sShowPage To:sTellAll Data:jsonString Save:false completion:nil];
-            }else{
-                [_iTKEduClassRoomSessionHandle sessionHandleDelMsg:sShowPage ID:sShowPage To:sTellAll Data:jsonString completion:nil];
-            }
-            
+        
+            [TKEduNetManager delRoomFile:tRoomProperty.iRoomId docid:tDocmentDocModel.fileid isMedia:false aHost:tRoomProperty.sWebIp aPort:tRoomProperty.sWebPort  aDelComplete:^int(id  _Nullable response) {
+                
+                [[TKEduSessionHandle shareInstance] deleteDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender];
+                if ([[TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid isEqualToString:tDocmentDocModel.fileid]) {
+                    TKDocmentDocModel *tDocmentDocNextModel = [[TKEduSessionHandle shareInstance] getNextDocment:[TKEduSessionHandle shareInstance].iCurrentDocmentModel];
+                   
+                    
+                    if (_isClassBegin) {
+                        [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocNextModel To:sTellAllExpectSender];
+                        
+                    }else{
+                        [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocNextModel];
+                      
+                    }
+                   
+                }
+                
+                [[TKEduSessionHandle shareInstance] delDocmentArray:tDocmentDocModel];
+                _iFileMutableArray = [[[TKEduSessionHandle shareInstance] docmentArray]mutableCopy];
+                [_iFileTableView reloadData];
+                return 1;
+            }];
+          
             
         }
             break;
         case FileListTypeUserList:
         {
-            NSString *tString = [NSString stringWithFormat:@"用户列表(%@人)",@([_iFileMutableArray count])];
+            [self hide];
+            //关闭涂鸦
+            NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
-            PublishState tState = tRoomUser.publishState;
-            switch (tRoomUser.publishState) {
-                case PublishState_NONE:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_VIDEOONLY;
-                    }
-                }
-                    break;
-                case PublishState_VIDEOONLY:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_VIDEOONLY;
-                    }else{
-                        tState = PublishState_NONE;
-                    }
-                }
-                    break;
-                case PublishState_AUDIOONLY:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_BOTH;
-                    }else{
-                        tState = PublishState_AUDIOONLY;
-                    }
-                }
-                    break;
-                case PublishState_BOTH:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_BOTH;
-                    }else{
-                        tState = PublishState_AUDIOONLY;
-                    }
-                }
-                    break;
-                default:
-                    break;
+            if (tRoomUser.publishState>1) {
+                
+                [[TKEduSessionHandle shareInstance]  sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!tRoomUser.canDraw)) completion:nil];
+ 
             }
-            [_iTKEduClassRoomSessionHandle sessionHandleChangeUserPublish:tRoomUser.peerID Publish:tState completion:nil];
-           
+
             
         }
             break;
         default:
             break;
-    }
-}
--(void)listButton4:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
-    switch (_iFileListType) {
-        case FileListTypeAudioAndVideo:
-        {
-            NSString *tString = [NSString stringWithFormat:@"影音列表"];
-            _iFileHeadLabel.text = MTLocalized(tString);
-            TKMediaDocModel *tMediaDocModel =  [_iFileMutableArray objectAtIndex:aIndexPath.row];
-            tMediaDocModel.isPlay =@( aButton.selected);
-            
-            NSDictionary *tMediaDocModelDic = @{
-                                                @"fileid":tMediaDocModel.fileid,
-                                                @"page":tMediaDocModel.page?tMediaDocModel.page:@(1),
-                                                @"ismedia":@(true),
-                                                @"filedata":@{
-                                                        @"fileid":tMediaDocModel.fileid,
-                                                        @"currpage":@(1),
-                                                        @"pagenum":tMediaDocModel.pagenum?tMediaDocModel.pagenum:@(1),
-                                                        @"filetype":tMediaDocModel.filetype,
-                                                        @"filename":tMediaDocModel.filename,
-                                                        @"swfpath":tMediaDocModel.swfpath
-                                                        }
-                                                };
-            _iFileHeadLabel.text = MTLocalized(tString);
-            NSString *tIdString = [tMediaDocModel.filetype isEqualToString:@"video"]?sVideo_MediaFilePage_ShowPage:sAudio_MediaFilePage_ShowPage ;
-            
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tMediaDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            
-             [_iTKEduClassRoomSessionHandle sessionHandleDelMsg:sShowPage ID:tIdString To:sTellAllExpectSender Data:jsonString completion:nil];
-            [_iTKEduWhiteBoardHandle delMediaArray:tMediaDocModel];
-            _iFileMutableArray = [[_iTKEduWhiteBoardHandle mediaArray]mutableCopy];
-            [_iFileTableView reloadData];
-            
-        }
-            break;
-        case FileListTypeDocument:
-        {
-            NSString *tString = [NSString stringWithFormat:@"文档列表"];
-            TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
-            
-            NSDictionary *tDocmentDocModelDic = @{
-                                                  @"fileid":tDocmentDocModel.fileid,
-                                                  
-                                                  @"ismedia":@(false),
-                                                  @"filedata":@{
-                                                          @"fileid":tDocmentDocModel.fileid,
-                                                          @"currpage":tDocmentDocModel.currpage?tDocmentDocModel.currpage:@(1),
-                                                          @"pagenum":tDocmentDocModel.pagenum?tDocmentDocModel.pagenum:@(1),
-                                                          @"filetype":tDocmentDocModel.filetype,
-                                                          @"filename":tDocmentDocModel.filename,
-                                                          @"swfpath":tDocmentDocModel.swfpath
-                                                          }
-                                                  };
-            
-            if (tDocmentDocModel.dynamicppt) {
-                bool tIsAynamicPPT = true;
-                tDocmentDocModelDic = @{
-                                        @"action":@"show",
-                                        @"aynamicPPT":@(tIsAynamicPPT),
-                                        
-                                        @"ismedia":@(false),
-                                        @"filedata":@{
-                                                @"fileid":tDocmentDocModel.fileid,
-                                                @"currpage":tDocmentDocModel.currpage?tDocmentDocModel.currpage:@(1),
-                                                @"pagenum":tDocmentDocModel.pagenum?tDocmentDocModel.pagenum:@(0),
-                                                @"filetype":tDocmentDocModel.filetype,
-                                                @"filename":tDocmentDocModel.filename,
-                                                @"swfpath":tDocmentDocModel.swfpath
-                                                }
-                                        };
-            }
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            _iFileHeadLabel.text = MTLocalized(tString);
-             [_iTKEduClassRoomSessionHandle sessionHandleDelMsg:sShowPage ID:sShowPage To:sTellAll Data:jsonString completion:nil];
-            [_iTKEduWhiteBoardHandle delDocmentArray:tDocmentDocModel];
-            _iFileMutableArray = [[_iTKEduWhiteBoardHandle docmentArray]mutableCopy];
-            [_iFileTableView reloadData];
-            
-        }
-            break;
-        case FileListTypeUserList:
-        {
-            NSString *tString = [NSString stringWithFormat:@"用户列表(%@人)",@([_iFileMutableArray count])];
-            _iFileHeadLabel.text = MTLocalized(tString);
-            RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
-            PublishState tState = tRoomUser.publishState;
-            switch (tRoomUser.publishState) {
-                case PublishState_NONE:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_VIDEOONLY;
-                    }
-                }
-                    break;
-                case PublishState_VIDEOONLY:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_VIDEOONLY;
-                    }else{
-                        tState = PublishState_NONE;
-                    }
-                }
-                    break;
-                case PublishState_AUDIOONLY:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_BOTH;
-                    }else{
-                        tState = PublishState_AUDIOONLY;
-                    }
-                }
-                    break;
-                case PublishState_BOTH:
-                {
-                    if (aButton.selected) {
-                        tState = PublishState_BOTH;
-                    }else{
-                        tState = PublishState_AUDIOONLY;
-                    }
-                }
-                    break;
-                default:
-                    break;
-            }
-            [_iTKEduClassRoomSessionHandle sessionHandleChangeUserPublish:tRoomUser.peerID Publish:tState completion:nil];
-            
-            
-        }
-            break;
-        default:
-            break;
-    }
+    } 
  
 }
+
+#pragma mark  mediaProtocol
+
+-(void)mediaPlayStatus:(BOOL)aSucess{
+    
+  [_iVideoPlayerHud hide:YES];
+    
+}
+
+-(void)mediaBackAction{
+    
+    if (_iAudioVideoPlayerView) {
+
+        _iAudioVideoPlayerView = nil;
+    }
+    
+    if (_iAudioPlayerView) {
+
+        _iAudioPlayerView = nil;
+    }
+    
+}
+
+- (void)replay:(TKMediaDocModel *)model {
+    [self prepareVideoOrAudio:model SendToOther:YES];
+}
+
+
 @end

@@ -9,19 +9,24 @@
 #import "TKVideoPlayerHandle.h"
 #import "TKMacro.h"
 #import "RoomUser.h"
+#import "TKEduBoardHandle.h"
+#import "TKEduSessionHandle.h"
+#import "TKMediaDocModel.h"
+
 @interface TKVideoPlayerHandle (){
 
     
 }
 
 @property (nonatomic,strong)UIView *iRootView;
+@property (nonatomic, assign) float volume;//默认最大声
 
 @property(nonatomic,strong)CABasicAnimation *iRotationAnimation;
 @property(nonatomic, strong)AVPlayerLayer   *iPreAVPlayerLayer;
 @property(nonatomic, strong)TKMediaDocModel *iPreMediaDocModel;
 @property(nonatomic, strong)UIButton        *iPreAudioButtion;
 @property(nonatomic, strong)AVPlayerItem    *iPreItem;// item
-
+@property (strong, nonatomic)  UISlider *iAudioslider2;
 @end
 NSString *const kAVPlayerCloseVideoNotificationKey   = @"kAVPlayerCloseVideoNotificationKey";
 NSString *const kAVPlayerCloseDetailVideoNotificationKey = @"kAVPlayerCloseDetailVideoNotificationKey";
@@ -33,10 +38,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 @implementation TKVideoPlayerHandle
 
 - (void)playerInitialize:(NSString *)urlString  aMediaDocModel:(TKMediaDocModel*)aMediaDocModel withView:(UIView*)aRootView aType:(NSString*)aType add:(BOOL)add aRoomUser:(RoomUser*)aRoomUser{
-    NSLog(@"---------%@",@(add));
+
     if (add) {
         _iRootView = aRootView;
         _iMediaDocModel = aMediaDocModel;
+        self.volume = 1.0;
         NSString *tdeletePathExtension = urlString.stringByDeletingPathExtension;
         NSString *tNewURLString = [NSString stringWithFormat:@"%@-1.%@",tdeletePathExtension,urlString.pathExtension];
         NSArray *tArray          = [tNewURLString componentsSeparatedByString:@"/"];
@@ -50,15 +56,15 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         if (_iCurrentItem) {
             
             _iPreItem = _iCurrentItem;
-           // [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_iCurrentItem];
-            [self removeObserverFromPlayerItem:_iCurrentItem];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+            [self removeObserverFromPlayerItem:_iPreItem];
             
         }
         //重新设置currentItem
         _iCurrentItem = [AVPlayerItem playerItemWithAsset:liveAsset];
         [self addObserverFromPlayerItem:_iCurrentItem];
         // 添加视频播放结束通知
-       // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:aType];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         //如果没有avplayer，则设置avplayer
         if (!_iAVPlayer) {
             _iAVPlayer = [AVPlayer playerWithPlayerItem:_iCurrentItem];
@@ -75,23 +81,42 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
                 [_iAVPlayer pause];
                 [_iAVPlayerLayer removeFromSuperlayer];
                 [_iPreAVPlayerLayer removeFromSuperlayer];
-                 NSLog(@"---------(删除)");
+                
             }
             AVPlayerLayer *tAVPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:_iAVPlayer];
-            tAVPlayerLayer.frame          =aRootView.layer.bounds;
-            tAVPlayerLayer.videoGravity   =AVLayerVideoGravityResizeAspectFill;
+            tAVPlayerLayer.frame          = aRootView.layer.bounds;
+            /*
+             
+             第1种模式AVLayerVideoGravityResizeAspect是按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑；
+             第2种AVLayerVideoGravityResizeAspectFill是以原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分就被切割了；
+             第3种AVLayerVideoGravityResize是拉伸视频内容达到边框占满，但不按原比例拉伸，这里明显可以看出宽度被拉伸了。
+             
+             */
+            tAVPlayerLayer.videoGravity   =AVLayerVideoGravityResize;
             _iAVPlayerLayer               = tAVPlayerLayer;
             if (!_iPreAVPlayerLayer) {
                 _iPreAVPlayerLayer = tAVPlayerLayer;
             }
            
-           
             [aRootView.layer addSublayer:tAVPlayerLayer];
-             NSLog(@"---------(%@)",@(aRootView.layer.sublayers.count));
+            NSLog(@"------layer %@",@([aRootView.layer.sublayers count]));
+            
            
         }else if([aType isEqualToString:@"audio"]) {
+            if(_iPreAudioButtion)
+            {
+                [_iAVPlayer.currentItem cancelPendingSeeks];
+                [_iAVPlayer.currentItem.asset cancelLoading];
+                [_iAVPlayer pause];
+                [_iAudioButtion.layer removeAllAnimations];
+                [_iAudioButtion removeFromSuperview];
+                [_iPreAudioButtion removeFromSuperview];
+                
+            }
+ 
             
-            UIButton * tAudioButtion = [[UIButton alloc]initWithFrame:CGRectMake(0, ScreenH-50, 50, 50)];
+            //132 ==bottomHeigh
+            UIButton * tAudioButtion = [[UIButton alloc]initWithFrame:CGRectMake(0, ScreenH-50-132, 50, 50)];
             [tAudioButtion setImage:LOADIMAGE(@"disk") forState:UIControlStateNormal];
             [aRootView addSubview:tAudioButtion];
             _iAudioButtion = tAudioButtion;
@@ -100,13 +125,13 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             }
             
         };
-        
+       
     }else{
         
         [self removePlayer:aType aMediaDocModel:aMediaDocModel];
         
     }
-  
+      [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
     
     
     
@@ -143,9 +168,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             [_iPreAudioButtion removeFromSuperview];
         }
         _iPreAudioButtion = _iAudioButtion;
-        
+       
     }
     
+  [[TKEduSessionHandle shareInstance]configurePlayerRoute:NO];
+
     
 }
 //获取视频的总时间
@@ -161,21 +188,43 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 }
 
 -(void)playeOrPause:(BOOL)aIsPlay {
+    if (!(_iAudioButtion || _iAVPlayerLayer)) {
+        return;
+    }
+    
+    NSInteger tCurrentTime = CMTimeGetSeconds(_iAVPlayer.currentItem.currentTime);
+    _iMediaDocModel.currentTime = @(tCurrentTime);
+    if (aIsPlay) {
+        // 如果是重新播放，需要将时间调回到0
+        NSInteger totalDuration = CMTimeGetSeconds(_iAVPlayer.currentItem.duration);
+        if (totalDuration == tCurrentTime) {
+            [self setCurrentTime:0];
+            
+        }
+        
+    }
+    
     //正在播放
     if (aIsPlay && _iAudioButtion) {
-         CABasicAnimation *tRotationAnimation            = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+         CABasicAnimation *tRotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         tRotationAnimation.toValue     = [NSNumber numberWithFloat: M_PI * 2.0 ];
         tRotationAnimation.duration    = 1;
         tRotationAnimation.cumulative  = YES;
         tRotationAnimation.repeatCount = HUGE_VALF;
         [_iAudioButtion.layer addAnimation:tRotationAnimation forKey:@"rotationAnimation"];
         
+        
     }else if(_iAudioButtion){
         //没播放，且是audioButton，则去掉动画
         [_iAudioButtion.layer removeAllAnimations];
         
     }
+  
     aIsPlay?[_iAVPlayer play]:[_iAVPlayer pause];
+    !aIsPlay?:[self configureVolume:self.volume];
+    [[TKEduSessionHandle shareInstance] configurePlayerRoute:aIsPlay];
+ 
+  
     
 }
 
@@ -198,14 +247,24 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     [_iAVPlayer.currentItem.asset cancelLoading];
     [_iAVPlayer pause];
     [_iAVPlayerLayer removeFromSuperlayer];
+    [_iPreAVPlayerLayer removeFromSuperlayer];
+    
     [_iAudioButtion removeFromSuperview];
+    [_iPreAudioButtion removeFromSuperview];
+    
     [_iAVPlayer replaceCurrentItemWithPlayerItem:nil];
     [self removeObserverFromPlayerItem:_iCurrentItem];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     _iAVPlayer    = nil;
     _iCurrentItem = nil;
+    _iAVPlayerLayer = nil;
+    _iPreAudioButtion = nil;
+    
+    [[TKEduSessionHandle shareInstance]configurePlayerRoute:NO];
 }
 -(void)dealloc{
     [self releaseAVPlayer];
+    NSLog(@"-------VideoPlayerHandle");
 }
 
 #pragma mark - 添加监听
@@ -230,6 +289,10 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         if(status == AVPlayerStatusReadyToPlay){
             // 设置进度条最大value= 视频总时长
            // double duration = CMTimeGetSeconds(_iAVPlayer.currentItem.duration);
+            if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student) {
+                 //[[TKEduClassRoomSessionHandle shareInstance]publishtNeedProgressMediaDocModel:_iMediaDocModel];
+            }
+           
          
         }
         
@@ -237,12 +300,28 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 }
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     
-    NSString *tStringType = notification.object;
-    [self removePlayer:tStringType aMediaDocModel:nil];
+    if (_iAudioButtion) {
+        [_iAudioButtion.layer removeAllAnimations];
+    }
     
 }
 #pragma mark 其他
+/**
+ *  获取系统音量
+ */
+- (void)configureVolume:(float)volume {
+    
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    
+    for (UIView *view in [volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            _iAudioslider2 = (UISlider *)view;
+            _iAudioslider2.value = volume;
 
+            break;
+        }
+    }
+}
 -(void)setVolumeForPlayer:(AVAsset*)liveAsset playerItem:(AVPlayerItem*) playerItem volume:(float)volume{
     
     //AVF_EXPORT NSString *const AVMediaTypeVideo                 NS_AVAILABLE(10_7, 4_0);

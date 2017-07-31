@@ -20,7 +20,7 @@ static CGFloat const cellHeight = 54.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
-    self.popoverPresentationController.backgroundColor = [UIColor whiteColor];
+    self.popoverPresentationController.backgroundColor = UICOLOR_FROM_RGB(62, 62, 62);;
     
     // 不显示多余的cell
     self.xc_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -32,6 +32,9 @@ static CGFloat const cellHeight = 54.0f;
 {
     self.xc_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
     self.xc_tableView.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    
+    self.xc_tableView.backgroundColor = UICOLOR_FROM_RGB(62, 62, 62);
+    
     [self.view addSubview:self.xc_tableView];
     
     [self.xc_tableView mas_makeConstraints:^(MASConstraintMaker *make) {

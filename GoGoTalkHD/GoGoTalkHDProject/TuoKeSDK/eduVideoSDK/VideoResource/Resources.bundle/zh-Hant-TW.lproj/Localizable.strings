@@ -5,6 +5,7 @@
  Created by macmini on 15/2/3.
  Copyright (c) 2015年 macmini. All rights reserved.
  */
+
 "Error.NoMeeting" = "會議不存在";
 "Error.NoLiving" = "直播不存在";
 "Error.NotSupportThisType" = "不支持這種直播類型，請用電腦端登錄";
@@ -12,7 +13,7 @@
 "Error.CheckmeetingFail" = "檢查會議失敗";
 "Error.CheckserverInformationFail" = "獲取伺服器信息失敗";
 "Error.CompanyFreeze" = "公司被凍結";
-"Error.RoomDeletedOrExpired" = "教室被删除或過期";
+"Error.RoomDeletedOrExpired" = "課堂不存在";
 "Error.MemberOverRoomLimit" = "教室人數超過限制";
 "Error.NeedPwd" = "該教室需要密碼，請輸入密碼";
 "Error.PwdError" = "教室密碼錯誤!";
@@ -27,6 +28,7 @@
 "Prompt.Quite" = "您確定退出嗎?";
 "Prompt.nicknameNotNull" = "昵稱不能為空";
 "Prompt.RoomIDNotNull" = "課堂號不能為空";
+"Prompt.onlyNumber" = "課堂號只能是數字";
 //login
 "Login.EnterRoom" = "進入教室";
 "Login.RoomId"    = "教室號";
@@ -53,6 +55,8 @@
 "Say.say" = "說點什麼吧";
 //button
 "Button.send" = "發送";
+"Button.closed" = "關閉";
+"Button.chat" = "聊天";
 //Class.Begin
 "Class.Begin" = "上課啦";
 "Class.Over" = "下課啦";
@@ -63,5 +67,35 @@
 "Button.ClassIsOver"   = "下課";
 "Button.ClassEnd"      = "課程結束";
 "Button.RaiseHand"     = "舉手";
+"Button.RaiseHandCancle"= "取消舉手";
+
+
+"Button.OpenAudio"          = "打開音頻";
+"Button.CloseAudio"         = "關閉音頻";
+"Button.OpenVideo"          = "打開視頻";
+"Button.CloseVideo"         = "關閉視頻";
+"Button.UpPlatform"         = "上發言席";
+"Button.DownPlatform"       = "下發言席";
+"Button.AllowDoodle"        = "授權塗鴉";
+"Button.CancelDoodle"       = "取消塗鴉";
+"Button.GiveCup"            = "發送獎杯";
+"Action.EnterRoom"          = "加入課堂!";
+"Action.ExitRoom"           = "離開課堂!";
+"Prompt.EndClass1M"         = "距離下課還剩1分鐘，請合理安排時間哦~";
+"Prompt.RoomToBeClosed"     = "教室即將關閉。";
+"Prompt.ClassToBegin"       = "距離上課時間還有1分鐘，請做好準備。";
+"Prompt.timeoutStart.one"   = "已逾時";
+"Prompt.timeoutStart.two"   = "分鐘，請抓緊時間開始上課";
+"Prompt.timeoutReadyEnd.one" = "您已超時";
+"Prompt.timeoutReadyEnd.two" = "分鐘，課堂將於";
+"Prompt.timeoutReadyEnd.three" = "分鐘之後自動關閉！";
+"Title.DocumentList"        = "課件列錶";
+"Title.MediaList"           = "媒體列錶";
+"Title.UserList"            = "花名册";
+"Title.UserList.two"        = "花名册 (1)";
+"Button.remindKnow"         = "我知道了";
+"Prompt.timeoutEnd"         = "課堂即將關閉";
+
+
 
 

@@ -1,4 +1,4 @@
-wy_room.service('ServiceTools', function () {
+tk_room.service('ServiceTools', function () {
 	return {
 		/*所需工具*/
         tool:{

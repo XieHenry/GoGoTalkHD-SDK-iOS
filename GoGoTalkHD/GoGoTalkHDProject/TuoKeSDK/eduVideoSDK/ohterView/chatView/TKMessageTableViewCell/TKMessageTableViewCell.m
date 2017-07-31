@@ -29,13 +29,9 @@
     _iMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _iMessageLabel.textColor = RGBCOLOR(134, 134, 134);
     _iMessageLabel.backgroundColor = [UIColor clearColor];
-    
-    _iMessageLabel.textColor = [UIColor whiteColor];
-    _iMessageLabel.backgroundColor = UICOLOR_FROM_HEX(ColorC8C8CE);
-    _iMessageLabel.layer.masksToBounds = YES;
-    _iMessageLabel.layer.cornerRadius = 4.0f;
-    
-    [_iMessageLabel setFont:TEXT_FONT];
+    _iMessageLabel.textAlignment = NSTextAlignmentCenter;
+    _iMessageLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    [_iMessageLabel setFont:TKFont(15)];
     [self.contentView addSubview:_iMessageLabel];
     self.contentView.backgroundColor = [UIColor clearColor];
     self.backgroundColor             = [UIColor clearColor];
@@ -43,7 +39,7 @@
 }
 - (void)resetView
 {
-    _iMessageLabel.text = [NSString stringWithFormat:@" %@ ", _text];
+    _iMessageLabel.text = _iMessageText;
 }
 
 
@@ -52,10 +48,10 @@
 {
     [super layoutSubviews];
     
-    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitHeight:28 Font:TEXT_FONT];
-    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width, tMessageLabelsize.height );
+    //CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitHeight:28 Font:TEXT_FONT];
+    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
+    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+20, tMessageLabelsize.height+20);
     
-   
      [self imageAddCornerWithRadius];
      [TKUtil setCenter:_iMessageLabel ToFrame:self.contentView.frame];
     [self.contentView bringSubviewToFront:_iMessageLabel];
@@ -71,7 +67,7 @@
         [self.contentView addSubview:_backgroudImageView];
     }
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_iMessageLabel.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(4, 4)];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_iMessageLabel.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake( CGRectGetWidth(_iMessageLabel.frame)/2,  CGRectGetWidth(_iMessageLabel.frame)/2)];
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
     //设置大小
@@ -86,11 +82,7 @@
 
     
 }
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
+
 
 + (CGSize)sizeFromText:(NSString *)text withLimitWidth:(CGFloat)width Font:(UIFont*)aFont
 {

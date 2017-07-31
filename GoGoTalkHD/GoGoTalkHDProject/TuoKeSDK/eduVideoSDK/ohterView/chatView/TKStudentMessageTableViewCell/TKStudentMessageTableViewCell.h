@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKMacro.h"
 typedef void(^bTranslationButtonClicked)(NSString *aTranslationString);
 
 @interface TKStudentMessageTableViewCell : UITableViewCell
@@ -17,11 +18,11 @@ typedef void(^bTranslationButtonClicked)(NSString *aTranslationString);
 @property (nonatomic, strong) UIButton *iTranslationButton;
 @property (nonatomic, copy)   bTranslationButtonClicked iTranslationButtonClicked;
 @property (nonatomic, strong) UILabel *iMessageTranslationLabel;
-
-
+@property (nonatomic, assign) MessageType iMessageType;
 @property (nonatomic, strong) NSString *iText;
 @property (nonatomic, strong) NSString *iTranslationtext;
-@property (nonatomic, strong) UIImageView *backgroudImageView;
+@property (nonatomic, strong) NSString *iNickName;
+@property (nonatomic, strong) NSString *iTime;
 
 - (void)resetView;
 + (CGFloat)heightFromText:(NSString *)text withLimitWidth:(CGFloat)width;
