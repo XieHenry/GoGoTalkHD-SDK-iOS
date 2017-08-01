@@ -13,7 +13,8 @@
 "Error.CheckmeetingFail" = "检查会议失败";
 "Error.CheckserverInformationFail" = "获取服务器信息失败";
 "Error.CompanyFreeze" = "公司被冻结！";
-"Error.RoomDeletedOrExpired" = "教室被删除或者过期！";
+//"Error.RoomDeletedOrExpired" = "教室被删除或者过期！";
+"Error.RoomDeletedOrExpired" = "该课程已结束！";
 "Error.MemberOverRoomLimit" = "教室人数超限";
 "Error.NeedPwd" = "该教室需要密码，请输入密码！";
 "Error.PwdError" = "课堂密码错误！";
