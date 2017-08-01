@@ -59,6 +59,7 @@
     // 注入JS对象名称AppModel，当JS通过AppModel来调用时，
     // 我们可以在WKScriptMessageHandler代理中接收到
     [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
+    [config.userContentController addScriptMessageHandler:self name:@"wHeight"];
     self.xc_webView = [[WKWebView alloc] initWithFrame:self.bounds
                                             configuration:config];
     self.xc_webView.navigationDelegate = self;
@@ -132,13 +133,13 @@
     [webView evaluateJavaScript:@"document.body.offsetHeight;"completionHandler:^(id _Nullable result,NSError *_Nullable error) {
         
         //获取页面高度，并重置webview的frame
-        CGFloat height = [result doubleValue];
-        if (self.xc_height == 0) {
-            if ([self.delegate respondsToSelector:@selector(previewDemoCourseCellHeightWithHeight:)]) {
-                [self.delegate previewDemoCourseCellHeightWithHeight:height];
-                self.xc_height = height;
-            }
-        }
+//        CGFloat height = [result doubleValue];
+//        if (self.xc_height == 0) {
+//            if ([self.delegate respondsToSelector:@selector(previewDemoCourseCellHeightWithHeight:)]) {
+//                [self.delegate previewDemoCourseCellHeightWithHeight:height];
+//                self.xc_height = height;
+//            }
+//        }
     }];
 }
 
@@ -161,6 +162,17 @@
         NSLog(@"%@", message.body);
         
         [self rightAction];
+    }
+    
+    if ([message.name isEqualToString:@"wHeight"]) {
+        NSDictionary *response = message.body;
+        if (self.xc_height == 0) {
+            if ([self.delegate respondsToSelector:@selector(previewDemoCourseCellHeightWithHeight:)]) {
+                [self.delegate previewDemoCourseCellHeightWithHeight:[response[@"wHeight"] floatValue]];
+                self.xc_height = [response[@"wHeight"] floatValue];
+            }
+        }
+        
     }
 }
 
