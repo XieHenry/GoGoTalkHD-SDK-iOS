@@ -93,10 +93,7 @@
             self.xc_label.text = @"";
         }
         
-        // 暂时换图
-//        self.xc_imgView.image = UIIMAGE_FROM_NAME(@"dengdaizhong");
-        
-        self.xc_imgView.image = UIIMAGE_FROM_NAME(@"tiyanke");
+        self.xc_imgView.image = UIIMAGE_FROM_NAME(@"dengdaizhong");
         
     } else if ([xc_model.result isEqualToString:@"4"]) {
         
