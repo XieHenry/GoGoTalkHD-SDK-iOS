@@ -42,6 +42,7 @@
                 GGT_CoursewareModel *model = [GGT_CoursewareModel yy_modelWithDictionary:obj];
                 if (idx == 0) {
                     model.xc_isSelected = YES;
+                    self.xc_coursewareModel = model;
                 } else {
                     model.xc_isSelected = NO;
                 }
