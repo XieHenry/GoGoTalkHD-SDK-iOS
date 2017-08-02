@@ -65,6 +65,7 @@
 {
     _xc_model = xc_model;
     if ([xc_model.msg isKindOfClass:[NSString class]]) {
+        xc_model.msg = [xc_model.msg stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         self.xc_placeholderLabel.text = xc_model.msg;
     }
 }
