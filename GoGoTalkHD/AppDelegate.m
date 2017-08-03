@@ -63,7 +63,9 @@ static BOOL isProduction = true;
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.base_url = BASE_REQUEST_URL;
 
-    [[BaseService share] sendGetRequestWithPath:URL_GetUrl token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@?Version=v%@", URL_GetUrl, APP_VERSION()];
+    
+    [[BaseService share] sendGetRequestWithPath:url token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
