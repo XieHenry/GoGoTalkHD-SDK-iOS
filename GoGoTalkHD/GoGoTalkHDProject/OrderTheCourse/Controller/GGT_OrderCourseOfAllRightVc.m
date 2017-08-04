@@ -131,7 +131,6 @@ typedef enum : NSUInteger {
     
     cell.xc_orderButton.tag = 100+indexPath.row;
     cell.xc_focusButton.tag = 1000+indexPath.row;
-    cell.xc_iconButton.tag = 10000+indexPath.row;
     
     /****预约***/
     [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -139,8 +138,6 @@ typedef enum : NSUInteger {
     /****关注***/
     [cell.xc_focusButton addTarget:self action:@selector(xc_focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    /****头像***/
-    [cell.xc_iconButton addTarget:self action:@selector(xc_iconButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.xc_model = self.xc_dataMuArray[indexPath.row];
     
@@ -150,6 +147,35 @@ typedef enum : NSUInteger {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return LineH(xc_cellHeight);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    GGT_HomeTeachModel *model = [self.xc_dataMuArray safe_objectAtIndex:indexPath.row];
+    GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.pushModel = model;
+    vc.refreshCellBlick = ^(NSString *statusStr) {
+        
+        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        if ([model.IsFollow isEqualToString:@"0"]) {
+            model.IsFollow = @"1";
+        } else {
+            model.IsFollow = @"0";
+        }
+        
+        cell.xc_model = model;
+        
+    };
+    
+    //刷新整个数据
+    vc.refreshLoadDataBlock = ^(BOOL isYes) {
+        self.xc_pageIndex = 1;
+        self.xc_loadType = XCLoadNewData;
+        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+    };
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -225,37 +251,7 @@ typedef enum : NSUInteger {
 
 }
 
-#pragma mark - 头像按钮
-- (void)xc_iconButtonClick:(UIButton *)button
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag-10000 inSection:0];
-    GGT_HomeTeachModel *model = [self.xc_dataMuArray safe_objectAtIndex:indexPath.row];
-    GGT_DetailsOfTeacherViewController *vc = [[GGT_DetailsOfTeacherViewController alloc]init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.pushModel = model;
-    vc.refreshCellBlick = ^(NSString *statusStr) {
-        
-        GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
-        if ([model.IsFollow isEqualToString:@"0"]) {
-            model.IsFollow = @"1";
-        } else {
-            model.IsFollow = @"0";
-        }
-        
-        cell.xc_model = model;
-        
-    };
-    
-    //刷新整个数据
-    vc.refreshLoadDataBlock = ^(BOOL isYes) {
-        self.xc_pageIndex = 1;
-        self.xc_loadType = XCLoadNewData;
-        [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
-    };
-    
-    [self.navigationController pushViewController:vc animated:YES];
- 
-}
+
 
 #pragma mark - 关注网络请求
 - (void)sendFocusNetworkWithHomeTeachModel:(GGT_HomeTeachModel *)model button:(UIButton *)button
@@ -303,7 +299,7 @@ typedef enum : NSUInteger {
 
 - (void)xc_loadDataWithDate:(NSString *)date timge:(NSString *)time pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@&time=%@&pageIndex=%ld&pageSize=%ld", URL_GetPageTeacherLessonApp, self.xc_date, self.xc_time, self.xc_pageIndex, self.xc_pageSize];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?date=%@&time=%@&pageIndex=%ld&pageSize=%ld", URL_GetPageTeacherLessonApp, self.xc_date, self.xc_time, (long)self.xc_pageIndex, (long)self.xc_pageSize];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         if (self.xc_loadType == XCLoadNewData) {

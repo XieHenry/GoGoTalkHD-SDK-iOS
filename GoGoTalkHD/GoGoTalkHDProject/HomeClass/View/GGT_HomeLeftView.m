@@ -131,15 +131,7 @@
     checkButton.tag = 103;
     [checkButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:checkButton];
-    checkButton.hidden = YES;
-    
-    [checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset(LineY(655));
-        make.size.mas_equalTo(CGSizeMake(LineW(28), LineH(27)));
-    }];
-    
-    
+
     
     // 电话按钮
     UIButton *phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -149,6 +141,12 @@
     [phoneButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:phoneButton];
     
+    [checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.bottom.equalTo(phoneButton.mas_top).with.offset(-LineY(30));
+        make.size.mas_equalTo(CGSizeMake(LineW(28), LineH(27)));
+    }];
+    
     
     [phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
@@ -156,7 +154,6 @@
         make.size.mas_equalTo(CGSizeMake(LineW(26), LineH(26)));
     }];
     
-
 }
 
 - (void)buttonAction:(UIButton *)button {
