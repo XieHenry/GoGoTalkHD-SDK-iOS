@@ -63,6 +63,7 @@
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = button.height/2.0;
+        button.hidden = YES;
         button;
     });
     [self addSubview:self.xc_bottomButton];
