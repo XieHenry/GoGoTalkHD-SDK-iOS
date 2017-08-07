@@ -42,8 +42,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushMineWithNotification:) name:@"mine" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTestReportWithNotification:) name:@"testReport1" object:nil];
 
-    //检测审核状态
-    [self checkStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -54,33 +52,6 @@
 
 }
 
-
-- (void)checkStatus {
-    
-    [[BaseService share] sendGetRequestWithPath:URL_GetTesting token:NO viewController:self showMBProgress:NO success:^(id responseObject) {
-
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        sin.isAuditStatus = NO;
-        
-        UIButton *button = [self.view viewWithTag:103];
-        button.hidden = NO;
-        
-    } failure:^(NSError *error) {
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        
-        //0是审核状态，隐藏
-        if ([error.userInfo[@"result"] isEqual:@0]) {
-            sin.isAuditStatus = YES;
-
-        }else {
-            sin.isAuditStatus = NO;
-            
-            UIButton *button = [self.view viewWithTag:103];
-            button.hidden = NO;
-        }
-    }];
-
-}
 
 
 #pragma mark - pushMessageAction

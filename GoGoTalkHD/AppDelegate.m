@@ -62,6 +62,7 @@ static BOOL isProduction = true;
     
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.base_url = BASE_REQUEST_URL;
+    single.isAuditStatus = NO;
 
     NSString *url = [NSString stringWithFormat:@"%@?Version=v%@", URL_GetUrl, APP_VERSION()];
     
@@ -88,12 +89,19 @@ static BOOL isProduction = true;
             // 逻辑后台处理
             
             single.base_url = responseObject[@"data"];
+            
+            if ([single.base_url isEqualToString:BASE_REQUEST_URL]) {
+                single.isAuditStatus = YES;
+            }
+            
             [self configWithOptions:launchOptions];
+
         });
         
     } failure:^(NSError *error) {
         
         single.base_url = BASE_REQUEST_URL;
+        single.isAuditStatus = NO;
         [self configWithOptions:launchOptions];
         
     }];

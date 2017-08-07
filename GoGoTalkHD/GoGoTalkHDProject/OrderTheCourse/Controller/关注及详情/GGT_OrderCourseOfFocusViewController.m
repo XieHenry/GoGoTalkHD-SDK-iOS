@@ -402,7 +402,7 @@
     GGT_FocusImgModel *focusImgModel = [self.iconDataArray safe_objectAtIndex:self.selectedIndex];
     
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass,focusImgModel.TeacherId,timeCollectionModel.date];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?teacherId=%ld&dateTime=%@", URL_GetIsSureClass,(long)focusImgModel.TeacherId,timeCollectionModel.date];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         

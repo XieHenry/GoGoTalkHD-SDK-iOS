@@ -205,9 +205,9 @@
     }
     
     
-    self.xc_orderNumLabel.text = [NSString stringWithFormat:@"%ld次", xc_model.LessonCount];
+    self.xc_orderNumLabel.text = [NSString stringWithFormat:@"%ld次", (long)xc_model.LessonCount];
     
-    self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", xc_model.Age];
+    self.xc_teachAgeLabel.text = [NSString stringWithFormat:@"%ld岁", (long)xc_model.Age];
     
     if ([self.xc_model.ImageUrl isKindOfClass:[NSString class]]) {
         NSString *urlStr = [self.xc_model.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
