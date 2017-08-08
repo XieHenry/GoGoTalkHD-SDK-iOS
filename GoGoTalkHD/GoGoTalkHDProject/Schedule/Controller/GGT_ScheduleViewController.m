@@ -1158,11 +1158,11 @@ static NSString * const CalendarCellID = @"cell";
 - (void) joinRoomComplete{
     TKLog(@"-----joinRoomComplete");
     [XCLogManager xc_readDataFromeFile];
+    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
 }
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
     [XCLogManager xc_deleteLogData];
-    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
 }
 - (void) onClassBegin{
     TKLog(@"-----onClassBegin");
