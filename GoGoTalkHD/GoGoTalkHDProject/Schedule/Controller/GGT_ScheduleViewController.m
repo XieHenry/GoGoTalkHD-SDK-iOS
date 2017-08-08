@@ -61,6 +61,8 @@ static NSString * const CalendarCellID = @"cell";
 
 @property (nonatomic, strong) GGT_CourseCellModel *xc_recentCourseModel;
 
+@property (nonatomic, strong) GGT_CourseCellModel *xc_course_model;
+
 @end
 
 @implementation GGT_ScheduleViewController
@@ -774,6 +776,8 @@ static NSString * const CalendarCellID = @"cell";
 //    model.serial = @"755158726";
 //    model.stuPwd = @"567";
     
+    self.xc_course_model = model;
+    
     switch ([model.Status integerValue]) {
         case 0:     // 已经预约  // 点击按钮可以取消预约
         {
@@ -804,7 +808,7 @@ static NSString * const CalendarCellID = @"cell";
                 // 记录日志
                 [XCLogManager xc_redirectNSlogToDocumentFolder];
                 
-                [self postNetworkModifyLessonStatusWithCourseModel:model];
+//                [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             }
             
@@ -835,7 +839,7 @@ static NSString * const CalendarCellID = @"cell";
                 // 记录日志
                 [XCLogManager xc_redirectNSlogToDocumentFolder];
                 
-                [self postNetworkModifyLessonStatusWithCourseModel:model];
+//                [self postNetworkModifyLessonStatusWithCourseModel:model];
                 
             }
         }
@@ -1158,6 +1162,7 @@ static NSString * const CalendarCellID = @"cell";
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
     [XCLogManager xc_deleteLogData];
+    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
 }
 - (void) onClassBegin{
     TKLog(@"-----onClassBegin");
