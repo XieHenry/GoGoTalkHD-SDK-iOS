@@ -131,12 +131,16 @@ typedef enum : NSUInteger {
     
     cell.xc_orderButton.tag = 100+indexPath.row;
     cell.xc_focusButton.tag = 1000+indexPath.row;
+    cell.xc_iconButton.tag = 10000 + indexPath.row;
     
     /****预约***/
     [cell.xc_orderButton addTarget:self action:@selector(xc_orderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     /****关注***/
     [cell.xc_focusButton addTarget:self action:@selector(xc_focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    /****头像***/
+    [cell.xc_iconButton addTarget:self action:@selector(xc_iconButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
     cell.xc_model = self.xc_dataMuArray[indexPath.row];
@@ -176,6 +180,15 @@ typedef enum : NSUInteger {
     };
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 头像按钮
+- (void)xc_iconButtonClick:(UIButton *)button
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag-10000 inSection:0];
+
+    [self tableView:_xc_tableView didSelectRowAtIndexPath:indexPath];
+    
 }
 
 
