@@ -22,11 +22,7 @@
 
 //将按钮设置为图片在上，文字在下
 -(void)initButton:(UIButton*)btn{
-    //设置按钮的字体选中颜色
-    [btn setTitleColor:UICOLOR_FROM_HEX(0x777777) forState:UIControlStateNormal];
-    [btn setTitleColor:UICOLOR_FROM_HEX(0xC40016) forState:UIControlStateSelected];
-    btn.titleLabel.font = Font(12);
-//    [btn setBackgroundColor:[UIColor lightGrayColor]];
+    btn.titleLabel.font = Font(14);
 
     
     CGSize imageSize = btn.imageView.frame.size;
@@ -60,16 +56,16 @@
     [self.optionsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
         make.top.equalTo(self.mas_top).with.offset(LineY(163));
-//        make.height.mas_offset(LineH(166)); //329 - 163
-        make.height.mas_offset(LineH(277)); //329 - 163
+        make.height.mas_offset(LineH(314)); //88*3+25+25
     }];
     
  
     // 课表按钮
     UIButton *scheduleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [scheduleButton setTitle:@"课表" forState:UIControlStateNormal];
-    scheduleButton.frame = CGRectMake(0, 0, LineW(88), LineH(55));
-    [scheduleButton setImage:UIIMAGE_FROM_NAME(@"kebiao_wei") forState:UIControlStateNormal];
+    scheduleButton.frame = CGRectMake(0, 0, LineW(88), LineH(88));
+    scheduleButton.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+    [scheduleButton setImage:UIIMAGE_FROM_NAME(@"kebiao") forState:UIControlStateNormal];
     [scheduleButton setImage:UIIMAGE_FROM_NAME(@"kebiao") forState:UIControlStateSelected];
     scheduleButton.tag = 100;
     scheduleButton.selected = YES;
@@ -81,15 +77,15 @@
     [scheduleButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
         make.top.equalTo(self.optionsView.mas_top).with.offset(0);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(55)));
+        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
     }];
     
     // 约课按钮
     UIButton *bookClassButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [bookClassButton setTitle:@"约课" forState:UIControlStateNormal];
-    bookClassButton.frame = CGRectMake(0, 0, LineW(88), LineH(55));
-    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke") forState:UIControlStateNormal];
-    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"bat-yueke-yi") forState:UIControlStateSelected];
+    bookClassButton.frame = CGRectMake(0, 0, LineW(88), LineH(88));
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"yueke") forState:UIControlStateNormal];
+    [bookClassButton setImage:UIIMAGE_FROM_NAME(@"yueke") forState:UIControlStateSelected];
     bookClassButton.tag = 101;
     bookClassButton.selected = NO;
     [bookClassButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -99,17 +95,17 @@
     
     [bookClassButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
-        make.top.equalTo(scheduleButton.mas_bottom).with.offset(56);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(55)));
+        make.top.equalTo(scheduleButton.mas_bottom).with.offset(25);
+        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
     }];
     
     
     // 我的按钮
     UIButton *mineButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mineButton setTitle:@"我的" forState:UIControlStateNormal];
-    mineButton.frame = CGRectMake(0, 0, LineW(88), LineH(57));
+    mineButton.frame = CGRectMake(0, 0, LineW(88), LineH(88));
     [mineButton setImage:UIIMAGE_FROM_NAME(@"wode") forState:UIControlStateNormal];
-    [mineButton setImage:UIIMAGE_FROM_NAME(@"wode_yi") forState:UIControlStateSelected];
+    [mineButton setImage:UIIMAGE_FROM_NAME(@"wode") forState:UIControlStateSelected];
     mineButton.tag = 102;
     mineButton.selected = NO;
     [mineButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +115,7 @@
     [mineButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
         make.bottom.equalTo(self.optionsView.mas_bottom).with.offset(-0);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(57)));
+        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
     }];
 
     
@@ -163,12 +159,14 @@
             if ([view isKindOfClass:[UIButton class]]) {
                 UIButton *btn = (UIButton *)view;
                 btn.selected = NO;
+                btn.backgroundColor = [UIColor clearColor];
             }
         }
     }
     
     button.selected = YES;
-    
+    button.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+
     if (self.buttonClickBlock) {
         self.buttonClickBlock(button);
     }
