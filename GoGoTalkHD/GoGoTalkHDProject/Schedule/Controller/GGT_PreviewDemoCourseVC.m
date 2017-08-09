@@ -20,6 +20,7 @@
 @property (nonatomic, strong) GGT_ResultModel *xc_resultModel;
 @property (nonatomic, strong) GGT_EvaReportModel *xc_reportModel;
 @property (nonatomic, strong) UIButton *xc_scrollTopButton;
+@property (nonatomic, strong) GGT_CourseCellModel *xc_course_model;
 @end
 
 @implementation GGT_PreviewDemoCourseVC
@@ -214,6 +215,8 @@
     GGT_CourseCellModel *model = self.xc_model;
     //    NSIndexPath *indexPath = self.xc_indexPath;
     
+    self.xc_course_model = model;
+    
     switch ([model.Status integerValue]) {
         case 0:     // 已经预约  // 点击按钮可以取消预约  // 需要刷新上一个控制器中cell
         {
@@ -239,7 +242,7 @@
             // 记录日志
             [XCLogManager xc_redirectNSlogToDocumentFolder];
             
-            [self postNetworkModifyLessonStatusWithCourseModel:model];
+//            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             
         }
@@ -263,7 +266,7 @@
             // 记录日志
             [XCLogManager xc_redirectNSlogToDocumentFolder];
             
-            [self postNetworkModifyLessonStatusWithCourseModel:model];
+//            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             
         }
@@ -320,6 +323,7 @@
 - (void) joinRoomComplete{
     TKLog(@"-----joinRoomComplete");
     [XCLogManager xc_readDataFromeFile];
+    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
 }
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");

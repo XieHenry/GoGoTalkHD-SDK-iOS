@@ -32,6 +32,9 @@
 @property (nonatomic, strong) BaseNavigationController *xc_nav1;
 
 @property (nonatomic, strong) UIViewController *currentVC;
+
+@property (nonatomic, strong) GGT_CourseCellModel *xc_course_model;
+
 @end
 
 @implementation GGT_HomeViewController
@@ -127,6 +130,8 @@
     
     GGT_CourseCellModel *model = userInfo[xc_message];
     
+    self.xc_course_model = model;
+    
     if (![model isKindOfClass:[GGT_CourseCellModel class]]) {
         return;
     }
@@ -162,7 +167,7 @@
         // 记录log日志
         [XCLogManager xc_redirectNSlogToDocumentFolder];
         
-        [self postNetworkModifyLessonStatusWithCourseModel:model];
+//        [self postNetworkModifyLessonStatusWithCourseModel:model];
         
     }];
 }
@@ -324,6 +329,7 @@
 - (void) joinRoomComplete{
     TKLog(@"-----joinRoomComplete");
     [XCLogManager xc_readDataFromeFile];
+    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
 }
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
