@@ -1518,6 +1518,11 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
          TKLog(@"没有音频");
     }
    
+    
+    if ([_iSessionHandle.localUser.nickName isEqualToString:@"student"]) {
+        _iSessionHandle.localUser.nickName = @"Student";
+    }
+    
     TKChatMessageModel *tModel = [[TKChatMessageModel alloc]initWithFromid:0 aTouid:0 iMessageType:MessageType_Message aMessage:[NSString stringWithFormat:@"%@ 进入教室",_iSessionHandle.localUser.nickName] aUserName:_iSessionHandle.localUser.nickName aTime:[TKUtil currentTime]];
     
     [_iSessionHandle addOrReplaceMessage:tModel];
