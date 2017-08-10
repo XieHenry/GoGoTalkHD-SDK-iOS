@@ -165,8 +165,13 @@
     }
     
     button.selected = YES;
-    button.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+    
 
+    if (button.tag == 100 || button.tag == 101 || button.tag == 102) {
+        button.backgroundColor = UICOLOR_FROM_HEX(ColorC40016);
+    }
+    
+    
     if (self.buttonClickBlock) {
         self.buttonClickBlock(button);
     }
