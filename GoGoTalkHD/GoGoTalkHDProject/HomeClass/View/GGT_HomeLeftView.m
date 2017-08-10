@@ -131,7 +131,6 @@
     
     // 电话按钮
     UIButton *phoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [phoneButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [phoneButton setImage:[UIImage imageNamed:@"kefu"] forState:(UIControlStateNormal)];
     phoneButton.tag = 104;
     [phoneButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
