@@ -31,6 +31,7 @@
             }
             case MessageType_Me:
             {
+                
                 _iUserName     = [NSString stringWithFormat:@"%@(%@)",_iUserName,MTLocalized(@"Role.Me")];
                 _iMessageTypeColor = RGBACOLOR_studentTextColor_Yellow;
                 break;

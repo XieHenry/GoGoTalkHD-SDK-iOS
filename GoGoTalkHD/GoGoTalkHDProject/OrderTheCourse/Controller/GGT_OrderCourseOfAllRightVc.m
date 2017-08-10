@@ -277,10 +277,14 @@ typedef enum : NSUInteger {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(button.tag-1000) inSection:0];
         GGT_OrderForeignListCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+        
+        //（是否关注 0：未关注 1：已关注）
         if ([model.IsFollow isEqualToString:@"0"]) {
             model.IsFollow = @"1";
+            [MBProgressHUD showMessage:@"已关注" toView:self.view];
         } else {
             model.IsFollow = @"0";
+            [MBProgressHUD showMessage:@"已取消关注" toView:self.view];
         }
         
         cell.xc_model = model;
