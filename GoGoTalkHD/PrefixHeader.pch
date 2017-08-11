@@ -53,6 +53,7 @@
 #import "NSTimer+BlockSupport.h"
 #import "XCLogManager.h"
 #import "UIImage+Category.h"
+#import "UIControl+XCNoRepeatClick.h"
 
 
 

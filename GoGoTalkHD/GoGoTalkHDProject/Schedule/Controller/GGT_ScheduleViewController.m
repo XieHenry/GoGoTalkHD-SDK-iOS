@@ -63,6 +63,8 @@ static NSString * const CalendarCellID = @"cell";
 
 @property (nonatomic, strong) GGT_CourseCellModel *xc_course_model;
 
+@property (nonatomic, assign) BOOL xc_isPush;
+
 @end
 
 @implementation GGT_ScheduleViewController
@@ -536,6 +538,9 @@ static NSString * const CalendarCellID = @"cell";
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.isInRoom = NO;
     
+    
+    self.xc_isPush = NO;
+    
 }
 
 - (void)addRightBarButtonItem
@@ -653,18 +658,20 @@ static NSString * const CalendarCellID = @"cell";
 //    [XCLogManager xc_redirectNSlogToDocumentFolder];
 //    return;
     
-    
-    GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-    if (sin.isAuditStatus) {
-        // 增加判断  （0：已经预约 1：即将上课 2：正在上课 3：已经结束 待评价 4：已经结束 已评价 5：已经结束 缺席）
-        if ([cell.xc_cellModel.Status integerValue] == 0 || [cell.xc_cellModel.Status integerValue] == 1) {
-            LOSAlert(@"上课时间未到，请耐心等待！");
+    if (!self.xc_isPush) {
+        GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        self.xc_isPush = YES;
+        if (sin.isAuditStatus) {
+            // 增加判断  （0：已经预约 1：即将上课 2：正在上课 3：已经结束 待评价 4：已经结束 已评价 5：已经结束 缺席）
+            if ([cell.xc_cellModel.Status integerValue] == 0 || [cell.xc_cellModel.Status integerValue] == 1) {
+                LOSAlert(@"上课时间未到，请耐心等待！");
+            } else {
+                [self getLessonWithCourseModel:cell.xc_cellModel tableView:tableView indexPath:indexPath];
+            }
         } else {
             [self getLessonWithCourseModel:cell.xc_cellModel tableView:tableView indexPath:indexPath];
         }
-    } else {
-        [self getLessonWithCourseModel:cell.xc_cellModel tableView:tableView indexPath:indexPath];
     }
     
 }
@@ -675,6 +682,8 @@ static NSString * const CalendarCellID = @"cell";
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
         if ([responseObject[@"data"] isKindOfClass:[NSArray class]]) {
+            
+            self.xc_isPush = NO;
             
             NSArray *data = responseObject[@"data"];
             GGT_CourseCellModel *model = nil;
@@ -977,6 +986,8 @@ static NSString * const CalendarCellID = @"cell";
     NSString *url = [NSString stringWithFormat:@"%@?stime=%@", URL_GetMyLesson, stime];
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:isShow success:^(id responseObject) {
+        
+        self.xc_isPush = NO;
         
         NSDictionary *dic = responseObject;
         GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
