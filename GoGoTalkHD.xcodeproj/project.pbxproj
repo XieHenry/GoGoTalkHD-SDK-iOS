@@ -220,7 +220,6 @@
 		D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */; };
 		D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */; };
 		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
-		D6993A571F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.m in Sources */ = {isa = PBXBuildFile; fileRef = D6993A561F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
@@ -685,8 +684,6 @@
 		D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeViewController.m; sourceTree = "<group>"; };
 		D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCourseAlertView.h; sourceTree = "<group>"; };
 		D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCourseAlertView.m; sourceTree = "<group>"; };
-		D6993A551F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+XCNoRepeatClick.h"; sourceTree = "<group>"; };
-		D6993A561F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+XCNoRepeatClick.m"; sourceTree = "<group>"; };
 		D6AB90CC1ECEBC22009D8758 /* GGT_PlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PlaceHolderView.h; sourceTree = "<group>"; };
 		D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PlaceHolderView.m; sourceTree = "<group>"; };
 		D6C150EA1EE79D500038841B /* NSObject+XCMethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+XCMethodSwizzle.h"; sourceTree = "<group>"; };
@@ -1909,8 +1906,6 @@
 				D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */,
 				D6E868F71F0B6F2900B48A5E /* XCLogManager.h */,
 				D6E868F81F0B6F2900B48A5E /* XCLogManager.m */,
-				D6993A551F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.h */,
-				D6993A561F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2321,7 +2316,6 @@
 				D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */,
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,
 				D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */,
-				D6993A571F3DBF52004F8F94 /* UIControl+XCNoRepeatClick.m in Sources */,
 				D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */,
 				5BD5165A1ECAD32E0015D694 /* GGT_MineClassTableViewCell.m in Sources */,
 				D6E0A5591EC2D9CD006A003D /* UIAlertController+Color.m in Sources */,
