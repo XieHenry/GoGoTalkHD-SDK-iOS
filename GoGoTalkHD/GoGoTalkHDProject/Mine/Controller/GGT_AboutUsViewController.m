@@ -23,7 +23,7 @@
 
     WKWebView *webView = [[WKWebView alloc] init];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://manage.gogo-talk.com:9332/ipad/abouts/wlh_about.html"]]];
-    webView.scrollView.bounces=NO;
+    webView.scrollView.bounces = NO;
     [self.view addSubview:webView];
     
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {
