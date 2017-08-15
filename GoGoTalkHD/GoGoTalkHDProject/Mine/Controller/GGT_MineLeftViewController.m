@@ -314,22 +314,22 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 vc = [[GGT_MineClassViewController alloc]init];
                 
                 break;
+//            case 2:
+//                //课程详情
+//                vc = [[GGT_CourseDetailsViewController alloc]init];
+//                
+//                break;
             case 2:
-                //课程详情
-                vc = [[GGT_CourseDetailsViewController alloc]init];
-                
-                break;
-            case 3:
                 //测评报告
                 vc = [[GGT_TestReportViewController alloc]init];
                 
                 break;
-            case 4:
+            case 3:
                 //意见反馈
                 vc = [[GGT_FeedbackViewController alloc]init];
                 
                 break;
-            case 5:
+            case 4:
                 //设置
                 vc = [[GGT_SettingViewController alloc]init];
                 
