@@ -145,6 +145,9 @@
 
 - (void)sendNetwork
 {
+    
+    self.xc_rightItemButton.userInteractionEnabled = NO;
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"lessonId"] = self.LessonId;
     dic[@"bId"] = self.xc_coursewareModel.BookingId;
@@ -152,18 +155,22 @@
 
     [[BaseService share] sendPostRequestWithPath:URL_AgainLesson parameters:dic token:YES viewController:self success:^(id responseObject) {
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
+        
+        self.xc_rightItemButton.userInteractionEnabled = YES;
+
         [self dismissViewControllerAnimated:YES completion:nil];
+
         if ([responseObject[@"msg"] isKindOfClass:[NSString class]]) {
             [MBProgressHUD showMessage:responseObject[@"msg"] toView:[UIApplication sharedApplication].keyWindow];
         }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
 
     } failure:^(NSError *error) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"cancle"}];
 
-        
+        self.xc_rightItemButton.userInteractionEnabled = YES;
+
         [self dismissViewControllerAnimated:YES completion:nil];
         
         NSDictionary *dic = error.userInfo;
