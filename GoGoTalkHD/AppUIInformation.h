@@ -21,6 +21,8 @@ static CGFloat const home_leftView_width = 88.0f;
 static CGFloat const marginMineRight = 586.0f;
 //约课中关注的全部宽度
 static CGFloat const marginFocusOn = 936.0f;
+// 上课倒计时
+static NSInteger const xc_room_countDown = 10; // 分钟
 
 
 
