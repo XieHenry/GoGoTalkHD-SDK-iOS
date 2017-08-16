@@ -549,7 +549,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         return;
     }
     
-    if (self.xc_cellModel.CountDown > 30 * 60 || self.xc_cellModel.CountDown < 0) return;
+    if (self.xc_cellModel.CountDown > xc_room_countDown * 60 || self.xc_cellModel.CountDown < 0) return;
     
     /// 计算倒计时
     NSInteger countDown = [self.xc_timeCount integerValue] - kCountDownManager.timeInterval;
@@ -557,7 +557,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 //    NSLog(@"%ld", countDown);
     
     if (countDown < 0) return;
-    if (countDown > 30 * 60) return;
+    if (countDown > xc_room_countDown * 60) return;
     
     /// 重新赋值
     self.xc_countDownLabel.text = [NSString stringWithFormat:@"%02zd分%02zd秒", (countDown/60)%60, countDown%60];
@@ -586,7 +586,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
                 self.xc_courseButton.hidden = YES;
             }
         } else {
-            if (countDown > 30*60) {
+            if (countDown > xc_room_countDown*60) {
                 self.xc_courseButton.hidden = YES;
             } else {
                 self.xc_courseButton.hidden = NO;
@@ -723,7 +723,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
             }
         } else {
             if ([xc_cellModel.Status integerValue] == 1 || [xc_cellModel.Status integerValue] == 2) {
-                if (self.xc_cellModel.CountDown <= 30 * 60) {
+                if (self.xc_cellModel.CountDown <= xc_room_countDown * 60) {
                     self.xc_courseButton.hidden = NO;
                 } else {
                     self.xc_courseButton.hidden = YES;

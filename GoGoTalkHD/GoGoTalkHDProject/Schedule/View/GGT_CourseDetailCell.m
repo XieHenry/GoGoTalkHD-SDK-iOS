@@ -692,7 +692,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
             }
         } else {
             if ([xc_cellModel.Status integerValue] == 1 || [xc_cellModel.Status integerValue] == 2) {
-                if (self.xc_cellModel.CountDown <= 30 * 60) {
+                if (self.xc_cellModel.CountDown <= xc_room_countDown * 60) {
                     self.xc_courseButton.hidden = NO;
                 } else {
                     self.xc_courseButton.hidden = YES;
@@ -733,7 +733,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
             }
             
         } else {
-            if (i > 30*60) {
+            if (i > xc_room_countDown*60) {
                 self.xc_courseButton.hidden = YES;
             } else {
                 self.xc_courseButton.hidden = NO;
