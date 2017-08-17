@@ -417,21 +417,28 @@
 
 - (void)refreshToken:(NSString *)url method:(NSInteger)method parameters:(id)parameters token:(BOOL)isLoadToken viewController:(UIViewController *)viewController success:(AFNSuccessResponse)success
              failure:(AFNFailureResponse)failure{
-    
+
     
     NSString *userName = [UserDefaults() objectForKey:@"phoneNumber"];
-    if (userName == nil) {
-        userName = @"";
-    }
     
     NSString *password = [UserDefaults() objectForKey:@"password"];
-    if (password == nil) {
-        password = @"";
+    
+    //如果都为空，退出到登录页
+    if (IsStrEmpty(userName) || IsStrEmpty(password)) {
+        [MBProgressHUD showMessage:@"登陆过期，请重新登录" toView:viewController.view];
+        
+        GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
+        [UserDefaults() setObject:@"no" forKey:@"login"];
+        [UserDefaults() setObject:@"" forKey:K_userToken];
+        [UserDefaults() synchronize];
+        BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
+        viewController.view.window.rootViewController = nav;
+        
+        return;
     }
     
     
     NSDictionary *postDic = @{@"UserName":userName,@"PassWord":password,@"OrgLink":IsStrEmpty([UserDefaults() objectForKey:K_registerID])?@"":[UserDefaults() objectForKey:K_registerID]};
-    
     
     //使用af原生请求，防止弹出MBProgressHUD动画。
     self.manager = [BaseService sharedHTTPSession];

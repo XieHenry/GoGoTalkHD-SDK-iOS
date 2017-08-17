@@ -97,6 +97,7 @@
         
         [UserDefaults() setObject:responseObject[@"data"][@"userToken"] forKey:K_userToken];
         [UserDefaults() setObject:self.registerView.phoneAccountField.text forKey:@"phoneNumber"];
+        [UserDefaults() setObject:self.registerView.passwordField.text forKey:@"password"];
         [UserDefaults() synchronize];
         
         

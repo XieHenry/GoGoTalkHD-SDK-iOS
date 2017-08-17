@@ -38,5 +38,4 @@
 //BASE_URL
 @property (nonatomic, strong) NSString *base_url;
 
-
 @end

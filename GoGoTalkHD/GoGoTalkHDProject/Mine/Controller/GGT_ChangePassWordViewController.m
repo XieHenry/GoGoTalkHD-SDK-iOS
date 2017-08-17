@@ -77,6 +77,8 @@
     [[BaseService share] requestWithPath:URL_ChangePwdByOldPwd method:XCHttpRequestPost parameters:postDic token:YES viewController:self success:^(id responseObject) {
         
         [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
+        [UserDefaults() setObject:_changePasswordView.changeField.text forKey:@"password"];
+        [UserDefaults() synchronize];
         
         [self performSelector:@selector(turnBackClick) withObject:nil afterDelay:0.0f];
         
