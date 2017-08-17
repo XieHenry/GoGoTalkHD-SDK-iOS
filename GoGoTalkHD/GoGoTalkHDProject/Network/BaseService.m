@@ -418,7 +418,19 @@
 - (void)refreshToken:(NSString *)url method:(NSInteger)method parameters:(id)parameters token:(BOOL)isLoadToken viewController:(UIViewController *)viewController success:(AFNSuccessResponse)success
              failure:(AFNFailureResponse)failure{
     
-    NSDictionary *postDic = @{@"UserName":[UserDefaults() objectForKey:@"phoneNumber"],@"PassWord":[UserDefaults() objectForKey:@"password"],@"OrgLink":IsStrEmpty([UserDefaults() objectForKey:K_registerID])?@"":[UserDefaults() objectForKey:K_registerID]};
+    
+    NSString *userName = [UserDefaults() objectForKey:@"phoneNumber"];
+    if (userName == nil) {
+        userName = @"";
+    }
+    
+    NSString *password = [UserDefaults() objectForKey:@"password"];
+    if (password == nil) {
+        password = @"";
+    }
+    
+    
+    NSDictionary *postDic = @{@"UserName":userName,@"PassWord":password,@"OrgLink":IsStrEmpty([UserDefaults() objectForKey:K_registerID])?@"":[UserDefaults() objectForKey:K_registerID]};
     
     
     //使用af原生请求，防止弹出MBProgressHUD动画。
