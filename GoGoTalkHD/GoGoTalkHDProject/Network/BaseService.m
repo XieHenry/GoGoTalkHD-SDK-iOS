@@ -59,6 +59,8 @@
                 case AFNetworkReachabilityStatusUnknown: // 未知网络
                     self.netWorkStaus = AFNetworkReachabilityStatusUnknown;
                     singleton.netStatus = NO;
+                    
+                    [self xc_reloadBaseURL];
 #ifdef DEBUG
                     [self showExceptionDialog:@"未知网络"];
 #endif
@@ -83,6 +85,8 @@
                     self.netWorkStaus = AFNetworkReachabilityStatusReachableViaWWAN;
                     singleton.netStatus = YES;
                     
+                    [self xc_reloadBaseURL];
+                    
 #ifdef DEBUG
                     [self showExceptionDialog:@"手机自带网络"];
 #endif
@@ -91,6 +95,8 @@
                 case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
                     self.netWorkStaus = AFNetworkReachabilityStatusReachableViaWiFi;
                     singleton.netStatus = YES;
+                    
+                    [self xc_reloadBaseURL];
                     
 #ifdef DEBUG
                     [self showExceptionDialog:@"WIFI"];
@@ -104,6 +110,24 @@
         
     }
     return self;
+}
+
+// 当当断网的时候 再次重新打开WIFI时  重新获取BaseURL
+- (void)xc_reloadBaseURL
+{
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    NSString *url = [NSString stringWithFormat:@"%@?Version=v%@", URL_GetUrl, APP_VERSION()];
+    [[BaseService share] sendGetRequestWithPath:url token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
+        
+        single.base_url = responseObject[@"data"];
+        if ([single.base_url isEqualToString:BASE_REQUEST_URL]) {
+            single.isAuditStatus = YES;
+        }
+        
+    } failure:^(NSError *error) {
+        single.base_url = BASE_REQUEST_URL;
+        single.isAuditStatus = NO;
+    }];
 }
 
 #pragma mark - public method
