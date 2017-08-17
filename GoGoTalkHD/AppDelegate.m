@@ -17,7 +17,7 @@
 #import "GGT_LaunchViewController.h"
 
 
-#define kBuglyAppId      @"ab92f40c75"
+#define kBuglyAppId      @"f911039477"
 
 
 //极光推送--GoGoHD
@@ -43,6 +43,8 @@ static BOOL isProduction = true;
     [self xc_configKeyWindow];
     
     [self xc_changeKeyWindowWithOptions:launchOptions];
+    
+    [Bugly startWithAppId:kBuglyAppId];
 
     return YES;
 }
