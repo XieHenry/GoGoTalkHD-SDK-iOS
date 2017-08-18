@@ -241,8 +241,8 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     
     self.xc_courseButton = ({
         UIButton *xc_enterRoomButton = [UIButton new];
-        xc_enterRoomButton.frame = CGRectMake(0, 0, 88, 30);
-        xc_enterRoomButton.titleLabel.font = Font(14);
+        xc_enterRoomButton.frame = CGRectMake(0, 0, 98, 36);
+        xc_enterRoomButton.titleLabel.font = Font(16);
         [xc_enterRoomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         xc_enterRoomButton.hidden = YES;
         xc_enterRoomButton;

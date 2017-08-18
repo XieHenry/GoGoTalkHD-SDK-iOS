@@ -699,6 +699,17 @@ static NSString * const CalendarCellID = @"cell";
                 vc.xc_model = model;
                 [self.navigationController pushViewController:vc animated:YES];
                 
+                @weakify(self);
+                vc.xc_changeStatusBlock = ^(GGT_CourseCellModel *xc_model) {
+                    @strongify(self);
+                    
+                    GGT_ScheduleStudyingCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+                    cell.xc_cellModel = xc_model;
+                    // 更改数据源
+                    [self.xc_courseMuArray replaceObjectAtIndex:indexPath.row withObject:xc_model];
+
+                };
+                
             } else {    // 0 正课     // 都是进入到课件详情
                 // @"2"是正在上课 @"5"是缺席
 //                if ([model.Status integerValue] != 2) {     // 2 是上课
@@ -723,7 +734,7 @@ static NSString * const CalendarCellID = @"cell";
                         };
                     }
                     
-                    if ([model.Status integerValue] == 3) {
+                    if ([model.Status integerValue] == 3 || [model.Status integerValue] == 2 || [model.Status integerValue] == 1) {
                         @weakify(self);
                         vc.xc_changeStatusBlock = ^(GGT_CourseCellModel *xc_model) {
                             @strongify(self);
@@ -737,7 +748,7 @@ static NSString * const CalendarCellID = @"cell";
                             //                [self.xc_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
                         };
                     }
-                    
+                
 //                } else if ([model.Status isEqualToString:@"2"]) {
                 
 //                    // 还需要传一些参数 上课的一些信息
@@ -1174,6 +1185,10 @@ static NSString * const CalendarCellID = @"cell";
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
     [XCLogManager xc_deleteLogData];
+    
+    // 网络请求 刷新数据
+    [self loadCourseDataWithStime:self.xc_selectedDate showMBP:NO];
+    [self loadCalendarDataWithDate:self.xc_selectedDate showMBP:NO];
 }
 - (void) onClassBegin{
     TKLog(@"-----onClassBegin");

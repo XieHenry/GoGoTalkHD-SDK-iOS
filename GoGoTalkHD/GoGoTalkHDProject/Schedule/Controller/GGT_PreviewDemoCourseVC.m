@@ -328,6 +328,10 @@
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
     [XCLogManager xc_deleteLogData];
+    
+    // 网络请求 刷新数据
+    [self refreshTableView];
+    [self loadData];
 }
 - (void) onClassBegin{
     TKLog(@"-----onClassBegin");
@@ -338,6 +342,42 @@
 }
 - (void) onCameraDidOpenError{
     TKLog(@"-----onCameraDidOpenError");
+}
+
+// 退出教室 刷新数据
+- (void)refreshTableView
+{
+    NSString *url = [NSString stringWithFormat:@"%@?lessonId=%@", URL_GetLessonByLessonId, self.xc_model.LessonId];
+    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+        if ([responseObject[@"data"] isKindOfClass:[NSArray class]]) {
+            
+            NSArray *data = responseObject[@"data"];
+            if ([data isKindOfClass:[NSArray class]] && data.count > 0) {
+                self.xc_model = [GGT_CourseCellModel yy_modelWithDictionary:[data firstObject]];
+            } else {
+                
+            }
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            GGT_CourseDetailCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
+            cell.xc_cellModel = self.xc_model;
+            
+            // 需要回调 刷新上一个控制器的待评价的cell
+            if (self.xc_changeStatusBlock) {
+                self.xc_changeStatusBlock(self.xc_model);
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        
+        NSDictionary *dic = error.userInfo;
+        if ([dic[@"msg"] isKindOfClass:[NSString class]] && [dic[@"msg"] length] > 0) {
+            [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];
+        }
+        
+    }];
+
 }
 
 
