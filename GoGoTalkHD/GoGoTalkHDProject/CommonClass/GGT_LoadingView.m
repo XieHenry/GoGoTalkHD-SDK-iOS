@@ -88,6 +88,13 @@
     if (self.loadingFailedBlock) {
         self.loadingFailedBlock(btn);
     }
+    
+    
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    if (sin.netStatus== NO) {
+        [MBProgressHUD showMessage:@"重新加载中..." toView:[[UIApplication sharedApplication] keyWindow]];
+    }
+    
 }
 
 
