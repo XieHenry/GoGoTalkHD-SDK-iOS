@@ -221,6 +221,7 @@
                 NSDictionary *userInfoDic = newError.userInfo;
                 if (viewController) {
                     [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                    single.netStatus = NO;
                 }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];
@@ -293,6 +294,7 @@
                 NSDictionary *userInfoDic = newError.userInfo;
                 if (viewController) {
                     [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                    single.netStatus = NO;
                 }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];

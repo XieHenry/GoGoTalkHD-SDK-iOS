@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)getDayAndWeekLoadData;
 
 @end
 

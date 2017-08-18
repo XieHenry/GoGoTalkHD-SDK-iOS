@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GGT_LoadingView.h"
 
 @interface BaseViewController : UIViewController
+@property (nonatomic, strong) GGT_LoadingView *loadingView;
 
 //左侧返回按钮
 - (void)setLeftBackButton;
@@ -30,5 +32,10 @@
 
 //右侧按钮的点击事件
 - (void)rightAction;
+
+//网络请求失败后，重新点击按钮加载数据
+- (void)showLoadingView;
+
+- (void)hideLoadingView;
 
 @end

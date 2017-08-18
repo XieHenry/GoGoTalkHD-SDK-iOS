@@ -156,8 +156,18 @@ static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
         
         [self.xc_topCollectionView reloadData];
         
-    } failure:^(NSError *error) {
+        if (self.refreshLoadData) {
+            self.refreshLoadData(YES);
+        }
         
+    } failure:^(NSError *error) {
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        if (sin.netStatus == NO) {
+            if (self.refreshLoadData) {
+                self.refreshLoadData(NO);
+            }
+            
+        }
     }];
 }
 

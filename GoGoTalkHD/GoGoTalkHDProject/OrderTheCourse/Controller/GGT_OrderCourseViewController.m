@@ -101,7 +101,11 @@
         }
     }];
     
-    [self.view bringSubviewToFront:self.xc_placeholderView];
+    
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    if ( sin.netStatus == YES) {
+        [self.view bringSubviewToFront:self.xc_placeholderView];
+    }
 }
 
 
@@ -164,13 +168,13 @@
             [btn setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:(UIControlStateNormal)];
             [button setTitleColor:UICOLOR_FROM_HEX(ColorC40016) forState:(UIControlStateNormal)];
             
-
+            
             [UIView animateWithDuration:0.3 animations:^{
                 self.animaView.frame = CGRectMake(0,0, LineW(92), LineH(30));
-
+                
             } completion:^(BOOL finished) {
                 [self anima];
-
+                
             }];
             
             
@@ -209,7 +213,7 @@
     shake.autoreverses = YES; //是否重复
     shake.repeatCount = 1;//次数
     [_animaView.layer addAnimation:shake forKey:@"shakeAnimation"];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -227,12 +231,16 @@
         self.xc_placeholderView.hidden = YES;
         
     } failure:^(NSError *error) {
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         
-        // 失败  展示
-        self.xc_placeholderView.hidden = NO;
-        NSDictionary *dic = error.userInfo;
-        GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
-        self.xc_placeholderView.xc_model = model;
+        if ( sin.netStatus == YES) {
+            // 失败  展示
+            self.xc_placeholderView.hidden = NO;
+            NSDictionary *dic = error.userInfo;
+            GGT_ResultModel *model = [GGT_ResultModel yy_modelWithDictionary:dic];
+            self.xc_placeholderView.xc_model = model;
+            
+        }
         
     }];
 }

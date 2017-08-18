@@ -42,7 +42,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTestReportWithNotification:) name:@"testReport2" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushChangeNameWithNotification:) name:@"changeNameStatus" object:nil];
-
+    
     
 }
 
@@ -56,10 +56,10 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 #pragma mark - pushMessageAction
 - (void)pushTestReportWithNotification:(NSNotification *)noti {
     isShowTestReportVc = YES;
-
+    
     //推送过来消息，进行切换cell的控制器
     [self getLeftName];
-
+    
 }
 
 //在个人信息页面修改中文名称之后，会发送通知刷新数据。
@@ -85,7 +85,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     self.splitViewController.preferredPrimaryColumnWidthFraction = 0.48;
     
     
-     [self getLeftName];
+    [self getLeftName];
     
     //创建tableview
     [self initTableView];
@@ -93,7 +93,16 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     //获取网络数据
     [self getLoadData];
     
+    
+}
 
+#pragma mark 没网络，重新数据请求
+-(void)refreshLodaData {
+    
+    [self getLeftName];
+    
+    //获取网络数据
+    [self getLoadData];
 }
 
 #pragma mark 获取左边的名称和icon
@@ -102,13 +111,13 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         
         _dataArray = [NSMutableArray array];
         _iconArray = [NSMutableArray array];
-
+        
         NSArray *dataArr = responseObject[@"data"];
         for (NSDictionary *dic in dataArr) {
             [_dataArray addObject:dic[@"name"]];
             [_iconArray addObject:dic[@"pic"]];
         }
-
+        
         [_tableView reloadData];
         
         //先刷新数据，再选中cell
@@ -129,10 +138,23 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
             }
         }
         
-        
+        if (self.refreshLoadData) {
+            self.refreshLoadData(YES);
+        }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        if (sin.netStatus == NO) {
+            
+            if (self.refreshLoadData) {
+                self.refreshLoadData(NO);
+            }
+
+        } else {
+            
+            [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+            
+        }
         
     }];
 }
@@ -145,7 +167,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         
         _model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
         [_headerView getResultModel:_model];
-
+        
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         sin.leftTotalCount = [NSString stringWithFormat:@"%ld",(long)_model.totalCount];
         
@@ -156,14 +178,28 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
                 [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                 
-                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
+        }
+        
+        if (self.refreshLoadData) {
+            self.refreshLoadData(YES);
         }
         
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        if (sin.netStatus == NO) {
+            
+            if (self.refreshLoadData) {
+                self.refreshLoadData(NO);
+            }
 
+        } else {
+            
+            [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+            
+        }
     }];
     
 }
@@ -212,7 +248,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     cell.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     cell.leftTitleLabel.text = [_dataArray safe_objectAtIndex:indexPath.row];
     cell.iconName = [_iconArray safe_objectAtIndex:indexPath.row];
-
+    
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus == YES) {
@@ -231,7 +267,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 [self.splitViewController showDetailViewController:nav sender:self];
             }
         }
-
+        
         
     }else {
         if(indexPath.row == 1){
@@ -254,7 +290,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 [self.splitViewController showDetailViewController:nav sender:self];
             }
         }
-
+        
     }
     
     
@@ -272,7 +308,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *vc;
-
+    
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus == YES) {
@@ -314,11 +350,11 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 vc = [[GGT_MineClassViewController alloc]init];
                 
                 break;
-//            case 2:
-//                //课程详情
-//                vc = [[GGT_CourseDetailsViewController alloc]init];
-//                
-//                break;
+                //            case 2:
+                //                //课程详情
+                //                vc = [[GGT_CourseDetailsViewController alloc]init];
+                //
+                //                break;
             case 2:
                 //测评报告
                 vc = [[GGT_TestReportViewController alloc]init];

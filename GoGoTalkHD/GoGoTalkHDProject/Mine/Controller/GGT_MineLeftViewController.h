@@ -8,7 +8,11 @@
 
 #import "BaseViewController.h"
 
+typedef void(^RefreshLoadData)(BOOL is);
 @interface GGT_MineLeftViewController : BaseViewController
 
+@property (nonatomic, copy) RefreshLoadData refreshLoadData;
+
+-(void)refreshLodaData;
 
 @end

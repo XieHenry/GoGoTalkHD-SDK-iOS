@@ -39,7 +39,6 @@
 #import "XCNormalFooter.h"
 
 
-
 #import "UIView+Layout.h"
 #import "NSArray+SafeExtension.h"
 #import "GGT_Singleton.h"

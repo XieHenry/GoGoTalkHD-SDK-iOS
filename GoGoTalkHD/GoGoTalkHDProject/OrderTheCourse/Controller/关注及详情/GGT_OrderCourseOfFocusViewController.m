@@ -15,7 +15,7 @@
 #import "GGT_TimeCollectionModel.h"
 #import "GGT_HomeDateModel.h"
 #import "GGT_OrderClassPopVC.h"
-
+#import "AppDelegate.h"
 
 #define magnification 1.15f  //头像放大倍数
 #define headPortraitW 62.5f  //头像宽度
@@ -124,6 +124,9 @@
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
+        [self hideLoadingView];
+
+        
         //如果全部取消关注的时候，会全部隐藏，所以这里需要显示一下
         self.nodataView.hidden = YES;
         self.headerView.hidden = NO;
@@ -194,12 +197,26 @@
         
     } failure:^(NSError *error) {
         
-        NSDictionary *dic = error.userInfo;
-        self.nodataView.hidden = NO;
-        self.headerView.hidden = YES;
-        self.orderTimeView.hidden = YES;
-        
-        [self.nodataView imageString:@"weichuxi" andAlertString:dic[@"msg"]];
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        if (sin.netStatus == NO) {
+            [self showLoadingView];
+            
+            __weak GGT_OrderCourseOfFocusViewController *weakself  = self;
+            weakself.loadingView.loadingFailedBlock = ^(UIButton *btn){
+                [weakself getTeacherFollowLoadData];
+                
+                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                [appDelegate getDayAndWeekLoadData];
+            };
+        } else {
+            NSDictionary *dic = error.userInfo;
+            self.nodataView.hidden = NO;
+            self.headerView.hidden = YES;
+            self.orderTimeView.hidden = YES;
+            
+            [self.nodataView imageString:@"weichuxi" andAlertString:dic[@"msg"]];
+        }
+
         
     }];
 }
