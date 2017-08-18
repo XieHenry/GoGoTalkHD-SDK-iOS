@@ -244,7 +244,10 @@ TKNavigationController* _iEduNavigationController = nil;
             default:{
                 report = YES;
                  //alertMessage = aDescript;
-                 alertMessage = MTLocalized(@"Error.aaa");
+                //Error.aaa没有对应的key和value，在没有网络的时候，走了这个方法，先使用State.NoNetwork
+//                 alertMessage = MTLocalized(@"Error.aaa");
+                alertMessage = MTLocalized(@"State.NoNetwork");
+                
                
                 break;
             }
