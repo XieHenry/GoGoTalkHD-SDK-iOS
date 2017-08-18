@@ -425,7 +425,7 @@
     
     //如果都为空，退出到登录页
     if (IsStrEmpty(userName) || IsStrEmpty(password)) {
-        [MBProgressHUD showMessage:@"登陆过期，请重新登录" toView:viewController.view];
+        [MBProgressHUD showMessage:@"登录过期，请重新登录" toView:viewController.view];
         
         GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
         [UserDefaults() setObject:@"no" forKey:@"login"];
