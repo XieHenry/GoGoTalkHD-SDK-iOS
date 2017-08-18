@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^XCChangeStatusBlock)(GGT_CourseCellModel *xc_model);
+
 @interface GGT_PreviewDemoCourseVC : BaseViewController
 
 @property (nonatomic, strong) GGT_CourseCellModel *xc_model;
+
+@property (nonatomic, copy) XCChangeStatusBlock xc_changeStatusBlock;
 
 @end
