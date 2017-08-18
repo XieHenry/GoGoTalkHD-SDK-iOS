@@ -180,6 +180,10 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
+            
+            GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+            
         }
         
         if (self.refreshLoadData) {
