@@ -380,15 +380,32 @@
             
             
         } failure:^(NSError *error) {
-            if ([error.userInfo[xc_returnCode] integerValue] != 1) {
-                UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:error.userInfo[xc_message] preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:0 handler:^(UIAlertAction * _Nonnull action) {
+            
+            //判断是否有网络，如果没网络，会显示为空
+            GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+            
+            if (sin.netStatus == YES) {
+                if ([error.userInfo[xc_returnCode] integerValue] != 1) {
+                    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:error.userInfo[xc_message] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:0 handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alertController addAction:action];
+                    action.textColor = UICOLOR_FROM_HEX(kThemeColor);
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            } else {
+                UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:xc_alert_message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了" style:0 handler:^(UIAlertAction * _Nonnull action) {
                     
                 }];
                 [alertController addAction:action];
                 action.textColor = UICOLOR_FROM_HEX(kThemeColor);
                 [self presentViewController:alertController animated:YES completion:nil];
             }
+            
+            
+            
         }];
     }];
     
