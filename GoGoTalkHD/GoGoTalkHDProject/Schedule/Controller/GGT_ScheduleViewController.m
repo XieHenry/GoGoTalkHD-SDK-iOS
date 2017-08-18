@@ -762,7 +762,7 @@ static NSString * const CalendarCellID = @"cell";
         }
         
     } failure:^(NSError *error) {
-        
+        self.xc_isPush = NO;
         NSDictionary *dic = error.userInfo;
         if ([dic[@"msg"] isKindOfClass:[NSString class]] && [dic[@"msg"] length] > 0) {
             [MBProgressHUD showMessage:dic[@"msg"] toView:self.view];

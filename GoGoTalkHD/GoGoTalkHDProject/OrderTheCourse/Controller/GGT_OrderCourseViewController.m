@@ -227,6 +227,11 @@
 {
     [[BaseService share] sendGetRequestWithPath:URL_getStudentClassHour token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
+        
+        if (self.xc_placeholderView.hidden == NO) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEnterForeground object:nil];
+        }
+        
         // 成功  不展示
         self.xc_placeholderView.hidden = YES;
         
