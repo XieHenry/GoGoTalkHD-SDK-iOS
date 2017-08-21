@@ -160,7 +160,9 @@
     
     
     if (self.isShowMBP) {
-        [MBProgressHUD showLoading:viewController.view];
+        if (viewController) {
+            [MBProgressHUD showLoading:viewController.view];
+        }
     }
     
     
@@ -317,11 +319,15 @@
                 failure(error);
 #ifdef DEBUG
                 NSDictionary *userInfoDic = error.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #endif
             }];
         }
@@ -336,11 +342,15 @@
                 failure(error);
 #ifdef DEBUG
                 NSDictionary *userInfoDic = error.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #else
                 NSError *newError = [[NSError alloc]initWithDomain:@"com.gogo-talk.GoGoTalk" code:1001 userInfo:@{xc_message:xc_alert_message}];
                 NSDictionary *userInfoDic = newError.userInfo;
-                [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                if (viewController) {
+                    [MBProgressHUD showMessage:userInfoDic[xc_message] toView:viewController.view];
+                }
 #endif
             }];
         }
@@ -427,8 +437,10 @@
     
     //如果都为空，退出到登录页
     if (IsStrEmpty(userName) || IsStrEmpty(password)) {
-        [MBProgressHUD showMessage:@"登录过期，请重新登录" toView:viewController.view];
-        
+        if (viewController) {
+            [MBProgressHUD showMessage:@"登录过期，请重新登录" toView:viewController.view];
+        }
+
         GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
         [UserDefaults() setObject:@"no" forKey:@"login"];
         [UserDefaults() setObject:@"" forKey:K_userToken];
