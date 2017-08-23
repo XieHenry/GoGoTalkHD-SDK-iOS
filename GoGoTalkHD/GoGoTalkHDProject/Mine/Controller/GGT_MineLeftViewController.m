@@ -131,7 +131,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
             }
         } else {
             if (isShowTestReportVc == YES) {
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             } else {
                 //每次请求数据后，都默认选中第一行
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
@@ -280,7 +280,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         
         
         if (isShowTestReportVc == YES) {
-            if (indexPath.row == 3) {
+            if (indexPath.row == 2) {
                 GGT_TestReportViewController *vc = [[GGT_TestReportViewController alloc]init];
                 BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:vc];
                 [self.splitViewController showDetailViewController:nav sender:self];
