@@ -92,7 +92,12 @@ static BOOL isProduction = true;
             
             single.base_url = responseObject[@"data"];
             
+            //如果地址一样则为正式地址，为非审核状态，为NO。否则为测试地址，为YES
             if ([single.base_url isEqualToString:BASE_REQUEST_URL]) {
+                
+                single.isAuditStatus = NO;
+            } else {
+                
                 single.isAuditStatus = YES;
             }
             
@@ -107,7 +112,7 @@ static BOOL isProduction = true;
         // 暂时开启测试地址
         NSString *url = [NSString stringWithFormat:@"%@:9332", BASE_REQUEST_URL];
         single.base_url = url;
-        single.isAuditStatus = NO;
+        single.isAuditStatus = YES;
         [self configWithOptions:launchOptions];
         
     }];
