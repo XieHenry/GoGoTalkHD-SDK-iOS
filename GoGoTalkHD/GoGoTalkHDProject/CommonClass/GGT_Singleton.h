@@ -25,7 +25,7 @@
 @property (nonatomic, copy) NSString *leftTotalCount;
 
 /**
- @abstract 是否在审核状态,YES是审核状态
+ @abstract 是否在审核状态,YES是审核状态，NO为正式地址
  **/
 @property (nonatomic) BOOL isAuditStatus;
 
