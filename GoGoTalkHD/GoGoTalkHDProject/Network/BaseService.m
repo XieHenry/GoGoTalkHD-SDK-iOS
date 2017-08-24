@@ -125,10 +125,10 @@
         }
         
     } failure:^(NSError *error) {
-//        single.base_url = BASE_REQUEST_URL;
+        single.base_url = BASE_REQUEST_URL;
         // 暂时开启测试地址
-        NSString *url = [NSString stringWithFormat:@"%@:9332", BASE_REQUEST_URL];
-        single.base_url = url;
+//        NSString *url = [NSString stringWithFormat:@"%@:9332", BASE_REQUEST_URL];
+//        single.base_url = url;
         single.isAuditStatus = NO;
     }];
 }
