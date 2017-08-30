@@ -187,27 +187,27 @@
     
     
     
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    if (sin.isAuditStatus == NO) {
+        //注册
+        self.registerButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [self.registerButton setTitle:@"注 册" forState:(UIControlStateNormal)];
+        [self.registerButton setTitleColor:UICOLOR_FROM_HEX(ColorC40016) forState:(UIControlStateNormal)];
+        self.registerButton.layer.borderWidth = LineW(1);
+        self.registerButton.layer.borderColor = UICOLOR_FROM_HEX(0xB80011).CGColor;
+        self.registerButton.titleLabel.font = Font(18);
+        self.registerButton.layer.cornerRadius = LineW(22);
+        self.registerButton.layer.masksToBounds = YES;
+        [self addSubview:self.registerButton];
+        
+        [self.registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.top.equalTo(self.loginButton.mas_bottom).with.offset(LineY(30));
+            make.size.mas_offset(CGSizeMake(LineW(324), LineH(44)));
+        }];
+    }
     
-    
-    //注册
-    self.registerButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [self.registerButton setTitle:@"注 册" forState:(UIControlStateNormal)];
-    [self.registerButton setTitleColor:UICOLOR_FROM_HEX(ColorC40016) forState:(UIControlStateNormal)];
-    self.registerButton.layer.borderWidth = LineW(1);
-    self.registerButton.layer.borderColor = UICOLOR_FROM_HEX(0xB80011).CGColor;
-    self.registerButton.titleLabel.font = Font(18);
-    self.registerButton.layer.cornerRadius = LineW(22);
-    self.registerButton.layer.masksToBounds = YES;
-    [self addSubview:self.registerButton];
-    
-    [self.registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.mas_centerX);
-        make.top.equalTo(self.loginButton.mas_bottom).with.offset(LineY(30));
-        make.size.mas_offset(CGSizeMake(LineW(324), LineH(44)));
-    }];
-    
-    
-    
+
     //背景图
     UIImageView *footerImageView = [[UIImageView alloc]init];
     footerImageView.image = UIIMAGE_FROM_NAME(@"tob_background");

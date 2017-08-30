@@ -24,6 +24,7 @@
 //退出登录按钮
 @property (nonatomic, strong) UIButton *logOutButton;
 
+@property (nonatomic, strong) GGT_Singleton *singleton;
 @end
 
 @implementation GGT_SettingViewController
@@ -34,12 +35,19 @@
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     self.navigationItem.title = @"设置";
     
+    self.singleton = [GGT_Singleton sharedSingleton];
+
+    
     [self initContentView];
     
 }
 
 - (void)initContentView {
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(LineX(20), LineY(20), marginMineRight-LineW(40), LineH(192)) style:(UITableViewStylePlain)];
+    if (self.singleton.isAuditStatus == YES) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(LineX(20), LineY(20), marginMineRight-LineW(40), LineH(144)) style:(UITableViewStylePlain)];
+    } else {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(LineX(20), LineY(20), marginMineRight-LineW(40), LineH(192)) style:(UITableViewStylePlain)];
+    }
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -52,7 +60,11 @@
     
     //    _dataArray = @[@"推送消息",@"清除缓存",@"前往AppStore评分",@"关于我们",@"当前版本"];
     //第一版不加前往AppStore评分
-    _dataArray = @[@"推送消息",@"清除缓存",@"关于我们",@"当前版本"];
+    if (self.singleton.isAuditStatus == YES) {
+        _dataArray = @[@"推送消息",@"清除缓存",@"当前版本"];
+    } else {
+        _dataArray = @[@"推送消息",@"清除缓存",@"关于我们",@"当前版本"];
+    }
     
     [_tableView reloadData];
     
@@ -119,32 +131,62 @@
         //计算缓存大小
         cell.contentLabel.text = [NSString stringWithFormat:@"%.2fM",[self folderSize]];
         
-    } else if (indexPath.row == 3) {
-
-        //更新坐标
-        cell.rightImgView.hidden = YES;
-        [cell.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(cell.leftTitleLabel.mas_right).with.offset(LineX(15));
-            make.right.equalTo(cell.rightImgView.mas_left).with.offset(-LineX(20));
-            make.centerY.equalTo(cell.contentView.mas_centerY);
-            make.height.mas_offset(LineH(22));
-        }];
-        
-        
-        [cell.rightImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(cell.contentView.mas_right).with.offset(-LineX(0));
-            make.centerY.equalTo(cell.contentView.mas_centerY);
-            make.size.mas_offset(CGSizeMake(LineW(0), LineH(0)));
-        }];
-        
-        
-        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        // app版本
-        NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-        
-        cell.contentLabel.text = [NSString stringWithFormat:@"v%@",app_Version];
-        
     }
+    
+    if (self.singleton.isAuditStatus == YES) {
+        if (indexPath.row == 2) {
+            //更新坐标
+            cell.rightImgView.hidden = YES;
+            [cell.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(cell.leftTitleLabel.mas_right).with.offset(LineX(15));
+                make.right.equalTo(cell.rightImgView.mas_left).with.offset(-LineX(20));
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.height.mas_offset(LineH(22));
+            }];
+            
+            
+            [cell.rightImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(cell.contentView.mas_right).with.offset(-LineX(0));
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.size.mas_offset(CGSizeMake(LineW(0), LineH(0)));
+            }];
+            
+            
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            // app版本
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            
+            cell.contentLabel.text = [NSString stringWithFormat:@"v%@",app_Version];
+        }
+    } else {
+         if (indexPath.row == 3) {
+            
+            //更新坐标
+            cell.rightImgView.hidden = YES;
+            [cell.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(cell.leftTitleLabel.mas_right).with.offset(LineX(15));
+                make.right.equalTo(cell.rightImgView.mas_left).with.offset(-LineX(20));
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.height.mas_offset(LineH(22));
+            }];
+            
+            
+            [cell.rightImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(cell.contentView.mas_right).with.offset(-LineX(0));
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.size.mas_offset(CGSizeMake(LineW(0), LineH(0)));
+            }];
+            
+            
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            // app版本
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            
+            cell.contentLabel.text = [NSString stringWithFormat:@"v%@",app_Version];
+            
+        }
+    }
+    
     
     
     return cell;
@@ -183,12 +225,18 @@
         [alert addAction:clernAction];
         [self presentViewController:alert animated:YES completion:nil];
         
-    } else if (indexPath.row == 2) {
-        //关于我们
-        GGT_AboutUsViewController *vc = [[GGT_AboutUsViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
     }
     
+    
+    if (self.singleton.isAuditStatus == NO) {
+         if (indexPath.row == 2) {
+            //关于我们
+            GGT_AboutUsViewController *vc = [[GGT_AboutUsViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    
+        
     
     //    else if (indexPath.row == 2) {
     //
