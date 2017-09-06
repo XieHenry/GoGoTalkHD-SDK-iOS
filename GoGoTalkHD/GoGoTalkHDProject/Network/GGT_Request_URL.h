@@ -9,6 +9,10 @@
 #ifndef GGT_Request_URL_h
 #define GGT_Request_URL_h
 
+// 测试地址
+//static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
+
+// 正式地址
 static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 
 
