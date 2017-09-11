@@ -517,11 +517,11 @@ static NSString * const CalendarCellID = @"cell";
     // 初始化数据
     [self initData];
     
-    // 请求日历上面的数据
-    [self loadCalendarDataWithDate:self.xc_selectedDate showMBP:YES];
-
-    // 请求日历下面的数据
-    [self loadCourseDataWithStime:self.xc_selectedDate showMBP:YES];
+//    // 请求日历上面的数据
+//    [self loadCalendarDataWithDate:self.xc_selectedDate showMBP:YES];
+//
+//    // 请求日历下面的数据
+//    [self loadCourseDataWithStime:self.xc_selectedDate showMBP:YES];
     
     
     // 添加右侧item
@@ -542,6 +542,18 @@ static NSString * const CalendarCellID = @"cell";
     self.xc_isPush = NO;
     
 }
+
+// 切换界面刷新功能
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 请求日历上面的数据
+    [self loadCalendarDataWithDate:self.xc_selectedDate showMBP:YES];
+    
+    // 请求日历下面的数据
+    [self loadCourseDataWithStime:self.xc_selectedDate showMBP:YES];
+}
+
 
 - (void)addRightBarButtonItem
 {
