@@ -197,6 +197,14 @@
 		D64412771F2ED73500C98F0F /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D64412021F2ED47300C98F0F /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = D654E1D91EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m */; };
 		D654E1E31EF8ECE800E3BAB7 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D654E1E21EF8ECE800E3BAB7 /* MZTimerLabel.m */; };
+		D66F72201F66911500AF4410 /* BJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F720F1F66911500AF4410 /* BJTableViewController.m */; };
+		D66F72211F66911500AF4410 /* UIViewController+BJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F72111F66911500AF4410 /* UIViewController+BJUtil.m */; };
+		D66F72221F66911500AF4410 /* BJConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F72141F66911500AF4410 /* BJConsoleViewController.m */; };
+		D66F72231F66911500AF4410 /* BJRoomViewController+media.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F72161F66911500AF4410 /* BJRoomViewController+media.m */; };
+		D66F72241F66911500AF4410 /* BJRoomViewController+users.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F72181F66911500AF4410 /* BJRoomViewController+users.m */; };
+		D66F72251F66911500AF4410 /* BJRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F721A1F66911500AF4410 /* BJRoomViewController.m */; };
+		D66F72261F66911500AF4410 /* BJAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F721D1F66911500AF4410 /* BJAppConfig.m */; };
+		D66F72271F66911500AF4410 /* BJAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D66F721F1F66911500AF4410 /* BJAppearance.m */; };
 		D66FCBDF1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D66FCBDE1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m */; };
 		D66FCBE21EEA3CAE00792A6C /* GGT_PreviewDemoCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D66FCBE11EEA3CAE00792A6C /* GGT_PreviewDemoCourseCell.m */; };
 		D66FCBF11EEA52AA00792A6C /* having_Class.gif in Resources */ = {isa = PBXBuildFile; fileRef = D66FCBEF1EEA52AA00792A6C /* having_Class.gif */; };
@@ -644,6 +652,22 @@
 		D654E1D91EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BlockSupport.m"; sourceTree = "<group>"; };
 		D654E1E11EF8ECE800E3BAB7 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
 		D654E1E21EF8ECE800E3BAB7 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
+		D66F720E1F66911500AF4410 /* BJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJTableViewController.h; sourceTree = "<group>"; };
+		D66F720F1F66911500AF4410 /* BJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJTableViewController.m; sourceTree = "<group>"; };
+		D66F72101F66911500AF4410 /* UIViewController+BJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BJUtil.h"; sourceTree = "<group>"; };
+		D66F72111F66911500AF4410 /* UIViewController+BJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BJUtil.m"; sourceTree = "<group>"; };
+		D66F72131F66911500AF4410 /* BJConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJConsoleViewController.h; sourceTree = "<group>"; };
+		D66F72141F66911500AF4410 /* BJConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJConsoleViewController.m; sourceTree = "<group>"; };
+		D66F72151F66911500AF4410 /* BJRoomViewController+media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BJRoomViewController+media.h"; sourceTree = "<group>"; };
+		D66F72161F66911500AF4410 /* BJRoomViewController+media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BJRoomViewController+media.m"; sourceTree = "<group>"; };
+		D66F72171F66911500AF4410 /* BJRoomViewController+users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BJRoomViewController+users.h"; sourceTree = "<group>"; };
+		D66F72181F66911500AF4410 /* BJRoomViewController+users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BJRoomViewController+users.m"; sourceTree = "<group>"; };
+		D66F72191F66911500AF4410 /* BJRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRoomViewController.h; sourceTree = "<group>"; };
+		D66F721A1F66911500AF4410 /* BJRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRoomViewController.m; sourceTree = "<group>"; };
+		D66F721C1F66911500AF4410 /* BJAppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJAppConfig.h; sourceTree = "<group>"; };
+		D66F721D1F66911500AF4410 /* BJAppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJAppConfig.m; sourceTree = "<group>"; };
+		D66F721E1F66911500AF4410 /* BJAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJAppearance.h; sourceTree = "<group>"; };
+		D66F721F1F66911500AF4410 /* BJAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJAppearance.m; sourceTree = "<group>"; };
 		D66FCBDD1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewDemoCourseVC.h; sourceTree = "<group>"; };
 		D66FCBDE1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewDemoCourseVC.m; sourceTree = "<group>"; };
 		D66FCBE01EEA3CAE00792A6C /* GGT_PreviewDemoCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewDemoCourseCell.h; sourceTree = "<group>"; };
@@ -1554,6 +1578,53 @@
 			path = WhiteBoardModel;
 			sourceTree = "<group>";
 		};
+		D66F720C1F66911500AF4410 /* BJYRoom */ = {
+			isa = PBXGroup;
+			children = (
+				D66F720D1F66911500AF4410 /* Extention */,
+				D66F72121F66911500AF4410 /* Room */,
+				D66F721B1F66911500AF4410 /* utilities */,
+			);
+			path = BJYRoom;
+			sourceTree = "<group>";
+		};
+		D66F720D1F66911500AF4410 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				D66F720E1F66911500AF4410 /* BJTableViewController.h */,
+				D66F720F1F66911500AF4410 /* BJTableViewController.m */,
+				D66F72101F66911500AF4410 /* UIViewController+BJUtil.h */,
+				D66F72111F66911500AF4410 /* UIViewController+BJUtil.m */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		D66F72121F66911500AF4410 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				D66F72131F66911500AF4410 /* BJConsoleViewController.h */,
+				D66F72141F66911500AF4410 /* BJConsoleViewController.m */,
+				D66F72151F66911500AF4410 /* BJRoomViewController+media.h */,
+				D66F72161F66911500AF4410 /* BJRoomViewController+media.m */,
+				D66F72171F66911500AF4410 /* BJRoomViewController+users.h */,
+				D66F72181F66911500AF4410 /* BJRoomViewController+users.m */,
+				D66F72191F66911500AF4410 /* BJRoomViewController.h */,
+				D66F721A1F66911500AF4410 /* BJRoomViewController.m */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		D66F721B1F66911500AF4410 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D66F721C1F66911500AF4410 /* BJAppConfig.h */,
+				D66F721D1F66911500AF4410 /* BJAppConfig.m */,
+				D66F721E1F66911500AF4410 /* BJAppearance.h */,
+				D66F721F1F66911500AF4410 /* BJAppearance.m */,
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
 		D66FCBE31EEA417600792A6C /* 课程列表table-暂时不用 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1846,6 +1917,7 @@
 			isa = PBXGroup;
 			children = (
 				5B9E05751F149BA80050CEDB /* OrderTheCourse */,
+				D66F720C1F66911500AF4410 /* BJYRoom */,
 				D68774341F0A07C9008687C2 /* TuoKeSDK */,
 				5B743D151EC5A0B9004E744A /* Mine */,
 				D6E0A56E1EC2DAD9006A003D /* CommonClass */,
@@ -2345,6 +2417,7 @@
 				D63DA94D1ED595CF00EFA686 /* GGT_CourseCellModel.m in Sources */,
 				5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */,
 				D644125A1F2ED47300C98F0F /* BITUpdateManager.m in Sources */,
+				D66F72251F66911500AF4410 /* BJRoomViewController.m in Sources */,
 				D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */,
 				D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */,
 				5BF912D21ECEC04F009C8186 /* GGT_CheckDevicePopViewController.m in Sources */,
@@ -2380,6 +2453,7 @@
 				D64412541F2ED47300C98F0F /* BITHockeyHelper.m in Sources */,
 				D6E0A5771EC2DB15006A003D /* GGT_Singleton.m in Sources */,
 				D64412591F2ED47300C98F0F /* BITStoreUpdateManager.m in Sources */,
+				D66F72201F66911500AF4410 /* BJTableViewController.m in Sources */,
 				5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */,
 				D64412301F2ED47300C98F0F /* TKTeacherMessageTableViewCell.m in Sources */,
 				5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */,
@@ -2387,7 +2461,9 @@
 				D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */,
 				D63DA9481ED5554400EFA686 /* NSArray+Log.m in Sources */,
 				D64412341F2ED47300C98F0F /* TKDocumentListView.m in Sources */,
+				D66F72261F66911500AF4410 /* BJAppConfig.m in Sources */,
 				5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */,
+				D66F72221F66911500AF4410 /* BJConsoleViewController.m in Sources */,
 				D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */,
 				5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */,
 				5BC473AA1EC99FA7003B8154 /* GGT_MineHeaderView.m in Sources */,
@@ -2409,6 +2485,7 @@
 				5BC473681EC95C8A003B8154 /* GGT_SettingViewController.m in Sources */,
 				D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */,
 				D64412571F2ED47300C98F0F /* BITKeychainUtils.m in Sources */,
+				D66F72211F66911500AF4410 /* UIViewController+BJUtil.m in Sources */,
 				D64412561F2ED47300C98F0F /* BITHTTPOperation.m in Sources */,
 				D644124E1F2ED47300C98F0F /* BITFeedbackManager.m in Sources */,
 				D6E0A5601EC2D9CD006A003D /* UIView+XCHelper.m in Sources */,
@@ -2426,7 +2503,9 @@
 				5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */,
 				5B7FE82C1ECC4E9600404939 /* GGT_ChangePasswordView.m in Sources */,
 				5BF912D51ECEC50D009C8186 /* GGT_CheckDeviceView.m in Sources */,
+				D66F72271F66911500AF4410 /* BJAppearance.m in Sources */,
 				D63DA9491ED5554400EFA686 /* NSDictionary+Log.m in Sources */,
+				D66F72241F66911500AF4410 /* BJRoomViewController+users.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
 				D64412611F2ED47300C98F0F /* TKAFNetworkActivityIndicatorManager.m in Sources */,
 				5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */,
@@ -2437,6 +2516,7 @@
 				5BC473AD1EC9A380003B8154 /* GGT_ChangePassWordViewController.m in Sources */,
 				5B9E05A81F14AABA0050CEDB /* GGT_OrderForeignListCell.m in Sources */,
 				D644123F1F2ED47300C98F0F /* TKVideoSmallView.m in Sources */,
+				D66F72231F66911500AF4410 /* BJRoomViewController+media.m in Sources */,
 				D64412241F2ED47300C98F0F /* TKEduRoomProperty.m in Sources */,
 				D64412631F2ED47300C98F0F /* TKAFSecurityPolicy.m in Sources */,
 				D64412601F2ED47300C98F0F /* TKAFHTTPSessionManager.m in Sources */,
@@ -2583,6 +2663,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = GoGoTalkHD/GoGoTalkHD.entitlements;
@@ -2619,6 +2700,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = GoGoTalkHD/GoGoTalkHD.entitlements;

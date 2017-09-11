@@ -10,11 +10,11 @@
 
 #if SD_UIKIT
 #import "objc/runtime.h"
-#import "UIView+WebCacheOperation.h"
+//#import "UIView+WebCacheOperation.h"
 #import "UIView+WebCache.h"
 #import "NSData+ImageContentType.h"
 #import "FLAnimatedImage.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 
 @implementation FLAnimatedImageView (WebCache)
 

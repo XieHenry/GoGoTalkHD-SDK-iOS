@@ -18,7 +18,8 @@
 
 
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+//#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 #import "Masonry.h"
 //#import "MJRefresh.h"         采用XCNormalHeader.h和XCNormalFooter.h
 #import "NSObject+YYModel.h"

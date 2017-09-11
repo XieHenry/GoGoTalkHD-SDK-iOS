@@ -14,8 +14,28 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BJLiveCore (0.4.0):
+    - AFNetworking (~> 3.0)
+    - BJLiveCore/BJHLMediaPlayer (= 0.4.0)
+    - JRSwizzle
+    - libextobjc/EXTScope
+    - LogStat (~> 0.6.6)
+    - PocketSocket
+    - ReactiveObjC
+    - SDWebImage
+    - YYModel
+  - BJLiveCore/BJHLMediaPlayer (0.4.0):
+    - AFNetworking (~> 3.0)
+    - JRSwizzle
+    - libextobjc/EXTScope
+    - LogStat (~> 0.6.6)
+    - PocketSocket
+    - ReactiveObjC
+    - SDWebImage
+    - YYModel
   - Bugly (2.4.8)
   - FLAnimatedImage (1.0.12)
+  - FLEX (2.4.0)
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
@@ -24,21 +44,35 @@ PODS:
   - JCore (1.1.5)
   - JPush (3.0.6):
     - JCore (~> 1.1.1)
+  - JRSwizzle (1.0)
+  - libextobjc/EXTScope (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4.1)
+  - LKDBHelper (2.4.4):
+    - LKDBHelper/standard (= 2.4.4)
+  - LKDBHelper/standard (2.4.4):
+    - FMDB
+  - LogStat (0.6.6):
+    - AFNetworking
+    - LKDBHelper
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
+  - PocketSocket (1.0.1):
+    - PocketSocket/Client (= 1.0.1)
+    - PocketSocket/Core (= 1.0.1)
+    - PocketSocket/Server (= 1.0.1)
+  - PocketSocket/Client (1.0.1):
+    - PocketSocket/Core
+  - PocketSocket/Core (1.0.1)
+  - PocketSocket/Server (1.0.1):
+    - PocketSocket/Client
   - Reachability (3.2)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - ReactiveObjC (3.0.0)
+  - SDWebImage (4.1.0):
+    - SDWebImage/Core (= 4.1.0)
+  - SDWebImage/Core (4.1.0)
   - UMengUShare/Core (6.4.5):
     - UMengUShare/Network
   - UMengUShare/Network (6.4.5)
@@ -57,8 +91,10 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - BJLiveCore
   - Bugly
   - FLAnimatedImage
+  - FLEX (~> 2.0)
   - FMDB
   - FSCalendar (= 2.7.8)
   - IQKeyboardManager
@@ -68,7 +104,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - Reachability
-  - ReactiveCocoa (~> 2.5.0)
+  - ReactiveObjC
   - SDWebImage
   - UMengUShare/Social/QQ
   - UMengUShare/Social/ReducedSina
@@ -78,24 +114,31 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BJLiveCore: a3e9471cb978f3135ff530ad223401635fd643c3
   Bugly: da3c02408c14838d498429320545a8e439392978
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   FSCalendar: 09369a2bf554ba71cd8e8cfb627e2df22a2c2af4
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
+  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
+  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  LKDBHelper: cf467ff69aaf1e13bd4964aca3a79881d54c6d14
+  LogStat: 62094776744429f4a84d2e850f7999bd04713036
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  PocketSocket: 9c6867d66fb4f962af96b9b07f4b45bb561b2c2a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: b426033e0934746f18532b7d0497b47bdfaaed49
+PODFILE CHECKSUM: 0b353fea2614734adb2eeed189458e4a4424b649
 
 COCOAPODS: 1.2.1
