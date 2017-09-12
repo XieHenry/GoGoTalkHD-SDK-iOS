@@ -10,7 +10,10 @@ inhibit_all_warnings!   #可能产生其他问题
     pod 'JPush'
     
     use_frameworks!
-    pod 'ReactiveCocoa', '~> 2.5.0'             # 必须加上上面的use_frameworks!
+    #和百家云的有冲突 换成ReactiveObjC
+#    pod 'ReactiveCocoa', '~> 2.5.0'             # 必须加上上面的use_frameworks!
+
+    pod 'ReactiveObjC'
     
     pod 'AFNetworking'
     pod 'FMDB'
@@ -35,6 +38,20 @@ inhibit_all_warnings!   #可能产生其他问题
     # 集成新浪微博(精简版1M)
     pod 'UMengUShare/Social/ReducedSina'
     
+    
+    
+    ############# 百家云 #############
+    source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/baijia/specs.git'
+    
+    post_install do |installer|
+        installer.pods_project.root_object.attributes["CLASSPREFIX"] = "BJL"
+        installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Baijia Cloud"
+    end
+#    inhibit_all_warnings!   #可能产生其他问题   去掉pod中的警告
+    pod 'BJLiveCore'
+    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+    ############# 百家云 #############
     
     
     

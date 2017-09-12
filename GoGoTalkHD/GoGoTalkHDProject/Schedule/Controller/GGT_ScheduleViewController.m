@@ -22,8 +22,12 @@
 
 #import "MZTimerLabel.h"
 
-#import "TKEduClassRoom.h"      // 测试拓课
+// 测试拓课
+#import "TKEduClassRoom.h"
 #import "TKMacro.h"
+
+// 百家云
+#import "BJRoomViewController.h"
 
 static NSString * const CalendarCellID = @"cell";
 
@@ -670,6 +674,10 @@ static NSString * const CalendarCellID = @"cell";
 //    [XCLogManager xc_redirectNSlogToDocumentFolder];
 //    return;
     
+    // 测试百家云
+//    [self doneWithButton];
+//    return;
+    
     if (!self.xc_isPush) {
         GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
@@ -685,7 +693,6 @@ static NSString * const CalendarCellID = @"cell";
             [self getLessonWithCourseModel:cell.xc_cellModel tableView:tableView indexPath:indexPath];
         }
     }
-    
 }
 
 - (void)getLessonWithCourseModel:(GGT_CourseCellModel *)courseModel tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
@@ -1191,7 +1198,7 @@ static NSString * const CalendarCellID = @"cell";
     NSLog(@"弹框已经消失");
 }
 
-
+#pragma mark - 拓课
 #pragma mark TKEduEnterClassRoomDelegate
 //error.code  Description:error.description
 - (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
@@ -1227,6 +1234,26 @@ static NSString * const CalendarCellID = @"cell";
 }
 - (void) onCameraDidOpenError{
     TKLog(@"-----onCameraDidOpenError");
+}
+
+
+#pragma mark - 百家云
+- (void)doneWithButton {
+    [self.view endEditing:YES];
+    
+    [self enterRoomWithJoinCode:@"2mnuv7"
+                       userName:@"Student"];
+}
+
+- (void)enterRoomWithJoinCode:(NSString *)joinCode userName:(NSString *)userName {
+    
+    BJRoomViewController *roomViewController = [BJRoomViewController new];
+    
+    [self presentViewController:roomViewController
+                       animated:YES
+                     completion:^{
+                         [roomViewController enterRoomWithSecret:joinCode userName:userName];
+                     }];
 }
 
 
