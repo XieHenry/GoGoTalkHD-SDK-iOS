@@ -67,6 +67,9 @@
 #import "GGT_HomeTeachModel.h"
 #import "GGT_CoursewareModel.h"
 
+// 拓课
+#import "GGT_TKManager.h"
+
 
 static NSString * const xc_returnCode = @"result";
 static NSString * const xc_returnMsg = @"msg";

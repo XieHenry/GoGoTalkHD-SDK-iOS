@@ -15,10 +15,10 @@
 
 #import "GGT_PreTeachEvaView.h"
 
-#import "TKEduClassRoom.h"      // 测试拓课
-#import "TKMacro.h"
+//#import "TKEduClassRoom.h"      // 测试拓课
+//#import "TKMacro.h"
 
-@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate, TKEduRoomDelegate>
+@interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UIScrollView *xc_scrollView;
 @property (nonatomic, strong) UIView *xc_contentView;
 @property (nonatomic, strong) GGT_CourseDetailCell *xc_topView;
@@ -275,20 +275,30 @@
         {
             
             
-            [self enterTKClassroomWithCourseModel:model];
+//            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
+            @weakify(self);
+            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                @strongify(self);
+                // 网络请求 刷新数据
+                [self refreshTableView];
+            }];
             
         }
             break;
         case 2:     // 正在上课  // 进入教室
         {
             
-            [self enterTKClassroomWithCourseModel:model];
-            
+//            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
-            
+            @weakify(self);
+            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                @strongify(self);
+                // 网络请求 刷新数据
+                [self refreshTableView];
+            }];
         }
             break;
         case 3:     // 已经结束 待评价     // 需要刷新上一个控制器中cell
@@ -312,19 +322,19 @@
     }
 }
 
-// 进入教室调用接口
-- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"LessonId"] = model.LessonId;
-    
-    NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
-    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
+//// 进入教室调用接口
+//- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
+//{
+//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+//    param[@"LessonId"] = model.LessonId;
+//    
+//    NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
+//    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
 
 // 取消预约
 - (void)cancleReservationCourseWithModel:(GGT_CourseCellModel *)model
@@ -455,59 +465,59 @@
 
 #pragma mark - 拓课
 #pragma mark TKEduEnterClassRoomDelegate
-- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
-{
-    NSDictionary *tDict = @{
-                            @"serial"   :model.serial,
-                            @"host"    :model.host,
-                            // @"userid"  : @"1111",
-                            @"port"    :model.port,
-                            @"nickname":model.nickname,    // 学生密码567
-                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                            };
-    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-    shareRoom.xc_roomPassword = model.stuPwd;
-    shareRoom.xc_roomName = model.LessonName;
-    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-    
-    // 记录日志
-    [XCLogManager xc_redirectNSlogToDocumentFolder];
-}
-
-//error.code  Description:error.description
-- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
-    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
-        
-    } else {
-        TKLog(@"-----onEnterRoomFailed");
-        [XCLogManager xc_readDataFromeFile];
-    }
-}
-- (void) onKitout:(EKickOutReason)reason{
-    TKLog(@"-----onKitout");
-}
-- (void) joinRoomComplete{
-    TKLog(@"-----joinRoomComplete");
-    [XCLogManager xc_readDataFromeFile];
-    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
-}
-- (void) leftRoomComplete{
-    TKLog(@"-----leftRoomComplete");
-    [XCLogManager xc_deleteLogData];
-    
-    // 网络请求 刷新数据
-    [self refreshTableView];
-}
-- (void) onClassBegin{
-    TKLog(@"-----onClassBegin");
-}
-- (void) onClassDismiss{
-    NSLog(@"-----onClassDismiss");
-    [TKEduClassRoom leftRoom];
-}
-- (void) onCameraDidOpenError{
-    TKLog(@"-----onCameraDidOpenError");
-}
+//- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
+//{
+//    NSDictionary *tDict = @{
+//                            @"serial"   :model.serial,
+//                            @"host"    :model.host,
+//                            // @"userid"  : @"1111",
+//                            @"port"    :model.port,
+//                            @"nickname":model.nickname,    // 学生密码567
+//                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+//                            };
+//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
+//    shareRoom.xc_roomPassword = model.stuPwd;
+//    shareRoom.xc_roomName = model.LessonName;
+//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+//    
+//    // 记录日志
+//    [XCLogManager xc_redirectNSlogToDocumentFolder];
+//}
+//
+////error.code  Description:error.description
+//- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
+//    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
+//        
+//    } else {
+//        TKLog(@"-----onEnterRoomFailed");
+//        [XCLogManager xc_readDataFromeFile];
+//    }
+//}
+//- (void) onKitout:(EKickOutReason)reason{
+//    TKLog(@"-----onKitout");
+//}
+//- (void) joinRoomComplete{
+//    TKLog(@"-----joinRoomComplete");
+//    [XCLogManager xc_readDataFromeFile];
+//    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
+//}
+//- (void) leftRoomComplete{
+//    TKLog(@"-----leftRoomComplete");
+//    [XCLogManager xc_deleteLogData];
+//    
+//    // 网络请求 刷新数据
+//    [self refreshTableView];
+//}
+//- (void) onClassBegin{
+//    TKLog(@"-----onClassBegin");
+//}
+//- (void) onClassDismiss{
+//    NSLog(@"-----onClassDismiss");
+//    [TKEduClassRoom leftRoom];
+//}
+//- (void) onCameraDidOpenError{
+//    TKLog(@"-----onCameraDidOpenError");
+//}
 
 // 退出教室 刷新数据
 - (void)refreshTableView
