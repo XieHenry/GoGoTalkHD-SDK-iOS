@@ -440,7 +440,7 @@
     
     NSString *userName = [UserDefaults() objectForKey:@"phoneNumber"];
     
-    NSString *password = [UserDefaults() objectForKey:@"password"];
+    NSString *password = [UserDefaults() objectForKey:K_password];
     
     //如果都为空，退出到登录页
     if (IsStrEmpty(userName) || IsStrEmpty(password)) {

@@ -125,7 +125,7 @@
         [UserDefaults() setObject:responseObject[@"data"][@"dicRes"][@"userToken"] forKey:K_userToken];
         [UserDefaults() setObject:[NSString stringWithFormat:@"%@",responseObject[@"data"][@"dicRes"][@"studentName"]] forKey:K_studentName];
         [UserDefaults() setObject:self.loginView.phoneAccountField.text forKey:@"phoneNumber"];
-        [UserDefaults() setObject:self.loginView.passwordField.text forKey:@"password"];
+        [UserDefaults() setObject:self.loginView.passwordField.text forKey:K_password];
         [UserDefaults() synchronize];
         
         [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
