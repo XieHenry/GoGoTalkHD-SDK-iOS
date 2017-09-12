@@ -15,6 +15,9 @@
 // 测试地址
 static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
 
+// 李志敏本地
+//static NSString * const BASE_REQUEST_URL = @"http://192.168.88.102:808";
+
 
 /*登录注册*/
 //注册
@@ -109,7 +112,8 @@ static NSString * const URL_GetTokenInvalid = @"/api/APP/GetTokenInvalid";
 static NSString * const URL_GetTesting = @"/api/APP/GetTesting";
 // 获取baseURL
 static NSString * const URL_GetUrl = @"api/APP/GetUrl";
-
+// 版本更新接口
+static NSString * const URL_VersionUpdateNew = @"api/APP/VersionUpdateNew";
 
 
 

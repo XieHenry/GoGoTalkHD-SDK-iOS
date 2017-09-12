@@ -274,22 +274,8 @@
         case 1:     // 即将上课  // 进入预习界面
         {
             
-            NSDictionary *tDict = @{
-                                    @"serial"   :model.serial,
-                                    @"host"    :model.host,
-                                    // @"userid"  : @"1111",
-                                    @"port"    :model.port,
-                                    @"nickname":model.nickname,    // 学生密码567
-                                    @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                                    };
-            TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-            shareRoom.xc_roomPassword = model.stuPwd;
-            shareRoom.xc_roomName = model.LessonName;
-            [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-
-            // 记录日志
-            [XCLogManager xc_redirectNSlogToDocumentFolder];
             
+            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             
@@ -298,21 +284,7 @@
         case 2:     // 正在上课  // 进入教室
         {
             
-            NSDictionary *tDict = @{
-                                    @"serial"   :model.serial,
-                                    @"host"    :model.host,
-                                    // @"userid"  : @"1111",
-                                    @"port"    :model.port,
-                                    @"nickname":model.nickname,    // 学生密码567
-                                    @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                                    };
-            TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-            shareRoom.xc_roomPassword = model.stuPwd;
-            shareRoom.xc_roomName = model.LessonName;
-            [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-            
-            // 记录日志
-            [XCLogManager xc_redirectNSlogToDocumentFolder];
+            [self enterTKClassroomWithCourseModel:model];
             
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
@@ -481,7 +453,27 @@
     [MBProgressHUD hideHUDForView:self.view];
 }
 
+#pragma mark - 拓课
 #pragma mark TKEduEnterClassRoomDelegate
+- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
+{
+    NSDictionary *tDict = @{
+                            @"serial"   :model.serial,
+                            @"host"    :model.host,
+                            // @"userid"  : @"1111",
+                            @"port"    :model.port,
+                            @"nickname":model.nickname,    // 学生密码567
+                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            };
+    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
+    shareRoom.xc_roomPassword = model.stuPwd;
+    shareRoom.xc_roomName = model.LessonName;
+    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+    
+    // 记录日志
+    [XCLogManager xc_redirectNSlogToDocumentFolder];
+}
+
 //error.code  Description:error.description
 - (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
     if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送

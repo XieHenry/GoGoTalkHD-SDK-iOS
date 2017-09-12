@@ -658,24 +658,8 @@ static NSString * const CalendarCellID = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    NSDictionary *tDict = @{
-//                            @"serial"   :@"755158726",
-//                            @"host"    :@"global.talk-cloud.com",
-//                            // @"userid"  : @"1111",
-//                            @"port"    :@"443",
-//                            @"nickname":@"test-6",    // 学生密码567
-//                            @"userrole":@"2"    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-//                            };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareTKEduClassRoomInstance];
-//    shareRoom.xc_roomPassword = @"567";
-//    shareRoom.xc_roomName = @"test-6";
-//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-//    // 记录日志
-//    [XCLogManager xc_redirectNSlogToDocumentFolder];
-//    return;
-    
     // 测试百家云
-//    [self doneWithButton];
+//    [self enterBJYClassRoom];
 //    return;
     
     if (!self.xc_isPush) {
@@ -831,23 +815,7 @@ static NSString * const CalendarCellID = @"cell";
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
                 
-                NSDictionary *tDict = @{
-                                        @"serial"   :model.serial,
-                                        @"host"    :model.host,
-                                        // @"userid"  : @"1111",
-                                        @"port"    :model.port,
-                                        @"nickname":model.nickname,    // 学生密码567
-                                        @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                                        };
-                TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-                shareRoom.xc_roomPassword = model.stuPwd;
-                shareRoom.xc_roomName = model.LessonName;
-                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-
-                // 记录日志
-                [XCLogManager xc_redirectNSlogToDocumentFolder];
-                
-//                [self postNetworkModifyLessonStatusWithCourseModel:model];
+                [self enterTKClassroomWithCourseModel:model];
 
             }
             
@@ -862,23 +830,7 @@ static NSString * const CalendarCellID = @"cell";
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
                 
-                NSDictionary *tDict = @{
-                                        @"serial"   :model.serial,
-                                        @"host"    :model.host,
-                                        // @"userid"  : @"1111",
-                                        @"port"    :model.port,
-                                        @"nickname":model.nickname,    // 学生密码567
-                                        @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                                        };
-                TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-                shareRoom.xc_roomPassword = model.stuPwd;
-                shareRoom.xc_roomName = model.LessonName;
-                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-
-                // 记录日志
-                [XCLogManager xc_redirectNSlogToDocumentFolder];
-                
-//                [self postNetworkModifyLessonStatusWithCourseModel:model];
+                [self enterTKClassroomWithCourseModel:model];
                 
             }
         }
@@ -1200,6 +1152,25 @@ static NSString * const CalendarCellID = @"cell";
 
 #pragma mark - 拓课
 #pragma mark TKEduEnterClassRoomDelegate
+- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
+{
+    NSDictionary *tDict = @{
+                            @"serial"   :model.serial,
+                            @"host"    :model.host,
+                            // @"userid"  : @"1111",
+                            @"port"    :model.port,
+                            @"nickname":model.nickname,    // 学生密码567
+                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            };
+    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
+    shareRoom.xc_roomPassword = model.stuPwd;
+    shareRoom.xc_roomName = model.LessonName;
+    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+    
+    // 记录日志
+    [XCLogManager xc_redirectNSlogToDocumentFolder];
+}
+
 //error.code  Description:error.description
 - (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
     if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
@@ -1238,7 +1209,7 @@ static NSString * const CalendarCellID = @"cell";
 
 
 #pragma mark - 百家云
-- (void)doneWithButton {
+- (void)enterBJYClassroom {
     [self.view endEditing:YES];
     
     [self enterRoomWithJoinCode:@"2mnuv7"
