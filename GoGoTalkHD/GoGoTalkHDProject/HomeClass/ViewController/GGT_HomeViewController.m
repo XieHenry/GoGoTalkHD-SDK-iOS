@@ -370,9 +370,62 @@
     
     [[BaseService share] sendGetRequestWithPath:urlStr token:NO viewController:self showMBProgress:NO success:^(id responseObject) {
         
+        if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+            GGT_UpdateModel *model = [GGT_UpdateModel yy_modelWithDictionary:responseObject[@"data"]];
+            [self popAlertVCWithModel:model];
+        }
+        
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)popAlertVCWithModel:(GGT_UpdateModel *)model
+{
+    //Type类型：0 非强制性更新  1 强制性更新  2 已是最新版本，不用更新
+    if ([model.Title isKindOfClass:[NSString class]] && [model.Contents isKindOfClass:[NSString class]]) {
+        
+        UIAlertController *alterC = [UIAlertController alertControllerWithTitle:model.Title message:model.Contents preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *firstAction = nil;
+        UIAlertAction *secondAction = nil;
+        
+        if ([model.FirstButton isKindOfClass:[NSString class]]) {
+            firstAction = [UIAlertAction actionWithTitle:model.FirstButton style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+        }
+        
+        if ([model.LastButton isKindOfClass:[NSString class]]) {
+            secondAction = [UIAlertAction actionWithTitle:model.LastButton style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if ([model.Url isKindOfClass:[NSString class]]) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.Url]];
+                }
+                
+                if ([model.Type isKindOfClass:[NSString class]] && [model.Type isEqualToString:@"1"]) {
+                    [self updateNewVersion];
+                }
+                
+            }];
+        }
+        
+        firstAction.textColor = UICOLOR_FROM_HEX(Color777777);
+        secondAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+        
+        if ([model.Type isEqualToString:@"0"]) {
+            [alterC addAction:firstAction];
+        }
+        
+        [alterC addAction:secondAction];
+        
+        
+        
+        if (![model.Type isEqualToString:@"2"]) {
+            [self presentViewController:alterC animated:YES completion:nil];
+        }
+
+    }
+    
 }
 
 

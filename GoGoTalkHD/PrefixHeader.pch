@@ -66,6 +66,7 @@
 #import "GGT_HomeTimeModel.h"
 #import "GGT_HomeTeachModel.h"
 #import "GGT_CoursewareModel.h"
+#import "GGT_UpdateModel.h"
 
 // 拓课
 #import "GGT_TKManager.h"

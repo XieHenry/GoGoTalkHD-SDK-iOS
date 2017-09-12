@@ -266,6 +266,7 @@
 		D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A59B1EC2FAC6006A003D /* BaseService.m */; };
 		D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E868F81F0B6F2900B48A5E /* XCLogManager.m */; };
 		D6ED8FF81F67C1B30002D7B4 /* GGT_TKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6ED8FF71F67C1B30002D7B4 /* GGT_TKManager.m */; };
+		D6ED8FFC1F67D34B0002D7B4 /* GGT_UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6ED8FFB1F67D34B0002D7B4 /* GGT_UpdateModel.m */; };
 		D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */; };
 		D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AEE1F1756CF00A79011 /* GGT_OrderClassPopVC.m */; };
 		D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AF11F1767D800A79011 /* GGT_ChooseCoursewareVC.m */; };
@@ -791,6 +792,8 @@
 		D6E868F81F0B6F2900B48A5E /* XCLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLogManager.m; sourceTree = "<group>"; };
 		D6ED8FF61F67C1B30002D7B4 /* GGT_TKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_TKManager.h; sourceTree = "<group>"; };
 		D6ED8FF71F67C1B30002D7B4 /* GGT_TKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_TKManager.m; sourceTree = "<group>"; };
+		D6ED8FFA1F67D34B0002D7B4 /* GGT_UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_UpdateModel.h; sourceTree = "<group>"; };
+		D6ED8FFB1F67D34B0002D7B4 /* GGT_UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_UpdateModel.m; sourceTree = "<group>"; };
 		D6FD8AE91F17525300A79011 /* GGT_OrderPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderPlaceholderView.h; sourceTree = "<group>"; };
 		D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderPlaceholderView.m; sourceTree = "<group>"; };
 		D6FD8AED1F1756CF00A79011 /* GGT_OrderClassPopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderClassPopVC.h; sourceTree = "<group>"; };
@@ -1808,6 +1811,7 @@
 		D69427311EC94CD30048FD2C /* HomeClass */ = {
 			isa = PBXGroup;
 			children = (
+				D6ED8FF91F67D33B0002D7B4 /* Model */,
 				D69427351EC94CD30048FD2C /* ViewController */,
 				D69427321EC94CD30048FD2C /* View */,
 			);
@@ -2077,6 +2081,15 @@
 				D6ED8FF71F67C1B30002D7B4 /* GGT_TKManager.m */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D6ED8FF91F67D33B0002D7B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6ED8FFA1F67D34B0002D7B4 /* GGT_UpdateModel.h */,
+				D6ED8FFB1F67D34B0002D7B4 /* GGT_UpdateModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D6FD8AEC1F17562D00A79011 /* 约课首页 */ = {
@@ -2510,6 +2523,7 @@
 				D64412661F2ED47300C98F0F /* TKAFURLSessionManager.m in Sources */,
 				D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */,
 				D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */,
+				D6ED8FFC1F67D34B0002D7B4 /* GGT_UpdateModel.m in Sources */,
 				D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */,
 				D67D55F81EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m in Sources */,
 				D644125C1F2ED47300C98F0F /* BITWebTableViewCell.m in Sources */,
