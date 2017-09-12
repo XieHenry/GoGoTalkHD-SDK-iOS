@@ -31,6 +31,8 @@
 #define K_userToken @"userToken"
 #define K_studentName @"studentName"
 #define K_registerID @"K_registerID"
+#define K_password @"GGT_password" //避免和拓课的重复
+#define K_nameEn @"K_nameEn"
 
 
 

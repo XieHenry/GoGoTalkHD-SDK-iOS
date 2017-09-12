@@ -77,6 +77,11 @@
         _dataArray = [NSMutableArray arrayWithObjects:sectionArr1,sectionArr2, nil];
         [_tableView reloadData];
         
+        //保存英文名
+        [UserDefaults() setObject:_selfInfoModel.NameEn forKey:K_nameEn];
+        [UserDefaults() synchronize];
+        
+        
     } failure:^(NSError *error) {
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
         
