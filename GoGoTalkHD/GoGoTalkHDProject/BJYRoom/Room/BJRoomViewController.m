@@ -118,7 +118,8 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                  @strongify(self);
                  
                  if (!error) {
-                     [self goBack];
+                     // error为空 则为退出成功 不需要再次退出了
+//                     [self goBack];
                      return YES;
                  }
                  
@@ -631,12 +632,28 @@ static CGFloat const xc_drawBarHeight = 68.0f;
 
 - (void)goBack {
     
-#pragma mark - 需要弹框
-    
-    [self.room exit];
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.room = nil;
+    UIAlertController *alterC = [UIAlertController alertControllerWithTitle:@"确定要退出教室" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"暂不" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
     }];
+    
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        // 退出教室
+        [self.room exit];
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.room = nil;
+        }];
+    }];
+    
+    firstAction.textColor = UICOLOR_FROM_HEX(Color777777);
+    secondAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+    
+    [alterC addAction:firstAction];
+    [alterC addAction:secondAction];
+    
+    [self presentViewController:alterC animated:YES completion:nil];
+    
 }
 
 - (void)sendMessage {
