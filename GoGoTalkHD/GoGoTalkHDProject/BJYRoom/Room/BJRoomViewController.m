@@ -547,6 +547,10 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                  // 注销进度日志
 //                 [self.console printFormat:@"loading progress: %f", progress];
                  
+                 if (progress == 0) {
+                     [MBProgressHUD showLoading:self.view];
+                 }
+                 
                  return YES;
              }];
     
@@ -556,6 +560,9 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                  
                  // 注销进度日志
 //                 [self.console printLine:@"loading success"];
+                 
+                 [MBProgressHUD hideHUDForView:self.view];
+                 
                  return YES;
              }];
     
@@ -575,7 +582,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
     [self bjl_observe:BJLMakeMethod(self.room.chatVM, didReceiveMessage:)
              observer:^BOOL(BJLMessage *message) {
                  @strongify(self);
-                 [self.console printFormat:@"chat %@: %@", message.fromUser.name, message.text];
+                 [self.console printFormat:@"%@: %@", message.fromUser.name, message.text];
                  return YES;
              }];
 }
@@ -623,6 +630,9 @@ static CGFloat const xc_drawBarHeight = 68.0f;
 }
 
 - (void)goBack {
+    
+#pragma mark - 需要弹框
+    
     [self.room exit];
     [self dismissViewControllerAnimated:YES completion:^{
         self.room = nil;

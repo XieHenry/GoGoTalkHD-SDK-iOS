@@ -345,7 +345,8 @@
                  BJLTupleUnpack(tuple) = ^(BJLOnlineUser *old,
                                            BJLOnlineUser *now) {
                      @strongify(self);
-                     [self.console printFormat:@"playingUserDidUpdate: %@ >> %@", old, now];
+                     // 注销进度日志
+//                     [self.console printFormat:@"playingUserDidUpdate: %@ >> %@", old, now];
                  };
                  return YES;
              }];
@@ -353,7 +354,9 @@
              observer:^BOOL(BJLOnlineUser *now,
                             BJLOnlineUser *old) {
                  @strongify(self);
-                 [self.console printFormat:@"playingUserDidUpdate:old: %@ >> %@", old, now];
+                 
+                 // 注销进度日志
+//                 [self.console printFormat:@"playingUserDidUpdate:old: %@ >> %@", old, now];
                  
 #pragma mark - 监听老师视频的打开还是关闭的状态
                  /*----------------------------*/
@@ -492,8 +495,11 @@
 - (void)makeSlideshowAndWhiteboardEvents {
     @weakify(self);
     
+    // 设置白板
     self.room.slideshowViewController.studentCanPreviewForward = YES;
     self.room.slideshowViewController.studentCanRemoteControl = YES;
+    
+    
     // self.room.slideshowViewController.placeholderImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
     
     [self addChildViewController:self.room.slideshowViewController
