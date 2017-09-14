@@ -38,8 +38,10 @@ inhibit_all_warnings!   #可能产生其他问题
     # 集成新浪微博(精简版1M)
     pod 'UMengUShare/Social/ReducedSina'
     
-    
-    
+    #友盟统计-无IDFA版SDK
+    pod 'UMengAnalytics-NO-IDFA'
+
+
     ############# 百家云 #############
     source 'https://github.com/CocoaPods/Specs.git'
     source 'https://github.com/baijia/specs.git'

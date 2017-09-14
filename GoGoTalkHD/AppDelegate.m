@@ -15,7 +15,7 @@
 #import "GGT_HomeViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "GGT_LaunchViewController.h"
-
+#import "UMMobClick/MobClick.h"
 
 #define kBuglyAppId      @"f911039477"
 
@@ -124,6 +124,9 @@ static BOOL isProduction = true;
     [self initKeyWindow];
     
     [self initIQKeyboardManager];
+    
+    //友盟统计
+    [self initUMConfig];
     
     //友盟分享
     [self initUmSocialCore];
@@ -274,6 +277,14 @@ static BOOL isProduction = true;
  
 }
 
+#pragma mark 友盟统计
+- (void)initUMConfig {
+    UMConfigInstance.appKey = @"59b9faabf29d982c4f000030";
+    UMConfigInstance.channelId = @"App Store";
+    UMConfigInstance.eSType = E_UM_GAME; //仅适用于游戏场景，应用统计不用设置
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+}
+
 
 #pragma mark 配置友盟分享
 - (void)initUmSocialCore {
@@ -283,7 +294,7 @@ static BOOL isProduction = true;
     [UMSocialGlobal shareInstance].isClearCacheWhenGetUserInfo = NO;
 
     /* 设置友盟appkey */
-    [[UMSocialManager defaultManager] setUmSocialAppkey:@"59291db4c62dca0f43001c71"];
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"59b9faabf29d982c4f000030"];
     
     /* 设置微信的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxf4f5e464e94b9956" appSecret:@"7b6c16881766b8e43bb0f6d8e5064f26" redirectURL:@"http://mobile.umeng.com/social"];
