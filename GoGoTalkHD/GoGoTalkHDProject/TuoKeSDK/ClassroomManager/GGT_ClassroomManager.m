@@ -1,25 +1,30 @@
 //
-//  GGT_TKManager.m
+//  GGT_ClassroomManager.m
 //  GoGoTalkHD
 //
 //  Created by 辰 on 2017/9/12.
 //  Copyright © 2017年 Chn. All rights reserved.
 //
 
-#import "GGT_TKManager.h"
+#import "GGT_ClassroomManager.h"
+
+// 拓课
 #import "TKEduClassRoom.h"
 #import "TKMacro.h"
 
-@interface GGT_TKManager ()<TKEduRoomDelegate>
+// 百家云
+#import "BJRoomViewController.h"
+
+@interface GGT_ClassroomManager ()<TKEduRoomDelegate>
 @property (nonatomic, strong) GGT_CourseCellModel *xc_model;
 @property (nonatomic, copy) TKLeftClassroomBlock xc_leftRoomBlock;
 @end
 
-@implementation GGT_TKManager
+@implementation GGT_ClassroomManager
 
 + (instancetype)share
 {
-    static GGT_TKManager *shareInstance = nil;
+    static GGT_ClassroomManager *shareInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shareInstance = [[self alloc] init];
@@ -27,9 +32,11 @@
     return shareInstance;
 }
 
+
+#pragma mark - 进入拓课的方法
 + (void)tk_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock
 {
-    GGT_TKManager *manager = [GGT_TKManager share];
+    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
     manager.xc_model = model;
     [manager enterTKClassroomWithCourseModel:model viewController:viewController];
     manager.xc_leftRoomBlock = leftRoomBlock;
@@ -92,7 +99,7 @@
     TKLog(@"-----onCameraDidOpenError");
 }
 
-// 进入教室调用接口
+#pragma mark - 进入教室调用接口 更新接口
 - (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -100,6 +107,54 @@
     
     NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:nil showMBProgress:NO success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark - 进入百家云的接口
++ (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model
+{
+
+    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
+    manager.xc_model = model;
+
+    BJRoomViewController *roomViewController = [BJRoomViewController new];
+    [viewController presentViewController:roomViewController
+                       animated:YES
+                     completion:^{
+                         [roomViewController enterRoomWithSecret:@"2mnuv7" userName:@"Student"];
+                     }];
+}
+
+// 调用接口 区别进入那个教室
++ (void)chooseClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock
+{
+    
+    NSString *url = [NSString stringWithFormat:@"%@?lessonId=%@", URL_GetLessonByLessonId, model.LessonId];
+    
+    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:viewController showMBProgress:YES success:^(id responseObject) {
+        
+        if ([responseObject[@"data"] isKindOfClass:[NSArray class]]) {
+            
+            NSArray *data = responseObject[@"data"];
+            GGT_CourseCellModel *currentModel = nil;
+            if ([data isKindOfClass:[NSArray class]] && data.count > 0) {
+                currentModel = [GGT_CourseCellModel yy_modelWithDictionary:[data firstObject]];
+            } else {
+                currentModel = model;
+            }
+            
+            // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
+            if (currentModel.ClassRoomType == 1) {  // 拓课
+                [self tk_enterClassroomWithViewController:viewController courseModel:currentModel leftRoomBlock:leftRoomBlock];
+            }
+            
+            if (currentModel.ClassRoomType == 4) {  // 百家云
+                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+            }
+        }
         
     } failure:^(NSError *error) {
         

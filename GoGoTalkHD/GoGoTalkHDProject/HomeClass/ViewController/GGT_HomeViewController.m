@@ -157,9 +157,9 @@
 //        [self postNetworkModifyLessonStatusWithCourseModel:model];
         
         @weakify(self);
-        [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+        [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
             @strongify(self);
-            
+
         }];
         
     }];

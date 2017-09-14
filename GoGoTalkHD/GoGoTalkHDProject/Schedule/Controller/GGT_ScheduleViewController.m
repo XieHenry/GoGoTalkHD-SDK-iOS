@@ -26,8 +26,8 @@
 //#import "TKEduClassRoom.h"
 //#import "TKMacro.h"
 
-// 百家云
-#import "BJRoomViewController.h"
+//// 百家云
+//#import "BJRoomViewController.h"
 
 static NSString * const CalendarCellID = @"cell";
 
@@ -789,8 +789,7 @@ static NSString * const CalendarCellID = @"cell";
 
 - (void)cellButtonAction:(UIButton *)button
 {
-    
-    
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag-100 inSection:0];
     GGT_ScheduleStudyingCell *cell = [self.xc_tableView cellForRowAtIndexPath:indexPath];
     GGT_CourseCellModel *model = cell.xc_cellModel;
@@ -817,8 +816,10 @@ static NSString * const CalendarCellID = @"cell";
                 
 //                [self enterTKClassroomWithCourseModel:model];
                 
+                
+                // 调用接口 进行教室判断  是百家云还是拓课
                 // 进入拓课的方法
-                [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                     
                 }];
 
@@ -837,8 +838,10 @@ static NSString * const CalendarCellID = @"cell";
                 
 //                [self enterTKClassroomWithCourseModel:model];
                 
+                
+                // 调用接口 进行教室判断  是百家云还是拓课
                 // // 进入拓课的方法
-                [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                     
                 }];
                 
@@ -1218,24 +1221,24 @@ static NSString * const CalendarCellID = @"cell";
 //}
 
 
-#pragma mark - 百家云
-- (void)enterBJYClassroom {
-    [self.view endEditing:YES];
-    
-    [self enterRoomWithJoinCode:@"2mnuv7"
-                       userName:@"Student"];
-}
-
-- (void)enterRoomWithJoinCode:(NSString *)joinCode userName:(NSString *)userName {
-    
-    BJRoomViewController *roomViewController = [BJRoomViewController new];
-    
-    [self presentViewController:roomViewController
-                       animated:YES
-                     completion:^{
-                         [roomViewController enterRoomWithSecret:joinCode userName:userName];
-                     }];
-}
+//#pragma mark - 百家云
+//- (void)enterBJYClassroom {
+//    [self.view endEditing:YES];
+//    
+//    [self enterRoomWithJoinCode:@"2mnuv7"
+//                       userName:@"Student"];
+//}
+//
+//- (void)enterRoomWithJoinCode:(NSString *)joinCode userName:(NSString *)userName {
+//    
+//    BJRoomViewController *roomViewController = [BJRoomViewController new];
+//    
+//    [self presentViewController:roomViewController
+//                       animated:YES
+//                     completion:^{
+//                         [roomViewController enterRoomWithSecret:joinCode userName:userName];
+//                     }];
+//}
 
 
 @end

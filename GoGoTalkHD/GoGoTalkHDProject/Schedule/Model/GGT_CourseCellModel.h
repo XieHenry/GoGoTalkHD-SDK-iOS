@@ -44,6 +44,10 @@
 @property (nonatomic, strong) NSString *StuRemark;
 @property (nonatomic, assign) NSInteger IsShowBooking;
 
+
+//教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
+@property (nonatomic, assign) NSInteger ClassRoomType;
+
 @end
 
 /*

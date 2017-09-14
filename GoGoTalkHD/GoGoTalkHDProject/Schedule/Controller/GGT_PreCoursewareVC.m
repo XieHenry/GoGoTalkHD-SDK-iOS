@@ -278,11 +278,14 @@
 //            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
+            
             @weakify(self);
-            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+            [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                
                 @strongify(self);
                 // 网络请求 刷新数据
                 [self refreshTableView];
+                
             }];
             
         }
@@ -294,11 +297,15 @@
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
             @weakify(self);
-            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+            [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                
                 @strongify(self);
                 // 网络请求 刷新数据
                 [self refreshTableView];
+                
             }];
+            
+            
         }
             break;
         case 3:     // 已经结束 待评价     // 需要刷新上一个控制器中cell

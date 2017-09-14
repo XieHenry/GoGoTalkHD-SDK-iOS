@@ -228,15 +228,13 @@
             
 //            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
-
+            
             @weakify(self);
-            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
-                
+            [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                 @strongify(self);
                 // 网络请求 刷新数据
                 [self refreshTableView];
                 [self loadData];
-                
             }];
         }
             break;
@@ -246,14 +244,12 @@
 //            [self enterTKClassroomWithCourseModel:model];
 //            [self postNetworkModifyLessonStatusWithCourseModel:model];
 
-            @weakify(self)
-            [GGT_TKManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
-                
+            @weakify(self);
+            [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                 @strongify(self);
                 // 网络请求 刷新数据
                 [self refreshTableView];
                 [self loadData];
-                
             }];
             
         }

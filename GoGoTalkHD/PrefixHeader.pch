@@ -69,7 +69,7 @@
 #import "GGT_UpdateModel.h"
 
 // 拓课
-#import "GGT_TKManager.h"
+#import "GGT_ClassroomManager.h"
 
 
 static NSString * const xc_returnCode = @"result";
