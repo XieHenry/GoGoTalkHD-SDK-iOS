@@ -13,14 +13,15 @@
 #import "TKEduRoomProperty.h"
 #import "TKEduSessionHandle.h"
 #import "TKMediaDocModel.h"
-#import "TKVideoPlayerHandle.h"
+
 #import "TKUtil.h"
 #import "TKDocmentDocModel.h"
 #import "TKDocumentListView.h"
 //guangsheng
-//static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_demo/index.html";
+static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_demo/index.html";
 //weijin
-static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
+//static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
+//static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
 
 @interface TKEduBoardHandle ()<WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 
@@ -119,8 +120,8 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sOnJsPlay];
      [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sCloseNewPptVideo];
     config.userContentController = userContentController;
+   
     CGRect tFrame = CGRectMake(0, 0, CGRectGetWidth(aFrame), CGRectGetHeight(aFrame));
-    
     // 创建WKWebView
     _iWebView = [[WKWebView alloc] initWithFrame:tFrame configuration:config];
     _iWebView.backgroundColor = RGBCOLOR(28, 28, 28);
@@ -179,14 +180,19 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
     };
 
     */
-    bool tIsPagePermission = false;
+    bool tAddPagePermission = false;
     
     NSDictionary *dictM = @{
                             @"mClientType":@(2),
                             @"serviceUrl":tJsServiceUrl,
-                            @"addPagePermission":@(tIsPagePermission),
+                            @"addPagePermission":@(tAddPagePermission),
                             @"deviceType":@(1),
-                            @"role":@([TKEduSessionHandle shareInstance].iRoomProperties.iUserType)
+                            @"role":@([TKEduSessionHandle shareInstance].iRoomProperties.iUserType),
+                            @"raisehand":@(false),
+                            @"giftnumber":@(0),
+                            @"candraw":@(false),
+                            @"disablevideo":@(false),
+                            @"disableaudio":@(false)
                             };
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictM options:NSJSONWritingPrettyPrinted error:nil];
     NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
@@ -201,8 +207,7 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
         }
         
     }];
-    //changeInitPageParameterFormPhone:function(key,value)
-    //"role",@(1)
+  
      [self setPagePermission:true];
     
     
@@ -221,17 +226,29 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
     NSString *tData = [tDic objectForKey:@"data"];
      NSData *tDataData = [tData dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *tDataDic = [NSJSONSerialization JSONObjectWithData:tDataData options:NSJSONReadingMutableContainers error:nil];
-    NSDictionary *tDic2 =  [tDataDic objectForKey:@"filedata"];
-    NSNumber *tCurrpage = [tDic2 objectForKey:@"currpage"];
-     NSNumber *tPPTslide = [tDic2 objectForKey:@"pptslide"];
-    NSNumber *tPPTstep = [tDic2 objectForKey:@"pptstep"];
-    
     TKDocmentDocModel *tDocmentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
-    tDocmentDocModel.currpage = tCurrpage?tCurrpage:tDocmentDocModel.currpage;
-    tDocmentDocModel.pptslide = tPPTslide?tPPTslide:tDocmentDocModel.pptslide;
-    tDocmentDocModel.pptstep = tPPTstep?tPPTstep:tDocmentDocModel.pptstep;
+    
+    
+    if ([msgName isEqualToString:sShowPage]) {
+        
+        NSDictionary *tDic2 =  [tDataDic objectForKey:@"filedata"];
+        NSNumber *tCurrpage = [tDic2 objectForKey:@"currpage"];
+        NSNumber *tPPTslide = [tDic2 objectForKey:@"pptslide"];
+        NSNumber *tPPTstep = [tDic2 objectForKey:@"pptstep"];
+        NSNumber *tPageNum = [tDic2 objectForKey:@"pagenum"];
+        tDocmentDocModel.currpage = tCurrpage?tCurrpage:tDocmentDocModel.currpage;
+        tDocmentDocModel.pptslide = tPPTslide?tPPTslide:tDocmentDocModel.pptslide;
+        tDocmentDocModel.pptstep = tPPTstep?tPPTstep:tDocmentDocModel.pptstep;
+        tDocmentDocModel.pagenum = tPageNum?tPageNum:tDocmentDocModel.pagenum;
+    }else if ([msgName isEqualToString:sWBPageCount]){
+            //加页
+          NSNumber *tTotalPage = [tDataDic objectForKey:@"totalPage"];
+          tDocmentDocModel.pagenum = tTotalPage?tTotalPage:tDocmentDocModel.pagenum;
+          tDocmentDocModel.currpage = tTotalPage?tTotalPage:tDocmentDocModel.pagenum;
+    }
+   
     [[TKEduSessionHandle shareInstance] addOrReplaceDocmentArray:tDocmentDocModel];
-    //{"ismedia":false,"filedata":{"fileid":7357,"currpage":2,"pagenum":6,"filetype":"docx","filename":"android手机使用手册.docx","swfpath":"/upload/20170620_154917_siblnssl.jpg"}}
+  
     BOOL save = YES;
     if ([tDic objectForKey:@"do_not_save"]) {
         save = [[tDic objectForKey:@"do_not_save"]boolValue];
@@ -240,10 +257,12 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
     BOOL isCanDraw = [TKEduSessionHandle shareInstance].localUser.canDraw;
     BOOL isTeacher = ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher);
     BOOL isSharpsChangeMsg = [msgName isEqualToString:sSharpsChange];
-    BOOL isCanSend = (isClassBegin &&((isCanDraw && isSharpsChangeMsg) || isTeacher));
+    BOOL isH5Document = ([tDocmentDocModel.fileprop integerValue] == 3);
+    
+    BOOL isCanSend = (isClassBegin &&((isCanDraw && isSharpsChangeMsg) || isTeacher || (isH5Document &&isCanDraw )));
     
     if (isCanSend) {
-        TKLog(@"jin msgName:%@msgID:%@tcurrpage:%@pptStep:%@pptslide:%@",msgName,msgId,tCurrpage,tPPTstep,tPPTslide);
+        
         [[TKEduSessionHandle shareInstance]  sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save completion:nil];
     }
     
@@ -313,23 +332,47 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
 //public void onJsPlay(final String videoData) ；
 -(void)onJsPlay:(NSDictionary *)videoData{
     NSString *aVideoData = [videoData objectForKey:@"data"];
-    if (!aVideoData) {
+    [[TKEduSessionHandle shareInstance]configurePlayerRoute:NO isCancle:NO];
+    if (!aVideoData || ([TKEduSessionHandle shareInstance].localUser.role == 2)) {
         return;
     }
+    
     NSString *tDataString = [NSString stringWithFormat:@"%@",aVideoData];
     NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
-    NSDictionary *tDic2 = @{@"videoData":tDic};
-    NSData *data = [NSJSONSerialization dataWithJSONObject:tDic2 options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.newPptAutoPlay(%@)",strM];
-    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.newPptAutoPlay");
-    }];
-    [[TKEduSessionHandle shareInstance]configurePlayerRoute:YES];
+    NSString *url = [tDic objectForKey:@"url"];
+    NSString *fileid = [tDic objectForKey:@"fileid"];
+    bool isvideo = [[tDic objectForKey:@"isvideo"]boolValue];
+    NSString * toID = [TKEduSessionHandle shareInstance].isClassBegin?sTellAll:[TKEduSessionHandle shareInstance].localUser.peerID;
+    [[TKEduSessionHandle shareInstance]sessionHandlePublishMedia:url hasVideo:isvideo fileid:fileid filename:@"" toID:toID block:nil];
+    
+
 }
 -(void)closeNewPptVideo:(id)aData{
-     [[TKEduSessionHandle shareInstance]configurePlayerRoute:NO];
+    [[TKEduSessionHandle shareInstance]configurePlayerRoute:NO isCancle:NO];
+    NSString *aVideoData = [aData objectForKey:@"data"];
+    if (!aVideoData || [TKEduSessionHandle shareInstance].localUser.role == 2)  {
+        return;
+    }
+    /*
+     let pptVideoJson = {
+     url:videoUrl ,
+     fileid:fileid?Number(fileid):fileid ,
+     isvideo:isvideo ,
+     };
+     */
+    
+    
+    
+    NSString *tDataString = [NSString stringWithFormat:@"%@",aVideoData];
+    NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+//    NSString *url = [tDic objectForKey:@"url"];
+//    NSString *fileid = [tDic objectForKey:@"fileid"];
+//    bool isvideo = [[tDic objectForKey:@"isvideo"]boolValue];
+    
+    
+  
 }
 #pragma mark 设置白板权限
 
@@ -366,7 +409,6 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo
 
 -(void)setAddPagePermission:(bool)aPagePermission{
     
-   //NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.changeInitPageParameterFormPhone(\"addPagePermission\",%@)",@(aPagePermission)];
      NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.changeInitPageParameterFormPhone({addPagePermission:%@})",@(aPagePermission)];
     //NSString *js2 =@" myFunction('Bill Gates','CEO')";
     //evaluate 评估

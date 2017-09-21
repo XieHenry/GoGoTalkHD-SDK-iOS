@@ -55,7 +55,9 @@ static NSString *const sAPP_ID = @"20170605000052251";
 static NSString *const sSECURITY_KEY = @"sYlf3rTdnEGTOKr1FuT1";
 static NSString *const sTRANS_API_HOST = @"http://api.fanyi.baidu.com/api/trans/vip/translate";
 static NSString *const sTapTableNotification = @"tapTableNotification";
-
+static NSString *const sDocListViewNotification = @"docListViewNotification";
+static NSString *const sPluggInMicrophoneNotification = @"pluggInMicrophone";
+static NSString *const sUnunpluggingHeadsetNotification = @"ununpluggingHeadset";
 typedef NS_ENUM(NSInteger, SpeakStatus) {
     m_RequestSpeak_Disable= 0,//没发言
     m_RequestSpeak_Allow,//发言中
@@ -102,16 +104,19 @@ typedef NS_ENUM(NSInteger, MessageType) {
     MessageType_Message		       //消息
 };
 typedef NS_ENUM(NSInteger, PublishState) {
-    PublishState_NONE      = 0,		    //没有
-    PublishState_AUDIOONLY =1,		    //只有音频
-    PublishState_VIDEOONLY =2,		//只有视频
-    PublishState_BOTH      =3		        //都有
+    PublishState_NONE           = 0,		    //没有
+    PublishState_AUDIOONLY      = 1,		    //只有音频
+    PublishState_VIDEOONLY      = 2,            //只有视频
+    PublishState_BOTH           = 3,		    //都有
+    PublishState_NONE_ONSTAGE   = 4             //音视频都没有但还在台上
 };
 
 typedef NS_ENUM(NSInteger, UserType) {
-    UserType_Teacher   = 0,		    //老师
-    UserType_Assistant =1,           //助教
-    UserType_Student   =2            //学生
+    UserType_Teacher   =0, //老师
+    UserType_Assistant =1, //助教
+    UserType_Student   =2, //学生
+    UserType_Live      =3, //直播
+    UserType_Patrol    =4, //巡检员
 };
 
 typedef NS_ENUM(NSInteger, RoomType) {
@@ -158,12 +163,15 @@ typedef NS_ENUM(NSInteger, PromptType) {
 
 static  NSString *const sChairmancontrol            = @"chairmancontrol";
 static  NSString *const sClassBegin                 = @"ClassBegin";
-static  NSString *const sWBPageCount                = @"WBPageCount";
+static  NSString *const sWBPageCount                = @"WBPageCount";//加页
+static  NSString *const sAddBoardPage_WBPageCount   = @"AddBoardPage_WBPageCount";
+
 static  NSString *const sShowPage                   = @"ShowPage";
 static  NSString *const sDocumentFilePage_ShowPage  = @"DocumentFilePage_ShowPage";
 static  NSString *const sActionShow                 = @"show";
 static  NSString *const sSharpsChange               = @"SharpsChange";
-static  NSString *const sDocumentChange            = @"DocumentChange";
+static  NSString *const sDocumentChange             = @"DocumentChange";
+static  NSString *const sStreamFailure              = @"StreamFailure";
 
 static  NSString *const sUpdateTime          = @"UpdateTime";
 static  NSString *const sMuteAudio           = @"MuteAudio";
@@ -182,6 +190,12 @@ static  NSString *const sPrintLogMessage     = @"printLogMessage";
 static  NSString *const sfullScreenToLc      = @"fullScreenToLc";
 static  NSString *const sOnJsPlay            = @"onJsPlay";
 static  NSString *const sCloseNewPptVideo    = @"closeNewPptVideo";
+static  NSString *const sDisableVideo        = @"disablevideo";
+static  NSString *const sDisableAudio        = @"disableaudio";
+
+// 英练帮公司id
+static  NSString *const YLB_COMPANYID        = @"10035";
+
 //播放mp3，mp4
 static  NSString *const sVideo_MediaFilePage_ShowPage   = @"Video_MediaFilePage_ShowPage";
 static  NSString *const sAudio_MediaFilePage_ShowPage   = @"Audio_MediaFilePage_ShowPage";
@@ -191,10 +205,14 @@ static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_
 //#define Debug 1;
 #define Realese 1;
 static  NSString *const sHttp   = @"https";
+static  NSString *const sPort   = @"443";
+#ifdef Debug
+static  NSString *const sHost   = @"192.168.1.17";
 
+#else
+static  NSString *const sHost   = @"global.talk-cloud.net";
 
-
-
+#endif
 #define INVOKE_PARAM(x,i) (x)[[NSString stringWithFormat:@"__index__value__%d",(i)]]
 
 #define SENDMSGTOALL_EXCEPT_ME			0

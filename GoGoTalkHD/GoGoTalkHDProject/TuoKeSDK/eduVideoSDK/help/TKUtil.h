@@ -64,6 +64,7 @@
 +(NSString *) md5HexDigest:(NSString *)aString;
 #pragma mark 获取当前时间
 +(NSString *)currentTime;
++(NSString *)currentTimeToSeconds;
 #pragma mark 只能是数字
 + (BOOL)validateNumber:(NSString*)number;
 #pragma mark globle
@@ -72,4 +73,6 @@
 +(NSInteger)numberBit:(NSInteger)aNumber;
 #pragma mark 判断当前语言
 +(BOOL)isEnglishLanguage;
+#pragma mark 获取文件url
++(NSString*)absolutefileUrl:(NSString*)fileUrl webIp:(NSString*)webIp webPort:(NSString*)webPort;
 @end

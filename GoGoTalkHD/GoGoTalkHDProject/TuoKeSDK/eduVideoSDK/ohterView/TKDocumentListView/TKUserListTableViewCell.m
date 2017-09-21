@@ -13,6 +13,7 @@
 #import "TKUtil.h"
 #import "TKEduBoardHandle.h"
 #import "TKEduSessionHandle.h"
+
 @implementation TKUserListTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -45,6 +46,19 @@
     self.contentView.backgroundColor = [UIColor clearColor];
     self.backgroundColor             = [UIColor clearColor];
    
+    
+    _iHandUpBtn = ({
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        //button.frame = CGRectMake(tX, tY, tWidth, tWidth);
+        button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [button setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
+        [button setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];
+        //[button addTarget:self action:@selector(Button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
+        button;
+        
+    });
+    [self.contentView addSubview:_iHandUpBtn];
     
     _iButton1 = ({
     
@@ -102,7 +116,8 @@
     });
      [self.contentView addSubview:_iButton4];
    
-    
+    // cell点击时不显示选中状态
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)resetView
@@ -127,27 +142,38 @@
     _iButton3.frame = CGRectMake(tX+tWidthAndCap*2, tY, tWidth, tWidth);
     _iButton4.frame = CGRectMake(tX+tWidthAndCap*3, tY, tWidth, tWidth);
     
+    if (_iFileListType == FileListTypeUserList) {
+        tWidth = 40;
+        tY = _iIconImageView.frame.origin.y + _iIconImageView.frame.size.height / 2 - tWidth / 2;
+        _iHandUpBtn.frame = CGRectMake(self.frame.size.width-5*tWidth, tY, tWidth, tWidth);
+        _iButton1.frame = CGRectMake(self.frame.size.width-4*tWidth, tY, tWidth, tWidth);
+        _iButton2.frame = CGRectMake(self.frame.size.width-3*tWidth, tY, tWidth, tWidth);
+        _iButton3.frame = CGRectMake(self.frame.size.width-2*tWidth, tY, tWidth, tWidth);
+        _iButton4.frame = CGRectMake(self.frame.size.width-tWidth, tY, tWidth, tWidth);
+    }
+    
 }
 -(void)configaration:(id)aModel withFileListType:(FileListType)aFileListType isClassBegin:(BOOL)isClassBegin{
      _iFileListType = aFileListType;
-    
+      [self clearButtonState];
     switch (_iFileListType) {
             //视频列表
         case FileListTypeAudioAndVideo:
         {
             _iButton1.hidden = YES;
             _iButton2.hidden = YES;
-             TKMediaDocModel *tDocModel =(TKMediaDocModel*) aModel;
-            NSString *tTypeString = [TKUtil docmentOrMediaImage:tDocModel.filetype];
+            TKMediaDocModel *tMediaModel =(TKMediaDocModel*) aModel;
+            NSString *tTypeString = [TKUtil docmentOrMediaImage:tMediaModel.filetype?tMediaModel.filetype:[tMediaModel.filename pathExtension]];
+
             
             _iIconImageView.image = LOADIMAGE(tTypeString);
             _iButton3.selected = NO;
             _iButton4.selected = NO;
-            _iNameLabel.text = tDocModel.filename;
+            _iNameLabel.text = tMediaModel.filename;
             _iButton3.hidden = NO;
             _iButton4.hidden = NO;
-            
-            BOOL tIsCurrentDocment = ([TKEduSessionHandle shareInstance].iCurrentMediaDocModel.fileid==tDocModel.fileid);
+            TKMediaDocModel *tCurrentMediaModel = [TKEduSessionHandle shareInstance].iCurrentMediaDocModel;
+            BOOL tIsCurrentDocment =[[TKEduSessionHandle shareInstance]isEqualFileId:tMediaModel aSecondModel:tCurrentMediaModel];
             _iButton3.selected = tIsCurrentDocment;
 
             [_iButton3 setImage: LOADIMAGE(@"btn_play_normal") forState:UIControlStateNormal];
@@ -163,17 +189,22 @@
             _iButton1.hidden = YES;
             _iButton2.hidden = YES;
             TKDocmentDocModel *tDocModel =(TKDocmentDocModel*) aModel;
-            NSString *tTypeString = [TKUtil docmentOrMediaImage:tDocModel.filetype];
-            
-            BOOL tIsCurrentDocment = ([[TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid integerValue]==[tDocModel.fileid integerValue]);
+             NSString *tTypeString = [TKUtil docmentOrMediaImage:tDocModel.filetype?tDocModel.filetype:[tDocModel.filename pathExtension]];
+             TKDocmentDocModel *tCurrentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
+            BOOL tIsCurrentDocment = [[TKEduSessionHandle shareInstance]isEqualFileId:tDocModel aSecondModel:tCurrentDocModel];
             NSLog(@"current %@ %@", [TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid, tDocModel.fileid);
             
             _iIconImageView.image = LOADIMAGE(tTypeString);
             _iNameLabel.text = tDocModel.filename;
             _iButton3.selected = NO;
             _iButton4.selected = NO;
-            if ([tDocModel.filetype isEqualToString:@""]) {
-                _iButton3.hidden = YES;
+            if ([tDocModel.filetype isEqualToString:MTLocalized(@"Title.whiteBoard")]) {
+                //_iButton3.hidden = YES;
+                _iButton3.hidden = NO;              // 白板的眼睛也需要显示出来
+                [_iButton3 setImage: LOADIMAGE(@"btn_eyes_01_normal") forState:UIControlStateNormal];
+                [_iButton3 setImage: LOADIMAGE(@"btn_eyes_02_normal") forState:UIControlStateSelected];
+                _iButton3.selected = tIsCurrentDocment;
+                
                 _iButton4.hidden = YES;
             }else{
                 _iButton3.hidden = NO;
@@ -193,6 +224,10 @@
         case FileListTypeUserList:
         {
             RoomUser *tRoomUser =(RoomUser*) aModel;
+            RoomUser *tPublishUser = [[[TKEduSessionHandle shareInstance]publishUserDic]objectForKey:tRoomUser.peerID];
+            RoomUser *tUnPublishUser = [[[TKEduSessionHandle shareInstance]unpublishUserDic]objectForKey:tRoomUser.peerID];
+            RoomUser *tPendUser = [[[TKEduSessionHandle shareInstance]pendingUserDic]objectForKey:tRoomUser.peerID];
+        
             // 发布状态，0：未发布，1：发布音频；2：发布视频；3：发布音视频
             switch (tRoomUser.publishState) {
                 case PublishState_NONE:
@@ -225,35 +260,80 @@
             }
             
            
-            if (!isClassBegin) {
+            if (!isClassBegin || tRoomUser.role != UserType_Student) {
+                _iHandUpBtn.hidden = YES;
                 _iButton1.hidden = YES;
                 _iButton2.hidden = YES;
                 _iButton3.hidden = YES;
                 _iButton4.hidden = YES;
+                
+                _iButton1.enabled = YES;
+                _iButton2.enabled = YES;
+                _iButton3.enabled = YES;
+                _iButton4.enabled = YES;
             }else{
-                _iButton1.hidden = ![[tRoomUser.properties objectForKey:sRaisehand]boolValue];
+                _iHandUpBtn.hidden = ![[tRoomUser.properties objectForKey:sRaisehand]boolValue];
+                _iButton1.hidden = NO; //![[tRoomUser.properties objectForKey:sRaisehand]boolValue];
                 _iButton2.hidden = NO;
                 _iButton3.hidden = NO;
                 _iButton4.hidden = NO;
                 _iButton4.selected = tRoomUser.canDraw;
+                
+                _iButton1.enabled = YES;
+                _iButton2.enabled = YES;
+                _iButton3.enabled = YES;
+                _iButton4.enabled = YES;
             }
-            
-            
 
             _iIconImageView.image = LOADIMAGE(@"icon_user.png");
-            _iNameLabel.text = tRoomUser.nickName;
+            NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[tRoomUser.nickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+            _iNameLabel.text = attrStr.string ;
+            
          
-            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
-            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];
-            [_iButton2 setImage: LOADIMAGE(@"btn_down_normal") forState:UIControlStateNormal];
-            [_iButton2 setImage: LOADIMAGE(@"btn_up_normal") forState:UIControlStateSelected];
+//            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
+//            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];
+//            [_iButton2 setImage: LOADIMAGE(@"btn_down_normal") forState:UIControlStateNormal];
+//            [_iButton2 setImage: LOADIMAGE(@"btn_up_normal") forState:UIControlStateSelected];
+//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_01_normal") forState:UIControlStateNormal];
+//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateSelected];
+//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateHighlighted];
+//            [_iButton4 setImage: LOADIMAGE(@"icon_control_tools_02") forState:UIControlStateNormal];
+//            [_iButton4 setImage: LOADIMAGE(@"btn_tools_02_normal") forState:UIControlStateSelected];
+            
+            [_iButton1 setImage: LOADIMAGE(@"btn_down_normal") forState:UIControlStateNormal];
+            [_iButton1 setImage: LOADIMAGE(@"btn_up_normal") forState:UIControlStateSelected];
+            [_iButton2 setImage: LOADIMAGE(@"btn_camera_01_normal") forState:UIControlStateNormal];
+            [_iButton2 setImage: LOADIMAGE(@"btn_camera_02_normal") forState:UIControlStateSelected];
             [_iButton3 setImage: LOADIMAGE(@"btn_audio_01_normal") forState:UIControlStateNormal];
             [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateSelected];
             [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateHighlighted];
             [_iButton4 setImage: LOADIMAGE(@"icon_control_tools_02") forState:UIControlStateNormal];
             [_iButton4 setImage: LOADIMAGE(@"btn_tools_02_normal") forState:UIControlStateSelected];
+            
+            if (tRoomUser.publishState >= 1) {
+                _iButton1.selected = YES;
+            } else {
+                _iButton1.selected = NO;
+            }
+            
+            if (tRoomUser.disableAudio) {
+                [_iButton3 setImage:LOADIMAGE(@"btn_audio_disabled") forState:UIControlStateNormal];
+                _iButton3.enabled = NO;
+            }
+            
+            if (tRoomUser.disableVideo) {
+                [_iButton2 setImage:LOADIMAGE(@"btn_video_disabled") forState:UIControlStateNormal];
+                _iButton2.enabled = NO;
+            }
+            
+//            // 检测用户举手状态
+//            if ([tRoomUser.properties objectForKey:sRaisehand] && [[tRoomUser.properties objectForKey:sRaisehand] boolValue] == YES) {
+//                //
+//                NSLog(@"检测到举手");
+//            }
 
-            CGFloat tWidth   = CGRectGetHeight(self.frame);
+            //CGFloat tWidth   = CGRectGetHeight(self.frame);
+            CGFloat tWidth = 30;
             CGFloat tViewCap =  4;
             CGFloat tWidthAndCap = tWidth + tViewCap;
             [TKUtil setWidth:_iNameLabel To: CGRectGetWidth(self.frame)-4*tWidthAndCap-CGRectGetMaxX(_iIconImageView.frame)];
@@ -267,7 +347,22 @@
     
     
 }
-
+-(void)clearButtonState{
+    _iButton1.hidden = NO;
+    _iButton2.hidden = NO;
+    _iButton3.hidden = NO;
+    _iButton4.hidden = NO;
+    _iButton1.selected = NO;
+    _iButton2.selected = NO;
+    _iButton3.selected = NO;
+    _iButton4.selected = NO;
+    _iButton1.enabled = YES;
+    _iButton2.enabled = YES;
+    _iButton3.enabled = YES;
+    _iButton4.enabled = YES;
+    [_iButton3 setImage: LOADIMAGE(@"btn_play_normal") forState:UIControlStateNormal];
+    [_iButton4 setImage: LOADIMAGE(@"btn_delete_normal") forState:UIControlStateNormal];
+}
 -(void)Button1Clicked:(UIButton *)aButton {
     //aButton.selected = !aButton.selected;
     if ([_iListDelegate respondsToSelector:@selector(listButton1:aIndexPath:)]) {

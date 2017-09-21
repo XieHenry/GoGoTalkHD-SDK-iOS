@@ -13,6 +13,7 @@
 #import "RoomController.h"
 #import "TKProgressHUD.h"
 #import "TKMacro.h"
+#import "TKUtil.h"
 
 typedef NS_ENUM(NSInteger, EClassStatus) {
     EClassStatus_IDLE = 0,
@@ -31,6 +32,7 @@ typedef NS_ENUM(NSInteger, CONNECT_RESULE)
     CONNECT_RESULE_RoomFreeze = 3002,// 公司被冻结
     CONNECT_RESULE_RoomDeleteOrOrverdue = 3003,//房间被删除或过期
     CONNECT_RESULE_RoomAuthenError = 4109,//认证错误
+    CONNECT_RESULE_RoomPointOverrun = 4112,//企业点数超限
     CONNECT_RESULE_RoomNumberOverRun = 4103//房间人数超限
    
 };
@@ -43,11 +45,9 @@ TKNavigationController* _iEduNavigationController = nil;
 @property (nonatomic, strong) RoomController *iRoomController;
 @property (nonatomic, weak) id<TKEduRoomDelegate> iRoomDelegate;
 @property (nonatomic, strong) TKEduRoomProperty * iRoomProperty;
-
+@property (nonatomic, strong) NSDictionary * iParam;
+@property (nonatomic, assign) BOOL  isFromWeb;
 @property (nonatomic, strong) TKProgressHUD *HUD;
-
-@property (nonatomic, assign) NSInteger xc_showHUDCount;
-
 @end
 
 @implementation TKEduClassRoom
@@ -58,7 +58,6 @@ TKNavigationController* _iEduNavigationController = nil;
     dispatch_once(&onceToken, ^
                   {
                       singleton = [[TKEduClassRoom alloc] init];
-                      singleton.xc_showHUDCount = 1;
                   });
     
     return singleton;
@@ -66,15 +65,17 @@ TKNavigationController* _iEduNavigationController = nil;
 +(int)joinRoomWithParamDic:(NSDictionary*)paramDic
                   ViewController:(UIViewController*)controller
                         Delegate:(id<TKEduRoomDelegate>)delegate
+                       isFromWeb:(BOOL)isFromWeb
 {
-    return  [[TKEduClassRoom shareInstance] enterClassRoomWithParamDic:paramDic ViewController:controller Delegate:delegate];
+    return  [[TKEduClassRoom shareInstance] enterClassRoomWithParamDic:paramDic ViewController:controller Delegate:delegate isFromWeb:isFromWeb];
    
 }
 -(int)enterClassRoomWithParamDic:(NSDictionary*)paramDic
                   ViewController:(UIViewController*)controller
                         Delegate:(id<TKEduRoomDelegate>)delegate
+                       isFromWeb:(BOOL)isFromWeb
 {
-
+    TKLog(@"tlm----- 进入房间之前的时间: %@", [TKUtil currentTimeToSeconds]);
     if (_iStatus != EClassStatus_IDLE)
     {
         return -1;//正在开会
@@ -83,34 +84,32 @@ TKNavigationController* _iEduNavigationController = nil;
     _iController = controller;
     _iRoomDelegate = delegate;
     _iStatus = EClassStatus_CHECKING;
+    _iParam = paramDic;
+    _isFromWeb = isFromWeb;
     _iRoomProperty = [[TKEduRoomProperty alloc]init];
     [_iRoomProperty parseMeetingInfo:paramDic];
-
-
+    
     __weak typeof(self)weekSelf = self;
     _HUD = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
     [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
     _HUD.dimBackground = YES;
     _HUD.removeFromSuperViewOnHide = YES;
+    [_HUD show:YES];
     
-    if (self.xc_showHUDCount % 2 == 0) {
-        [_HUD show:YES];
-    }
-    self.xc_showHUDCount++;
-    
-    if (_iRoomProperty.sCmdUserRole ==UserType_Teacher && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) {
+    if ((_iRoomProperty.sCmdUserRole ==UserType_Teacher && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
         [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
         [_HUD hide:YES];
         return -1;
     }
-    [TKEduNetManager checkRoom:_iRoomProperty.iRoomId aPwd:_iRoomProperty.sCmdPassWord  aHost:_iRoomProperty.sWebIp aPort: _iRoomProperty.sWebPort   aUserID: _iRoomProperty.iUserId  aUserRole:_iRoomProperty.sCmdUserRole aDidComplete:^int( id _Nullable response ,NSString* aPassWord) {
+    
+    [TKEduNetManager checkRoom:paramDic aDidComplete:^int(id  _Nullable response, NSString * _Nullable aPassWord) {
         __strong typeof(self)strongSelf = weekSelf;
         _iRoomProperty.sCmdPassWord = aPassWord;
-       
+        
         if (response) {
             _iStatus = EClassStatus_CONNECTING;
             int ret = 0;
-           
+            
             ret = [[response objectForKey:@"result"] intValue];
             if (ret == 0) {
                 
@@ -122,29 +121,27 @@ TKNavigationController* _iEduNavigationController = nil;
                     _iRoomProperty.iRoomName = [tRoom objectForKey:@"roomname"]?[tRoom objectForKey:@"roomname"]:@"";
                     _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
-                   
-                    if (tMaxVideo>6 || (tMaxVideo == 0)) {
-                        tMaxVideo = 6;
-                    }
+                    
+//                    if (tMaxVideo>6 || (tMaxVideo == 0)) {
+//                        tMaxVideo = 6;
+//                    }
+                    
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
                 }
-
+                
                 //roomrole
                 UserType tUserRole = [response objectForKey:@"roomrole"]?[[response objectForKey:@"roomrole"]intValue ]:UserType_Teacher;
                 _iRoomProperty.iUserType = tUserRole;
                 
-                if (tUserRole != _iRoomProperty.sCmdUserRole) {
+                if ((tUserRole != _iRoomProperty.sCmdUserRole) &&  !isFromWeb) {
                     [strongSelf reportFail:CONNECT_RESULE_PasswordError aDescript:@""];
                     [_HUD hide:YES];
                     return -1;
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
                     _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:_iRoomController];
-//#pragma mark - 修改屏幕旋转问题
-//                    _iEduNavigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
                     [controller presentViewController:_iEduNavigationController animated:YES completion:^{
                         [_HUD hide:YES];
                     }];
@@ -155,22 +152,20 @@ TKNavigationController* _iEduNavigationController = nil;
             }else{
                 
                 [strongSelf reportFail:[[response objectForKey:@"result"]intValue] aDescript:@""];
-                 [_HUD hide:YES];
+                [_HUD hide:YES];
                 
             }
-            
-
-            
         }
-        return 0;
+         return 0;
+            
     } aNetError:^int(NSError * _Nullable aError) {
         NSLog(@"----------------aError %@",aError.description);
-         __strong typeof(self)strongSelf = weekSelf;
-         [strongSelf reportFail:(int)aError.code aDescript:aError.description];
-         [_HUD hide:YES];
+        __strong typeof(self)strongSelf = weekSelf;
+        [strongSelf reportFail:(int)aError.code aDescript:aError.description];
+        [_HUD hide:YES];
         return -1;
     }];
-
+    
     //默认返回0
     return  0;
 }
@@ -235,6 +230,12 @@ TKNavigationController* _iEduNavigationController = nil;
 //                 alertMessage = @"该房间需要密码，请输入密码";
             }
                 break;
+                
+            case CONNECT_RESULE_RoomPointOverrun: {//4112  企业点数超限
+                alertMessage = MTLocalized(@"Error.pointOverRun");
+                //                 alertMessage = @" 企业点数超限";
+            }
+                break;
             case CONNECT_RESULE_RoomAuthenError: {
                 alertMessage = MTLocalized(@"Error.AuthIncorrect");
 //                 alertMessage = @"认证错误";
@@ -244,10 +245,7 @@ TKNavigationController* _iEduNavigationController = nil;
             default:{
                 report = YES;
                  //alertMessage = aDescript;
-                //Error.aaa没有对应的key和value，在没有网络的时候，走了这个方法，先使用State.NoNetwork
-//                 alertMessage = MTLocalized(@"Error.aaa");
-                alertMessage = MTLocalized(@"State.NoNetwork");
-                
+                 alertMessage = MTLocalized(@"Error.WaitingForNetwork");
                
                 break;
             }
@@ -261,43 +259,15 @@ TKNavigationController* _iEduNavigationController = nil;
                 textField.placeholder = MTLocalized(@"Prompt.inputPwd");// @"请输入密码";
             }];
             
-          
+            NSDictionary *tDict = _iParam;
+            BOOL tIsFromWeb = _isFromWeb;
             UIAlertAction *tAction = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 UITextField *login = alertController.textFields.firstObject;
-                
-//                 [TKEduClassRoomNetWorkManager checkMeeting:tRoomProperty.iRoomId aPwd:tRoomProperty.sCmdPassWord  aHost:tRoomProperty.sWebIp aPort: tRoomProperty.sWebPort
-                
+
                 _iRoomProperty.sCmdPassWord = login.text;
-
-
-                
-
-#ifdef Debug
-                NSDictionary *tDict = @{
-                                        @"serial"   :_iRoomProperty.iRoomId,
-                                        @"password":login.text,
-                                        @"host"    :_iRoomProperty.sWebIp,
-                                        @"port"    :_iRoomProperty.sWebPort,
-                                        @"userid"  :_iRoomProperty.iUserId,
-                                        @"userrole":@(_iRoomProperty.sCmdUserRole),
-                                        @"nickname":_iRoomProperty.sNickName
-                                       
-                                        };
-#else
-                NSDictionary *tDict = @{
-                                        @"serial"   :_iRoomProperty.iRoomId,
-                                        @"password":login.text,
-                                        @"host"    :_iRoomProperty.sWebIp,
-                                        @"port"    :_iRoomProperty.sWebPort,
-                                        // @"userid"  :_iRoomProperty.iUserId,
-                                        @"userrole":@(_iRoomProperty.sCmdUserRole),
-                                        @"nickname":_iRoomProperty.sNickName
-                                        
-                                        };
-#endif
-              
-               
-                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:_iController Delegate:_iRoomDelegate];
+                NSMutableDictionary *tHavePasswordDic = [NSMutableDictionary dictionaryWithDictionary:tDict];
+                [tHavePasswordDic setObject:login.text forKey:@"password"];
+                [TKEduClassRoom joinRoomWithParamDic:tHavePasswordDic ViewController:_iController Delegate:_iRoomDelegate isFromWeb:tIsFromWeb];
                 
             }];
             UIAlertAction *tAction2 = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.Cancel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -305,9 +275,7 @@ TKNavigationController* _iEduNavigationController = nil;
             }];
             [alertController addAction:tAction];
             [alertController addAction:tAction2];
-            
-#pragma mark - 不能弹框
-//            [_iController presentViewController:alertController animated:YES completion:nil];
+            [_iController presentViewController:alertController animated:YES completion:nil];
             
         }else{
            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:MTLocalized(@"Prompt.prompt") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
@@ -331,26 +299,6 @@ TKNavigationController* _iEduNavigationController = nil;
             _iStatus = EClassStatus_IDLE;
 
         }
-        
-        //        if (ret == CONNECT_RESULE_PasswordError || ret == CONNECT_RESULE_NeedPassword)
-        if (ret == CONNECT_RESULE_NeedPassword) // 不能添加密码错误的判断  要不会死循环
-        {
-#pragma mark - 需要延迟操作 否则会崩溃
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                _iRoomProperty.sCmdPassWord = self.xc_roomPassword;
-                NSDictionary *tDict = @{
-                                        @"serial"   :_iRoomProperty.iRoomId,
-                                        @"password":self.xc_roomPassword,
-                                        @"host"    :_iRoomProperty.sWebIp,
-                                        @"port"    :_iRoomProperty.sWebPort,
-                                        // @"userid"  :_iRoomProperty.iUserId,
-                                        @"userrole":@(_iRoomProperty.sCmdUserRole),
-                                        @"nickname":_iRoomProperty.sNickName
-                                        };
-                [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:_iController Delegate:_iRoomDelegate];
-            });
-        }
-        
     }
 }
 #pragma mark - private

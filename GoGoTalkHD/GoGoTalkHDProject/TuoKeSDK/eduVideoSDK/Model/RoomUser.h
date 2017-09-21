@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface RoomUser : NSObject
 
 /**
@@ -49,6 +50,16 @@
   用户属性。Sdk调用者设置的自定义属性会在这里被找到
  */
 @property (nonatomic, strong) NSMutableDictionary *properties;
+
+/**
+ 该用户是否禁用自己的视频
+ */
+@property (nonatomic, assign) BOOL disableVideo;
+
+/**
+ 该用户是否禁用自己的音频
+ */
+@property (nonatomic, assign) BOOL disableAudio;
 
 /**
  初始化一个用户

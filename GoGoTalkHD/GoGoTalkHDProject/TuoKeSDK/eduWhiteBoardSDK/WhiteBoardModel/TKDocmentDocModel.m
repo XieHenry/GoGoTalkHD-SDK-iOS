@@ -7,7 +7,7 @@
 //
 
 #import "TKDocmentDocModel.h"
-
+#import "TKMacro.h"
 @implementation TKDocmentDocModel
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
@@ -17,8 +17,10 @@
 -(void)dynamicpptUpdate{
     //如果是动态ppt
     if ([_dynamicppt intValue]) {
-        _swfpath = [_downloadpath copy];
-        _action = @"show";
+        if (_downloadpath) {
+            _swfpath = [_downloadpath copy];
+        }
+        _action = sActionShow;
     }else{
         _action = @"";
     }

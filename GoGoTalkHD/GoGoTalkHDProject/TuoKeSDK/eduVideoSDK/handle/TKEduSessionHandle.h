@@ -10,10 +10,9 @@
 #import <Foundation/Foundation.h>
 #import "TKEduClassRoom.h"
 #import "TKMacro.h"
-#import "TKVideoPlayerHandle.h"
 #import "TKEduBoardHandle.h"
 
-@class TKChatMessageModel,TKEduRoomProperty,TKMediaDocModel,TKDocmentDocModel,RoomUser,RoomManager,TKDocumentListView;
+@class TKChatMessageModel,TKEduRoomProperty,TKMediaDocModel,TKDocmentDocModel,RoomUser,RoomManager,TKDocumentListView,TKProgressHUD;
 
 
 #pragma mark 1 TKEduSessionDelegate
@@ -40,6 +39,19 @@
 - (void)sessionManagerDidFailWithError:(NSError *)error ;
 //白板等相关信令
 - (void)sessionManagerOnRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(unsigned long)ts Data:(NSObject*)data InList:(BOOL)inlist;
+//重连
+- (void)sessionHandleReconnected:(id)params;
+// peerConnection断开恢复
+- (void)peerConnectionRecover;
+// 订阅断开
+- (void)peerSubscribeRecover:(RoomUser *)user;
+//获取礼物数
+- (void)sessionManagerGetGiftNumber:(void(^)())completion;
+#pragma mark media
+- (void)sessionManagerMediaPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user ;
+- (void)sessionManagerMediaUnPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user;
+- (void)sessionManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+
 
 @end
 
@@ -67,7 +79,8 @@
 @property (nonatomic, copy, readonly) NSString *roomName;
 @property (nonatomic, assign, readonly) int      roomType;
 @property (nonatomic, copy, readonly) NSDictionary *roomProperties;
-
+@property (nonatomic, copy) NSDictionary *iParamDic;
+@property (nonatomic,strong) NSMutableDictionary *iPublishDic;
 #pragma mark 自定义
 @property (nonatomic, strong) TKEduRoomProperty *iRoomProperties;
 @property (nonatomic, strong) RoomUser *iTeacherUser;
@@ -76,20 +89,27 @@
 @property (nonatomic, assign) BOOL iIsCanOffertoDraw;//yes 可以 no 不可以
 @property (nonatomic, assign) BOOL isHeadphones;//是否是耳机
 @property (nonatomic, assign) BOOL iIsClassEnd;
+
 #pragma mark 白板
-@property (nonatomic,strong) TKMediaDocModel   *iCurrentMediaDocModel;
-@property (nonatomic,strong) TKMediaDocModel   *iPreMediaDocModel;
-@property (nonatomic,strong) TKDocmentDocModel *iCurrentDocmentModel;
-@property (nonatomic,strong) TKDocmentDocModel *iPreDocmentModel;
+@property (nonatomic,strong) TKMediaDocModel    *iCurrentMediaDocModel;
+@property (nonatomic,strong) TKMediaDocModel    *iPreMediaDocModel;
+@property (nonatomic,strong) TKDocmentDocModel  *iCurrentDocmentModel;
+@property (nonatomic,strong) TKDocmentDocModel  *iPreDocmentModel;
 @property(nonatomic,strong)  TKDocumentListView *iDocumentListView;
 @property(nonatomic,strong)  TKDocumentListView *iMediaListView;
-@property (nonatomic,strong) TKDocmentDocModel *iDefaultDocment;
-@property (nonatomic,strong) NSMutableArray *iDocmentMutableArray;
-@property (nonatomic,strong) NSMutableArray *iMediaMutableArray;
-@property (nonatomic,strong) TKEduBoardHandle *iBoardHandle;
-@property (nonatomic,strong) TKVideoPlayerHandle *iVideoPlayerHandle;
-@property (nonatomic,assign)BOOL iIsPlay;
+@property (nonatomic,strong) TKDocmentDocModel  *iDefaultDocment;
+@property (nonatomic,strong) NSMutableArray     *iDocmentMutableArray;
+@property (nonatomic,strong) NSMutableDictionary*iDocmentMutableDic;
+@property (nonatomic,strong) NSMutableArray     *iMediaMutableArray;
+@property (nonatomic,strong) NSMutableDictionary*iMediaMutableDic;
+@property (nonatomic,strong) TKEduBoardHandle   *iBoardHandle;
 
+
+@property (nonatomic,assign)BOOL iIsPlaying;//是否播放中
+@property (nonatomic,assign)BOOL isPlayMedia;//是否有音频
+@property (nonatomic,assign)BOOL isChangeMedia;//是否是切换
+@property (nonatomic, assign) CGFloat iVolume;//音量 默认最大，耳机一半
+@property (nonatomic,assign)BOOL isLocal;
 +(instancetype)shareInstance;
 
 - (void)configureSession:(NSDictionary*)paramDic
@@ -98,9 +118,7 @@
           aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
          aRoomProperties:(TKEduRoomProperty*)aRoomProperties;
 
--(void)joinEduClassRoomForWithHost:(NSString *)aHost aPort:(NSString *)aPort aNickName:(NSString *)aNickName aDomain:(NSString *)aDomain aRoomId:(NSString *)aRoomId aPassword:(NSString *)aPassword aUserID:(NSString *)aUserID Properties:(NSDictionary*)properties aUserType:(UserType)aUserType;
-
-
+-(void)joinEduClassRoomWithParam:(NSDictionary *)aParamDic aProperties:(NSDictionary *)aProperties;
 - (void)sessionHandleLeaveRoom:(void (^)(NSError *error))block;
 
 -(void) sessionHandleLeaveRoom:(BOOL)force Completion:(void (^)(NSError *))block;
@@ -139,25 +157,53 @@
 - (void)sessionHandleEnableOtherAudio:(BOOL)enable;
 
 - (void)sessionHandleUseLoudSpeaker:(BOOL)use;
+#pragma mark media
+- (void)sessionHandlePublishMedia:(NSString *)fileurl hasVideo:(BOOL)hasVideo fileid:(NSString *)fileid  filename:(NSString *)filename toID:(NSString*)toID block:(void (^)(NSError *))block;
+- (void)sessionHandleUnpublishMedia:(void (^)(NSError *))block;
+- (void)sessionHandlePlayMedia:(NSString*)fileId completion:(void (^)(NSError *error, NSObject *view))block;
+-(void)sessionHandleMediaPause:(BOOL)pause;
+-(void)sessionHandleMediaSeektoPos:(NSTimeInterval)pos;
+-(void)sessionHandleMediaVolum:(CGFloat)volum;
+
 
 #pragma 其他
 -(void)clearAllClassData;
+//message
 - (NSArray *)messageList;
 - (void)addOrReplaceMessage:(TKChatMessageModel *)aMessageModel;
+//audio
 - (NSSet *)userPlayAudioArray;
 - (void)addOrReplaceUserPlayAudioArray:(RoomUser *)aRoomUser ;
 - (void)delUserPlayAudioArray:(RoomUser *)aRoomUser ;
-- (NSArray *)userListArray;
-- (void)addOrReplaceUserArray:(RoomUser *)aRoomUser;
-- (void)delUserArray:(RoomUser *)aRoomUser;
--(NSDictionary *)pendingButtonDic;
--(void)delePendingButton:(RoomUser*)aRoomUser;
--(bool)addPendingButton:(RoomUser *)aRoomUser;
+//user
+- (NSArray *)userArray;
+- (void)addUser:(RoomUser *)aRoomUser;
+- (void)delUser:(RoomUser *)aRoomUser;
+//user 老师和学生
+- (NSArray *)userStdntAndTchrArray;
+- (void)addUserStdntAndTchr:(RoomUser *)aRoomUser;
+- (void)delUserStdntAndTchr:(RoomUser *)aRoomUser;
+-(RoomUser *)userInUserList:(NSString*)peerId ;
+//除了老师teacher和巡课Patrol
+- (NSArray *)userListExpecPtrlAndTchr;
+//特殊身份 助教等
+-(void)addSecialUser:(RoomUser *)aRoomUser;
+-(void)delSecialUser:(RoomUser*)aRoomUser;
+-(NSDictionary *)secialUserDic;
+//pending
+-(NSDictionary *)pendingUserDic;
+-(void)delePendingUser:(RoomUser*)aRoomUser;
+-(bool)addPendingUser:(RoomUser *)aRoomUser;
+//publish
+-(void)addPublishUser:(RoomUser *)aRoomUser;
+-(void)delePublishUser:(RoomUser*)aRoomUser;
+-(NSDictionary *)publishUserDic;
+//unpublish
+-(void)addUnPublishUser:(RoomUser *)aRoomUser;
+-(void)deleUnPublishUser:(RoomUser*)aRoomUser;
+-(NSDictionary *)unpublishUserDic;
 #pragma mark 影音播放
 -(void)publishtMediaDocModel:(TKMediaDocModel*)aMediaDocModel add:(BOOL)add To:(NSString *)to;
--(void)publishtProgressMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to isPlay:(BOOL)isPlay;
--(void)publishtPlayOrPauseMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to isPlay:(BOOL)isPlay;
--(void)publishtNeedProgressMediaDocModel:(TKMediaDocModel*)aMediaDocModel ;
 
 -(void)deleteaMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to;
 #pragma mark 文档
@@ -167,11 +213,16 @@
 
 #pragma mark 白板
 //文档
+-(NSDictionary *)docmentDic;
+-(TKDocmentDocModel*)getDocmentFromFiledId:(NSString *)aFiledId;
+
 - (NSArray *)docmentArray;
 - (bool)addOrReplaceDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 - (void)delDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 -(TKDocmentDocModel *)getNextDocment:(TKDocmentDocModel *)aCurrentDocmentModel;
 //音视频
+-(NSDictionary *)meidaDic;
+-(TKMediaDocModel*)getMediaFromFiledId:(NSString *)aFiledId;
 - (NSArray *)mediaArray;
 - (void)addOrReplaceMediaArray:(TKMediaDocModel *)aMediaDocModel;
 - (void)delMediaArray:(TKMediaDocModel *)aMediaDocModel;
@@ -179,7 +230,15 @@
 
 -(void)docmentDefault:(TKDocmentDocModel*)aDefaultDocment;
 
+-(BOOL)isEqualFileId:(id)aModel  aSecondModel:(id)aSecondModel;
 #pragma mark 设置声道
--(void)configurePlayerRoute:(BOOL)aIsPlay;
+-(void)configurePlayerRoute:(BOOL)aIsPlay isCancle:(BOOL)isCancle;
+
+#pragma mark 用户自己打开关闭音视频
+- (void)disableMyVideo:(BOOL)disable;
+- (void)disableMyAudio:(BOOL)disable;
+#pragma mark 设置HUD
+-(void)configureHUD:(NSString *)aString  aIsShow:(BOOL)aIsShow;
+
 
 @end

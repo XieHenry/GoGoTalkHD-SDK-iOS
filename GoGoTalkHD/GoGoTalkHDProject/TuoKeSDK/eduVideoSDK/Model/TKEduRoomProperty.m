@@ -21,10 +21,10 @@
     _sDomain      = [params objectForKey:@"domain"]?[params objectForKey:@"domain"]:@"www";
     _sCmdPassWord = [params objectForKey:@"password"]?[params objectForKey:@"password"]:@"";
     _sCmdUserRole = [params objectForKey:@"userrole"]?[[params objectForKey:@"userrole"]intValue]:0;
-     _iUserId      = [params objectForKey:@"userid"]?[params objectForKey:@"userid"]:@"0";
+     _iUserId     = [params objectForKey:@"userid"]?[params objectForKey:@"userid"]:@"0";
     _iRoomName    = [params objectForKey:@"roomname"]?[params objectForKey:@"roomname"]:@"";
     _iRoomId      = [params objectForKey:@"serial"]?[params objectForKey:@"serial"]:@"";
-    _iCompanyID      = [params objectForKey:@"companyId"]?[params objectForKey:@"companyId"]:@"";
+    _iCompanyID   = [params objectForKey:@"companyId"]?[params objectForKey:@"companyId"]:@"";
 }
 
 @end

@@ -24,6 +24,8 @@
 static int req = 1000;
 static NSString * const FORM_FLE_INPUT = @"filedata";
 
+extern int expireSeconds;
+
 @interface TKEduNetManager ()<NSURLSessionDataDelegate>
 @property (nonatomic ,copy)bCheckRoomdidComplete aCheckMeetingDidComplete;
 @property (nonatomic ,copy)bCheckRoomError aCheckMeetingError;
@@ -42,35 +44,17 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
     
     return singleton;
 }
-+(void)checkRoom:(NSString *_Nonnull)aRoomId aPwd:(NSString *_Nonnull)aPwd aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aUserID:(NSString *_Nonnull)aUserID aUserRole:(UserType)aUserRole  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError {
-    [[self shareInstance]checkRoom:aRoomId aPwd:aPwd aHost:aHost aPort:aPort aUserID:aUserID  aUserRole:aUserRole aDidComplete:aDidComplete aNetError:aNetError];
+#pragma mark checkRoom
++(void)checkRoom:(NSDictionary *_Nonnull)aParam  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError {
+    [[self shareInstance]checkRoom:aParam aDidComplete:aDidComplete aNetError:aNetError];
     
 }
 
-
-
--(void)checkRoom:(NSString *_Nonnull)aRoomId aPwd:(NSString *_Nonnull)aPwd aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aUserID:(NSString *_Nonnull)aUserID  aUserRole:(UserType)aUserRole aDidComplete:(bCheckRoomdidComplete _Nullable  )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError{
-
-    NSDictionary *tParamDic;
-    if (!aUserID || [aPwd isEqualToString:@""]) {
-        aUserID = @"0";
-    }
-    
-#ifndef Realese
-     //aPwd = @"1";
-#endif
-   
-    if (!aPwd || [aPwd isEqualToString:@""]) {
-    
-        tParamDic  = @{@"serial":aRoomId,@"userrole":@(aUserRole)};
-    }else{
-        tParamDic = @{@"serial":aRoomId,@"password":aPwd,@"userrole":@(aUserRole)};
-    }
-  
+-(void)checkRoom:(NSDictionary *_Nonnull)aParam  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError{
     //1。创建管理者对象
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
     manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
-//    manager.baseURL.scheme = @"https";
+    //    manager.baseURL.scheme = @"https";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
                                                                               @"text/html",
                                                                               @"text/json",
@@ -91,9 +75,12 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
     [NSURLCache setSharedURLCache:URLCache];
     
     __block NSURLSessionDataTask *session = nil;
-    _aCheckMeetingDidComplete = aDidComplete;
-    _aCheckMeetingError = aNetError;
-    session =   [manager POST:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/checkroom",sHttp,aHost ,aPort] parameters: tParamDic progress:^(NSProgress * _Nonnull uploadProgress) {
+    _aCheckMeetingDidComplete  = aDidComplete;
+    _aCheckMeetingError       = aNetError;
+    NSString *tPassword = @"";
+    NSString *tHost = [aParam objectForKey:@"host"]?[aParam objectForKey:@"host"]:sHost;
+    NSString *tPort= [aParam objectForKey:@"port"]?[aParam objectForKey:@"port"]:sPort;
+    session =   [manager POST:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/checkroom",sHttp,tHost ,tPort] parameters: aParam progress:^(NSProgress * _Nonnull uploadProgress) {
         
         
         
@@ -105,27 +92,29 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
                 break;
             if ([responseObject isKindOfClass:[NSData class]]){
                 id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-               
-                if (_aCheckMeetingDidComplete) {
-                    _aCheckMeetingDidComplete(json,aPwd);
+                
+                if (aDidComplete) {
+                    aDidComplete(json,tPassword);
                 }
             }
-           
+            
             
         }while(0);
         
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-       
-        if (_aCheckMeetingError) {
-            _aCheckMeetingError(error);
+        
+        if (aNetError) {
+            aNetError(error);
         }
         NSLog(@"-----------%@",error.description);
     }];
     [session resume];
-
 }
+
+
+
 #pragma mark 礼物数量
 +(void)getGiftinfo:(NSString *_Nonnull)aRoomId aParticipantId:(NSString *_Nonnull)aParticipantId aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aGetGifInfoComplete:(bGetGifInfoComplete _Nullable )aGetGifInfoComplete aGetGifInfoError:(bGetGifInfoError _Nullable)aGetGifInfoError{
     
@@ -192,14 +181,13 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
 }
 #pragma mark 请求礼物
 
-+(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete{
++(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
     
-    [[self shareInstance] sendGifForRoomUser:aRoomUserArray roomID:roomID aMySelf:aMySelf aHost:aHost aPort:aPort aSendComplete:aSendComplete];
-    
+    [[self shareInstance] sendGifForRoomUser:aRoomUserArray roomID:roomID aMySelf:aMySelf aHost:aHost aPort:aPort aSendComplete:aSendComplete aNetError:aNetError];
     
 }
 
--(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete{
+-(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
     
     NSMutableDictionary *tParamDic = @{@"serial":roomID,@"sendid":aMySelf.peerID,@"sendname":aMySelf.nickName}.mutableCopy;
     NSMutableDictionary *tJS = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -266,8 +254,8 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (_aCheckMeetingError) {
-            _aCheckMeetingError(error);
+        if (aNetError) {
+            aNetError(error);
         }
         NSLog(@"-----------%@",error.description);
     }];
@@ -366,15 +354,15 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
 
 #pragma mark doc
 
-+(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *)docid isMedia:(bool)isMedia    aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete{
++(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *)docid isMedia:(bool)isMedia    aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete aNetError:(bError _Nullable) aNetError{
     
-    [[self shareInstance]delRoomFile:roomID docid:docid isMedia:isMedia   aHost:aHost aPort:aPort aDelComplete:aDelComplete ];
+    [[self shareInstance]delRoomFile:roomID docid:docid isMedia:isMedia   aHost:aHost aPort:aPort aDelComplete:aDelComplete aNetError:aNetError];
 }
 
 
 
 
--(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *)docid isMedia:(bool)isMedia   aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete
+-(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *)docid isMedia:(bool)isMedia   aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete aNetError:(bError _Nullable) aNetError
 {
 
 
@@ -435,27 +423,31 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (_aCheckMeetingError) {
-            _aCheckMeetingError(error);
+        if (aNetError) {
+            aNetError(error);
         }
         NSLog(@"-----------%@",error.description);
     }];
     [session resume];
 }
 #pragma mark 下课
-+(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete{
++(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
     
-    [[self shareInstance]classBeginEnd:roomID companyid:companyid  aHost:aHost aPort:aPort aComplete:aComplete ];
+    [[self shareInstance]classBeginEnd:roomID companyid:companyid  aHost:aHost aPort:aPort aComplete:aComplete aNetError:aNetError];
 }
 
 
 
 
--(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *)companyid aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete
+-(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *)companyid aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError
 {
+    NSDictionary *tParamDic;
+    if ([TKEduSessionHandle shareInstance].roomMgr.autoQuitClassWhenClassOverFlag == YES) {
+        tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid,@"endsign":@(1)};         // 英练帮需要结束课堂
+    } else {
+        tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid};
+    }
     
-    
-    NSDictionary *tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid};
     //1。创建管理者对象
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
     manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
@@ -497,11 +489,99 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
                 
                 int result = [[json objectForKey:@"result"]intValue];
                 
-                if (!result ) {
-                    if (aComplete) {
-                        aComplete(json);
-                    }
-                }
+//                if (!result ) {
+//                    if (aComplete) {
+//                        aComplete(json);
+//                    }
+//                }
+                
+                aComplete(nil);         // 无需关心返回值，直接下课
+            }
+            
+            
+        }while(0);
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (aNetError) {
+            aNetError(error);
+        }
+        NSLog(@"-----------%@",error.description);
+    }];
+    [session resume];
+}
+
+
+
+#pragma mark 上课
++(void)classBeginStar:(NSString * _Nonnull )roomID companyid:(NSString *)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete  aNetError:(bError _Nullable) aNetError{
+    
+    [[self shareInstance]classBeginStar:roomID companyid:companyid  aHost:aHost aPort:aPort aComplete:aComplete aNetError:aNetError];
+}
+
+
+
+
+-(void)classBeginStar:(NSString * _Nonnull )roomID companyid:(NSString *)companyid aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError
+{
+    NSDictionary *tParamDic;
+    
+    if ([[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
+        tParamDic = @{@"serial":roomID,@"companyid":companyid};
+    } else {
+        tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
+    }
+    
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    // https ssl 验证。
+    [manager setSecurityPolicy:[self customSecurityPolicy]];
+    manager.requestSerializer.timeoutInterval = 60;
+    
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+
+    session =   [manager GET:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/roomstart",sHttp,aHost ,aPort] parameters: tParamDic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                
+                int result = [[json objectForKey:@"result"]intValue];
+                
+//                if (!result ) {
+//                    if (aComplete) {
+//                        aComplete(json);
+//                    }
+//                }
+                
+                aComplete(nil);         // 无需关心返回值是什么，直接上课
                 
             }
             
@@ -512,8 +592,8 @@ static NSString * const FORM_FLE_INPUT = @"filedata";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (_aCheckMeetingError) {
-            _aCheckMeetingError(error);
+        if (aNetError) {
+            aNetError(error);
         }
         NSLog(@"-----------%@",error.description);
     }];
@@ -699,6 +779,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         [_iRequestDelegate uploadProgress:req totalBytesSent:totalBytesSent bytesTotal:totalBytesExpectedToSend];
     }
 }
+
+
+
 
 
 

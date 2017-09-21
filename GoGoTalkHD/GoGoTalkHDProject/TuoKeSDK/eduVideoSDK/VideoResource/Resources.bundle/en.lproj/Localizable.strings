@@ -16,7 +16,9 @@
 "Error.RoomDeletedOrExpired" = "The class has expired.";
 "Error.MemberOverRoomLimit" = "The number of students has exceeded limit.";
 "Error.NeedPwd" = "You need to be authenticated.Please enter password.";
-"Error.PwdError" = "The classroom doesn't exist.";
+
+"Error.pointOverRun" = "Enterprise point overrun";
+"Error.PwdError" = "The password doesn't right.";
 "Error.AuthIncorrect" = "Authentication Failed";
 "Error.WaitingForNetwork" = "Your network is temporarily unavailable, please try again later";
 //Prompt
@@ -26,11 +28,11 @@
 "Prompt.Cancel" = "Cancel";
 "Prompt.Know" = "Yes,I know";
 "Prompt.Quite" = "Do you want to exit";
-"Prompt.nicknameNotNull" = "The nickName cannot be empt";
+"Prompt.nicknameNotNull" = "The nickName cannot be empty";
 "Prompt.onlyNumber" = "The RoomId only be number";
-"Prompt.RoomIDNotNull" = "The RoomId cannot be empt";
-"Login.EnterRoom" = "Room";
-"Login.RoomId"    = "ID";
+"Prompt.RoomIDNotNull" = "The RoomId cannot be empty";
+"Login.EnterRoom" = "Enter Classroom";
+"Login.RoomId"    = "Room";
 "Login.RoomIdPlaceHolder"    = "Room ID";
 "Login.nickName"  = "Name";
 "Login.Role"      = "Role";
@@ -64,10 +66,10 @@
 "Class.Over" = "Class is over";
 
 
-"Button.MuteAudio" = "Mute All";
-"Button.Reward"    = "Reward All";
+"Button.MuteAudio" = "Mute Students";
+"Button.Reward"    = "Grant Trophy to All";
 "Button.ClassBegin"    = "Time for Class";
-"Button.ClassIsOver"    = "End of Class";
+"Button.ClassIsOver"    = "Finish Class";
 "Button.ClassEnd"      = "Class End";
 "Button.RaiseHand"     = "Raise Hand";
 "Button.RaiseHandCancle" = "Cancel your hands";
@@ -78,9 +80,9 @@
 "Button.CloseVideo"         = "Video Off";
 "Button.UpPlatform"         = "Video on";
 "Button.DownPlatform"       = "Video off";
-"Button.AllowDoodle"        = "Operation";
-"Button.CancelDoodle"       = "No Operation";
-"Button.GiveCup"            = "Grant Trophy";
+"Button.AllowDoodle"        = "Draw";
+"Button.CancelDoodle"       = "No Drawing";
+"Button.GiveCup"            = "Give Trophy";
 "Action.EnterRoom"          = "Enter Classroom";
 "Action.ExitRoom"           = "Leave Classroom";
 "Prompt.EndClass1M"         = "There are 1 minute to finish class. Be remained.";
@@ -91,9 +93,15 @@
 "Prompt.timeoutReadyEnd.one" = "Your class is";
 "Prompt.timeoutReadyEnd.two" = "minutes overtime now. This  class will end automatically in";
 "Prompt.timeoutReadyEnd.three" = "minutes.";
-"Title.DocumentList"        = "Teaching Material List";
-"Title.MediaList"           = "Media List";
-"Title.UserList"            = "Students List";
-"Title.UserList.two"        = "Students List (1)";
+"Title.DocumentList"        = "Teaching Material Files";
+"Title.MediaList"           = "Media Files";
+"Title.UserList"            = "Student List";
+"Title.UserList.two"        = "Student List (1)";
 "Button.remindKnow"         = "I got it.";
 "Prompt.timeoutEnd"         = "This class is about to shut down.";
+
+"Title.whiteBoard"          = "whiteboard";
+"Prompt.CanotOn"            = "The student's audio and video devices are unavailable. May be disabled. Please tell student to enable them.";
+"Prompt.FinishClass"        = "Are you sure you want to finish class？";
+"Prompt.exceeds"            = "The number of screen video exceeds the limit!";
+"Prompt.ClassEnd"           = "The class is over!";
