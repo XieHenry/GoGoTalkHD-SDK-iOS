@@ -198,7 +198,7 @@
                     NSLog(@"%@-Get请求地址:\n%@---success日志:\n%@",[viewController class],urlStr,responseObject);
                     
                 }
-                else if ([[dic objectForKey:xc_returnCode]integerValue] == 1000) {
+                else if ([[dic objectForKey:xc_returnCode]integerValue] == 1000 || [[dic objectForKey:xc_returnCode]integerValue] == 1002) {
                     NSLog(@"%@-Get请求地址:\n%@---登陆过期日志:\n%@",[viewController class],urlStr,responseObject);
                     [self refreshToken:pinjieUrlStr method:method parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
                     
@@ -267,7 +267,7 @@
                     NSLog(@"%@-Post请求地址:\n%@---success日志:\n%@",[viewController class],urlStr,responseObject);
                     
                 }
-                else if ([[dic objectForKey:xc_returnCode]integerValue] == 1000) {
+                else if ([[dic objectForKey:xc_returnCode]integerValue] == 1000 || [[dic objectForKey:xc_returnCode]integerValue] == 1002) {
                     NSLog(@"%@-Post请求地址:\n%@---登陆过期日志:\n%@",[viewController class],urlStr,responseObject);
                     
                     [self refreshToken:pinjieUrlStr method:method parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
@@ -485,6 +485,18 @@
                 //重新请求
                 [self requestWithPath:url method:method parameters:parameters token:isLoadToken viewController:viewController success:success failure:failure];
             });
+        } else {
+            
+            // 取消所有的网络请求
+            [self.manager.operationQueue cancelALLOperations];
+            
+            GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
+            [UserDefaults() setObject:@"no" forKey:@"login"];
+            [UserDefaults() setObject:@"" forKey:K_userToken];
+            [UserDefaults() synchronize];
+            BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
+            viewController.view.window.rootViewController = nav;
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

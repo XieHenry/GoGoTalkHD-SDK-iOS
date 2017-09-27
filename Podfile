@@ -43,16 +43,16 @@ inhibit_all_warnings!   #可能产生其他问题
 
 
     ############# 百家云 #############
-    source 'https://github.com/CocoaPods/Specs.git'
-    source 'https://github.com/baijia/specs.git'
-    
-    post_install do |installer|
-        installer.pods_project.root_object.attributes["CLASSPREFIX"] = "BJL"
-        installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Baijia Cloud"
-    end
-#    inhibit_all_warnings!   #可能产生其他问题   去掉pod中的警告
-    pod 'BJLiveCore'
-    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+#    source 'https://github.com/CocoaPods/Specs.git'
+#    source 'https://github.com/baijia/specs.git'
+#
+#    post_install do |installer|
+#        installer.pods_project.root_object.attributes["CLASSPREFIX"] = "BJL"
+#        installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Baijia Cloud"
+#    end
+##    inhibit_all_warnings!   #可能产生其他问题   去掉pod中的警告
+#    pod 'BJLiveCore'
+#    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
     ############# 百家云 #############
     
     

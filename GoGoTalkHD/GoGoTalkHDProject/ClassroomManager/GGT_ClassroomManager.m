@@ -13,7 +13,7 @@
 #import "TKMacro.h"
 
 // 百家云
-#import "BJRoomViewController.h"
+//#import "BJRoomViewController.h"
 
 @interface GGT_ClassroomManager ()<TKEduRoomDelegate>
 @property (nonatomic, strong) GGT_CourseCellModel *xc_model;
@@ -117,15 +117,15 @@
 + (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model
 {
 
-    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
-    manager.xc_model = model;
-
-    BJRoomViewController *roomViewController = [BJRoomViewController new];
-    [viewController presentViewController:roomViewController
-                       animated:YES
-                     completion:^{
-                         [roomViewController enterRoomWithSecret:@"2mnuv7" userName:@"Student"];
-                     }];
+//    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
+//    manager.xc_model = model;
+//
+//    BJRoomViewController *roomViewController = [BJRoomViewController new];
+//    [viewController presentViewController:roomViewController
+//                       animated:YES
+//                     completion:^{
+//                         [roomViewController enterRoomWithSecret:@"2mnuv7" userName:@"Student"];
+//                     }];
 }
 
 // 调用接口 区别进入那个教室
