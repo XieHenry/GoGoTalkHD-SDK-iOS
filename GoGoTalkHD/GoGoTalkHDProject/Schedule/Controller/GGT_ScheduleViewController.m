@@ -840,7 +840,7 @@ static NSString * const CalendarCellID = @"cell";
                 
                 
                 // 调用接口 进行教室判断  是百家云还是拓课
-                // // 进入拓课的方法
+                 // 进入拓课的方法
                 [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                     
                 }];
@@ -869,7 +869,7 @@ static NSString * const CalendarCellID = @"cell";
     }
 }
 
-//// 进入教室调用接口
+// 进入教室调用接口
 //- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
 //{
 //    NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -1178,7 +1178,7 @@ static NSString * const CalendarCellID = @"cell";
 //    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
 //    shareRoom.xc_roomPassword = model.stuPwd;
 //    shareRoom.xc_roomName = model.LessonName;
-//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
+//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
 //    
 //    // 记录日志
 //    [XCLogManager xc_redirectNSlogToDocumentFolder];

@@ -16,6 +16,7 @@
 "Error.RoomDeletedOrExpired" = "課堂不存在";
 "Error.MemberOverRoomLimit" = "教室人數超過限制";
 "Error.NeedPwd" = "該教室需要密碼，請輸入密碼";
+"Error.pointOverRun" = "企業點數超限";
 "Error.PwdError" = "教室密碼錯誤!";
 "Error.AuthIncorrect" = "Auth不正確";
 "Error.WaitingForNetwork" = "您的網絡暫時不可用，請稍後重試";
@@ -89,13 +90,18 @@
 "Prompt.timeoutReadyEnd.one" = "您已超時";
 "Prompt.timeoutReadyEnd.two" = "分鐘，課堂將於";
 "Prompt.timeoutReadyEnd.three" = "分鐘之後自動關閉！";
-"Title.DocumentList"        = "課件列錶";
-"Title.MediaList"           = "媒體列錶";
+"Title.DocumentList"        = "課件庫";
+"Title.MediaList"           = "媒體庫";
 "Title.UserList"            = "花名册";
 "Title.UserList.two"        = "花名册 (1)";
 "Button.remindKnow"         = "我知道了";
-"Prompt.timeoutEnd"         = "課堂即將關閉";
 
+"Prompt.timeoutEnd"         = "課堂即將關閉";
+"Title.whiteBoard"          = "白板";
+"Prompt.CanotOn"            = "該學生的音視頻設備不可用。有可能是自行禁用了設備。請提醒學生啟用設備。";
+"Prompt.FinishClass"        = "您確定要下課嗎?";
+"Prompt.exceeds"            = "發言席人數超過限制!";
+"Prompt.ClassEnd"           = "本次課程已經結束!";
 
 
 

@@ -30,7 +30,7 @@
     CGFloat tViewCap = 10 *Proportion;
     CGFloat tContentWidth = CGRectGetWidth(self.contentView.frame);
     CGFloat tContentHigh = CGRectGetHeight(self.contentView.frame);
-    CGFloat tTimeLabelWidth = 50*Proportion;
+    CGFloat tTimeLabelWidth = 100*Proportion;     // 原来为50*Proportion
     CGFloat tTimeLabelHeigh = 16*Proportion;
     CGFloat tTranslateLabelHeigh = 22*Proportion;
     //头
@@ -158,14 +158,11 @@
     [super layoutSubviews];
      CGFloat tViewCap = 10 *Proportion;
      CGFloat tContentWidth = CGRectGetWidth(self.contentView.frame);
-     CGFloat tTimeLabelWidth = 80*Proportion;
+     CGFloat tTimeLabelWidth = 100*Proportion;    // 原来为50*Proportion
      CGFloat tTimeLabelHeigh = 16*Proportion;
      CGFloat tTranslateLabelHeigh = 22*Proportion;
     //
-    //MessageType_Teacher  MessageType_OtherUer  MessageType_Message
-    //之前是MessageType_Me
-    // _iMessageType == MessageType_Teacher || _iMessageType == MessageType_OtherUer || _iMessageType == MessageType_Message
-    if (_iMessageType == MessageType_Teacher || _iMessageType == MessageType_OtherUer || _iMessageType == MessageType_Message) {
+    if (_iMessageType == MessageType_Me) {
         _iTimeLabel.frame = CGRectMake(tViewCap,0,tTimeLabelWidth ,tTimeLabelHeigh);
         _iNickNameLabel.frame =  CGRectMake(CGRectGetMaxX(_iTimeLabel.frame), 0, tContentWidth-tTimeLabelWidth-tViewCap, tTimeLabelHeigh);
 

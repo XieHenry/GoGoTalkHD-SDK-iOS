@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UIButton *iButton2;
 @property (strong, nonatomic) UIButton *iButton3;
 @property (strong, nonatomic) UIButton *iButton4;
+@property (strong, nonatomic) UIButton *iHandUpBtn;     // 举手按钮
 @property (nonatomic,assign)  FileListType  iFileListType;
 @property (nonatomic, strong) NSString *text;
 @property (strong, nonatomic) TKMediaDocModel *iMediaDocModel;

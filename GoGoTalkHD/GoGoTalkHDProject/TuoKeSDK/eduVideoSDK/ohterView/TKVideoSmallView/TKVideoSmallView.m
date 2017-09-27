@@ -14,11 +14,12 @@
 #import "TKEduBoardHandle.h"
 #import "TKEduNetManager.h"
 #import "TKEduRoomProperty.h"
+#import "TKEduSessionHandle.h"
 //214*140  214*120 214*20
 //214*140  214*120 214*20
 //120*112  120*90  120*22
 
-static const CGFloat sVideoSmallNameLabelHeight = 22;
+//static const CGFloat sVideoSmallNameLabelHeight = 22;
 
 @interface TKVideoSmallView ()<VideolistProtocol,CAAnimationDelegate>
 @property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
@@ -29,6 +30,8 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
 @property (nonatomic, strong) UIImageView * _Nullable iAudioImageView;
 /** *  举手 */
 @property (nonatomic, strong) UIImageView * _Nullable iHandsUpImageView;
+/** *  视频 */
+@property (nonatomic, strong) UIImageView * _Nullable iVideoImageView;
 
 //gift
 @property (nonatomic, strong) UIImageView *iGiftAnimationView;
@@ -53,6 +56,7 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         CGFloat tVideoHeigh     = tVideoWidth*3/4.0;
         _iVideoBackgroundImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_teacher_big")];
         _iVideoBackgroundImageView.frame        = CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
+        _iVideoBackgroundImageView.backgroundColor = RGBCOLOR(47, 47, 47);
         _iVideoBackgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewContentModeBottom;
         
         _iVideoFrame =  CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
@@ -125,17 +129,33 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             
         });
         CGFloat tVideoImageWidth = (tVideoWidth-6)/8.0;
+        
+        if (aVideoRole != EVideoRoleTeacher) {
+            
+            _iVideoImageView = ({
+                
+                UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_video")];
+                tImageView.frame        = CGRectMake(0, 0, tVideoImageWidth, tVideoImageWidth);
+                tImageView;
+                
+            });
+        } else {
+            
+            _iVideoImageView = nil;
+            
+        }
+        
         _iAudioImageView = ({
             
             UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_audio")];
-            tImageView.frame        = CGRectMake(0, 0, tVideoImageWidth, tVideoImageWidth);
+            tImageView.frame        = CGRectMake((aVideoRole == EVideoRoleTeacher) ? 0 : tVideoImageWidth, 0, tVideoImageWidth, tVideoImageWidth);
             tImageView;
             
         });
         _iDrawImageView = ({
             
             UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_tools")];
-            tImageView.frame        = CGRectMake(tVideoImageWidth*2+3, 0, tVideoImageWidth, tVideoImageWidth);
+            tImageView.frame        = CGRectMake(tVideoImageWidth*2, 0, tVideoImageWidth, tVideoImageWidth);
             tImageView;
             
         });
@@ -148,12 +168,15 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             tImageView;
             
         });
+        
+        [self addSubview:_iVideoImageView];
         [self addSubview:_iAudioImageView];
         [self addSubview:_iDrawImageView];
         [self addSubview:_iHandsUpImageView];
         
        
         if (aVideoRole != EVideoRoleTeacher) {[self addSubview:_iGifButton];}
+        _iVideoImageView.hidden    = YES;
         _iAudioImageView.hidden    = YES;
         _iDrawImageView.hidden     = YES;
         _iHandsUpImageView.hidden  = YES;
@@ -178,7 +201,10 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
 }
 -(void)setIRoomUser:(RoomUser *)iRoomUser{
     
-     BOOL isShowAudioImage = ( iRoomUser.publishState == PublishState_AUDIOONLY || iRoomUser.publishState== PublishState_BOTH);
+    BOOL isShowAudioImage = ( iRoomUser.publishState == PublishState_AUDIOONLY ||
+                             iRoomUser.publishState== PublishState_BOTH);
+    BOOL isShowVideoImage = (iRoomUser.publishState == PublishState_BOTH ||
+                             iRoomUser.publishState == PublishState_VIDEOONLY);
     if (iRoomUser) {
 //         [[NSNotificationCenter defaultCenter]postNotificationName:[NSString stringWithFormat:@"%@%@",sRaisehand,user.peerID] object:@(_iIsRaiseHandUp)];
         
@@ -192,10 +218,14 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         
         _iGifButton.hidden = YES;
     }
-      [self bringSubviewToFront:_iAudioImageView];
-      [self bringSubviewToFront:_iDrawImageView];
-      [self bringSubviewToFront:_iHandsUpImageView];
+    [self bringSubviewToFront:_iAudioImageView];
+    [self bringSubviewToFront:_iDrawImageView];
+    [self bringSubviewToFront:_iHandsUpImageView];
     
+    // 学生自己可以在自己的SmallView上弹出操作视图
+    if ([iRoomUser.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID] && iRoomUser.role == EVideoRoleOther) {
+        _iFunctionButton.enabled = YES;
+    }
    
     _iRoomUser = iRoomUser;
     int currentGift = 0;
@@ -203,11 +233,15 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         currentGift = [[_iRoomUser.properties objectForKey:sGiftNumber] intValue];
     [_iGifButton setTitle:[NSString stringWithFormat:@"%@",@(currentGift)] forState:UIControlStateNormal];
     
-    _iAudioImageView.hidden    = !isShowAudioImage;
-    _iDrawImageView.hidden    = !iRoomUser.canDraw || (iRoomUser.publishState == PublishState_NONE)|| (iRoomUser.role == UserType_Teacher) ;
+    _iAudioImageView.hidden = !isShowAudioImage;
+    _iVideoImageView.hidden = !isShowVideoImage;
+    _iDrawImageView.hidden  = !iRoomUser.canDraw || (iRoomUser.publishState == PublishState_NONE) || (iRoomUser.role == UserType_Teacher) ;
     
     _iHandsUpImageView.hidden  = ![[iRoomUser.properties objectForKey:sRaisehand] boolValue]|| (iRoomUser.role == UserType_Teacher);
     
+    // 根据用户disableAudio和disableVideo去设置图片
+    [self changeAudioDisabledState];
+    [self changeVideoDisabledState];
 }
 
 -(void)refreshRaiseHandUI:(NSNotification *)aNotification{
@@ -215,6 +249,9 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
     PublishState tPublishState = [[tDic objectForKey:sPublishstate]integerValue];
     BOOL tAudioImageShow = !(tPublishState  == PublishState_BOTH || tPublishState == PublishState_AUDIOONLY );
     _iAudioImageView.hidden = tAudioImageShow;
+    
+    BOOL tVideoImageShow = !(tPublishState == PublishState_BOTH || tPublishState == PublishState_VIDEOONLY);
+    _iVideoImageView.hidden = tVideoImageShow;
 
      BOOL tHandsUpImageShow = (_iRoomUser.role == UserType_Teacher) ||([TKEduSessionHandle shareInstance].localUser.role ==UserType_Student)|| (![[tDic objectForKey:sRaisehand]boolValue]);
     _iHandsUpImageView.hidden = tHandsUpImageShow;
@@ -226,25 +263,45 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         [self  potStartAnimationForView:self];
     }
     
+    self.iRoomUser.disableVideo = [[tDic valueForKey:sDisableVideo] boolValue];
+    self.iRoomUser.disableAudio = [[tDic valueForKey:sDisableAudio] boolValue];
+    // 只有学生才能控制音视频禁用状态
+    if (_iVideoRole != EVideoRoleTeacher) {
+        [self changeAudioDisabledState];
+        [self changeVideoDisabledState];
+    }
     
-    
+    if (_iVideoRole == EVideoRoleTeacher) {
+        if (tPublishState == PublishState_AUDIOONLY || tPublishState == PublishState_NONE_ONSTAGE) {
+            [self bringSubviewToFront:_iVideoBackgroundImageView];      // 背景图片显示上来
+            [self bringSubviewToFront:_iVideoImageView];
+            [self bringSubviewToFront:_iAudioImageView];
+            [self bringSubviewToFront:_iDrawImageView];
+            [self bringSubviewToFront:_iHandsUpImageView];
+        } else {
+            [self sendSubviewToBack:_iVideoBackgroundImageView];
+        }
+    }
 }
 -(void)functionButtonClicked:(UIButton *)aButton{
-    TKLog(@"aaaaaa");
-    if (!_iPeerId || [_iPeerId isEqualToString:@""])
+   
+    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID])
         return;
     
     if (!_iFunctionView) {
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
         switch (_iVideoRole) {
             case EVideoRoleTeacher:{
-                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleTeacher aRoomUer:_iRoomUser];
+                //修改部分
+                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 320, 70) withType:1 aVideoRole:EVideoRoleTeacher aRoomUer:_iRoomUser];
+                // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleTeacher aRoomUer:_iRoomUser];
                 _iFunctionView.iDelegate = self;
                 break;
             }
             case EVideoRoleOur:{
-                
-                 _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleOur aRoomUer:_iRoomUser];
+                //修改部分
+                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 320, 70) withType:1 aVideoRole:EVideoRoleOur aRoomUer:_iRoomUser];
+                // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleOur aRoomUer:_iRoomUser];
                 _iFunctionView.iDelegate = self;
                 break;
                 
@@ -252,7 +309,10 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             default:{
                 
                 _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
-                 _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 295, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+
+                //修改部分
+                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 320, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+                // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 295, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
                 _iFunctionView.iDelegate = self;
                 
                 break;
@@ -261,13 +321,13 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
                 
         }
         
-       
+        
         [[UIApplication sharedApplication].keyWindow addSubview:_iFunctionView];
     }else{
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
-       
+        
     }
-  
+    
 }
 -(void)hideFunctionView{
     _iFunctionView.hidden = YES;
@@ -314,11 +374,42 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
        // _iCurrentPeerId = _iPeerId;
         if (aVideoRole == EVideoRoleTeacher) {
             TKLog(@"关闭视频");
-             PublishState tPublishState = _iRoomUser.publishState;
-            [_iEduClassRoomSessionHandle sessionHandleEnableVideo:![_iEduClassRoomSessionHandle sessionHandleIsVideoEnabled]];
-            aButton.selected = [_iEduClassRoomSessionHandle sessionHandleIsVideoEnabled];
-          
+            PublishState tPublishState = _iRoomUser.publishState;
+            switch (tPublishState) {
+                case PublishState_VIDEOONLY:
+                    tPublishState = PublishState_NONE_ONSTAGE;
+                    break;
+                case PublishState_AUDIOONLY:
+                    tPublishState = PublishState_BOTH;
+                    break;
+                case PublishState_BOTH:
+                    tPublishState = PublishState_AUDIOONLY;
+                    break;
+                case PublishState_NONE_ONSTAGE:
+                    tPublishState = PublishState_VIDEOONLY;
+                    break;
+                default:
+                    break;
+            }
+            //[_iEduClassRoomSessionHandle sessionHandleEnableVideo:![_iEduClassRoomSessionHandle sessionHandleIsVideoEnabled]];
+            //aButton.selected = [_iEduClassRoomSessionHandle sessionHandleIsVideoEnabled];
             
+            // iPad端老师不通过VideoEnable来开关视频，直接发publish状态改变信令
+            [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:tPublishState completion:nil];
+            aButton.selected = (tPublishState == PublishState_BOTH || tPublishState == PublishState_VIDEOONLY);
+            _iVideoImageView.hidden = !aButton.selected;
+            
+            if (!aButton.selected) {
+                // 如果不播放视频，将背景图片移动至最上层
+                [self bringSubviewToFront:_iVideoBackgroundImageView];
+                [self bringSubviewToFront:_iVideoImageView];
+                [self bringSubviewToFront:_iAudioImageView];
+                [self bringSubviewToFront:_iDrawImageView];
+                [self bringSubviewToFront:_iHandsUpImageView];
+            } else {
+                // 如果播放视频，将背景图片移动至最底层
+                [self sendSubviewToBack:_iVideoBackgroundImageView];
+            }
         }else{
             
             TKLog(@"授权涂鸦");
@@ -344,21 +435,40 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         if (aVideoRole == EVideoRoleTeacher) {
             TKLog(@"关闭音频");
             PublishState tPublishState = _iRoomUser.publishState;
-            [_iEduClassRoomSessionHandle sessionHandleEnableAudio:![_iEduClassRoomSessionHandle sessionHandleIsAudioEnabled]];
-            aButton.selected = ![_iEduClassRoomSessionHandle sessionHandleIsAudioEnabled];
+            switch (tPublishState) {
+                case PublishState_VIDEOONLY:
+                    tPublishState = PublishState_BOTH;
+                    break;
+                case PublishState_AUDIOONLY:
+                    tPublishState = PublishState_NONE_ONSTAGE;
+                    break;
+                case PublishState_BOTH:
+                    tPublishState = PublishState_VIDEOONLY;
+                    break;
+                case PublishState_NONE_ONSTAGE:
+                    tPublishState = PublishState_AUDIOONLY;
+                    break;
+                default:
+                    break;
+            }
+            //[_iEduClassRoomSessionHandle sessionHandleEnableAudio:![_iEduClassRoomSessionHandle sessionHandleIsAudioEnabled]];
+            //aButton.selected = ![_iEduClassRoomSessionHandle sessionHandleIsAudioEnabled];
+            
+            // iPad端老师不通过AudioEnable来开关视频，直接发publish状态改变信令
+            [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:tPublishState completion:nil];
+            aButton.selected = !(tPublishState == PublishState_AUDIOONLY || tPublishState == PublishState_BOTH);
             _iAudioImageView.hidden = aButton.selected;
                        
         }else{
             
             TKLog(@"下讲台");
             PublishState tPublishState = _iRoomUser.publishState;
-            BOOL isShowVideo = (tPublishState == PublishState_BOTH || tPublishState == PublishState_VIDEOONLY );
+            //BOOL isShowVideo = (tPublishState == PublishState_BOTH || tPublishState == PublishState_VIDEOONLY);
+            BOOL isShowVideo = (tPublishState != PublishState_NONE);
             if (isShowVideo) {
                 [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_NONE completion:nil];
-                  [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
-                
-                
-            }else{
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+            } else {
                 [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_BOTH completion:nil];
             }
            
@@ -381,13 +491,14 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             _iAudioImageView.hidden = !aButton.selected;
         }else{
             
-            if (_iRoomUser.publishState == PublishState_NONE) {
+            if (_iRoomUser.publishState == PublishState_NONE || _iRoomUser.publishState == PublishState_NONE_ONSTAGE) {
                 [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_AUDIOONLY completion:nil];
                 aButton.selected = YES;
                 _iAudioImageView.hidden = !aButton.selected;
                  [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(false) completion:nil];
             }else if (_iRoomUser.publishState == PublishState_AUDIOONLY){
-                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_NONE completion:nil];
+                // 该状态下，音视频都关闭但在台上
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_NONE_ONSTAGE completion:nil];
                 aButton.selected = NO;
                 _iAudioImageView.hidden = !aButton.selected;
 
@@ -405,7 +516,6 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
         }
         
     }
-
     
 }
 -(void)videoSmallButton4:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
@@ -425,11 +535,64 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
             [strongSelf potStartAnimationForView:strongSelf];
            
             
-        }];
+        }aNetError:nil];
         TKLog(@"发奖励");
     }
     
-   
+}
+-(void)videoSmallButton5:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
+    TKLog(@"关闭视频");
+    [self hideFunctionView];
+    if (![_iPeerId isEqualToString:@""]) {
+        
+        //_iCurrentPeerId = _iPeerId;
+        BOOL isShowVideoImage = ( _iRoomUser.publishState == PublishState_VIDEOONLY || _iRoomUser.publishState== PublishState_BOTH);
+        if (aVideoRole == UserType_Teacher) {
+            [_iEduClassRoomSessionHandle sessionHandleEnableAudio:!isShowVideoImage];
+            aButton.selected = isShowVideoImage;
+            _iVideoImageView.hidden = !aButton.selected;
+        }else{
+            
+            if (_iRoomUser.publishState == PublishState_NONE || _iRoomUser.publishState == PublishState_NONE_ONSTAGE) {
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_VIDEOONLY completion:nil];
+                aButton.selected = YES;
+                _iVideoImageView.hidden = !aButton.selected;
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(false) completion:nil];
+            }else if (_iRoomUser.publishState == PublishState_VIDEOONLY){
+                // 这种情况下音视频都关闭，但还在台上
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_NONE_ONSTAGE completion:nil];
+                aButton.selected = NO;
+                _iVideoImageView.hidden = !aButton.selected;
+                
+            }else if (_iRoomUser.publishState == PublishState_BOTH){
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_AUDIOONLY completion:nil];
+                aButton.selected = NO;
+                _iVideoImageView.hidden = !aButton.selected;
+            }else if(_iRoomUser.publishState == PublishState_AUDIOONLY){
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_BOTH completion:nil];
+                aButton.selected = YES;
+                _iVideoImageView.hidden = !aButton.selected;
+                [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sRaisehand Value:@(false) completion:nil];
+            }
+            
+        }
+        
+        if (!aButton.selected) {
+            // 如果不播放视频，将背景图片移动至最上层
+            [self bringSubviewToFront:_iVideoBackgroundImageView];
+            
+            [self bringSubviewToFront:_iVideoImageView];
+            [self bringSubviewToFront:_iAudioImageView];
+            [self bringSubviewToFront:_iDrawImageView];
+            [self bringSubviewToFront:_iHandsUpImageView];
+        } else {
+            // 如果播放视频，将背景图片移动至最底层
+            [self sendSubviewToBack:_iVideoBackgroundImageView];
+        }
+        
+    }
+    
+    
 }
 #pragma mark 动画
 - (void)potStartAnimationForView:(UIView *)view
@@ -508,6 +671,57 @@ static const CGFloat sVideoSmallNameLabelHeight = 22;
     [self.iGifButton setTitle:[NSString stringWithFormat:@"%@",@(currentGift)] forState:UIControlStateNormal];
     
 }
+
+#pragma mark private
+
+-(void)changeAudioDisabledState {
+    //self.iRoomUser.disableAudio = state;
+    if (self.iRoomUser.disableAudio == YES) {
+        self.iAudioImageView.image = LOADIMAGE(@"icon_audio_disabled");
+        self.iAudioImageView.hidden = NO;
+    } else {
+        if (self.iRoomUser.publishState == 1 || self.iRoomUser.publishState == 3) {
+            self.iAudioImageView.image = LOADIMAGE(@"icon_audio");
+            self.iAudioImageView.hidden = NO;
+        } else {
+            self.iAudioImageView.image = LOADIMAGE(@"icon_audio");
+            self.iAudioImageView.hidden = YES;
+        }
+    }
+    
+}
+
+-(void)changeVideoDisabledState {
+    //self.iRoomUser.disableVideo = state;
+    if (self.iRoomUser.disableVideo == YES) {
+        self.iVideoImageView.image = LOADIMAGE(@"icon_video_disabled");
+        self.iVideoImageView.hidden = NO;
+        
+        [self bringSubviewToFront:_iVideoBackgroundImageView];      // 背景图片显示上来
+        [self bringSubviewToFront:_iVideoImageView];
+        [self bringSubviewToFront:_iAudioImageView];
+        [self bringSubviewToFront:_iDrawImageView];
+        [self bringSubviewToFront:_iHandsUpImageView];
+        
+    } else {
+        if (self.iRoomUser.publishState == 2 || self.iRoomUser.publishState == 3) {
+            self.iVideoImageView.image = LOADIMAGE(@"icon_video");
+            self.iVideoImageView.hidden = NO;
+            
+            [self sendSubviewToBack:_iVideoBackgroundImageView];
+        } else {
+            self.iVideoImageView.image = LOADIMAGE(@"icon_video");
+            self.iVideoImageView.hidden = YES;
+            
+            [self bringSubviewToFront:_iVideoBackgroundImageView];      // 背景图片显示上来
+            [self bringSubviewToFront:_iVideoImageView];
+            [self bringSubviewToFront:_iAudioImageView];
+            [self bringSubviewToFront:_iDrawImageView];
+            [self bringSubviewToFront:_iHandsUpImageView];
+        }
+    }
+}
+
 #pragma mark Wdeprecated
 ///** *  开始触摸，记录触点位置用于判断是拖动还是点击 */
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {

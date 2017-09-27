@@ -258,7 +258,7 @@
 }
 +(BOOL)isVideo:(NSString *)filetype{
     BOOL tIsVideo = false;
-    if ([filetype isEqualToString:@"mp4"]) {
+    if ([filetype isEqualToString:@"mp4"] || [filetype isEqualToString:@"webm"]) {
         tIsVideo = true;
     }
     return tIsVideo;
@@ -266,7 +266,7 @@
 
 +(NSString *)docmentOrMediaImage:(NSString*)aType{
     NSString *tString = @"icon_user";
-    if ([aType isEqualToString:@""]) {
+    if ([aType isEqualToString:MTLocalized(@"Title.whiteBoard")]) {
         tString = @"icon_empty";
         
     }else if ([aType isEqualToString:@"xls"]||[aType isEqualToString:@"xlsx"]||[aType isEqualToString:@"xlt"]||[aType isEqualToString:@"xlsm"]){
@@ -291,6 +291,8 @@
     }
     else if ([aType isEqualToString:@"mp4"]){
         tString = @"icon_mp4";
+    } else if ([aType isEqualToString:@"zip"]){
+        tString = @"icon_h5";
     }
     return tString;
     
@@ -302,6 +304,14 @@
     NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
     return strDate;
 }
+
++(NSString *)currentTimeToSeconds{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+    return strDate;
+}
+
 +(NSString *) md5HexDigest:(NSString *)aString{
     const char *original_str = [aString UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
@@ -357,5 +367,17 @@
     NSLog ( @"----%@" , currentLanguage); //打印结果： en 用获取到的当前语言，和支持的语言做字符串对比，就可以知道是那种语言了。
     if([currentLanguage isEqualToString:@"en-CN"]) { return YES; }
     return NO;
+}
++(NSString*)absolutefileUrl:(NSString*)fileUrl webIp:(NSString*)webIp webPort:(NSString*)webPort{
+
+    NSString *tUrl = [NSString stringWithFormat:@"%@://%@:%@%@",sHttp,webIp,webPort,fileUrl];
+    NSString *tdeletePathExtension = tUrl.stringByDeletingPathExtension;
+    NSString *tNewURLString = [NSString stringWithFormat:@"%@-1.%@",tdeletePathExtension,tUrl.pathExtension];
+    NSArray *tArray          = [tNewURLString componentsSeparatedByString:@"/"];
+    if ([tArray count]<4) {
+        return @"";
+    }
+    NSString *tNewURLString2 = [NSString stringWithFormat:@"%@//%@/%@/%@",[tArray objectAtIndex:0],[tArray objectAtIndex:1],[tArray objectAtIndex:2],[tArray objectAtIndex:3]];
+    return tNewURLString2;
 }
 @end

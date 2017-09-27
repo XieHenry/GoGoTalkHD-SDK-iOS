@@ -21,10 +21,6 @@
 
 -(void)show:(FileListType)aFileListType aFileList:(NSArray *)aFileList isClassBegin:(BOOL)isClassBegin;
 -(void)hide;
--(void)clearVideo:(BOOL)isPublish;
 
--(void)prepareVideoOrAudio:(TKMediaDocModel*)aMediaDocModel SendToOther:(BOOL)send;
--(void)playOrPauseVideoOrAudio:(BOOL)aPlay;
-- (void)setCurrentTime:(double)time SendToOther:(BOOL)send;
-
+- (void)reloadData;
 @end

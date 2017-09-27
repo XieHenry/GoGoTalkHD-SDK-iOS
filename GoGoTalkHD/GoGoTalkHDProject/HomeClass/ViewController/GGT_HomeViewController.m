@@ -399,6 +399,7 @@
         if ([model.LastButton isKindOfClass:[NSString class]]) {
             secondAction = [UIAlertAction actionWithTitle:model.LastButton style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if ([model.Url isKindOfClass:[NSString class]]) {
+                    model.Url = [model.Url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.Url]];
                 }
                 

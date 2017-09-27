@@ -68,4 +68,6 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)();
 -(void)hideFunctionView;
 -(void)clearVideoData;
 -(void)addVideoView:(UIView*_Nullable)view;
+-(void)changeAudioDisabledState;
+-(void)changeVideoDisabledState;
 @end

@@ -33,7 +33,9 @@
     
     self.inputView = _iPickView;// 重点！ 这样点击TextField就会弹出pickerView了.
     
-    _iDataArray = @[@"老师",@"学生"];//0-老师 ,1-助教，2-学生
+
+    _iDataArray = @[MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Student")];//0-老师 ,1-助教，2-学生
+
     _iRole = 0;
     /* default selected item */
     [self setText:[_iDataArray objectAtIndex:0]];// 设置TextField默认显示pickerView第一列的内容

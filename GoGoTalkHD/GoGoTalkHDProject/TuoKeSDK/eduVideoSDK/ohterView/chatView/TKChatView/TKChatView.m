@@ -150,7 +150,11 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
         return;
     }
 
-    [[TKEduSessionHandle shareInstance] sessionHandleSendMessage:_iInputField.text completion:nil];
+    NSDictionary *messageDic = @{@"msg":_iInputField.text, @"type":@(0)};
+    NSData *messageData = [NSJSONSerialization dataWithJSONObject:messageDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *messageConvertStr = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+    
+    [[TKEduSessionHandle shareInstance] sessionHandleSendMessage:messageConvertStr completion:nil];
     _iInputField.text = @"";
     _iReplyText.hidden = NO;
     [_iInputField resignFirstResponder];

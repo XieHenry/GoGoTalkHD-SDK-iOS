@@ -16,6 +16,7 @@
 -(void)videoSmallButton2:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
 -(void)videoSmallButton3:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
 -(void)videoSmallButton4:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
+-(void)videoSmallButton5:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
 
 @end
 @interface TKVideoFunctionView : UIView
