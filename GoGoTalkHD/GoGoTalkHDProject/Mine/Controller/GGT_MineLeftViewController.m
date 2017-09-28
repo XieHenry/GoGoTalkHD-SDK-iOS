@@ -113,6 +113,14 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         _iconArray = [NSMutableArray array];
         
         NSArray *dataArr = responseObject[@"data"];
+        
+        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+        if (dataArr.count == 4) {
+            sin.isShowAuditStatus = YES;
+        } else if (dataArr.count == 5) {
+            sin.isShowAuditStatus = NO;
+        }
+        
         for (NSDictionary *dic in dataArr) {
             [_dataArray addObject:dic[@"name"]];
             [_iconArray addObject:dic[@"pic"]];
@@ -121,7 +129,6 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         [_tableView reloadData];
         
         //先刷新数据，再选中cell
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         if (sin.isAuditStatus == YES ) {
             if (isShowTestReportVc == YES) {
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
@@ -315,7 +322,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-    if (sin.isAuditStatus == YES) {
+    if (sin.isShowAuditStatus == YES) {
         switch (indexPath.row) {
             case 0:
                 //个人信息

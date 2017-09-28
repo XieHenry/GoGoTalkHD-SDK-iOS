@@ -38,4 +38,6 @@
 //BASE_URL
 @property (nonatomic, strong) NSString *base_url;
 
+//我的界面，点击切换不同的视图，YES是审核状态，NO为正式地址
+@property (nonatomic) BOOL isShowAuditStatus;
 @end
