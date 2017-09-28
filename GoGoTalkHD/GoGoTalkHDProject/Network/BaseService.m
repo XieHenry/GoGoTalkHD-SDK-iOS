@@ -488,7 +488,9 @@
         } else {
             
             // 取消所有的网络请求
-            [self.manager.operationQueue cancelALLOperations];
+            [self.manager.operationQueue cancelAllOperations];
+            // 清空密码
+            [UserDefaults() setObject:@"" forKey:K_password];
             
             GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
             [UserDefaults() setObject:@"no" forKey:@"login"];
