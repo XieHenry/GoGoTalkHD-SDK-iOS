@@ -492,12 +492,16 @@
             // 清空密码
             [UserDefaults() setObject:@"" forKey:K_password];
             
-            GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
-            [UserDefaults() setObject:@"no" forKey:@"login"];
-            [UserDefaults() setObject:@"" forKey:K_userToken];
-            [UserDefaults() synchronize];
-            BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
-            viewController.view.window.rootViewController = nav;
+            [MBProgressHUD showMessage:@"登录过期，请重新登录" toView:[UIApplication sharedApplication].keyWindow];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                GGT_LoginViewController *loginVc = [[GGT_LoginViewController alloc]init];
+                [UserDefaults() setObject:@"no" forKey:@"login"];
+                [UserDefaults() setObject:@"" forKey:K_userToken];
+                [UserDefaults() synchronize];
+                BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:loginVc];
+                viewController.view.window.rootViewController = nav;
+            });
             
         }
         
