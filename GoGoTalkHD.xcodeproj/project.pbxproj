@@ -212,9 +212,7 @@
 		D6B100731F6B74B900DD6D7C /* TKAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1000F1F6B74B900DD6D7C /* TKAFURLSessionManager.m */; };
 		D6B100741F6B74B900DD6D7C /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100121F6B74B900DD6D7C /* TKProgressHUD.m */; };
 		D6B100751F6B74B900DD6D7C /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100141F6B74B900DD6D7C /* TKRCGlobalConfig.m */; };
-		D6B100761F6B74B900DD6D7C /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B100161F6B74B900DD6D7C /* libroomsdk.a */; };
 		D6B100771F6B74B900DD6D7C /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6B100171F6B74B900DD6D7C /* Resources.bundle */; };
-		D6B100781F6B74B900DD6D7C /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B100181F6B74B900DD6D7C /* SocketIO.framework */; };
 		D6B100791F6B74B900DD6D7C /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B100191F6B74B900DD6D7C /* WebRTC.framework */; };
 		D6B1007A1F6B74B900DD6D7C /* RoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1001C1F6B74B900DD6D7C /* RoomController.m */; };
 		D6B1007B1F6B74B900DD6D7C /* TKEduBoardHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100201F6B74B900DD6D7C /* TKEduBoardHandle.m */; };
@@ -222,7 +220,6 @@
 		D6B1007D1F6B74B900DD6D7C /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100251F6B74B900DD6D7C /* TKDocmentDocModel.m */; };
 		D6B1007E1F6B74B900DD6D7C /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100271F6B74B900DD6D7C /* TKMediaDocModel.m */; };
 		D6B1007F1F6B74DB00DD6D7C /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6B100191F6B74B900DD6D7C /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6B100801F6B74E600DD6D7C /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6B100181F6B74B900DD6D7C /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF331F6B749C00DD6D7C /* GGT_ClassroomManager.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
@@ -258,6 +255,11 @@
 		D6E0A5901EC2DBB3006A003D /* GGT_LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A5881EC2DBB3006A003D /* GGT_LoginView.m */; };
 		D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A58A1EC2DBB3006A003D /* GGT_RegisterView.m */; };
 		D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A59B1EC2FAC6006A003D /* BaseService.m */; };
+		D6E7FF6C1F8E0BC9006FA225 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6E7FF6B1F8E0BB7006FA225 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6E7FF6D1F8E0BCF006FA225 /* StarscreamSocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6E7FF6A1F8E0BB7006FA225 /* StarscreamSocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6E7FF6E1F8E0BDF006FA225 /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7FF691F8E0BA6006FA225 /* libroomsdk.a */; };
+		D6E7FF6F1F8E0BE1006FA225 /* StarscreamSocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7FF6A1F8E0BB7006FA225 /* StarscreamSocketIO.framework */; };
+		D6E7FF701F8E0BE4006FA225 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E7FF6B1F8E0BB7006FA225 /* SocketIO.framework */; };
 		D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E868F81F0B6F2900B48A5E /* XCLogManager.m */; };
 		D6ED8FFC1F67D34B0002D7B4 /* GGT_UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6ED8FFB1F67D34B0002D7B4 /* GGT_UpdateModel.m */; };
 		D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6FD8AEA1F17525300A79011 /* GGT_OrderPlaceholderView.m */; };
@@ -291,7 +293,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6B100801F6B74E600DD6D7C /* SocketIO.framework in CopyFiles */,
+				D6E7FF6D1F8E0BCF006FA225 /* StarscreamSocketIO.framework in CopyFiles */,
+				D6E7FF6C1F8E0BC9006FA225 /* SocketIO.framework in CopyFiles */,
 				D6B1007F1F6B74DB00DD6D7C /* WebRTC.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,9 +530,7 @@
 		D6B100121F6B74B900DD6D7C /* TKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressHUD.m; sourceTree = "<group>"; };
 		D6B100131F6B74B900DD6D7C /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
 		D6B100141F6B74B900DD6D7C /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
-		D6B100161F6B74B900DD6D7C /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
 		D6B100171F6B74B900DD6D7C /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		D6B100181F6B74B900DD6D7C /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
 		D6B100191F6B74B900DD6D7C /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		D6B1001B1F6B74B900DD6D7C /* RoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomController.h; sourceTree = "<group>"; };
 		D6B1001C1F6B74B900DD6D7C /* RoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomController.m; sourceTree = "<group>"; };
@@ -790,6 +791,9 @@
 		D6E0A59A1EC2FAC6006A003D /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
 		D6E0A59B1EC2FAC6006A003D /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
 		D6E0A59C1EC2FAC6006A003D /* GGT_Request_URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_Request_URL.h; sourceTree = "<group>"; };
+		D6E7FF691F8E0BA6006FA225 /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
+		D6E7FF6A1F8E0BB7006FA225 /* StarscreamSocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarscreamSocketIO.framework; sourceTree = "<group>"; };
+		D6E7FF6B1F8E0BB7006FA225 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
 		D6E868F71F0B6F2900B48A5E /* XCLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCLogManager.h; sourceTree = "<group>"; };
 		D6E868F81F0B6F2900B48A5E /* XCLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLogManager.m; sourceTree = "<group>"; };
 		D6ED8FFA1F67D34B0002D7B4 /* GGT_UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_UpdateModel.h; sourceTree = "<group>"; };
@@ -811,9 +815,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6E7FF701F8E0BE4006FA225 /* SocketIO.framework in Frameworks */,
+				D6E7FF6F1F8E0BE1006FA225 /* StarscreamSocketIO.framework in Frameworks */,
+				D6E7FF6E1F8E0BDF006FA225 /* libroomsdk.a in Frameworks */,
 				D6B1004B1F6B74B900DD6D7C /* CrashReporter.framework in Frameworks */,
-				D6B100761F6B74B900DD6D7C /* libroomsdk.a in Frameworks */,
-				D6B100781F6B74B900DD6D7C /* SocketIO.framework in Frameworks */,
 				D6B100791F6B74B900DD6D7C /* WebRTC.framework in Frameworks */,
 				D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */,
 				D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */,
@@ -1370,9 +1375,10 @@
 		D6B100151F6B74B900DD6D7C /* VideoResource */ = {
 			isa = PBXGroup;
 			children = (
-				D6B100161F6B74B900DD6D7C /* libroomsdk.a */,
+				D6E7FF691F8E0BA6006FA225 /* libroomsdk.a */,
+				D6E7FF6B1F8E0BB7006FA225 /* SocketIO.framework */,
+				D6E7FF6A1F8E0BB7006FA225 /* StarscreamSocketIO.framework */,
 				D6B100171F6B74B900DD6D7C /* Resources.bundle */,
-				D6B100181F6B74B900DD6D7C /* SocketIO.framework */,
 				D6B100191F6B74B900DD6D7C /* WebRTC.framework */,
 			);
 			path = VideoResource;
