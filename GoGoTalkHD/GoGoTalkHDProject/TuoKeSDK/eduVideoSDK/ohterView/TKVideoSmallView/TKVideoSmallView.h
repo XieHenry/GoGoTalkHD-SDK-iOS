@@ -41,6 +41,8 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)();
 @property(strong,nonatomic)UIButton *_Nonnull iGifButton;
 /** *  当前看的peerid */
 @property(copy,nonatomic)NSString *_Nonnull iPeerId;
+/** *  是否拖拽出去了 */
+@property(assign,nonatomic)BOOL isDrag;
 
 /** *  当前的用户 */
 @property(strong,nonatomic)RoomUser *_Nullable iRoomUser;
@@ -48,7 +50,7 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)();
 /** *  视频view */
 @property (nonatomic, weak) UIView * _Nullable  iRealVideoView;
 /** *  视频tag */
-@property (nonatomic, assign) int iVideoViewTag;
+@property (nonatomic, assign) NSInteger iVideoViewTag;
 /** *  视频Frame */
 @property (nonatomic, assign) CGRect  iVideoFrame;
 /** *  视频ImageView */

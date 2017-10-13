@@ -135,7 +135,9 @@
     if (_iFileListType != FileListTypeUserList) {
         [self hide];
     }
-    
+    if( [TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol){
+        return;
+    }
     // 如果没有上课，不能点击学生上台
     if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
         //[tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -146,7 +148,7 @@
     if ((indexPath.row == 0)&&(_iFileListType == FileListTypeDocument)) {
          TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
         if (_isClassBegin) {
-            [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender];
+            [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender aTellLocal:YES];
  
         }else{
             [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
@@ -329,6 +331,9 @@
 //上台
 -(void)listButton2:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
     [self hide];
+    if( [TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol){
+        return;
+    }
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
@@ -382,6 +387,10 @@
 //切换动态ppt，音频
 -(void)listButton3:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
     [self hide];
+   if( [TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol){
+       return;
+   }
+    
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
@@ -427,7 +436,7 @@
             TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
             
             if (_isClassBegin) {
-                [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender];
+                [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender aTellLocal:YES];
                 
             }else{
                 [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
@@ -490,6 +499,9 @@
 //涂鸦，删除文件，影音
 -(void)listButton4:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath{
     //[self hide];
+    if( [TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol){
+        return;
+    }
     TKEduRoomProperty *tRoomProperty = [TKEduSessionHandle shareInstance].iRoomProperties;
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
@@ -534,7 +546,7 @@
                     
                     TKDocmentDocModel *tDocmentDocNextModel = [[TKEduSessionHandle shareInstance] getNextDocment:[TKEduSessionHandle shareInstance].iCurrentDocmentModel];
                     if (_isClassBegin) {
-                        [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocNextModel To:sTellAllExpectSender];
+                        [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocNextModel To:sTellAllExpectSender aTellLocal:YES];
                         
                     }else{
                         [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocNextModel];

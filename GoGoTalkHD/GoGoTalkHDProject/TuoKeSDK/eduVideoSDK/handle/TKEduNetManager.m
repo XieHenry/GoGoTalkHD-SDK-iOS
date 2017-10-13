@@ -18,8 +18,6 @@
 #define INTERFACE @"/ClientAPI/"
 #define HTTP_SERVER     @"192.168.0.66"
 #define MEETING_PORT     81
-//#define HTTP_SERVER     @"www.weiyicloud.net"
-//#define MEETING_PORT     443
 #define TEST_HTTP       @"http://" HTTP_SERVER INTERFACE
 static int req = 1000;
 static NSString * const FORM_FLE_INPUT = @"filedata";
@@ -531,7 +529,8 @@ extern int expireSeconds;
     if ([[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
         tParamDic = @{@"serial":roomID,@"companyid":companyid};
     } else {
-        tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
+        //tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
+        tParamDic = @{@"serial":roomID,@"companyid":companyid};
     }
     
     //1。创建管理者对象

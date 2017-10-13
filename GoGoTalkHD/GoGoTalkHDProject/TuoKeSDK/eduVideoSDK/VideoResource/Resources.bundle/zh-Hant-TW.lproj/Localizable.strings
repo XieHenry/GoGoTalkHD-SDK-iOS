@@ -52,6 +52,8 @@
 //role
 "Role.Me" = "我";
 "Role.Teacher" = "老師";
+"Role.Student" = "學生";
+"Role.Patrol"  = "巡課";
 //say
 "Say.say" = "說點什麼吧";
 //button

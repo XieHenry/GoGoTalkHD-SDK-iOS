@@ -56,7 +56,8 @@
 // 添加view，子类实现
 - (void)ac_initAudioSubviews {
     
-    if ([TKEduSessionHandle shareInstance].localUser.role==2) {
+    
+    if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback)) {
         self.iDiskButtion = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 57, 57)];
         [self.iDiskButtion setImage:LOADIMAGE(@"disk") forState:UIControlStateNormal];
         if ( _iMediaStream.isPlay) {
@@ -139,9 +140,10 @@
 
 - (void)ac_initVideoSubviews
 {
-    if ([TKEduSessionHandle shareInstance].localUser.role==2) {
+    if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback)){
         return;
     }
+   
     self.backgroundColor = RGBCOLOR(23, 23, 23);
     //返回按钮
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW-60, 10, 50, 50)];
@@ -219,7 +221,6 @@
     
     [TKEduSessionHandle shareInstance].isPlayMedia          = NO;
     [[TKEduSessionHandle shareInstance]sessionHandleUnpublishMedia:nil];
-
     
 }
 //-1
@@ -236,8 +237,7 @@
     }
    
     [[TKEduSessionHandle shareInstance]sessionHandleMediaPause:!start];
-     [[TKEduSessionHandle shareInstance]configurePlayerRoute: NO isCancle:NO];
-    //[[TKEduSessionHandle shareInstance]configurePlayerRoute:start isCancle:NO];
+    [[TKEduSessionHandle shareInstance]configurePlayerRoute: NO isCancle:NO];
     
 }
 -(void)updatePlayUI:(BOOL)start{
@@ -245,7 +245,7 @@
         return;
     }
     //学生的时候
-    if ([TKEduSessionHandle shareInstance].localUser.role == 2) {
+    if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol)) {
         if (start ) {
             [self.iDiskButtion.layer removeAllAnimations];
             CABasicAnimation *tRotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -309,9 +309,11 @@
     if (current!=self.lastTime) {
         [self.activity stopAnimating];
         self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", [self formatPlayTime:current/1000], isnan(total)?@"00:00":[self formatPlayTime:total/1000]];
+        
     } else {
         if (current < total) {
             [self.activity startAnimating];
+            
         }
     }
     

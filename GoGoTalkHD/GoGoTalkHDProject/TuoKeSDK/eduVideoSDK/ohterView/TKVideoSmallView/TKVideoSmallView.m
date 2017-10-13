@@ -195,7 +195,9 @@
     }
     return self;
 }
-
+-(void)layoutSubviews{
+    [self bringSubviewToFront:_iFunctionButton];
+}
 -(void)setIsNeedFunctionButton:(BOOL)isNeedFunctionButton{
     _iFunctionButton.enabled = isNeedFunctionButton;
 }
@@ -285,7 +287,7 @@
 }
 -(void)functionButtonClicked:(UIButton *)aButton{
    
-    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID])
+    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID] || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
         return;
     
     if (!_iFunctionView) {
@@ -311,7 +313,7 @@
                 _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
 
                 //修改部分
-                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 320, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame)-70, 320, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
                 // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 295, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
                 _iFunctionView.iDelegate = self;
                 
@@ -357,6 +359,8 @@
 -(void)clearVideoData{
     _iPeerId = @"";
     self.iRoomUser = nil;
+    _isDrag = NO;
+    
     [self changeName:@""];
     [_iRealVideoView removeFromSuperview];
     _iRealVideoView = nil;

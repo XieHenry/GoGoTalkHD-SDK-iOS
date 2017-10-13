@@ -298,6 +298,14 @@
     
     
 }
+
++(NSString *)timestampToFormatString:(NSTimeInterval)ts {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *strDate = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:ts]];
+    return strDate;
+}
+
 +(NSString *)currentTime{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
@@ -379,5 +387,11 @@
     }
     NSString *tNewURLString2 = [NSString stringWithFormat:@"%@//%@/%@/%@",[tArray objectAtIndex:0],[tArray objectAtIndex:1],[tArray objectAtIndex:2],[tArray objectAtIndex:3]];
     return tNewURLString2;
+}
+
++(NSString *)dictionaryToJSONString:(NSDictionary *)dic {
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return str;
 }
 @end

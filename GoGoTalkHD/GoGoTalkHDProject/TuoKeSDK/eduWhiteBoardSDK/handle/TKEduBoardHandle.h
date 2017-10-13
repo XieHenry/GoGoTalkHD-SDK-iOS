@@ -27,12 +27,13 @@ typedef void(^bLoadFinishedBlock)();
 
 -(void)setDrawable:(BOOL) candraw;
 -(void)setPagePermission:(BOOL)canPage;
+-(void)closeNewPptVideo:(id) aData;
 -(void)setPageParameterForPhoneForRole:(UserType)aRole;
 -(void)setAddPagePermission:(bool)aPagePermission;
 //数据
 -(void)clearAllWhiteBoardData;
 -(void)cleanup;
 -(void)refreshUIForFull:(BOOL)isFull;
-
+-(void)refreshWebViewUI;
 
 @end

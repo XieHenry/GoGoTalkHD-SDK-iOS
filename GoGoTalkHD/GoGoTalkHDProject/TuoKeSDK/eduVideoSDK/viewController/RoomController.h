@@ -16,5 +16,11 @@
                        aParamDic:(NSDictionary *)aParamDic
                        aRoomName:(NSString *)aRoomName
                    aRoomProperty:(TKEduRoomProperty *)aRoomProperty;
+
+- (instancetype)initPlaybackWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
+                               aParamDic:(NSDictionary *)aParamDic
+                               aRoomName:(NSString *)aRoomName
+                           aRoomProperty:(TKEduRoomProperty *)aRoomProperty;
+
 -(void)prepareForLeave:(BOOL)aQuityourself;
 @end

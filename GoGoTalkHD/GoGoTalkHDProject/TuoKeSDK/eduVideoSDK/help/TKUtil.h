@@ -62,6 +62,8 @@
 +(NSMutableDictionary *)decodeUrl:(NSString *)aDecodeUrl;
 +(NSMutableDictionary *)decodeParam:(NSString *)aParamString;
 +(NSString *) md5HexDigest:(NSString *)aString;
+#pragma mark 将时间戳转换成字符串
++(NSString *)timestampToFormatString:(NSTimeInterval)ts;
 #pragma mark 获取当前时间
 +(NSString *)currentTime;
 +(NSString *)currentTimeToSeconds;
@@ -75,4 +77,7 @@
 +(BOOL)isEnglishLanguage;
 #pragma mark 获取文件url
 +(NSString*)absolutefileUrl:(NSString*)fileUrl webIp:(NSString*)webIp webPort:(NSString*)webPort;
+#pragma mark 将字典转换为JSON字符串
++(NSString *)dictionaryToJSONString:(NSDictionary *)dic;
 @end
+

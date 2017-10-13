@@ -260,7 +260,7 @@
             }
             
            
-            if (!isClassBegin || tRoomUser.role != UserType_Student) {
+            if (!isClassBegin || tRoomUser.role != UserType_Student || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol)) {
                 _iHandUpBtn.hidden = YES;
                 _iButton1.hidden = YES;
                 _iButton2.hidden = YES;

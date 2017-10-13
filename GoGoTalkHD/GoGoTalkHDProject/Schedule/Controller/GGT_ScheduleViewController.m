@@ -658,8 +658,13 @@ static NSString * const CalendarCellID = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    // 测试百家云
-//    [self enterBJYClassRoom];
+    // 测试使用
+    // 调用接口 进行教室判断  是百家云还是拓课
+    // 进入拓课的方法
+//    GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:cell.xc_cellModel leftRoomBlock:^{
+//
+//    }];
 //    return;
     
     if (!self.xc_isPush) {

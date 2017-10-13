@@ -112,11 +112,12 @@ typedef NS_ENUM(NSInteger, PublishState) {
 };
 
 typedef NS_ENUM(NSInteger, UserType) {
+    UserType_Playback  =-1,//回放
     UserType_Teacher   =0, //老师
     UserType_Assistant =1, //助教
     UserType_Student   =2, //学生
     UserType_Live      =3, //直播
-    UserType_Patrol    =4, //巡检员
+    UserType_Patrol    =4, //巡课
 };
 
 typedef NS_ENUM(NSInteger, RoomType) {
@@ -166,12 +167,14 @@ static  NSString *const sClassBegin                 = @"ClassBegin";
 static  NSString *const sWBPageCount                = @"WBPageCount";//加页
 static  NSString *const sAddBoardPage_WBPageCount   = @"AddBoardPage_WBPageCount";
 
-static  NSString *const sShowPage                   = @"ShowPage";
+static  NSString *const sShowPage                   = @"ShowPage";//显示文档
 static  NSString *const sDocumentFilePage_ShowPage  = @"DocumentFilePage_ShowPage";
 static  NSString *const sActionShow                 = @"show";
-static  NSString *const sSharpsChange               = @"SharpsChange";
-static  NSString *const sDocumentChange             = @"DocumentChange";
+static  NSString *const sSharpsChange               = @"SharpsChange";//画笔
+static  NSString *const sDocumentChange             = @"DocumentChange";//添加或删除文档
 static  NSString *const sStreamFailure              = @"StreamFailure";
+
+static  NSString *const sVideoDraghandle            = @"videoDraghandle";//视频拖拽
 
 static  NSString *const sUpdateTime          = @"UpdateTime";
 static  NSString *const sMuteAudio           = @"MuteAudio";
@@ -202,8 +205,10 @@ static  NSString *const sAudio_MediaFilePage_ShowPage   = @"Audio_MediaFilePage_
 static  NSString *const sMediaProgress                  = @"MediaProgress";
 static  NSString *const sMediaProgress_video_1          = @"MediaProgress_video_1";
 static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_1";
+
 //#define Debug 1;
 #define Realese 1;
+
 static  NSString *const sHttp   = @"https";
 static  NSString *const sPort   = @"443";
 #ifdef Debug

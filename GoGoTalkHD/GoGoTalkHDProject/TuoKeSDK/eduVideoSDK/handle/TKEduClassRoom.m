@@ -48,6 +48,7 @@ TKNavigationController* _iEduNavigationController = nil;
 @property (nonatomic, strong) NSDictionary * iParam;
 @property (nonatomic, assign) BOOL  isFromWeb;
 @property (nonatomic, strong) TKProgressHUD *HUD;
+@property (nonatomic, readwrite) BOOL enterClassRoomAgain;
 @end
 
 @implementation TKEduClassRoom
@@ -62,6 +63,66 @@ TKNavigationController* _iEduNavigationController = nil;
     
     return singleton;
 }
+
++ (int)joinPlaybackRoomWithParamDic:(NSDictionary *)paramDic
+                    ViewController:(UIViewController*)controller
+                          Delegate:(id<TKEduRoomDelegate>)delegate
+                         isFromWeb:(BOOL)isFromWeb
+{
+    return [[TKEduClassRoom shareInstance] enterPlaybackClassRoomWithParamDic:paramDic ViewController:controller Delegate:delegate isFromWeb:isFromWeb];
+}
+
+- (int)enterPlaybackClassRoomWithParamDic:(NSDictionary*)paramDic
+                           ViewController:(UIViewController*)controller
+                                 Delegate:(id<TKEduRoomDelegate>)delegate
+                               isFromWeb:(BOOL)isFromWeb {
+    TKLog(@"tlm----- 进入房间之前的时间: %@", [TKUtil currentTimeToSeconds]);
+    if (_iStatus != EClassStatus_IDLE)
+    {
+//        NSArray *array = [UIApplication sharedApplication].windows;
+//        int count = (int)array.count;
+//        [TKRCGlobalConfig HUDShowMessage:MTLocalized(@"Prompt.leaveRoom") addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
+        self.enterClassRoomAgain = YES;
+        [_iRoomController prepareForLeave:YES];
+        return -1;//正在开会
+    }
+    
+    _iController = controller;
+    _iRoomDelegate = delegate;
+    _iStatus = EClassStatus_CHECKING;
+    _iParam = paramDic;
+    _isFromWeb = isFromWeb;
+    _iRoomProperty = [[TKEduRoomProperty alloc]init];
+    [_iRoomProperty parseMeetingInfo:paramDic];
+    _iRoomProperty.iRoomType = [[paramDic objectForKey:@"type"] integerValue];
+
+    _HUD = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
+    [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
+    _HUD.dimBackground = YES;
+    _HUD.removeFromSuperViewOnHide = YES;
+    [_HUD show:YES];
+    
+    if ((_iRoomProperty.sCmdUserRole ==UserType_Teacher && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
+        [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
+        [_HUD hide:YES];
+        return -1;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //_iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+        _enterClassRoomAgain = NO;
+        _iRoomController = [[RoomController alloc] initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+        _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:_iRoomController];
+        [controller presentViewController:_iEduNavigationController animated:YES completion:^{
+            [_HUD hide:YES];
+        }];
+        
+    });
+    
+    //默认返回0
+    return  0;
+}
+
 +(int)joinRoomWithParamDic:(NSDictionary*)paramDic
                   ViewController:(UIViewController*)controller
                         Delegate:(id<TKEduRoomDelegate>)delegate
@@ -95,8 +156,8 @@ TKNavigationController* _iEduNavigationController = nil;
     _HUD.dimBackground = YES;
     _HUD.removeFromSuperViewOnHide = YES;
     [_HUD show:YES];
-    
-    if ((_iRoomProperty.sCmdUserRole ==UserType_Teacher && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
+    //除了学生可以没有密码，其他身份都需要密码
+    if ((_iRoomProperty.sCmdUserRole !=UserType_Student && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
         [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
         [_HUD hide:YES];
         return -1;
@@ -109,7 +170,7 @@ TKNavigationController* _iEduNavigationController = nil;
         if (response) {
             _iStatus = EClassStatus_CONNECTING;
             int ret = 0;
-            
+            TKLog(@"tlm-----checkRoom 进入房间之前的时间: %@", [TKUtil currentTimeToSeconds]);
             ret = [[response objectForKey:@"result"] intValue];
             if (ret == 0) {
                 

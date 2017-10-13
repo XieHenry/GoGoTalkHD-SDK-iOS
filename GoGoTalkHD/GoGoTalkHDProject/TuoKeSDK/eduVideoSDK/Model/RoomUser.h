@@ -22,7 +22,7 @@
 @property (nonatomic, copy) NSString *nickName;
 
 /**
-  用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+  用户身份，0：老师；1：助教；2：学生；3：旁听；4：寻课
  */
 @property (nonatomic) int role;
 

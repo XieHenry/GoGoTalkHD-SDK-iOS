@@ -54,6 +54,8 @@
 "Role.Me" = "me";
 "Role.Teacher" = "teacher";
 "Role.Student" = "student";
+"Role.Patrol"  = "patrol";
+
 //say
 "Say.say" = "say something";
 //button

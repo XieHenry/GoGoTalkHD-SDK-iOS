@@ -82,6 +82,15 @@
 - (void)roomManagerMessageReceived:(NSString *)message ofUser:(RoomUser *)user;
 
 /**
+ 回放时收到聊天消息
+ 
+ @param message 聊天消息内容
+ @param user 发送者用户对象
+ @param ts 发送消息的时间戳
+ */
+- (void)roomManagerPlaybackMessageReceived:(NSString *)message ofUser:(RoomUser *)user ts:(NSTimeInterval)ts;
+
+/**
  进入房间错误
  
  @param error 错误码，详见错误码定义
@@ -126,6 +135,32 @@
  @param isPlay 播放（YES）暂停（NO）
  */
 - (void)roomManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+
+#pragma mark Playback
+
+/**
+ 获取到回放总时长的回调
+ 
+ @param duration 回放的总时长
+ */
+- (void)roomManagerReceivePlaybackDuration:(NSTimeInterval)duration;
+
+/**
+ 回放时接收到从服务器发来的回放进度变化
+ 
+ @param time 变化的时间进度
+ */
+- (void)roomManagerPlaybackUpdateTime:(NSTimeInterval)time;
+
+/**
+ 回放时清理
+ */
+- (void)roomManagerPlaybackClearAll;
+
+/**
+ 回放播放完毕
+ */
+- (void)roomManagerPlaybackEnd;
 
 @end
 
@@ -264,6 +299,15 @@
 - (instancetype)initWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
 
 /**
+ 进入回放教室的初始化方法，需要白板和音频用此方法
+ 
+ @param delegate 实现了RoomManagerDelegate回调接口的对象
+ @param wb 实现了RoomWhiteBoard回调接口的白板对象
+ @return RoomManager实例方法
+ */
+- (instancetype)initPlaybackWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
+
+/**
  进入房间
  
  @param host 服务器地址，通常是global.talk-cloud.com
@@ -273,6 +317,21 @@
  @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
  */
 - (void)joinRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties;
+
+/**
+ 进入回放房间
+ 
+ @param host 服务器地址，通常是global.talk-cloud.com
+ @param port 服务器https端口，通常是443
+ @param nickname 本地用户的昵称
+ @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选)
+ @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
+ */
+- (void)joinPlaybackRoomWithHost:(NSString *)host
+                            Port:(int)port
+                        NickName:(NSString*)nickname
+                          Params:(NSDictionary*)params
+                      Properties:(NSDictionary*)properties;
 
 /**
  离开房间
@@ -492,4 +551,21 @@
  @param volum 音量 1-10
  */
 -(void)mediaVolum:(CGFloat)volum;
+
+/**
+ 回放拖动播放滑块
+ 
+ @param positionTime 回放的时间
+ */
+- (void)seekPlayback:(NSTimeInterval)positionTime;
+
+/**
+ 停止回放
+ */
+- (void)pausePlayback;
+
+/**
+ 开始回放
+ */
+- (void)playback;
 @end

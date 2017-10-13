@@ -35,24 +35,28 @@
 - (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties;
 //聊天信息
 - (void)sessionManagerMessageReceived:(NSString *)message ofUser:(RoomUser *)user ;
+//回放的聊天信息
+- (void)sessionManagerPlaybackMessageReceived:(NSString *)message ofUser:(RoomUser *)user ts:(NSTimeInterval)ts;
 //进入会议失败
 - (void)sessionManagerDidFailWithError:(NSError *)error ;
 //白板等相关信令
 - (void)sessionManagerOnRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(unsigned long)ts Data:(NSObject*)data InList:(BOOL)inlist;
-//重连
-- (void)sessionHandleReconnected:(id)params;
-// peerConnection断开恢复
-- (void)peerConnectionRecover;
-// 订阅断开
-- (void)peerSubscribeRecover:(RoomUser *)user;
+
 //获取礼物数
 - (void)sessionManagerGetGiftNumber:(void(^)())completion;
 #pragma mark media
+//发布媒体流
 - (void)sessionManagerMediaPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user ;
+//取消媒体流
 - (void)sessionManagerMediaUnPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user;
+//媒体流进度
 - (void)sessionManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
 
-
+#pragma mark Playback
+- (void)sessionManagerReceivePlaybackDuration:(NSTimeInterval)duration;
+- (void)sessionManagerPlaybackUpdateTime:(NSTimeInterval)time;
+- (void)sessionManagerPlaybackClearAll;
+- (void)sessionManagerPlaybackEnd;
 @end
 
 @protocol TKEduBoardDelegate <NSObject>
@@ -89,7 +93,9 @@
 @property (nonatomic, assign) BOOL iIsCanOffertoDraw;//yes 可以 no 不可以
 @property (nonatomic, assign) BOOL isHeadphones;//是否是耳机
 @property (nonatomic, assign) BOOL iIsClassEnd;
-
+@property (nonatomic, assign) BOOL iHasPublishStd;//是否有发布的学生
+@property (nonatomic, assign) BOOL iStdOutBottom;//是否有拖出去的视频
+@property (nonatomic, assign) BOOL iIsFullState;//是否全屏状态
 #pragma mark 白板
 @property (nonatomic,strong) TKMediaDocModel    *iCurrentMediaDocModel;
 @property (nonatomic,strong) TKMediaDocModel    *iPreMediaDocModel;
@@ -110,6 +116,7 @@
 @property (nonatomic,assign)BOOL isChangeMedia;//是否是切换
 @property (nonatomic, assign) CGFloat iVolume;//音量 默认最大，耳机一半
 @property (nonatomic,assign)BOOL isLocal;
+@property (nonatomic,assign)BOOL isPlayback;  // 是否是回放
 +(instancetype)shareInstance;
 
 - (void)configureSession:(NSDictionary*)paramDic
@@ -117,6 +124,13 @@
         aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
           aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
          aRoomProperties:(TKEduRoomProperty*)aRoomProperties;
+
+// 回放进入接口
+- (void)configurePlaybackSession:(NSDictionary*)paramDic
+                   aRoomDelegate:(id<TKEduRoomDelegate>) aRoomDelegate
+                aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
+                  aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
+                 aRoomProperties:(TKEduRoomProperty*)aRoomProperties;
 
 -(void)joinEduClassRoomWithParam:(NSDictionary *)aParamDic aProperties:(NSDictionary *)aProperties;
 - (void)sessionHandleLeaveRoom:(void (^)(NSError *error))block;
@@ -139,7 +153,7 @@
 
 - (void)sessionHandleEvictUser:(NSString*)peerID completion:(void (^)(NSError *error))block;
 
-
+-(void)publishVideoDragWithDic:(NSDictionary * )aVideoDic To:(NSString *)to;
 //WebRTC & Media
 
 - (void)sessionHandleSelectCameraPosition:(BOOL)isFront;
@@ -158,13 +172,18 @@
 
 - (void)sessionHandleUseLoudSpeaker:(BOOL)use;
 #pragma mark media
+//发布媒体流
 - (void)sessionHandlePublishMedia:(NSString *)fileurl hasVideo:(BOOL)hasVideo fileid:(NSString *)fileid  filename:(NSString *)filename toID:(NSString*)toID block:(void (^)(NSError *))block;
+//关闭媒体流
 - (void)sessionHandleUnpublishMedia:(void (^)(NSError *))block;
+//播放媒体流
 - (void)sessionHandlePlayMedia:(NSString*)fileId completion:(void (^)(NSError *error, NSObject *view))block;
+//媒体流暂停
 -(void)sessionHandleMediaPause:(BOOL)pause;
+//媒体流进度
 -(void)sessionHandleMediaSeektoPos:(NSTimeInterval)pos;
+//媒体流音量
 -(void)sessionHandleMediaVolum:(CGFloat)volum;
-
 
 #pragma 其他
 -(void)clearAllClassData;
@@ -202,12 +221,10 @@
 -(void)addUnPublishUser:(RoomUser *)aRoomUser;
 -(void)deleUnPublishUser:(RoomUser*)aRoomUser;
 -(NSDictionary *)unpublishUserDic;
-#pragma mark 影音播放
--(void)publishtMediaDocModel:(TKMediaDocModel*)aMediaDocModel add:(BOOL)add To:(NSString *)to;
-
+#pragma mark 影音
 -(void)deleteaMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to;
 #pragma mark 文档
--(void)publishtDocMentDocModel:(TKDocmentDocModel*)tDocmentDocModel To:(NSString *)to;
+-(void)publishtDocMentDocModel:(TKDocmentDocModel*)tDocmentDocModel To:(NSString *)to aTellLocal:(BOOL)aTellLocal;
 //删除文档
 -(void)deleteDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to;
 
@@ -240,5 +257,8 @@
 #pragma mark 设置HUD
 -(void)configureHUD:(NSString *)aString  aIsShow:(BOOL)aIsShow;
 
-
+#pragma mark 回放相关
+- (void)playback;
+- (void)pausePlayback;
+- (void)seekPlayback:(NSTimeInterval)positionTime;
 @end

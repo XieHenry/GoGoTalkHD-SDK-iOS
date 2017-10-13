@@ -24,7 +24,7 @@
 -(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer{
     
     if (self = [super initWithFrame:frame]) {
-        
+        _iRoomUer = aRoomUer;
         _iVideoRole =aVideoRole;
         
         CGFloat tHeight = CGRectGetHeight(frame);
