@@ -225,8 +225,7 @@
 		D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */; };
 		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
-<<<<<<< HEAD
-=======
+
 		D6B100281F6B74B900DD6D7C /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF391F6B74B900DD6D7C /* TKEduClassRoom.m */; };
 		D6B100291F6B74B900DD6D7C /* TKEduNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF3B1F6B74B900DD6D7C /* TKEduNetManager.m */; };
 		D6B1002A1F6B74B900DD6D7C /* TKEduSessionHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF3D1F6B74B900DD6D7C /* TKEduSessionHandle.m */; };
@@ -312,7 +311,7 @@
 		D6B1007D1F6B74B900DD6D7C /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100251F6B74B900DD6D7C /* TKDocmentDocModel.m */; };
 		D6B1007E1F6B74B900DD6D7C /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B100271F6B74B900DD6D7C /* TKMediaDocModel.m */; };
 		D6B1007F1F6B74DB00DD6D7C /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6B100191F6B74B900DD6D7C /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
->>>>>>> 3a4282ffded8d531b9e3c5df3e4a6cdf4beee8e8
+
 		D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF331F6B749C00DD6D7C /* GGT_ClassroomManager.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
