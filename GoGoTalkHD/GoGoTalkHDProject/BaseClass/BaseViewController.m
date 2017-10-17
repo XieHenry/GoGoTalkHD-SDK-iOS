@@ -25,7 +25,14 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:Font(20),NSFontAttributeName,UICOLOR_FROM_HEX(ColorFFFFFF),NSForegroundColorAttributeName, nil]];
 }
 
+//状态条显示，并设置为白色
+- (BOOL)prefersStatusBarHidden{
+    return NO;
+}
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 #pragma mark 左侧返回按钮
 - (void)setLeftBackButton {

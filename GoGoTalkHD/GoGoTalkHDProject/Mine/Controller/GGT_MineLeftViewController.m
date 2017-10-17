@@ -188,8 +188,11 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
             
-            GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+            if (sin.isShowAuditStatus == NO) {
+                GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+            }
+            
             
         }
         
@@ -281,9 +284,12 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         
         
     }else {
-        if(indexPath.row == 1){
-            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+        if (sin.isShowAuditStatus == NO) {
+            if(indexPath.row == 1){
+                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+            }
         }
+        
         
         
         if (isShowTestReportVc == YES) {
@@ -357,7 +363,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 
                 break;
             case 1:
-                //我的keshi
+                //我的课时
                 vc = [[GGT_MineClassViewController alloc]init];
                 
                 break;

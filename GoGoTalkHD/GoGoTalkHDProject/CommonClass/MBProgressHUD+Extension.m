@@ -80,8 +80,7 @@
     // 设置提醒框背景色
     hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
     //设置菊花颜色
-//    hud.activityIndicatorColor = [UIColor whiteColor];
-    [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = [UIColor whiteColor];
+    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]].color = [UIColor whiteColor];
     hud.removeFromSuperViewOnHide = YES;
     return hud;
 }

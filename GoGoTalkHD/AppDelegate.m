@@ -211,12 +211,7 @@ static BOOL isProduction = true;
         self.window.rootViewController = mainVc;
     }
     
-    
-    //启动图没有状态栏，之后都加载状态栏---并修改为白色--个别页面需要单独设置，包括登录注册（已完成）和视频直播界面
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    
-//    [self.window makeKeyAndVisible];
+
 }
 
 #pragma mark 初始化IQKeyboardManager
