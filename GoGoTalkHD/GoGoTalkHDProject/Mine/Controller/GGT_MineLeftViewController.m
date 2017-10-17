@@ -284,21 +284,12 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         
         
     }else {
-        if (sin.isShowAuditStatus == NO) {
-            if(indexPath.row == 1){
-                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
-            }
-        }
-        
-        
-        
         if (isShowTestReportVc == YES) {
             if (indexPath.row == 2) {
                 GGT_TestReportViewController *vc = [[GGT_TestReportViewController alloc]init];
                 BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:vc];
                 [self.splitViewController showDetailViewController:nav sender:self];
             }
-            
             
         } else {
             if (indexPath.row == 0) {
@@ -307,10 +298,14 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 [self.splitViewController showDetailViewController:nav sender:self];
             }
         }
-        
     }
     
     
+    if (sin.isShowAuditStatus == NO) {
+        if(indexPath.row == 1){
+            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+        }
+    }
     return cell;
     
 }
