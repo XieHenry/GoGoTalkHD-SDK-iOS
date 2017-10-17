@@ -15,7 +15,7 @@ static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 // 测试地址
 //static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
 
-// 测试地址
+// 最新测试地址
 //static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
 
 // 李志敏本地

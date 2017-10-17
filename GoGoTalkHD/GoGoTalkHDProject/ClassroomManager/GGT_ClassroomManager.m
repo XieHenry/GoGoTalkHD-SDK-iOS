@@ -83,6 +83,10 @@
     
     // 发送进入教室的网络请求
     [self postNetworkModifyLessonStatusWithCourseModel:self.xc_model];
+    
+    // 在倒计时弹窗的地方有用 判断是否弹出进入教室的alter
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    single.isInRoom = YES;
 }
 - (void) leftRoomComplete{
     TKLog(@"-----leftRoomComplete");
@@ -91,6 +95,9 @@
     if (self.xc_leftRoomBlock) {
         self.xc_leftRoomBlock();
     }
+    
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    single.isInRoom = NO;
 }
 - (void) onClassBegin{
     TKLog(@"-----onClassBegin");
