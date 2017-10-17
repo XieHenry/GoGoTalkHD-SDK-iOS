@@ -211,12 +211,7 @@ static BOOL isProduction = true;
         self.window.rootViewController = mainVc;
     }
     
-    
-    //启动图没有状态栏，之后都加载状态栏---并修改为白色--个别页面需要单独设置，包括登录注册（已完成）和视频直播界面
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    
-//    [self.window makeKeyAndVisible];
+
 }
 
 #pragma mark 初始化IQKeyboardManager
@@ -302,7 +297,7 @@ static BOOL isProduction = true;
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106211590"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106130781"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
 
     /* 设置新浪的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"221400771"  appSecret:@"16f0baf24de41eae8b1b3bbbc8de06d9" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];

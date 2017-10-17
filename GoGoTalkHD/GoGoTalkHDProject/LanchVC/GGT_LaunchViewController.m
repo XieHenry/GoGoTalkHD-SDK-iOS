@@ -31,4 +31,9 @@
     }];
 }
 
+//状态条显示，并设置为白色
+- (BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
 @end

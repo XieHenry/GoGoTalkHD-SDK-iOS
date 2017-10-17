@@ -47,7 +47,7 @@
 			<string>QQ</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ41ef7306</string>
+				<string>QQ41ee375d</string>
 			</array>
 		</dict>
 		<dict>
@@ -57,7 +57,7 @@
 			<string>Qzone</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1106211590</string>
+				<string>tencent1106130781</string>
 			</array>
 		</dict>
 	</array>
@@ -134,7 +134,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 </dict>
 </plist>

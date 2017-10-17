@@ -225,11 +225,6 @@
 		D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */; };
 		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
-
-
-
-
-
 		D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF331F6B749C00DD6D7C /* GGT_ClassroomManager.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
