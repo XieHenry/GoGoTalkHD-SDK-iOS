@@ -184,7 +184,7 @@
 - (void)configData
 {
     if ([self.xc_model.FilePath isKindOfClass:[NSString class]] && self.xc_model.FilePath.length > 0) {
-        NSString *urlStr = [self.xc_model.FilePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlStr = [self.xc_model.FilePath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSURL *url = [NSURL URLWithString:urlStr];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.xc_webView loadRequest:request];

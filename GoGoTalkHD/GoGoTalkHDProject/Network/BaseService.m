@@ -159,7 +159,7 @@
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     
     urlStr = [single.base_url stringByAppendingPathComponent:urlStr];
-    urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     //        NSLog(@"打印token----%@",[UserDefaults() objectForKey:K_userToken]);
     
     
@@ -469,8 +469,8 @@
     
     
     NSString *urlStr = [single.base_url stringByAppendingPathComponent:URL_Login];
-    urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
     
     [self.manager POST:urlStr parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

@@ -44,7 +44,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushKebiaoWithNotification:) name:@"kebiao" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushMineWithNotification:) name:@"mine" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTestReportWithNotification:) name:@"testReport1" object:nil];
-
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -52,7 +52,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kebiao" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"mine" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"testReport1" object:nil];
-
+    
 }
 
 
@@ -60,7 +60,7 @@
 #pragma mark - pushMessageAction
 - (void)pushKebiaoWithNotification:(NSNotification *)noti {
     NSLog(@"--%@",noti.userInfo);
-   
+    
     
     UIButton *button1 = [self.xc_leftView viewWithTag:100];
     button1.selected = YES;
@@ -84,14 +84,14 @@
     button1.selected = NO;
     
     if (self.currentVC == self.mineVc) {
-
+        
         return;
     } else {
-
+        
         [self replaceController:self.currentVC newController:self.mineVc];
     }
     
-
+    
 }
 
 - (void)pushTestReportWithNotification:(NSNotification *)noti {
@@ -103,12 +103,12 @@
     
     if (self.currentVC == self.mineVc) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"testReport2" object:self userInfo:noti.userInfo];
-
+        
         return;
     } else {
         [self replaceController:self.currentVC newController:self.mineVc];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"testReport2" object:self userInfo:noti.userInfo];
-
+        
     }
 }
 
@@ -153,13 +153,13 @@
         @strongify(self);
         NSLog(@"---进入教室---消失了---%@", self);
         
-//        [self enterTKClassroomWithCourseModel:model];
-//        [self postNetworkModifyLessonStatusWithCourseModel:model];
+        //        [self enterTKClassroomWithCourseModel:model];
+        //        [self postNetworkModifyLessonStatusWithCourseModel:model];
         
         @weakify(self);
         [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
             @strongify(self);
-
+            
         }];
         
     }];
@@ -286,13 +286,13 @@
                 
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil];
                 cancelAction.textColor = UICOLOR_FROM_HEX(ColorC40016);
-
+                
                 [alert addAction:cancelAction];
                 [self presentViewController:alert animated:YES completion:nil];
                 
             }
                 break;
-  
+                
             default:
                 break;
         }
@@ -303,7 +303,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPopoverCourseAlterViewNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPopoverCourseAlterViewNotification object:nil];
 }
 
 #pragma mark TKEduEnterClassRoomDelegate
@@ -321,7 +321,7 @@
 //    shareRoom.xc_roomPassword = model.stuPwd;
 //    shareRoom.xc_roomName = model.LessonName;
 //    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-//    
+//
 //    // 记录日志
 //    [XCLogManager xc_redirectNSlogToDocumentFolder];
 //}
@@ -329,7 +329,7 @@
 ////error.code  Description:error.description
 //- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
 //    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
-//        
+//
 //    } else {
 //        TKLog(@"-----onEnterRoomFailed");
 //        [XCLogManager xc_readDataFromeFile];
@@ -399,8 +399,9 @@
         if ([model.LastButton isKindOfClass:[NSString class]]) {
             secondAction = [UIAlertAction actionWithTitle:model.LastButton style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if ([model.Url isKindOfClass:[NSString class]]) {
-                    model.Url = [model.Url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.Url]];
+                    //对中文地址进行编码处理，否则会跳转失败
+                    NSString *urlStr = [model.Url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
                 }
                 
                 if ([model.Type isKindOfClass:[NSString class]] && [model.Type isEqualToString:@"1"]) {
@@ -424,10 +425,11 @@
         if (![model.Type isEqualToString:@"2"]) {
             [self presentViewController:alterC animated:YES completion:nil];
         }
-
+        
     }
     
 }
 
 
 @end
+

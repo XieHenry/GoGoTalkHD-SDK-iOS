@@ -20,6 +20,7 @@
 		5B8337CE1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8337CD1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m */; };
 		5B8337D11ED3DFEB005EE004 /* GGT_ChoicePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8337D01ED3DFEB005EE004 /* GGT_ChoicePickView.m */; };
 		5B8F1F5B1EE143CA00149368 /* GGT_MineClassPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1F5A1EE143CA00149368 /* GGT_MineClassPlaceholderView.m */; };
+		5B913C9D1F9DF58400982385 /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B913C9C1F9DF58400982385 /* GGT_HomeViewController.m */; };
 		5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */; };
 		5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05831F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m */; };
 		5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E05861F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m */; };
@@ -222,7 +223,6 @@
 		D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94B1ED2B6B70069F385 /* GGT_CourseDetailCell.m */; };
 		D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */; };
 		D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */; };
-		D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */; };
 		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
 		D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF331F6B749C00DD6D7C /* GGT_ClassroomManager.m */; };
@@ -332,6 +332,8 @@
 		5B8337D01ED3DFEB005EE004 /* GGT_ChoicePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ChoicePickView.m; sourceTree = "<group>"; };
 		5B8F1F591EE143CA00149368 /* GGT_MineClassPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineClassPlaceholderView.h; sourceTree = "<group>"; };
 		5B8F1F5A1EE143CA00149368 /* GGT_MineClassPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineClassPlaceholderView.m; sourceTree = "<group>"; };
+		5B913C9B1F9DF58400982385 /* GGT_HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GGT_HomeViewController.h; sourceTree = "<group>"; };
+		5B913C9C1F9DF58400982385 /* GGT_HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeViewController.m; sourceTree = "<group>"; };
 		5B9E057D1F149C390050CEDB /* GGT_OrderCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseViewController.h; sourceTree = "<group>"; };
 		5B9E057E1F149C390050CEDB /* GGT_OrderCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_OrderCourseViewController.m; sourceTree = "<group>"; };
 		5B9E05821F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_OrderCourseOfAllLeftVc.h; sourceTree = "<group>"; };
@@ -714,8 +716,6 @@
 		D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_EvaluateView.m; sourceTree = "<group>"; };
 		D69427331EC94CD30048FD2C /* GGT_HomeLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeLeftView.h; sourceTree = "<group>"; };
 		D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeLeftView.m; sourceTree = "<group>"; };
-		D69427361EC94CD30048FD2C /* GGT_HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeViewController.h; sourceTree = "<group>"; };
-		D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeViewController.m; sourceTree = "<group>"; };
 		D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCourseAlertView.h; sourceTree = "<group>"; };
 		D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCourseAlertView.m; sourceTree = "<group>"; };
 		D6AB90CC1ECEBC22009D8758 /* GGT_PlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PlaceHolderView.h; sourceTree = "<group>"; };
@@ -1789,8 +1789,8 @@
 		D69427351EC94CD30048FD2C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D69427361EC94CD30048FD2C /* GGT_HomeViewController.h */,
-				D69427371EC94CD30048FD2C /* GGT_HomeViewController.m */,
+				5B913C9B1F9DF58400982385 /* GGT_HomeViewController.h */,
+				5B913C9C1F9DF58400982385 /* GGT_HomeViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2521,7 +2521,6 @@
 				D60C4A6A1F904EBF00A3EE25 /* TKUtil.mm in Sources */,
 				5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */,
 				D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */,
-				D69427391EC94CD30048FD2C /* GGT_HomeViewController.m in Sources */,
 				D66FCBF51EEA7D3200792A6C /* GGT_PreviewDemoPlaceholderView.m in Sources */,
 				D6E0A5581EC2D9CD006A003D /* NSString+XCHelper.m in Sources */,
 				D60C4A5F1F904EBF00A3EE25 /* TKButton.m in Sources */,
@@ -2565,6 +2564,7 @@
 				D60C4A241F904EBF00A3EE25 /* BITHockeyBaseViewController.m in Sources */,
 				D6134AFF1F16138500B4405E /* GGT_DateAndTimeHeaderView.m in Sources */,
 				D6E0A55A1EC2D9CD006A003D /* UIButton+timer.m in Sources */,
+				5B913C9D1F9DF58400982385 /* GGT_HomeViewController.m in Sources */,
 				D6E0A5321EC2D9AE006A003D /* BaseNavigationController.m in Sources */,
 				5BBB2D481F185A1200393B68 /* GGT_FocusImgModel.m in Sources */,
 				D60C4A1E1F904EBF00A3EE25 /* TKAFURLResponseSerialization.m in Sources */,

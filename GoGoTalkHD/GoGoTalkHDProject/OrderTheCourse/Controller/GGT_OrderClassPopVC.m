@@ -178,7 +178,7 @@
     
     
     if ([self.ImageUrl isKindOfClass:[NSString class]]) {
-        NSString *urlStr = [self.ImageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlStr = [self.ImageUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSURL *url = [NSURL URLWithString:urlStr];
         [self.xc_teachImgView sd_setImageWithURL:url placeholderImage:UIIMAGE_FROM_NAME(@"headPortrait_default_avatar")];
     }
