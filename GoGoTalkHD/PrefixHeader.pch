@@ -77,6 +77,11 @@ static NSString * const xc_returnMsg = @"msg";
 static NSString * const xc_message = @"msg";
 static NSString * const xc_alert_message = @"网络不给力，请稍后再试";
 
+
+static NSString * const xc_servicePhoneNum = @"客服电话:400-8787-276";
+static NSString * const xc_serviceTime = @"周一至周日 8:00~22:00";
+static NSString * const xc_humanCheckTitle = @"人工在线支持";
+
 // 开课前一分钟的弹窗通知
 static NSString * const kPopoverCourseAlterViewNotification = @"kPopoverCourseAlterViewNotification";
 

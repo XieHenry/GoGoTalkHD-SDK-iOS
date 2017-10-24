@@ -8,8 +8,6 @@
 
 #import "GGT_PreviewCourseAlertView.h"
 
-static NSString * const enterButtonTitle = @"进入教室";
-
 @interface GGT_PreviewCourseAlertView ()
 @property (nonatomic, strong) UIImageView *xc_contentImgView;
 @property (nonatomic, strong) UIButton *xc_cancleButton;
@@ -19,6 +17,10 @@ static NSString * const enterButtonTitle = @"进入教室";
 
 @property (nonatomic, strong) NSString *titleString;
 @property (nonatomic, strong) NSString *messageString;
+@property (nonatomic, strong) NSString *bgImgName;
+@property (nonatomic, strong) NSString *bottomButtonTitle;
+
+@property (nonatomic, assign) XCPopType type;
 
 @end
 
@@ -34,7 +36,8 @@ static NSString * const enterButtonTitle = @"进入教室";
 //    return alertView;
 //}
 
-+ (instancetype)viewWithTitle:(NSString *)title message:(NSString *)message cancleBlock:(XCAlertCancleBlock)cancleBlock enterBlock:(XCAlertEnterBlock)enterBlock
+// 修改背景图
++ (instancetype)viewWithTitle:(NSString *)title message:(NSString *)message bottomButtonTitle:(NSString *)buttonTitle bgImg:(NSString *)bgImgName type:(XCPopType)type cancleBlock:(XCAlertCancleBlock)cancleBlock enterBlock:(XCAlertEnterBlock)enterBlock
 {
     GGT_PreviewCourseAlertView *shareView = [[GGT_PreviewCourseAlertView alloc] init];
     shareView.frame = [UIScreen mainScreen].bounds;
@@ -44,6 +47,10 @@ static NSString * const enterButtonTitle = @"进入教室";
     
     shareView.titleString = title;
     shareView.messageString = message;
+    shareView.bgImgName = bgImgName;
+    shareView.bottomButtonTitle = buttonTitle;
+    shareView.type = type;
+    
     shareView.cancleBlock = cancleBlock;
     shareView.enterBlock = enterBlock;
     
@@ -79,7 +86,10 @@ static NSString * const enterButtonTitle = @"进入教室";
 {
     self.xc_contentImgView = ({
         UIImageView *xc_contentImgView = [UIImageView new];
-        UIImage *img = UIIMAGE_FROM_NAME(@"jijiangkaike_background");
+        if (![self.bgImgName isKindOfClass:[NSString class]] || self.bgImgName.length == 0) {
+            self.bgImgName = @"jijiangkaike_background";
+        }
+        UIImage *img = UIIMAGE_FROM_NAME(self.bgImgName);
         xc_contentImgView.image = img;
         xc_contentImgView.contentMode = UIViewContentModeCenter;
         xc_contentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
@@ -103,7 +113,12 @@ static NSString * const enterButtonTitle = @"进入教室";
         UILabel *xc_titleLabel = [UILabel new];
         xc_titleLabel.text = self.titleString;
         xc_titleLabel.textColor = UICOLOR_FROM_HEX(Color333333);
-        xc_titleLabel.font = Font(24);
+        if (self.type == XCPopTypeEnterRoom) {
+            xc_titleLabel.font = Font(24);
+        } else {
+            xc_titleLabel.font = Font(18);
+        }
+        
         xc_titleLabel;
     });
     [self.xc_contentImgView addSubview:self.xc_titleLabel];
@@ -112,7 +127,12 @@ static NSString * const enterButtonTitle = @"进入教室";
         UILabel *xc_messageLabel = [UILabel new];
         xc_messageLabel.text = self.messageString;
         xc_messageLabel.textColor = UICOLOR_FROM_HEX(Color333333);
-        xc_messageLabel.font = Font(19);
+        if (self.type == XCPopTypeEnterRoom) {
+            xc_messageLabel.font = Font(19);
+        } else {
+            xc_messageLabel.font = Font(18);
+        }
+        
         xc_messageLabel;
     });
     [self.xc_contentImgView addSubview:self.xc_messageLabel];
@@ -120,9 +140,18 @@ static NSString * const enterButtonTitle = @"进入教室";
     self.xc_enterRoomButton = ({
         UIButton *xc_enterRoomButton = [UIButton new];
         xc_enterRoomButton.frame = CGRectMake(0, 0, 0, 0);
-        [xc_enterRoomButton setBackgroundColor:UICOLOR_FROM_HEX(kThemeColor)];
-        [xc_enterRoomButton setTitle:enterButtonTitle forState:UIControlStateNormal];
-        [xc_enterRoomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        
+        [xc_enterRoomButton setTitle:self.bottomButtonTitle forState:UIControlStateNormal];
+        
+        if (self.type == XCPopTypeEnterRoom) {
+            [xc_enterRoomButton setBackgroundColor:UICOLOR_FROM_HEX(kThemeColor)];
+            [xc_enterRoomButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        } else {
+            [xc_enterRoomButton setBackgroundColor:[UIColor whiteColor]];
+            [xc_enterRoomButton setTitleColor:UICOLOR_FROM_HEX(kThemeColor) forState:UIControlStateNormal];
+        }
+        
         xc_enterRoomButton.titleLabel.font = Font(17);
         xc_enterRoomButton;
     });
@@ -160,6 +189,7 @@ static NSString * const enterButtonTitle = @"进入教室";
     
     // 需要更新 不然frame为0
     [self layoutIfNeeded];
+    [self.xc_enterRoomButton addBorderForViewWithBorderWidth:1.0 BorderColor:UICOLOR_FROM_HEX(kThemeColor) CornerRadius:10];
     self.xc_enterRoomButton.layer.masksToBounds = YES;
     self.xc_enterRoomButton.layer.cornerRadius = self.xc_enterRoomButton.height/2.0f;
 }

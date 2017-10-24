@@ -18,6 +18,8 @@
 
 #import "GGT_PreviewCourseAlertView.h"
 
+#import "GGT_PreviewCourseAlertView.h"
+
 //#import "TKEduClassRoom.h"      // 测试拓课
 //#import "TKMacro.h"
 
@@ -146,22 +148,17 @@
     NSString *titleString = [NSString stringWithFormat:@"%@的课程即将开始", timeStr];
     
     @weakify(self);
-    [GGT_PreviewCourseAlertView viewWithTitle:titleString message:@"" cancleBlock:^{
+    [GGT_PreviewCourseAlertView viewWithTitle:titleString message:@"" bottomButtonTitle:@"进入教室" bgImg:@"jijiangkaike_background" type:XCPopTypeEnterRoom cancleBlock:^{
         @strongify(self);
         NSLog(@"---点的是叉号---%@", self);
     } enterBlock:^{
         @strongify(self);
         NSLog(@"---进入教室---消失了---%@", self);
-        
-//        [self enterTKClassroomWithCourseModel:model];
-//        [self postNetworkModifyLessonStatusWithCourseModel:model];
-        
         @weakify(self);
         [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
             @strongify(self);
-
+            NSLog(@"%@", self);
         }];
-        
     }];
 }
 
@@ -280,15 +277,35 @@
                 break;
             case 104:
             {
+                @weakify(self);
+                [GGT_PreviewCourseAlertView viewWithTitle:xc_servicePhoneNum message:xc_serviceTime bottomButtonTitle:xc_humanCheckTitle bgImg:@"RenGongZaiXianZhiChi_background" type:XCPopTypeHumanService cancleBlock:^{
+                    @strongify(self);
+                    NSLog(@"---点的是叉号---%@", self);
+                } enterBlock:^{
+                    @strongify(self);
+                    NSLog(@"---点按钮---%@", self);
+                }];
                 
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"请拨打电话 ：400-8787-276" preferredStyle:UIAlertControllerStyleAlert];
-                alert.titleColor = UICOLOR_FROM_HEX(0x000000);
-                
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil];
-                cancelAction.textColor = UICOLOR_FROM_HEX(ColorC40016);
-
-                [alert addAction:cancelAction];
-                [self presentViewController:alert animated:YES completion:nil];
+//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"请拨打电话 ：400-8787-276" preferredStyle:UIAlertControllerStyleAlert];
+//                alert.titleColor = UICOLOR_FROM_HEX(0x000000);
+//
+//                // 知道了按钮
+//                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
+//                cancelAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+//
+//
+//                // 人工客服按钮
+//                UIAlertAction *helpAction = [UIAlertAction actionWithTitle:xc_humanCheckTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//                    // 获取人工检测设备房间的信息
+//                    [self getHumanCheckClassroomInfo];
+//
+//                }];
+//                helpAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+//
+//                [alert addAction:cancelAction];
+//                [alert addAction:helpAction];
+//                [self presentViewController:alert animated:YES completion:nil];
                 
             }
                 break;
@@ -297,6 +314,21 @@
                 break;
         }
     };
+}
+
+// 获取人工检测设备房间的信息
+- (void)getHumanCheckClassroomInfo
+{
+    [[BaseService share] sendGetRequestWithPath:nil token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
+        
+        // 进入教室
+        [GGT_ClassroomManager tk_enterClassroomWithViewController:self courseModel:nil leftRoomBlock:^{
+            
+        }];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

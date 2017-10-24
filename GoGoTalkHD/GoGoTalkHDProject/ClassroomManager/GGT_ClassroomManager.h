@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^TKLeftClassroomBlock)();
+typedef void(^TKLeftClassroomBlock)(void);
 
 @interface GGT_ClassroomManager : NSObject
 
 + (void)chooseClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock;
 
-//+ (void)tk_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock;
++ (void)tk_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock;
 //
 //+ (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model;
 
