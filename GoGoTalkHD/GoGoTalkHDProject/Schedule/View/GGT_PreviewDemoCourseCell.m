@@ -120,7 +120,7 @@
 -(void)loadHtml:(NSString *)urlString inView:(WKWebView *)webView
 {
     if (urlString.length > 0) {
-        urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSURL *url = [NSURL URLWithString:urlString];
         [webView loadRequest:[NSURLRequest requestWithURL:url]];
     }
