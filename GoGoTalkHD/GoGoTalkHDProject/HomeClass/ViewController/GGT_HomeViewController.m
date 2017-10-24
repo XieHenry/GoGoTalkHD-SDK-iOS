@@ -18,8 +18,6 @@
 
 #import "GGT_PopAlertView.h"
 
-#import "GGT_PopAlertView.h"
-
 //#import "TKEduClassRoom.h"      // 测试拓课
 //#import "TKMacro.h"
 
