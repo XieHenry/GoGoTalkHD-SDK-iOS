@@ -168,7 +168,7 @@
     
     [self.xc_cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.xc_contentImgView.mas_top).offset(LineH(24));
-        make.right.equalTo(self.xc_contentImgView.mas_right).offset(-LineW(7));
+        make.right.equalTo(self.xc_contentImgView.mas_right).offset(LineW(7));
     }];
     
     [self.xc_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

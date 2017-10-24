@@ -277,7 +277,7 @@
             case 104:
             {
                 @weakify(self);
-                [GGT_PopAlertView viewWithTitle:xc_servicePhoneNum message:xc_serviceTime bottomButtonTitle:xc_humanCheckTitle bgImg:@"RenGongZaiXianZhiChi_background" type:XCPopTypeHumanService cancleBlock:^{
+                [GGT_PopAlertView viewWithTitle:xc_servicePhoneNum message:xc_serviceTime bottomButtonTitle:xc_humanCheckTitle bgImg:@"rengongzaixianzhichi_background" type:XCPopTypeHumanService cancleBlock:^{
                     @strongify(self);
                     NSLog(@"---点的是叉号---%@", self);
                 } enterBlock:^{
