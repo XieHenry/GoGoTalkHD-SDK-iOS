@@ -283,6 +283,9 @@
                 } enterBlock:^{
                     @strongify(self);
                     NSLog(@"---点按钮---%@", self);
+                    
+                    [self getHumanCheckClassroomInfo];
+                    
                 }];
                 
 //                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"请拨打电话 ：400-8787-276" preferredStyle:UIAlertControllerStyleAlert];
@@ -318,16 +321,22 @@
 // 获取人工检测设备房间的信息
 - (void)getHumanCheckClassroomInfo
 {
-    [[BaseService share] sendGetRequestWithPath:nil token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
+    [[BaseService share] sendGetRequestWithPath:URL_GetOnlineInfns token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
         // 进入教室
-        [GGT_ClassroomManager tk_enterClassroomWithViewController:self courseModel:nil leftRoomBlock:^{
-            
-        }];
-        
+        if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+            GGT_CourseCellModel *model = [GGT_CourseCellModel yy_modelWithDictionary:responseObject[@"data"]];
+            if (![model.nickname isKindOfClass:[NSString class]] || model.nickname.length == 0) {
+                model.nickname = @"Student";
+            }
+            [GGT_ClassroomManager tk_enterClassroomWithViewController:self courseModel:model leftRoomBlock:^{
+                
+            }];
+        }
     } failure:^(NSError *error) {
         
     }];
+    
 }
 
 
@@ -336,59 +345,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPopoverCourseAlterViewNotification object:nil];
 }
-
-#pragma mark TKEduEnterClassRoomDelegate
-//- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
-//{
-//    NSDictionary *tDict = @{
-//                            @"serial"   :model.serial,
-//                            @"host"    :model.host,
-//                            // @"userid"  : @"1111",
-//                            @"port"    :model.port,
-//                            @"nickname":model.nickname,    // 学生密码567
-//                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-//                            };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-//    shareRoom.xc_roomPassword = model.stuPwd;
-//    shareRoom.xc_roomName = model.LessonName;
-//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-//
-//    // 记录日志
-//    [XCLogManager xc_redirectNSlogToDocumentFolder];
-//}
-//
-////error.code  Description:error.description
-//- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
-//    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
-//
-//    } else {
-//        TKLog(@"-----onEnterRoomFailed");
-//        [XCLogManager xc_readDataFromeFile];
-//    }
-//}
-//- (void) onKitout:(EKickOutReason)reason{
-//    TKLog(@"-----onKitout");
-//}
-//- (void) joinRoomComplete{
-//    TKLog(@"-----joinRoomComplete");
-//    [XCLogManager xc_readDataFromeFile];
-//    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
-//}
-//- (void) leftRoomComplete{
-//    TKLog(@"-----leftRoomComplete");
-//    [XCLogManager xc_deleteLogData];
-//}
-//- (void) onClassBegin{
-//    TKLog(@"-----onClassBegin");
-//}
-//- (void) onClassDismiss{
-//    NSLog(@"-----onClassDismiss");
-//    [TKEduClassRoom leftRoom];
-//}
-//- (void) onCameraDidOpenError{
-//    TKLog(@"-----onCameraDidOpenError");
-//}
-
 
 
 - (void)updateNewVersion

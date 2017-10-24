@@ -115,6 +115,8 @@ static NSString * const URL_GetTesting = @"/api/APP/GetTesting";
 static NSString * const URL_GetUrl = @"api/APP/GetUrl";
 // 版本更新接口
 static NSString * const URL_VersionUpdateNew = @"api/APP/VersionUpdateNew";
+// 获取人工检测设备的房间信息
+static NSString * const URL_GetOnlineInfns = @"api/APP/GetOnlineInfns";
 
 
 
