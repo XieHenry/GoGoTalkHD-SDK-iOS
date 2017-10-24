@@ -8,15 +8,12 @@
 
 #import "GGT_PreCoursewareVC.h"
 
-#import "GGT_PreviewCourseAlertView.h"
 #import "BaseNavigationController.h"
 #import "GGT_EvaluationPopViewController.h"     // 测试
 #import "GGT_CourseDetailCell.h"
 
 #import "GGT_PreTeachEvaView.h"
 
-//#import "TKEduClassRoom.h"      // 测试拓课
-//#import "TKMacro.h"
 
 @interface GGT_PreCoursewareVC ()<UIScrollViewDelegate, WKNavigationDelegate, UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UIScrollView *xc_scrollView;

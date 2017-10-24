@@ -16,9 +16,9 @@
 //检查设备
 #import "GGT_CheckDevicePopViewController.h"
 
-#import "GGT_PreviewCourseAlertView.h"
+#import "GGT_PopAlertView.h"
 
-#import "GGT_PreviewCourseAlertView.h"
+#import "GGT_PopAlertView.h"
 
 //#import "TKEduClassRoom.h"      // 测试拓课
 //#import "TKMacro.h"
@@ -148,7 +148,7 @@
     NSString *titleString = [NSString stringWithFormat:@"%@的课程即将开始", timeStr];
     
     @weakify(self);
-    [GGT_PreviewCourseAlertView viewWithTitle:titleString message:@"" bottomButtonTitle:@"进入教室" bgImg:@"jijiangkaike_background" type:XCPopTypeEnterRoom cancleBlock:^{
+    [GGT_PopAlertView viewWithTitle:titleString message:@"" bottomButtonTitle:@"进入教室" bgImg:@"jijiangkaike_background" type:XCPopTypeEnterRoom cancleBlock:^{
         @strongify(self);
         NSLog(@"---点的是叉号---%@", self);
     } enterBlock:^{
@@ -277,7 +277,7 @@
             case 104:
             {
                 @weakify(self);
-                [GGT_PreviewCourseAlertView viewWithTitle:xc_servicePhoneNum message:xc_serviceTime bottomButtonTitle:xc_humanCheckTitle bgImg:@"RenGongZaiXianZhiChi_background" type:XCPopTypeHumanService cancleBlock:^{
+                [GGT_PopAlertView viewWithTitle:xc_servicePhoneNum message:xc_serviceTime bottomButtonTitle:xc_humanCheckTitle bgImg:@"RenGongZaiXianZhiChi_background" type:XCPopTypeHumanService cancleBlock:^{
                     @strongify(self);
                     NSLog(@"---点的是叉号---%@", self);
                 } enterBlock:^{

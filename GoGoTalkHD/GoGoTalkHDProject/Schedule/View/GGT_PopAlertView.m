@@ -1,14 +1,14 @@
 //
-//  GGT_PreviewCourseAlertView.m
+//  GGT_PopAlertView.m
 //  GoGoTalk
 //
 //  Created by 辰 on 2017/5/8.
 //  Copyright © 2017年 XieHenry. All rights reserved.
 //
 
-#import "GGT_PreviewCourseAlertView.h"
+#import "GGT_PopAlertView.h"
 
-@interface GGT_PreviewCourseAlertView ()
+@interface GGT_PopAlertView ()
 @property (nonatomic, strong) UIImageView *xc_contentImgView;
 @property (nonatomic, strong) UIButton *xc_cancleButton;
 @property (nonatomic, strong) UILabel *xc_titleLabel;
@@ -24,14 +24,14 @@
 
 @end
 
-@implementation GGT_PreviewCourseAlertView
+@implementation GGT_PopAlertView
 
 //+ (instancetype)shareAlertView
 //{
-//    static GGT_PreviewCourseAlertView *alertView = nil;
+//    static GGT_PopAlertView *alertView = nil;
 //    static dispatch_once_t onceToken;
 //    dispatch_once(&onceToken, ^{
-//        alertView = [GGT_PreviewCourseAlertView new];
+//        alertView = [GGT_PopAlertView new];
 //    });
 //    return alertView;
 //}
@@ -39,7 +39,7 @@
 // 修改背景图
 + (instancetype)viewWithTitle:(NSString *)title message:(NSString *)message bottomButtonTitle:(NSString *)buttonTitle bgImg:(NSString *)bgImgName type:(XCPopType)type cancleBlock:(XCAlertCancleBlock)cancleBlock enterBlock:(XCAlertEnterBlock)enterBlock
 {
-    GGT_PreviewCourseAlertView *shareView = [[GGT_PreviewCourseAlertView alloc] init];
+    GGT_PopAlertView *shareView = [[GGT_PopAlertView alloc] init];
     shareView.frame = [UIScreen mainScreen].bounds;
     shareView.backgroundColor = UICOLOR_FROM_RGB_ALPHA(0, 0, 0, 0.4);
     UIWindow *window = [UIApplication sharedApplication].keyWindow;

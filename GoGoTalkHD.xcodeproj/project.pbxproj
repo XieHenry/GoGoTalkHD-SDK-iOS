@@ -223,7 +223,7 @@
 		D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94B1ED2B6B70069F385 /* GGT_CourseDetailCell.m */; };
 		D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */; };
 		D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */; };
-		D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */; };
+		D694274A1EC9561B0048FD2C /* GGT_PopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D69427471EC9561B0048FD2C /* GGT_PopAlertView.m */; };
 		D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */; };
 		D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B1FF331F6B749C00DD6D7C /* GGT_ClassroomManager.m */; };
 		D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EB1EE79D500038841B /* NSObject+XCMethodSwizzle.m */; };
@@ -716,8 +716,8 @@
 		D68DC94E1ED2BC9F0069F385 /* GGT_EvaluateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_EvaluateView.m; sourceTree = "<group>"; };
 		D69427331EC94CD30048FD2C /* GGT_HomeLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_HomeLeftView.h; sourceTree = "<group>"; };
 		D69427341EC94CD30048FD2C /* GGT_HomeLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_HomeLeftView.m; sourceTree = "<group>"; };
-		D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PreviewCourseAlertView.h; sourceTree = "<group>"; };
-		D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PreviewCourseAlertView.m; sourceTree = "<group>"; };
+		D69427461EC9561B0048FD2C /* GGT_PopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopAlertView.h; sourceTree = "<group>"; };
+		D69427471EC9561B0048FD2C /* GGT_PopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PopAlertView.m; sourceTree = "<group>"; };
 		D6AB90CC1ECEBC22009D8758 /* GGT_PlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PlaceHolderView.h; sourceTree = "<group>"; };
 		D6AB90CD1ECEBC22009D8758 /* GGT_PlaceHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PlaceHolderView.m; sourceTree = "<group>"; };
 		D6B1FF321F6B749C00DD6D7C /* GGT_ClassroomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ClassroomManager.h; sourceTree = "<group>"; };
@@ -1712,7 +1712,7 @@
 			children = (
 				D603AAF11ECD5353003ECC20 /* 日历cell */,
 				D603AAF21ECD536C003ECC20 /* 课程cell */,
-				D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */,
+				D68DC9501ED2BD340069F385 /* 弹框 */,
 				D68DC9511ED2BD450069F385 /* 点评view */,
 				D68DC9521ED2BD500069F385 /* 没有数据view */,
 				D68DC9041ED299910069F385 /* GGT_TeachEvaCell.h */,
@@ -1740,13 +1740,13 @@
 			path = TuoKeSDK;
 			sourceTree = "<group>";
 		};
-		D68DC9501ED2BD340069F385 /* 开课前一分钟弹框 */ = {
+		D68DC9501ED2BD340069F385 /* 弹框 */ = {
 			isa = PBXGroup;
 			children = (
-				D69427461EC9561B0048FD2C /* GGT_PreviewCourseAlertView.h */,
-				D69427471EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m */,
+				D69427461EC9561B0048FD2C /* GGT_PopAlertView.h */,
+				D69427471EC9561B0048FD2C /* GGT_PopAlertView.m */,
 			);
-			name = "开课前一分钟弹框";
+			name = "弹框";
 			sourceTree = "<group>";
 		};
 		D68DC9511ED2BD450069F385 /* 点评view */ = {
@@ -2465,7 +2465,7 @@
 				D60C4A311F904EBF00A3EE25 /* BITStoreUpdateManager.m in Sources */,
 				D63DA94D1ED595CF00EFA686 /* GGT_CourseCellModel.m in Sources */,
 				5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */,
-				D694274A1EC9561B0048FD2C /* GGT_PreviewCourseAlertView.m in Sources */,
+				D694274A1EC9561B0048FD2C /* GGT_PopAlertView.m in Sources */,
 				D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */,
 				5BF912D21ECEC04F009C8186 /* GGT_CheckDevicePopViewController.m in Sources */,
 				D6FD8AF51F176B1000A79011 /* GGT_ChooseCoursewareCell.m in Sources */,

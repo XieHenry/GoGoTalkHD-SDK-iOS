@@ -1,5 +1,5 @@
 //
-//  GGT_PreviewCourseAlertView.h
+//  GG_PreviewCourseAlertView.h
 //  GoGoTalk
 //
 //  Created by 辰 on 2017/5/8.
@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
 typedef void(^XCAlertCancleBlock)(void);
 typedef void(^XCAlertEnterBlock)(void);
 
-@interface GGT_PreviewCourseAlertView : UIView
+@interface GGT_PopAlertView : UIView
 
 @property (nonatomic, copy) XCAlertCancleBlock cancleBlock;
 @property (nonatomic, copy) XCAlertEnterBlock  enterBlock;
