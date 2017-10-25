@@ -149,6 +149,13 @@
         make.size.mas_equalTo(CGSizeMake(LineW(26), LineH(26)));
     }];
     
+    GGT_Singleton *single = [GGT_Singleton sharedSingleton];
+    if (single.isAuditStatus) {
+        phoneButton.hidden = YES;
+    } else {
+        phoneButton.hidden = NO;
+    }
+    
 }
 
 - (void)buttonAction:(UIButton *)button {
