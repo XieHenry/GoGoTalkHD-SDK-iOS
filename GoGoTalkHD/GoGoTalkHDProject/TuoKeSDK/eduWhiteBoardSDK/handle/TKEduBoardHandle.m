@@ -135,8 +135,18 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     _iWebView.scrollView.scrollEnabled = NO;
     _iWebView.scrollView.backgroundColor = RGBCOLOR(28, 28, 28);
     
-#if defined(__IPHONE_11_0)
-    [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+//#if defined(__IPHONE_11_0)
+//    [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+//#endif
+    
+#ifdef __IPHONE_11_0
+    if ([_iWebView.scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+        if (@available(iOS 11.0, *)) {
+            [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 #endif
 
 #ifdef Debug

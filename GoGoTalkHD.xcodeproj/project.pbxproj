@@ -1091,9 +1091,9 @@
 		D60C49271F904EBE00A3EE25 /* handle */ = {
 			isa = PBXGroup;
 			children = (
+				D60C492A1F904EBE00A3EE25 /* TKWeakScriptMessageDelegate.h */,
 				D60C49281F904EBE00A3EE25 /* TKWeakScriptMessageDelegate.m */,
 				D60C49291F904EBE00A3EE25 /* TKEduBoardHandle.h */,
-				D60C492A1F904EBE00A3EE25 /* TKWeakScriptMessageDelegate.h */,
 				D60C492B1F904EBE00A3EE25 /* TKEduBoardHandle.m */,
 			);
 			path = handle;
