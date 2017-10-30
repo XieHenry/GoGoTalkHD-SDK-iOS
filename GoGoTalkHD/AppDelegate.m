@@ -16,6 +16,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "GGT_LaunchViewController.h"
 #import "UMMobClick/MobClick.h"
+#import "GGT_ClassroomManager.h"
 
 #define kBuglyAppId      @"f911039477"
 
@@ -564,6 +565,30 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [application cancelAllLocalNotifications];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kEnterForeground object:nil];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    NSString *urlStr = url.absoluteString;
+    urlStr = [urlStr stringByRemovingPercentEncoding];
+
+    NSArray *array = [urlStr componentsSeparatedByString:@"="];
+    
+    NSData *jsonData = [array.lastObject dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    
+    NSLog(@"%@", dic);
+    
+    GGT_CourseCellModel *model = [GGT_CourseCellModel yy_modelWithDictionary:dic];
+    
+    [GGT_ClassroomManager chooseClassroomWithViewController:[UIApplication sharedApplication].keyWindow.rootViewController courseModel:model leftRoomBlock:^{
+        
+    }];
+    
+    return YES;
 }
 
 

@@ -56,9 +56,7 @@
                             @"nickname":model.nickname,    // 学生密码567
                             @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                             };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-//    shareRoom.xc_roomPassword = model.stuPwd;
-//    shareRoom.xc_roomName = model.LessonName;
+
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:viewController Delegate:self isFromWeb:NO];
     
     // 记录日志
@@ -162,7 +160,29 @@
             }
             
             if (currentModel.ClassRoomType == 4) {  // 百家云
-                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+//                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+                
+                // 进入百家云的APP
+                // 教室是拓课的  需要唤醒另一个APP 进行上课
+                NSURL *schemes = [NSURL URLWithString:@"GoGoTalkBJY://"];
+                // 如果已经安装了这个应用,就跳转
+                if ([[UIApplication sharedApplication] canOpenURL:schemes]) {
+                    
+                    // 拼接URL
+                    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+                    dictionary[@"nickname"] = model.nickname;
+                    dictionary[@"serial"] = model.serial;
+                    dictionary[@"lessonId"] = model.LessonId;
+                    
+                    NSError *parseError = nil;
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&parseError];
+                    NSString *urlStr = [NSString stringWithFormat:@"%@data=%@", schemes, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    NSURL *url = [NSURL URLWithString:urlStr];
+                    [[UIApplication sharedApplication] openURL:url];
+                } else {
+                    // 下载
+                }
             }
             
             
