@@ -154,6 +154,9 @@
                 currentModel = model;
             }
             
+//#warning 需要删除
+//            currentModel.ClassRoomType = 4;
+            
             // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
             if (currentModel.ClassRoomType == 1) {  // 拓课
                 [self tk_enterClassroomWithViewController:viewController courseModel:currentModel leftRoomBlock:leftRoomBlock];
@@ -164,19 +167,19 @@
                 
                 // 进入百家云的APP
                 // 教室是拓课的  需要唤醒另一个APP 进行上课
-                NSURL *schemes = [NSURL URLWithString:@"GoGoTalkBJY://"];
+                NSURL *schemes = [NSURL URLWithString:BJY_APP_URL_SCHEMES];
                 // 如果已经安装了这个应用,就跳转
                 if ([[UIApplication sharedApplication] canOpenURL:schemes]) {
                     
-                    // 拼接URL
-                    NSMutableDictionary *dictionary = [NSMutableDictionary new];
-                    dictionary[@"nickname"] = model.nickname;
-                    dictionary[@"serial"] = model.serial;
-                    dictionary[@"lessonId"] = model.LessonId;
+                    // 模型转字典
+                    NSDictionary *modelDic = [model yy_modelToJSONObject];
                     
+                    // 字典转字符串
                     NSError *parseError = nil;
-                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&parseError];
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:modelDic options:NSJSONWritingPrettyPrinted error:&parseError];
                     NSString *urlStr = [NSString stringWithFormat:@"%@data=%@", schemes, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                    
+                    // 处理字符串
                     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                     NSURL *url = [NSURL URLWithString:urlStr];
                     [[UIApplication sharedApplication] openURL:url];

@@ -16,7 +16,6 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "GGT_LaunchViewController.h"
 #import "UMMobClick/MobClick.h"
-#import "GGT_ClassroomManager.h"
 
 #define kBuglyAppId      @"f911039477"
 
