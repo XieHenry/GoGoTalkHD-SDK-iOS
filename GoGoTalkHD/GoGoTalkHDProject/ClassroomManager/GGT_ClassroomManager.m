@@ -177,7 +177,7 @@
                     // 字典转字符串
                     NSError *parseError = nil;
                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:modelDic options:NSJSONWritingPrettyPrinted error:&parseError];
-                    NSString *urlStr = [NSString stringWithFormat:@"%@data=%@", schemes, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                    NSString *urlStr = [NSString stringWithFormat:@"%@%@", schemes, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
                     
                     // 处理字符串
                     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

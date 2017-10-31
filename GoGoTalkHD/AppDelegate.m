@@ -571,7 +571,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *urlStr = url.absoluteString;
     urlStr = [urlStr stringByRemovingPercentEncoding];
 
-    NSArray *array = [urlStr componentsSeparatedByString:@"="];
+    NSArray *array = [urlStr componentsSeparatedByString:TK_APP_URL_SCHEMES];
     
     NSData *jsonData = [array.lastObject dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
