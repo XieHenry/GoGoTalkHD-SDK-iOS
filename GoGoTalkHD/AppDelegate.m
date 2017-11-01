@@ -91,7 +91,6 @@ static BOOL isProduction = true;
             // 逻辑后台处理
             
             single.base_url = responseObject[@"data"];
-            
             //如果地址一样则为正式地址，为非审核状态，为NO。否则为测试地址，为YES
             if ([single.base_url isEqualToString:BASE_REQUEST_URL]) {
                 

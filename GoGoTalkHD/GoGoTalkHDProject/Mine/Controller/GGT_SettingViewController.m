@@ -156,7 +156,7 @@
             // app版本
             NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
             
-            cell.contentLabel.text = [NSString stringWithFormat:@"v%@",app_Version];
+            cell.contentLabel.text = [NSString stringWithFormat:@"TK-v%@",app_Version];
         }
     } else {
          if (indexPath.row == 3) {
@@ -182,7 +182,7 @@
             // app版本
             NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
             
-            cell.contentLabel.text = [NSString stringWithFormat:@"v%@",app_Version];
+            cell.contentLabel.text = [NSString stringWithFormat:@"TK-v%@",app_Version];
             
         }
     }
