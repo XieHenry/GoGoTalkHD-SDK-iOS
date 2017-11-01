@@ -565,6 +565,30 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[NSNotificationCenter defaultCenter] postNotificationName:kEnterForeground object:nil];
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    NSString *urlStr = url.absoluteString;
+    urlStr = [urlStr stringByRemovingPercentEncoding];
+
+    NSArray *array = [urlStr componentsSeparatedByString:TK_APP_URL_SCHEMES];
+    
+    NSData *jsonData = [array.lastObject dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    
+    NSLog(@"%@", dic);
+    
+    GGT_CourseCellModel *model = [GGT_CourseCellModel yy_modelWithDictionary:dic];
+    
+    [GGT_ClassroomManager chooseClassroomWithViewController:[UIApplication sharedApplication].keyWindow.rootViewController courseModel:model leftRoomBlock:^{
+        
+    }];
+    
+    return YES;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

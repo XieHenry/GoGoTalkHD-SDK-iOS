@@ -88,6 +88,11 @@ static NSString * const kPopoverCourseAlterViewNotification = @"kPopoverCourseAl
 // 进入前台刷新
 static NSString * const kEnterForeground = @"kEnterForeground";
 
+static NSString * const BJY_APP_URL_SCHEMES = @"GoGoTalkBJY://";
+
+static NSString * const TK_APP_URL_SCHEMES = @"GoGoTalkTK://";
+
+
 
 
 

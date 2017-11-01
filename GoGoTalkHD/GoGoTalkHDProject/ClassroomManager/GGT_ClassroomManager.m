@@ -56,9 +56,7 @@
                             @"nickname":model.nickname,    // 学生密码567
                             @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
                             };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-//    shareRoom.xc_roomPassword = model.stuPwd;
-//    shareRoom.xc_roomName = model.LessonName;
+
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:viewController Delegate:self isFromWeb:NO];
     
     // 记录日志
@@ -156,13 +154,38 @@
                 currentModel = model;
             }
             
+//#warning 需要删除
+//            currentModel.ClassRoomType = 4;
+            
             // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
             if (currentModel.ClassRoomType == 1) {  // 拓课
                 [self tk_enterClassroomWithViewController:viewController courseModel:currentModel leftRoomBlock:leftRoomBlock];
             }
             
             if (currentModel.ClassRoomType == 4) {  // 百家云
-                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+//                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+                
+                // 进入百家云的APP
+                // 教室是拓课的  需要唤醒另一个APP 进行上课
+                NSURL *schemes = [NSURL URLWithString:BJY_APP_URL_SCHEMES];
+                // 如果已经安装了这个应用,就跳转
+                if ([[UIApplication sharedApplication] canOpenURL:schemes]) {
+                    
+                    // 模型转字典
+                    NSDictionary *modelDic = [model yy_modelToJSONObject];
+                    
+                    // 字典转字符串
+                    NSError *parseError = nil;
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:modelDic options:NSJSONWritingPrettyPrinted error:&parseError];
+                    NSString *urlStr = [NSString stringWithFormat:@"%@%@", schemes, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                    
+                    // 处理字符串
+                    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    NSURL *url = [NSURL URLWithString:urlStr];
+                    [[UIApplication sharedApplication] openURL:url];
+                } else {
+                    // 下载
+                }
             }
             
             

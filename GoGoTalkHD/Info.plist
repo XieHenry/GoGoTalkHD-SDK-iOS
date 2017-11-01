@@ -60,6 +60,14 @@
 				<string>tencent1106130781</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>GoGoTalkTK</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.3.3</string>
@@ -97,6 +105,7 @@
 		<string>mqzoneopensdkapi</string>
 		<string>mqqbrowser</string>
 		<string>mttbrowser</string>
+		<string>GoGoTalkBJY</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
