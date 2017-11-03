@@ -10,13 +10,13 @@
 #define GGT_Request_URL_h
 
 // 正式地址
-//static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
+static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 
 // 测试地址
 //static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
 
 // 最新测试地址
-static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
+//static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
 
 
 
@@ -117,7 +117,8 @@ static NSString * const URL_GetUrl = @"api/APP/GetUrl";
 static NSString * const URL_VersionUpdateNew = @"api/APP/VersionUpdateNew";
 // 获取人工检测设备的房间信息
 static NSString * const URL_GetOnlineInfns = @"api/APP/GetOnlineInfns";
-
+//获取下载BJY版的App
+static NSString * const URL_GetVersionClassUpdaten = @"api/APP/VersionClassUpdatenByLessonId";
 
 
 

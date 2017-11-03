@@ -184,7 +184,22 @@
                     NSURL *url = [NSURL URLWithString:urlStr];
                     [[UIApplication sharedApplication] openURL:url];
                 } else {
-                    // 下载
+                    // 下载，获取接口
+                    // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
+                    NSString *urlStr = [NSString stringWithFormat:@"%@?RoomType=%ld", URL_GetVersionClassUpdaten,(long)currentModel.ClassRoomType];
+                    
+                    
+                    [[BaseService share] sendGetRequestWithPath:urlStr token:NO viewController:viewController showMBProgress:NO success:^(id responseObject) {
+                        
+                        if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                            GGT_UpdateModel *model = [GGT_UpdateModel yy_modelWithDictionary:responseObject[@"data"]];
+                            [self popAlertVcWithModel:model viewController:viewController];
+                        }
+                        
+                    } failure:^(NSError *error) {
+                        
+                    }];
+                    
                 }
             }
             
@@ -195,5 +210,35 @@
         
     }];
 }
+
+
++ (void)popAlertVcWithModel:(GGT_UpdateModel *)model viewController:(UIViewController *)vc {
+    
+    if ([model.Title isKindOfClass:[NSString class]] && [model.Contents isKindOfClass:[NSString class]]) {
+        
+        UIAlertController *alterC = [UIAlertController alertControllerWithTitle:model.Title message:model.Contents preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *secondAction = nil;
+        
+        
+        if ([model.LastButton isKindOfClass:[NSString class]]) {
+            secondAction = [UIAlertAction actionWithTitle:model.LastButton style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if ([model.Url isKindOfClass:[NSString class]]) {
+                    //对中文地址进行编码处理，否则会跳转失败
+                    NSString *urlStr = [model.Url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+                }
+
+            }];
+        }
+        
+        secondAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+        [alterC addAction:secondAction];
+        [vc presentViewController:alterC animated:YES completion:nil];
+
+    }
+    
+}
+
 
 @end
