@@ -139,6 +139,12 @@ static const CGFloat sPromButtonHeigh = 34;
    
 }
 
+-(void)setToZeroTime {
+    _iHourLabel.text   = @"00";
+    _iMinuteLabel.text = @"00";
+    _iSecondLabel.text = @"00";
+}
+
 -(void)setClassTime:(NSTimeInterval)aLocalTime{
     
     _iLocalTime = aLocalTime;

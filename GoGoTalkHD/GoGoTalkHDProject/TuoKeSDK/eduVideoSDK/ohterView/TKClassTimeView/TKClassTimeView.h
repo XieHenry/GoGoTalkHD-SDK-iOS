@@ -14,4 +14,5 @@
 -(void)setClassTime:(NSTimeInterval)aLocalTime;
 -(void)showPromte:(PromptType)aPromptType aPassEndTime:(int)aPassEndTime aPromptTime:(int)aPromptTime;
 -(void)hidePromptView;
+-(void)setToZeroTime;
 @end

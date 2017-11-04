@@ -192,13 +192,13 @@
              NSString *tTypeString = [TKUtil docmentOrMediaImage:tDocModel.filetype?tDocModel.filetype:[tDocModel.filename pathExtension]];
              TKDocmentDocModel *tCurrentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
             BOOL tIsCurrentDocment = [[TKEduSessionHandle shareInstance]isEqualFileId:tDocModel aSecondModel:tCurrentDocModel];
-            NSLog(@"current %@ %@", [TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid, tDocModel.fileid);
+            TKLog(@"------current %@ %@", [TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid, tDocModel.fileid);
             
             _iIconImageView.image = LOADIMAGE(tTypeString);
             _iNameLabel.text = tDocModel.filename;
             _iButton3.selected = NO;
             _iButton4.selected = NO;
-            if ([tDocModel.filetype isEqualToString:MTLocalized(@"Title.whiteBoard")]) {
+            if ([tDocModel.filetype isEqualToString:(@"whiteboard")]) {
                 //_iButton3.hidden = YES;
                 _iButton3.hidden = NO;              // 白板的眼睛也需要显示出来
                 [_iButton3 setImage: LOADIMAGE(@"btn_eyes_01_normal") forState:UIControlStateNormal];
@@ -260,7 +260,7 @@
             }
             
            
-            if (!isClassBegin || tRoomUser.role != UserType_Student || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol)) {
+            if (!isClassBegin || ((tRoomUser.role != UserType_Student) && (tRoomUser.role != UserType_Assistant) ) || ((tRoomUser.role == UserType_Assistant) && [TKEduSessionHandle shareInstance].iIsAssitOpenVInit == 0)) {
                 _iHandUpBtn.hidden = YES;
                 _iButton1.hidden = YES;
                 _iButton2.hidden = YES;

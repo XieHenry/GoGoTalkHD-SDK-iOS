@@ -13,7 +13,7 @@
 
 @import UIKit;
 
-typedef void(^bLoadFinishedBlock)();
+typedef void(^bLoadFinishedBlock) (void);
 
 @interface TKEduBoardHandle : NSObject
 
@@ -35,5 +35,9 @@ typedef void(^bLoadFinishedBlock)();
 -(void)cleanup;
 -(void)refreshUIForFull:(BOOL)isFull;
 -(void)refreshWebViewUI;
-
+-(void)setRoomType:(NSInteger)roomType;
+-(void)clearLcAllData;
+-(void)setMyPeerID:(NSString *)peerId nickName:(NSString *)nickName;
+-(void)disconnectCleanup;
+-(void)playbackSeekCleanup;
 @end

@@ -12,6 +12,12 @@
 #import "TKUtil.h"
 #import "MediaStream.h"
 
+@interface TKBaseMediaView ()
+
+@property (nonatomic, assign) BOOL isScreenShare;
+
+@end
+
 @implementation TKBaseMediaView
 
 - (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
@@ -24,7 +30,7 @@
         _iMediaStream = aMediaStream;
         _isPlayEnd      = NO;
         _duration       = aMediaStream.duration;
-        
+        _isScreenShare  = NO;
         [TKEduSessionHandle shareInstance].isPlayMedia = YES;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
@@ -41,6 +47,20 @@
     }
     return self;
 }
+
+- (instancetype)initScreenShare:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.isScreenShare = YES;
+        [self ac_initVideoSubviews];
+        [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(unPluggingHeadSet:) name:sUnunpluggingHeadsetNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pluggInMicrophone:) name:sPluggInMicrophoneNotification object:nil];
+    }
+    return self;
+}
+
 -(void)unPluggingHeadSet:(NSNotification *)notifi{
     
     [self audioVolum: [TKEduSessionHandle shareInstance].iVolume];
@@ -140,7 +160,7 @@
 
 - (void)ac_initVideoSubviews
 {
-    if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback)){
+    if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback) || self.isScreenShare){
         return;
     }
    

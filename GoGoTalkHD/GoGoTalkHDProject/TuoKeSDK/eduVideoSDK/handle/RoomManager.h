@@ -98,6 +98,11 @@
 - (void)roomManagerDidFailWithError:(NSError *)error;
 
 /**
+ 在没有发布或订阅成功之前，发布3次失败或订阅3次失败通知上层有网路问题。
+ */
+- (void)roomManagerReportNetworkProblem;
+
+/**
  收到自定义信令消息
  
  @param add true：新增消息；false：删除消息
@@ -135,6 +140,22 @@
  @param isPlay 播放（YES）暂停（NO）
  */
 - (void)roomManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+
+#pragma mark screen
+
+/**
+ 有用户发布桌面共享
+ 
+ @param user 发布桌面共享的用户
+ */
+- (void)roomManagerScreenPublished:(RoomUser *)user;
+
+/**
+ 用户取消桌面发布
+ 
+ @param user 取消发布桌面共享的用户
+ */
+- (void)roomManagerScreenUnPublished:(RoomUser *)user;
 
 #pragma mark Playback
 
@@ -183,7 +204,20 @@
  @param data 消息数据，可以是Number、String、NSDictionary或NSArray
  @return YES ，代表白板处理 不用RoomManagerDelegate去处理了；  NO ，代表白板不处理，传给RoomManagerDelegate
  */
-- (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist;
+//- (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist;
+
+/**
+ 收到自定义信令消息，与音视频相类似。
+ 
+ @param add true：新增消息；false：删除消息
+ @param msgID 消息id
+ @param msgName 消息名字
+ @param ts 消息时间戳
+ @param data 消息数据，可以是Number、String、NSDictionary或NSArray
+ @param fromId 用户id
+ @return YES ，代表白板处理 不用RoomManagerDelegate去处理了；  NO ，代表白板不处理，传给RoomManagerDelegate
+ */
+- (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist fromID:(NSString*)fromId;
 
 /**
  白板接收到的所有信令
@@ -191,6 +225,27 @@
  @param list 信令数组
  */
 - (void)onRemoteMsgList:(NSArray*)list;
+
+/**
+ 白板接收到用户发布
+ 
+ @param user 发布的用户
+ */
+- (void)onUserPublished:(RoomUser *)user;
+
+/**
+ 白板接收到用户取消发布
+ 
+ @param user 取消发布的用户
+ */
+- (void)onUserUnpublished:(RoomUser *)user;
+
+/**
+ 白板接收到用户离开
+ 
+ @param user 离开的用户
+ */
+- (void)onUserLeft:(RoomUser *)user;
 
 @end
 
@@ -277,9 +332,18 @@
 @property (nonatomic, assign, readonly) BOOL hideClassBeginEndButton;
 
 /**
+ 助教是否可以上下台
+ */
+@property (nonatomic, assign, readonly) BOOL assistantCanPublish;
+
+/**
  当前的流媒体
  */
 @property (nonatomic, strong, readonly) MediaStream *currentMediaStream;
+/**
+ 是否低消耗状态
+ */
+@property (nonatomic, assign, readonly) BOOL lowConsume;
 
 /**
  初始化方法，如果不需要白板用此方法
@@ -307,6 +371,9 @@
  */
 - (instancetype)initPlaybackWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
 
+- (void)joinRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
+
+- (void)joinPlaybackRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
 /**
  进入房间
  
@@ -405,6 +472,8 @@
  @param block 完成的回调
  */
 - (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
+
+- (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save AssociatedMsgID:(NSString*)associatedMsgID AssociatedUserID:(NSString*)associatedUserID completion:(void (^)(NSError *error))block;
 
 /**
  删除自定义消息
@@ -568,4 +637,21 @@
  开始回放
  */
 - (void)playback;
+
+/**
+ 播放桌面共享
+ 
+ @param peerID 共享桌面的用户id
+ @param block 播放共享桌面后的回调
+ */
+- (void)playScreen:(NSString *)peerID completion:(void (^)(NSError *, NSObject *))block;
+
+/**
+ 关闭共享桌面
+ 
+ @param peerID 共享桌面的用户id
+ @param block 关闭共享桌面的回调
+ */
+- (void)unPlayScreen:(NSString *)peerID completion:(void (^)(NSError *error))block;
+
 @end

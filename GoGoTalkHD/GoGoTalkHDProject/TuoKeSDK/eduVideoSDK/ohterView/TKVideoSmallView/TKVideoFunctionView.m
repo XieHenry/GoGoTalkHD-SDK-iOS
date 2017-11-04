@@ -50,6 +50,17 @@
         if (aVideoRole == EVideoRoleTeacher || (aVideoRole != EVideoRoleTeacher && [aRoomUer.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID])) {
             tPoroFloat = 2.0;
         }
+        
+        // 不显示学生的关闭视频按钮，减一个位置
+        if (aVideoRole != EVideoRoleTeacher && ![aRoomUer.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]) {
+            tPoroFloat = tPoroFloat - 1;
+        }
+        
+        // 如果是助教，只显示下台和关音频2个
+        if (aRoomUer.role == UserType_Assistant) {
+            tPoroFloat = 2;
+        }
+        
         CGFloat tWidth = (CGRectGetWidth(frame)-20)/tPoroFloat;
        
         _iButton1 = ({
@@ -146,7 +157,8 @@
                 tButton.titleRect = CGRectMake(0, tHeight-30, tWidth, 20);
                 //            tButton.imageRect = CGRectMake((tWidth-30)/2.0, (tHeight-30)/2.0, 30, 30);
                 //            tButton.titleRect = CGRectMake(0, tHeight-20, tWidth, 20);
-                tButton.frame = CGRectMake((aRoomUer.disableVideo?tWidth*2:tWidth*3)+10 , 0, tWidth, tHeight);
+                //tButton.frame = CGRectMake((aRoomUer.disableVideo?tWidth*2:tWidth*3)+10 , 0, tWidth, tHeight);
+                tButton.frame = CGRectMake((aRoomUer.disableVideo?tWidth*1:tWidth*2)+10 , 0, tWidth, tHeight);  // 不显示关闭视频按钮，减一个位置
                 tButton;
                 
             });
@@ -180,6 +192,7 @@
                     x = tWidth * 4;
                 }
             }
+            x = x - tWidth;     // 不显示关闭视频按钮，减一个位置
             tButton.frame = CGRectMake(10+x, 0, tWidth, tHeight);
             tButton;
             
@@ -247,12 +260,17 @@
             _iButton3.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
             [self addSubview:_iButton5];
             [self addSubview:_iButton3];
+        } else if (aRoomUer.role == UserType_Assistant) {
+            _iButton2.frame = CGRectMake(10, 0, tWidth, tHeight);
+            _iButton3.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
+            [self addSubview:_iButton2];
+            [self addSubview:_iButton3];
         } else {
             [self addSubview:_iButton1];
             [self addSubview:_iButton2];
             [self addSubview:_iButton3];
             [self addSubview:_iButton4];
-            [self addSubview:_iButton5];
+            //[self addSubview:_iButton5];
         }
         
        

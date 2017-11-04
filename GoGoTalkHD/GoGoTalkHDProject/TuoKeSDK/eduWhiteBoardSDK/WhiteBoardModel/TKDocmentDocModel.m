@@ -25,4 +25,15 @@
         _action = @"";
     }
 }
+
+- (void)resetToDefault {
+    self.currpage = [[NSNumber alloc] initWithInt:1];
+    self.pptstep = [[NSNumber alloc] initWithInt:0];
+    self.steptotal = [[NSNumber alloc] initWithInt:0];
+    self.pptslide = [[NSNumber alloc] initWithInt:1];
+    if (self.fileid.intValue == 0) {
+        self.pagenum = [[NSNumber alloc] initWithInt:1];
+    }
+}
+
 @end

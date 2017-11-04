@@ -22,7 +22,9 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 //weijin
 //static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
 //static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
+//建行
 
+//static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.33:8020/phone-demo/index.html";
 @interface TKEduBoardHandle ()<WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 
 @property(nonatomic,retain)UIView *iContainView;
@@ -135,37 +137,32 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     _iWebView.scrollView.scrollEnabled = NO;
     _iWebView.scrollView.backgroundColor = RGBCOLOR(28, 28, 28);
     
-//#if defined(__IPHONE_11_0)
-//    [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-//#endif
     
 #ifdef __IPHONE_11_0
     if ([_iWebView.scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-        if (@available(iOS 11.0, *)) {
-            [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-        } else {
-            // Fallback on earlier versions
-        }
+         [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
+    
 #endif
 
 #ifdef Debug
-//   
-//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ts=%@",sEduWhiteBoardUrl, @([[NSDate date]timeIntervalSince1970])]];
-//         //根据URL创建请求
-//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//         //WKWebView加载请求
-//        [_iWebView loadRequest:request];
+
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ts=%@",sEduWhiteBoardUrl, @([[NSDate date]timeIntervalSince1970])]];
+//    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&languageType=%@", url.absoluteString, [TKUtil getCurrentLanguage]]];
+//     //根据URL创建请求
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//     [self clearcookie];
+//     //WKWebView加载请求
+//    [_iWebView loadRequest:request];
     
 #endif
     //phone_demo/index.hml?ts=1111
     NSURL *path = [BUNDLE URLForResource:@"phone_demo/index" withExtension:@"html"];
+    path = [NSURL URLWithString:[NSString stringWithFormat:@"%@?languageType=%@", path.absoluteString, [TKUtil getCurrentLanguage]]];
     [self clearcookie];
     [_iWebView loadRequest:[NSURLRequest requestWithURL:path]];
     
     
-
-  
     //添加到containView上
     [aContainView addSubview:_iWebView];
     
@@ -204,7 +201,7 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
                             @"serviceUrl":tJsServiceUrl,
                             @"addPagePermission":@(tAddPagePermission),
                             @"deviceType":@(1),
-                            @"role":@(role),
+                            @"role":@([TKEduSessionHandle shareInstance].isPlayback?-1:role),
                             @"raisehand":@(false),
                             @"giftnumber":@(0),
                             @"candraw":@(false),
@@ -242,6 +239,8 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     NSString* msgId = [tDic objectForKey:@"id"];
     NSString* toId =[tDic objectForKey:@"toID"];
     NSString *tData = [tDic objectForKey:@"data"];
+    NSString *associatedMsgID = [tDic objectForKey:@"associatedMsgID"];
+    NSString *associatedUserID = [tDic objectForKey:@"associatedUserID"];
      NSData *tDataData = [tData dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *tDataDic = [NSJSONSerialization JSONObjectWithData:tDataData options:NSJSONReadingMutableContainers error:nil];
     TKDocmentDocModel *tDocmentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
@@ -264,6 +263,8 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
           tDocmentDocModel.currpage = tTotalPage?tTotalPage:tDocmentDocModel.pagenum;
     }
    
+    //NSArray *tArray =  [[TKEduSessionHandle shareInstance] docmentArray];
+    //TKLog(@"jin sendBoardData %@",tArray);
     [[TKEduSessionHandle shareInstance] addOrReplaceDocmentArray:tDocmentDocModel];
   
     BOOL save = YES;
@@ -273,22 +274,24 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     BOOL isClassBegin = [TKEduSessionHandle shareInstance].isClassBegin;
     BOOL isCanDraw = [TKEduSessionHandle shareInstance].localUser.canDraw;
     BOOL isTeacher = ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher);
-    BOOL isSharpsChangeMsg = [msgName isEqualToString:sSharpsChange];
+    //BOOL isResultStudent = [msgName isEqualToString:sResultStudent];
+    BOOL isResultStudent = YES;
     BOOL isH5Document = ([tDocmentDocModel.fileprop integerValue] == 3);
     
     //BOOL isCanSend = (isClassBegin &&((isCanDraw && isSharpsChangeMsg) || isTeacher || (isH5Document &&isCanDraw )));
     
-    BOOL isCanSend = (isClassBegin &&(isCanDraw  || isTeacher));
+    BOOL isCanSend = (isClassBegin &&(isCanDraw  || isTeacher || isResultStudent));
     
     if (isCanSend) {
-        
-        [[TKEduSessionHandle shareInstance]  sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save completion:nil];
+        [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID completion:nil];
     }
     
     
 }
 -(void)deleteBoardData:(NSDictionary*)aJs{
-    NSData *tJsData = [aJs objectForKey:@"data"];
+    NSString *tDataString = [aJs objectForKey:@"data"];
+    NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+    //NSData *tJsData = [aJs objectForKey:@"data"];
     NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
     NSString* msgName =[tDic objectForKey:@"signallingName"];
     NSString* msgId = [tDic objectForKey:@"id"];
@@ -443,6 +446,15 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
         
     }];
 }
+
+-(void)clearLcAllData {
+    NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.clearLcAllData"];
+    [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        NSLog(@"清理白板!");
+    }];
+}
+
+
 -(void)resizeHandler{
     
 
@@ -475,6 +487,48 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     
     //webview暂停加载
    // [_iWebView stopLoading];
+}
+
+-(void)setRoomType:(NSInteger)roomType {
+    NSDictionary *roomTypeDic = @{@"roomType":@(roomType)};
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:roomTypeDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.oneToMany(%@)", tJsonString];
+    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        // 什么都不做
+    }];
+}
+
+-(void)setMyPeerID:(NSString *)peerId nickName:(NSString *)nickName {
+    if (peerId && nickName) {
+        NSDictionary *peerIdDic = @{@"peerid":peerId, @"nickname":nickName};
+        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:peerIdDic options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
+        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.joinRoom(%@)", tJsonString];
+        [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            // 什么都不做
+        }];
+    }
+}
+
+-(void)disconnectCleanup {
+    NSDictionary *dic = @{@"type":@"room-disconnected"};
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.dispatchEvent(%@)", tJsonString];
+    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        TKLog(@"断网重连白板清理！");
+    }];
+}
+
+-(void)playbackSeekCleanup {
+    NSDictionary *dic = @{@"type":@"room-playback-clear_all"};
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.dispatchEvent(%@)", tJsonString];
+    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        TKLog(@"回放seek白板清理！");
+    }];
 }
 
 #pragma mark - WKScriptMessageHandler

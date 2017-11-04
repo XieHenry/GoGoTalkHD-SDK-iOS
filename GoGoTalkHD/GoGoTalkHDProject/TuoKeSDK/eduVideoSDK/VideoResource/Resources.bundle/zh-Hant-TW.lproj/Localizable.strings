@@ -29,6 +29,7 @@
 "Prompt.Quite" = "您確定退出嗎?";
 "Prompt.nicknameNotNull" = "昵稱不能為空";
 "Prompt.RoomIDNotNull" = "課堂號不能為空";
+"Prompt.devicetPrompt" = "當前的設備配置較低，課堂不能完美運行";
 "Prompt.onlyNumber" = "課堂號只能是數字";
 //login
 "Login.EnterRoom" = "進入教室";
@@ -104,6 +105,17 @@
 "Prompt.FinishClass"        = "您確定要下課嗎?";
 "Prompt.exceeds"            = "發言席人數超過限制!";
 "Prompt.ClassEnd"           = "本次課程已經結束!";
+"Prompt.NeedCamera"         = "請在iPhone的\"設置-隱私-相機\"選項中，允許拓課雲訪問妳的相機。";
+"Prompt.NeedMicrophone.Title" = "無法錄音";
+"Prompt.NeedMicrophone"     = "請在iPhone的\"設置-隱私-相機\"選項中，允許拓課雲訪問妳的手機麥克風。";
+"Prompt.Sure"               = "好";
+"Prompt.NeedCameraNeedMicrophone" = "請在iPhone的\"設置-隱私\"選項中，允許拓課雲訪問妳的攝像頭和麥克風。";
 
+"Action.Title"     = "拍攝上傳";
+"Action.TakePhoto" = "拍攝照片";
+"Action.ChoosePhoto" = "選擇照片";
+"Button.UploadPhoto" = "拍照";
 
-
+"Prompt.enterBackGround" = "進入後臺";
+"Prompt.enterForeGround" = "恢復前臺";
+"Prompt.NetworkException" = "網絡出現異常，請檢查網絡環境，重新進入";

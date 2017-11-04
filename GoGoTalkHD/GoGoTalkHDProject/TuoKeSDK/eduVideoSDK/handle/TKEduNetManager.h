@@ -29,7 +29,9 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 @end
 
 @interface TKEduNetManager : NSObject
-
++ (instancetype _Nonnull )initTKEduNetManagerWithDelegate:(id < TKEduNetWorkDelegate> _Nonnull)delegate;
+    
+    
 +(void)checkRoom:(NSDictionary *_Nonnull)aParam  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError ;
 
 +(void)getGiftinfo:(NSString *_Nonnull)aRoomId aParticipantId:(NSString *_Nonnull)aParticipantId aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aGetGifInfoComplete:(bGetGifInfoComplete _Nullable )aGetGifInfoComplete aGetGifInfoError:(bGetGifInfoError _Nullable)aGetGifInfoError;
@@ -37,8 +39,11 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 +(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *_Nonnull)docid isMedia:(bool)isMedia    aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete aNetError:(bError _Nullable) aNetError;
 
 +(void)sendGifForRoomUser:(NSArray *_Nonnull)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError;
-#pragma mark 上传文档暂时无用
-- (int)uploadWithRequestURL:(NSString*_Nullable)requestURL meetingID:(int)meetingid fileData:(NSData *_Nullable)fileData fileName:(NSString *_Nullable)fileName userName:(NSString *_Nullable)userName;
+#pragma mark 上传文档
++ (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*_Nullable)roomID fileData:(NSData *_Nullable)fileData fileName:(NSString *_Nullable)fileName  fileType:(NSString *_Nullable)fileType userName:(NSString *_Nullable)userName userID:(NSString *_Nullable)userID delegate:(id _Nullable )delegate;
+
+- (int)uploadWithaHost2:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*_Nullable)roomID fileData:(NSData *_Nullable)fileData fileName:(NSString *_Nullable)fileName  fileType:(NSString *_Nullable)fileType userName:(NSString *_Nullable)userName userID:(NSString *_Nullable)userID;
+
 - (void)getmeetingfile:(int)meetingid requestURL:(NSString *_Nullable)requestURL;
 #pragma mark 下课
 +(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *_Nonnull)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;

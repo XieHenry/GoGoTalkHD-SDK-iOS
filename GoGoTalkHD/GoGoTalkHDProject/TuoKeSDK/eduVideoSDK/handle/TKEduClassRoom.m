@@ -95,7 +95,13 @@ TKNavigationController* _iEduNavigationController = nil;
     _iRoomProperty = [[TKEduRoomProperty alloc]init];
     [_iRoomProperty parseMeetingInfo:paramDic];
     _iRoomProperty.iRoomType = [[paramDic objectForKey:@"type"] integerValue];
-
+    bool isConform = [TKUtil deviceisConform];
+    isConform      = true;
+    if (!isConform) {
+        _iRoomProperty.iMaxVideo = @(2);
+    }else{
+         _iRoomProperty.iMaxVideo = @(6);
+    }
     _HUD = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
     [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
     _HUD.dimBackground = YES;
@@ -182,12 +188,13 @@ TKNavigationController* _iEduNavigationController = nil;
                     _iRoomProperty.iRoomName = [tRoom objectForKey:@"roomname"]?[tRoom objectForKey:@"roomname"]:@"";
                     _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
-                    
-//                    if (tMaxVideo>6 || (tMaxVideo == 0)) {
-//                        tMaxVideo = 6;
-//                    }
-                    
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
+                    bool isConform = [TKUtil deviceisConform];
+                    isConform      = true;
+                    if (!isConform) {
+                        _iRoomProperty.iMaxVideo = @(2);
+                    }
+                    
                 }
                 
                 //roomrole
@@ -216,6 +223,9 @@ TKNavigationController* _iEduNavigationController = nil;
                 [_HUD hide:YES];
                 
             }
+        }else{
+            [strongSelf reportFail:-2 aDescript:@""];
+            [_HUD hide:YES];
         }
          return 0;
             

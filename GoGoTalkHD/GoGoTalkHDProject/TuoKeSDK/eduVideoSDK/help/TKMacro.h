@@ -174,7 +174,12 @@ static  NSString *const sSharpsChange               = @"SharpsChange";//画笔
 static  NSString *const sDocumentChange             = @"DocumentChange";//添加或删除文档
 static  NSString *const sStreamFailure              = @"StreamFailure";
 
+static  NSString *const sAllAll             = @"__AllAll";
+
 static  NSString *const sVideoDraghandle            = @"videoDraghandle";//视频拖拽
+
+static  NSString *const sResultStudent            = @"resultStudent";//学生答题
+static  NSString *const sUserEnterBackGround      = @"userEnterBackGround";//进入后台
 
 static  NSString *const sUpdateTime          = @"UpdateTime";
 static  NSString *const sMuteAudio           = @"MuteAudio";
@@ -236,4 +241,9 @@ static  NSString *const sHost   = @"global.talk-cloud.net";
 #define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
 #define iOS9_1Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.1f)
 #define iOS10_0Later ([UIDevice currentDevice].systemVersion.floatValue >= 10.0f)
+
+#define tk_weakify(var)   __weak typeof(var) weakSelf = var
+#define tk_strongify(var) __strong typeof(var) strongSelf = var
+
+
 #endif /* TKMacro_h */

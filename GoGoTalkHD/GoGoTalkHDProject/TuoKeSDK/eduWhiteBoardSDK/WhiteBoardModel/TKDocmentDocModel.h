@@ -66,4 +66,5 @@
 @property (nonatomic, strong) NSNumber *isShow;//是否查看
 @property (nonatomic, strong) NSNumber* duration;//BOOl
 -(void)dynamicpptUpdate;
+- (void)resetToDefault;
 @end

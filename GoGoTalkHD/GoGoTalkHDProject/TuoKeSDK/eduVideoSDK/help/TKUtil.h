@@ -79,5 +79,9 @@
 +(NSString*)absolutefileUrl:(NSString*)fileUrl webIp:(NSString*)webIp webPort:(NSString*)webPort;
 #pragma mark 将字典转换为JSON字符串
 +(NSString *)dictionaryToJSONString:(NSDictionary *)dic;
+#pragma mark 检测语言
++(NSString*)getCurrentLanguage;
+#pragma mark 是否符合设备
++(bool)deviceisConform;
 @end
 

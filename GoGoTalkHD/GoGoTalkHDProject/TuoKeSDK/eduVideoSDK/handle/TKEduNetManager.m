@@ -42,6 +42,16 @@ extern int expireSeconds;
     
     return singleton;
 }
+    
++ (instancetype)initTKEduNetManagerWithDelegate:(id<TKEduNetWorkDelegate>)delegate
+{
+    TKEduNetManager *manager = nil;
+    if (manager == nil) {
+        manager = [[TKEduNetManager alloc] init];
+        manager.iRequestDelegate = delegate;
+    }
+    return manager;
+}
 #pragma mark checkRoom
 +(void)checkRoom:(NSDictionary *_Nonnull)aParam  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError {
     [[self shareInstance]checkRoom:aParam aDidComplete:aDidComplete aNetError:aNetError];
@@ -571,15 +581,7 @@ extern int expireSeconds;
                 break;
             if ([responseObject isKindOfClass:[NSData class]]){
                 id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-                
-                int result = [[json objectForKey:@"result"]intValue];
-                
-//                if (!result ) {
-//                    if (aComplete) {
-//                        aComplete(json);
-//                    }
-//                }
-                
+
                 aComplete(nil);         // 无需关心返回值是什么，直接上课
                 
             }
@@ -601,7 +603,90 @@ extern int expireSeconds;
 
 
 #pragma mark 其他
-- (int)uploadWithRequestURL:(NSString*)requestURL meetingID:(int)meetingid fileData:(NSData *)fileData fileName:(NSString *)fileName userName:(NSString *)userName
++ (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID delegate:(id)delegate{
+    
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    NSString*requestURL= [NSString stringWithFormat:@"%@://%@:%@/ClientAPI/uploaddocument",sHttp,aHost ,aPort];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    // https ssl 验证。
+    [manager setSecurityPolicy:[[self shareInstance] customSecurityPolicy]];
+    NSDictionary *parameters = @{@"serial" : roomID,
+                              @"userid" : userID,
+                              @"sender" : userName,
+                              @"conversion" : @1,
+                              @"isconversiondone" : @0,
+                              @"writedb" : @1,
+                              @"fileoldname" : fileName,
+                              @"fieltype" : fileType,
+                              @"alluser" : @1};
+    NSURLSessionTask *session = [manager POST:requestURL parameters:parameters constructingBodyWithBlock:^(id<TKAFMultipartFormData>  _Nonnull formData) {
+        NSData *imageData = fileData;
+        
+        NSString *imageFileName = fileName;
+        if (fileName == nil || ![fileName isKindOfClass:[NSString class]] || fileName.length == 0) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            imageFileName = [NSString stringWithFormat:@"%@.jpeg", str];
+        }
+
+        [formData appendPartWithFileData:imageData name:FORM_FLE_INPUT fileName:imageFileName mimeType:@"image/jpge, image/gif, image/jpeg, image/pjpeg, image/pjpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+     
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (delegate && [delegate respondsToSelector:@selector(uploadProgress:totalBytesSent:bytesTotal:)]) {
+                 [delegate uploadProgress:req totalBytesSent:uploadProgress.completedUnitCount  bytesTotal:uploadProgress.totalUnitCount];
+            }
+        });
+       
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        do
+        {
+            
+            
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                
+                 int result = [[json objectForKey:@"result"]intValue];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (delegate && [delegate respondsToSelector:@selector(uploadFileResponse:req:)]) {
+                        [delegate uploadFileResponse:json req:result];
+                    }
+                });
+
+            }
+            
+            
+        }while(0);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (delegate && [delegate respondsToSelector:@selector(uploadFileResponse:req:)]) {
+                [delegate uploadFileResponse:nil req:-1];
+            }
+        });
+    }];
+    
+    [session resume];
+    
+    
+    return 1;
+}
+
+- (int)uploadWithaHost2:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
@@ -611,14 +696,33 @@ extern int expireSeconds;
     NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
     //结束符 AaB03x--
     NSString *endMPboundary=[[NSString alloc]initWithFormat:@"%@--",MPboundary];
-    
+
     NSMutableData *myRequestData=[NSMutableData data];
+    NSString*requestURL= [NSString stringWithFormat:@"%@://%@:%@/ClientAPI/uploaddocument",sHttp,aHost ,aPort];
     NSURL *url = [NSURL URLWithString:requestURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
     NSMutableString *body=[[NSMutableString alloc]init];
-    NSDictionary *dataDic = @{@"serial" : @(meetingid),
+ /*
+  
+  "serial": _room_properties['serial'],           /[表情]id
+  "userid": _myself.id,            //用户id
+  "sender": _myself.nickname,        //用户名
+  "conversion": 1,               //是否进行文档转换
+  "isconversiondone": 0,         //表示是否从客户端进行转换   1：客户端转换 0：否
+  "writedb": 1,                 //是否写数据库 1：写  0：不写
+  'fileoldname':filename  ,     //原文件名(如果是原文件)
+  "fieltype": filetype,             //文件类型(如果是原文件)
+  "alluser": 1                   //是否对所有人可见
+  
+  */
+    NSDictionary *dataDic = @{@"serial" : roomID,
+                              @"userid" : userID,
                               @"sender" : userName,
                               @"conversion" : @1,
+                              @"isconversiondone" : @0,
+                              @"writedb" : @1,
+                              @"fileoldname" : fileName,
+                              @"fieltype" : fileType,
                               @"alluser" : @1};
     for (NSString *key in dataDic.allKeys)
     {
@@ -779,7 +883,27 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
 }
 
-
+- (void)URLSession:(NSURLSession *)session
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+{
+    // 如果使用默认的处置方式，那么 credential 就会被忽略
+    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+    NSURLCredential *credential = nil;
+    
+    if ([challenge.protectionSpace.authenticationMethod
+         isEqualToString:
+         NSURLAuthenticationMethodServerTrust]) {
+        
+        credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        if (credential) {
+            disposition = NSURLSessionAuthChallengeUseCredential;
+        }
+    }
+    if (completionHandler) {
+        completionHandler(disposition, credential);
+    }
+}
 
 
 

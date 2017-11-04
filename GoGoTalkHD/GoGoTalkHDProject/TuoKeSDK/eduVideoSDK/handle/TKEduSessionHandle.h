@@ -51,12 +51,24 @@
 - (void)sessionManagerMediaUnPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user;
 //媒体流进度
 - (void)sessionManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+#pragma mark Screen
+- (void)sessionManagerScreenPublish:(RoomUser *)user;
+- (void)sessionManagerScreenUnPublish:(RoomUser *)user;
 
 #pragma mark Playback
 - (void)sessionManagerReceivePlaybackDuration:(NSTimeInterval)duration;
 - (void)sessionManagerPlaybackUpdateTime:(NSTimeInterval)time;
 - (void)sessionManagerPlaybackClearAll;
 - (void)sessionManagerPlaybackEnd;
+
+#pragma mark 设备检测
+- (void)noCamera;
+- (void)noMicrophone;
+- (void)noCameraAndNoMicrophone;
+
+#pragma mark 首次发布或订阅失败3次
+- (void)networkTrouble;
+
 @end
 
 @protocol TKEduBoardDelegate <NSObject>
@@ -110,13 +122,20 @@
 @property (nonatomic,strong) NSMutableDictionary*iMediaMutableDic;
 @property (nonatomic,strong) TKEduBoardHandle   *iBoardHandle;
 
-
 @property (nonatomic,assign)BOOL iIsPlaying;//是否播放中
 @property (nonatomic,assign)BOOL isPlayMedia;//是否有音频
 @property (nonatomic,assign)BOOL isChangeMedia;//是否是切换
 @property (nonatomic, assign) CGFloat iVolume;//音量 默认最大，耳机一半
 @property (nonatomic,assign)BOOL isLocal;
 @property (nonatomic,assign)BOOL isPlayback;  // 是否是回放
+@property (nonatomic,assign)BOOL iIsJoined;//是否加入了房间
+
+//配置项
+@property (assign,nonatomic)BOOL iIsCanDraw;
+@property (assign,nonatomic)BOOL iIsCanPage;
+@property (assign,nonatomic)BOOL iIsCanDrawInit;
+@property (assign,nonatomic)BOOL iIsCanPageInit;
+@property (assign,nonatomic)BOOL iIsAssitOpenVInit;
 +(instancetype)shareInstance;
 
 - (void)configureSession:(NSDictionary*)paramDic
@@ -131,6 +150,7 @@
                 aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
                   aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
                  aRoomProperties:(TKEduRoomProperty*)aRoomProperties;
+
 
 -(void)joinEduClassRoomWithParam:(NSDictionary *)aParamDic aProperties:(NSDictionary *)aProperties;
 - (void)sessionHandleLeaveRoom:(void (^)(NSError *error))block;
@@ -147,7 +167,8 @@
 
 - (void)sessionHandleSendMessage:(NSString*)message completion:(void (^)(NSError *error))block;
 
-- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
+//- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
+- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save AssociatedMsgID:(NSString*)associatedMsgID AssociatedUserID:(NSString*)associatedUserID completion:(void (^)(NSError *error))block;
 
 - (void)sessionHandleDelMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data completion:(void (^)(NSError *error))block;
 
@@ -185,8 +206,13 @@
 //媒体流音量
 -(void)sessionHandleMediaVolum:(CGFloat)volum;
 
+#pragma mark Screen
+-(void)sessionHandlePlayScreen:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+-(void)sessionHandleUnPlayScreen:(NSString *)peerId completion:(void (^)(NSError *error))block;
+
 #pragma 其他
 -(void)clearAllClassData;
+-(void)clearMessageList;
 //message
 - (NSArray *)messageList;
 - (void)addOrReplaceMessage:(TKChatMessageModel *)aMessageModel;
@@ -227,7 +253,8 @@
 -(void)publishtDocMentDocModel:(TKDocmentDocModel*)tDocmentDocModel To:(NSString *)to aTellLocal:(BOOL)aTellLocal;
 //删除文档
 -(void)deleteDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to;
-
+//添加文档
+-(void)addDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to;
 #pragma mark 白板
 //文档
 -(NSDictionary *)docmentDic;
@@ -237,6 +264,7 @@
 - (bool)addOrReplaceDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 - (void)delDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 -(TKDocmentDocModel *)getNextDocment:(TKDocmentDocModel *)aCurrentDocmentModel;
+- (void)fileListResetToDefault;         // 使文档列表中的文档复位
 //音视频
 -(NSDictionary *)meidaDic;
 -(TKMediaDocModel*)getMediaFromFiledId:(NSString *)aFiledId;
@@ -244,7 +272,6 @@
 - (void)addOrReplaceMediaArray:(TKMediaDocModel *)aMediaDocModel;
 - (void)delMediaArray:(TKMediaDocModel *)aMediaDocModel;
 -(TKMediaDocModel*)getNextMedia:(TKMediaDocModel *)aCurrentMediaDocModel;
-
 -(void)docmentDefault:(TKDocmentDocModel*)aDefaultDocment;
 
 -(BOOL)isEqualFileId:(id)aModel  aSecondModel:(id)aSecondModel;
@@ -261,4 +288,10 @@
 - (void)playback;
 - (void)pausePlayback;
 - (void)seekPlayback:(NSTimeInterval)positionTime;
+
+#pragma mark 设置权限
+//画笔权限以及翻页权限初始化
+-(void)configureDrawAndPageWithControl:(NSString *)aChairmancontrol;
+- (void)configureDraw:(BOOL)isDraw isSend:(BOOL)isSend to:(NSString *)to peerID:(NSString*)peerID;
+- (void)configurePage:(BOOL)isPage isSend:(BOOL)isSend to:(NSString *)to peerID:(NSString*)peerID;
 @end

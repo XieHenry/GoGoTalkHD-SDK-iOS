@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, EDir)
 
 
 
-typedef CGPoint (^bVideoSmallViewClickeBlockType)();
+typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 @interface TKVideoSmallView : UIView
 
 -(nonnull instancetype)initWithFrame:(CGRect)frame aVideoRole:(EVideoRole)aVideoRole NS_DESIGNATED_INITIALIZER;

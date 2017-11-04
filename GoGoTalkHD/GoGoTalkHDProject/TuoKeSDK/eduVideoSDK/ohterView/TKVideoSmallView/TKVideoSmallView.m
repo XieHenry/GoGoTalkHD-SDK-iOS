@@ -235,6 +235,11 @@
         currentGift = [[_iRoomUser.properties objectForKey:sGiftNumber] intValue];
     [_iGifButton setTitle:[NSString stringWithFormat:@"%@",@(currentGift)] forState:UIControlStateNormal];
     
+    // 助教视频不显示奖杯
+    if (iRoomUser.role == UserType_Assistant) {
+        _iGifButton.hidden = YES;
+    }
+    
     _iAudioImageView.hidden = !isShowAudioImage;
     _iVideoImageView.hidden = !isShowVideoImage;
     _iDrawImageView.hidden  = !iRoomUser.canDraw || (iRoomUser.publishState == PublishState_NONE) || (iRoomUser.role == UserType_Teacher) ;
@@ -244,6 +249,12 @@
     // 根据用户disableAudio和disableVideo去设置图片
     [self changeAudioDisabledState];
     [self changeVideoDisabledState];
+    
+    // 未上课，不显示摄像头和话筒图标
+    if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
+        _iAudioImageView.hidden = YES;
+        _iVideoImageView.hidden = YES;
+    }
 }
 
 -(void)refreshRaiseHandUI:(NSNotification *)aNotification{
@@ -287,6 +298,10 @@
 }
 -(void)functionButtonClicked:(UIButton *)aButton{
    
+    if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
+        return;
+    }
+    
     if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID] || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
         return;
     
@@ -418,9 +433,10 @@
             
             TKLog(@"授权涂鸦");
             if (_iRoomUser.publishState>1) {
-                [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!_iRoomUser.canDraw)) completion:nil];
+                //[_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!_iRoomUser.canDraw)) completion:nil];
+                [[TKEduSessionHandle shareInstance]configureDraw:!_iRoomUser.canDraw isSend:YES to:sTellAll peerID:_iRoomUser.peerID];
                 
-                //[[TKEduWhiteBoardHandle shareTKEduWhiteBoardHandleInstance] setDrawable:!_iRoomUser.canDraw];
+                ////[[TKEduWhiteBoardHandle shareTKEduWhiteBoardHandleInstance] setDrawable:!_iRoomUser.canDraw];
                 aButton.selected =  !_iRoomUser.canDraw;
                 _iDrawImageView.hidden = _iRoomUser.canDraw;
             }
@@ -471,7 +487,12 @@
             BOOL isShowVideo = (tPublishState != PublishState_NONE);
             if (isShowVideo) {
                 [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_NONE completion:nil];
-                [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+                // 助教始终有画笔权限
+                if (_iRoomUser.role != UserType_Assistant) {
+                    [[TKEduSessionHandle shareInstance]configureDraw:false isSend:true to:sTellAll peerID:_iRoomUser.peerID];
+                    //[_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+                }
+
             } else {
                 [_iEduClassRoomSessionHandle sessionHandleChangeUserPublish:_iPeerId Publish:PublishState_BOTH completion:nil];
             }
@@ -693,6 +714,11 @@
         }
     }
     
+    // 未上课，不显示摄像头和话筒图标
+    if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
+        _iAudioImageView.hidden = YES;
+        _iVideoImageView.hidden = YES;
+    }
 }
 
 -(void)changeVideoDisabledState {
@@ -723,6 +749,12 @@
             [self bringSubviewToFront:_iDrawImageView];
             [self bringSubviewToFront:_iHandsUpImageView];
         }
+    }
+    
+    // 未上课，不显示摄像头和话筒图标
+    if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
+        _iAudioImageView.hidden = YES;
+        _iVideoImageView.hidden = YES;
     }
 }
 

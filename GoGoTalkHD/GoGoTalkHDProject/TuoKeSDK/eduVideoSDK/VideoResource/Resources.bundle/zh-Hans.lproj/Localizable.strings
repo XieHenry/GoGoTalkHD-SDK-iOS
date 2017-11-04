@@ -30,6 +30,7 @@
 "Prompt.Quite" = "您确定退出吗？";
 "Prompt.nicknameNotNull" = "昵称不能为空";
 "Prompt.RoomIDNotNull" = "课堂号不能为空";
+"Prompt.devicetPrompt" = "当前的设备配置较低，课堂不能完美运行";
 "Prompt.onlyNumber" = "课堂号只能是数字";
 "Login.EnterRoom" = "进入教室";
 "Login.RoomId" = "教室号";
@@ -105,3 +106,19 @@
 "Prompt.FinishClass"        = "您确定要下课吗?";
 "Prompt.exceeds"            = "发言席人数超过限制!";
 "Prompt.ClassEnd"           = "本次课程已经结束!";
+
+"Prompt.NeedCamera"         = "请在iPhone的\"设置-隐私-相机\"选项中，允许拓课云访问你的相机。";
+"Prompt.NeedMicrophone.Title" = "无法录音";
+"Prompt.NeedMicrophone"     = "请在iPhone的\"设置-隐私-相机\"选项中，允许拓课云访问你的手机麦克风。";
+"Prompt.Sure"               = "好";
+"Prompt.NeedCameraNeedMicrophone" = "请在iPhone的\"设置-隐私\"选项中，允许拓课云访问你的摄像头和麦克风。";
+
+
+"Action.Title"       = "拍照上传";
+"Action.TakePhoto"   = "拍摄照片";
+"Action.ChoosePhoto" = "选择图片";
+"Button.UploadPhoto" = "拍照";
+
+"Prompt.enterBackGround" = "进入后台";
+"Prompt.enterForeGround" = "恢复前台";
+"Prompt.NetworkException" = "网络出现异常，请检查网络环境，重新进入";

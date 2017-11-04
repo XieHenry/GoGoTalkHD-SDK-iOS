@@ -31,6 +31,7 @@
 "Prompt.nicknameNotNull" = "The nickName cannot be empty";
 "Prompt.onlyNumber" = "The RoomId only be number";
 "Prompt.RoomIDNotNull" = "The RoomId cannot be empty";
+"Prompt.devicetPrompt" = "The current device configuration is low, the classroom can not run perfectly";
 "Login.EnterRoom" = "Enter Classroom";
 "Login.RoomId"    = "Room";
 "Login.RoomIdPlaceHolder"    = "Room ID";
@@ -107,3 +108,19 @@
 "Prompt.FinishClass"        = "Are you sure you want to finish class？";
 "Prompt.exceeds"            = "The number of screen video exceeds the limit!";
 "Prompt.ClassEnd"           = "The class is over!";
+"Prompt.leaveRoom"          = "Have entered a classroom, quit first!";
+"Prompt.NeedCamera"         = "Please allow TalkCloud to access your device's camera in \"Settings\"->\"Privacy\"->\"Camera\".";
+"Prompt.NeedMicrophone.Title" = "Unable to record";
+"Prompt.NeedMicrophone"     = "Allow TalkCloud to access your microphone from device menu: \"Settings\"->\"Privacy\"->\"Microphone\".";
+"Prompt.Sure"                 = "OK";
+"Prompt.NeedCameraNeedMicrophone" = "Allow TalkCloud to access your camera and microphone on Settings-privacy on your iPhone";
+
+
+"Action.Title"       = "Take photo";
+"Action.TakePhoto"   = "Take Photo";
+"Action.ChoosePhoto" = "Choose Photo";
+"Button.UploadPhoto" = "Take Photo";
+
+"Prompt.enterBackGround" = "enter backGround";
+"Prompt.enterForeGround" = "resume foreGround";
+"Prompt.NetworkException" = "Network exception, check the network environment and re-enter";

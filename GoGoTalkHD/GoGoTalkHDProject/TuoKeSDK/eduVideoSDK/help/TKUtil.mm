@@ -10,6 +10,7 @@
 #import "TKMacro.h"
 #import "TKGTMBase64.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "sys/utsname.h"
 #define kChosenDigestLength		CC_SHA1_DIGEST_LENGTH
 
 #define DESKEY @"Gd0^9f@KoAQOXFPZQ^H&fURo"
@@ -266,7 +267,7 @@
 
 +(NSString *)docmentOrMediaImage:(NSString*)aType{
     NSString *tString = @"icon_user";
-    if ([aType isEqualToString:MTLocalized(@"Title.whiteBoard")]) {
+    if ([aType isEqualToString:@"whiteboard"]) {
         tString = @"icon_empty";
         
     }else if ([aType isEqualToString:@"xls"]||[aType isEqualToString:@"xlsx"]||[aType isEqualToString:@"xlt"]||[aType isEqualToString:@"xlsm"]){
@@ -393,5 +394,81 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return str;
+}
+
+#pragma mark 检测语言
++(NSString*)getCurrentLanguage {
+    NSArray *language = [NSLocale preferredLanguages];
+    if ([language objectAtIndex:0]) {
+        NSString *currentLanguage = [language objectAtIndex:0];
+        if ([currentLanguage length] >= 7 && [[currentLanguage substringToIndex:7] isEqualToString:@"zh-Hans"]) {
+            return @"ch";
+        }
+        
+        if ([currentLanguage length] >= 7 && [[currentLanguage substringToIndex:7] isEqualToString:@"zh-Hant"]) {
+            return @"tw";
+        }
+        
+        if ([currentLanguage length] >= 3 && [[currentLanguage substringToIndex:3] isEqualToString:@"en-"]) {
+            return @"en";
+        }
+    }
+    
+    return @"ch";
+}
+//https://www.theiphonewiki.com/wiki/Models
+//2014年10月17日iPad Air 2、iPad mini 3 iPhone6 iPad mini 2
++(bool)deviceisConform{
+
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];//获得设备类型
+    
+    NSArray *tParagramArray = [platform componentsSeparatedByString:@","];
+    if ([tParagramArray count]<2) {
+        return false;
+    }
+    
+    // 运行app的时候，给一个提示：当前的设备配置较低，课堂不能完美运行
+    // 点击按钮“知道了”关闭
+    NSString *platString = [tParagramArray objectAtIndex:0];
+    NSString *tPlatVersion = [tParagramArray objectAtIndex:1];
+    
+    NSArray *tIPhoneArray = [platString componentsSeparatedByString:@"iPhone"];
+    NSArray *tIPadArray   = [platString componentsSeparatedByString:@"iPad"];
+    if ([tIPhoneArray count]==2) {
+        /*
+         3 iphone
+         iPhone 6
+         iPhone7,2
+         iPhone 6 Plus
+         iPhone7,1
+         */
+        
+        NSString *tIPhoneVersion = [tIPhoneArray objectAtIndex:1];
+        bool isConformPhone      = [tIPhoneVersion intValue]>6?true:false;
+        return isConformPhone;
+    }
+    if ([tIPadArray count]==2) {
+        //iPad Air 2
+        //iPad5,3 iPad5,4
+        //iPad mini 4
+        //iPad5,1
+        NSString *tIPadVersion = [tIPadArray objectAtIndex:1];
+        bool isConformIPad = [tIPadVersion intValue]>4?true:false;
+        if (isConformIPad) {
+            return isConformIPad;
+        }
+        //iPad mini 2
+        //iPad4,4
+        //iPad mini 3
+        //iPad4,7 iPad4,8 iPad4,9
+        if ([tIPadVersion intValue] == 4) {
+            isConformIPad = [tPlatVersion intValue]>3?true:false;
+        }
+        return isConformIPad;
+        
+    }
+    return false;
 }
 @end

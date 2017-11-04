@@ -22,7 +22,7 @@
 @property (nonatomic, copy) NSString *nickName;
 
 /**
-  用户身份，0：老师；1：助教；2：学生；3：旁听；4：寻课
+  用户身份，0：老师；1：助教；2：学生；3：旁听；4：巡课
  */
 @property (nonatomic) int role;
 
@@ -60,6 +60,7 @@
  该用户是否禁用自己的音频
  */
 @property (nonatomic, assign) BOOL disableAudio;
+
 
 /**
  初始化一个用户

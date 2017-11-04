@@ -138,6 +138,7 @@
     if( [TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol){
         return;
     }
+    
     // 如果没有上课，不能点击学生上台
     if ([TKEduSessionHandle shareInstance].isClassBegin == NO) {
         //[tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -171,10 +172,15 @@
         RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:indexPath.row];
         
         // 助教不能上下台
-        if (tRoomUser.role == UserType_Assistant) {
+        if (tRoomUser.role == UserType_Assistant && [TKEduSessionHandle shareInstance].roomMgr.assistantCanPublish == NO) {
             //[tableView deselectRowAtIndexPath:indexPath animated:NO];
             return;
         }
+        
+        // 助教1对1不能上下台
+//        if (tRoomUser.role == UserType_Assistant && [TKEduSessionHandle shareInstance].roomMgr.roomType == RoomType_OneToOne) {
+//            return;
+//        }
         
         // 如果用户没有在台上，上台时需要判断最大人数
         if (tRoomUser.publishState < 1 && !(tRoomUser.disableVideo == YES && tRoomUser.disableAudio == YES)) {
@@ -198,7 +204,11 @@
         BOOL isShowVideo = tRoomUser.publishState >= 1;      // isShowVideo现在是是否在台上的判断结果
         if (isShowVideo) {
             tState = PublishState_NONE;
-            [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+            // 助教始终有画笔权限
+            if (tRoomUser.role != UserType_Assistant) {
+                [[TKEduSessionHandle shareInstance]configureDraw:false isSend:true to:sTellAll peerID:tRoomUser.peerID];
+                //[[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+            }
             
         } else {
             if (tRoomUser.disableVideo == YES && tRoomUser.disableAudio == NO) {
@@ -365,7 +375,8 @@
             if (isShowVideo) {
                 
                 tState = PublishState_NONE;
-                [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
+                 [[TKEduSessionHandle shareInstance]configureDraw:false isSend:true to:sTellAll peerID:tRoomUser.peerID];
+                //[[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@(false) completion:nil];
                 
             }else{
                 
@@ -429,7 +440,9 @@
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.DocumentList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             [aButton setSelected:YES];
-            if (aButton == _iPreButton) {
+            
+            // 上课后再下课之后点击上课时最后点击的文档
+            if (aButton == _iPreButton && ![TKEduSessionHandle shareInstance].iIsClassEnd) {
                 return;
             }
             
@@ -572,8 +585,8 @@
             _iFileHeadLabel.text = MTLocalized(tString);
             RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
             if (tRoomUser.publishState>1) {
-                
-                [[TKEduSessionHandle shareInstance]  sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!tRoomUser.canDraw)) completion:nil];
+                 [[TKEduSessionHandle shareInstance]configureDraw:!tRoomUser.canDraw isSend:true to:sTellAll peerID:tRoomUser.peerID];
+                //[[TKEduSessionHandle shareInstance]  sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!tRoomUser.canDraw)) completion:nil];
                 
             }
             

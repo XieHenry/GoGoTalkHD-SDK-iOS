@@ -13,6 +13,7 @@
 - (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
                               frame:(CGRect)frame;
 
+- (instancetype)initScreenShare:(CGRect)frame;
 
 - (void)playAction:(BOOL)star;
 -(void)seekProgressToPos:(NSTimeInterval)value;
