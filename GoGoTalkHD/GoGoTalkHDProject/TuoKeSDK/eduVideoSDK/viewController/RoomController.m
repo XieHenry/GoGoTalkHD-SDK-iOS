@@ -52,6 +52,9 @@
 @import PhotosUI;
 @import Photos;
 
+#pragma mark - 常用语
+#import "GGT_PopoverController.h"
+
 //214 *142
 
 #define VideoSmallViewMargins 6
@@ -113,7 +116,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 
 
-@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate>
+@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate>
 
 
 //移动
@@ -210,6 +213,11 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic , strong) TKUploadImageView * uploadImageView;
 @property (nonatomic , strong) TKEduNetManager * requestManager;
 @property (nonatomic , strong) UIImagePickerController * iPickerController;
+
+
+#pragma mark - 常用语
+@property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
+@property (nonatomic, strong) UIButton *xc_commonButton;
 
 
 @end
@@ -403,6 +411,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }
     
     self.requestManager = [TKEduNetManager initTKEduNetManagerWithDelegate:self];
+    
+    
+#pragma mark - 常用语
+    [self xc_loadPhraseData];
    
 }
 
@@ -910,12 +922,20 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
       
     }
+    
+#pragma mark - 修改的
+    _iOpenAlumButton.hidden = YES;
+    _iClassBeginAndRaiseHandButton.hidden = YES;
+    
     //聊天
     {
         CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
-        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
-
-        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight);
+//        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
+//        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight);
+        
+#pragma mark - 修改的
+        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iMuteAudioAndRewardView.frame)-tChatHeight-tViewCap;
+        _iChatTableView.frame = CGRectMake(0, CGRectGetMaxY(_iMuteAudioAndRewardView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight);
         
         _inputContainerFrame      = CGRectMake(0, CGRectGetMaxY(_iChatTableView.frame), sRightWidth*Proportion, tChatHeight);
         _inputContainer.frame     = _inputContainerFrame;
@@ -1153,12 +1173,24 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [_iRightView addSubview:_iClassBeginAndOpenAlumdView];
     
     }
+    
+#pragma mark - 修改的
+    _iOpenAlumButton.hidden = YES;
+    _iClassBeginAndRaiseHandButton.hidden = YES;
+    
+    
     //聊天
     {
          CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
         
-        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
-         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
+//        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
+//         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
+        
+#pragma mark - 修改的
+        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iMuteAudioAndRewardView.frame)-tChatHeight-tViewCap;
+        _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iMuteAudioAndRewardView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
+        
+        
         _iChatTableView.backgroundColor = [UIColor clearColor];
         _iChatTableView.separatorColor  = [UIColor clearColor];
         _iChatTableView.showsHorizontalScrollIndicator = NO;
@@ -1202,6 +1234,29 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         });
         
         [_inputContainer addSubview:tButton];
+        
+#pragma mark - 常用语
+        self.xc_commonButton = ({
+            
+            
+            UIImage *xc_img = UIIMAGE_FROM_NAME(@"changyongyu_wei");
+            CGFloat tSendButtonX = (sRightWidth-xc_img.size.width-4)*Proportion-10;
+            UIButton *tSendButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+            tSendButton.frame = CGRectMake(tSendButtonX, (tButton.height-xc_img.size.height)/2.0, xc_img.size.width, xc_img.size.height);
+            [tSendButton setImage:UIIMAGE_FROM_NAME(@"changyongyu_wei") forState:UIControlStateNormal];
+            [tSendButton setImage:UIIMAGE_FROM_NAME(@"chongyongyu_yi") forState:UIControlStateSelected];
+            
+            tSendButton.titleLabel.font = TKFont(10);
+            
+#pragma mark - 注销  不然button会移动
+            //            tSendButton.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+            
+            [tSendButton addTarget:self action:@selector(replyAction2:) forControlEvents:UIControlEventTouchUpInside];
+            tSendButton;
+        });
+        [tButton addSubview:self.xc_commonButton];
+#pragma mark - 常用语
+        
         
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -4001,4 +4056,85 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
     }
    
 }
+
+
+/// 获取聊天界面 常用语数据
+- (void)xc_loadPhraseData
+{
+    self.xc_phraseMuArray = [NSMutableArray array];
+    
+    [[BaseService share] sendGetRequestWithPath:URL_GetContrastInfo token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
+        
+        NSArray *data = responseObject[@"data"];
+        [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            GGT_CoursePhraseModel *model = [GGT_CoursePhraseModel yy_modelWithDictionary:obj];
+            [self.xc_phraseMuArray addObject:model];
+        }];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)replyAction2:(UIButton *)button
+{
+    button.selected = YES;
+    [self.view endEditing:YES];
+    [self showPopView:button];
+}
+
+- (void)showPopView:(UIButton *)button
+{
+    //showPopView
+    GGT_PopoverController *vc = [GGT_PopoverController new];
+    vc.modalPresentationStyle = UIModalPresentationPopover;
+    vc.popoverPresentationController.sourceView = self.xc_commonButton;
+    vc.popoverPresentationController.sourceRect = button.bounds;
+    vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    vc.popoverPresentationController.delegate = self;
+    
+    vc.xc_phraseMuArray = self.xc_phraseMuArray;
+    
+    // 修改弹出视图的size 在控制器内部修改更好
+    //    vc.preferredContentSize = CGSizeMake(100, 100);
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    @weakify(self)
+    vc.dismissBlock = ^(NSString *selectString) {
+        @strongify(self);
+        NSLog(@"点击了---%@", selectString);
+        button.selected = NO;
+        if ([selectString isKindOfClass:[NSString class]]) {
+            if (selectString.length>0) {
+                //                [self.room.chatVM sendMessage:selectString];
+                _inputField.text = selectString;
+                //                [self replyAction];
+                
+                
+                NSDictionary *messageDic = @{@"msg":selectString, @"type":@(0)};
+                NSData *messageData = [NSJSONSerialization dataWithJSONObject:messageDic options:NSJSONWritingPrettyPrinted error:nil];
+                NSString *messageConvertStr = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+                [[TKEduSessionHandle shareInstance] sessionHandleSendMessage:messageConvertStr completion:nil];
+            }
+        }
+    };
+}
+
+#pragma mark - UIPopoverPresentationControllerDelegate
+//默认返回的是覆盖整个屏幕，需设置成UIModalPresentationNone。
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+    return UIModalPresentationNone;
+}
+
+//点击蒙版是否消失，默认为yes；
+-(BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+    self.xc_commonButton.selected = NO;
+    return YES;
+}
+
+//弹框消失时调用的方法
+-(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+    NSLog(@"弹框已经消失");
+}
+
 @end
