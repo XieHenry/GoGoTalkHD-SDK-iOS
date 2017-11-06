@@ -72,10 +72,12 @@
                     self.netWorkStaus = AFNetworkReachabilityStatusNotReachable;
                     singleton.netStatus = NO;
                     [self showExceptionDialog:@"没有网络(断网)"];
-                    
-                    
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                     UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"没有网络" message:@"" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alertV show];
+#pragma clang diagnostic pop
                     
                 }
                     
@@ -429,9 +431,12 @@
 - (void)alertErrorMessage:(NSError *)error
 {
     NSDictionary *userInfoDic = error.userInfo;
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"" message:userInfoDic[xc_message] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alertV show];
-    
+#pragma clang diagnostic pop
 }
 
 - (void)refreshToken:(NSString *)url method:(NSInteger)method parameters:(id)parameters token:(BOOL)isLoadToken viewController:(UIViewController *)viewController success:(AFNSuccessResponse)success
