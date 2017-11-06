@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSString *xc_timeCount;
 
 /// 倒计时到0时回调
-@property (nonatomic, copy) void(^countDownZero)();
+@property (nonatomic, copy) void(^countDownZero)(void);
 
 
 + (instancetype)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath;

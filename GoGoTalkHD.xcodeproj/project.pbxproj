@@ -78,7 +78,6 @@
 		5B5CF3F01FAD631B007F5906 /* BITUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5CF35E1FAD631B007F5906 /* BITUpdateViewController.m */; };
 		5B5CF3F11FAD631B007F5906 /* BITWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5CF3611FAD631B007F5906 /* BITWebTableViewCell.m */; };
 		5B5CF3F21FAD631B007F5906 /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5CF3651FAD631B007F5906 /* HockeySDKPrivate.m */; };
-		5B5CF3F31FAD631B007F5906 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5B5CF3671FAD631B007F5906 /* HockeySDK.xcconfig */; };
 		5B5CF3F41FAD631B007F5906 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B5CF3681FAD631B007F5906 /* HockeySDKResources.bundle */; };
 		5B5CF3F51FAD631B007F5906 /* LTUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B5CF36B1FAD631B007F5906 /* LTUpdate.strings */; };
 		5B5CF3F61FAD631B007F5906 /* LTUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5CF3861FAD631B007F5906 /* LTUpdate.m */; };
@@ -2163,7 +2162,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GGT_;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = Chn;
 				TargetAttributes = {
 					D6E0A4761EC2C200006A003D = {
@@ -2291,7 +2290,6 @@
 				5BF3A6C21EEAC3B100491CC2 /* shebeijianche_38.png in Resources */,
 				5BE8F9811ED6A4B300958AED /* AddressList.txt in Resources */,
 				5BF3A6CA1EEAC3B100491CC2 /* shebeijianche_9.png in Resources */,
-				5B5CF3F31FAD631B007F5906 /* HockeySDK.xcconfig in Resources */,
 				D66FCBF21EEA52AA00792A6C /* having_Class@2x.gif in Resources */,
 				5B5CF3C61FAD631B007F5906 /* TKUserListTableViewCell.xib in Resources */,
 			);

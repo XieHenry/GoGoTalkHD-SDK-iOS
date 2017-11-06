@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^XCDeleteCourseBlock)();
+typedef void(^XCDeleteCourseBlock)(void);
 typedef void(^XCChangeStatusBlock)(GGT_CourseCellModel *xc_model);
 
 @interface GGT_PreCoursewareVC : BaseViewController

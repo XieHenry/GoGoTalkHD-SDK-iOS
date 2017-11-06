@@ -14,7 +14,7 @@
 @property (nonatomic, strong) UIButton *xc_courseButton;
 
 /// 倒计时到0时回调
-@property (nonatomic, copy) void(^countDownZero)();
+@property (nonatomic, copy) void(^countDownZero)(void);
 
 // 倒计时的时间
 @property (nonatomic, strong) NSString *xc_timeCount;

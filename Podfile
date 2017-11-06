@@ -1,4 +1,4 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 target 'GoGoTalkHD' do
 
 inhibit_all_warnings!   #可能产生其他问题

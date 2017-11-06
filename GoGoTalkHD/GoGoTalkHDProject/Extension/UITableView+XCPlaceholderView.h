@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^XCClickBlock)();
+typedef void(^XCClickBlock)(void);
 
 @interface UITableView (XCPlaceholderView)
 

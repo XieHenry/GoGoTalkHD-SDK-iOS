@@ -23,9 +23,9 @@
 @interface NSTimer (BlockSupport)
 
 // timer是自启动的
-+ (NSTimer *)xc_scheduledTimerWithTimeInterval:(NSTimeInterval)interval block:(void(^)())block repeats:(BOOL)repeats;
++ (NSTimer *)xc_scheduledTimerWithTimeInterval:(NSTimeInterval)interval block:(void(^)(void))block repeats:(BOOL)repeats;
 
 // timer需要fire 然后添加到runloop中
-+ (NSTimer *)xc_timerWithTimeInterval:(NSTimeInterval)interval block:(void(^)())block repeats:(BOOL)repeats;
++ (NSTimer *)xc_timerWithTimeInterval:(NSTimeInterval)interval block:(void(^)(void))block repeats:(BOOL)repeats;
 
 @end
