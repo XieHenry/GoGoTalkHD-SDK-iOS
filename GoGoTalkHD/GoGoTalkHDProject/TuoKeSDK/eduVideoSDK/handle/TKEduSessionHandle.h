@@ -97,6 +97,7 @@
 @property (nonatomic, copy, readonly) NSDictionary *roomProperties;
 @property (nonatomic, copy) NSDictionary *iParamDic;
 @property (nonatomic,strong) NSMutableDictionary *iPublishDic;
+@property (nonatomic,strong) NSMutableArray *iUserList;
 #pragma mark 自定义
 @property (nonatomic, strong) TKEduRoomProperty *iRoomProperties;
 @property (nonatomic, strong) RoomUser *iTeacherUser;

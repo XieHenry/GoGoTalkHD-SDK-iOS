@@ -119,3 +119,5 @@
 "Prompt.enterBackGround" = "進入後臺";
 "Prompt.enterForeGround" = "恢復前臺";
 "Prompt.NetworkException" = "網絡出現異常，請檢查網絡環境，重新進入";
+"Prompt.HaveEnterBackground" = "進入了後臺模式";
+"Prompt.HaveBackForground" = "返回了正常模式";

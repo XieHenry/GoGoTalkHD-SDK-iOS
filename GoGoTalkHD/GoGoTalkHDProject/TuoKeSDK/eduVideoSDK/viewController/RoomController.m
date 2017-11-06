@@ -6,6 +6,7 @@
 //  Copyright © 2017年 talkcloud. All rights reserved.
 //
 
+//#import "ViewController.h"
 #import "RoomController.h"
 #import "RoomManager.h"
 #import "TKEduBoardHandle.h"
@@ -15,6 +16,7 @@
 #import "TKVideoSmallView.h"
 #import "TKUtil.h"
 #import "TKMacro.h"
+#import "sys/utsname.h"
 //reconnection
 
 #import "TKTimer.h"
@@ -116,7 +118,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 
 
-@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate>
+@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate>
 
 
 //移动
@@ -218,7 +220,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark - 常用语
 @property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
 @property (nonatomic, strong) UIButton *xc_commonButton;
-
 
 @end
 
@@ -411,11 +412,11 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }
     
     self.requestManager = [TKEduNetManager initTKEduNetManagerWithDelegate:self];
-    
+   
     
 #pragma mark - 常用语
     [self xc_loadPhraseData];
-   
+    
 }
 
 #pragma mark Pad 初始化
@@ -1178,7 +1179,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     _iOpenAlumButton.hidden = YES;
     _iClassBeginAndRaiseHandButton.hidden = YES;
     
-    
     //聊天
     {
          CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
@@ -1189,7 +1189,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark - 修改的
         CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iMuteAudioAndRewardView.frame)-tChatHeight-tViewCap;
         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iMuteAudioAndRewardView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
-        
         
         _iChatTableView.backgroundColor = [UIColor clearColor];
         _iChatTableView.separatorColor  = [UIColor clearColor];
@@ -1235,6 +1234,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         
         [_inputContainer addSubview:tButton];
         
+        
 #pragma mark - 常用语
         self.xc_commonButton = ({
             
@@ -1256,7 +1256,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         });
         [tButton addSubview:self.xc_commonButton];
 #pragma mark - 常用语
-        
         
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -1800,7 +1799,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
              
              [self dismissViewControllerAnimated:YES completion:^{
                  if ([TKEduClassRoom shareInstance].enterClassRoomAgain) {
-                     #pragma mark - 暂时注销掉 不知道什么用
+
+#pragma mark - 暂时注销掉 不知道什么用
 //                     ViewController *tRoom = (ViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
 //                     [tRoom openUrl:tRoom.urlPath];
                  }
@@ -2642,13 +2642,29 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [self moveVideo:tMvVideoDic];
         
 
-    }else if ([msgName isEqualToString:sUserEnterBackGround]){
-
-//        if (add) {
-//              [self showMessage:[NSString stringWithFormat:@"%@",MTLocalized(@"Prompt.enterBackGround")]];
-//        }else{
-//              [self showMessage:[NSString stringWithFormat:@"%@",MTLocalized(@"Prompt.enterForeGround")]];
-//        }
+    } else if ([msgName isEqualToString:sUserEnterBackGround]){
+        
+        NSString *peerId = [[msgID componentsSeparatedByString:@"_"] objectAtIndex:1];
+        NSString *nickName;
+        NSString *deviceType;
+        for (RoomUser *user in _iSessionHandle.iUserList) {
+            if ([user.peerID isEqualToString:peerId]) {
+                nickName = user.nickName;
+                deviceType = [user.properties objectForKey:@"devicetype"];
+            }
+        }
+        
+        if (add) {
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }else{
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveBackForground")];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }
       
     }
     
@@ -4057,7 +4073,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
    
 }
 
-
+#pragma mark - 常用语
 /// 获取聊天界面 常用语数据
 - (void)xc_loadPhraseData
 {

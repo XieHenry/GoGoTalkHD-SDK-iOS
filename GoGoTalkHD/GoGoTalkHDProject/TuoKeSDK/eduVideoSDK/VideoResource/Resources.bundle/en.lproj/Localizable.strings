@@ -124,3 +124,5 @@
 "Prompt.enterBackGround" = "enter backGround";
 "Prompt.enterForeGround" = "resume foreGround";
 "Prompt.NetworkException" = "Network exception, check the network environment and re-enter";
+"Prompt.HaveEnterBackground" = "Backstage mode";
+"Prompt.HaveBackForground" = "Back to normal mode";

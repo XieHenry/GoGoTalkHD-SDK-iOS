@@ -45,8 +45,8 @@
 - (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model viewController:(UIViewController *)viewController
 {
 
-//    model.serial = @"755158726";
-//    model.nickname = @"teacher";
+    model.serial = @"755158726";
+    model.nickname = @"teacher";
 
     NSDictionary *tDict = @{
                             @"serial"   :model.serial,

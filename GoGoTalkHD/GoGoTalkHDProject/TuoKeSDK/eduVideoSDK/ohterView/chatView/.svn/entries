@@ -1,0 +1,52 @@
+10
+
+dir
+25774
+svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView
+svn://tonglm@192.168.1.28
+
+
+
+2017-09-01T22:45:13.201913Z
+24422
+tonglm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de2abff8-9739-4157-a70d-81cc75667de8
+
+TKTeacherMessageTableViewCell
+dir
+
+HPGrowingTextView
+dir
+
+chatMessgaeModel
+dir
+
+TKMessageTableViewCell
+dir
+
+TGLiveViewChatTableViewCell
+dir
+
+TKChatView
+dir
+
+TGWeakDelegate
+dir
+
+TKStudentMessageTableViewCell
+dir
+

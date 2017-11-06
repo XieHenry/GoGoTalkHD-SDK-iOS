@@ -17,6 +17,7 @@
 #import "RoomUser.h"
 #import "TKDocumentListView.h"
 #import "TKProgressHUD.h"
+#import "sys/utsname.h"
 
 @import AVFoundation;
 @interface RoomManager(test)
@@ -25,7 +26,6 @@
 @interface TKEduSessionHandle ()<RoomManagerDelegate,RoomWhiteBoard>
 
 @property (nonatomic,strong) NSMutableArray *iMessageList;
-@property (nonatomic,strong) NSMutableArray *iUserList;
 @property (nonatomic,strong) NSMutableArray *iUserStdAndTchrList;
 @property (nonatomic,strong) NSMutableDictionary *iSpecialUserDic;
 
@@ -2093,11 +2093,11 @@
     if (_iCurrentMediaDocModel &&  _iIsPlaying && (self.localUser.role == UserType_Student)) {
        
     }
-//    if (self.localUser.role == UserType_Student) {
-//        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
-//        [self sessionHandleDelMsg:sUserEnterBackGround ID:tMsgID To:sTellAllExpectSender Data:nil completion:nil];
-//
-//    }
+    
+    if (self.localUser.role == UserType_Student) {
+        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
+        [self sessionHandleDelMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil completion:nil];
+    }
     
 }
 -(void)enterBackground:(NSNotification *)aNotification{
@@ -2107,12 +2107,11 @@
     if (_iCurrentMediaDocModel&&_iIsPlaying && (self.localUser.role == UserType_Student)) {
        
     }
-//    if (self.localUser.role == UserType_Student) {
-//        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
-//        [self sessionHandlePubMsg:sUserEnterBackGround ID:tMsgID To:sTellAllExpectSender Data:nil Save:true AssociatedMsgID:sUserEnterBackGround AssociatedUserID:self.localUser.peerID completion:nil];
-//    }
     
-    
+    if (self.localUser.role == UserType_Student) {
+        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
+        [self sessionHandlePubMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil Save:true AssociatedMsgID:sUserEnterBackGround AssociatedUserID:self.localUser.peerID completion:nil];
+    }
 }
 #pragma mark 用户自己打开关闭音视频
 - (void)disableMyVideo:(BOOL)disable {

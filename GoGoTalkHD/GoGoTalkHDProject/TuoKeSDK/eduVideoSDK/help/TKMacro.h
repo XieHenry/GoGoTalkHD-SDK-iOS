@@ -189,6 +189,7 @@ static  NSString *const sTellAll             = @"__all";
 static  NSString *const sTellNone            = @"__none";
 static  NSString *const sTellAllExpectSender = @"__allExceptSender";
 static  NSString *const sTellAllExpectAuditor = @"__allExceptAuditor";
+static  NSString *const sSuperUsers          = @"__allSuperUsers";
 static  NSString *const sGiftNumber          = @"giftnumber";
 static  NSString *const sCandraw             = @"candraw";
 static  NSString *const sSendBoardData       = @"sendBoardData";
