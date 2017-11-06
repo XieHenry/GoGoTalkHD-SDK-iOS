@@ -184,7 +184,7 @@
                     NSURL *url = [NSURL URLWithString:urlStr];
                     [[UIApplication sharedApplication] openURL:url];
                 } else {
-                    // 下载，获取接口
+                    // 下载百家云版本的App（GoGo英语HD(第二课堂)），获取接口
                     // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
                     NSString *urlStr = [NSString stringWithFormat:@"%@?RoomType=%ld", URL_GetVersionClassUpdaten,(long)currentModel.ClassRoomType];
                     
