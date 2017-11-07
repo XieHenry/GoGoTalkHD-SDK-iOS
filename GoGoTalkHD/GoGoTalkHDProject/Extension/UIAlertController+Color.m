@@ -89,6 +89,9 @@
     objc_setAssociatedObject(self, @selector(messageColor), messageColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+// 防止KVO直接赋值崩溃
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{}
+
 @end
 
 

@@ -10,13 +10,13 @@
 #define GGT_Request_URL_h
 
 // 正式地址
-static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
+//static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 
 // 测试地址
 //static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
 
 // 最新测试地址
-//static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
+static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
 
 
 
@@ -91,6 +91,8 @@ static NSString * const URL_GetMyLesson = @"api/APP/AppGetMyLesson";
 static NSString * const URL_AppStudentEvaluateTeacher = @"api/APP/AppStudentEvaluateTeacher";
 //取消约课
 static NSString * const URL_DelLesson = @"api/APP/DelLesson";
+//判断取消约课的时间
+//static NSString * const URL_GetCancelFormalLessonStatus = @"api/APP/getCancelFormalLessonStatus";
 //预约试听课
 static NSString * const URL_AddDemoMsg = @"api/APP/AddDemoMsg";
 //获取课程详情
