@@ -1796,8 +1796,8 @@
 		D69427311EC94CD30048FD2C /* HomeClass */ = {
 			isa = PBXGroup;
 			children = (
-				D6ED8FF91F67D33B0002D7B4 /* Model */,
 				D69427351EC94CD30048FD2C /* ViewController */,
+				D6ED8FF91F67D33B0002D7B4 /* Model */,
 				D69427321EC94CD30048FD2C /* View */,
 			);
 			path = HomeClass;
