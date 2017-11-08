@@ -92,7 +92,7 @@ static NSString * const URL_AppStudentEvaluateTeacher = @"api/APP/AppStudentEval
 //取消约课
 static NSString * const URL_DelLesson = @"api/APP/DelLesson";
 //判断取消约课的时间
-//static NSString * const URL_GetCancelFormalLessonStatus = @"api/APP/getCancelFormalLessonStatus";
+static NSString * const URL_GetCancelFormalLessonStatus = @"api/APP/getCancelFormalLessonStatus";
 //预约试听课
 static NSString * const URL_AddDemoMsg = @"api/APP/AddDemoMsg";
 //获取课程详情
