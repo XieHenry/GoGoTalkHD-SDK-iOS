@@ -43,7 +43,7 @@
     _headerScrollerView.scrollEnabled = YES;
     _headerScrollerView.showsVerticalScrollIndicator = NO;
     _headerScrollerView.showsHorizontalScrollIndicator = NO;
-    _headerScrollerView.pagingEnabled = NO;
+    _headerScrollerView.pagingEnabled = YES;
     _headerScrollerView.bounces = NO;
     _headerScrollerView.delegate = self;
     _headerScrollerView.backgroundColor = UICOLOR_FROM_HEX(0xEBEBEB);
@@ -91,7 +91,7 @@
     _bgScrollerView.scrollEnabled = YES;
     _bgScrollerView.showsVerticalScrollIndicator = NO;
     _bgScrollerView.showsHorizontalScrollIndicator = NO;
-    _bgScrollerView.pagingEnabled = NO;
+    _bgScrollerView.pagingEnabled = YES;
     _bgScrollerView.delegate = self;
     _bgScrollerView.bounces = NO;
     _bgScrollerView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
@@ -283,6 +283,7 @@
     CGPoint offset=tableView.contentOffset;
     offset.y=offsetY;
     tableView.contentOffset=offset;
+
 }
 
 
