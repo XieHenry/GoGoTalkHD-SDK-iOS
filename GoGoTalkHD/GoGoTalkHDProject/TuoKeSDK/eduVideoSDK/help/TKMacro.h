@@ -201,6 +201,7 @@ static  NSString *const sOnJsPlay            = @"onJsPlay";
 static  NSString *const sCloseNewPptVideo    = @"closeNewPptVideo";
 static  NSString *const sDisableVideo        = @"disablevideo";
 static  NSString *const sDisableAudio        = @"disableaudio";
+static  NSString *const sIsInBackGround      = @"isInBackGround";
 
 // 英练帮公司id
 static  NSString *const YLB_COMPANYID        = @"10035";

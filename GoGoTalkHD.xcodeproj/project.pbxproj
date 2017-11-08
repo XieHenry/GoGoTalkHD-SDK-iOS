@@ -99,6 +99,99 @@
 		D627DCF21ED4196E00076FBD /* XCNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF11ED4196E00076FBD /* XCNormalHeader.m */; };
 		D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF41ED41AD000076FBD /* XCNormalFooter.m */; };
 		D627DCF91ED432C800076FBD /* GGT_CalendarCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */; };
+		D628D4E51FB29AC80050CE54 /* TKEduSessionHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */; };
+		D628D4E61FB29AC80050CE54 /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */; };
+		D628D4E71FB29AC80050CE54 /* TKEduNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */; };
+		D628D4E81FB29AC80050CE54 /* TKAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */; };
+		D628D4E91FB29AC80050CE54 /* TKAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */; };
+		D628D4EA1FB29AC80050CE54 /* TKAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */; };
+		D628D4EB1FB29AC80050CE54 /* TKAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */; };
+		D628D4EC1FB29AC80050CE54 /* TKAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */; };
+		D628D4ED1FB29AC80050CE54 /* TKAFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */; };
+		D628D4EE1FB29AC80050CE54 /* TKAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */; };
+		D628D4EF1FB29AC80050CE54 /* TKGTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4081FB29AC70050CE54 /* TKGTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D628D4F01FB29AC80050CE54 /* BITAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */; };
+		D628D4F11FB29AC80050CE54 /* BITHockeyBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */; };
+		D628D4F21FB29AC80050CE54 /* BITCrashReportTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */; };
+		D628D4F31FB29AC80050CE54 /* BITHockeyBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */; };
+		D628D4F41FB29AC80050CE54 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */; };
+		D628D4F51FB29AC80050CE54 /* BITUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */; };
+		D628D4F61FB29AC80050CE54 /* BITHockeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */; };
+		D628D4F71FB29AC80050CE54 /* BITWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */; };
+		D628D4F81FB29AC80050CE54 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */; };
+		D628D4F91FB29AC80050CE54 /* BITFeedbackUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */; };
+		D628D4FA1FB29AC80050CE54 /* BITUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4211FB29AC70050CE54 /* BITUpdateManager.m */; };
+		D628D4FB1FB29AC80050CE54 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */; };
+		D628D4FC1FB29AC80050CE54 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */; };
+		D628D4FD1FB29AC80050CE54 /* BITAppVersionMetaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */; };
+		D628D4FE1FB29AC80050CE54 /* BITStoreUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */; };
+		D628D4FF1FB29AC80050CE54 /* BITFeedbackActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */; };
+		D628D5001FB29AC80050CE54 /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */; };
+		D628D5011FB29AC80050CE54 /* BITAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */; };
+		D628D5021FB29AC80050CE54 /* BITCrashAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */; };
+		D628D5031FB29AC80050CE54 /* BITFeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */; };
+		D628D5041FB29AC80050CE54 /* BITAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */; };
+		D628D5051FB29AC80050CE54 /* BITFeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */; };
+		D628D5061FB29AC80050CE54 /* BITAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */; };
+		D628D5071FB29AC80050CE54 /* BITFeedbackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */; };
+		D628D5081FB29AC80050CE54 /* BITKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */; };
+		D628D5091FB29AC80050CE54 /* BITCrashManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4411FB29AC70050CE54 /* BITCrashManager.m */; };
+		D628D50A1FB29AC80050CE54 /* BITFeedbackListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */; };
+		D628D50B1FB29AC80050CE54 /* BITFeedbackComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */; };
+		D628D50C1FB29AC80050CE54 /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */; };
+		D628D50D1FB29AC80050CE54 /* BITStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4531FB29AC70050CE54 /* BITStoreButton.m */; };
+		D628D50E1FB29AC80050CE54 /* LTUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4551FB29AC70050CE54 /* LTUpdate.m */; };
+		D628D50F1FB29AC80050CE54 /* LTUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = D628D4571FB29AC70050CE54 /* LTUpdate.strings */; };
+		D628D5101FB29AC80050CE54 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D4721FB29AC70050CE54 /* CrashReporter.framework */; };
+		D628D5111FB29AC80050CE54 /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4751FB29AC70050CE54 /* TKProgressHUD.m */; };
+		D628D5121FB29AC80050CE54 /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */; };
+		D628D5131FB29AC80050CE54 /* StarscreamSocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */; };
+		D628D5141FB29AC80050CE54 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47A1FB29AC70050CE54 /* SocketIO.framework */; };
+		D628D5151FB29AC80050CE54 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47B1FB29AC70050CE54 /* WebRTC.framework */; };
+		D628D5161FB29AC80050CE54 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D628D47C1FB29AC70050CE54 /* Resources.bundle */; };
+		D628D5171FB29AC80050CE54 /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47D1FB29AC70050CE54 /* libroomsdk.a */; };
+		D628D5181FB29AC80050CE54 /* NSString+sizeHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */; };
+		D628D5191FB29AC80050CE54 /* TKChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4841FB29AC70050CE54 /* TKChatView.m */; };
+		D628D51A1FB29AC80050CE54 /* TKChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */; };
+		D628D51B1FB29AC80050CE54 /* TKGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */; };
+		D628D51C1FB29AC80050CE54 /* TKTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */; };
+		D628D51D1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */; };
+		D628D51E1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */; };
+		D628D51F1FB29AC80050CE54 /* TKMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */; };
+		D628D5201FB29AC80050CE54 /* TKMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */; };
+		D628D5211FB29AC80050CE54 /* TKWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */; };
+		D628D5221FB29AC80050CE54 /* TKLiveViewChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */; };
+		D628D5231FB29AC80050CE54 /* TKStudentMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */; };
+		D628D5241FB29AC80050CE54 /* TKStudentMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */; };
+		D628D5251FB29AC80050CE54 /* TKDocumentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */; };
+		D628D5261FB29AC80050CE54 /* TKUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */; };
+		D628D5271FB29AC80050CE54 /* TKUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */; };
+		D628D5281FB29AC80050CE54 /* TKUploadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */; };
+		D628D5291FB29AC80050CE54 /* TKPlaybackMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */; };
+		D628D52A1FB29AC80050CE54 /* TKAudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */; };
+		D628D52B1FB29AC80050CE54 /* TKProgressSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */; };
+		D628D52C1FB29AC80050CE54 /* TKBaseMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */; };
+		D628D52D1FB29AC80050CE54 /* TKMessageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */; };
+		D628D52E1FB29AC80050CE54 /* TKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B31FB29AC70050CE54 /* TKButton.m */; };
+		D628D52F1FB29AC80050CE54 /* TKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B51FB29AC70050CE54 /* TKTimer.m */; };
+		D628D5301FB29AC80050CE54 /* TKVideoSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */; };
+		D628D5311FB29AC80050CE54 /* TKDrogView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B91FB29AC70050CE54 /* TKDrogView.m */; };
+		D628D5321FB29AC80050CE54 /* TKVideoFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */; };
+		D628D5331FB29AC80050CE54 /* TKClassTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */; };
+		D628D5341FB29AC80050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */; };
+		D628D5351FB29AC80050CE54 /* UIControl+clickedOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */; };
+		D628D5361FB29AC80050CE54 /* TKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C71FB29AC70050CE54 /* TKNavigationController.m */; };
+		D628D5371FB29AC80050CE54 /* TKPickViewTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */; };
+		D628D5381FB29AC80050CE54 /* TKEduRoomProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */; };
+		D628D5391FB29AC80050CE54 /* RoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D51FB29AC70050CE54 /* RoomController.m */; };
+		D628D53A1FB29AC80050CE54 /* TKUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D91FB29AC70050CE54 /* TKUtil.mm */; };
+		D628D53B1FB29AC80050CE54 /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */; };
+		D628D53C1FB29AC80050CE54 /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */; };
+		D628D53D1FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */; };
+		D628D53E1FB29AC80050CE54 /* TKEduBoardHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */; };
+		D628D53F1FB29B380050CE54 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D47B1FB29AC70050CE54 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D628D5401FB29B400050CE54 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D47A1FB29AC70050CE54 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D628D5411FB29B440050CE54 /* StarscreamSocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */; };
 		D6353E171EE8E250004E1288 /* GGT_PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E161EE8E250004E1288 /* GGT_PopoverCell.m */; };
 		D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E211EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m */; };
@@ -139,99 +232,6 @@
 		D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150EE1EE79E820038841B /* UITableView+XCPlaceholderView.m */; };
 		D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */; };
 		D6D7CBED1F2199C80087DDA0 /* GGT_LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */; };
-		D6DB90D81FB08E780095BEFA /* TKEduSessionHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FE21FB08E770095BEFA /* TKEduSessionHandle.m */; };
-		D6DB90D91FB08E780095BEFA /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FE41FB08E770095BEFA /* TKEduClassRoom.m */; };
-		D6DB90DA1FB08E780095BEFA /* TKEduNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FE51FB08E770095BEFA /* TKEduNetManager.m */; };
-		D6DB90DB1FB08E780095BEFA /* TKAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FE91FB08E770095BEFA /* TKAFURLRequestSerialization.m */; };
-		D6DB90DC1FB08E780095BEFA /* TKAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FED1FB08E770095BEFA /* TKAFURLSessionManager.m */; };
-		D6DB90DD1FB08E780095BEFA /* TKAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FEE1FB08E770095BEFA /* TKAFSecurityPolicy.m */; };
-		D6DB90DE1FB08E780095BEFA /* TKAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FF01FB08E770095BEFA /* TKAFURLResponseSerialization.m */; };
-		D6DB90DF1FB08E780095BEFA /* TKAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FF31FB08E770095BEFA /* TKAFHTTPSessionManager.m */; };
-		D6DB90E01FB08E780095BEFA /* TKAFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FF41FB08E770095BEFA /* TKAFNetworkActivityIndicatorManager.m */; };
-		D6DB90E11FB08E780095BEFA /* TKAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FF51FB08E770095BEFA /* TKAFNetworkReachabilityManager.m */; };
-		D6DB90E21FB08E780095BEFA /* TKGTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FFB1FB08E770095BEFA /* TKGTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D6DB90E31FB08E780095BEFA /* BITAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB8FFE1FB08E770095BEFA /* BITAttributedLabel.m */; };
-		D6DB90E41FB08E780095BEFA /* BITHockeyBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90001FB08E770095BEFA /* BITHockeyBaseViewController.m */; };
-		D6DB90E51FB08E780095BEFA /* BITCrashReportTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90021FB08E770095BEFA /* BITCrashReportTextFormatter.m */; };
-		D6DB90E61FB08E780095BEFA /* BITHockeyBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90051FB08E770095BEFA /* BITHockeyBaseManager.m */; };
-		D6DB90E71FB08E780095BEFA /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90071FB08E770095BEFA /* BITHTTPOperation.m */; };
-		D6DB90E81FB08E780095BEFA /* BITUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90081FB08E770095BEFA /* BITUpdateViewController.m */; };
-		D6DB90E91FB08E780095BEFA /* BITHockeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90091FB08E770095BEFA /* BITHockeyHelper.m */; };
-		D6DB90EA1FB08E780095BEFA /* BITWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB900C1FB08E770095BEFA /* BITWebTableViewCell.m */; };
-		D6DB90EB1FB08E780095BEFA /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB900F1FB08E770095BEFA /* BITHockeyManager.m */; };
-		D6DB90EC1FB08E780095BEFA /* BITFeedbackUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90131FB08E770095BEFA /* BITFeedbackUserDataViewController.m */; };
-		D6DB90ED1FB08E780095BEFA /* BITUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90141FB08E770095BEFA /* BITUpdateManager.m */; };
-		D6DB90EE1FB08E780095BEFA /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6DB90171FB08E770095BEFA /* HockeySDKResources.bundle */; };
-		D6DB90EF1FB08E780095BEFA /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D6DB90181FB08E770095BEFA /* HockeySDK.xcconfig */; };
-		D6DB90F01FB08E780095BEFA /* BITAppVersionMetaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90191FB08E770095BEFA /* BITAppVersionMetaInfo.m */; };
-		D6DB90F11FB08E780095BEFA /* BITStoreUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB901A1FB08E770095BEFA /* BITStoreUpdateManager.m */; };
-		D6DB90F21FB08E780095BEFA /* BITFeedbackActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB901C1FB08E770095BEFA /* BITFeedbackActivity.m */; };
-		D6DB90F31FB08E780095BEFA /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90201FB08E770095BEFA /* HockeySDKPrivate.m */; };
-		D6DB90F41FB08E780095BEFA /* BITAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90211FB08E770095BEFA /* BITAuthenticator.m */; };
-		D6DB90F51FB08E780095BEFA /* BITCrashAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90271FB08E770095BEFA /* BITCrashAttachment.m */; };
-		D6DB90F61FB08E780095BEFA /* BITFeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB902A1FB08E770095BEFA /* BITFeedbackListViewController.m */; };
-		D6DB90F71FB08E780095BEFA /* BITAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB902B1FB08E770095BEFA /* BITAuthenticationViewController.m */; };
-		D6DB90F81FB08E780095BEFA /* BITFeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB902D1FB08E770095BEFA /* BITFeedbackManager.m */; };
-		D6DB90F91FB08E780095BEFA /* BITAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB902F1FB08E770095BEFA /* BITAppStoreHeader.m */; };
-		D6DB90FA1FB08E780095BEFA /* BITFeedbackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90321FB08E770095BEFA /* BITFeedbackMessage.m */; };
-		D6DB90FB1FB08E780095BEFA /* BITKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90331FB08E770095BEFA /* BITKeychainUtils.m */; };
-		D6DB90FC1FB08E780095BEFA /* BITCrashManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90341FB08E770095BEFA /* BITCrashManager.m */; };
-		D6DB90FD1FB08E780095BEFA /* BITFeedbackListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB903D1FB08E770095BEFA /* BITFeedbackListViewCell.m */; };
-		D6DB90FE1FB08E780095BEFA /* BITFeedbackComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB903F1FB08E770095BEFA /* BITFeedbackComposeViewController.m */; };
-		D6DB90FF1FB08E780095BEFA /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90431FB08E770095BEFA /* BITHockeyAppClient.m */; };
-		D6DB91001FB08E780095BEFA /* BITStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90461FB08E770095BEFA /* BITStoreButton.m */; };
-		D6DB91011FB08E780095BEFA /* LTUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90481FB08E770095BEFA /* LTUpdate.m */; };
-		D6DB91021FB08E780095BEFA /* LTUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6DB904A1FB08E770095BEFA /* LTUpdate.strings */; };
-		D6DB91031FB08E780095BEFA /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DB90651FB08E770095BEFA /* CrashReporter.framework */; };
-		D6DB91041FB08E780095BEFA /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90681FB08E770095BEFA /* TKProgressHUD.m */; };
-		D6DB91051FB08E780095BEFA /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB906A1FB08E770095BEFA /* TKRCGlobalConfig.m */; };
-		D6DB91061FB08E780095BEFA /* StarscreamSocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DB906C1FB08E770095BEFA /* StarscreamSocketIO.framework */; };
-		D6DB91071FB08E780095BEFA /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DB906D1FB08E770095BEFA /* SocketIO.framework */; };
-		D6DB91081FB08E780095BEFA /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DB906E1FB08E770095BEFA /* WebRTC.framework */; };
-		D6DB91091FB08E780095BEFA /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6DB906F1FB08E770095BEFA /* Resources.bundle */; };
-		D6DB910A1FB08E780095BEFA /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DB90701FB08E770095BEFA /* libroomsdk.a */; };
-		D6DB910B1FB08E780095BEFA /* NSString+sizeHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90751FB08E780095BEFA /* NSString+sizeHeight.m */; };
-		D6DB910C1FB08E780095BEFA /* TKChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90771FB08E780095BEFA /* TKChatView.m */; };
-		D6DB910D1FB08E780095BEFA /* TKChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB907A1FB08E780095BEFA /* TKChatMessageModel.m */; };
-		D6DB910E1FB08E780095BEFA /* TKGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB907C1FB08E780095BEFA /* TKGrowingTextView.m */; };
-		D6DB910F1FB08E780095BEFA /* TKTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB907F1FB08E780095BEFA /* TKTextViewInternal.m */; };
-		D6DB91101FB08E780095BEFA /* TKTeacherMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90821FB08E780095BEFA /* TKTeacherMessageTableViewCell.m */; };
-		D6DB91111FB08E780095BEFA /* TKTeacherMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DB90831FB08E780095BEFA /* TKTeacherMessageTableViewCell.xib */; };
-		D6DB91121FB08E780095BEFA /* TKMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90851FB08E780095BEFA /* TKMessageTableViewCell.m */; };
-		D6DB91131FB08E780095BEFA /* TKMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DB90871FB08E780095BEFA /* TKMessageTableViewCell.xib */; };
-		D6DB91141FB08E780095BEFA /* TKWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90891FB08E780095BEFA /* TKWeakDelegate.m */; };
-		D6DB91151FB08E780095BEFA /* TKLiveViewChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB908C1FB08E780095BEFA /* TKLiveViewChatTableViewCell.m */; };
-		D6DB91161FB08E780095BEFA /* TKStudentMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DB908F1FB08E780095BEFA /* TKStudentMessageTableViewCell.xib */; };
-		D6DB91171FB08E780095BEFA /* TKStudentMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90901FB08E780095BEFA /* TKStudentMessageTableViewCell.m */; };
-		D6DB91181FB08E780095BEFA /* TKDocumentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90941FB08E780095BEFA /* TKDocumentListView.m */; };
-		D6DB91191FB08E780095BEFA /* TKUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DB90951FB08E780095BEFA /* TKUserListTableViewCell.xib */; };
-		D6DB911A1FB08E780095BEFA /* TKUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90961FB08E780095BEFA /* TKUserListTableViewCell.m */; };
-		D6DB911B1FB08E780095BEFA /* TKUploadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB909A1FB08E780095BEFA /* TKUploadImageView.m */; };
-		D6DB911C1FB08E780095BEFA /* TKPlaybackMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB909B1FB08E780095BEFA /* TKPlaybackMaskView.m */; };
-		D6DB911D1FB08E780095BEFA /* TKAudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB909F1FB08E780095BEFA /* TKAudioHelper.m */; };
-		D6DB911E1FB08E780095BEFA /* TKProgressSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A01FB08E780095BEFA /* TKProgressSlider.m */; };
-		D6DB911F1FB08E780095BEFA /* TKBaseMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A11FB08E780095BEFA /* TKBaseMediaView.m */; };
-		D6DB91201FB08E780095BEFA /* TKMessageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A51FB08E780095BEFA /* TKMessageTipView.m */; };
-		D6DB91211FB08E780095BEFA /* TKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A61FB08E780095BEFA /* TKButton.m */; };
-		D6DB91221FB08E780095BEFA /* TKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A81FB08E780095BEFA /* TKTimer.m */; };
-		D6DB91231FB08E780095BEFA /* TKVideoSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90A91FB08E780095BEFA /* TKVideoSmallView.m */; };
-		D6DB91241FB08E780095BEFA /* TKDrogView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90AC1FB08E780095BEFA /* TKDrogView.m */; };
-		D6DB91251FB08E780095BEFA /* TKVideoFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90AD1FB08E780095BEFA /* TKVideoFunctionView.m */; };
-		D6DB91261FB08E780095BEFA /* TKClassTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90B21FB08E780095BEFA /* TKClassTimeView.m */; };
-		D6DB91271FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90B51FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.m */; };
-		D6DB91281FB08E780095BEFA /* UIControl+clickedOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90B81FB08E780095BEFA /* UIControl+clickedOnce.m */; };
-		D6DB91291FB08E780095BEFA /* TKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90BA1FB08E780095BEFA /* TKNavigationController.m */; };
-		D6DB912A1FB08E780095BEFA /* TKPickViewTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90BF1FB08E780095BEFA /* TKPickViewTextField.m */; };
-		D6DB912B1FB08E780095BEFA /* TKEduRoomProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90C51FB08E780095BEFA /* TKEduRoomProperty.m */; };
-		D6DB912C1FB08E780095BEFA /* RoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90C81FB08E780095BEFA /* RoomController.m */; };
-		D6DB912D1FB08E780095BEFA /* TKUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90CC1FB08E780095BEFA /* TKUtil.mm */; };
-		D6DB912E1FB08E780095BEFA /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90D11FB08E780095BEFA /* TKMediaDocModel.m */; };
-		D6DB912F1FB08E780095BEFA /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90D21FB08E780095BEFA /* TKDocmentDocModel.m */; };
-		D6DB91301FB08E780095BEFA /* TKWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90D41FB08E780095BEFA /* TKWeakScriptMessageDelegate.m */; };
-		D6DB91311FB08E780095BEFA /* TKEduBoardHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DB90D71FB08E780095BEFA /* TKEduBoardHandle.m */; };
-		D6DB91321FB08EB70095BEFA /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6DB906E1FB08E770095BEFA /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6DB91331FB08EC10095BEFA /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6DB906D1FB08E770095BEFA /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6DB91341FB08EC40095BEFA /* StarscreamSocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6DB906C1FB08E770095BEFA /* StarscreamSocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6E0A47C1EC2C200006A003D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A47B1EC2C200006A003D /* main.m */; };
 		D6E0A47F1EC2C200006A003D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E0A47E1EC2C200006A003D /* AppDelegate.m */; };
 		D6E0A4871EC2C200006A003D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6E0A4861EC2C200006A003D /* Assets.xcassets */; };
@@ -295,9 +295,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6DB91341FB08EC40095BEFA /* StarscreamSocketIO.framework in CopyFiles */,
-				D6DB91331FB08EC10095BEFA /* SocketIO.framework in CopyFiles */,
-				D6DB91321FB08EB70095BEFA /* WebRTC.framework in CopyFiles */,
+				D628D5411FB29B440050CE54 /* StarscreamSocketIO.framework in CopyFiles */,
+				D628D5401FB29B400050CE54 /* SocketIO.framework in CopyFiles */,
+				D628D53F1FB29B380050CE54 /* WebRTC.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +448,219 @@
 		D627DCF41ED41AD000076FBD /* XCNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNormalFooter.m; sourceTree = "<group>"; };
 		D627DCF71ED432C800076FBD /* GGT_CalendarCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CalendarCellModel.h; sourceTree = "<group>"; };
 		D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CalendarCellModel.m; sourceTree = "<group>"; };
+		D628D3ED1FB29AC70050CE54 /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
+		D628D3EE1FB29AC70050CE54 /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
+		D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduSessionHandle.m; sourceTree = "<group>"; };
+		D628D3F01FB29AC70050CE54 /* TKEduNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduNetManager.h; sourceTree = "<group>"; };
+		D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
+		D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduNetManager.m; sourceTree = "<group>"; };
+		D628D3F31FB29AC70050CE54 /* TKEduSessionHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduSessionHandle.h; sourceTree = "<group>"; };
+		D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLRequestSerialization.m; sourceTree = "<group>"; };
+		D628D3F71FB29AC70050CE54 /* TKAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworking.h; sourceTree = "<group>"; };
+		D628D3F81FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		D628D3F91FB29AC70050CE54 /* TKAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFHTTPSessionManager.h; sourceTree = "<group>"; };
+		D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLSessionManager.m; sourceTree = "<group>"; };
+		D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFSecurityPolicy.m; sourceTree = "<group>"; };
+		D628D3FC1FB29AC70050CE54 /* TKAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLResponseSerialization.m; sourceTree = "<group>"; };
+		D628D3FE1FB29AC70050CE54 /* TKAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLRequestSerialization.h; sourceTree = "<group>"; };
+		D628D3FF1FB29AC70050CE54 /* TKAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLSessionManager.h; sourceTree = "<group>"; };
+		D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFHTTPSessionManager.m; sourceTree = "<group>"; };
+		D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		D628D4031FB29AC70050CE54 /* TKAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFSecurityPolicy.h; sourceTree = "<group>"; };
+		D628D4041FB29AC70050CE54 /* TKAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLResponseSerialization.h; sourceTree = "<group>"; };
+		D628D4061FB29AC70050CE54 /* TKGTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMBase64.h; sourceTree = "<group>"; };
+		D628D4071FB29AC70050CE54 /* TKGTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMDefines.h; sourceTree = "<group>"; };
+		D628D4081FB29AC70050CE54 /* TKGTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGTMBase64.m; sourceTree = "<group>"; };
+		D628D40A1FB29AC70050CE54 /* BITFeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManager.h; sourceTree = "<group>"; };
+		D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAttributedLabel.m; sourceTree = "<group>"; };
+		D628D40C1FB29AC70050CE54 /* BITAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticationViewController.h; sourceTree = "<group>"; };
+		D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseViewController.m; sourceTree = "<group>"; };
+		D628D40E1FB29AC70050CE54 /* BITFeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewController.h; sourceTree = "<group>"; };
+		D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportTextFormatter.m; sourceTree = "<group>"; };
+		D628D4101FB29AC70050CE54 /* HockeySDKFeatureConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKFeatureConfig.h; sourceTree = "<group>"; };
+		D628D4111FB29AC70050CE54 /* BITCrashAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashAttachment.h; sourceTree = "<group>"; };
+		D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseManager.m; sourceTree = "<group>"; };
+		D628D4131FB29AC70050CE54 /* BITFeedbackComposeViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewControllerDelegate.h; sourceTree = "<group>"; };
+		D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
+		D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateViewController.m; sourceTree = "<group>"; };
+		D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyHelper.m; sourceTree = "<group>"; };
+		D628D4171FB29AC70050CE54 /* BITKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITKeychainUtils.h; sourceTree = "<group>"; };
+		D628D4181FB29AC70050CE54 /* BITFeedbackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessage.h; sourceTree = "<group>"; };
+		D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITWebTableViewCell.m; sourceTree = "<group>"; };
+		D628D41A1FB29AC70050CE54 /* BITAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppStoreHeader.h; sourceTree = "<group>"; };
+		D628D41B1FB29AC70050CE54 /* BITUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerPrivate.h; sourceTree = "<group>"; };
+		D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
+		D628D41D1FB29AC70050CE54 /* BITFeedbackComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewController.h; sourceTree = "<group>"; };
+		D628D41E1FB29AC70050CE54 /* BITFeedbackListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewCell.h; sourceTree = "<group>"; };
+		D628D41F1FB29AC70050CE54 /* BITStoreUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerPrivate.h; sourceTree = "<group>"; };
+		D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackUserDataViewController.m; sourceTree = "<group>"; };
+		D628D4211FB29AC70050CE54 /* BITUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateManager.m; sourceTree = "<group>"; };
+		D628D4221FB29AC70050CE54 /* BITHockeyBaseManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManagerPrivate.h; sourceTree = "<group>"; };
+		D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppVersionMetaInfo.m; sourceTree = "<group>"; };
+		D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreUpdateManager.m; sourceTree = "<group>"; };
+		D628D4281FB29AC70050CE54 /* BITCrashManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManager.h; sourceTree = "<group>"; };
+		D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackActivity.m; sourceTree = "<group>"; };
+		D628D42A1FB29AC70050CE54 /* BITStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreButton.h; sourceTree = "<group>"; };
+		D628D42B1FB29AC70050CE54 /* BITHockeyManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManagerDelegate.h; sourceTree = "<group>"; };
+		D628D42C1FB29AC70050CE54 /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
+		D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HockeySDKPrivate.m; sourceTree = "<group>"; };
+		D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticator.m; sourceTree = "<group>"; };
+		D628D42F1FB29AC70050CE54 /* BITAuthenticator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator_Private.h; sourceTree = "<group>"; };
+		D628D4301FB29AC70050CE54 /* BITHockeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyHelper.h; sourceTree = "<group>"; };
+		D628D4311FB29AC70050CE54 /* BITUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewController.h; sourceTree = "<group>"; };
+		D628D4321FB29AC70050CE54 /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
+		D628D4331FB29AC70050CE54 /* BITHockeyBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManager.h; sourceTree = "<group>"; };
+		D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashAttachment.m; sourceTree = "<group>"; };
+		D628D4351FB29AC70050CE54 /* BITHockeyBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseViewController.h; sourceTree = "<group>"; };
+		D628D4361FB29AC70050CE54 /* BITCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatter.h; sourceTree = "<group>"; };
+		D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewController.m; sourceTree = "<group>"; };
+		D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticationViewController.m; sourceTree = "<group>"; };
+		D628D4391FB29AC70050CE54 /* BITAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAttributedLabel.h; sourceTree = "<group>"; };
+		D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackManager.m; sourceTree = "<group>"; };
+		D628D43B1FB29AC70050CE54 /* BITFeedbackManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerDelegate.h; sourceTree = "<group>"; };
+		D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppStoreHeader.m; sourceTree = "<group>"; };
+		D628D43D1FB29AC70050CE54 /* BITWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITWebTableViewCell.h; sourceTree = "<group>"; };
+		D628D43E1FB29AC70050CE54 /* BITUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerDelegate.h; sourceTree = "<group>"; };
+		D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessage.m; sourceTree = "<group>"; };
+		D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITKeychainUtils.m; sourceTree = "<group>"; };
+		D628D4411FB29AC70050CE54 /* BITCrashManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashManager.m; sourceTree = "<group>"; };
+		D628D4421FB29AC70050CE54 /* BITStoreUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManager.h; sourceTree = "<group>"; };
+		D628D4431FB29AC70050CE54 /* BITFeedbackActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackActivity.h; sourceTree = "<group>"; };
+		D628D4441FB29AC70050CE54 /* BITStoreUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerDelegate.h; sourceTree = "<group>"; };
+		D628D4451FB29AC70050CE54 /* BITAppVersionMetaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppVersionMetaInfo.h; sourceTree = "<group>"; };
+		D628D4461FB29AC70050CE54 /* BITUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManager.h; sourceTree = "<group>"; };
+		D628D4471FB29AC70050CE54 /* BITUpdateViewControllerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewControllerPrivate.h; sourceTree = "<group>"; };
+		D628D4481FB29AC70050CE54 /* BITFeedbackUserDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackUserDataViewController.h; sourceTree = "<group>"; };
+		D628D4491FB29AC70050CE54 /* BITFeedbackManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerPrivate.h; sourceTree = "<group>"; };
+		D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewCell.m; sourceTree = "<group>"; };
+		D628D44B1FB29AC70050CE54 /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
+		D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackComposeViewController.m; sourceTree = "<group>"; };
+		D628D44D1FB29AC70050CE54 /* BITAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator.h; sourceTree = "<group>"; };
+		D628D44E1FB29AC70050CE54 /* BITCrashManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerDelegate.h; sourceTree = "<group>"; };
+		D628D44F1FB29AC70050CE54 /* HockeySDKPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKPrivate.h; sourceTree = "<group>"; };
+		D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
+		D628D4511FB29AC70050CE54 /* BITCrashManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerPrivate.h; sourceTree = "<group>"; };
+		D628D4521FB29AC70050CE54 /* HockeySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDK.h; sourceTree = "<group>"; };
+		D628D4531FB29AC70050CE54 /* BITStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreButton.m; sourceTree = "<group>"; };
+		D628D4551FB29AC70050CE54 /* LTUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUpdate.m; sourceTree = "<group>"; };
+		D628D4581FB29AC70050CE54 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4591FB29AC70050CE54 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D628D45A1FB29AC70050CE54 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D45B1FB29AC70050CE54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D628D45C1FB29AC70050CE54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D45D1FB29AC70050CE54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D45E1FB29AC70050CE54 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D45F1FB29AC70050CE54 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4601FB29AC70050CE54 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4611FB29AC70050CE54 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4621FB29AC70050CE54 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4631FB29AC70050CE54 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4641FB29AC70050CE54 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4651FB29AC70050CE54 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4661FB29AC70050CE54 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4671FB29AC70050CE54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D628D4681FB29AC70050CE54 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4691FB29AC70050CE54 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D46A1FB29AC70050CE54 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D628D46B1FB29AC70050CE54 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D46C1FB29AC70050CE54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D46D1FB29AC70050CE54 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D46E1FB29AC70050CE54 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D46F1FB29AC70050CE54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D628D4701FB29AC70050CE54 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D628D4711FB29AC70050CE54 /* LTUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUpdate.h; sourceTree = "<group>"; };
+		D628D4721FB29AC70050CE54 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		D628D4741FB29AC70050CE54 /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
+		D628D4751FB29AC70050CE54 /* TKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressHUD.m; sourceTree = "<group>"; };
+		D628D4761FB29AC70050CE54 /* TKProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressHUD.h; sourceTree = "<group>"; };
+		D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
+		D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarscreamSocketIO.framework; sourceTree = "<group>"; };
+		D628D47A1FB29AC70050CE54 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
+		D628D47B1FB29AC70050CE54 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
+		D628D47C1FB29AC70050CE54 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		D628D47D1FB29AC70050CE54 /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
+		D628D4811FB29AC70050CE54 /* TKChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatView.h; sourceTree = "<group>"; };
+		D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+sizeHeight.m"; sourceTree = "<group>"; };
+		D628D4831FB29AC70050CE54 /* NSString+sizeHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+sizeHeight.h"; sourceTree = "<group>"; };
+		D628D4841FB29AC70050CE54 /* TKChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatView.m; sourceTree = "<group>"; };
+		D628D4861FB29AC70050CE54 /* TKChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatMessageModel.h; sourceTree = "<group>"; };
+		D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatMessageModel.m; sourceTree = "<group>"; };
+		D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGrowingTextView.m; sourceTree = "<group>"; };
+		D628D48A1FB29AC70050CE54 /* TKTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextViewInternal.h; sourceTree = "<group>"; };
+		D628D48B1FB29AC70050CE54 /* TKGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGrowingTextView.h; sourceTree = "<group>"; };
+		D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewInternal.m; sourceTree = "<group>"; };
+		D628D48E1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTeacherMessageTableViewCell.h; sourceTree = "<group>"; };
+		D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTeacherMessageTableViewCell.m; sourceTree = "<group>"; };
+		D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKTeacherMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTableViewCell.m; sourceTree = "<group>"; };
+		D628D4931FB29AC70050CE54 /* TKMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTableViewCell.h; sourceTree = "<group>"; };
+		D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakDelegate.m; sourceTree = "<group>"; };
+		D628D4971FB29AC70050CE54 /* TKWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakDelegate.h; sourceTree = "<group>"; };
+		D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLiveViewChatTableViewCell.m; sourceTree = "<group>"; };
+		D628D49A1FB29AC70050CE54 /* TKLiveViewChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLiveViewChatTableViewCell.h; sourceTree = "<group>"; };
+		D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKStudentMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKStudentMessageTableViewCell.m; sourceTree = "<group>"; };
+		D628D49E1FB29AC70050CE54 /* TKStudentMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKStudentMessageTableViewCell.h; sourceTree = "<group>"; };
+		D628D4A01FB29AC70050CE54 /* TKUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUserListTableViewCell.h; sourceTree = "<group>"; };
+		D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocumentListView.m; sourceTree = "<group>"; };
+		D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUserListTableViewCell.xib; sourceTree = "<group>"; };
+		D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUserListTableViewCell.m; sourceTree = "<group>"; };
+		D628D4A41FB29AC70050CE54 /* TKDocumentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocumentListView.h; sourceTree = "<group>"; };
+		D628D4A61FB29AC70050CE54 /* TKUploadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUploadImageView.h; sourceTree = "<group>"; };
+		D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUploadImageView.m; sourceTree = "<group>"; };
+		D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPlaybackMaskView.m; sourceTree = "<group>"; };
+		D628D4AA1FB29AC70050CE54 /* TKBaseMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBaseMediaView.h; sourceTree = "<group>"; };
+		D628D4AB1FB29AC70050CE54 /* TKProgressSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressSlider.h; sourceTree = "<group>"; };
+		D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAudioHelper.m; sourceTree = "<group>"; };
+		D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressSlider.m; sourceTree = "<group>"; };
+		D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBaseMediaView.m; sourceTree = "<group>"; };
+		D628D4AF1FB29AC70050CE54 /* TKAudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAudioHelper.h; sourceTree = "<group>"; };
+		D628D4B11FB29AC70050CE54 /* TKDrogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDrogView.h; sourceTree = "<group>"; };
+		D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTipView.m; sourceTree = "<group>"; };
+		D628D4B31FB29AC70050CE54 /* TKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKButton.m; sourceTree = "<group>"; };
+		D628D4B41FB29AC70050CE54 /* TKVideoFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoFunctionView.h; sourceTree = "<group>"; };
+		D628D4B51FB29AC70050CE54 /* TKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTimer.m; sourceTree = "<group>"; };
+		D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoSmallView.m; sourceTree = "<group>"; };
+		D628D4B71FB29AC70050CE54 /* TKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKButton.h; sourceTree = "<group>"; };
+		D628D4B81FB29AC70050CE54 /* TKMessageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTipView.h; sourceTree = "<group>"; };
+		D628D4B91FB29AC70050CE54 /* TKDrogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDrogView.m; sourceTree = "<group>"; };
+		D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoFunctionView.m; sourceTree = "<group>"; };
+		D628D4BB1FB29AC70050CE54 /* TKVideoSmallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoSmallView.h; sourceTree = "<group>"; };
+		D628D4BC1FB29AC70050CE54 /* TKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTimer.h; sourceTree = "<group>"; };
+		D628D4BE1FB29AC70050CE54 /* TKClassTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKClassTimeView.h; sourceTree = "<group>"; };
+		D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKClassTimeView.m; sourceTree = "<group>"; };
+		D628D4C11FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+TKLandScapeImagePicker.h"; sourceTree = "<group>"; };
+		D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+TKLandScapeImagePicker.m"; sourceTree = "<group>"; };
+		D628D4C41FB29AC70050CE54 /* UIControl+clickedOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+clickedOnce.h"; sourceTree = "<group>"; };
+		D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+clickedOnce.m"; sourceTree = "<group>"; };
+		D628D4C71FB29AC70050CE54 /* TKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNavigationController.m; sourceTree = "<group>"; };
+		D628D4C81FB29AC70050CE54 /* TKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNavigationController.h; sourceTree = "<group>"; };
+		D628D4C91FB29AC70050CE54 /* TKPlaybackMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPlaybackMaskView.h; sourceTree = "<group>"; };
+		D628D4CB1FB29AC70050CE54 /* TKPickViewTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPickViewTextField.h; sourceTree = "<group>"; };
+		D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPickViewTextField.m; sourceTree = "<group>"; };
+		D628D4CE1FB29AC70050CE54 /* PlaybackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackModel.h; sourceTree = "<group>"; };
+		D628D4CF1FB29AC70050CE54 /* MediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaStream.h; sourceTree = "<group>"; };
+		D628D4D01FB29AC70050CE54 /* TKEduRoomProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduRoomProperty.h; sourceTree = "<group>"; };
+		D628D4D11FB29AC70050CE54 /* RoomUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomUser.h; sourceTree = "<group>"; };
+		D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduRoomProperty.m; sourceTree = "<group>"; };
+		D628D4D41FB29AC70050CE54 /* RoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomController.h; sourceTree = "<group>"; };
+		D628D4D51FB29AC70050CE54 /* RoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomController.m; sourceTree = "<group>"; };
+		D628D4D71FB29AC70050CE54 /* TKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
+		D628D4D81FB29AC70050CE54 /* TKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUtil.h; sourceTree = "<group>"; };
+		D628D4D91FB29AC70050CE54 /* TKUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TKUtil.mm; sourceTree = "<group>"; };
+		D628D4DC1FB29AC80050CE54 /* TKMediaDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMediaDocModel.h; sourceTree = "<group>"; };
+		D628D4DD1FB29AC80050CE54 /* TKDocmentDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocmentDocModel.h; sourceTree = "<group>"; };
+		D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMediaDocModel.m; sourceTree = "<group>"; };
+		D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocmentDocModel.m; sourceTree = "<group>"; };
+		D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
+		D628D4E21FB29AC80050CE54 /* TKEduBoardHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduBoardHandle.h; sourceTree = "<group>"; };
+		D628D4E31FB29AC80050CE54 /* TKWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduBoardHandle.m; sourceTree = "<group>"; };
 		D6353E121EE8E20A004E1288 /* GGT_PopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverController.h; sourceTree = "<group>"; };
 		D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PopoverController.m; sourceTree = "<group>"; };
 		D6353E151EE8E250004E1288 /* GGT_PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverCell.h; sourceTree = "<group>"; };
@@ -523,219 +736,6 @@
 		D6C150F11EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+XCPlaceholderView.m"; sourceTree = "<group>"; };
 		D6D7CBEB1F2199C80087DDA0 /* GGT_LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_LaunchViewController.h; sourceTree = "<group>"; };
 		D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_LaunchViewController.m; sourceTree = "<group>"; };
-		D6DB8FE01FB08E770095BEFA /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
-		D6DB8FE11FB08E770095BEFA /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
-		D6DB8FE21FB08E770095BEFA /* TKEduSessionHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduSessionHandle.m; sourceTree = "<group>"; };
-		D6DB8FE31FB08E770095BEFA /* TKEduNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduNetManager.h; sourceTree = "<group>"; };
-		D6DB8FE41FB08E770095BEFA /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
-		D6DB8FE51FB08E770095BEFA /* TKEduNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduNetManager.m; sourceTree = "<group>"; };
-		D6DB8FE61FB08E770095BEFA /* TKEduSessionHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduSessionHandle.h; sourceTree = "<group>"; };
-		D6DB8FE91FB08E770095BEFA /* TKAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLRequestSerialization.m; sourceTree = "<group>"; };
-		D6DB8FEA1FB08E770095BEFA /* TKAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworking.h; sourceTree = "<group>"; };
-		D6DB8FEB1FB08E770095BEFA /* TKAFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		D6DB8FEC1FB08E770095BEFA /* TKAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFHTTPSessionManager.h; sourceTree = "<group>"; };
-		D6DB8FED1FB08E770095BEFA /* TKAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLSessionManager.m; sourceTree = "<group>"; };
-		D6DB8FEE1FB08E770095BEFA /* TKAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFSecurityPolicy.m; sourceTree = "<group>"; };
-		D6DB8FEF1FB08E770095BEFA /* TKAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		D6DB8FF01FB08E770095BEFA /* TKAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLResponseSerialization.m; sourceTree = "<group>"; };
-		D6DB8FF11FB08E770095BEFA /* TKAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLRequestSerialization.h; sourceTree = "<group>"; };
-		D6DB8FF21FB08E770095BEFA /* TKAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLSessionManager.h; sourceTree = "<group>"; };
-		D6DB8FF31FB08E770095BEFA /* TKAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFHTTPSessionManager.m; sourceTree = "<group>"; };
-		D6DB8FF41FB08E770095BEFA /* TKAFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		D6DB8FF51FB08E770095BEFA /* TKAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		D6DB8FF61FB08E770095BEFA /* TKAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFSecurityPolicy.h; sourceTree = "<group>"; };
-		D6DB8FF71FB08E770095BEFA /* TKAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLResponseSerialization.h; sourceTree = "<group>"; };
-		D6DB8FF91FB08E770095BEFA /* TKGTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMBase64.h; sourceTree = "<group>"; };
-		D6DB8FFA1FB08E770095BEFA /* TKGTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMDefines.h; sourceTree = "<group>"; };
-		D6DB8FFB1FB08E770095BEFA /* TKGTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGTMBase64.m; sourceTree = "<group>"; };
-		D6DB8FFD1FB08E770095BEFA /* BITFeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManager.h; sourceTree = "<group>"; };
-		D6DB8FFE1FB08E770095BEFA /* BITAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAttributedLabel.m; sourceTree = "<group>"; };
-		D6DB8FFF1FB08E770095BEFA /* BITAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticationViewController.h; sourceTree = "<group>"; };
-		D6DB90001FB08E770095BEFA /* BITHockeyBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseViewController.m; sourceTree = "<group>"; };
-		D6DB90011FB08E770095BEFA /* BITFeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewController.h; sourceTree = "<group>"; };
-		D6DB90021FB08E770095BEFA /* BITCrashReportTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportTextFormatter.m; sourceTree = "<group>"; };
-		D6DB90031FB08E770095BEFA /* HockeySDKFeatureConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKFeatureConfig.h; sourceTree = "<group>"; };
-		D6DB90041FB08E770095BEFA /* BITCrashAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashAttachment.h; sourceTree = "<group>"; };
-		D6DB90051FB08E770095BEFA /* BITHockeyBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseManager.m; sourceTree = "<group>"; };
-		D6DB90061FB08E770095BEFA /* BITFeedbackComposeViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewControllerDelegate.h; sourceTree = "<group>"; };
-		D6DB90071FB08E770095BEFA /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
-		D6DB90081FB08E770095BEFA /* BITUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateViewController.m; sourceTree = "<group>"; };
-		D6DB90091FB08E770095BEFA /* BITHockeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyHelper.m; sourceTree = "<group>"; };
-		D6DB900A1FB08E770095BEFA /* BITKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITKeychainUtils.h; sourceTree = "<group>"; };
-		D6DB900B1FB08E770095BEFA /* BITFeedbackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessage.h; sourceTree = "<group>"; };
-		D6DB900C1FB08E770095BEFA /* BITWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITWebTableViewCell.m; sourceTree = "<group>"; };
-		D6DB900D1FB08E770095BEFA /* BITAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppStoreHeader.h; sourceTree = "<group>"; };
-		D6DB900E1FB08E770095BEFA /* BITUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerPrivate.h; sourceTree = "<group>"; };
-		D6DB900F1FB08E770095BEFA /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
-		D6DB90101FB08E770095BEFA /* BITFeedbackComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewController.h; sourceTree = "<group>"; };
-		D6DB90111FB08E770095BEFA /* BITFeedbackListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewCell.h; sourceTree = "<group>"; };
-		D6DB90121FB08E770095BEFA /* BITStoreUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerPrivate.h; sourceTree = "<group>"; };
-		D6DB90131FB08E770095BEFA /* BITFeedbackUserDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackUserDataViewController.m; sourceTree = "<group>"; };
-		D6DB90141FB08E770095BEFA /* BITUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateManager.m; sourceTree = "<group>"; };
-		D6DB90151FB08E770095BEFA /* BITHockeyBaseManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManagerPrivate.h; sourceTree = "<group>"; };
-		D6DB90171FB08E770095BEFA /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
-		D6DB90181FB08E770095BEFA /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		D6DB90191FB08E770095BEFA /* BITAppVersionMetaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppVersionMetaInfo.m; sourceTree = "<group>"; };
-		D6DB901A1FB08E770095BEFA /* BITStoreUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreUpdateManager.m; sourceTree = "<group>"; };
-		D6DB901B1FB08E770095BEFA /* BITCrashManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManager.h; sourceTree = "<group>"; };
-		D6DB901C1FB08E770095BEFA /* BITFeedbackActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackActivity.m; sourceTree = "<group>"; };
-		D6DB901D1FB08E770095BEFA /* BITStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreButton.h; sourceTree = "<group>"; };
-		D6DB901E1FB08E770095BEFA /* BITHockeyManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManagerDelegate.h; sourceTree = "<group>"; };
-		D6DB901F1FB08E770095BEFA /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
-		D6DB90201FB08E770095BEFA /* HockeySDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HockeySDKPrivate.m; sourceTree = "<group>"; };
-		D6DB90211FB08E770095BEFA /* BITAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticator.m; sourceTree = "<group>"; };
-		D6DB90221FB08E770095BEFA /* BITAuthenticator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator_Private.h; sourceTree = "<group>"; };
-		D6DB90231FB08E770095BEFA /* BITHockeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyHelper.h; sourceTree = "<group>"; };
-		D6DB90241FB08E770095BEFA /* BITUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewController.h; sourceTree = "<group>"; };
-		D6DB90251FB08E770095BEFA /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
-		D6DB90261FB08E770095BEFA /* BITHockeyBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManager.h; sourceTree = "<group>"; };
-		D6DB90271FB08E770095BEFA /* BITCrashAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashAttachment.m; sourceTree = "<group>"; };
-		D6DB90281FB08E770095BEFA /* BITHockeyBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseViewController.h; sourceTree = "<group>"; };
-		D6DB90291FB08E770095BEFA /* BITCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatter.h; sourceTree = "<group>"; };
-		D6DB902A1FB08E770095BEFA /* BITFeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewController.m; sourceTree = "<group>"; };
-		D6DB902B1FB08E770095BEFA /* BITAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticationViewController.m; sourceTree = "<group>"; };
-		D6DB902C1FB08E770095BEFA /* BITAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAttributedLabel.h; sourceTree = "<group>"; };
-		D6DB902D1FB08E770095BEFA /* BITFeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackManager.m; sourceTree = "<group>"; };
-		D6DB902E1FB08E770095BEFA /* BITFeedbackManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerDelegate.h; sourceTree = "<group>"; };
-		D6DB902F1FB08E770095BEFA /* BITAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppStoreHeader.m; sourceTree = "<group>"; };
-		D6DB90301FB08E770095BEFA /* BITWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITWebTableViewCell.h; sourceTree = "<group>"; };
-		D6DB90311FB08E770095BEFA /* BITUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerDelegate.h; sourceTree = "<group>"; };
-		D6DB90321FB08E770095BEFA /* BITFeedbackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessage.m; sourceTree = "<group>"; };
-		D6DB90331FB08E770095BEFA /* BITKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITKeychainUtils.m; sourceTree = "<group>"; };
-		D6DB90341FB08E770095BEFA /* BITCrashManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashManager.m; sourceTree = "<group>"; };
-		D6DB90351FB08E770095BEFA /* BITStoreUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManager.h; sourceTree = "<group>"; };
-		D6DB90361FB08E770095BEFA /* BITFeedbackActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackActivity.h; sourceTree = "<group>"; };
-		D6DB90371FB08E770095BEFA /* BITStoreUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerDelegate.h; sourceTree = "<group>"; };
-		D6DB90381FB08E770095BEFA /* BITAppVersionMetaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppVersionMetaInfo.h; sourceTree = "<group>"; };
-		D6DB90391FB08E770095BEFA /* BITUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManager.h; sourceTree = "<group>"; };
-		D6DB903A1FB08E770095BEFA /* BITUpdateViewControllerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewControllerPrivate.h; sourceTree = "<group>"; };
-		D6DB903B1FB08E770095BEFA /* BITFeedbackUserDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackUserDataViewController.h; sourceTree = "<group>"; };
-		D6DB903C1FB08E770095BEFA /* BITFeedbackManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerPrivate.h; sourceTree = "<group>"; };
-		D6DB903D1FB08E770095BEFA /* BITFeedbackListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewCell.m; sourceTree = "<group>"; };
-		D6DB903E1FB08E770095BEFA /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
-		D6DB903F1FB08E770095BEFA /* BITFeedbackComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackComposeViewController.m; sourceTree = "<group>"; };
-		D6DB90401FB08E770095BEFA /* BITAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator.h; sourceTree = "<group>"; };
-		D6DB90411FB08E770095BEFA /* BITCrashManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerDelegate.h; sourceTree = "<group>"; };
-		D6DB90421FB08E770095BEFA /* HockeySDKPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKPrivate.h; sourceTree = "<group>"; };
-		D6DB90431FB08E770095BEFA /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
-		D6DB90441FB08E770095BEFA /* BITCrashManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerPrivate.h; sourceTree = "<group>"; };
-		D6DB90451FB08E770095BEFA /* HockeySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDK.h; sourceTree = "<group>"; };
-		D6DB90461FB08E770095BEFA /* BITStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreButton.m; sourceTree = "<group>"; };
-		D6DB90481FB08E770095BEFA /* LTUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUpdate.m; sourceTree = "<group>"; };
-		D6DB904B1FB08E770095BEFA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB904C1FB08E770095BEFA /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D6DB904D1FB08E770095BEFA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB904E1FB08E770095BEFA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D6DB904F1FB08E770095BEFA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90501FB08E770095BEFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90511FB08E770095BEFA /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90521FB08E770095BEFA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90531FB08E770095BEFA /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90541FB08E770095BEFA /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90551FB08E770095BEFA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90561FB08E770095BEFA /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90571FB08E770095BEFA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90581FB08E770095BEFA /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90591FB08E770095BEFA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB905A1FB08E770095BEFA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D6DB905B1FB08E770095BEFA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB905C1FB08E770095BEFA /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB905D1FB08E770095BEFA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D6DB905E1FB08E770095BEFA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB905F1FB08E770095BEFA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90601FB08E770095BEFA /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90611FB08E770095BEFA /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90621FB08E770095BEFA /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D6DB90631FB08E770095BEFA /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D6DB90641FB08E770095BEFA /* LTUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUpdate.h; sourceTree = "<group>"; };
-		D6DB90651FB08E770095BEFA /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		D6DB90671FB08E770095BEFA /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
-		D6DB90681FB08E770095BEFA /* TKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressHUD.m; sourceTree = "<group>"; };
-		D6DB90691FB08E770095BEFA /* TKProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressHUD.h; sourceTree = "<group>"; };
-		D6DB906A1FB08E770095BEFA /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
-		D6DB906C1FB08E770095BEFA /* StarscreamSocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarscreamSocketIO.framework; sourceTree = "<group>"; };
-		D6DB906D1FB08E770095BEFA /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
-		D6DB906E1FB08E770095BEFA /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
-		D6DB906F1FB08E770095BEFA /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		D6DB90701FB08E770095BEFA /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
-		D6DB90741FB08E770095BEFA /* TKChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatView.h; sourceTree = "<group>"; };
-		D6DB90751FB08E780095BEFA /* NSString+sizeHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+sizeHeight.m"; sourceTree = "<group>"; };
-		D6DB90761FB08E780095BEFA /* NSString+sizeHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+sizeHeight.h"; sourceTree = "<group>"; };
-		D6DB90771FB08E780095BEFA /* TKChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatView.m; sourceTree = "<group>"; };
-		D6DB90791FB08E780095BEFA /* TKChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatMessageModel.h; sourceTree = "<group>"; };
-		D6DB907A1FB08E780095BEFA /* TKChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatMessageModel.m; sourceTree = "<group>"; };
-		D6DB907C1FB08E780095BEFA /* TKGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGrowingTextView.m; sourceTree = "<group>"; };
-		D6DB907D1FB08E780095BEFA /* TKTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextViewInternal.h; sourceTree = "<group>"; };
-		D6DB907E1FB08E780095BEFA /* TKGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGrowingTextView.h; sourceTree = "<group>"; };
-		D6DB907F1FB08E780095BEFA /* TKTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewInternal.m; sourceTree = "<group>"; };
-		D6DB90811FB08E780095BEFA /* TKTeacherMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTeacherMessageTableViewCell.h; sourceTree = "<group>"; };
-		D6DB90821FB08E780095BEFA /* TKTeacherMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTeacherMessageTableViewCell.m; sourceTree = "<group>"; };
-		D6DB90831FB08E780095BEFA /* TKTeacherMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKTeacherMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D6DB90851FB08E780095BEFA /* TKMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTableViewCell.m; sourceTree = "<group>"; };
-		D6DB90861FB08E780095BEFA /* TKMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTableViewCell.h; sourceTree = "<group>"; };
-		D6DB90871FB08E780095BEFA /* TKMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D6DB90891FB08E780095BEFA /* TKWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakDelegate.m; sourceTree = "<group>"; };
-		D6DB908A1FB08E780095BEFA /* TKWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakDelegate.h; sourceTree = "<group>"; };
-		D6DB908C1FB08E780095BEFA /* TKLiveViewChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLiveViewChatTableViewCell.m; sourceTree = "<group>"; };
-		D6DB908D1FB08E780095BEFA /* TKLiveViewChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLiveViewChatTableViewCell.h; sourceTree = "<group>"; };
-		D6DB908F1FB08E780095BEFA /* TKStudentMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKStudentMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D6DB90901FB08E780095BEFA /* TKStudentMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKStudentMessageTableViewCell.m; sourceTree = "<group>"; };
-		D6DB90911FB08E780095BEFA /* TKStudentMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKStudentMessageTableViewCell.h; sourceTree = "<group>"; };
-		D6DB90931FB08E780095BEFA /* TKUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUserListTableViewCell.h; sourceTree = "<group>"; };
-		D6DB90941FB08E780095BEFA /* TKDocumentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocumentListView.m; sourceTree = "<group>"; };
-		D6DB90951FB08E780095BEFA /* TKUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUserListTableViewCell.xib; sourceTree = "<group>"; };
-		D6DB90961FB08E780095BEFA /* TKUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUserListTableViewCell.m; sourceTree = "<group>"; };
-		D6DB90971FB08E780095BEFA /* TKDocumentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocumentListView.h; sourceTree = "<group>"; };
-		D6DB90991FB08E780095BEFA /* TKUploadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUploadImageView.h; sourceTree = "<group>"; };
-		D6DB909A1FB08E780095BEFA /* TKUploadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUploadImageView.m; sourceTree = "<group>"; };
-		D6DB909B1FB08E780095BEFA /* TKPlaybackMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPlaybackMaskView.m; sourceTree = "<group>"; };
-		D6DB909D1FB08E780095BEFA /* TKBaseMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBaseMediaView.h; sourceTree = "<group>"; };
-		D6DB909E1FB08E780095BEFA /* TKProgressSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressSlider.h; sourceTree = "<group>"; };
-		D6DB909F1FB08E780095BEFA /* TKAudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAudioHelper.m; sourceTree = "<group>"; };
-		D6DB90A01FB08E780095BEFA /* TKProgressSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressSlider.m; sourceTree = "<group>"; };
-		D6DB90A11FB08E780095BEFA /* TKBaseMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBaseMediaView.m; sourceTree = "<group>"; };
-		D6DB90A21FB08E780095BEFA /* TKAudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAudioHelper.h; sourceTree = "<group>"; };
-		D6DB90A41FB08E780095BEFA /* TKDrogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDrogView.h; sourceTree = "<group>"; };
-		D6DB90A51FB08E780095BEFA /* TKMessageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTipView.m; sourceTree = "<group>"; };
-		D6DB90A61FB08E780095BEFA /* TKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKButton.m; sourceTree = "<group>"; };
-		D6DB90A71FB08E780095BEFA /* TKVideoFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoFunctionView.h; sourceTree = "<group>"; };
-		D6DB90A81FB08E780095BEFA /* TKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTimer.m; sourceTree = "<group>"; };
-		D6DB90A91FB08E780095BEFA /* TKVideoSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoSmallView.m; sourceTree = "<group>"; };
-		D6DB90AA1FB08E780095BEFA /* TKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKButton.h; sourceTree = "<group>"; };
-		D6DB90AB1FB08E780095BEFA /* TKMessageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTipView.h; sourceTree = "<group>"; };
-		D6DB90AC1FB08E780095BEFA /* TKDrogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDrogView.m; sourceTree = "<group>"; };
-		D6DB90AD1FB08E780095BEFA /* TKVideoFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoFunctionView.m; sourceTree = "<group>"; };
-		D6DB90AE1FB08E780095BEFA /* TKVideoSmallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoSmallView.h; sourceTree = "<group>"; };
-		D6DB90AF1FB08E780095BEFA /* TKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTimer.h; sourceTree = "<group>"; };
-		D6DB90B11FB08E780095BEFA /* TKClassTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKClassTimeView.h; sourceTree = "<group>"; };
-		D6DB90B21FB08E780095BEFA /* TKClassTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKClassTimeView.m; sourceTree = "<group>"; };
-		D6DB90B41FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+TKLandScapeImagePicker.h"; sourceTree = "<group>"; };
-		D6DB90B51FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+TKLandScapeImagePicker.m"; sourceTree = "<group>"; };
-		D6DB90B71FB08E780095BEFA /* UIControl+clickedOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+clickedOnce.h"; sourceTree = "<group>"; };
-		D6DB90B81FB08E780095BEFA /* UIControl+clickedOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+clickedOnce.m"; sourceTree = "<group>"; };
-		D6DB90BA1FB08E780095BEFA /* TKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNavigationController.m; sourceTree = "<group>"; };
-		D6DB90BB1FB08E780095BEFA /* TKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNavigationController.h; sourceTree = "<group>"; };
-		D6DB90BC1FB08E780095BEFA /* TKPlaybackMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPlaybackMaskView.h; sourceTree = "<group>"; };
-		D6DB90BE1FB08E780095BEFA /* TKPickViewTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPickViewTextField.h; sourceTree = "<group>"; };
-		D6DB90BF1FB08E780095BEFA /* TKPickViewTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPickViewTextField.m; sourceTree = "<group>"; };
-		D6DB90C11FB08E780095BEFA /* PlaybackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackModel.h; sourceTree = "<group>"; };
-		D6DB90C21FB08E780095BEFA /* MediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaStream.h; sourceTree = "<group>"; };
-		D6DB90C31FB08E780095BEFA /* TKEduRoomProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduRoomProperty.h; sourceTree = "<group>"; };
-		D6DB90C41FB08E780095BEFA /* RoomUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomUser.h; sourceTree = "<group>"; };
-		D6DB90C51FB08E780095BEFA /* TKEduRoomProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduRoomProperty.m; sourceTree = "<group>"; };
-		D6DB90C71FB08E780095BEFA /* RoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomController.h; sourceTree = "<group>"; };
-		D6DB90C81FB08E780095BEFA /* RoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomController.m; sourceTree = "<group>"; };
-		D6DB90CA1FB08E780095BEFA /* TKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
-		D6DB90CB1FB08E780095BEFA /* TKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUtil.h; sourceTree = "<group>"; };
-		D6DB90CC1FB08E780095BEFA /* TKUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TKUtil.mm; sourceTree = "<group>"; };
-		D6DB90CF1FB08E780095BEFA /* TKMediaDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMediaDocModel.h; sourceTree = "<group>"; };
-		D6DB90D01FB08E780095BEFA /* TKDocmentDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocmentDocModel.h; sourceTree = "<group>"; };
-		D6DB90D11FB08E780095BEFA /* TKMediaDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMediaDocModel.m; sourceTree = "<group>"; };
-		D6DB90D21FB08E780095BEFA /* TKDocmentDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocmentDocModel.m; sourceTree = "<group>"; };
-		D6DB90D41FB08E780095BEFA /* TKWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
-		D6DB90D51FB08E780095BEFA /* TKEduBoardHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduBoardHandle.h; sourceTree = "<group>"; };
-		D6DB90D61FB08E780095BEFA /* TKWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
-		D6DB90D71FB08E780095BEFA /* TKEduBoardHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduBoardHandle.m; sourceTree = "<group>"; };
 		D6E0A4771EC2C200006A003D /* GoGoTalkHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoTalkHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E0A47B1EC2C200006A003D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6E0A47D1EC2C200006A003D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -822,14 +822,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D628D5131FB29AC80050CE54 /* StarscreamSocketIO.framework in Frameworks */,
+				D628D5171FB29AC80050CE54 /* libroomsdk.a in Frameworks */,
+				D628D5101FB29AC80050CE54 /* CrashReporter.framework in Frameworks */,
+				D628D5141FB29AC80050CE54 /* SocketIO.framework in Frameworks */,
+				D628D5151FB29AC80050CE54 /* WebRTC.framework in Frameworks */,
 				D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */,
 				D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */,
 				D68775621F0A0853008687C2 /* CoreMedia.framework in Frameworks */,
-				D6DB91061FB08E780095BEFA /* StarscreamSocketIO.framework in Frameworks */,
-				D6DB910A1FB08E780095BEFA /* libroomsdk.a in Frameworks */,
-				D6DB91031FB08E780095BEFA /* CrashReporter.framework in Frameworks */,
-				D6DB91071FB08E780095BEFA /* SocketIO.framework in Frameworks */,
-				D6DB91081FB08E780095BEFA /* WebRTC.framework in Frameworks */,
 				A38DFB95570C011E79A85D71 /* Pods_GoGoTalkHD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1129,6 +1129,481 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D628D3EB1FB29AC70050CE54 /* eduVideoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D628D3EC1FB29AC70050CE54 /* handle */,
+				D628D3F41FB29AC70050CE54 /* third */,
+				D628D4781FB29AC70050CE54 /* VideoResource */,
+				D628D47E1FB29AC70050CE54 /* ohterView */,
+				D628D4CD1FB29AC70050CE54 /* Model */,
+				D628D4D31FB29AC70050CE54 /* viewController */,
+				D628D4D61FB29AC70050CE54 /* help */,
+			);
+			path = eduVideoSDK;
+			sourceTree = "<group>";
+		};
+		D628D3EC1FB29AC70050CE54 /* handle */ = {
+			isa = PBXGroup;
+			children = (
+				D628D3ED1FB29AC70050CE54 /* TKEduClassRoom.h */,
+				D628D3EE1FB29AC70050CE54 /* RoomManager.h */,
+				D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */,
+				D628D3F01FB29AC70050CE54 /* TKEduNetManager.h */,
+				D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */,
+				D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */,
+				D628D3F31FB29AC70050CE54 /* TKEduSessionHandle.h */,
+			);
+			path = handle;
+			sourceTree = "<group>";
+		};
+		D628D3F41FB29AC70050CE54 /* third */ = {
+			isa = PBXGroup;
+			children = (
+				D628D3F51FB29AC70050CE54 /* TKAFNetworking */,
+				D628D4051FB29AC70050CE54 /* GTMBase64 */,
+				D628D4091FB29AC70050CE54 /* HockeySDK */,
+				D628D4541FB29AC70050CE54 /* LTUpdate */,
+				D628D4721FB29AC70050CE54 /* CrashReporter.framework */,
+				D628D4731FB29AC70050CE54 /* TKProgressHUD */,
+			);
+			path = third;
+			sourceTree = "<group>";
+		};
+		D628D3F51FB29AC70050CE54 /* TKAFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */,
+				D628D3F71FB29AC70050CE54 /* TKAFNetworking.h */,
+				D628D3F81FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.h */,
+				D628D3F91FB29AC70050CE54 /* TKAFHTTPSessionManager.h */,
+				D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */,
+				D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */,
+				D628D3FC1FB29AC70050CE54 /* TKAFNetworkReachabilityManager.h */,
+				D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */,
+				D628D3FE1FB29AC70050CE54 /* TKAFURLRequestSerialization.h */,
+				D628D3FF1FB29AC70050CE54 /* TKAFURLSessionManager.h */,
+				D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */,
+				D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */,
+				D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */,
+				D628D4031FB29AC70050CE54 /* TKAFSecurityPolicy.h */,
+				D628D4041FB29AC70050CE54 /* TKAFURLResponseSerialization.h */,
+			);
+			path = TKAFNetworking;
+			sourceTree = "<group>";
+		};
+		D628D4051FB29AC70050CE54 /* GTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4061FB29AC70050CE54 /* TKGTMBase64.h */,
+				D628D4071FB29AC70050CE54 /* TKGTMDefines.h */,
+				D628D4081FB29AC70050CE54 /* TKGTMBase64.m */,
+			);
+			path = GTMBase64;
+			sourceTree = "<group>";
+		};
+		D628D4091FB29AC70050CE54 /* HockeySDK */ = {
+			isa = PBXGroup;
+			children = (
+				D628D40A1FB29AC70050CE54 /* BITFeedbackManager.h */,
+				D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */,
+				D628D40C1FB29AC70050CE54 /* BITAuthenticationViewController.h */,
+				D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */,
+				D628D40E1FB29AC70050CE54 /* BITFeedbackListViewController.h */,
+				D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */,
+				D628D4101FB29AC70050CE54 /* HockeySDKFeatureConfig.h */,
+				D628D4111FB29AC70050CE54 /* BITCrashAttachment.h */,
+				D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */,
+				D628D4131FB29AC70050CE54 /* BITFeedbackComposeViewControllerDelegate.h */,
+				D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */,
+				D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */,
+				D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */,
+				D628D4171FB29AC70050CE54 /* BITKeychainUtils.h */,
+				D628D4181FB29AC70050CE54 /* BITFeedbackMessage.h */,
+				D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */,
+				D628D41A1FB29AC70050CE54 /* BITAppStoreHeader.h */,
+				D628D41B1FB29AC70050CE54 /* BITUpdateManagerPrivate.h */,
+				D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */,
+				D628D41D1FB29AC70050CE54 /* BITFeedbackComposeViewController.h */,
+				D628D41E1FB29AC70050CE54 /* BITFeedbackListViewCell.h */,
+				D628D41F1FB29AC70050CE54 /* BITStoreUpdateManagerPrivate.h */,
+				D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */,
+				D628D4211FB29AC70050CE54 /* BITUpdateManager.m */,
+				D628D4221FB29AC70050CE54 /* BITHockeyBaseManagerPrivate.h */,
+				D628D4231FB29AC70050CE54 /* Resources */,
+				D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */,
+				D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */,
+				D628D4281FB29AC70050CE54 /* BITCrashManager.h */,
+				D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */,
+				D628D42A1FB29AC70050CE54 /* BITStoreButton.h */,
+				D628D42B1FB29AC70050CE54 /* BITHockeyManagerDelegate.h */,
+				D628D42C1FB29AC70050CE54 /* BITHockeyAppClient.h */,
+				D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */,
+				D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */,
+				D628D42F1FB29AC70050CE54 /* BITAuthenticator_Private.h */,
+				D628D4301FB29AC70050CE54 /* BITHockeyHelper.h */,
+				D628D4311FB29AC70050CE54 /* BITUpdateViewController.h */,
+				D628D4321FB29AC70050CE54 /* BITHTTPOperation.h */,
+				D628D4331FB29AC70050CE54 /* BITHockeyBaseManager.h */,
+				D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */,
+				D628D4351FB29AC70050CE54 /* BITHockeyBaseViewController.h */,
+				D628D4361FB29AC70050CE54 /* BITCrashReportTextFormatter.h */,
+				D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */,
+				D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */,
+				D628D4391FB29AC70050CE54 /* BITAttributedLabel.h */,
+				D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */,
+				D628D43B1FB29AC70050CE54 /* BITFeedbackManagerDelegate.h */,
+				D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */,
+				D628D43D1FB29AC70050CE54 /* BITWebTableViewCell.h */,
+				D628D43E1FB29AC70050CE54 /* BITUpdateManagerDelegate.h */,
+				D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */,
+				D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */,
+				D628D4411FB29AC70050CE54 /* BITCrashManager.m */,
+				D628D4421FB29AC70050CE54 /* BITStoreUpdateManager.h */,
+				D628D4431FB29AC70050CE54 /* BITFeedbackActivity.h */,
+				D628D4441FB29AC70050CE54 /* BITStoreUpdateManagerDelegate.h */,
+				D628D4451FB29AC70050CE54 /* BITAppVersionMetaInfo.h */,
+				D628D4461FB29AC70050CE54 /* BITUpdateManager.h */,
+				D628D4471FB29AC70050CE54 /* BITUpdateViewControllerPrivate.h */,
+				D628D4481FB29AC70050CE54 /* BITFeedbackUserDataViewController.h */,
+				D628D4491FB29AC70050CE54 /* BITFeedbackManagerPrivate.h */,
+				D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */,
+				D628D44B1FB29AC70050CE54 /* BITHockeyManager.h */,
+				D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */,
+				D628D44D1FB29AC70050CE54 /* BITAuthenticator.h */,
+				D628D44E1FB29AC70050CE54 /* BITCrashManagerDelegate.h */,
+				D628D44F1FB29AC70050CE54 /* HockeySDKPrivate.h */,
+				D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */,
+				D628D4511FB29AC70050CE54 /* BITCrashManagerPrivate.h */,
+				D628D4521FB29AC70050CE54 /* HockeySDK.h */,
+				D628D4531FB29AC70050CE54 /* BITStoreButton.m */,
+			);
+			path = HockeySDK;
+			sourceTree = "<group>";
+		};
+		D628D4231FB29AC70050CE54 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */,
+				D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D628D4541FB29AC70050CE54 /* LTUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4551FB29AC70050CE54 /* LTUpdate.m */,
+				D628D4561FB29AC70050CE54 /* LTI18N */,
+				D628D4711FB29AC70050CE54 /* LTUpdate.h */,
+			);
+			path = LTUpdate;
+			sourceTree = "<group>";
+		};
+		D628D4561FB29AC70050CE54 /* LTI18N */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4571FB29AC70050CE54 /* LTUpdate.strings */,
+			);
+			path = LTI18N;
+			sourceTree = "<group>";
+		};
+		D628D4731FB29AC70050CE54 /* TKProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4741FB29AC70050CE54 /* TKRCGlobalConfig.h */,
+				D628D4751FB29AC70050CE54 /* TKProgressHUD.m */,
+				D628D4761FB29AC70050CE54 /* TKProgressHUD.h */,
+				D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */,
+			);
+			path = TKProgressHUD;
+			sourceTree = "<group>";
+		};
+		D628D4781FB29AC70050CE54 /* VideoResource */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */,
+				D628D47A1FB29AC70050CE54 /* SocketIO.framework */,
+				D628D47B1FB29AC70050CE54 /* WebRTC.framework */,
+				D628D47C1FB29AC70050CE54 /* Resources.bundle */,
+				D628D47D1FB29AC70050CE54 /* libroomsdk.a */,
+			);
+			path = VideoResource;
+			sourceTree = "<group>";
+		};
+		D628D47E1FB29AC70050CE54 /* ohterView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D47F1FB29AC70050CE54 /* chatView */,
+				D628D49F1FB29AC70050CE54 /* TKDocumentListView */,
+				D628D4A51FB29AC70050CE54 /* TKUploadImageView */,
+				D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */,
+				D628D4A91FB29AC70050CE54 /* TKMediaView */,
+				D628D4B01FB29AC70050CE54 /* TKVideoSmallView */,
+				D628D4BD1FB29AC70050CE54 /* TKClassTimeView */,
+				D628D4C01FB29AC70050CE54 /* TKLandScapeImagePicker */,
+				D628D4C31FB29AC70050CE54 /* TKButtonClickedOnce */,
+				D628D4C61FB29AC70050CE54 /* TKNavigationController */,
+				D628D4C91FB29AC70050CE54 /* TKPlaybackMaskView.h */,
+				D628D4CA1FB29AC70050CE54 /* TKPickViewTextField */,
+			);
+			path = ohterView;
+			sourceTree = "<group>";
+		};
+		D628D47F1FB29AC70050CE54 /* chatView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4801FB29AC70050CE54 /* TKChatView */,
+				D628D4851FB29AC70050CE54 /* chatMessgaeModel */,
+				D628D4881FB29AC70050CE54 /* HPGrowingTextView */,
+				D628D48D1FB29AC70050CE54 /* TKTeacherMessageTableViewCell */,
+				D628D4911FB29AC70050CE54 /* TKMessageTableViewCell */,
+				D628D4951FB29AC70050CE54 /* TGWeakDelegate */,
+				D628D4981FB29AC70050CE54 /* TGLiveViewChatTableViewCell */,
+				D628D49B1FB29AC70050CE54 /* TKStudentMessageTableViewCell */,
+			);
+			path = chatView;
+			sourceTree = "<group>";
+		};
+		D628D4801FB29AC70050CE54 /* TKChatView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4811FB29AC70050CE54 /* TKChatView.h */,
+				D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */,
+				D628D4831FB29AC70050CE54 /* NSString+sizeHeight.h */,
+				D628D4841FB29AC70050CE54 /* TKChatView.m */,
+			);
+			path = TKChatView;
+			sourceTree = "<group>";
+		};
+		D628D4851FB29AC70050CE54 /* chatMessgaeModel */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4861FB29AC70050CE54 /* TKChatMessageModel.h */,
+				D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */,
+			);
+			path = chatMessgaeModel;
+			sourceTree = "<group>";
+		};
+		D628D4881FB29AC70050CE54 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */,
+				D628D48A1FB29AC70050CE54 /* TKTextViewInternal.h */,
+				D628D48B1FB29AC70050CE54 /* TKGrowingTextView.h */,
+				D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */,
+			);
+			path = HPGrowingTextView;
+			sourceTree = "<group>";
+		};
+		D628D48D1FB29AC70050CE54 /* TKTeacherMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D628D48E1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.h */,
+				D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */,
+				D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */,
+			);
+			path = TKTeacherMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D628D4911FB29AC70050CE54 /* TKMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */,
+				D628D4931FB29AC70050CE54 /* TKMessageTableViewCell.h */,
+				D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */,
+			);
+			path = TKMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D628D4951FB29AC70050CE54 /* TGWeakDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */,
+				D628D4971FB29AC70050CE54 /* TKWeakDelegate.h */,
+			);
+			path = TGWeakDelegate;
+			sourceTree = "<group>";
+		};
+		D628D4981FB29AC70050CE54 /* TGLiveViewChatTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */,
+				D628D49A1FB29AC70050CE54 /* TKLiveViewChatTableViewCell.h */,
+			);
+			path = TGLiveViewChatTableViewCell;
+			sourceTree = "<group>";
+		};
+		D628D49B1FB29AC70050CE54 /* TKStudentMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */,
+				D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */,
+				D628D49E1FB29AC70050CE54 /* TKStudentMessageTableViewCell.h */,
+			);
+			path = TKStudentMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D628D49F1FB29AC70050CE54 /* TKDocumentListView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4A01FB29AC70050CE54 /* TKUserListTableViewCell.h */,
+				D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */,
+				D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */,
+				D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */,
+				D628D4A41FB29AC70050CE54 /* TKDocumentListView.h */,
+			);
+			path = TKDocumentListView;
+			sourceTree = "<group>";
+		};
+		D628D4A51FB29AC70050CE54 /* TKUploadImageView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4A61FB29AC70050CE54 /* TKUploadImageView.h */,
+				D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */,
+			);
+			path = TKUploadImageView;
+			sourceTree = "<group>";
+		};
+		D628D4A91FB29AC70050CE54 /* TKMediaView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4AA1FB29AC70050CE54 /* TKBaseMediaView.h */,
+				D628D4AB1FB29AC70050CE54 /* TKProgressSlider.h */,
+				D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */,
+				D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */,
+				D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */,
+				D628D4AF1FB29AC70050CE54 /* TKAudioHelper.h */,
+			);
+			path = TKMediaView;
+			sourceTree = "<group>";
+		};
+		D628D4B01FB29AC70050CE54 /* TKVideoSmallView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4B11FB29AC70050CE54 /* TKDrogView.h */,
+				D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */,
+				D628D4B31FB29AC70050CE54 /* TKButton.m */,
+				D628D4B41FB29AC70050CE54 /* TKVideoFunctionView.h */,
+				D628D4B51FB29AC70050CE54 /* TKTimer.m */,
+				D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */,
+				D628D4B71FB29AC70050CE54 /* TKButton.h */,
+				D628D4B81FB29AC70050CE54 /* TKMessageTipView.h */,
+				D628D4B91FB29AC70050CE54 /* TKDrogView.m */,
+				D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */,
+				D628D4BB1FB29AC70050CE54 /* TKVideoSmallView.h */,
+				D628D4BC1FB29AC70050CE54 /* TKTimer.h */,
+			);
+			path = TKVideoSmallView;
+			sourceTree = "<group>";
+		};
+		D628D4BD1FB29AC70050CE54 /* TKClassTimeView */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4BE1FB29AC70050CE54 /* TKClassTimeView.h */,
+				D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */,
+			);
+			path = TKClassTimeView;
+			sourceTree = "<group>";
+		};
+		D628D4C01FB29AC70050CE54 /* TKLandScapeImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4C11FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.h */,
+				D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */,
+			);
+			path = TKLandScapeImagePicker;
+			sourceTree = "<group>";
+		};
+		D628D4C31FB29AC70050CE54 /* TKButtonClickedOnce */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4C41FB29AC70050CE54 /* UIControl+clickedOnce.h */,
+				D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */,
+			);
+			path = TKButtonClickedOnce;
+			sourceTree = "<group>";
+		};
+		D628D4C61FB29AC70050CE54 /* TKNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4C71FB29AC70050CE54 /* TKNavigationController.m */,
+				D628D4C81FB29AC70050CE54 /* TKNavigationController.h */,
+			);
+			path = TKNavigationController;
+			sourceTree = "<group>";
+		};
+		D628D4CA1FB29AC70050CE54 /* TKPickViewTextField */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4CB1FB29AC70050CE54 /* TKPickViewTextField.h */,
+				D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */,
+			);
+			path = TKPickViewTextField;
+			sourceTree = "<group>";
+		};
+		D628D4CD1FB29AC70050CE54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4CE1FB29AC70050CE54 /* PlaybackModel.h */,
+				D628D4CF1FB29AC70050CE54 /* MediaStream.h */,
+				D628D4D01FB29AC70050CE54 /* TKEduRoomProperty.h */,
+				D628D4D11FB29AC70050CE54 /* RoomUser.h */,
+				D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D628D4D31FB29AC70050CE54 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4D41FB29AC70050CE54 /* RoomController.h */,
+				D628D4D51FB29AC70050CE54 /* RoomController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		D628D4D61FB29AC70050CE54 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4D71FB29AC70050CE54 /* TKMacro.h */,
+				D628D4D81FB29AC70050CE54 /* TKUtil.h */,
+				D628D4D91FB29AC70050CE54 /* TKUtil.mm */,
+			);
+			path = help;
+			sourceTree = "<group>";
+		};
+		D628D4DA1FB29AC80050CE54 /* eduWhiteBoardSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4DB1FB29AC80050CE54 /* WhiteBoardModel */,
+				D628D4E01FB29AC80050CE54 /* handle */,
+			);
+			path = eduWhiteBoardSDK;
+			sourceTree = "<group>";
+		};
+		D628D4DB1FB29AC80050CE54 /* WhiteBoardModel */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4DC1FB29AC80050CE54 /* TKMediaDocModel.h */,
+				D628D4DD1FB29AC80050CE54 /* TKDocmentDocModel.h */,
+				D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */,
+				D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */,
+			);
+			path = WhiteBoardModel;
+			sourceTree = "<group>";
+		};
+		D628D4E01FB29AC80050CE54 /* handle */ = {
+			isa = PBXGroup;
+			children = (
+				D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */,
+				D628D4E21FB29AC80050CE54 /* TKEduBoardHandle.h */,
+				D628D4E31FB29AC80050CE54 /* TKWeakScriptMessageDelegate.h */,
+				D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */,
+			);
+			path = handle;
+			sourceTree = "<group>";
+		};
 		D63DA9411ED5554400EFA686 /* 打印中文 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1285,8 +1760,8 @@
 		D68774341F0A07C9008687C2 /* TuoKeSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D6DB8FDE1FB08E770095BEFA /* eduVideoSDK */,
-				D6DB90CD1FB08E780095BEFA /* eduWhiteBoardSDK */,
+				D628D3EB1FB29AC70050CE54 /* eduVideoSDK */,
+				D628D4DA1FB29AC80050CE54 /* eduWhiteBoardSDK */,
 			);
 			path = TuoKeSDK;
 			sourceTree = "<group>";
@@ -1371,481 +1846,6 @@
 				D6D7CBEC1F2199C80087DDA0 /* GGT_LaunchViewController.m */,
 			);
 			path = LanchVC;
-			sourceTree = "<group>";
-		};
-		D6DB8FDE1FB08E770095BEFA /* eduVideoSDK */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FDF1FB08E770095BEFA /* handle */,
-				D6DB8FE71FB08E770095BEFA /* third */,
-				D6DB906B1FB08E770095BEFA /* VideoResource */,
-				D6DB90711FB08E770095BEFA /* ohterView */,
-				D6DB90C01FB08E780095BEFA /* Model */,
-				D6DB90C61FB08E780095BEFA /* viewController */,
-				D6DB90C91FB08E780095BEFA /* help */,
-			);
-			path = eduVideoSDK;
-			sourceTree = "<group>";
-		};
-		D6DB8FDF1FB08E770095BEFA /* handle */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FE01FB08E770095BEFA /* TKEduClassRoom.h */,
-				D6DB8FE11FB08E770095BEFA /* RoomManager.h */,
-				D6DB8FE21FB08E770095BEFA /* TKEduSessionHandle.m */,
-				D6DB8FE31FB08E770095BEFA /* TKEduNetManager.h */,
-				D6DB8FE41FB08E770095BEFA /* TKEduClassRoom.m */,
-				D6DB8FE51FB08E770095BEFA /* TKEduNetManager.m */,
-				D6DB8FE61FB08E770095BEFA /* TKEduSessionHandle.h */,
-			);
-			path = handle;
-			sourceTree = "<group>";
-		};
-		D6DB8FE71FB08E770095BEFA /* third */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FE81FB08E770095BEFA /* TKAFNetworking */,
-				D6DB8FF81FB08E770095BEFA /* GTMBase64 */,
-				D6DB8FFC1FB08E770095BEFA /* HockeySDK */,
-				D6DB90471FB08E770095BEFA /* LTUpdate */,
-				D6DB90651FB08E770095BEFA /* CrashReporter.framework */,
-				D6DB90661FB08E770095BEFA /* TKProgressHUD */,
-			);
-			path = third;
-			sourceTree = "<group>";
-		};
-		D6DB8FE81FB08E770095BEFA /* TKAFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FE91FB08E770095BEFA /* TKAFURLRequestSerialization.m */,
-				D6DB8FEA1FB08E770095BEFA /* TKAFNetworking.h */,
-				D6DB8FEB1FB08E770095BEFA /* TKAFNetworkActivityIndicatorManager.h */,
-				D6DB8FEC1FB08E770095BEFA /* TKAFHTTPSessionManager.h */,
-				D6DB8FED1FB08E770095BEFA /* TKAFURLSessionManager.m */,
-				D6DB8FEE1FB08E770095BEFA /* TKAFSecurityPolicy.m */,
-				D6DB8FEF1FB08E770095BEFA /* TKAFNetworkReachabilityManager.h */,
-				D6DB8FF01FB08E770095BEFA /* TKAFURLResponseSerialization.m */,
-				D6DB8FF11FB08E770095BEFA /* TKAFURLRequestSerialization.h */,
-				D6DB8FF21FB08E770095BEFA /* TKAFURLSessionManager.h */,
-				D6DB8FF31FB08E770095BEFA /* TKAFHTTPSessionManager.m */,
-				D6DB8FF41FB08E770095BEFA /* TKAFNetworkActivityIndicatorManager.m */,
-				D6DB8FF51FB08E770095BEFA /* TKAFNetworkReachabilityManager.m */,
-				D6DB8FF61FB08E770095BEFA /* TKAFSecurityPolicy.h */,
-				D6DB8FF71FB08E770095BEFA /* TKAFURLResponseSerialization.h */,
-			);
-			path = TKAFNetworking;
-			sourceTree = "<group>";
-		};
-		D6DB8FF81FB08E770095BEFA /* GTMBase64 */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FF91FB08E770095BEFA /* TKGTMBase64.h */,
-				D6DB8FFA1FB08E770095BEFA /* TKGTMDefines.h */,
-				D6DB8FFB1FB08E770095BEFA /* TKGTMBase64.m */,
-			);
-			path = GTMBase64;
-			sourceTree = "<group>";
-		};
-		D6DB8FFC1FB08E770095BEFA /* HockeySDK */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB8FFD1FB08E770095BEFA /* BITFeedbackManager.h */,
-				D6DB8FFE1FB08E770095BEFA /* BITAttributedLabel.m */,
-				D6DB8FFF1FB08E770095BEFA /* BITAuthenticationViewController.h */,
-				D6DB90001FB08E770095BEFA /* BITHockeyBaseViewController.m */,
-				D6DB90011FB08E770095BEFA /* BITFeedbackListViewController.h */,
-				D6DB90021FB08E770095BEFA /* BITCrashReportTextFormatter.m */,
-				D6DB90031FB08E770095BEFA /* HockeySDKFeatureConfig.h */,
-				D6DB90041FB08E770095BEFA /* BITCrashAttachment.h */,
-				D6DB90051FB08E770095BEFA /* BITHockeyBaseManager.m */,
-				D6DB90061FB08E770095BEFA /* BITFeedbackComposeViewControllerDelegate.h */,
-				D6DB90071FB08E770095BEFA /* BITHTTPOperation.m */,
-				D6DB90081FB08E770095BEFA /* BITUpdateViewController.m */,
-				D6DB90091FB08E770095BEFA /* BITHockeyHelper.m */,
-				D6DB900A1FB08E770095BEFA /* BITKeychainUtils.h */,
-				D6DB900B1FB08E770095BEFA /* BITFeedbackMessage.h */,
-				D6DB900C1FB08E770095BEFA /* BITWebTableViewCell.m */,
-				D6DB900D1FB08E770095BEFA /* BITAppStoreHeader.h */,
-				D6DB900E1FB08E770095BEFA /* BITUpdateManagerPrivate.h */,
-				D6DB900F1FB08E770095BEFA /* BITHockeyManager.m */,
-				D6DB90101FB08E770095BEFA /* BITFeedbackComposeViewController.h */,
-				D6DB90111FB08E770095BEFA /* BITFeedbackListViewCell.h */,
-				D6DB90121FB08E770095BEFA /* BITStoreUpdateManagerPrivate.h */,
-				D6DB90131FB08E770095BEFA /* BITFeedbackUserDataViewController.m */,
-				D6DB90141FB08E770095BEFA /* BITUpdateManager.m */,
-				D6DB90151FB08E770095BEFA /* BITHockeyBaseManagerPrivate.h */,
-				D6DB90161FB08E770095BEFA /* Resources */,
-				D6DB90191FB08E770095BEFA /* BITAppVersionMetaInfo.m */,
-				D6DB901A1FB08E770095BEFA /* BITStoreUpdateManager.m */,
-				D6DB901B1FB08E770095BEFA /* BITCrashManager.h */,
-				D6DB901C1FB08E770095BEFA /* BITFeedbackActivity.m */,
-				D6DB901D1FB08E770095BEFA /* BITStoreButton.h */,
-				D6DB901E1FB08E770095BEFA /* BITHockeyManagerDelegate.h */,
-				D6DB901F1FB08E770095BEFA /* BITHockeyAppClient.h */,
-				D6DB90201FB08E770095BEFA /* HockeySDKPrivate.m */,
-				D6DB90211FB08E770095BEFA /* BITAuthenticator.m */,
-				D6DB90221FB08E770095BEFA /* BITAuthenticator_Private.h */,
-				D6DB90231FB08E770095BEFA /* BITHockeyHelper.h */,
-				D6DB90241FB08E770095BEFA /* BITUpdateViewController.h */,
-				D6DB90251FB08E770095BEFA /* BITHTTPOperation.h */,
-				D6DB90261FB08E770095BEFA /* BITHockeyBaseManager.h */,
-				D6DB90271FB08E770095BEFA /* BITCrashAttachment.m */,
-				D6DB90281FB08E770095BEFA /* BITHockeyBaseViewController.h */,
-				D6DB90291FB08E770095BEFA /* BITCrashReportTextFormatter.h */,
-				D6DB902A1FB08E770095BEFA /* BITFeedbackListViewController.m */,
-				D6DB902B1FB08E770095BEFA /* BITAuthenticationViewController.m */,
-				D6DB902C1FB08E770095BEFA /* BITAttributedLabel.h */,
-				D6DB902D1FB08E770095BEFA /* BITFeedbackManager.m */,
-				D6DB902E1FB08E770095BEFA /* BITFeedbackManagerDelegate.h */,
-				D6DB902F1FB08E770095BEFA /* BITAppStoreHeader.m */,
-				D6DB90301FB08E770095BEFA /* BITWebTableViewCell.h */,
-				D6DB90311FB08E770095BEFA /* BITUpdateManagerDelegate.h */,
-				D6DB90321FB08E770095BEFA /* BITFeedbackMessage.m */,
-				D6DB90331FB08E770095BEFA /* BITKeychainUtils.m */,
-				D6DB90341FB08E770095BEFA /* BITCrashManager.m */,
-				D6DB90351FB08E770095BEFA /* BITStoreUpdateManager.h */,
-				D6DB90361FB08E770095BEFA /* BITFeedbackActivity.h */,
-				D6DB90371FB08E770095BEFA /* BITStoreUpdateManagerDelegate.h */,
-				D6DB90381FB08E770095BEFA /* BITAppVersionMetaInfo.h */,
-				D6DB90391FB08E770095BEFA /* BITUpdateManager.h */,
-				D6DB903A1FB08E770095BEFA /* BITUpdateViewControllerPrivate.h */,
-				D6DB903B1FB08E770095BEFA /* BITFeedbackUserDataViewController.h */,
-				D6DB903C1FB08E770095BEFA /* BITFeedbackManagerPrivate.h */,
-				D6DB903D1FB08E770095BEFA /* BITFeedbackListViewCell.m */,
-				D6DB903E1FB08E770095BEFA /* BITHockeyManager.h */,
-				D6DB903F1FB08E770095BEFA /* BITFeedbackComposeViewController.m */,
-				D6DB90401FB08E770095BEFA /* BITAuthenticator.h */,
-				D6DB90411FB08E770095BEFA /* BITCrashManagerDelegate.h */,
-				D6DB90421FB08E770095BEFA /* HockeySDKPrivate.h */,
-				D6DB90431FB08E770095BEFA /* BITHockeyAppClient.m */,
-				D6DB90441FB08E770095BEFA /* BITCrashManagerPrivate.h */,
-				D6DB90451FB08E770095BEFA /* HockeySDK.h */,
-				D6DB90461FB08E770095BEFA /* BITStoreButton.m */,
-			);
-			path = HockeySDK;
-			sourceTree = "<group>";
-		};
-		D6DB90161FB08E770095BEFA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90171FB08E770095BEFA /* HockeySDKResources.bundle */,
-				D6DB90181FB08E770095BEFA /* HockeySDK.xcconfig */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		D6DB90471FB08E770095BEFA /* LTUpdate */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90481FB08E770095BEFA /* LTUpdate.m */,
-				D6DB90491FB08E770095BEFA /* LTI18N */,
-				D6DB90641FB08E770095BEFA /* LTUpdate.h */,
-			);
-			path = LTUpdate;
-			sourceTree = "<group>";
-		};
-		D6DB90491FB08E770095BEFA /* LTI18N */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB904A1FB08E770095BEFA /* LTUpdate.strings */,
-			);
-			path = LTI18N;
-			sourceTree = "<group>";
-		};
-		D6DB90661FB08E770095BEFA /* TKProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90671FB08E770095BEFA /* TKRCGlobalConfig.h */,
-				D6DB90681FB08E770095BEFA /* TKProgressHUD.m */,
-				D6DB90691FB08E770095BEFA /* TKProgressHUD.h */,
-				D6DB906A1FB08E770095BEFA /* TKRCGlobalConfig.m */,
-			);
-			path = TKProgressHUD;
-			sourceTree = "<group>";
-		};
-		D6DB906B1FB08E770095BEFA /* VideoResource */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB906C1FB08E770095BEFA /* StarscreamSocketIO.framework */,
-				D6DB906D1FB08E770095BEFA /* SocketIO.framework */,
-				D6DB906E1FB08E770095BEFA /* WebRTC.framework */,
-				D6DB906F1FB08E770095BEFA /* Resources.bundle */,
-				D6DB90701FB08E770095BEFA /* libroomsdk.a */,
-			);
-			path = VideoResource;
-			sourceTree = "<group>";
-		};
-		D6DB90711FB08E770095BEFA /* ohterView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90721FB08E770095BEFA /* chatView */,
-				D6DB90921FB08E780095BEFA /* TKDocumentListView */,
-				D6DB90981FB08E780095BEFA /* TKUploadImageView */,
-				D6DB909B1FB08E780095BEFA /* TKPlaybackMaskView.m */,
-				D6DB909C1FB08E780095BEFA /* TKMediaView */,
-				D6DB90A31FB08E780095BEFA /* TKVideoSmallView */,
-				D6DB90B01FB08E780095BEFA /* TKClassTimeView */,
-				D6DB90B31FB08E780095BEFA /* TKLandScapeImagePicker */,
-				D6DB90B61FB08E780095BEFA /* TKButtonClickedOnce */,
-				D6DB90B91FB08E780095BEFA /* TKNavigationController */,
-				D6DB90BC1FB08E780095BEFA /* TKPlaybackMaskView.h */,
-				D6DB90BD1FB08E780095BEFA /* TKPickViewTextField */,
-			);
-			path = ohterView;
-			sourceTree = "<group>";
-		};
-		D6DB90721FB08E770095BEFA /* chatView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90731FB08E770095BEFA /* TKChatView */,
-				D6DB90781FB08E780095BEFA /* chatMessgaeModel */,
-				D6DB907B1FB08E780095BEFA /* HPGrowingTextView */,
-				D6DB90801FB08E780095BEFA /* TKTeacherMessageTableViewCell */,
-				D6DB90841FB08E780095BEFA /* TKMessageTableViewCell */,
-				D6DB90881FB08E780095BEFA /* TGWeakDelegate */,
-				D6DB908B1FB08E780095BEFA /* TGLiveViewChatTableViewCell */,
-				D6DB908E1FB08E780095BEFA /* TKStudentMessageTableViewCell */,
-			);
-			path = chatView;
-			sourceTree = "<group>";
-		};
-		D6DB90731FB08E770095BEFA /* TKChatView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90741FB08E770095BEFA /* TKChatView.h */,
-				D6DB90751FB08E780095BEFA /* NSString+sizeHeight.m */,
-				D6DB90761FB08E780095BEFA /* NSString+sizeHeight.h */,
-				D6DB90771FB08E780095BEFA /* TKChatView.m */,
-			);
-			path = TKChatView;
-			sourceTree = "<group>";
-		};
-		D6DB90781FB08E780095BEFA /* chatMessgaeModel */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90791FB08E780095BEFA /* TKChatMessageModel.h */,
-				D6DB907A1FB08E780095BEFA /* TKChatMessageModel.m */,
-			);
-			path = chatMessgaeModel;
-			sourceTree = "<group>";
-		};
-		D6DB907B1FB08E780095BEFA /* HPGrowingTextView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB907C1FB08E780095BEFA /* TKGrowingTextView.m */,
-				D6DB907D1FB08E780095BEFA /* TKTextViewInternal.h */,
-				D6DB907E1FB08E780095BEFA /* TKGrowingTextView.h */,
-				D6DB907F1FB08E780095BEFA /* TKTextViewInternal.m */,
-			);
-			path = HPGrowingTextView;
-			sourceTree = "<group>";
-		};
-		D6DB90801FB08E780095BEFA /* TKTeacherMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90811FB08E780095BEFA /* TKTeacherMessageTableViewCell.h */,
-				D6DB90821FB08E780095BEFA /* TKTeacherMessageTableViewCell.m */,
-				D6DB90831FB08E780095BEFA /* TKTeacherMessageTableViewCell.xib */,
-			);
-			path = TKTeacherMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D6DB90841FB08E780095BEFA /* TKMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90851FB08E780095BEFA /* TKMessageTableViewCell.m */,
-				D6DB90861FB08E780095BEFA /* TKMessageTableViewCell.h */,
-				D6DB90871FB08E780095BEFA /* TKMessageTableViewCell.xib */,
-			);
-			path = TKMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D6DB90881FB08E780095BEFA /* TGWeakDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90891FB08E780095BEFA /* TKWeakDelegate.m */,
-				D6DB908A1FB08E780095BEFA /* TKWeakDelegate.h */,
-			);
-			path = TGWeakDelegate;
-			sourceTree = "<group>";
-		};
-		D6DB908B1FB08E780095BEFA /* TGLiveViewChatTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB908C1FB08E780095BEFA /* TKLiveViewChatTableViewCell.m */,
-				D6DB908D1FB08E780095BEFA /* TKLiveViewChatTableViewCell.h */,
-			);
-			path = TGLiveViewChatTableViewCell;
-			sourceTree = "<group>";
-		};
-		D6DB908E1FB08E780095BEFA /* TKStudentMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB908F1FB08E780095BEFA /* TKStudentMessageTableViewCell.xib */,
-				D6DB90901FB08E780095BEFA /* TKStudentMessageTableViewCell.m */,
-				D6DB90911FB08E780095BEFA /* TKStudentMessageTableViewCell.h */,
-			);
-			path = TKStudentMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D6DB90921FB08E780095BEFA /* TKDocumentListView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90931FB08E780095BEFA /* TKUserListTableViewCell.h */,
-				D6DB90941FB08E780095BEFA /* TKDocumentListView.m */,
-				D6DB90951FB08E780095BEFA /* TKUserListTableViewCell.xib */,
-				D6DB90961FB08E780095BEFA /* TKUserListTableViewCell.m */,
-				D6DB90971FB08E780095BEFA /* TKDocumentListView.h */,
-			);
-			path = TKDocumentListView;
-			sourceTree = "<group>";
-		};
-		D6DB90981FB08E780095BEFA /* TKUploadImageView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90991FB08E780095BEFA /* TKUploadImageView.h */,
-				D6DB909A1FB08E780095BEFA /* TKUploadImageView.m */,
-			);
-			path = TKUploadImageView;
-			sourceTree = "<group>";
-		};
-		D6DB909C1FB08E780095BEFA /* TKMediaView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB909D1FB08E780095BEFA /* TKBaseMediaView.h */,
-				D6DB909E1FB08E780095BEFA /* TKProgressSlider.h */,
-				D6DB909F1FB08E780095BEFA /* TKAudioHelper.m */,
-				D6DB90A01FB08E780095BEFA /* TKProgressSlider.m */,
-				D6DB90A11FB08E780095BEFA /* TKBaseMediaView.m */,
-				D6DB90A21FB08E780095BEFA /* TKAudioHelper.h */,
-			);
-			path = TKMediaView;
-			sourceTree = "<group>";
-		};
-		D6DB90A31FB08E780095BEFA /* TKVideoSmallView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90A41FB08E780095BEFA /* TKDrogView.h */,
-				D6DB90A51FB08E780095BEFA /* TKMessageTipView.m */,
-				D6DB90A61FB08E780095BEFA /* TKButton.m */,
-				D6DB90A71FB08E780095BEFA /* TKVideoFunctionView.h */,
-				D6DB90A81FB08E780095BEFA /* TKTimer.m */,
-				D6DB90A91FB08E780095BEFA /* TKVideoSmallView.m */,
-				D6DB90AA1FB08E780095BEFA /* TKButton.h */,
-				D6DB90AB1FB08E780095BEFA /* TKMessageTipView.h */,
-				D6DB90AC1FB08E780095BEFA /* TKDrogView.m */,
-				D6DB90AD1FB08E780095BEFA /* TKVideoFunctionView.m */,
-				D6DB90AE1FB08E780095BEFA /* TKVideoSmallView.h */,
-				D6DB90AF1FB08E780095BEFA /* TKTimer.h */,
-			);
-			path = TKVideoSmallView;
-			sourceTree = "<group>";
-		};
-		D6DB90B01FB08E780095BEFA /* TKClassTimeView */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90B11FB08E780095BEFA /* TKClassTimeView.h */,
-				D6DB90B21FB08E780095BEFA /* TKClassTimeView.m */,
-			);
-			path = TKClassTimeView;
-			sourceTree = "<group>";
-		};
-		D6DB90B31FB08E780095BEFA /* TKLandScapeImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90B41FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.h */,
-				D6DB90B51FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.m */,
-			);
-			path = TKLandScapeImagePicker;
-			sourceTree = "<group>";
-		};
-		D6DB90B61FB08E780095BEFA /* TKButtonClickedOnce */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90B71FB08E780095BEFA /* UIControl+clickedOnce.h */,
-				D6DB90B81FB08E780095BEFA /* UIControl+clickedOnce.m */,
-			);
-			path = TKButtonClickedOnce;
-			sourceTree = "<group>";
-		};
-		D6DB90B91FB08E780095BEFA /* TKNavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90BA1FB08E780095BEFA /* TKNavigationController.m */,
-				D6DB90BB1FB08E780095BEFA /* TKNavigationController.h */,
-			);
-			path = TKNavigationController;
-			sourceTree = "<group>";
-		};
-		D6DB90BD1FB08E780095BEFA /* TKPickViewTextField */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90BE1FB08E780095BEFA /* TKPickViewTextField.h */,
-				D6DB90BF1FB08E780095BEFA /* TKPickViewTextField.m */,
-			);
-			path = TKPickViewTextField;
-			sourceTree = "<group>";
-		};
-		D6DB90C01FB08E780095BEFA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90C11FB08E780095BEFA /* PlaybackModel.h */,
-				D6DB90C21FB08E780095BEFA /* MediaStream.h */,
-				D6DB90C31FB08E780095BEFA /* TKEduRoomProperty.h */,
-				D6DB90C41FB08E780095BEFA /* RoomUser.h */,
-				D6DB90C51FB08E780095BEFA /* TKEduRoomProperty.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		D6DB90C61FB08E780095BEFA /* viewController */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90C71FB08E780095BEFA /* RoomController.h */,
-				D6DB90C81FB08E780095BEFA /* RoomController.m */,
-			);
-			path = viewController;
-			sourceTree = "<group>";
-		};
-		D6DB90C91FB08E780095BEFA /* help */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90CA1FB08E780095BEFA /* TKMacro.h */,
-				D6DB90CB1FB08E780095BEFA /* TKUtil.h */,
-				D6DB90CC1FB08E780095BEFA /* TKUtil.mm */,
-			);
-			path = help;
-			sourceTree = "<group>";
-		};
-		D6DB90CD1FB08E780095BEFA /* eduWhiteBoardSDK */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90CE1FB08E780095BEFA /* WhiteBoardModel */,
-				D6DB90D31FB08E780095BEFA /* handle */,
-			);
-			path = eduWhiteBoardSDK;
-			sourceTree = "<group>";
-		};
-		D6DB90CE1FB08E780095BEFA /* WhiteBoardModel */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90CF1FB08E780095BEFA /* TKMediaDocModel.h */,
-				D6DB90D01FB08E780095BEFA /* TKDocmentDocModel.h */,
-				D6DB90D11FB08E780095BEFA /* TKMediaDocModel.m */,
-				D6DB90D21FB08E780095BEFA /* TKDocmentDocModel.m */,
-			);
-			path = WhiteBoardModel;
-			sourceTree = "<group>";
-		};
-		D6DB90D31FB08E780095BEFA /* handle */ = {
-			isa = PBXGroup;
-			children = (
-				D6DB90D41FB08E780095BEFA /* TKWeakScriptMessageDelegate.m */,
-				D6DB90D51FB08E780095BEFA /* TKEduBoardHandle.h */,
-				D6DB90D61FB08E780095BEFA /* TKWeakScriptMessageDelegate.h */,
-				D6DB90D71FB08E780095BEFA /* TKEduBoardHandle.m */,
-			);
-			path = handle;
 			sourceTree = "<group>";
 		};
 		D6E0A46E1EC2C200006A003D = {
@@ -2241,18 +2241,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6E0A4871EC2C200006A003D /* Assets.xcassets in Resources */,
-				D6DB91111FB08E780095BEFA /* TKTeacherMessageTableViewCell.xib in Resources */,
+				D628D51E1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.xib in Resources */,
 				5BF3A6C01EEAC3B100491CC2 /* shebeijianche_36.png in Resources */,
-				D6DB91191FB08E780095BEFA /* TKUserListTableViewCell.xib in Resources */,
+				D628D5261FB29AC80050CE54 /* TKUserListTableViewCell.xib in Resources */,
 				5BF3A6BA1EEAC3B100491CC2 /* shebeijianche_30.png in Resources */,
 				5BF3A6B11EEAC3B100491CC2 /* shebeijianche_22.png in Resources */,
 				5BF3A6C31EEAC3B100491CC2 /* shebeijianche_39.png in Resources */,
 				5BF3A6BB1EEAC3B100491CC2 /* shebeijianche_31.png in Resources */,
-				D6DB90EF1FB08E780095BEFA /* HockeySDK.xcconfig in Resources */,
+				D628D4FC1FB29AC80050CE54 /* HockeySDK.xcconfig in Resources */,
 				5BF3A6AC1EEAC3B100491CC2 /* shebeijianche_18.png in Resources */,
 				5BF3A6AB1EEAC3B100491CC2 /* shebeijianche_17.png in Resources */,
-				D6DB91161FB08E780095BEFA /* TKStudentMessageTableViewCell.xib in Resources */,
-				D6DB91131FB08E780095BEFA /* TKMessageTableViewCell.xib in Resources */,
+				D628D5231FB29AC80050CE54 /* TKStudentMessageTableViewCell.xib in Resources */,
+				D628D5201FB29AC80050CE54 /* TKMessageTableViewCell.xib in Resources */,
 				5BF3A6A91EEAC3B100491CC2 /* shebeijianche_15.png in Resources */,
 				5BF3A6A81EEAC3B100491CC2 /* shebeijianche_14.png in Resources */,
 				5BF3A6A61EEAC3B100491CC2 /* shebeijianche_12.png in Resources */,
@@ -2269,18 +2269,18 @@
 				5BF3A6C41EEAC3B100491CC2 /* shebeijianche_4.png in Resources */,
 				5BF3A6A41EEAC3B100491CC2 /* shebeijianche_10.png in Resources */,
 				5BF3A6A71EEAC3B100491CC2 /* shebeijianche_13.png in Resources */,
-				D6DB91091FB08E780095BEFA /* Resources.bundle in Resources */,
+				D628D5161FB29AC80050CE54 /* Resources.bundle in Resources */,
 				D6E0A5781EC2DB15006A003D /* MBProgressHUD.bundle in Resources */,
 				5BF3A6B81EEAC3B100491CC2 /* shebeijianche_29.png in Resources */,
 				5BF3A6A31EEAC3B100491CC2 /* shebeijianche_1.png in Resources */,
 				5BF3A6B01EEAC3B100491CC2 /* shebeijianche_21.png in Resources */,
-				D6DB90EE1FB08E780095BEFA /* HockeySDKResources.bundle in Resources */,
+				D628D4FB1FB29AC80050CE54 /* HockeySDKResources.bundle in Resources */,
 				D66FCBF11EEA52AA00792A6C /* having_Class.gif in Resources */,
 				5BF3A6C71EEAC3B100491CC2 /* shebeijianche_6.png in Resources */,
 				5BF3A6B51EEAC3B100491CC2 /* shebeijianche_26.png in Resources */,
 				5BF3A6C81EEAC3B100491CC2 /* shebeijianche_7.png in Resources */,
 				5BF3A6C51EEAC3B100491CC2 /* shebeijianche_40.png in Resources */,
-				D6DB91021FB08E780095BEFA /* LTUpdate.strings in Resources */,
+				D628D50F1FB29AC80050CE54 /* LTUpdate.strings in Resources */,
 				5BF3A6B31EEAC3B100491CC2 /* shebeijianche_24.png in Resources */,
 				5BF3A6AD1EEAC3B100491CC2 /* shebeijianche_19.png in Resources */,
 				5BF3A6BF1EEAC3B100491CC2 /* shebeijianche_35.png in Resources */,
@@ -2403,68 +2403,68 @@
 			buildActionMask = 2147483647;
 			files = (
 				D627DCF91ED432C800076FBD /* GGT_CalendarCellModel.m in Sources */,
-				D6DB91251FB08E780095BEFA /* TKVideoFunctionView.m in Sources */,
+				D628D5321FB29AC80050CE54 /* TKVideoFunctionView.m in Sources */,
 				D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */,
-				D6DB91211FB08E780095BEFA /* TKButton.m in Sources */,
-				D6DB91311FB08E780095BEFA /* TKEduBoardHandle.m in Sources */,
-				D6DB90EC1FB08E780095BEFA /* BITFeedbackUserDataViewController.m in Sources */,
+				D628D52E1FB29AC80050CE54 /* TKButton.m in Sources */,
+				D628D53E1FB29AC80050CE54 /* TKEduBoardHandle.m in Sources */,
+				D628D4F91FB29AC80050CE54 /* BITFeedbackUserDataViewController.m in Sources */,
 				D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */,
-				D6DB90FD1FB08E780095BEFA /* BITFeedbackListViewCell.m in Sources */,
+				D628D50A1FB29AC80050CE54 /* BITFeedbackListViewCell.m in Sources */,
 				5B1E61DF1F46CC5F00342CC5 /* GGT_LoadingView.m in Sources */,
-				D6DB90E41FB08E780095BEFA /* BITHockeyBaseViewController.m in Sources */,
-				D6DB90E31FB08E780095BEFA /* BITAttributedLabel.m in Sources */,
+				D628D4F11FB29AC80050CE54 /* BITHockeyBaseViewController.m in Sources */,
+				D628D4F01FB29AC80050CE54 /* BITAttributedLabel.m in Sources */,
 				D6E0A47F1EC2C200006A003D /* AppDelegate.m in Sources */,
 				5B8F1F5B1EE143CA00149368 /* GGT_MineClassPlaceholderView.m in Sources */,
 				5B8337CE1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m in Sources */,
-				D6DB911D1FB08E780095BEFA /* TKAudioHelper.m in Sources */,
+				D628D52A1FB29AC80050CE54 /* TKAudioHelper.m in Sources */,
 				D6E0A5571EC2D9CD006A003D /* NSArray+SafeExtension.m in Sources */,
 				D6E0A58C1EC2DBB3006A003D /* GGT_LoginViewController.m in Sources */,
 				5B9E058A1F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m in Sources */,
 				D6869CC31F18897700C5390C /* GGT_HomeTeachModel.m in Sources */,
-				D6DB91291FB08E780095BEFA /* TKNavigationController.m in Sources */,
-				D6DB90ED1FB08E780095BEFA /* BITUpdateManager.m in Sources */,
-				D6DB911F1FB08E780095BEFA /* TKBaseMediaView.m in Sources */,
-				D6DB90F01FB08E780095BEFA /* BITAppVersionMetaInfo.m in Sources */,
-				D6DB90EB1FB08E780095BEFA /* BITHockeyManager.m in Sources */,
+				D628D5361FB29AC80050CE54 /* TKNavigationController.m in Sources */,
+				D628D4FA1FB29AC80050CE54 /* BITUpdateManager.m in Sources */,
+				D628D52C1FB29AC80050CE54 /* TKBaseMediaView.m in Sources */,
+				D628D4FD1FB29AC80050CE54 /* BITAppVersionMetaInfo.m in Sources */,
+				D628D4F81FB29AC80050CE54 /* BITHockeyManager.m in Sources */,
 				5B8337D11ED3DFEB005EE004 /* GGT_ChoicePickView.m in Sources */,
 				D63DA94A1ED5554400EFA686 /* NSString+unicode.m in Sources */,
 				D6E0A5901EC2DBB3006A003D /* GGT_LoginView.m in Sources */,
 				D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */,
-				D6DB912E1FB08E780095BEFA /* TKMediaDocModel.m in Sources */,
-				D6DB90F61FB08E780095BEFA /* BITFeedbackListViewController.m in Sources */,
+				D628D53B1FB29AC80050CE54 /* TKMediaDocModel.m in Sources */,
+				D628D5031FB29AC80050CE54 /* BITFeedbackListViewController.m in Sources */,
 				D6353E171EE8E250004E1288 /* GGT_PopoverCell.m in Sources */,
 				D6E0A55D1EC2D9CD006A003D /* UIImage+Category.m in Sources */,
 				D627DCEF1ED411FD00076FBD /* GGT_ScheduleTableView.m in Sources */,
-				D6DB90E51FB08E780095BEFA /* BITCrashReportTextFormatter.m in Sources */,
-				D6DB90E91FB08E780095BEFA /* BITHockeyHelper.m in Sources */,
+				D628D4F21FB29AC80050CE54 /* BITCrashReportTextFormatter.m in Sources */,
+				D628D4F61FB29AC80050CE54 /* BITHockeyHelper.m in Sources */,
 				D66FCBDF1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m in Sources */,
-				D6DB91151FB08E780095BEFA /* TKLiveViewChatTableViewCell.m in Sources */,
-				D6DB90DA1FB08E780095BEFA /* TKEduNetManager.m in Sources */,
-				D6DB90F71FB08E780095BEFA /* BITAuthenticationViewController.m in Sources */,
-				D6DB90FA1FB08E780095BEFA /* BITFeedbackMessage.m in Sources */,
-				D6DB90E21FB08E780095BEFA /* TKGTMBase64.m in Sources */,
-				D6DB91011FB08E780095BEFA /* LTUpdate.m in Sources */,
+				D628D5221FB29AC80050CE54 /* TKLiveViewChatTableViewCell.m in Sources */,
+				D628D4E71FB29AC80050CE54 /* TKEduNetManager.m in Sources */,
+				D628D5041FB29AC80050CE54 /* BITAuthenticationViewController.m in Sources */,
+				D628D5071FB29AC80050CE54 /* BITFeedbackMessage.m in Sources */,
+				D628D4EF1FB29AC80050CE54 /* TKGTMBase64.m in Sources */,
+				D628D50E1FB29AC80050CE54 /* LTUpdate.m in Sources */,
 				D67ACCC31EE15C7A0027031C /* UILabel+XCHelper.m in Sources */,
 				D603AAED1ECD3AE7003ECC20 /* GGT_EvaluationPopViewController.m in Sources */,
 				5B8049D41ED295AC00A99911 /* GGT_AboutUsViewController.m in Sources */,
 				5B743D241EC5A416004E744A /* GGT_MineRightViewController.m in Sources */,
 				D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */,
-				D6DB912A1FB08E780095BEFA /* TKPickViewTextField.m in Sources */,
+				D628D5371FB29AC80050CE54 /* TKPickViewTextField.m in Sources */,
 				D6869CC01F18651500C5390C /* GGT_HomeTimeModel.m in Sources */,
 				5BBB2D4B1F189EAF00393B68 /* GGT_TimeCollectionModel.m in Sources */,
 				D6FD8AF81F17811C00A79011 /* GGT_HomeDateModel.m in Sources */,
-				D6DB911C1FB08E780095BEFA /* TKPlaybackMaskView.m in Sources */,
-				D6DB91281FB08E780095BEFA /* UIControl+clickedOnce.m in Sources */,
+				D628D5291FB29AC80050CE54 /* TKPlaybackMaskView.m in Sources */,
+				D628D5351FB29AC80050CE54 /* UIControl+clickedOnce.m in Sources */,
 				D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */,
-				D6DB90E01FB08E780095BEFA /* TKAFNetworkActivityIndicatorManager.m in Sources */,
-				D6DB910D1FB08E780095BEFA /* TKChatMessageModel.m in Sources */,
-				D6DB91201FB08E780095BEFA /* TKMessageTipView.m in Sources */,
+				D628D4ED1FB29AC80050CE54 /* TKAFNetworkActivityIndicatorManager.m in Sources */,
+				D628D51A1FB29AC80050CE54 /* TKChatMessageModel.m in Sources */,
+				D628D52D1FB29AC80050CE54 /* TKMessageTipView.m in Sources */,
 				D64096851EEFE39E0038A0CC /* GGT_PreCoursewareVC.m in Sources */,
 				D6D7CBED1F2199C80087DDA0 /* GGT_LaunchViewController.m in Sources */,
 				5BF1CBCE1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m in Sources */,
 				D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */,
-				D6DB91261FB08E780095BEFA /* TKClassTimeView.m in Sources */,
-				D6DB91231FB08E780095BEFA /* TKVideoSmallView.m in Sources */,
+				D628D5331FB29AC80050CE54 /* TKClassTimeView.m in Sources */,
+				D628D5301FB29AC80050CE54 /* TKVideoSmallView.m in Sources */,
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,
 				D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */,
 				D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */,
@@ -2473,35 +2473,35 @@
 				D67ACCC61EE173E00027031C /* GGT_ResultModel.m in Sources */,
 				5BF1CBCC1F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m in Sources */,
 				5BF912D81ECECD46009C8186 /* GGT_ShareAndFeedBackViewController.m in Sources */,
-				D6DB91171FB08E780095BEFA /* TKStudentMessageTableViewCell.m in Sources */,
+				D628D5241FB29AC80050CE54 /* TKStudentMessageTableViewCell.m in Sources */,
 				D6E0A58F1EC2DBB3006A003D /* GGT_ForgotPasswordView.m in Sources */,
 				D6E0A5351EC2D9AE006A003D /* BaseViewController.m in Sources */,
 				5BC473621EC95C39003B8154 /* GGT_FeedbackViewController.m in Sources */,
 				D685D7661F0E04DE00987BB4 /* GGT_CoursePhraseModel.m in Sources */,
-				D6DB90F41FB08E780095BEFA /* BITAuthenticator.m in Sources */,
+				D628D5011FB29AC80050CE54 /* BITAuthenticator.m in Sources */,
 				D6E0A58B1EC2DBB3006A003D /* GGT_ForgotPasswordViewController.m in Sources */,
 				D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */,
 				D63DA94D1ED595CF00EFA686 /* GGT_CourseCellModel.m in Sources */,
-				D6DB91141FB08E780095BEFA /* TKWeakDelegate.m in Sources */,
-				D6DB911B1FB08E780095BEFA /* TKUploadImageView.m in Sources */,
-				D6DB90D91FB08E780095BEFA /* TKEduClassRoom.m in Sources */,
+				D628D5211FB29AC80050CE54 /* TKWeakDelegate.m in Sources */,
+				D628D5281FB29AC80050CE54 /* TKUploadImageView.m in Sources */,
+				D628D4E61FB29AC80050CE54 /* TKEduClassRoom.m in Sources */,
 				5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */,
-				D6DB910F1FB08E780095BEFA /* TKTextViewInternal.m in Sources */,
+				D628D51C1FB29AC80050CE54 /* TKTextViewInternal.m in Sources */,
 				D694274A1EC9561B0048FD2C /* GGT_PopAlertView.m in Sources */,
 				D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */,
 				5BF912D21ECEC04F009C8186 /* GGT_CheckDevicePopViewController.m in Sources */,
 				D6FD8AF51F176B1000A79011 /* GGT_ChooseCoursewareCell.m in Sources */,
 				D66FCBE21EEA3CAE00792A6C /* GGT_PreviewDemoCourseCell.m in Sources */,
-				D6DB90F51FB08E780095BEFA /* BITCrashAttachment.m in Sources */,
+				D628D5021FB29AC80050CE54 /* BITCrashAttachment.m in Sources */,
 				D6E0A5421EC2D9C1006A003D /* XCStarView.m in Sources */,
-				D6DB91041FB08E780095BEFA /* TKProgressHUD.m in Sources */,
+				D628D5111FB29AC80050CE54 /* TKProgressHUD.m in Sources */,
 				5BF1CBCB1F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m in Sources */,
 				D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */,
-				D6DB912F1FB08E780095BEFA /* TKDocmentDocModel.m in Sources */,
+				D628D53C1FB29AC80050CE54 /* TKDocmentDocModel.m in Sources */,
 				D6E0A55F1EC2D9CD006A003D /* UIView+XCCornerRadius.m in Sources */,
 				5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */,
-				D6DB90DC1FB08E780095BEFA /* TKAFURLSessionManager.m in Sources */,
-				D6DB91101FB08E780095BEFA /* TKTeacherMessageTableViewCell.m in Sources */,
+				D628D4E91FB29AC80050CE54 /* TKAFURLSessionManager.m in Sources */,
+				D628D51D1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.m in Sources */,
 				D64096881EEFF5720038A0CC /* GGT_PreTeachEvaView.m in Sources */,
 				5BF1CBC11F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m in Sources */,
 				D6E0A55E1EC2D9CD006A003D /* UIView+Layout.m in Sources */,
@@ -2510,26 +2510,26 @@
 				D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */,
 				5BC4735F1EC95C12003B8154 /* GGT_MineClassViewController.m in Sources */,
 				D60FA5191EC987AE00838DE4 /* FLAnimatedImageView+WebCache.m in Sources */,
-				D6DB90F21FB08E780095BEFA /* BITFeedbackActivity.m in Sources */,
+				D628D4FF1FB29AC80050CE54 /* BITFeedbackActivity.m in Sources */,
 				5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */,
 				D66FCBF81EEA9A4400792A6C /* GGT_EvaReportModel.m in Sources */,
-				D6DB90FC1FB08E780095BEFA /* BITCrashManager.m in Sources */,
-				D6DB90E71FB08E780095BEFA /* BITHTTPOperation.m in Sources */,
-				D6DB90D81FB08E780095BEFA /* TKEduSessionHandle.m in Sources */,
+				D628D5091FB29AC80050CE54 /* BITCrashManager.m in Sources */,
+				D628D4F41FB29AC80050CE54 /* BITHTTPOperation.m in Sources */,
+				D628D4E51FB29AC80050CE54 /* TKEduSessionHandle.m in Sources */,
 				D6E0A5771EC2DB15006A003D /* GGT_Singleton.m in Sources */,
-				D6DB90EA1FB08E780095BEFA /* BITWebTableViewCell.m in Sources */,
-				D6DB90DD1FB08E780095BEFA /* TKAFSecurityPolicy.m in Sources */,
-				D6DB91051FB08E780095BEFA /* TKRCGlobalConfig.m in Sources */,
+				D628D4F71FB29AC80050CE54 /* BITWebTableViewCell.m in Sources */,
+				D628D4EA1FB29AC80050CE54 /* TKAFSecurityPolicy.m in Sources */,
+				D628D5121FB29AC80050CE54 /* TKRCGlobalConfig.m in Sources */,
 				5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */,
 				5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */,
 				5BF1CBCD1F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m in Sources */,
 				D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */,
 				D63DA9481ED5554400EFA686 /* NSArray+Log.m in Sources */,
-				D6DB911A1FB08E780095BEFA /* TKUserListTableViewCell.m in Sources */,
-				D6DB912B1FB08E780095BEFA /* TKEduRoomProperty.m in Sources */,
+				D628D5271FB29AC80050CE54 /* TKUserListTableViewCell.m in Sources */,
+				D628D5381FB29AC80050CE54 /* TKEduRoomProperty.m in Sources */,
 				5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */,
-				D6DB910B1FB08E780095BEFA /* NSString+sizeHeight.m in Sources */,
-				D6DB90E61FB08E780095BEFA /* BITHockeyBaseManager.m in Sources */,
+				D628D5181FB29AC80050CE54 /* NSString+sizeHeight.m in Sources */,
+				D628D4F31FB29AC80050CE54 /* BITHockeyBaseManager.m in Sources */,
 				D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */,
 				5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */,
 				5BC473AA1EC99FA7003B8154 /* GGT_MineHeaderView.m in Sources */,
@@ -2539,62 +2539,62 @@
 				D6E0A47C1EC2C200006A003D /* main.m in Sources */,
 				5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */,
 				D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */,
-				D6DB90F91FB08E780095BEFA /* BITAppStoreHeader.m in Sources */,
+				D628D5061FB29AC80050CE54 /* BITAppStoreHeader.m in Sources */,
 				D66FCBF51EEA7D3200792A6C /* GGT_PreviewDemoPlaceholderView.m in Sources */,
-				D6DB91271FB08E780095BEFA /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */,
+				D628D5341FB29AC80050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */,
 				D6E0A5581EC2D9CD006A003D /* NSString+XCHelper.m in Sources */,
 				D6134AFC1F1610D400B4405E /* GGT_TimeCollectionCell.m in Sources */,
-				D6DB91181FB08E780095BEFA /* TKDocumentListView.m in Sources */,
+				D628D5251FB29AC80050CE54 /* TKDocumentListView.m in Sources */,
 				5BC473681EC95C8A003B8154 /* GGT_SettingViewController.m in Sources */,
 				D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */,
-				D6DB912D1FB08E780095BEFA /* TKUtil.mm in Sources */,
+				D628D53A1FB29AC80050CE54 /* TKUtil.mm in Sources */,
 				D6E0A5601EC2D9CD006A003D /* UIView+XCHelper.m in Sources */,
-				D6DB90DE1FB08E780095BEFA /* TKAFURLResponseSerialization.m in Sources */,
+				D628D4EB1FB29AC80050CE54 /* TKAFURLResponseSerialization.m in Sources */,
 				5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */,
-				D6DB90DF1FB08E780095BEFA /* TKAFHTTPSessionManager.m in Sources */,
+				D628D4EC1FB29AC80050CE54 /* TKAFHTTPSessionManager.m in Sources */,
 				D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */,
-				D6DB91221FB08E780095BEFA /* TKTimer.m in Sources */,
+				D628D52F1FB29AC80050CE54 /* TKTimer.m in Sources */,
 				D6134AF91F15F8B700B4405E /* GGT_DateCollectionCell.m in Sources */,
 				D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */,
 				D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */,
-				D6DB91301FB08E780095BEFA /* TKWeakScriptMessageDelegate.m in Sources */,
+				D628D53D1FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m in Sources */,
 				D6ED8FFC1F67D34B0002D7B4 /* GGT_UpdateModel.m in Sources */,
-				D6DB91241FB08E780095BEFA /* TKDrogView.m in Sources */,
+				D628D5311FB29AC80050CE54 /* TKDrogView.m in Sources */,
 				D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */,
-				D6DB90F81FB08E780095BEFA /* BITFeedbackManager.m in Sources */,
-				D6DB91121FB08E780095BEFA /* TKMessageTableViewCell.m in Sources */,
+				D628D5051FB29AC80050CE54 /* BITFeedbackManager.m in Sources */,
+				D628D51F1FB29AC80050CE54 /* TKMessageTableViewCell.m in Sources */,
 				D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */,
-				D6DB90F31FB08E780095BEFA /* HockeySDKPrivate.m in Sources */,
+				D628D5001FB29AC80050CE54 /* HockeySDKPrivate.m in Sources */,
 				D67D55F81EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m in Sources */,
-				D6DB90FB1FB08E780095BEFA /* BITKeychainUtils.m in Sources */,
+				D628D5081FB29AC80050CE54 /* BITKeychainUtils.m in Sources */,
 				5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */,
 				5B7FE82C1ECC4E9600404939 /* GGT_ChangePasswordView.m in Sources */,
 				5BF912D51ECEC50D009C8186 /* GGT_CheckDeviceView.m in Sources */,
-				D6DB90FE1FB08E780095BEFA /* BITFeedbackComposeViewController.m in Sources */,
+				D628D50B1FB29AC80050CE54 /* BITFeedbackComposeViewController.m in Sources */,
 				D63DA9491ED5554400EFA686 /* NSDictionary+Log.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
-				D6DB910C1FB08E780095BEFA /* TKChatView.m in Sources */,
+				D628D5191FB29AC80050CE54 /* TKChatView.m in Sources */,
 				5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */,
-				D6DB90E11FB08E780095BEFA /* TKAFNetworkReachabilityManager.m in Sources */,
+				D628D4EE1FB29AC80050CE54 /* TKAFNetworkReachabilityManager.m in Sources */,
 				D6E0A5411EC2D9C1006A003D /* PlaceholderTextView.m in Sources */,
-				D6DB912C1FB08E780095BEFA /* RoomController.m in Sources */,
+				D628D5391FB29AC80050CE54 /* RoomController.m in Sources */,
 				5B743D271EC5A435004E744A /* GGT_MineLeftViewController.m in Sources */,
 				D654E1E31EF8ECE800E3BAB7 /* MZTimerLabel.m in Sources */,
 				5BC473AD1EC9A380003B8154 /* GGT_ChangePassWordViewController.m in Sources */,
 				5B9E05A81F14AABA0050CEDB /* GGT_OrderForeignListCell.m in Sources */,
-				D6DB90DB1FB08E780095BEFA /* TKAFURLRequestSerialization.m in Sources */,
+				D628D4E81FB29AC80050CE54 /* TKAFURLRequestSerialization.m in Sources */,
 				D67D55EF1EC58E47009D3CC5 /* GGT_CalendarCell.m in Sources */,
 				5BD5165D1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.m in Sources */,
-				D6DB90FF1FB08E780095BEFA /* BITHockeyAppClient.m in Sources */,
+				D628D50C1FB29AC80050CE54 /* BITHockeyAppClient.m in Sources */,
 				D6134AFF1F16138500B4405E /* GGT_DateAndTimeHeaderView.m in Sources */,
 				D6E0A55A1EC2D9CD006A003D /* UIButton+timer.m in Sources */,
 				5B913C9D1F9DF58400982385 /* GGT_HomeViewController.m in Sources */,
-				D6DB91001FB08E780095BEFA /* BITStoreButton.m in Sources */,
-				D6DB90E81FB08E780095BEFA /* BITUpdateViewController.m in Sources */,
-				D6DB911E1FB08E780095BEFA /* TKProgressSlider.m in Sources */,
-				D6DB90F11FB08E780095BEFA /* BITStoreUpdateManager.m in Sources */,
+				D628D50D1FB29AC80050CE54 /* BITStoreButton.m in Sources */,
+				D628D4F51FB29AC80050CE54 /* BITUpdateViewController.m in Sources */,
+				D628D52B1FB29AC80050CE54 /* TKProgressSlider.m in Sources */,
+				D628D4FE1FB29AC80050CE54 /* BITStoreUpdateManager.m in Sources */,
 				D6E0A5321EC2D9AE006A003D /* BaseNavigationController.m in Sources */,
-				D6DB910E1FB08E780095BEFA /* TKGrowingTextView.m in Sources */,
+				D628D51B1FB29AC80050CE54 /* TKGrowingTextView.m in Sources */,
 				5BBB2D481F185A1200393B68 /* GGT_FocusImgModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2631,34 +2631,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D6DB904A1FB08E770095BEFA /* LTUpdate.strings */ = {
+		D628D4571FB29AC70050CE54 /* LTUpdate.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D6DB904B1FB08E770095BEFA /* de */,
-				D6DB904C1FB08E770095BEFA /* zh-Hant-TW */,
-				D6DB904D1FB08E770095BEFA /* ar */,
-				D6DB904E1FB08E770095BEFA /* zh-Hans */,
-				D6DB904F1FB08E770095BEFA /* ja */,
-				D6DB90501FB08E770095BEFA /* en */,
-				D6DB90511FB08E770095BEFA /* uk */,
-				D6DB90521FB08E770095BEFA /* es */,
-				D6DB90531FB08E770095BEFA /* sl */,
-				D6DB90541FB08E770095BEFA /* da */,
-				D6DB90551FB08E770095BEFA /* it */,
-				D6DB90561FB08E770095BEFA /* sk */,
-				D6DB90571FB08E770095BEFA /* sv */,
-				D6DB90581FB08E770095BEFA /* cs */,
-				D6DB90591FB08E770095BEFA /* ko */,
-				D6DB905A1FB08E770095BEFA /* zh-Hant */,
-				D6DB905B1FB08E770095BEFA /* tr */,
-				D6DB905C1FB08E770095BEFA /* pl */,
-				D6DB905D1FB08E770095BEFA /* pt-BR */,
-				D6DB905E1FB08E770095BEFA /* ru */,
-				D6DB905F1FB08E770095BEFA /* fr */,
-				D6DB90601FB08E770095BEFA /* nl */,
-				D6DB90611FB08E770095BEFA /* th */,
-				D6DB90621FB08E770095BEFA /* pt-PT */,
-				D6DB90631FB08E770095BEFA /* ro */,
+				D628D4581FB29AC70050CE54 /* de */,
+				D628D4591FB29AC70050CE54 /* zh-Hant-TW */,
+				D628D45A1FB29AC70050CE54 /* ar */,
+				D628D45B1FB29AC70050CE54 /* zh-Hans */,
+				D628D45C1FB29AC70050CE54 /* ja */,
+				D628D45D1FB29AC70050CE54 /* en */,
+				D628D45E1FB29AC70050CE54 /* uk */,
+				D628D45F1FB29AC70050CE54 /* es */,
+				D628D4601FB29AC70050CE54 /* sl */,
+				D628D4611FB29AC70050CE54 /* da */,
+				D628D4621FB29AC70050CE54 /* it */,
+				D628D4631FB29AC70050CE54 /* sk */,
+				D628D4641FB29AC70050CE54 /* sv */,
+				D628D4651FB29AC70050CE54 /* cs */,
+				D628D4661FB29AC70050CE54 /* ko */,
+				D628D4671FB29AC70050CE54 /* zh-Hant */,
+				D628D4681FB29AC70050CE54 /* tr */,
+				D628D4691FB29AC70050CE54 /* pl */,
+				D628D46A1FB29AC70050CE54 /* pt-BR */,
+				D628D46B1FB29AC70050CE54 /* ru */,
+				D628D46C1FB29AC70050CE54 /* fr */,
+				D628D46D1FB29AC70050CE54 /* nl */,
+				D628D46E1FB29AC70050CE54 /* th */,
+				D628D46F1FB29AC70050CE54 /* pt-PT */,
+				D628D4701FB29AC70050CE54 /* ro */,
 			);
 			name = LTUpdate.strings;
 			sourceTree = "<group>";

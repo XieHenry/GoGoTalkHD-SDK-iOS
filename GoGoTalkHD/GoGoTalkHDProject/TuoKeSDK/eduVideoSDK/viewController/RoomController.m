@@ -118,7 +118,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 
 
-@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate>
+@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate>
 
 
 //移动
@@ -215,7 +215,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic , strong) TKUploadImageView * uploadImageView;
 @property (nonatomic , strong) TKEduNetManager * requestManager;
 @property (nonatomic , strong) UIImagePickerController * iPickerController;
-
 
 #pragma mark - 常用语
 @property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
@@ -412,11 +411,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }
     
     self.requestManager = [TKEduNetManager initTKEduNetManagerWithDelegate:self];
-   
     
 #pragma mark - 常用语
     [self xc_loadPhraseData];
-    
+   
 }
 
 #pragma mark Pad 初始化
@@ -1186,6 +1184,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
 //         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
         
+        
 #pragma mark - 修改的
         CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iMuteAudioAndRewardView.frame)-tChatHeight-tViewCap;
         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iMuteAudioAndRewardView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
@@ -1799,8 +1798,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
              
              [self dismissViewControllerAnimated:YES completion:^{
                  if ([TKEduClassRoom shareInstance].enterClassRoomAgain) {
-
-#pragma mark - 暂时注销掉 不知道什么用
+                     
+#pragma mark - 修改的
 //                     ViewController *tRoom = (ViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
 //                     [tRoom openUrl:tRoom.urlPath];
                  }
@@ -2180,6 +2179,18 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [self.iUsertListView reloadData];
     [self refreshData];
     
+    // 提示在后台的学生
+    //[[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]
+    if (_iUserType == UserType_Teacher || _iUserType == UserType_Assistant || _iUserType == UserType_Patrol) {
+        if ([user.properties objectForKey:sIsInBackGround] != nil &&
+            [[user.properties objectForKey:sIsInBackGround] boolValue] == YES) {
+            NSString *deviceType = [user.properties objectForKey:@"devicetype"];
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", user.nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:user.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:user.nickName aTime:[TKUtil currentTimeToSeconds]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }
+    }
     
 }
 //用户离开
@@ -2324,6 +2335,33 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     for (RoomUser *user in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
         NSLog(@"%d", user.disableVideo);
         NSLog(@"%d", user.disableAudio);
+    }
+    
+    if ([properties objectForKey:sIsInBackGround]) {
+        BOOL isInBackground = [[properties objectForKey:sIsInBackGround] boolValue];
+        // 当用户发生前后台切换，用户列表状态也要发生变化
+        for (RoomUser *u in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
+            if ([u.peerID isEqualToString:user.peerID]) {
+                [u.properties setObject:[properties objectForKey:sIsInBackGround] forKey:sIsInBackGround];
+                [self.iUsertListView reloadData];
+                break;
+            }
+        }
+        
+        if (_iUserType == UserType_Teacher || _iUserType == UserType_Assistant || _iUserType == UserType_Patrol) {
+            NSString *deviceType = [user.properties objectForKey:@"devicetype"];
+            NSString *content;
+            if (isInBackground) {
+                content = MTLocalized(@"Prompt.HaveEnterBackground");
+            } else {
+                content = MTLocalized(@"Prompt.HaveBackForground");
+            }
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", user.nickName, deviceType, content];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:user.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:user.nickName aTime:[TKUtil currentTimeToSeconds]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }
+
     }
     
     NSDictionary *tDic = @{sRaisehand:[properties objectForKey:sRaisehand]?[properties objectForKey:sRaisehand]:@(isRaiseHand),
@@ -2644,27 +2682,27 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
     } else if ([msgName isEqualToString:sUserEnterBackGround]){
         
-        NSString *peerId = [[msgID componentsSeparatedByString:@"_"] objectAtIndex:1];
-        NSString *nickName;
-        NSString *deviceType;
-        for (RoomUser *user in _iSessionHandle.iUserList) {
-            if ([user.peerID isEqualToString:peerId]) {
-                nickName = user.nickName;
-                deviceType = [user.properties objectForKey:@"devicetype"];
-            }
-        }
-        
-        if (add) {
-            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
-            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
-            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
-            [self refreshData];
-        }else{
-            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveBackForground")];
-            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
-            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
-            [self refreshData];
-        }
+//        NSString *peerId = [[msgID componentsSeparatedByString:@"_"] objectAtIndex:1];
+//        NSString *nickName;
+//        NSString *deviceType;
+//        for (RoomUser *user in _iSessionHandle.iUserList) {
+//            if ([user.peerID isEqualToString:peerId]) {
+//                nickName = user.nickName;
+//                deviceType = [user.properties objectForKey:@"devicetype"];
+//            }
+//        }
+//
+//        if (add) {
+//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
+//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+//            [self refreshData];
+//        }else{
+//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveBackForground")];
+//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+//            [self refreshData];
+//        }
       
     }
     
@@ -2870,6 +2908,13 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark 首次发布或订阅失败3次
 - (void)networkTrouble {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:MTLocalized(@"Prompt.NetworkException") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *tActionSure = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.OK") style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:tActionSure];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)networkChanged {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:MTLocalized(@"Prompt.NetworkChanged") preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *tActionSure = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.OK") style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:tActionSure];
     [self presentViewController:alert animated:YES completion:nil];
@@ -4152,5 +4197,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
     NSLog(@"弹框已经消失");
 }
+
 
 @end

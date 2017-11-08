@@ -510,6 +510,12 @@
     }
 }
 
+- (void)roomManagerReportNetworkChanged {
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(networkChanged)]) {
+        [(id<TKEduSessionDelegate>) _iSessionDelegate networkChanged];
+    }
+}
+
 // 连接服务器成功
 - (void)roomManagerConnected:(void(^)())completion {
     if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerGetGiftNumber:)]) {
@@ -2095,8 +2101,9 @@
     }
     
     if (self.localUser.role == UserType_Student) {
-        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
-        [self sessionHandleDelMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil completion:nil];
+//        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
+//        [self sessionHandleDelMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil completion:nil];
+//        [self sessionHandleChangeUserProperty:self.localUser.peerID TellWhom:sTellAll Key:sIsInBackGround Value:@(NO) completion:nil];
     }
     
 }
@@ -2109,8 +2116,9 @@
     }
     
     if (self.localUser.role == UserType_Student) {
-        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
-        [self sessionHandlePubMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil Save:true AssociatedMsgID:sUserEnterBackGround AssociatedUserID:self.localUser.peerID completion:nil];
+//        NSString *tMsgID = [NSString stringWithFormat:@"%@_%@",sUserEnterBackGround,self.localUser.peerID];
+//        [self sessionHandlePubMsg:sUserEnterBackGround ID:tMsgID To:sSuperUsers Data:nil Save:true AssociatedMsgID:sUserEnterBackGround AssociatedUserID:self.localUser.peerID completion:nil];
+//        [self sessionHandleChangeUserProperty:self.localUser.peerID TellWhom:sTellAll Key:sIsInBackGround Value:@(YES) completion:nil];
     }
 }
 #pragma mark 用户自己打开关闭音视频

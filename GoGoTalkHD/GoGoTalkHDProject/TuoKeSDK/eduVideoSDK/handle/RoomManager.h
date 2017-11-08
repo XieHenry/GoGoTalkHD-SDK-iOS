@@ -103,6 +103,11 @@
 - (void)roomManagerReportNetworkProblem;
 
 /**
+ 网络环境发生变化，进行提示
+ */
+- (void)roomManagerReportNetworkChanged;
+
+/**
  收到自定义信令消息
  
  @param add true：新增消息；false：删除消息

@@ -68,7 +68,7 @@
 
 #pragma mark 首次发布或订阅失败3次
 - (void)networkTrouble;
-
+- (void)networkChanged;
 @end
 
 @protocol TKEduBoardDelegate <NSObject>

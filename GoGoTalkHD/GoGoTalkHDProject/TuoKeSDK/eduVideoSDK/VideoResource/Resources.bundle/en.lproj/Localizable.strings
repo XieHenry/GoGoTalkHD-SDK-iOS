@@ -123,6 +123,8 @@
 
 "Prompt.enterBackGround" = "enter backGround";
 "Prompt.enterForeGround" = "resume foreGround";
-"Prompt.NetworkException" = "Network exception, check the network environment and re-enter";
+"Prompt.NetworkException" = "Network exception. Please close the antivirus software or firewall and re-enter";
 "Prompt.HaveEnterBackground" = "Backstage mode";
 "Prompt.HaveBackForground" = "Back to normal mode";
+"Prompt.BackgroundCouldNotOnStage" = "The student's application in the background, could not on stage.";
+"Prompt.NetworkChanged" = "Network exception, check the network environment and re-enter";
