@@ -18,7 +18,7 @@ static CGFloat const xc_topCellHeight = 112/2.0;
 static CGFloat const xc_bottomCellHeight = 74/2.0;
 static CGFloat const xc_collectionHeaderHeight = 50.0f;
 static CGFloat const xc_collectionFooterHeight = 35.0f/2;
-static CGFloat const xc_topCollectionViewHeight = 324.0f/2;
+static CGFloat const xc_topCollectionViewHeight = 274.0f;
 
 @interface GGT_OrderCourseOfAllLeftVc ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *xc_topCollectionView;
