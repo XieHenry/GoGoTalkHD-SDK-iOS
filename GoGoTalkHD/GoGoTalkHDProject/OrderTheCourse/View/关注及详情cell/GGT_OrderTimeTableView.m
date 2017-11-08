@@ -14,7 +14,6 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        self.sectionRow = 7;
         
         [self initDataSource];
         [self initContentView];
@@ -26,9 +25,21 @@
 #pragma mark 创建顶部数据
 - (void)initDataSource {
 
+    UIView *headerBgView = [[UIView alloc]init];
+    headerBgView.backgroundColor = UICOLOR_FROM_HEX(0xEBEBEB);
+    [self addSubview:headerBgView];
+    [headerBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-0);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.height.mas_offset(LineH(60));
+    }];
+    
+    
+    
     //7天时间 89*7
     _headerScrollerView = [[UIScrollView alloc]init];
-    //    _headerScrollerView.contentSize = CGSizeMake(LineW(85)*self.sectionRow,LineH(60));
+        _headerScrollerView.contentSize = CGSizeMake(LineW(728)*2,LineH(60));
     _headerScrollerView.scrollEnabled = YES;
     _headerScrollerView.showsVerticalScrollIndicator = NO;
     _headerScrollerView.showsHorizontalScrollIndicator = NO;
@@ -39,8 +50,8 @@
     [self addSubview:_headerScrollerView];
     
     [_headerScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-0);
+        make.left.equalTo(self.mas_left).with.offset(LineW(104));
+        make.right.equalTo(self.mas_right).with.offset(-LineW(104));
         make.top.equalTo(self.mas_top).with.offset(0);
         make.height.mas_offset(LineH(60));
     }];
@@ -51,7 +62,7 @@
     for (NSUInteger i =  0; i < sin.orderCourse_dateMuArray.count; i++) {
         GGT_HomeDateModel *model = [sin.orderCourse_dateMuArray safe_objectAtIndex:i];
         
-        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake((marginFocusOn-LineW(728))/2 +LineW(104)*i, 0, LineW(104), LineH(60))];
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(LineW(104)*i, 0, LineW(104), LineH(60))];
         [_headerScrollerView addSubview:headerView];
         
         UILabel *monthLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, LineY(15), LineW(104), LineH(15))];
@@ -84,11 +95,13 @@
     _bgScrollerView.delegate = self;
     _bgScrollerView.bounces = NO;
     _bgScrollerView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+    //更新坐标
+    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(29 * LineH(42)) + LineH(18));
     [self addSubview:_bgScrollerView];
     
     [_bgScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-0);
+        make.left.equalTo(self.mas_left).with.offset(LineW(104));
+        make.right.equalTo(self.mas_right).with.offset(-LineW(104));
         make.top.equalTo(_headerScrollerView.mas_bottom).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(-0);
     }];
@@ -236,12 +249,42 @@
 
     //更新坐标
     NSInteger count = [[self.alltimeArray safe_objectAtIndex:0] count];
-    _bgScrollerView.contentSize = CGSizeMake(marginFocusOn,(count * LineH(42)) + LineH(18));
-    _collectionView.frame = CGRectMake((marginFocusOn-LineW(728))/2, LineY(8), LineW(728),(count * LineH(42)));
+    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(count * LineH(42)) + LineH(18));
+    _collectionView.frame = CGRectMake(0, LineY(8), LineW(728) *2,(count * LineH(42)));
     
     [_collectionView reloadData];
 
 }
+
+//设置两个UIScrollView联动
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if(scrollView == self.headerScrollerView) {
+        
+        CGFloat offsetY = self.headerScrollerView.contentOffset.x;
+        CGPoint offset = self.bgScrollerView.contentOffset;
+        offset.x = offsetY;
+        self.bgScrollerView.contentOffset = offset;
+        
+        
+    } else {
+        CGFloat offsetY = self.bgScrollerView.contentOffset.x;
+        CGPoint offset = self.headerScrollerView.contentOffset;
+        offset.x = offsetY;
+        self.headerScrollerView.contentOffset = offset;
+        
+    }
+    
+}
+
+
+- (void)tableView:(UITableView *)tableView scrollFollowTheOther:(UITableView *)other{
+    CGFloat offsetY= other.contentOffset.y;
+    CGPoint offset=tableView.contentOffset;
+    offset.y=offsetY;
+    tableView.contentOffset=offset;
+}
+
 
 @end
 

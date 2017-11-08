@@ -145,7 +145,7 @@
 #pragma mark 时间列表
 - (void)initOrderTimeView {
     self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, LineH(129), marginFocusOn, SCREEN_HEIGHT()-LineH(129)-64)];
-    self.orderTimeView.backgroundColor = [UIColor clearColor];
+    self.orderTimeView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     
     __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
     
@@ -216,7 +216,13 @@
         NSMutableArray *classListFArr = [NSMutableArray array];
         NSMutableArray *classListGArr = [NSMutableArray array];
         
-        
+        NSMutableArray *classListHArr = [NSMutableArray array];
+        NSMutableArray *classListIArr = [NSMutableArray array];
+        NSMutableArray *classListJArr = [NSMutableArray array];
+        NSMutableArray *classListKArr = [NSMutableArray array];
+        NSMutableArray *classListLArr = [NSMutableArray array];
+        NSMutableArray *classListMArr = [NSMutableArray array];
+        NSMutableArray *classListNArr = [NSMutableArray array];
         
         for (NSDictionary *dic in dataDic[@"classListA"]) {
             GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
@@ -262,6 +268,52 @@
         
         [self.timeDataArray addObject:classListGArr];
         
+        
+        
+        for (NSDictionary *dic in dataDic[@"classListH"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListHArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListHArr];
+        
+        
+        for (NSDictionary *dic in dataDic[@"classListI"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListIArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListIArr];
+        
+        for (NSDictionary *dic in dataDic[@"classListJ"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListJArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListJArr];
+        
+        for (NSDictionary *dic in dataDic[@"classListK"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListKArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListKArr];
+        
+        for (NSDictionary *dic in dataDic[@"classListL"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListLArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListLArr];
+        
+        for (NSDictionary *dic in dataDic[@"classListM"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListMArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListMArr];
+        
+        for (NSDictionary *dic in dataDic[@"classListN"]) {
+            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+            [classListNArr addObject:model];
+        }
+        [self.timeDataArray  addObject:classListNArr];
+
+
         //cell获得数据
         [self.orderTimeView getCellArr:self.timeDataArray];
         

@@ -27,8 +27,7 @@ typedef void(^OrderBlick)(GGT_TimeCollectionModel *timeCollectionModel,GGT_HomeD
 @property (nonatomic, strong) NSMutableArray *weeksArray;
 //自定义时间
 @property (nonatomic, strong) NSArray *alltimeArray;
-//展示多少天的数据
-@property (nonatomic, assign) NSInteger sectionRow;
+
 
 @property (nonatomic, copy) OrderBlick orderBlick;
 //选中的cell
