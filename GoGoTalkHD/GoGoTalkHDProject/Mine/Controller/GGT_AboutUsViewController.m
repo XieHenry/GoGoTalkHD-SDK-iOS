@@ -21,8 +21,10 @@
     
     [self setLeftBackButton];
 
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/%@",sin.base_url,URL_GetAboutUs];
     WKWebView *webView = [[WKWebView alloc] init];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://manage.gogo-talk.com:9332/ipad/abouts/wlh_about.html"]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     webView.scrollView.bounces = NO;
     [self.view addSubview:webView];
     
