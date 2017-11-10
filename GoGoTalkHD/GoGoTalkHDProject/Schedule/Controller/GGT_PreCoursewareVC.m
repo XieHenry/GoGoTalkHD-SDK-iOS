@@ -340,11 +340,49 @@
 //    }];
 //}
 
+
 // 取消预约
 - (void)cancleReservationCourseWithModel:(GGT_CourseCellModel *)model
 {
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@?lessonid=%@", URL_GetCancelFormalLessonStatus, model.LessonId];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            [self cancelClassWithModel:model responseObject:responseObject];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+// 取消约课
+- (void)cancelClassWithModel:(GGT_CourseCellModel *)model responseObject:(NSDictionary *)responseObject
+{
+    
     // 在可以取消约课的情况下 弹框
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定要取消本次预约课程" preferredStyle:UIAlertControllerStyleAlert];
+//    NSString *message1 = @"本月您已消耗完<span style='color:red;font-size=17px'>3次</span>机会，本次取消将扣除1课时";
+    
+    NSString *xc_alertMsg = @"";
+    if ([responseObject[@"msg"] isKindOfClass:[NSString class]] && [responseObject[@"msg"] length] > 0) {
+        xc_alertMsg = responseObject[@"msg"];
+    }
+    NSDictionary *options = @{ NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
+                               NSCharacterEncodingDocumentAttribute :@(NSUTF8StringEncoding) };
+    NSData *data = [xc_alertMsg dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableAttributedString *attiSS = [[NSMutableAttributedString alloc] initWithData:data options:options documentAttributes:nil error:nil];
+    
+    // 在可以取消约课的情况下 弹框
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:xc_alertMsg preferredStyle:UIAlertControllerStyleAlert];
+    
+    NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+    [ps setAlignment:NSTextAlignmentCenter];
+    
+    [attiSS addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17], NSParagraphStyleAttributeName:ps} range:NSMakeRange(0, attiSS.length)];
+    [alertController setValue:attiSS forKey:@"attributedMessage"];
+    
+    
     
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
