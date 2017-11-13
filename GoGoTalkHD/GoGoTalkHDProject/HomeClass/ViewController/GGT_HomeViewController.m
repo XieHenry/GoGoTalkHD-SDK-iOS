@@ -151,6 +151,7 @@
         NSLog(@"---点的是叉号---%@", self);
     } enterBlock:^{
         
+//        @weakify(self);
         [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
             @strongify(self);
             NSLog(@"%@", self);
