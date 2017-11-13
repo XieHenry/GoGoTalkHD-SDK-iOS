@@ -1055,6 +1055,7 @@ div.role-control-draw-permission{
     height: 2rem;
     position: absolute;
     display: none;
+    overflow: hidden;
     top:1rem;
     left: 0;
     z-index: 9999;

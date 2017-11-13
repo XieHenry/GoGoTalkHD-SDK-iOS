@@ -351,6 +351,11 @@
 @property (nonatomic, assign, readonly) BOOL lowConsume;
 
 /**
+ 是否在后台
+ */
+@property (nonatomic, assign) BOOL inBackground;
+
+/**
  初始化方法，如果不需要白板用此方法
  
  @param delegate 实现了RoomManagerDelegate回调接口的对象

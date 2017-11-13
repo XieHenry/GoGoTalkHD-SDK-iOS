@@ -95,103 +95,102 @@
 		D6134AF91F15F8B700B4405E /* GGT_DateCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6134AF81F15F8B700B4405E /* GGT_DateCollectionCell.m */; };
 		D6134AFC1F1610D400B4405E /* GGT_TimeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6134AFB1F1610D400B4405E /* GGT_TimeCollectionCell.m */; };
 		D6134AFF1F16138500B4405E /* GGT_DateAndTimeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6134AFE1F16138500B4405E /* GGT_DateAndTimeHeaderView.m */; };
+		D6207EF71FB934CF001FB741 /* TKEduSessionHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E011FB934CE001FB741 /* TKEduSessionHandle.m */; };
+		D6207EF81FB934CF001FB741 /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E031FB934CE001FB741 /* TKEduClassRoom.m */; };
+		D6207EF91FB934CF001FB741 /* TKEduNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E041FB934CE001FB741 /* TKEduNetManager.m */; };
+		D6207EFA1FB934CF001FB741 /* TKAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E081FB934CE001FB741 /* TKAFURLRequestSerialization.m */; };
+		D6207EFB1FB934CF001FB741 /* TKAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E0C1FB934CE001FB741 /* TKAFURLSessionManager.m */; };
+		D6207EFC1FB934CF001FB741 /* TKAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E0D1FB934CE001FB741 /* TKAFSecurityPolicy.m */; };
+		D6207EFD1FB934CF001FB741 /* TKAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E0F1FB934CE001FB741 /* TKAFURLResponseSerialization.m */; };
+		D6207EFE1FB934CF001FB741 /* TKAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E121FB934CE001FB741 /* TKAFHTTPSessionManager.m */; };
+		D6207EFF1FB934CF001FB741 /* TKAFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E131FB934CE001FB741 /* TKAFNetworkActivityIndicatorManager.m */; };
+		D6207F001FB934CF001FB741 /* TKAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E141FB934CE001FB741 /* TKAFNetworkReachabilityManager.m */; };
+		D6207F011FB934CF001FB741 /* TKGTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E1A1FB934CE001FB741 /* TKGTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D6207F021FB934CF001FB741 /* BITAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E1D1FB934CE001FB741 /* BITAttributedLabel.m */; };
+		D6207F031FB934CF001FB741 /* BITHockeyBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E1F1FB934CE001FB741 /* BITHockeyBaseViewController.m */; };
+		D6207F041FB934CF001FB741 /* BITCrashReportTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E211FB934CE001FB741 /* BITCrashReportTextFormatter.m */; };
+		D6207F051FB934CF001FB741 /* BITHockeyBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E241FB934CE001FB741 /* BITHockeyBaseManager.m */; };
+		D6207F061FB934CF001FB741 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E261FB934CE001FB741 /* BITHTTPOperation.m */; };
+		D6207F071FB934CF001FB741 /* BITUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E271FB934CE001FB741 /* BITUpdateViewController.m */; };
+		D6207F081FB934CF001FB741 /* BITHockeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E281FB934CE001FB741 /* BITHockeyHelper.m */; };
+		D6207F091FB934CF001FB741 /* BITWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E2B1FB934CE001FB741 /* BITWebTableViewCell.m */; };
+		D6207F0A1FB934CF001FB741 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E2E1FB934CE001FB741 /* BITHockeyManager.m */; };
+		D6207F0B1FB934CF001FB741 /* BITFeedbackUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E321FB934CE001FB741 /* BITFeedbackUserDataViewController.m */; };
+		D6207F0C1FB934CF001FB741 /* BITUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E331FB934CE001FB741 /* BITUpdateManager.m */; };
+		D6207F0D1FB934CF001FB741 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6207E361FB934CE001FB741 /* HockeySDKResources.bundle */; };
+		D6207F0F1FB934CF001FB741 /* BITAppVersionMetaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E381FB934CE001FB741 /* BITAppVersionMetaInfo.m */; };
+		D6207F101FB934CF001FB741 /* BITStoreUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E391FB934CE001FB741 /* BITStoreUpdateManager.m */; };
+		D6207F111FB934CF001FB741 /* BITFeedbackActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E3B1FB934CE001FB741 /* BITFeedbackActivity.m */; };
+		D6207F121FB934CF001FB741 /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E3F1FB934CE001FB741 /* HockeySDKPrivate.m */; };
+		D6207F131FB934CF001FB741 /* BITAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E401FB934CE001FB741 /* BITAuthenticator.m */; };
+		D6207F141FB934CF001FB741 /* BITCrashAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E461FB934CE001FB741 /* BITCrashAttachment.m */; };
+		D6207F151FB934CF001FB741 /* BITFeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E491FB934CE001FB741 /* BITFeedbackListViewController.m */; };
+		D6207F161FB934CF001FB741 /* BITAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E4A1FB934CE001FB741 /* BITAuthenticationViewController.m */; };
+		D6207F171FB934CF001FB741 /* BITFeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E4C1FB934CE001FB741 /* BITFeedbackManager.m */; };
+		D6207F181FB934CF001FB741 /* BITAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E4E1FB934CE001FB741 /* BITAppStoreHeader.m */; };
+		D6207F191FB934CF001FB741 /* BITFeedbackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E511FB934CE001FB741 /* BITFeedbackMessage.m */; };
+		D6207F1A1FB934CF001FB741 /* BITKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E521FB934CE001FB741 /* BITKeychainUtils.m */; };
+		D6207F1B1FB934CF001FB741 /* BITCrashManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E531FB934CE001FB741 /* BITCrashManager.m */; };
+		D6207F1C1FB934CF001FB741 /* BITFeedbackListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E5C1FB934CE001FB741 /* BITFeedbackListViewCell.m */; };
+		D6207F1D1FB934CF001FB741 /* BITFeedbackComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E5E1FB934CE001FB741 /* BITFeedbackComposeViewController.m */; };
+		D6207F1E1FB934CF001FB741 /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E621FB934CE001FB741 /* BITHockeyAppClient.m */; };
+		D6207F1F1FB934CF001FB741 /* BITStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E651FB934CE001FB741 /* BITStoreButton.m */; };
+		D6207F201FB934CF001FB741 /* LTUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E671FB934CE001FB741 /* LTUpdate.m */; };
+		D6207F211FB934CF001FB741 /* LTUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6207E691FB934CE001FB741 /* LTUpdate.strings */; };
+		D6207F221FB934CF001FB741 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6207E841FB934CE001FB741 /* CrashReporter.framework */; };
+		D6207F231FB934CF001FB741 /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E871FB934CE001FB741 /* TKProgressHUD.m */; };
+		D6207F241FB934CF001FB741 /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E891FB934CE001FB741 /* TKRCGlobalConfig.m */; };
+		D6207F251FB934CF001FB741 /* StarscreamSocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6207E8B1FB934CE001FB741 /* StarscreamSocketIO.framework */; };
+		D6207F261FB934CF001FB741 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6207E8C1FB934CE001FB741 /* SocketIO.framework */; };
+		D6207F271FB934CF001FB741 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6207E8D1FB934CE001FB741 /* WebRTC.framework */; };
+		D6207F281FB934CF001FB741 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6207E8E1FB934CE001FB741 /* Resources.bundle */; };
+		D6207F291FB934CF001FB741 /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6207E8F1FB934CE001FB741 /* libroomsdk.a */; };
+		D6207F2A1FB934CF001FB741 /* NSString+sizeHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E941FB934CE001FB741 /* NSString+sizeHeight.m */; };
+		D6207F2B1FB934CF001FB741 /* TKChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E961FB934CE001FB741 /* TKChatView.m */; };
+		D6207F2C1FB934CF001FB741 /* TKChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E991FB934CE001FB741 /* TKChatMessageModel.m */; };
+		D6207F2D1FB934CF001FB741 /* TKGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E9B1FB934CE001FB741 /* TKGrowingTextView.m */; };
+		D6207F2E1FB934CF001FB741 /* TKTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207E9E1FB934CE001FB741 /* TKTextViewInternal.m */; };
+		D6207F2F1FB934CF001FB741 /* TKTeacherMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EA11FB934CE001FB741 /* TKTeacherMessageTableViewCell.m */; };
+		D6207F301FB934CF001FB741 /* TKTeacherMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6207EA21FB934CE001FB741 /* TKTeacherMessageTableViewCell.xib */; };
+		D6207F311FB934CF001FB741 /* TKMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EA41FB934CE001FB741 /* TKMessageTableViewCell.m */; };
+		D6207F321FB934CF001FB741 /* TKMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6207EA61FB934CE001FB741 /* TKMessageTableViewCell.xib */; };
+		D6207F331FB934CF001FB741 /* TKWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EA81FB934CE001FB741 /* TKWeakDelegate.m */; };
+		D6207F341FB934CF001FB741 /* TKLiveViewChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EAB1FB934CE001FB741 /* TKLiveViewChatTableViewCell.m */; };
+		D6207F351FB934CF001FB741 /* TKStudentMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6207EAE1FB934CE001FB741 /* TKStudentMessageTableViewCell.xib */; };
+		D6207F361FB934CF001FB741 /* TKStudentMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EAF1FB934CE001FB741 /* TKStudentMessageTableViewCell.m */; };
+		D6207F371FB934CF001FB741 /* TKDocumentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EB31FB934CE001FB741 /* TKDocumentListView.m */; };
+		D6207F381FB934CF001FB741 /* TKUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6207EB41FB934CE001FB741 /* TKUserListTableViewCell.xib */; };
+		D6207F391FB934CF001FB741 /* TKUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EB51FB934CE001FB741 /* TKUserListTableViewCell.m */; };
+		D6207F3A1FB934CF001FB741 /* TKUploadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EB91FB934CE001FB741 /* TKUploadImageView.m */; };
+		D6207F3B1FB934CF001FB741 /* TKPlaybackMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EBA1FB934CE001FB741 /* TKPlaybackMaskView.m */; };
+		D6207F3C1FB934CF001FB741 /* TKAudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EBE1FB934CE001FB741 /* TKAudioHelper.m */; };
+		D6207F3D1FB934CF001FB741 /* TKProgressSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EBF1FB934CE001FB741 /* TKProgressSlider.m */; };
+		D6207F3E1FB934CF001FB741 /* TKBaseMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EC01FB934CE001FB741 /* TKBaseMediaView.m */; };
+		D6207F3F1FB934CF001FB741 /* TKMessageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EC41FB934CE001FB741 /* TKMessageTipView.m */; };
+		D6207F401FB934CF001FB741 /* TKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EC51FB934CE001FB741 /* TKButton.m */; };
+		D6207F411FB934CF001FB741 /* TKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EC71FB934CE001FB741 /* TKTimer.m */; };
+		D6207F421FB934CF001FB741 /* TKVideoSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EC81FB934CE001FB741 /* TKVideoSmallView.m */; };
+		D6207F431FB934CF001FB741 /* TKDrogView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ECB1FB934CE001FB741 /* TKDrogView.m */; };
+		D6207F441FB934CF001FB741 /* TKVideoFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ECC1FB934CE001FB741 /* TKVideoFunctionView.m */; };
+		D6207F451FB934CF001FB741 /* TKClassTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ED11FB934CE001FB741 /* TKClassTimeView.m */; };
+		D6207F461FB934CF001FB741 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ED41FB934CE001FB741 /* UIImagePickerController+TKLandScapeImagePicker.m */; };
+		D6207F471FB934CF001FB741 /* UIControl+clickedOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ED71FB934CE001FB741 /* UIControl+clickedOnce.m */; };
+		D6207F481FB934CF001FB741 /* TKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207ED91FB934CE001FB741 /* TKNavigationController.m */; };
+		D6207F491FB934CF001FB741 /* TKPickViewTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EDE1FB934CE001FB741 /* TKPickViewTextField.m */; };
+		D6207F4A1FB934CF001FB741 /* TKEduRoomProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EE41FB934CE001FB741 /* TKEduRoomProperty.m */; };
+		D6207F4B1FB934CF001FB741 /* RoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EE71FB934CE001FB741 /* RoomController.m */; };
+		D6207F4C1FB934CF001FB741 /* TKUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D6207EEB1FB934CE001FB741 /* TKUtil.mm */; };
+		D6207F4D1FB934CF001FB741 /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EF01FB934CF001FB741 /* TKMediaDocModel.m */; };
+		D6207F4E1FB934CF001FB741 /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EF11FB934CF001FB741 /* TKDocmentDocModel.m */; };
+		D6207F4F1FB934CF001FB741 /* TKWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EF31FB934CF001FB741 /* TKWeakScriptMessageDelegate.m */; };
+		D6207F501FB934CF001FB741 /* TKEduBoardHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6207EF61FB934CF001FB741 /* TKEduBoardHandle.m */; };
+		D6207F511FB9364E001FB741 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6207E8D1FB934CE001FB741 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6207F521FB93656001FB741 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6207E8C1FB934CE001FB741 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6207F531FB9365A001FB741 /* StarscreamSocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D6207E8B1FB934CE001FB741 /* StarscreamSocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D627DCEF1ED411FD00076FBD /* GGT_ScheduleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCEE1ED411FD00076FBD /* GGT_ScheduleTableView.m */; };
 		D627DCF21ED4196E00076FBD /* XCNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF11ED4196E00076FBD /* XCNormalHeader.m */; };
 		D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF41ED41AD000076FBD /* XCNormalFooter.m */; };
 		D627DCF91ED432C800076FBD /* GGT_CalendarCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */; };
-		D628D4E51FB29AC80050CE54 /* TKEduSessionHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */; };
-		D628D4E61FB29AC80050CE54 /* TKEduClassRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */; };
-		D628D4E71FB29AC80050CE54 /* TKEduNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */; };
-		D628D4E81FB29AC80050CE54 /* TKAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */; };
-		D628D4E91FB29AC80050CE54 /* TKAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */; };
-		D628D4EA1FB29AC80050CE54 /* TKAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */; };
-		D628D4EB1FB29AC80050CE54 /* TKAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */; };
-		D628D4EC1FB29AC80050CE54 /* TKAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */; };
-		D628D4ED1FB29AC80050CE54 /* TKAFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */; };
-		D628D4EE1FB29AC80050CE54 /* TKAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */; };
-		D628D4EF1FB29AC80050CE54 /* TKGTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4081FB29AC70050CE54 /* TKGTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D628D4F01FB29AC80050CE54 /* BITAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */; };
-		D628D4F11FB29AC80050CE54 /* BITHockeyBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */; };
-		D628D4F21FB29AC80050CE54 /* BITCrashReportTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */; };
-		D628D4F31FB29AC80050CE54 /* BITHockeyBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */; };
-		D628D4F41FB29AC80050CE54 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */; };
-		D628D4F51FB29AC80050CE54 /* BITUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */; };
-		D628D4F61FB29AC80050CE54 /* BITHockeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */; };
-		D628D4F71FB29AC80050CE54 /* BITWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */; };
-		D628D4F81FB29AC80050CE54 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */; };
-		D628D4F91FB29AC80050CE54 /* BITFeedbackUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */; };
-		D628D4FA1FB29AC80050CE54 /* BITUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4211FB29AC70050CE54 /* BITUpdateManager.m */; };
-		D628D4FB1FB29AC80050CE54 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */; };
-		D628D4FC1FB29AC80050CE54 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */; };
-		D628D4FD1FB29AC80050CE54 /* BITAppVersionMetaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */; };
-		D628D4FE1FB29AC80050CE54 /* BITStoreUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */; };
-		D628D4FF1FB29AC80050CE54 /* BITFeedbackActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */; };
-		D628D5001FB29AC80050CE54 /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */; };
-		D628D5011FB29AC80050CE54 /* BITAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */; };
-		D628D5021FB29AC80050CE54 /* BITCrashAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */; };
-		D628D5031FB29AC80050CE54 /* BITFeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */; };
-		D628D5041FB29AC80050CE54 /* BITAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */; };
-		D628D5051FB29AC80050CE54 /* BITFeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */; };
-		D628D5061FB29AC80050CE54 /* BITAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */; };
-		D628D5071FB29AC80050CE54 /* BITFeedbackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */; };
-		D628D5081FB29AC80050CE54 /* BITKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */; };
-		D628D5091FB29AC80050CE54 /* BITCrashManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4411FB29AC70050CE54 /* BITCrashManager.m */; };
-		D628D50A1FB29AC80050CE54 /* BITFeedbackListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */; };
-		D628D50B1FB29AC80050CE54 /* BITFeedbackComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */; };
-		D628D50C1FB29AC80050CE54 /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */; };
-		D628D50D1FB29AC80050CE54 /* BITStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4531FB29AC70050CE54 /* BITStoreButton.m */; };
-		D628D50E1FB29AC80050CE54 /* LTUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4551FB29AC70050CE54 /* LTUpdate.m */; };
-		D628D50F1FB29AC80050CE54 /* LTUpdate.strings in Resources */ = {isa = PBXBuildFile; fileRef = D628D4571FB29AC70050CE54 /* LTUpdate.strings */; };
-		D628D5101FB29AC80050CE54 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D4721FB29AC70050CE54 /* CrashReporter.framework */; };
-		D628D5111FB29AC80050CE54 /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4751FB29AC70050CE54 /* TKProgressHUD.m */; };
-		D628D5121FB29AC80050CE54 /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */; };
-		D628D5131FB29AC80050CE54 /* StarscreamSocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */; };
-		D628D5141FB29AC80050CE54 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47A1FB29AC70050CE54 /* SocketIO.framework */; };
-		D628D5151FB29AC80050CE54 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47B1FB29AC70050CE54 /* WebRTC.framework */; };
-		D628D5161FB29AC80050CE54 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D628D47C1FB29AC70050CE54 /* Resources.bundle */; };
-		D628D5171FB29AC80050CE54 /* libroomsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D628D47D1FB29AC70050CE54 /* libroomsdk.a */; };
-		D628D5181FB29AC80050CE54 /* NSString+sizeHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */; };
-		D628D5191FB29AC80050CE54 /* TKChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4841FB29AC70050CE54 /* TKChatView.m */; };
-		D628D51A1FB29AC80050CE54 /* TKChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */; };
-		D628D51B1FB29AC80050CE54 /* TKGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */; };
-		D628D51C1FB29AC80050CE54 /* TKTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */; };
-		D628D51D1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */; };
-		D628D51E1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */; };
-		D628D51F1FB29AC80050CE54 /* TKMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */; };
-		D628D5201FB29AC80050CE54 /* TKMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */; };
-		D628D5211FB29AC80050CE54 /* TKWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */; };
-		D628D5221FB29AC80050CE54 /* TKLiveViewChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */; };
-		D628D5231FB29AC80050CE54 /* TKStudentMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */; };
-		D628D5241FB29AC80050CE54 /* TKStudentMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */; };
-		D628D5251FB29AC80050CE54 /* TKDocumentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */; };
-		D628D5261FB29AC80050CE54 /* TKUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */; };
-		D628D5271FB29AC80050CE54 /* TKUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */; };
-		D628D5281FB29AC80050CE54 /* TKUploadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */; };
-		D628D5291FB29AC80050CE54 /* TKPlaybackMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */; };
-		D628D52A1FB29AC80050CE54 /* TKAudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */; };
-		D628D52B1FB29AC80050CE54 /* TKProgressSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */; };
-		D628D52C1FB29AC80050CE54 /* TKBaseMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */; };
-		D628D52D1FB29AC80050CE54 /* TKMessageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */; };
-		D628D52E1FB29AC80050CE54 /* TKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B31FB29AC70050CE54 /* TKButton.m */; };
-		D628D52F1FB29AC80050CE54 /* TKTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B51FB29AC70050CE54 /* TKTimer.m */; };
-		D628D5301FB29AC80050CE54 /* TKVideoSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */; };
-		D628D5311FB29AC80050CE54 /* TKDrogView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4B91FB29AC70050CE54 /* TKDrogView.m */; };
-		D628D5321FB29AC80050CE54 /* TKVideoFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */; };
-		D628D5331FB29AC80050CE54 /* TKClassTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */; };
-		D628D5341FB29AC80050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */; };
-		D628D5351FB29AC80050CE54 /* UIControl+clickedOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */; };
-		D628D5361FB29AC80050CE54 /* TKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4C71FB29AC70050CE54 /* TKNavigationController.m */; };
-		D628D5371FB29AC80050CE54 /* TKPickViewTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */; };
-		D628D5381FB29AC80050CE54 /* TKEduRoomProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */; };
-		D628D5391FB29AC80050CE54 /* RoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D51FB29AC70050CE54 /* RoomController.m */; };
-		D628D53A1FB29AC80050CE54 /* TKUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D628D4D91FB29AC70050CE54 /* TKUtil.mm */; };
-		D628D53B1FB29AC80050CE54 /* TKMediaDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */; };
-		D628D53C1FB29AC80050CE54 /* TKDocmentDocModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */; };
-		D628D53D1FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */; };
-		D628D53E1FB29AC80050CE54 /* TKEduBoardHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */; };
-		D628D53F1FB29B380050CE54 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D47B1FB29AC70050CE54 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D628D5401FB29B400050CE54 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D47A1FB29AC70050CE54 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D628D5411FB29B440050CE54 /* StarscreamSocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */; };
 		D6353E171EE8E250004E1288 /* GGT_PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E161EE8E250004E1288 /* GGT_PopoverCell.m */; };
 		D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6353E211EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m */; };
@@ -295,9 +294,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D628D5411FB29B440050CE54 /* StarscreamSocketIO.framework in CopyFiles */,
-				D628D5401FB29B400050CE54 /* SocketIO.framework in CopyFiles */,
-				D628D53F1FB29B380050CE54 /* WebRTC.framework in CopyFiles */,
+				D6207F531FB9365A001FB741 /* StarscreamSocketIO.framework in CopyFiles */,
+				D6207F521FB93656001FB741 /* SocketIO.framework in CopyFiles */,
+				D6207F511FB9364E001FB741 /* WebRTC.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +439,219 @@
 		D6134AFB1F1610D400B4405E /* GGT_TimeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_TimeCollectionCell.m; sourceTree = "<group>"; };
 		D6134AFD1F16138500B4405E /* GGT_DateAndTimeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_DateAndTimeHeaderView.h; sourceTree = "<group>"; };
 		D6134AFE1F16138500B4405E /* GGT_DateAndTimeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_DateAndTimeHeaderView.m; sourceTree = "<group>"; };
+		D6207DFF1FB934CE001FB741 /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
+		D6207E001FB934CE001FB741 /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
+		D6207E011FB934CE001FB741 /* TKEduSessionHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduSessionHandle.m; sourceTree = "<group>"; };
+		D6207E021FB934CE001FB741 /* TKEduNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduNetManager.h; sourceTree = "<group>"; };
+		D6207E031FB934CE001FB741 /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
+		D6207E041FB934CE001FB741 /* TKEduNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduNetManager.m; sourceTree = "<group>"; };
+		D6207E051FB934CE001FB741 /* TKEduSessionHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduSessionHandle.h; sourceTree = "<group>"; };
+		D6207E081FB934CE001FB741 /* TKAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLRequestSerialization.m; sourceTree = "<group>"; };
+		D6207E091FB934CE001FB741 /* TKAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworking.h; sourceTree = "<group>"; };
+		D6207E0A1FB934CE001FB741 /* TKAFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		D6207E0B1FB934CE001FB741 /* TKAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFHTTPSessionManager.h; sourceTree = "<group>"; };
+		D6207E0C1FB934CE001FB741 /* TKAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLSessionManager.m; sourceTree = "<group>"; };
+		D6207E0D1FB934CE001FB741 /* TKAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFSecurityPolicy.m; sourceTree = "<group>"; };
+		D6207E0E1FB934CE001FB741 /* TKAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		D6207E0F1FB934CE001FB741 /* TKAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLResponseSerialization.m; sourceTree = "<group>"; };
+		D6207E101FB934CE001FB741 /* TKAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLRequestSerialization.h; sourceTree = "<group>"; };
+		D6207E111FB934CE001FB741 /* TKAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLSessionManager.h; sourceTree = "<group>"; };
+		D6207E121FB934CE001FB741 /* TKAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFHTTPSessionManager.m; sourceTree = "<group>"; };
+		D6207E131FB934CE001FB741 /* TKAFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		D6207E141FB934CE001FB741 /* TKAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		D6207E151FB934CE001FB741 /* TKAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFSecurityPolicy.h; sourceTree = "<group>"; };
+		D6207E161FB934CE001FB741 /* TKAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLResponseSerialization.h; sourceTree = "<group>"; };
+		D6207E181FB934CE001FB741 /* TKGTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMBase64.h; sourceTree = "<group>"; };
+		D6207E191FB934CE001FB741 /* TKGTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMDefines.h; sourceTree = "<group>"; };
+		D6207E1A1FB934CE001FB741 /* TKGTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGTMBase64.m; sourceTree = "<group>"; };
+		D6207E1C1FB934CE001FB741 /* BITFeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManager.h; sourceTree = "<group>"; };
+		D6207E1D1FB934CE001FB741 /* BITAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAttributedLabel.m; sourceTree = "<group>"; };
+		D6207E1E1FB934CE001FB741 /* BITAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticationViewController.h; sourceTree = "<group>"; };
+		D6207E1F1FB934CE001FB741 /* BITHockeyBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseViewController.m; sourceTree = "<group>"; };
+		D6207E201FB934CE001FB741 /* BITFeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewController.h; sourceTree = "<group>"; };
+		D6207E211FB934CE001FB741 /* BITCrashReportTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportTextFormatter.m; sourceTree = "<group>"; };
+		D6207E221FB934CE001FB741 /* HockeySDKFeatureConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKFeatureConfig.h; sourceTree = "<group>"; };
+		D6207E231FB934CE001FB741 /* BITCrashAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashAttachment.h; sourceTree = "<group>"; };
+		D6207E241FB934CE001FB741 /* BITHockeyBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseManager.m; sourceTree = "<group>"; };
+		D6207E251FB934CE001FB741 /* BITFeedbackComposeViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewControllerDelegate.h; sourceTree = "<group>"; };
+		D6207E261FB934CE001FB741 /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
+		D6207E271FB934CE001FB741 /* BITUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateViewController.m; sourceTree = "<group>"; };
+		D6207E281FB934CE001FB741 /* BITHockeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyHelper.m; sourceTree = "<group>"; };
+		D6207E291FB934CE001FB741 /* BITKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITKeychainUtils.h; sourceTree = "<group>"; };
+		D6207E2A1FB934CE001FB741 /* BITFeedbackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessage.h; sourceTree = "<group>"; };
+		D6207E2B1FB934CE001FB741 /* BITWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITWebTableViewCell.m; sourceTree = "<group>"; };
+		D6207E2C1FB934CE001FB741 /* BITAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppStoreHeader.h; sourceTree = "<group>"; };
+		D6207E2D1FB934CE001FB741 /* BITUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerPrivate.h; sourceTree = "<group>"; };
+		D6207E2E1FB934CE001FB741 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
+		D6207E2F1FB934CE001FB741 /* BITFeedbackComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewController.h; sourceTree = "<group>"; };
+		D6207E301FB934CE001FB741 /* BITFeedbackListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewCell.h; sourceTree = "<group>"; };
+		D6207E311FB934CE001FB741 /* BITStoreUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerPrivate.h; sourceTree = "<group>"; };
+		D6207E321FB934CE001FB741 /* BITFeedbackUserDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackUserDataViewController.m; sourceTree = "<group>"; };
+		D6207E331FB934CE001FB741 /* BITUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateManager.m; sourceTree = "<group>"; };
+		D6207E341FB934CE001FB741 /* BITHockeyBaseManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManagerPrivate.h; sourceTree = "<group>"; };
+		D6207E361FB934CE001FB741 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		D6207E371FB934CE001FB741 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		D6207E381FB934CE001FB741 /* BITAppVersionMetaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppVersionMetaInfo.m; sourceTree = "<group>"; };
+		D6207E391FB934CE001FB741 /* BITStoreUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreUpdateManager.m; sourceTree = "<group>"; };
+		D6207E3A1FB934CE001FB741 /* BITCrashManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManager.h; sourceTree = "<group>"; };
+		D6207E3B1FB934CE001FB741 /* BITFeedbackActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackActivity.m; sourceTree = "<group>"; };
+		D6207E3C1FB934CE001FB741 /* BITStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreButton.h; sourceTree = "<group>"; };
+		D6207E3D1FB934CE001FB741 /* BITHockeyManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManagerDelegate.h; sourceTree = "<group>"; };
+		D6207E3E1FB934CE001FB741 /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
+		D6207E3F1FB934CE001FB741 /* HockeySDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HockeySDKPrivate.m; sourceTree = "<group>"; };
+		D6207E401FB934CE001FB741 /* BITAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticator.m; sourceTree = "<group>"; };
+		D6207E411FB934CE001FB741 /* BITAuthenticator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator_Private.h; sourceTree = "<group>"; };
+		D6207E421FB934CE001FB741 /* BITHockeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyHelper.h; sourceTree = "<group>"; };
+		D6207E431FB934CE001FB741 /* BITUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewController.h; sourceTree = "<group>"; };
+		D6207E441FB934CE001FB741 /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
+		D6207E451FB934CE001FB741 /* BITHockeyBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManager.h; sourceTree = "<group>"; };
+		D6207E461FB934CE001FB741 /* BITCrashAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashAttachment.m; sourceTree = "<group>"; };
+		D6207E471FB934CE001FB741 /* BITHockeyBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseViewController.h; sourceTree = "<group>"; };
+		D6207E481FB934CE001FB741 /* BITCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatter.h; sourceTree = "<group>"; };
+		D6207E491FB934CE001FB741 /* BITFeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewController.m; sourceTree = "<group>"; };
+		D6207E4A1FB934CE001FB741 /* BITAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticationViewController.m; sourceTree = "<group>"; };
+		D6207E4B1FB934CE001FB741 /* BITAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAttributedLabel.h; sourceTree = "<group>"; };
+		D6207E4C1FB934CE001FB741 /* BITFeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackManager.m; sourceTree = "<group>"; };
+		D6207E4D1FB934CE001FB741 /* BITFeedbackManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerDelegate.h; sourceTree = "<group>"; };
+		D6207E4E1FB934CE001FB741 /* BITAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppStoreHeader.m; sourceTree = "<group>"; };
+		D6207E4F1FB934CE001FB741 /* BITWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITWebTableViewCell.h; sourceTree = "<group>"; };
+		D6207E501FB934CE001FB741 /* BITUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerDelegate.h; sourceTree = "<group>"; };
+		D6207E511FB934CE001FB741 /* BITFeedbackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessage.m; sourceTree = "<group>"; };
+		D6207E521FB934CE001FB741 /* BITKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITKeychainUtils.m; sourceTree = "<group>"; };
+		D6207E531FB934CE001FB741 /* BITCrashManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashManager.m; sourceTree = "<group>"; };
+		D6207E541FB934CE001FB741 /* BITStoreUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManager.h; sourceTree = "<group>"; };
+		D6207E551FB934CE001FB741 /* BITFeedbackActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackActivity.h; sourceTree = "<group>"; };
+		D6207E561FB934CE001FB741 /* BITStoreUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerDelegate.h; sourceTree = "<group>"; };
+		D6207E571FB934CE001FB741 /* BITAppVersionMetaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppVersionMetaInfo.h; sourceTree = "<group>"; };
+		D6207E581FB934CE001FB741 /* BITUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManager.h; sourceTree = "<group>"; };
+		D6207E591FB934CE001FB741 /* BITUpdateViewControllerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewControllerPrivate.h; sourceTree = "<group>"; };
+		D6207E5A1FB934CE001FB741 /* BITFeedbackUserDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackUserDataViewController.h; sourceTree = "<group>"; };
+		D6207E5B1FB934CE001FB741 /* BITFeedbackManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerPrivate.h; sourceTree = "<group>"; };
+		D6207E5C1FB934CE001FB741 /* BITFeedbackListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewCell.m; sourceTree = "<group>"; };
+		D6207E5D1FB934CE001FB741 /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
+		D6207E5E1FB934CE001FB741 /* BITFeedbackComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackComposeViewController.m; sourceTree = "<group>"; };
+		D6207E5F1FB934CE001FB741 /* BITAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator.h; sourceTree = "<group>"; };
+		D6207E601FB934CE001FB741 /* BITCrashManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerDelegate.h; sourceTree = "<group>"; };
+		D6207E611FB934CE001FB741 /* HockeySDKPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKPrivate.h; sourceTree = "<group>"; };
+		D6207E621FB934CE001FB741 /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
+		D6207E631FB934CE001FB741 /* BITCrashManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerPrivate.h; sourceTree = "<group>"; };
+		D6207E641FB934CE001FB741 /* HockeySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDK.h; sourceTree = "<group>"; };
+		D6207E651FB934CE001FB741 /* BITStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreButton.m; sourceTree = "<group>"; };
+		D6207E671FB934CE001FB741 /* LTUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUpdate.m; sourceTree = "<group>"; };
+		D6207E6A1FB934CE001FB741 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E6B1FB934CE001FB741 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D6207E6C1FB934CE001FB741 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E6D1FB934CE001FB741 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D6207E6E1FB934CE001FB741 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E6F1FB934CE001FB741 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E701FB934CE001FB741 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E711FB934CE001FB741 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E721FB934CE001FB741 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E731FB934CE001FB741 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E741FB934CE001FB741 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E751FB934CE001FB741 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E761FB934CE001FB741 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E771FB934CE001FB741 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E781FB934CE001FB741 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E791FB934CE001FB741 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D6207E7A1FB934CE001FB741 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E7B1FB934CE001FB741 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E7C1FB934CE001FB741 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D6207E7D1FB934CE001FB741 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E7E1FB934CE001FB741 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E7F1FB934CE001FB741 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E801FB934CE001FB741 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E811FB934CE001FB741 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
+		D6207E821FB934CE001FB741 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/LTUpdate.strings; sourceTree = "<group>"; };
+		D6207E831FB934CE001FB741 /* LTUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUpdate.h; sourceTree = "<group>"; };
+		D6207E841FB934CE001FB741 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		D6207E861FB934CE001FB741 /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
+		D6207E871FB934CE001FB741 /* TKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressHUD.m; sourceTree = "<group>"; };
+		D6207E881FB934CE001FB741 /* TKProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressHUD.h; sourceTree = "<group>"; };
+		D6207E891FB934CE001FB741 /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
+		D6207E8B1FB934CE001FB741 /* StarscreamSocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarscreamSocketIO.framework; sourceTree = "<group>"; };
+		D6207E8C1FB934CE001FB741 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
+		D6207E8D1FB934CE001FB741 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
+		D6207E8E1FB934CE001FB741 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		D6207E8F1FB934CE001FB741 /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
+		D6207E931FB934CE001FB741 /* TKChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatView.h; sourceTree = "<group>"; };
+		D6207E941FB934CE001FB741 /* NSString+sizeHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+sizeHeight.m"; sourceTree = "<group>"; };
+		D6207E951FB934CE001FB741 /* NSString+sizeHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+sizeHeight.h"; sourceTree = "<group>"; };
+		D6207E961FB934CE001FB741 /* TKChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatView.m; sourceTree = "<group>"; };
+		D6207E981FB934CE001FB741 /* TKChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatMessageModel.h; sourceTree = "<group>"; };
+		D6207E991FB934CE001FB741 /* TKChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatMessageModel.m; sourceTree = "<group>"; };
+		D6207E9B1FB934CE001FB741 /* TKGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGrowingTextView.m; sourceTree = "<group>"; };
+		D6207E9C1FB934CE001FB741 /* TKTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextViewInternal.h; sourceTree = "<group>"; };
+		D6207E9D1FB934CE001FB741 /* TKGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGrowingTextView.h; sourceTree = "<group>"; };
+		D6207E9E1FB934CE001FB741 /* TKTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewInternal.m; sourceTree = "<group>"; };
+		D6207EA01FB934CE001FB741 /* TKTeacherMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTeacherMessageTableViewCell.h; sourceTree = "<group>"; };
+		D6207EA11FB934CE001FB741 /* TKTeacherMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTeacherMessageTableViewCell.m; sourceTree = "<group>"; };
+		D6207EA21FB934CE001FB741 /* TKTeacherMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKTeacherMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D6207EA41FB934CE001FB741 /* TKMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTableViewCell.m; sourceTree = "<group>"; };
+		D6207EA51FB934CE001FB741 /* TKMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTableViewCell.h; sourceTree = "<group>"; };
+		D6207EA61FB934CE001FB741 /* TKMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D6207EA81FB934CE001FB741 /* TKWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakDelegate.m; sourceTree = "<group>"; };
+		D6207EA91FB934CE001FB741 /* TKWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakDelegate.h; sourceTree = "<group>"; };
+		D6207EAB1FB934CE001FB741 /* TKLiveViewChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLiveViewChatTableViewCell.m; sourceTree = "<group>"; };
+		D6207EAC1FB934CE001FB741 /* TKLiveViewChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLiveViewChatTableViewCell.h; sourceTree = "<group>"; };
+		D6207EAE1FB934CE001FB741 /* TKStudentMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKStudentMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D6207EAF1FB934CE001FB741 /* TKStudentMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKStudentMessageTableViewCell.m; sourceTree = "<group>"; };
+		D6207EB01FB934CE001FB741 /* TKStudentMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKStudentMessageTableViewCell.h; sourceTree = "<group>"; };
+		D6207EB21FB934CE001FB741 /* TKUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUserListTableViewCell.h; sourceTree = "<group>"; };
+		D6207EB31FB934CE001FB741 /* TKDocumentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocumentListView.m; sourceTree = "<group>"; };
+		D6207EB41FB934CE001FB741 /* TKUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUserListTableViewCell.xib; sourceTree = "<group>"; };
+		D6207EB51FB934CE001FB741 /* TKUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUserListTableViewCell.m; sourceTree = "<group>"; };
+		D6207EB61FB934CE001FB741 /* TKDocumentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocumentListView.h; sourceTree = "<group>"; };
+		D6207EB81FB934CE001FB741 /* TKUploadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUploadImageView.h; sourceTree = "<group>"; };
+		D6207EB91FB934CE001FB741 /* TKUploadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUploadImageView.m; sourceTree = "<group>"; };
+		D6207EBA1FB934CE001FB741 /* TKPlaybackMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPlaybackMaskView.m; sourceTree = "<group>"; };
+		D6207EBC1FB934CE001FB741 /* TKBaseMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBaseMediaView.h; sourceTree = "<group>"; };
+		D6207EBD1FB934CE001FB741 /* TKProgressSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressSlider.h; sourceTree = "<group>"; };
+		D6207EBE1FB934CE001FB741 /* TKAudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAudioHelper.m; sourceTree = "<group>"; };
+		D6207EBF1FB934CE001FB741 /* TKProgressSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressSlider.m; sourceTree = "<group>"; };
+		D6207EC01FB934CE001FB741 /* TKBaseMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBaseMediaView.m; sourceTree = "<group>"; };
+		D6207EC11FB934CE001FB741 /* TKAudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAudioHelper.h; sourceTree = "<group>"; };
+		D6207EC31FB934CE001FB741 /* TKDrogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDrogView.h; sourceTree = "<group>"; };
+		D6207EC41FB934CE001FB741 /* TKMessageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTipView.m; sourceTree = "<group>"; };
+		D6207EC51FB934CE001FB741 /* TKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKButton.m; sourceTree = "<group>"; };
+		D6207EC61FB934CE001FB741 /* TKVideoFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoFunctionView.h; sourceTree = "<group>"; };
+		D6207EC71FB934CE001FB741 /* TKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTimer.m; sourceTree = "<group>"; };
+		D6207EC81FB934CE001FB741 /* TKVideoSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoSmallView.m; sourceTree = "<group>"; };
+		D6207EC91FB934CE001FB741 /* TKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKButton.h; sourceTree = "<group>"; };
+		D6207ECA1FB934CE001FB741 /* TKMessageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTipView.h; sourceTree = "<group>"; };
+		D6207ECB1FB934CE001FB741 /* TKDrogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDrogView.m; sourceTree = "<group>"; };
+		D6207ECC1FB934CE001FB741 /* TKVideoFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoFunctionView.m; sourceTree = "<group>"; };
+		D6207ECD1FB934CE001FB741 /* TKVideoSmallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoSmallView.h; sourceTree = "<group>"; };
+		D6207ECE1FB934CE001FB741 /* TKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTimer.h; sourceTree = "<group>"; };
+		D6207ED01FB934CE001FB741 /* TKClassTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKClassTimeView.h; sourceTree = "<group>"; };
+		D6207ED11FB934CE001FB741 /* TKClassTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKClassTimeView.m; sourceTree = "<group>"; };
+		D6207ED31FB934CE001FB741 /* UIImagePickerController+TKLandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+TKLandScapeImagePicker.h"; sourceTree = "<group>"; };
+		D6207ED41FB934CE001FB741 /* UIImagePickerController+TKLandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+TKLandScapeImagePicker.m"; sourceTree = "<group>"; };
+		D6207ED61FB934CE001FB741 /* UIControl+clickedOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+clickedOnce.h"; sourceTree = "<group>"; };
+		D6207ED71FB934CE001FB741 /* UIControl+clickedOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+clickedOnce.m"; sourceTree = "<group>"; };
+		D6207ED91FB934CE001FB741 /* TKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNavigationController.m; sourceTree = "<group>"; };
+		D6207EDA1FB934CE001FB741 /* TKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNavigationController.h; sourceTree = "<group>"; };
+		D6207EDB1FB934CE001FB741 /* TKPlaybackMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPlaybackMaskView.h; sourceTree = "<group>"; };
+		D6207EDD1FB934CE001FB741 /* TKPickViewTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPickViewTextField.h; sourceTree = "<group>"; };
+		D6207EDE1FB934CE001FB741 /* TKPickViewTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPickViewTextField.m; sourceTree = "<group>"; };
+		D6207EE01FB934CE001FB741 /* PlaybackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackModel.h; sourceTree = "<group>"; };
+		D6207EE11FB934CE001FB741 /* MediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaStream.h; sourceTree = "<group>"; };
+		D6207EE21FB934CE001FB741 /* TKEduRoomProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduRoomProperty.h; sourceTree = "<group>"; };
+		D6207EE31FB934CE001FB741 /* RoomUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomUser.h; sourceTree = "<group>"; };
+		D6207EE41FB934CE001FB741 /* TKEduRoomProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduRoomProperty.m; sourceTree = "<group>"; };
+		D6207EE61FB934CE001FB741 /* RoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomController.h; sourceTree = "<group>"; };
+		D6207EE71FB934CE001FB741 /* RoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomController.m; sourceTree = "<group>"; };
+		D6207EE91FB934CE001FB741 /* TKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
+		D6207EEA1FB934CE001FB741 /* TKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUtil.h; sourceTree = "<group>"; };
+		D6207EEB1FB934CE001FB741 /* TKUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TKUtil.mm; sourceTree = "<group>"; };
+		D6207EEE1FB934CF001FB741 /* TKMediaDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMediaDocModel.h; sourceTree = "<group>"; };
+		D6207EEF1FB934CF001FB741 /* TKDocmentDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocmentDocModel.h; sourceTree = "<group>"; };
+		D6207EF01FB934CF001FB741 /* TKMediaDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMediaDocModel.m; sourceTree = "<group>"; };
+		D6207EF11FB934CF001FB741 /* TKDocmentDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocmentDocModel.m; sourceTree = "<group>"; };
+		D6207EF31FB934CF001FB741 /* TKWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
+		D6207EF41FB934CF001FB741 /* TKEduBoardHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduBoardHandle.h; sourceTree = "<group>"; };
+		D6207EF51FB934CF001FB741 /* TKWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		D6207EF61FB934CF001FB741 /* TKEduBoardHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduBoardHandle.m; sourceTree = "<group>"; };
 		D627DCED1ED411FD00076FBD /* GGT_ScheduleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ScheduleTableView.h; sourceTree = "<group>"; };
 		D627DCEE1ED411FD00076FBD /* GGT_ScheduleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ScheduleTableView.m; sourceTree = "<group>"; };
 		D627DCF01ED4196E00076FBD /* XCNormalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNormalHeader.h; sourceTree = "<group>"; };
@@ -448,219 +660,6 @@
 		D627DCF41ED41AD000076FBD /* XCNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNormalFooter.m; sourceTree = "<group>"; };
 		D627DCF71ED432C800076FBD /* GGT_CalendarCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CalendarCellModel.h; sourceTree = "<group>"; };
 		D627DCF81ED432C800076FBD /* GGT_CalendarCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CalendarCellModel.m; sourceTree = "<group>"; };
-		D628D3ED1FB29AC70050CE54 /* TKEduClassRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduClassRoom.h; sourceTree = "<group>"; };
-		D628D3EE1FB29AC70050CE54 /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
-		D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduSessionHandle.m; sourceTree = "<group>"; };
-		D628D3F01FB29AC70050CE54 /* TKEduNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduNetManager.h; sourceTree = "<group>"; };
-		D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduClassRoom.m; sourceTree = "<group>"; };
-		D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduNetManager.m; sourceTree = "<group>"; };
-		D628D3F31FB29AC70050CE54 /* TKEduSessionHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduSessionHandle.h; sourceTree = "<group>"; };
-		D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLRequestSerialization.m; sourceTree = "<group>"; };
-		D628D3F71FB29AC70050CE54 /* TKAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworking.h; sourceTree = "<group>"; };
-		D628D3F81FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		D628D3F91FB29AC70050CE54 /* TKAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFHTTPSessionManager.h; sourceTree = "<group>"; };
-		D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLSessionManager.m; sourceTree = "<group>"; };
-		D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFSecurityPolicy.m; sourceTree = "<group>"; };
-		D628D3FC1FB29AC70050CE54 /* TKAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFURLResponseSerialization.m; sourceTree = "<group>"; };
-		D628D3FE1FB29AC70050CE54 /* TKAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLRequestSerialization.h; sourceTree = "<group>"; };
-		D628D3FF1FB29AC70050CE54 /* TKAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLSessionManager.h; sourceTree = "<group>"; };
-		D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFHTTPSessionManager.m; sourceTree = "<group>"; };
-		D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		D628D4031FB29AC70050CE54 /* TKAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFSecurityPolicy.h; sourceTree = "<group>"; };
-		D628D4041FB29AC70050CE54 /* TKAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAFURLResponseSerialization.h; sourceTree = "<group>"; };
-		D628D4061FB29AC70050CE54 /* TKGTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMBase64.h; sourceTree = "<group>"; };
-		D628D4071FB29AC70050CE54 /* TKGTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGTMDefines.h; sourceTree = "<group>"; };
-		D628D4081FB29AC70050CE54 /* TKGTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGTMBase64.m; sourceTree = "<group>"; };
-		D628D40A1FB29AC70050CE54 /* BITFeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManager.h; sourceTree = "<group>"; };
-		D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAttributedLabel.m; sourceTree = "<group>"; };
-		D628D40C1FB29AC70050CE54 /* BITAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticationViewController.h; sourceTree = "<group>"; };
-		D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseViewController.m; sourceTree = "<group>"; };
-		D628D40E1FB29AC70050CE54 /* BITFeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewController.h; sourceTree = "<group>"; };
-		D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportTextFormatter.m; sourceTree = "<group>"; };
-		D628D4101FB29AC70050CE54 /* HockeySDKFeatureConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKFeatureConfig.h; sourceTree = "<group>"; };
-		D628D4111FB29AC70050CE54 /* BITCrashAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashAttachment.h; sourceTree = "<group>"; };
-		D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseManager.m; sourceTree = "<group>"; };
-		D628D4131FB29AC70050CE54 /* BITFeedbackComposeViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewControllerDelegate.h; sourceTree = "<group>"; };
-		D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
-		D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateViewController.m; sourceTree = "<group>"; };
-		D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyHelper.m; sourceTree = "<group>"; };
-		D628D4171FB29AC70050CE54 /* BITKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITKeychainUtils.h; sourceTree = "<group>"; };
-		D628D4181FB29AC70050CE54 /* BITFeedbackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessage.h; sourceTree = "<group>"; };
-		D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITWebTableViewCell.m; sourceTree = "<group>"; };
-		D628D41A1FB29AC70050CE54 /* BITAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppStoreHeader.h; sourceTree = "<group>"; };
-		D628D41B1FB29AC70050CE54 /* BITUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerPrivate.h; sourceTree = "<group>"; };
-		D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
-		D628D41D1FB29AC70050CE54 /* BITFeedbackComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackComposeViewController.h; sourceTree = "<group>"; };
-		D628D41E1FB29AC70050CE54 /* BITFeedbackListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackListViewCell.h; sourceTree = "<group>"; };
-		D628D41F1FB29AC70050CE54 /* BITStoreUpdateManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerPrivate.h; sourceTree = "<group>"; };
-		D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackUserDataViewController.m; sourceTree = "<group>"; };
-		D628D4211FB29AC70050CE54 /* BITUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUpdateManager.m; sourceTree = "<group>"; };
-		D628D4221FB29AC70050CE54 /* BITHockeyBaseManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManagerPrivate.h; sourceTree = "<group>"; };
-		D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
-		D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppVersionMetaInfo.m; sourceTree = "<group>"; };
-		D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreUpdateManager.m; sourceTree = "<group>"; };
-		D628D4281FB29AC70050CE54 /* BITCrashManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManager.h; sourceTree = "<group>"; };
-		D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackActivity.m; sourceTree = "<group>"; };
-		D628D42A1FB29AC70050CE54 /* BITStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreButton.h; sourceTree = "<group>"; };
-		D628D42B1FB29AC70050CE54 /* BITHockeyManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManagerDelegate.h; sourceTree = "<group>"; };
-		D628D42C1FB29AC70050CE54 /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
-		D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HockeySDKPrivate.m; sourceTree = "<group>"; };
-		D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticator.m; sourceTree = "<group>"; };
-		D628D42F1FB29AC70050CE54 /* BITAuthenticator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator_Private.h; sourceTree = "<group>"; };
-		D628D4301FB29AC70050CE54 /* BITHockeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyHelper.h; sourceTree = "<group>"; };
-		D628D4311FB29AC70050CE54 /* BITUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewController.h; sourceTree = "<group>"; };
-		D628D4321FB29AC70050CE54 /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
-		D628D4331FB29AC70050CE54 /* BITHockeyBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManager.h; sourceTree = "<group>"; };
-		D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashAttachment.m; sourceTree = "<group>"; };
-		D628D4351FB29AC70050CE54 /* BITHockeyBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseViewController.h; sourceTree = "<group>"; };
-		D628D4361FB29AC70050CE54 /* BITCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatter.h; sourceTree = "<group>"; };
-		D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewController.m; sourceTree = "<group>"; };
-		D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAuthenticationViewController.m; sourceTree = "<group>"; };
-		D628D4391FB29AC70050CE54 /* BITAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAttributedLabel.h; sourceTree = "<group>"; };
-		D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackManager.m; sourceTree = "<group>"; };
-		D628D43B1FB29AC70050CE54 /* BITFeedbackManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerDelegate.h; sourceTree = "<group>"; };
-		D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITAppStoreHeader.m; sourceTree = "<group>"; };
-		D628D43D1FB29AC70050CE54 /* BITWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITWebTableViewCell.h; sourceTree = "<group>"; };
-		D628D43E1FB29AC70050CE54 /* BITUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManagerDelegate.h; sourceTree = "<group>"; };
-		D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessage.m; sourceTree = "<group>"; };
-		D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITKeychainUtils.m; sourceTree = "<group>"; };
-		D628D4411FB29AC70050CE54 /* BITCrashManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashManager.m; sourceTree = "<group>"; };
-		D628D4421FB29AC70050CE54 /* BITStoreUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManager.h; sourceTree = "<group>"; };
-		D628D4431FB29AC70050CE54 /* BITFeedbackActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackActivity.h; sourceTree = "<group>"; };
-		D628D4441FB29AC70050CE54 /* BITStoreUpdateManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITStoreUpdateManagerDelegate.h; sourceTree = "<group>"; };
-		D628D4451FB29AC70050CE54 /* BITAppVersionMetaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAppVersionMetaInfo.h; sourceTree = "<group>"; };
-		D628D4461FB29AC70050CE54 /* BITUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateManager.h; sourceTree = "<group>"; };
-		D628D4471FB29AC70050CE54 /* BITUpdateViewControllerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUpdateViewControllerPrivate.h; sourceTree = "<group>"; };
-		D628D4481FB29AC70050CE54 /* BITFeedbackUserDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackUserDataViewController.h; sourceTree = "<group>"; };
-		D628D4491FB29AC70050CE54 /* BITFeedbackManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerPrivate.h; sourceTree = "<group>"; };
-		D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackListViewCell.m; sourceTree = "<group>"; };
-		D628D44B1FB29AC70050CE54 /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
-		D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackComposeViewController.m; sourceTree = "<group>"; };
-		D628D44D1FB29AC70050CE54 /* BITAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITAuthenticator.h; sourceTree = "<group>"; };
-		D628D44E1FB29AC70050CE54 /* BITCrashManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerDelegate.h; sourceTree = "<group>"; };
-		D628D44F1FB29AC70050CE54 /* HockeySDKPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKPrivate.h; sourceTree = "<group>"; };
-		D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
-		D628D4511FB29AC70050CE54 /* BITCrashManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerPrivate.h; sourceTree = "<group>"; };
-		D628D4521FB29AC70050CE54 /* HockeySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDK.h; sourceTree = "<group>"; };
-		D628D4531FB29AC70050CE54 /* BITStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITStoreButton.m; sourceTree = "<group>"; };
-		D628D4551FB29AC70050CE54 /* LTUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUpdate.m; sourceTree = "<group>"; };
-		D628D4581FB29AC70050CE54 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4591FB29AC70050CE54 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D628D45A1FB29AC70050CE54 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D45B1FB29AC70050CE54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D628D45C1FB29AC70050CE54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D45D1FB29AC70050CE54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D45E1FB29AC70050CE54 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D45F1FB29AC70050CE54 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4601FB29AC70050CE54 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4611FB29AC70050CE54 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4621FB29AC70050CE54 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4631FB29AC70050CE54 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4641FB29AC70050CE54 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4651FB29AC70050CE54 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4661FB29AC70050CE54 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4671FB29AC70050CE54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D628D4681FB29AC70050CE54 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4691FB29AC70050CE54 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D46A1FB29AC70050CE54 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D628D46B1FB29AC70050CE54 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D46C1FB29AC70050CE54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D46D1FB29AC70050CE54 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D46E1FB29AC70050CE54 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D46F1FB29AC70050CE54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LTUpdate.strings"; sourceTree = "<group>"; };
-		D628D4701FB29AC70050CE54 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/LTUpdate.strings; sourceTree = "<group>"; };
-		D628D4711FB29AC70050CE54 /* LTUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUpdate.h; sourceTree = "<group>"; };
-		D628D4721FB29AC70050CE54 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		D628D4741FB29AC70050CE54 /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
-		D628D4751FB29AC70050CE54 /* TKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressHUD.m; sourceTree = "<group>"; };
-		D628D4761FB29AC70050CE54 /* TKProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressHUD.h; sourceTree = "<group>"; };
-		D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
-		D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarscreamSocketIO.framework; sourceTree = "<group>"; };
-		D628D47A1FB29AC70050CE54 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = "<group>"; };
-		D628D47B1FB29AC70050CE54 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
-		D628D47C1FB29AC70050CE54 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		D628D47D1FB29AC70050CE54 /* libroomsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libroomsdk.a; sourceTree = "<group>"; };
-		D628D4811FB29AC70050CE54 /* TKChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatView.h; sourceTree = "<group>"; };
-		D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+sizeHeight.m"; sourceTree = "<group>"; };
-		D628D4831FB29AC70050CE54 /* NSString+sizeHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+sizeHeight.h"; sourceTree = "<group>"; };
-		D628D4841FB29AC70050CE54 /* TKChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatView.m; sourceTree = "<group>"; };
-		D628D4861FB29AC70050CE54 /* TKChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatMessageModel.h; sourceTree = "<group>"; };
-		D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatMessageModel.m; sourceTree = "<group>"; };
-		D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGrowingTextView.m; sourceTree = "<group>"; };
-		D628D48A1FB29AC70050CE54 /* TKTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextViewInternal.h; sourceTree = "<group>"; };
-		D628D48B1FB29AC70050CE54 /* TKGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGrowingTextView.h; sourceTree = "<group>"; };
-		D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewInternal.m; sourceTree = "<group>"; };
-		D628D48E1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTeacherMessageTableViewCell.h; sourceTree = "<group>"; };
-		D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTeacherMessageTableViewCell.m; sourceTree = "<group>"; };
-		D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKTeacherMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTableViewCell.m; sourceTree = "<group>"; };
-		D628D4931FB29AC70050CE54 /* TKMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTableViewCell.h; sourceTree = "<group>"; };
-		D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakDelegate.m; sourceTree = "<group>"; };
-		D628D4971FB29AC70050CE54 /* TKWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakDelegate.h; sourceTree = "<group>"; };
-		D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLiveViewChatTableViewCell.m; sourceTree = "<group>"; };
-		D628D49A1FB29AC70050CE54 /* TKLiveViewChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLiveViewChatTableViewCell.h; sourceTree = "<group>"; };
-		D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKStudentMessageTableViewCell.xib; sourceTree = "<group>"; };
-		D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKStudentMessageTableViewCell.m; sourceTree = "<group>"; };
-		D628D49E1FB29AC70050CE54 /* TKStudentMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKStudentMessageTableViewCell.h; sourceTree = "<group>"; };
-		D628D4A01FB29AC70050CE54 /* TKUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUserListTableViewCell.h; sourceTree = "<group>"; };
-		D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocumentListView.m; sourceTree = "<group>"; };
-		D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUserListTableViewCell.xib; sourceTree = "<group>"; };
-		D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUserListTableViewCell.m; sourceTree = "<group>"; };
-		D628D4A41FB29AC70050CE54 /* TKDocumentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocumentListView.h; sourceTree = "<group>"; };
-		D628D4A61FB29AC70050CE54 /* TKUploadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUploadImageView.h; sourceTree = "<group>"; };
-		D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUploadImageView.m; sourceTree = "<group>"; };
-		D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPlaybackMaskView.m; sourceTree = "<group>"; };
-		D628D4AA1FB29AC70050CE54 /* TKBaseMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBaseMediaView.h; sourceTree = "<group>"; };
-		D628D4AB1FB29AC70050CE54 /* TKProgressSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressSlider.h; sourceTree = "<group>"; };
-		D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAudioHelper.m; sourceTree = "<group>"; };
-		D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressSlider.m; sourceTree = "<group>"; };
-		D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBaseMediaView.m; sourceTree = "<group>"; };
-		D628D4AF1FB29AC70050CE54 /* TKAudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAudioHelper.h; sourceTree = "<group>"; };
-		D628D4B11FB29AC70050CE54 /* TKDrogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDrogView.h; sourceTree = "<group>"; };
-		D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageTipView.m; sourceTree = "<group>"; };
-		D628D4B31FB29AC70050CE54 /* TKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKButton.m; sourceTree = "<group>"; };
-		D628D4B41FB29AC70050CE54 /* TKVideoFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoFunctionView.h; sourceTree = "<group>"; };
-		D628D4B51FB29AC70050CE54 /* TKTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTimer.m; sourceTree = "<group>"; };
-		D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoSmallView.m; sourceTree = "<group>"; };
-		D628D4B71FB29AC70050CE54 /* TKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKButton.h; sourceTree = "<group>"; };
-		D628D4B81FB29AC70050CE54 /* TKMessageTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageTipView.h; sourceTree = "<group>"; };
-		D628D4B91FB29AC70050CE54 /* TKDrogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDrogView.m; sourceTree = "<group>"; };
-		D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVideoFunctionView.m; sourceTree = "<group>"; };
-		D628D4BB1FB29AC70050CE54 /* TKVideoSmallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVideoSmallView.h; sourceTree = "<group>"; };
-		D628D4BC1FB29AC70050CE54 /* TKTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTimer.h; sourceTree = "<group>"; };
-		D628D4BE1FB29AC70050CE54 /* TKClassTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKClassTimeView.h; sourceTree = "<group>"; };
-		D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKClassTimeView.m; sourceTree = "<group>"; };
-		D628D4C11FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+TKLandScapeImagePicker.h"; sourceTree = "<group>"; };
-		D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+TKLandScapeImagePicker.m"; sourceTree = "<group>"; };
-		D628D4C41FB29AC70050CE54 /* UIControl+clickedOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+clickedOnce.h"; sourceTree = "<group>"; };
-		D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+clickedOnce.m"; sourceTree = "<group>"; };
-		D628D4C71FB29AC70050CE54 /* TKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNavigationController.m; sourceTree = "<group>"; };
-		D628D4C81FB29AC70050CE54 /* TKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNavigationController.h; sourceTree = "<group>"; };
-		D628D4C91FB29AC70050CE54 /* TKPlaybackMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPlaybackMaskView.h; sourceTree = "<group>"; };
-		D628D4CB1FB29AC70050CE54 /* TKPickViewTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPickViewTextField.h; sourceTree = "<group>"; };
-		D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPickViewTextField.m; sourceTree = "<group>"; };
-		D628D4CE1FB29AC70050CE54 /* PlaybackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackModel.h; sourceTree = "<group>"; };
-		D628D4CF1FB29AC70050CE54 /* MediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaStream.h; sourceTree = "<group>"; };
-		D628D4D01FB29AC70050CE54 /* TKEduRoomProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduRoomProperty.h; sourceTree = "<group>"; };
-		D628D4D11FB29AC70050CE54 /* RoomUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomUser.h; sourceTree = "<group>"; };
-		D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduRoomProperty.m; sourceTree = "<group>"; };
-		D628D4D41FB29AC70050CE54 /* RoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomController.h; sourceTree = "<group>"; };
-		D628D4D51FB29AC70050CE54 /* RoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomController.m; sourceTree = "<group>"; };
-		D628D4D71FB29AC70050CE54 /* TKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
-		D628D4D81FB29AC70050CE54 /* TKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUtil.h; sourceTree = "<group>"; };
-		D628D4D91FB29AC70050CE54 /* TKUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TKUtil.mm; sourceTree = "<group>"; };
-		D628D4DC1FB29AC80050CE54 /* TKMediaDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMediaDocModel.h; sourceTree = "<group>"; };
-		D628D4DD1FB29AC80050CE54 /* TKDocmentDocModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDocmentDocModel.h; sourceTree = "<group>"; };
-		D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMediaDocModel.m; sourceTree = "<group>"; };
-		D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDocmentDocModel.m; sourceTree = "<group>"; };
-		D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
-		D628D4E21FB29AC80050CE54 /* TKEduBoardHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEduBoardHandle.h; sourceTree = "<group>"; };
-		D628D4E31FB29AC80050CE54 /* TKWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
-		D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEduBoardHandle.m; sourceTree = "<group>"; };
 		D6353E121EE8E20A004E1288 /* GGT_PopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverController.h; sourceTree = "<group>"; };
 		D6353E131EE8E20A004E1288 /* GGT_PopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_PopoverController.m; sourceTree = "<group>"; };
 		D6353E151EE8E250004E1288 /* GGT_PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_PopoverCell.h; sourceTree = "<group>"; };
@@ -822,11 +821,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D628D5131FB29AC80050CE54 /* StarscreamSocketIO.framework in Frameworks */,
-				D628D5171FB29AC80050CE54 /* libroomsdk.a in Frameworks */,
-				D628D5101FB29AC80050CE54 /* CrashReporter.framework in Frameworks */,
-				D628D5141FB29AC80050CE54 /* SocketIO.framework in Frameworks */,
-				D628D5151FB29AC80050CE54 /* WebRTC.framework in Frameworks */,
+				D6207F251FB934CF001FB741 /* StarscreamSocketIO.framework in Frameworks */,
+				D6207F291FB934CF001FB741 /* libroomsdk.a in Frameworks */,
+				D6207F221FB934CF001FB741 /* CrashReporter.framework in Frameworks */,
+				D6207F261FB934CF001FB741 /* SocketIO.framework in Frameworks */,
+				D6207F271FB934CF001FB741 /* WebRTC.framework in Frameworks */,
 				D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */,
 				D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */,
 				D68775621F0A0853008687C2 /* CoreMedia.framework in Frameworks */,
@@ -1112,6 +1111,481 @@
 			path = Mode;
 			sourceTree = "<group>";
 		};
+		D6207DFD1FB934CE001FB741 /* eduVideoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D6207DFE1FB934CE001FB741 /* handle */,
+				D6207E061FB934CE001FB741 /* third */,
+				D6207E8A1FB934CE001FB741 /* VideoResource */,
+				D6207E901FB934CE001FB741 /* ohterView */,
+				D6207EDF1FB934CE001FB741 /* Model */,
+				D6207EE51FB934CE001FB741 /* viewController */,
+				D6207EE81FB934CE001FB741 /* help */,
+			);
+			path = eduVideoSDK;
+			sourceTree = "<group>";
+		};
+		D6207DFE1FB934CE001FB741 /* handle */ = {
+			isa = PBXGroup;
+			children = (
+				D6207DFF1FB934CE001FB741 /* TKEduClassRoom.h */,
+				D6207E001FB934CE001FB741 /* RoomManager.h */,
+				D6207E011FB934CE001FB741 /* TKEduSessionHandle.m */,
+				D6207E021FB934CE001FB741 /* TKEduNetManager.h */,
+				D6207E031FB934CE001FB741 /* TKEduClassRoom.m */,
+				D6207E041FB934CE001FB741 /* TKEduNetManager.m */,
+				D6207E051FB934CE001FB741 /* TKEduSessionHandle.h */,
+			);
+			path = handle;
+			sourceTree = "<group>";
+		};
+		D6207E061FB934CE001FB741 /* third */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E071FB934CE001FB741 /* TKAFNetworking */,
+				D6207E171FB934CE001FB741 /* GTMBase64 */,
+				D6207E1B1FB934CE001FB741 /* HockeySDK */,
+				D6207E661FB934CE001FB741 /* LTUpdate */,
+				D6207E841FB934CE001FB741 /* CrashReporter.framework */,
+				D6207E851FB934CE001FB741 /* TKProgressHUD */,
+			);
+			path = third;
+			sourceTree = "<group>";
+		};
+		D6207E071FB934CE001FB741 /* TKAFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E081FB934CE001FB741 /* TKAFURLRequestSerialization.m */,
+				D6207E091FB934CE001FB741 /* TKAFNetworking.h */,
+				D6207E0A1FB934CE001FB741 /* TKAFNetworkActivityIndicatorManager.h */,
+				D6207E0B1FB934CE001FB741 /* TKAFHTTPSessionManager.h */,
+				D6207E0C1FB934CE001FB741 /* TKAFURLSessionManager.m */,
+				D6207E0D1FB934CE001FB741 /* TKAFSecurityPolicy.m */,
+				D6207E0E1FB934CE001FB741 /* TKAFNetworkReachabilityManager.h */,
+				D6207E0F1FB934CE001FB741 /* TKAFURLResponseSerialization.m */,
+				D6207E101FB934CE001FB741 /* TKAFURLRequestSerialization.h */,
+				D6207E111FB934CE001FB741 /* TKAFURLSessionManager.h */,
+				D6207E121FB934CE001FB741 /* TKAFHTTPSessionManager.m */,
+				D6207E131FB934CE001FB741 /* TKAFNetworkActivityIndicatorManager.m */,
+				D6207E141FB934CE001FB741 /* TKAFNetworkReachabilityManager.m */,
+				D6207E151FB934CE001FB741 /* TKAFSecurityPolicy.h */,
+				D6207E161FB934CE001FB741 /* TKAFURLResponseSerialization.h */,
+			);
+			path = TKAFNetworking;
+			sourceTree = "<group>";
+		};
+		D6207E171FB934CE001FB741 /* GTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E181FB934CE001FB741 /* TKGTMBase64.h */,
+				D6207E191FB934CE001FB741 /* TKGTMDefines.h */,
+				D6207E1A1FB934CE001FB741 /* TKGTMBase64.m */,
+			);
+			path = GTMBase64;
+			sourceTree = "<group>";
+		};
+		D6207E1B1FB934CE001FB741 /* HockeySDK */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E1C1FB934CE001FB741 /* BITFeedbackManager.h */,
+				D6207E1D1FB934CE001FB741 /* BITAttributedLabel.m */,
+				D6207E1E1FB934CE001FB741 /* BITAuthenticationViewController.h */,
+				D6207E1F1FB934CE001FB741 /* BITHockeyBaseViewController.m */,
+				D6207E201FB934CE001FB741 /* BITFeedbackListViewController.h */,
+				D6207E211FB934CE001FB741 /* BITCrashReportTextFormatter.m */,
+				D6207E221FB934CE001FB741 /* HockeySDKFeatureConfig.h */,
+				D6207E231FB934CE001FB741 /* BITCrashAttachment.h */,
+				D6207E241FB934CE001FB741 /* BITHockeyBaseManager.m */,
+				D6207E251FB934CE001FB741 /* BITFeedbackComposeViewControllerDelegate.h */,
+				D6207E261FB934CE001FB741 /* BITHTTPOperation.m */,
+				D6207E271FB934CE001FB741 /* BITUpdateViewController.m */,
+				D6207E281FB934CE001FB741 /* BITHockeyHelper.m */,
+				D6207E291FB934CE001FB741 /* BITKeychainUtils.h */,
+				D6207E2A1FB934CE001FB741 /* BITFeedbackMessage.h */,
+				D6207E2B1FB934CE001FB741 /* BITWebTableViewCell.m */,
+				D6207E2C1FB934CE001FB741 /* BITAppStoreHeader.h */,
+				D6207E2D1FB934CE001FB741 /* BITUpdateManagerPrivate.h */,
+				D6207E2E1FB934CE001FB741 /* BITHockeyManager.m */,
+				D6207E2F1FB934CE001FB741 /* BITFeedbackComposeViewController.h */,
+				D6207E301FB934CE001FB741 /* BITFeedbackListViewCell.h */,
+				D6207E311FB934CE001FB741 /* BITStoreUpdateManagerPrivate.h */,
+				D6207E321FB934CE001FB741 /* BITFeedbackUserDataViewController.m */,
+				D6207E331FB934CE001FB741 /* BITUpdateManager.m */,
+				D6207E341FB934CE001FB741 /* BITHockeyBaseManagerPrivate.h */,
+				D6207E351FB934CE001FB741 /* Resources */,
+				D6207E381FB934CE001FB741 /* BITAppVersionMetaInfo.m */,
+				D6207E391FB934CE001FB741 /* BITStoreUpdateManager.m */,
+				D6207E3A1FB934CE001FB741 /* BITCrashManager.h */,
+				D6207E3B1FB934CE001FB741 /* BITFeedbackActivity.m */,
+				D6207E3C1FB934CE001FB741 /* BITStoreButton.h */,
+				D6207E3D1FB934CE001FB741 /* BITHockeyManagerDelegate.h */,
+				D6207E3E1FB934CE001FB741 /* BITHockeyAppClient.h */,
+				D6207E3F1FB934CE001FB741 /* HockeySDKPrivate.m */,
+				D6207E401FB934CE001FB741 /* BITAuthenticator.m */,
+				D6207E411FB934CE001FB741 /* BITAuthenticator_Private.h */,
+				D6207E421FB934CE001FB741 /* BITHockeyHelper.h */,
+				D6207E431FB934CE001FB741 /* BITUpdateViewController.h */,
+				D6207E441FB934CE001FB741 /* BITHTTPOperation.h */,
+				D6207E451FB934CE001FB741 /* BITHockeyBaseManager.h */,
+				D6207E461FB934CE001FB741 /* BITCrashAttachment.m */,
+				D6207E471FB934CE001FB741 /* BITHockeyBaseViewController.h */,
+				D6207E481FB934CE001FB741 /* BITCrashReportTextFormatter.h */,
+				D6207E491FB934CE001FB741 /* BITFeedbackListViewController.m */,
+				D6207E4A1FB934CE001FB741 /* BITAuthenticationViewController.m */,
+				D6207E4B1FB934CE001FB741 /* BITAttributedLabel.h */,
+				D6207E4C1FB934CE001FB741 /* BITFeedbackManager.m */,
+				D6207E4D1FB934CE001FB741 /* BITFeedbackManagerDelegate.h */,
+				D6207E4E1FB934CE001FB741 /* BITAppStoreHeader.m */,
+				D6207E4F1FB934CE001FB741 /* BITWebTableViewCell.h */,
+				D6207E501FB934CE001FB741 /* BITUpdateManagerDelegate.h */,
+				D6207E511FB934CE001FB741 /* BITFeedbackMessage.m */,
+				D6207E521FB934CE001FB741 /* BITKeychainUtils.m */,
+				D6207E531FB934CE001FB741 /* BITCrashManager.m */,
+				D6207E541FB934CE001FB741 /* BITStoreUpdateManager.h */,
+				D6207E551FB934CE001FB741 /* BITFeedbackActivity.h */,
+				D6207E561FB934CE001FB741 /* BITStoreUpdateManagerDelegate.h */,
+				D6207E571FB934CE001FB741 /* BITAppVersionMetaInfo.h */,
+				D6207E581FB934CE001FB741 /* BITUpdateManager.h */,
+				D6207E591FB934CE001FB741 /* BITUpdateViewControllerPrivate.h */,
+				D6207E5A1FB934CE001FB741 /* BITFeedbackUserDataViewController.h */,
+				D6207E5B1FB934CE001FB741 /* BITFeedbackManagerPrivate.h */,
+				D6207E5C1FB934CE001FB741 /* BITFeedbackListViewCell.m */,
+				D6207E5D1FB934CE001FB741 /* BITHockeyManager.h */,
+				D6207E5E1FB934CE001FB741 /* BITFeedbackComposeViewController.m */,
+				D6207E5F1FB934CE001FB741 /* BITAuthenticator.h */,
+				D6207E601FB934CE001FB741 /* BITCrashManagerDelegate.h */,
+				D6207E611FB934CE001FB741 /* HockeySDKPrivate.h */,
+				D6207E621FB934CE001FB741 /* BITHockeyAppClient.m */,
+				D6207E631FB934CE001FB741 /* BITCrashManagerPrivate.h */,
+				D6207E641FB934CE001FB741 /* HockeySDK.h */,
+				D6207E651FB934CE001FB741 /* BITStoreButton.m */,
+			);
+			path = HockeySDK;
+			sourceTree = "<group>";
+		};
+		D6207E351FB934CE001FB741 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E361FB934CE001FB741 /* HockeySDKResources.bundle */,
+				D6207E371FB934CE001FB741 /* HockeySDK.xcconfig */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D6207E661FB934CE001FB741 /* LTUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E671FB934CE001FB741 /* LTUpdate.m */,
+				D6207E681FB934CE001FB741 /* LTI18N */,
+				D6207E831FB934CE001FB741 /* LTUpdate.h */,
+			);
+			path = LTUpdate;
+			sourceTree = "<group>";
+		};
+		D6207E681FB934CE001FB741 /* LTI18N */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E691FB934CE001FB741 /* LTUpdate.strings */,
+			);
+			path = LTI18N;
+			sourceTree = "<group>";
+		};
+		D6207E851FB934CE001FB741 /* TKProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E861FB934CE001FB741 /* TKRCGlobalConfig.h */,
+				D6207E871FB934CE001FB741 /* TKProgressHUD.m */,
+				D6207E881FB934CE001FB741 /* TKProgressHUD.h */,
+				D6207E891FB934CE001FB741 /* TKRCGlobalConfig.m */,
+			);
+			path = TKProgressHUD;
+			sourceTree = "<group>";
+		};
+		D6207E8A1FB934CE001FB741 /* VideoResource */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E8B1FB934CE001FB741 /* StarscreamSocketIO.framework */,
+				D6207E8C1FB934CE001FB741 /* SocketIO.framework */,
+				D6207E8D1FB934CE001FB741 /* WebRTC.framework */,
+				D6207E8E1FB934CE001FB741 /* Resources.bundle */,
+				D6207E8F1FB934CE001FB741 /* libroomsdk.a */,
+			);
+			path = VideoResource;
+			sourceTree = "<group>";
+		};
+		D6207E901FB934CE001FB741 /* ohterView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E911FB934CE001FB741 /* chatView */,
+				D6207EB11FB934CE001FB741 /* TKDocumentListView */,
+				D6207EB71FB934CE001FB741 /* TKUploadImageView */,
+				D6207EBA1FB934CE001FB741 /* TKPlaybackMaskView.m */,
+				D6207EBB1FB934CE001FB741 /* TKMediaView */,
+				D6207EC21FB934CE001FB741 /* TKVideoSmallView */,
+				D6207ECF1FB934CE001FB741 /* TKClassTimeView */,
+				D6207ED21FB934CE001FB741 /* TKLandScapeImagePicker */,
+				D6207ED51FB934CE001FB741 /* TKButtonClickedOnce */,
+				D6207ED81FB934CE001FB741 /* TKNavigationController */,
+				D6207EDB1FB934CE001FB741 /* TKPlaybackMaskView.h */,
+				D6207EDC1FB934CE001FB741 /* TKPickViewTextField */,
+			);
+			path = ohterView;
+			sourceTree = "<group>";
+		};
+		D6207E911FB934CE001FB741 /* chatView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E921FB934CE001FB741 /* TKChatView */,
+				D6207E971FB934CE001FB741 /* chatMessgaeModel */,
+				D6207E9A1FB934CE001FB741 /* HPGrowingTextView */,
+				D6207E9F1FB934CE001FB741 /* TKTeacherMessageTableViewCell */,
+				D6207EA31FB934CE001FB741 /* TKMessageTableViewCell */,
+				D6207EA71FB934CE001FB741 /* TGWeakDelegate */,
+				D6207EAA1FB934CE001FB741 /* TGLiveViewChatTableViewCell */,
+				D6207EAD1FB934CE001FB741 /* TKStudentMessageTableViewCell */,
+			);
+			path = chatView;
+			sourceTree = "<group>";
+		};
+		D6207E921FB934CE001FB741 /* TKChatView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E931FB934CE001FB741 /* TKChatView.h */,
+				D6207E941FB934CE001FB741 /* NSString+sizeHeight.m */,
+				D6207E951FB934CE001FB741 /* NSString+sizeHeight.h */,
+				D6207E961FB934CE001FB741 /* TKChatView.m */,
+			);
+			path = TKChatView;
+			sourceTree = "<group>";
+		};
+		D6207E971FB934CE001FB741 /* chatMessgaeModel */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E981FB934CE001FB741 /* TKChatMessageModel.h */,
+				D6207E991FB934CE001FB741 /* TKChatMessageModel.m */,
+			);
+			path = chatMessgaeModel;
+			sourceTree = "<group>";
+		};
+		D6207E9A1FB934CE001FB741 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207E9B1FB934CE001FB741 /* TKGrowingTextView.m */,
+				D6207E9C1FB934CE001FB741 /* TKTextViewInternal.h */,
+				D6207E9D1FB934CE001FB741 /* TKGrowingTextView.h */,
+				D6207E9E1FB934CE001FB741 /* TKTextViewInternal.m */,
+			);
+			path = HPGrowingTextView;
+			sourceTree = "<group>";
+		};
+		D6207E9F1FB934CE001FB741 /* TKTeacherMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EA01FB934CE001FB741 /* TKTeacherMessageTableViewCell.h */,
+				D6207EA11FB934CE001FB741 /* TKTeacherMessageTableViewCell.m */,
+				D6207EA21FB934CE001FB741 /* TKTeacherMessageTableViewCell.xib */,
+			);
+			path = TKTeacherMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D6207EA31FB934CE001FB741 /* TKMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EA41FB934CE001FB741 /* TKMessageTableViewCell.m */,
+				D6207EA51FB934CE001FB741 /* TKMessageTableViewCell.h */,
+				D6207EA61FB934CE001FB741 /* TKMessageTableViewCell.xib */,
+			);
+			path = TKMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D6207EA71FB934CE001FB741 /* TGWeakDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EA81FB934CE001FB741 /* TKWeakDelegate.m */,
+				D6207EA91FB934CE001FB741 /* TKWeakDelegate.h */,
+			);
+			path = TGWeakDelegate;
+			sourceTree = "<group>";
+		};
+		D6207EAA1FB934CE001FB741 /* TGLiveViewChatTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EAB1FB934CE001FB741 /* TKLiveViewChatTableViewCell.m */,
+				D6207EAC1FB934CE001FB741 /* TKLiveViewChatTableViewCell.h */,
+			);
+			path = TGLiveViewChatTableViewCell;
+			sourceTree = "<group>";
+		};
+		D6207EAD1FB934CE001FB741 /* TKStudentMessageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EAE1FB934CE001FB741 /* TKStudentMessageTableViewCell.xib */,
+				D6207EAF1FB934CE001FB741 /* TKStudentMessageTableViewCell.m */,
+				D6207EB01FB934CE001FB741 /* TKStudentMessageTableViewCell.h */,
+			);
+			path = TKStudentMessageTableViewCell;
+			sourceTree = "<group>";
+		};
+		D6207EB11FB934CE001FB741 /* TKDocumentListView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EB21FB934CE001FB741 /* TKUserListTableViewCell.h */,
+				D6207EB31FB934CE001FB741 /* TKDocumentListView.m */,
+				D6207EB41FB934CE001FB741 /* TKUserListTableViewCell.xib */,
+				D6207EB51FB934CE001FB741 /* TKUserListTableViewCell.m */,
+				D6207EB61FB934CE001FB741 /* TKDocumentListView.h */,
+			);
+			path = TKDocumentListView;
+			sourceTree = "<group>";
+		};
+		D6207EB71FB934CE001FB741 /* TKUploadImageView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EB81FB934CE001FB741 /* TKUploadImageView.h */,
+				D6207EB91FB934CE001FB741 /* TKUploadImageView.m */,
+			);
+			path = TKUploadImageView;
+			sourceTree = "<group>";
+		};
+		D6207EBB1FB934CE001FB741 /* TKMediaView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EBC1FB934CE001FB741 /* TKBaseMediaView.h */,
+				D6207EBD1FB934CE001FB741 /* TKProgressSlider.h */,
+				D6207EBE1FB934CE001FB741 /* TKAudioHelper.m */,
+				D6207EBF1FB934CE001FB741 /* TKProgressSlider.m */,
+				D6207EC01FB934CE001FB741 /* TKBaseMediaView.m */,
+				D6207EC11FB934CE001FB741 /* TKAudioHelper.h */,
+			);
+			path = TKMediaView;
+			sourceTree = "<group>";
+		};
+		D6207EC21FB934CE001FB741 /* TKVideoSmallView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EC31FB934CE001FB741 /* TKDrogView.h */,
+				D6207EC41FB934CE001FB741 /* TKMessageTipView.m */,
+				D6207EC51FB934CE001FB741 /* TKButton.m */,
+				D6207EC61FB934CE001FB741 /* TKVideoFunctionView.h */,
+				D6207EC71FB934CE001FB741 /* TKTimer.m */,
+				D6207EC81FB934CE001FB741 /* TKVideoSmallView.m */,
+				D6207EC91FB934CE001FB741 /* TKButton.h */,
+				D6207ECA1FB934CE001FB741 /* TKMessageTipView.h */,
+				D6207ECB1FB934CE001FB741 /* TKDrogView.m */,
+				D6207ECC1FB934CE001FB741 /* TKVideoFunctionView.m */,
+				D6207ECD1FB934CE001FB741 /* TKVideoSmallView.h */,
+				D6207ECE1FB934CE001FB741 /* TKTimer.h */,
+			);
+			path = TKVideoSmallView;
+			sourceTree = "<group>";
+		};
+		D6207ECF1FB934CE001FB741 /* TKClassTimeView */ = {
+			isa = PBXGroup;
+			children = (
+				D6207ED01FB934CE001FB741 /* TKClassTimeView.h */,
+				D6207ED11FB934CE001FB741 /* TKClassTimeView.m */,
+			);
+			path = TKClassTimeView;
+			sourceTree = "<group>";
+		};
+		D6207ED21FB934CE001FB741 /* TKLandScapeImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				D6207ED31FB934CE001FB741 /* UIImagePickerController+TKLandScapeImagePicker.h */,
+				D6207ED41FB934CE001FB741 /* UIImagePickerController+TKLandScapeImagePicker.m */,
+			);
+			path = TKLandScapeImagePicker;
+			sourceTree = "<group>";
+		};
+		D6207ED51FB934CE001FB741 /* TKButtonClickedOnce */ = {
+			isa = PBXGroup;
+			children = (
+				D6207ED61FB934CE001FB741 /* UIControl+clickedOnce.h */,
+				D6207ED71FB934CE001FB741 /* UIControl+clickedOnce.m */,
+			);
+			path = TKButtonClickedOnce;
+			sourceTree = "<group>";
+		};
+		D6207ED81FB934CE001FB741 /* TKNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				D6207ED91FB934CE001FB741 /* TKNavigationController.m */,
+				D6207EDA1FB934CE001FB741 /* TKNavigationController.h */,
+			);
+			path = TKNavigationController;
+			sourceTree = "<group>";
+		};
+		D6207EDC1FB934CE001FB741 /* TKPickViewTextField */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EDD1FB934CE001FB741 /* TKPickViewTextField.h */,
+				D6207EDE1FB934CE001FB741 /* TKPickViewTextField.m */,
+			);
+			path = TKPickViewTextField;
+			sourceTree = "<group>";
+		};
+		D6207EDF1FB934CE001FB741 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EE01FB934CE001FB741 /* PlaybackModel.h */,
+				D6207EE11FB934CE001FB741 /* MediaStream.h */,
+				D6207EE21FB934CE001FB741 /* TKEduRoomProperty.h */,
+				D6207EE31FB934CE001FB741 /* RoomUser.h */,
+				D6207EE41FB934CE001FB741 /* TKEduRoomProperty.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D6207EE51FB934CE001FB741 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EE61FB934CE001FB741 /* RoomController.h */,
+				D6207EE71FB934CE001FB741 /* RoomController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		D6207EE81FB934CE001FB741 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EE91FB934CE001FB741 /* TKMacro.h */,
+				D6207EEA1FB934CE001FB741 /* TKUtil.h */,
+				D6207EEB1FB934CE001FB741 /* TKUtil.mm */,
+			);
+			path = help;
+			sourceTree = "<group>";
+		};
+		D6207EEC1FB934CF001FB741 /* eduWhiteBoardSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EED1FB934CF001FB741 /* WhiteBoardModel */,
+				D6207EF21FB934CF001FB741 /* handle */,
+			);
+			path = eduWhiteBoardSDK;
+			sourceTree = "<group>";
+		};
+		D6207EED1FB934CF001FB741 /* WhiteBoardModel */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EEE1FB934CF001FB741 /* TKMediaDocModel.h */,
+				D6207EEF1FB934CF001FB741 /* TKDocmentDocModel.h */,
+				D6207EF01FB934CF001FB741 /* TKMediaDocModel.m */,
+				D6207EF11FB934CF001FB741 /* TKDocmentDocModel.m */,
+			);
+			path = WhiteBoardModel;
+			sourceTree = "<group>";
+		};
+		D6207EF21FB934CF001FB741 /* handle */ = {
+			isa = PBXGroup;
+			children = (
+				D6207EF31FB934CF001FB741 /* TKWeakScriptMessageDelegate.m */,
+				D6207EF41FB934CF001FB741 /* TKEduBoardHandle.h */,
+				D6207EF51FB934CF001FB741 /* TKWeakScriptMessageDelegate.h */,
+				D6207EF61FB934CF001FB741 /* TKEduBoardHandle.m */,
+			);
+			path = handle;
+			sourceTree = "<group>";
+		};
 		D627DCF61ED4329100076FBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1127,481 +1601,6 @@
 				D685D7651F0E04DE00987BB4 /* GGT_CoursePhraseModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		D628D3EB1FB29AC70050CE54 /* eduVideoSDK */ = {
-			isa = PBXGroup;
-			children = (
-				D628D3EC1FB29AC70050CE54 /* handle */,
-				D628D3F41FB29AC70050CE54 /* third */,
-				D628D4781FB29AC70050CE54 /* VideoResource */,
-				D628D47E1FB29AC70050CE54 /* ohterView */,
-				D628D4CD1FB29AC70050CE54 /* Model */,
-				D628D4D31FB29AC70050CE54 /* viewController */,
-				D628D4D61FB29AC70050CE54 /* help */,
-			);
-			path = eduVideoSDK;
-			sourceTree = "<group>";
-		};
-		D628D3EC1FB29AC70050CE54 /* handle */ = {
-			isa = PBXGroup;
-			children = (
-				D628D3ED1FB29AC70050CE54 /* TKEduClassRoom.h */,
-				D628D3EE1FB29AC70050CE54 /* RoomManager.h */,
-				D628D3EF1FB29AC70050CE54 /* TKEduSessionHandle.m */,
-				D628D3F01FB29AC70050CE54 /* TKEduNetManager.h */,
-				D628D3F11FB29AC70050CE54 /* TKEduClassRoom.m */,
-				D628D3F21FB29AC70050CE54 /* TKEduNetManager.m */,
-				D628D3F31FB29AC70050CE54 /* TKEduSessionHandle.h */,
-			);
-			path = handle;
-			sourceTree = "<group>";
-		};
-		D628D3F41FB29AC70050CE54 /* third */ = {
-			isa = PBXGroup;
-			children = (
-				D628D3F51FB29AC70050CE54 /* TKAFNetworking */,
-				D628D4051FB29AC70050CE54 /* GTMBase64 */,
-				D628D4091FB29AC70050CE54 /* HockeySDK */,
-				D628D4541FB29AC70050CE54 /* LTUpdate */,
-				D628D4721FB29AC70050CE54 /* CrashReporter.framework */,
-				D628D4731FB29AC70050CE54 /* TKProgressHUD */,
-			);
-			path = third;
-			sourceTree = "<group>";
-		};
-		D628D3F51FB29AC70050CE54 /* TKAFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				D628D3F61FB29AC70050CE54 /* TKAFURLRequestSerialization.m */,
-				D628D3F71FB29AC70050CE54 /* TKAFNetworking.h */,
-				D628D3F81FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.h */,
-				D628D3F91FB29AC70050CE54 /* TKAFHTTPSessionManager.h */,
-				D628D3FA1FB29AC70050CE54 /* TKAFURLSessionManager.m */,
-				D628D3FB1FB29AC70050CE54 /* TKAFSecurityPolicy.m */,
-				D628D3FC1FB29AC70050CE54 /* TKAFNetworkReachabilityManager.h */,
-				D628D3FD1FB29AC70050CE54 /* TKAFURLResponseSerialization.m */,
-				D628D3FE1FB29AC70050CE54 /* TKAFURLRequestSerialization.h */,
-				D628D3FF1FB29AC70050CE54 /* TKAFURLSessionManager.h */,
-				D628D4001FB29AC70050CE54 /* TKAFHTTPSessionManager.m */,
-				D628D4011FB29AC70050CE54 /* TKAFNetworkActivityIndicatorManager.m */,
-				D628D4021FB29AC70050CE54 /* TKAFNetworkReachabilityManager.m */,
-				D628D4031FB29AC70050CE54 /* TKAFSecurityPolicy.h */,
-				D628D4041FB29AC70050CE54 /* TKAFURLResponseSerialization.h */,
-			);
-			path = TKAFNetworking;
-			sourceTree = "<group>";
-		};
-		D628D4051FB29AC70050CE54 /* GTMBase64 */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4061FB29AC70050CE54 /* TKGTMBase64.h */,
-				D628D4071FB29AC70050CE54 /* TKGTMDefines.h */,
-				D628D4081FB29AC70050CE54 /* TKGTMBase64.m */,
-			);
-			path = GTMBase64;
-			sourceTree = "<group>";
-		};
-		D628D4091FB29AC70050CE54 /* HockeySDK */ = {
-			isa = PBXGroup;
-			children = (
-				D628D40A1FB29AC70050CE54 /* BITFeedbackManager.h */,
-				D628D40B1FB29AC70050CE54 /* BITAttributedLabel.m */,
-				D628D40C1FB29AC70050CE54 /* BITAuthenticationViewController.h */,
-				D628D40D1FB29AC70050CE54 /* BITHockeyBaseViewController.m */,
-				D628D40E1FB29AC70050CE54 /* BITFeedbackListViewController.h */,
-				D628D40F1FB29AC70050CE54 /* BITCrashReportTextFormatter.m */,
-				D628D4101FB29AC70050CE54 /* HockeySDKFeatureConfig.h */,
-				D628D4111FB29AC70050CE54 /* BITCrashAttachment.h */,
-				D628D4121FB29AC70050CE54 /* BITHockeyBaseManager.m */,
-				D628D4131FB29AC70050CE54 /* BITFeedbackComposeViewControllerDelegate.h */,
-				D628D4141FB29AC70050CE54 /* BITHTTPOperation.m */,
-				D628D4151FB29AC70050CE54 /* BITUpdateViewController.m */,
-				D628D4161FB29AC70050CE54 /* BITHockeyHelper.m */,
-				D628D4171FB29AC70050CE54 /* BITKeychainUtils.h */,
-				D628D4181FB29AC70050CE54 /* BITFeedbackMessage.h */,
-				D628D4191FB29AC70050CE54 /* BITWebTableViewCell.m */,
-				D628D41A1FB29AC70050CE54 /* BITAppStoreHeader.h */,
-				D628D41B1FB29AC70050CE54 /* BITUpdateManagerPrivate.h */,
-				D628D41C1FB29AC70050CE54 /* BITHockeyManager.m */,
-				D628D41D1FB29AC70050CE54 /* BITFeedbackComposeViewController.h */,
-				D628D41E1FB29AC70050CE54 /* BITFeedbackListViewCell.h */,
-				D628D41F1FB29AC70050CE54 /* BITStoreUpdateManagerPrivate.h */,
-				D628D4201FB29AC70050CE54 /* BITFeedbackUserDataViewController.m */,
-				D628D4211FB29AC70050CE54 /* BITUpdateManager.m */,
-				D628D4221FB29AC70050CE54 /* BITHockeyBaseManagerPrivate.h */,
-				D628D4231FB29AC70050CE54 /* Resources */,
-				D628D4261FB29AC70050CE54 /* BITAppVersionMetaInfo.m */,
-				D628D4271FB29AC70050CE54 /* BITStoreUpdateManager.m */,
-				D628D4281FB29AC70050CE54 /* BITCrashManager.h */,
-				D628D4291FB29AC70050CE54 /* BITFeedbackActivity.m */,
-				D628D42A1FB29AC70050CE54 /* BITStoreButton.h */,
-				D628D42B1FB29AC70050CE54 /* BITHockeyManagerDelegate.h */,
-				D628D42C1FB29AC70050CE54 /* BITHockeyAppClient.h */,
-				D628D42D1FB29AC70050CE54 /* HockeySDKPrivate.m */,
-				D628D42E1FB29AC70050CE54 /* BITAuthenticator.m */,
-				D628D42F1FB29AC70050CE54 /* BITAuthenticator_Private.h */,
-				D628D4301FB29AC70050CE54 /* BITHockeyHelper.h */,
-				D628D4311FB29AC70050CE54 /* BITUpdateViewController.h */,
-				D628D4321FB29AC70050CE54 /* BITHTTPOperation.h */,
-				D628D4331FB29AC70050CE54 /* BITHockeyBaseManager.h */,
-				D628D4341FB29AC70050CE54 /* BITCrashAttachment.m */,
-				D628D4351FB29AC70050CE54 /* BITHockeyBaseViewController.h */,
-				D628D4361FB29AC70050CE54 /* BITCrashReportTextFormatter.h */,
-				D628D4371FB29AC70050CE54 /* BITFeedbackListViewController.m */,
-				D628D4381FB29AC70050CE54 /* BITAuthenticationViewController.m */,
-				D628D4391FB29AC70050CE54 /* BITAttributedLabel.h */,
-				D628D43A1FB29AC70050CE54 /* BITFeedbackManager.m */,
-				D628D43B1FB29AC70050CE54 /* BITFeedbackManagerDelegate.h */,
-				D628D43C1FB29AC70050CE54 /* BITAppStoreHeader.m */,
-				D628D43D1FB29AC70050CE54 /* BITWebTableViewCell.h */,
-				D628D43E1FB29AC70050CE54 /* BITUpdateManagerDelegate.h */,
-				D628D43F1FB29AC70050CE54 /* BITFeedbackMessage.m */,
-				D628D4401FB29AC70050CE54 /* BITKeychainUtils.m */,
-				D628D4411FB29AC70050CE54 /* BITCrashManager.m */,
-				D628D4421FB29AC70050CE54 /* BITStoreUpdateManager.h */,
-				D628D4431FB29AC70050CE54 /* BITFeedbackActivity.h */,
-				D628D4441FB29AC70050CE54 /* BITStoreUpdateManagerDelegate.h */,
-				D628D4451FB29AC70050CE54 /* BITAppVersionMetaInfo.h */,
-				D628D4461FB29AC70050CE54 /* BITUpdateManager.h */,
-				D628D4471FB29AC70050CE54 /* BITUpdateViewControllerPrivate.h */,
-				D628D4481FB29AC70050CE54 /* BITFeedbackUserDataViewController.h */,
-				D628D4491FB29AC70050CE54 /* BITFeedbackManagerPrivate.h */,
-				D628D44A1FB29AC70050CE54 /* BITFeedbackListViewCell.m */,
-				D628D44B1FB29AC70050CE54 /* BITHockeyManager.h */,
-				D628D44C1FB29AC70050CE54 /* BITFeedbackComposeViewController.m */,
-				D628D44D1FB29AC70050CE54 /* BITAuthenticator.h */,
-				D628D44E1FB29AC70050CE54 /* BITCrashManagerDelegate.h */,
-				D628D44F1FB29AC70050CE54 /* HockeySDKPrivate.h */,
-				D628D4501FB29AC70050CE54 /* BITHockeyAppClient.m */,
-				D628D4511FB29AC70050CE54 /* BITCrashManagerPrivate.h */,
-				D628D4521FB29AC70050CE54 /* HockeySDK.h */,
-				D628D4531FB29AC70050CE54 /* BITStoreButton.m */,
-			);
-			path = HockeySDK;
-			sourceTree = "<group>";
-		};
-		D628D4231FB29AC70050CE54 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4241FB29AC70050CE54 /* HockeySDKResources.bundle */,
-				D628D4251FB29AC70050CE54 /* HockeySDK.xcconfig */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		D628D4541FB29AC70050CE54 /* LTUpdate */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4551FB29AC70050CE54 /* LTUpdate.m */,
-				D628D4561FB29AC70050CE54 /* LTI18N */,
-				D628D4711FB29AC70050CE54 /* LTUpdate.h */,
-			);
-			path = LTUpdate;
-			sourceTree = "<group>";
-		};
-		D628D4561FB29AC70050CE54 /* LTI18N */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4571FB29AC70050CE54 /* LTUpdate.strings */,
-			);
-			path = LTI18N;
-			sourceTree = "<group>";
-		};
-		D628D4731FB29AC70050CE54 /* TKProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4741FB29AC70050CE54 /* TKRCGlobalConfig.h */,
-				D628D4751FB29AC70050CE54 /* TKProgressHUD.m */,
-				D628D4761FB29AC70050CE54 /* TKProgressHUD.h */,
-				D628D4771FB29AC70050CE54 /* TKRCGlobalConfig.m */,
-			);
-			path = TKProgressHUD;
-			sourceTree = "<group>";
-		};
-		D628D4781FB29AC70050CE54 /* VideoResource */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4791FB29AC70050CE54 /* StarscreamSocketIO.framework */,
-				D628D47A1FB29AC70050CE54 /* SocketIO.framework */,
-				D628D47B1FB29AC70050CE54 /* WebRTC.framework */,
-				D628D47C1FB29AC70050CE54 /* Resources.bundle */,
-				D628D47D1FB29AC70050CE54 /* libroomsdk.a */,
-			);
-			path = VideoResource;
-			sourceTree = "<group>";
-		};
-		D628D47E1FB29AC70050CE54 /* ohterView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D47F1FB29AC70050CE54 /* chatView */,
-				D628D49F1FB29AC70050CE54 /* TKDocumentListView */,
-				D628D4A51FB29AC70050CE54 /* TKUploadImageView */,
-				D628D4A81FB29AC70050CE54 /* TKPlaybackMaskView.m */,
-				D628D4A91FB29AC70050CE54 /* TKMediaView */,
-				D628D4B01FB29AC70050CE54 /* TKVideoSmallView */,
-				D628D4BD1FB29AC70050CE54 /* TKClassTimeView */,
-				D628D4C01FB29AC70050CE54 /* TKLandScapeImagePicker */,
-				D628D4C31FB29AC70050CE54 /* TKButtonClickedOnce */,
-				D628D4C61FB29AC70050CE54 /* TKNavigationController */,
-				D628D4C91FB29AC70050CE54 /* TKPlaybackMaskView.h */,
-				D628D4CA1FB29AC70050CE54 /* TKPickViewTextField */,
-			);
-			path = ohterView;
-			sourceTree = "<group>";
-		};
-		D628D47F1FB29AC70050CE54 /* chatView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4801FB29AC70050CE54 /* TKChatView */,
-				D628D4851FB29AC70050CE54 /* chatMessgaeModel */,
-				D628D4881FB29AC70050CE54 /* HPGrowingTextView */,
-				D628D48D1FB29AC70050CE54 /* TKTeacherMessageTableViewCell */,
-				D628D4911FB29AC70050CE54 /* TKMessageTableViewCell */,
-				D628D4951FB29AC70050CE54 /* TGWeakDelegate */,
-				D628D4981FB29AC70050CE54 /* TGLiveViewChatTableViewCell */,
-				D628D49B1FB29AC70050CE54 /* TKStudentMessageTableViewCell */,
-			);
-			path = chatView;
-			sourceTree = "<group>";
-		};
-		D628D4801FB29AC70050CE54 /* TKChatView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4811FB29AC70050CE54 /* TKChatView.h */,
-				D628D4821FB29AC70050CE54 /* NSString+sizeHeight.m */,
-				D628D4831FB29AC70050CE54 /* NSString+sizeHeight.h */,
-				D628D4841FB29AC70050CE54 /* TKChatView.m */,
-			);
-			path = TKChatView;
-			sourceTree = "<group>";
-		};
-		D628D4851FB29AC70050CE54 /* chatMessgaeModel */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4861FB29AC70050CE54 /* TKChatMessageModel.h */,
-				D628D4871FB29AC70050CE54 /* TKChatMessageModel.m */,
-			);
-			path = chatMessgaeModel;
-			sourceTree = "<group>";
-		};
-		D628D4881FB29AC70050CE54 /* HPGrowingTextView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4891FB29AC70050CE54 /* TKGrowingTextView.m */,
-				D628D48A1FB29AC70050CE54 /* TKTextViewInternal.h */,
-				D628D48B1FB29AC70050CE54 /* TKGrowingTextView.h */,
-				D628D48C1FB29AC70050CE54 /* TKTextViewInternal.m */,
-			);
-			path = HPGrowingTextView;
-			sourceTree = "<group>";
-		};
-		D628D48D1FB29AC70050CE54 /* TKTeacherMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D628D48E1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.h */,
-				D628D48F1FB29AC70050CE54 /* TKTeacherMessageTableViewCell.m */,
-				D628D4901FB29AC70050CE54 /* TKTeacherMessageTableViewCell.xib */,
-			);
-			path = TKTeacherMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D628D4911FB29AC70050CE54 /* TKMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4921FB29AC70050CE54 /* TKMessageTableViewCell.m */,
-				D628D4931FB29AC70050CE54 /* TKMessageTableViewCell.h */,
-				D628D4941FB29AC70050CE54 /* TKMessageTableViewCell.xib */,
-			);
-			path = TKMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D628D4951FB29AC70050CE54 /* TGWeakDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4961FB29AC70050CE54 /* TKWeakDelegate.m */,
-				D628D4971FB29AC70050CE54 /* TKWeakDelegate.h */,
-			);
-			path = TGWeakDelegate;
-			sourceTree = "<group>";
-		};
-		D628D4981FB29AC70050CE54 /* TGLiveViewChatTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4991FB29AC70050CE54 /* TKLiveViewChatTableViewCell.m */,
-				D628D49A1FB29AC70050CE54 /* TKLiveViewChatTableViewCell.h */,
-			);
-			path = TGLiveViewChatTableViewCell;
-			sourceTree = "<group>";
-		};
-		D628D49B1FB29AC70050CE54 /* TKStudentMessageTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				D628D49C1FB29AC70050CE54 /* TKStudentMessageTableViewCell.xib */,
-				D628D49D1FB29AC70050CE54 /* TKStudentMessageTableViewCell.m */,
-				D628D49E1FB29AC70050CE54 /* TKStudentMessageTableViewCell.h */,
-			);
-			path = TKStudentMessageTableViewCell;
-			sourceTree = "<group>";
-		};
-		D628D49F1FB29AC70050CE54 /* TKDocumentListView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4A01FB29AC70050CE54 /* TKUserListTableViewCell.h */,
-				D628D4A11FB29AC70050CE54 /* TKDocumentListView.m */,
-				D628D4A21FB29AC70050CE54 /* TKUserListTableViewCell.xib */,
-				D628D4A31FB29AC70050CE54 /* TKUserListTableViewCell.m */,
-				D628D4A41FB29AC70050CE54 /* TKDocumentListView.h */,
-			);
-			path = TKDocumentListView;
-			sourceTree = "<group>";
-		};
-		D628D4A51FB29AC70050CE54 /* TKUploadImageView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4A61FB29AC70050CE54 /* TKUploadImageView.h */,
-				D628D4A71FB29AC70050CE54 /* TKUploadImageView.m */,
-			);
-			path = TKUploadImageView;
-			sourceTree = "<group>";
-		};
-		D628D4A91FB29AC70050CE54 /* TKMediaView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4AA1FB29AC70050CE54 /* TKBaseMediaView.h */,
-				D628D4AB1FB29AC70050CE54 /* TKProgressSlider.h */,
-				D628D4AC1FB29AC70050CE54 /* TKAudioHelper.m */,
-				D628D4AD1FB29AC70050CE54 /* TKProgressSlider.m */,
-				D628D4AE1FB29AC70050CE54 /* TKBaseMediaView.m */,
-				D628D4AF1FB29AC70050CE54 /* TKAudioHelper.h */,
-			);
-			path = TKMediaView;
-			sourceTree = "<group>";
-		};
-		D628D4B01FB29AC70050CE54 /* TKVideoSmallView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4B11FB29AC70050CE54 /* TKDrogView.h */,
-				D628D4B21FB29AC70050CE54 /* TKMessageTipView.m */,
-				D628D4B31FB29AC70050CE54 /* TKButton.m */,
-				D628D4B41FB29AC70050CE54 /* TKVideoFunctionView.h */,
-				D628D4B51FB29AC70050CE54 /* TKTimer.m */,
-				D628D4B61FB29AC70050CE54 /* TKVideoSmallView.m */,
-				D628D4B71FB29AC70050CE54 /* TKButton.h */,
-				D628D4B81FB29AC70050CE54 /* TKMessageTipView.h */,
-				D628D4B91FB29AC70050CE54 /* TKDrogView.m */,
-				D628D4BA1FB29AC70050CE54 /* TKVideoFunctionView.m */,
-				D628D4BB1FB29AC70050CE54 /* TKVideoSmallView.h */,
-				D628D4BC1FB29AC70050CE54 /* TKTimer.h */,
-			);
-			path = TKVideoSmallView;
-			sourceTree = "<group>";
-		};
-		D628D4BD1FB29AC70050CE54 /* TKClassTimeView */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4BE1FB29AC70050CE54 /* TKClassTimeView.h */,
-				D628D4BF1FB29AC70050CE54 /* TKClassTimeView.m */,
-			);
-			path = TKClassTimeView;
-			sourceTree = "<group>";
-		};
-		D628D4C01FB29AC70050CE54 /* TKLandScapeImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4C11FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.h */,
-				D628D4C21FB29AC70050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m */,
-			);
-			path = TKLandScapeImagePicker;
-			sourceTree = "<group>";
-		};
-		D628D4C31FB29AC70050CE54 /* TKButtonClickedOnce */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4C41FB29AC70050CE54 /* UIControl+clickedOnce.h */,
-				D628D4C51FB29AC70050CE54 /* UIControl+clickedOnce.m */,
-			);
-			path = TKButtonClickedOnce;
-			sourceTree = "<group>";
-		};
-		D628D4C61FB29AC70050CE54 /* TKNavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4C71FB29AC70050CE54 /* TKNavigationController.m */,
-				D628D4C81FB29AC70050CE54 /* TKNavigationController.h */,
-			);
-			path = TKNavigationController;
-			sourceTree = "<group>";
-		};
-		D628D4CA1FB29AC70050CE54 /* TKPickViewTextField */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4CB1FB29AC70050CE54 /* TKPickViewTextField.h */,
-				D628D4CC1FB29AC70050CE54 /* TKPickViewTextField.m */,
-			);
-			path = TKPickViewTextField;
-			sourceTree = "<group>";
-		};
-		D628D4CD1FB29AC70050CE54 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4CE1FB29AC70050CE54 /* PlaybackModel.h */,
-				D628D4CF1FB29AC70050CE54 /* MediaStream.h */,
-				D628D4D01FB29AC70050CE54 /* TKEduRoomProperty.h */,
-				D628D4D11FB29AC70050CE54 /* RoomUser.h */,
-				D628D4D21FB29AC70050CE54 /* TKEduRoomProperty.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		D628D4D31FB29AC70050CE54 /* viewController */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4D41FB29AC70050CE54 /* RoomController.h */,
-				D628D4D51FB29AC70050CE54 /* RoomController.m */,
-			);
-			path = viewController;
-			sourceTree = "<group>";
-		};
-		D628D4D61FB29AC70050CE54 /* help */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4D71FB29AC70050CE54 /* TKMacro.h */,
-				D628D4D81FB29AC70050CE54 /* TKUtil.h */,
-				D628D4D91FB29AC70050CE54 /* TKUtil.mm */,
-			);
-			path = help;
-			sourceTree = "<group>";
-		};
-		D628D4DA1FB29AC80050CE54 /* eduWhiteBoardSDK */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4DB1FB29AC80050CE54 /* WhiteBoardModel */,
-				D628D4E01FB29AC80050CE54 /* handle */,
-			);
-			path = eduWhiteBoardSDK;
-			sourceTree = "<group>";
-		};
-		D628D4DB1FB29AC80050CE54 /* WhiteBoardModel */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4DC1FB29AC80050CE54 /* TKMediaDocModel.h */,
-				D628D4DD1FB29AC80050CE54 /* TKDocmentDocModel.h */,
-				D628D4DE1FB29AC80050CE54 /* TKMediaDocModel.m */,
-				D628D4DF1FB29AC80050CE54 /* TKDocmentDocModel.m */,
-			);
-			path = WhiteBoardModel;
-			sourceTree = "<group>";
-		};
-		D628D4E01FB29AC80050CE54 /* handle */ = {
-			isa = PBXGroup;
-			children = (
-				D628D4E11FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m */,
-				D628D4E21FB29AC80050CE54 /* TKEduBoardHandle.h */,
-				D628D4E31FB29AC80050CE54 /* TKWeakScriptMessageDelegate.h */,
-				D628D4E41FB29AC80050CE54 /* TKEduBoardHandle.m */,
-			);
-			path = handle;
 			sourceTree = "<group>";
 		};
 		D63DA9411ED5554400EFA686 /* 打印中文 */ = {
@@ -1760,8 +1759,8 @@
 		D68774341F0A07C9008687C2 /* TuoKeSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D628D3EB1FB29AC70050CE54 /* eduVideoSDK */,
-				D628D4DA1FB29AC80050CE54 /* eduWhiteBoardSDK */,
+				D6207DFD1FB934CE001FB741 /* eduVideoSDK */,
+				D6207EEC1FB934CF001FB741 /* eduWhiteBoardSDK */,
 			);
 			path = TuoKeSDK;
 			sourceTree = "<group>";
@@ -2241,18 +2240,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6E0A4871EC2C200006A003D /* Assets.xcassets in Resources */,
-				D628D51E1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.xib in Resources */,
+				D6207F301FB934CF001FB741 /* TKTeacherMessageTableViewCell.xib in Resources */,
 				5BF3A6C01EEAC3B100491CC2 /* shebeijianche_36.png in Resources */,
-				D628D5261FB29AC80050CE54 /* TKUserListTableViewCell.xib in Resources */,
+				D6207F381FB934CF001FB741 /* TKUserListTableViewCell.xib in Resources */,
 				5BF3A6BA1EEAC3B100491CC2 /* shebeijianche_30.png in Resources */,
 				5BF3A6B11EEAC3B100491CC2 /* shebeijianche_22.png in Resources */,
 				5BF3A6C31EEAC3B100491CC2 /* shebeijianche_39.png in Resources */,
 				5BF3A6BB1EEAC3B100491CC2 /* shebeijianche_31.png in Resources */,
-				D628D4FC1FB29AC80050CE54 /* HockeySDK.xcconfig in Resources */,
 				5BF3A6AC1EEAC3B100491CC2 /* shebeijianche_18.png in Resources */,
 				5BF3A6AB1EEAC3B100491CC2 /* shebeijianche_17.png in Resources */,
-				D628D5231FB29AC80050CE54 /* TKStudentMessageTableViewCell.xib in Resources */,
-				D628D5201FB29AC80050CE54 /* TKMessageTableViewCell.xib in Resources */,
+				D6207F351FB934CF001FB741 /* TKStudentMessageTableViewCell.xib in Resources */,
+				D6207F321FB934CF001FB741 /* TKMessageTableViewCell.xib in Resources */,
 				5BF3A6A91EEAC3B100491CC2 /* shebeijianche_15.png in Resources */,
 				5BF3A6A81EEAC3B100491CC2 /* shebeijianche_14.png in Resources */,
 				5BF3A6A61EEAC3B100491CC2 /* shebeijianche_12.png in Resources */,
@@ -2269,18 +2267,18 @@
 				5BF3A6C41EEAC3B100491CC2 /* shebeijianche_4.png in Resources */,
 				5BF3A6A41EEAC3B100491CC2 /* shebeijianche_10.png in Resources */,
 				5BF3A6A71EEAC3B100491CC2 /* shebeijianche_13.png in Resources */,
-				D628D5161FB29AC80050CE54 /* Resources.bundle in Resources */,
+				D6207F281FB934CF001FB741 /* Resources.bundle in Resources */,
 				D6E0A5781EC2DB15006A003D /* MBProgressHUD.bundle in Resources */,
 				5BF3A6B81EEAC3B100491CC2 /* shebeijianche_29.png in Resources */,
 				5BF3A6A31EEAC3B100491CC2 /* shebeijianche_1.png in Resources */,
 				5BF3A6B01EEAC3B100491CC2 /* shebeijianche_21.png in Resources */,
-				D628D4FB1FB29AC80050CE54 /* HockeySDKResources.bundle in Resources */,
+				D6207F0D1FB934CF001FB741 /* HockeySDKResources.bundle in Resources */,
 				D66FCBF11EEA52AA00792A6C /* having_Class.gif in Resources */,
 				5BF3A6C71EEAC3B100491CC2 /* shebeijianche_6.png in Resources */,
 				5BF3A6B51EEAC3B100491CC2 /* shebeijianche_26.png in Resources */,
 				5BF3A6C81EEAC3B100491CC2 /* shebeijianche_7.png in Resources */,
 				5BF3A6C51EEAC3B100491CC2 /* shebeijianche_40.png in Resources */,
-				D628D50F1FB29AC80050CE54 /* LTUpdate.strings in Resources */,
+				D6207F211FB934CF001FB741 /* LTUpdate.strings in Resources */,
 				5BF3A6B31EEAC3B100491CC2 /* shebeijianche_24.png in Resources */,
 				5BF3A6AD1EEAC3B100491CC2 /* shebeijianche_19.png in Resources */,
 				5BF3A6BF1EEAC3B100491CC2 /* shebeijianche_35.png in Resources */,
@@ -2403,68 +2401,68 @@
 			buildActionMask = 2147483647;
 			files = (
 				D627DCF91ED432C800076FBD /* GGT_CalendarCellModel.m in Sources */,
-				D628D5321FB29AC80050CE54 /* TKVideoFunctionView.m in Sources */,
+				D6207F441FB934CF001FB741 /* TKVideoFunctionView.m in Sources */,
 				D68DC94F1ED2BC9F0069F385 /* GGT_EvaluateView.m in Sources */,
-				D628D52E1FB29AC80050CE54 /* TKButton.m in Sources */,
-				D628D53E1FB29AC80050CE54 /* TKEduBoardHandle.m in Sources */,
-				D628D4F91FB29AC80050CE54 /* BITFeedbackUserDataViewController.m in Sources */,
+				D6207F401FB934CF001FB741 /* TKButton.m in Sources */,
+				D6207F501FB934CF001FB741 /* TKEduBoardHandle.m in Sources */,
+				D6207F0B1FB934CF001FB741 /* BITFeedbackUserDataViewController.m in Sources */,
 				D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */,
-				D628D50A1FB29AC80050CE54 /* BITFeedbackListViewCell.m in Sources */,
+				D6207F1C1FB934CF001FB741 /* BITFeedbackListViewCell.m in Sources */,
 				5B1E61DF1F46CC5F00342CC5 /* GGT_LoadingView.m in Sources */,
-				D628D4F11FB29AC80050CE54 /* BITHockeyBaseViewController.m in Sources */,
-				D628D4F01FB29AC80050CE54 /* BITAttributedLabel.m in Sources */,
+				D6207F031FB934CF001FB741 /* BITHockeyBaseViewController.m in Sources */,
+				D6207F021FB934CF001FB741 /* BITAttributedLabel.m in Sources */,
 				D6E0A47F1EC2C200006A003D /* AppDelegate.m in Sources */,
 				5B8F1F5B1EE143CA00149368 /* GGT_MineClassPlaceholderView.m in Sources */,
 				5B8337CE1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m in Sources */,
-				D628D52A1FB29AC80050CE54 /* TKAudioHelper.m in Sources */,
+				D6207F3C1FB934CF001FB741 /* TKAudioHelper.m in Sources */,
 				D6E0A5571EC2D9CD006A003D /* NSArray+SafeExtension.m in Sources */,
 				D6E0A58C1EC2DBB3006A003D /* GGT_LoginViewController.m in Sources */,
 				5B9E058A1F14A8760050CEDB /* GGT_OrderCourseSplitViewController.m in Sources */,
 				D6869CC31F18897700C5390C /* GGT_HomeTeachModel.m in Sources */,
-				D628D5361FB29AC80050CE54 /* TKNavigationController.m in Sources */,
-				D628D4FA1FB29AC80050CE54 /* BITUpdateManager.m in Sources */,
-				D628D52C1FB29AC80050CE54 /* TKBaseMediaView.m in Sources */,
-				D628D4FD1FB29AC80050CE54 /* BITAppVersionMetaInfo.m in Sources */,
-				D628D4F81FB29AC80050CE54 /* BITHockeyManager.m in Sources */,
+				D6207F481FB934CF001FB741 /* TKNavigationController.m in Sources */,
+				D6207F0C1FB934CF001FB741 /* BITUpdateManager.m in Sources */,
+				D6207F3E1FB934CF001FB741 /* TKBaseMediaView.m in Sources */,
+				D6207F0F1FB934CF001FB741 /* BITAppVersionMetaInfo.m in Sources */,
+				D6207F0A1FB934CF001FB741 /* BITHockeyManager.m in Sources */,
 				5B8337D11ED3DFEB005EE004 /* GGT_ChoicePickView.m in Sources */,
 				D63DA94A1ED5554400EFA686 /* NSString+unicode.m in Sources */,
 				D6E0A5901EC2DBB3006A003D /* GGT_LoginView.m in Sources */,
 				D6AB90CE1ECEBC22009D8758 /* GGT_PlaceHolderView.m in Sources */,
-				D628D53B1FB29AC80050CE54 /* TKMediaDocModel.m in Sources */,
-				D628D5031FB29AC80050CE54 /* BITFeedbackListViewController.m in Sources */,
+				D6207F4D1FB934CF001FB741 /* TKMediaDocModel.m in Sources */,
+				D6207F151FB934CF001FB741 /* BITFeedbackListViewController.m in Sources */,
 				D6353E171EE8E250004E1288 /* GGT_PopoverCell.m in Sources */,
 				D6E0A55D1EC2D9CD006A003D /* UIImage+Category.m in Sources */,
 				D627DCEF1ED411FD00076FBD /* GGT_ScheduleTableView.m in Sources */,
-				D628D4F21FB29AC80050CE54 /* BITCrashReportTextFormatter.m in Sources */,
-				D628D4F61FB29AC80050CE54 /* BITHockeyHelper.m in Sources */,
+				D6207F041FB934CF001FB741 /* BITCrashReportTextFormatter.m in Sources */,
+				D6207F081FB934CF001FB741 /* BITHockeyHelper.m in Sources */,
 				D66FCBDF1EEA37B100792A6C /* GGT_PreviewDemoCourseVC.m in Sources */,
-				D628D5221FB29AC80050CE54 /* TKLiveViewChatTableViewCell.m in Sources */,
-				D628D4E71FB29AC80050CE54 /* TKEduNetManager.m in Sources */,
-				D628D5041FB29AC80050CE54 /* BITAuthenticationViewController.m in Sources */,
-				D628D5071FB29AC80050CE54 /* BITFeedbackMessage.m in Sources */,
-				D628D4EF1FB29AC80050CE54 /* TKGTMBase64.m in Sources */,
-				D628D50E1FB29AC80050CE54 /* LTUpdate.m in Sources */,
+				D6207F341FB934CF001FB741 /* TKLiveViewChatTableViewCell.m in Sources */,
+				D6207EF91FB934CF001FB741 /* TKEduNetManager.m in Sources */,
+				D6207F161FB934CF001FB741 /* BITAuthenticationViewController.m in Sources */,
+				D6207F191FB934CF001FB741 /* BITFeedbackMessage.m in Sources */,
+				D6207F011FB934CF001FB741 /* TKGTMBase64.m in Sources */,
+				D6207F201FB934CF001FB741 /* LTUpdate.m in Sources */,
 				D67ACCC31EE15C7A0027031C /* UILabel+XCHelper.m in Sources */,
 				D603AAED1ECD3AE7003ECC20 /* GGT_EvaluationPopViewController.m in Sources */,
 				5B8049D41ED295AC00A99911 /* GGT_AboutUsViewController.m in Sources */,
 				5B743D241EC5A416004E744A /* GGT_MineRightViewController.m in Sources */,
 				D6E0A59D1EC2FAC6006A003D /* BaseService.m in Sources */,
-				D628D5371FB29AC80050CE54 /* TKPickViewTextField.m in Sources */,
+				D6207F491FB934CF001FB741 /* TKPickViewTextField.m in Sources */,
 				D6869CC01F18651500C5390C /* GGT_HomeTimeModel.m in Sources */,
 				5BBB2D4B1F189EAF00393B68 /* GGT_TimeCollectionModel.m in Sources */,
 				D6FD8AF81F17811C00A79011 /* GGT_HomeDateModel.m in Sources */,
-				D628D5291FB29AC80050CE54 /* TKPlaybackMaskView.m in Sources */,
-				D628D5351FB29AC80050CE54 /* UIControl+clickedOnce.m in Sources */,
+				D6207F3B1FB934CF001FB741 /* TKPlaybackMaskView.m in Sources */,
+				D6207F471FB934CF001FB741 /* UIControl+clickedOnce.m in Sources */,
 				D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */,
-				D628D4ED1FB29AC80050CE54 /* TKAFNetworkActivityIndicatorManager.m in Sources */,
-				D628D51A1FB29AC80050CE54 /* TKChatMessageModel.m in Sources */,
-				D628D52D1FB29AC80050CE54 /* TKMessageTipView.m in Sources */,
+				D6207EFF1FB934CF001FB741 /* TKAFNetworkActivityIndicatorManager.m in Sources */,
+				D6207F2C1FB934CF001FB741 /* TKChatMessageModel.m in Sources */,
+				D6207F3F1FB934CF001FB741 /* TKMessageTipView.m in Sources */,
 				D64096851EEFE39E0038A0CC /* GGT_PreCoursewareVC.m in Sources */,
 				D6D7CBED1F2199C80087DDA0 /* GGT_LaunchViewController.m in Sources */,
 				5BF1CBCE1F176D2A00BB1CDA /* GGT_OrderTimeTableView.m in Sources */,
 				D6FD8AEF1F1756CF00A79011 /* GGT_OrderClassPopVC.m in Sources */,
-				D628D5331FB29AC80050CE54 /* TKClassTimeView.m in Sources */,
-				D628D5301FB29AC80050CE54 /* TKVideoSmallView.m in Sources */,
+				D6207F451FB934CF001FB741 /* TKClassTimeView.m in Sources */,
+				D6207F421FB934CF001FB741 /* TKVideoSmallView.m in Sources */,
 				D6E0A5791EC2DB15006A003D /* MBProgressHUD+Extension.m in Sources */,
 				D654E1DA1EF8AF7C00E3BAB7 /* NSTimer+BlockSupport.m in Sources */,
 				D6C150F21EE7A0C50038841B /* UICollectionView+XCPlaceholderView.m in Sources */,
@@ -2473,35 +2471,35 @@
 				D67ACCC61EE173E00027031C /* GGT_ResultModel.m in Sources */,
 				5BF1CBCC1F176D2A00BB1CDA /* GGT_FocusOnOfPageScrollView.m in Sources */,
 				5BF912D81ECECD46009C8186 /* GGT_ShareAndFeedBackViewController.m in Sources */,
-				D628D5241FB29AC80050CE54 /* TKStudentMessageTableViewCell.m in Sources */,
+				D6207F361FB934CF001FB741 /* TKStudentMessageTableViewCell.m in Sources */,
 				D6E0A58F1EC2DBB3006A003D /* GGT_ForgotPasswordView.m in Sources */,
 				D6E0A5351EC2D9AE006A003D /* BaseViewController.m in Sources */,
 				5BC473621EC95C39003B8154 /* GGT_FeedbackViewController.m in Sources */,
 				D685D7661F0E04DE00987BB4 /* GGT_CoursePhraseModel.m in Sources */,
-				D628D5011FB29AC80050CE54 /* BITAuthenticator.m in Sources */,
+				D6207F131FB934CF001FB741 /* BITAuthenticator.m in Sources */,
 				D6E0A58B1EC2DBB3006A003D /* GGT_ForgotPasswordViewController.m in Sources */,
 				D6E868F91F0B6F2900B48A5E /* XCLogManager.m in Sources */,
 				D63DA94D1ED595CF00EFA686 /* GGT_CourseCellModel.m in Sources */,
-				D628D5211FB29AC80050CE54 /* TKWeakDelegate.m in Sources */,
-				D628D5281FB29AC80050CE54 /* TKUploadImageView.m in Sources */,
-				D628D4E61FB29AC80050CE54 /* TKEduClassRoom.m in Sources */,
+				D6207F331FB934CF001FB741 /* TKWeakDelegate.m in Sources */,
+				D6207F3A1FB934CF001FB741 /* TKUploadImageView.m in Sources */,
+				D6207EF81FB934CF001FB741 /* TKEduClassRoom.m in Sources */,
 				5BBA56DD1ED829E20085DEEE /* GGT_MineLeftModel.m in Sources */,
-				D628D51C1FB29AC80050CE54 /* TKTextViewInternal.m in Sources */,
+				D6207F2E1FB934CF001FB741 /* TKTextViewInternal.m in Sources */,
 				D694274A1EC9561B0048FD2C /* GGT_PopAlertView.m in Sources */,
 				D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */,
 				5BF912D21ECEC04F009C8186 /* GGT_CheckDevicePopViewController.m in Sources */,
 				D6FD8AF51F176B1000A79011 /* GGT_ChooseCoursewareCell.m in Sources */,
 				D66FCBE21EEA3CAE00792A6C /* GGT_PreviewDemoCourseCell.m in Sources */,
-				D628D5021FB29AC80050CE54 /* BITCrashAttachment.m in Sources */,
+				D6207F141FB934CF001FB741 /* BITCrashAttachment.m in Sources */,
 				D6E0A5421EC2D9C1006A003D /* XCStarView.m in Sources */,
-				D628D5111FB29AC80050CE54 /* TKProgressHUD.m in Sources */,
+				D6207F231FB934CF001FB741 /* TKProgressHUD.m in Sources */,
 				5BF1CBCB1F176D2A00BB1CDA /* GGT_DetailsOfTeacherView.m in Sources */,
 				D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */,
-				D628D53C1FB29AC80050CE54 /* TKDocmentDocModel.m in Sources */,
+				D6207F4E1FB934CF001FB741 /* TKDocmentDocModel.m in Sources */,
 				D6E0A55F1EC2D9CD006A003D /* UIView+XCCornerRadius.m in Sources */,
 				5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */,
-				D628D4E91FB29AC80050CE54 /* TKAFURLSessionManager.m in Sources */,
-				D628D51D1FB29AC80050CE54 /* TKTeacherMessageTableViewCell.m in Sources */,
+				D6207EFB1FB934CF001FB741 /* TKAFURLSessionManager.m in Sources */,
+				D6207F2F1FB934CF001FB741 /* TKTeacherMessageTableViewCell.m in Sources */,
 				D64096881EEFF5720038A0CC /* GGT_PreTeachEvaView.m in Sources */,
 				5BF1CBC11F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m in Sources */,
 				D6E0A55E1EC2D9CD006A003D /* UIView+Layout.m in Sources */,
@@ -2510,26 +2508,26 @@
 				D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */,
 				5BC4735F1EC95C12003B8154 /* GGT_MineClassViewController.m in Sources */,
 				D60FA5191EC987AE00838DE4 /* FLAnimatedImageView+WebCache.m in Sources */,
-				D628D4FF1FB29AC80050CE54 /* BITFeedbackActivity.m in Sources */,
+				D6207F111FB934CF001FB741 /* BITFeedbackActivity.m in Sources */,
 				5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */,
 				D66FCBF81EEA9A4400792A6C /* GGT_EvaReportModel.m in Sources */,
-				D628D5091FB29AC80050CE54 /* BITCrashManager.m in Sources */,
-				D628D4F41FB29AC80050CE54 /* BITHTTPOperation.m in Sources */,
-				D628D4E51FB29AC80050CE54 /* TKEduSessionHandle.m in Sources */,
+				D6207F1B1FB934CF001FB741 /* BITCrashManager.m in Sources */,
+				D6207F061FB934CF001FB741 /* BITHTTPOperation.m in Sources */,
+				D6207EF71FB934CF001FB741 /* TKEduSessionHandle.m in Sources */,
 				D6E0A5771EC2DB15006A003D /* GGT_Singleton.m in Sources */,
-				D628D4F71FB29AC80050CE54 /* BITWebTableViewCell.m in Sources */,
-				D628D4EA1FB29AC80050CE54 /* TKAFSecurityPolicy.m in Sources */,
-				D628D5121FB29AC80050CE54 /* TKRCGlobalConfig.m in Sources */,
+				D6207F091FB934CF001FB741 /* BITWebTableViewCell.m in Sources */,
+				D6207EFC1FB934CF001FB741 /* TKAFSecurityPolicy.m in Sources */,
+				D6207F241FB934CF001FB741 /* TKRCGlobalConfig.m in Sources */,
 				5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */,
 				5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */,
 				5BF1CBCD1F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m in Sources */,
 				D6C150EF1EE79E820038841B /* UITableView+XCPlaceholderView.m in Sources */,
 				D63DA9481ED5554400EFA686 /* NSArray+Log.m in Sources */,
-				D628D5271FB29AC80050CE54 /* TKUserListTableViewCell.m in Sources */,
-				D628D5381FB29AC80050CE54 /* TKEduRoomProperty.m in Sources */,
+				D6207F391FB934CF001FB741 /* TKUserListTableViewCell.m in Sources */,
+				D6207F4A1FB934CF001FB741 /* TKEduRoomProperty.m in Sources */,
 				5B9E05B01F14ABAC0050CEDB /* GGT_NoMoreDateAlertView.m in Sources */,
-				D628D5181FB29AC80050CE54 /* NSString+sizeHeight.m in Sources */,
-				D628D4F31FB29AC80050CE54 /* BITHockeyBaseManager.m in Sources */,
+				D6207F2A1FB934CF001FB741 /* NSString+sizeHeight.m in Sources */,
+				D6207F051FB934CF001FB741 /* BITHockeyBaseManager.m in Sources */,
 				D6C150EC1EE79D500038841B /* NSObject+XCMethodSwizzle.m in Sources */,
 				5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */,
 				5BC473AA1EC99FA7003B8154 /* GGT_MineHeaderView.m in Sources */,
@@ -2539,62 +2537,62 @@
 				D6E0A47C1EC2C200006A003D /* main.m in Sources */,
 				5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */,
 				D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */,
-				D628D5061FB29AC80050CE54 /* BITAppStoreHeader.m in Sources */,
+				D6207F181FB934CF001FB741 /* BITAppStoreHeader.m in Sources */,
 				D66FCBF51EEA7D3200792A6C /* GGT_PreviewDemoPlaceholderView.m in Sources */,
-				D628D5341FB29AC80050CE54 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */,
+				D6207F461FB934CF001FB741 /* UIImagePickerController+TKLandScapeImagePicker.m in Sources */,
 				D6E0A5581EC2D9CD006A003D /* NSString+XCHelper.m in Sources */,
 				D6134AFC1F1610D400B4405E /* GGT_TimeCollectionCell.m in Sources */,
-				D628D5251FB29AC80050CE54 /* TKDocumentListView.m in Sources */,
+				D6207F371FB934CF001FB741 /* TKDocumentListView.m in Sources */,
 				5BC473681EC95C8A003B8154 /* GGT_SettingViewController.m in Sources */,
 				D627DCF51ED41AD000076FBD /* XCNormalFooter.m in Sources */,
-				D628D53A1FB29AC80050CE54 /* TKUtil.mm in Sources */,
+				D6207F4C1FB934CF001FB741 /* TKUtil.mm in Sources */,
 				D6E0A5601EC2D9CD006A003D /* UIView+XCHelper.m in Sources */,
-				D628D4EB1FB29AC80050CE54 /* TKAFURLResponseSerialization.m in Sources */,
+				D6207EFD1FB934CF001FB741 /* TKAFURLResponseSerialization.m in Sources */,
 				5B9E05871F14A84F0050CEDB /* GGT_OrderCourseOfAllRightVc.m in Sources */,
-				D628D4EC1FB29AC80050CE54 /* TKAFHTTPSessionManager.m in Sources */,
+				D6207EFE1FB934CF001FB741 /* TKAFHTTPSessionManager.m in Sources */,
 				D6E0A5911EC2DBB3006A003D /* GGT_RegisterView.m in Sources */,
-				D628D52F1FB29AC80050CE54 /* TKTimer.m in Sources */,
+				D6207F411FB934CF001FB741 /* TKTimer.m in Sources */,
 				D6134AF91F15F8B700B4405E /* GGT_DateCollectionCell.m in Sources */,
 				D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */,
 				D6FD8AF21F1767D800A79011 /* GGT_ChooseCoursewareVC.m in Sources */,
-				D628D53D1FB29AC80050CE54 /* TKWeakScriptMessageDelegate.m in Sources */,
+				D6207F4F1FB934CF001FB741 /* TKWeakScriptMessageDelegate.m in Sources */,
 				D6ED8FFC1F67D34B0002D7B4 /* GGT_UpdateModel.m in Sources */,
-				D628D5311FB29AC80050CE54 /* TKDrogView.m in Sources */,
+				D6207F431FB934CF001FB741 /* TKDrogView.m in Sources */,
 				D6FD8AEB1F17525300A79011 /* GGT_OrderPlaceholderView.m in Sources */,
-				D628D5051FB29AC80050CE54 /* BITFeedbackManager.m in Sources */,
-				D628D51F1FB29AC80050CE54 /* TKMessageTableViewCell.m in Sources */,
+				D6207F171FB934CF001FB741 /* BITFeedbackManager.m in Sources */,
+				D6207F311FB934CF001FB741 /* TKMessageTableViewCell.m in Sources */,
 				D6B1FF341F6B749C00DD6D7C /* GGT_ClassroomManager.m in Sources */,
-				D628D5001FB29AC80050CE54 /* HockeySDKPrivate.m in Sources */,
+				D6207F121FB934CF001FB741 /* HockeySDKPrivate.m in Sources */,
 				D67D55F81EC58EE5009D3CC5 /* GGT_ScheduleStudyingCell.m in Sources */,
-				D628D5081FB29AC80050CE54 /* BITKeychainUtils.m in Sources */,
+				D6207F1A1FB934CF001FB741 /* BITKeychainUtils.m in Sources */,
 				5B9E05811F149C390050CEDB /* GGT_OrderCourseViewController.m in Sources */,
 				5B7FE82C1ECC4E9600404939 /* GGT_ChangePasswordView.m in Sources */,
 				5BF912D51ECEC50D009C8186 /* GGT_CheckDeviceView.m in Sources */,
-				D628D50B1FB29AC80050CE54 /* BITFeedbackComposeViewController.m in Sources */,
+				D6207F1D1FB934CF001FB741 /* BITFeedbackComposeViewController.m in Sources */,
 				D63DA9491ED5554400EFA686 /* NSDictionary+Log.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
-				D628D5191FB29AC80050CE54 /* TKChatView.m in Sources */,
+				D6207F2B1FB934CF001FB741 /* TKChatView.m in Sources */,
 				5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */,
-				D628D4EE1FB29AC80050CE54 /* TKAFNetworkReachabilityManager.m in Sources */,
+				D6207F001FB934CF001FB741 /* TKAFNetworkReachabilityManager.m in Sources */,
 				D6E0A5411EC2D9C1006A003D /* PlaceholderTextView.m in Sources */,
-				D628D5391FB29AC80050CE54 /* RoomController.m in Sources */,
+				D6207F4B1FB934CF001FB741 /* RoomController.m in Sources */,
 				5B743D271EC5A435004E744A /* GGT_MineLeftViewController.m in Sources */,
 				D654E1E31EF8ECE800E3BAB7 /* MZTimerLabel.m in Sources */,
 				5BC473AD1EC9A380003B8154 /* GGT_ChangePassWordViewController.m in Sources */,
 				5B9E05A81F14AABA0050CEDB /* GGT_OrderForeignListCell.m in Sources */,
-				D628D4E81FB29AC80050CE54 /* TKAFURLRequestSerialization.m in Sources */,
+				D6207EFA1FB934CF001FB741 /* TKAFURLRequestSerialization.m in Sources */,
 				D67D55EF1EC58E47009D3CC5 /* GGT_CalendarCell.m in Sources */,
 				5BD5165D1ECAE5EA0015D694 /* GGT_MineLeftTableViewCell.m in Sources */,
-				D628D50C1FB29AC80050CE54 /* BITHockeyAppClient.m in Sources */,
+				D6207F1E1FB934CF001FB741 /* BITHockeyAppClient.m in Sources */,
 				D6134AFF1F16138500B4405E /* GGT_DateAndTimeHeaderView.m in Sources */,
 				D6E0A55A1EC2D9CD006A003D /* UIButton+timer.m in Sources */,
 				5B913C9D1F9DF58400982385 /* GGT_HomeViewController.m in Sources */,
-				D628D50D1FB29AC80050CE54 /* BITStoreButton.m in Sources */,
-				D628D4F51FB29AC80050CE54 /* BITUpdateViewController.m in Sources */,
-				D628D52B1FB29AC80050CE54 /* TKProgressSlider.m in Sources */,
-				D628D4FE1FB29AC80050CE54 /* BITStoreUpdateManager.m in Sources */,
+				D6207F1F1FB934CF001FB741 /* BITStoreButton.m in Sources */,
+				D6207F071FB934CF001FB741 /* BITUpdateViewController.m in Sources */,
+				D6207F3D1FB934CF001FB741 /* TKProgressSlider.m in Sources */,
+				D6207F101FB934CF001FB741 /* BITStoreUpdateManager.m in Sources */,
 				D6E0A5321EC2D9AE006A003D /* BaseNavigationController.m in Sources */,
-				D628D51B1FB29AC80050CE54 /* TKGrowingTextView.m in Sources */,
+				D6207F2D1FB934CF001FB741 /* TKGrowingTextView.m in Sources */,
 				5BBB2D481F185A1200393B68 /* GGT_FocusImgModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2631,34 +2629,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D628D4571FB29AC70050CE54 /* LTUpdate.strings */ = {
+		D6207E691FB934CE001FB741 /* LTUpdate.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D628D4581FB29AC70050CE54 /* de */,
-				D628D4591FB29AC70050CE54 /* zh-Hant-TW */,
-				D628D45A1FB29AC70050CE54 /* ar */,
-				D628D45B1FB29AC70050CE54 /* zh-Hans */,
-				D628D45C1FB29AC70050CE54 /* ja */,
-				D628D45D1FB29AC70050CE54 /* en */,
-				D628D45E1FB29AC70050CE54 /* uk */,
-				D628D45F1FB29AC70050CE54 /* es */,
-				D628D4601FB29AC70050CE54 /* sl */,
-				D628D4611FB29AC70050CE54 /* da */,
-				D628D4621FB29AC70050CE54 /* it */,
-				D628D4631FB29AC70050CE54 /* sk */,
-				D628D4641FB29AC70050CE54 /* sv */,
-				D628D4651FB29AC70050CE54 /* cs */,
-				D628D4661FB29AC70050CE54 /* ko */,
-				D628D4671FB29AC70050CE54 /* zh-Hant */,
-				D628D4681FB29AC70050CE54 /* tr */,
-				D628D4691FB29AC70050CE54 /* pl */,
-				D628D46A1FB29AC70050CE54 /* pt-BR */,
-				D628D46B1FB29AC70050CE54 /* ru */,
-				D628D46C1FB29AC70050CE54 /* fr */,
-				D628D46D1FB29AC70050CE54 /* nl */,
-				D628D46E1FB29AC70050CE54 /* th */,
-				D628D46F1FB29AC70050CE54 /* pt-PT */,
-				D628D4701FB29AC70050CE54 /* ro */,
+				D6207E6A1FB934CE001FB741 /* de */,
+				D6207E6B1FB934CE001FB741 /* zh-Hant-TW */,
+				D6207E6C1FB934CE001FB741 /* ar */,
+				D6207E6D1FB934CE001FB741 /* zh-Hans */,
+				D6207E6E1FB934CE001FB741 /* ja */,
+				D6207E6F1FB934CE001FB741 /* en */,
+				D6207E701FB934CE001FB741 /* uk */,
+				D6207E711FB934CE001FB741 /* es */,
+				D6207E721FB934CE001FB741 /* sl */,
+				D6207E731FB934CE001FB741 /* da */,
+				D6207E741FB934CE001FB741 /* it */,
+				D6207E751FB934CE001FB741 /* sk */,
+				D6207E761FB934CE001FB741 /* sv */,
+				D6207E771FB934CE001FB741 /* cs */,
+				D6207E781FB934CE001FB741 /* ko */,
+				D6207E791FB934CE001FB741 /* zh-Hant */,
+				D6207E7A1FB934CE001FB741 /* tr */,
+				D6207E7B1FB934CE001FB741 /* pl */,
+				D6207E7C1FB934CE001FB741 /* pt-BR */,
+				D6207E7D1FB934CE001FB741 /* ru */,
+				D6207E7E1FB934CE001FB741 /* fr */,
+				D6207E7F1FB934CE001FB741 /* nl */,
+				D6207E801FB934CE001FB741 /* th */,
+				D6207E811FB934CE001FB741 /* pt-PT */,
+				D6207E821FB934CE001FB741 /* ro */,
 			);
 			name = LTUpdate.strings;
 			sourceTree = "<group>";

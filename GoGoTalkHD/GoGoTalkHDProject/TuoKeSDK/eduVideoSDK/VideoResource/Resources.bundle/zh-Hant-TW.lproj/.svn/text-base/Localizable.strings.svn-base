@@ -118,4 +118,8 @@
 
 "Prompt.enterBackGround" = "進入後臺";
 "Prompt.enterForeGround" = "恢復前臺";
-"Prompt.NetworkException" = "網絡出現異常，請檢查網絡環境，重新進入";
+"Prompt.NetworkException" = "網絡出現異常，請關閉殺毒軟體或防火牆後，重新進入";
+"Prompt.HaveEnterBackground" = "進入了後臺模式";
+"Prompt.HaveBackForground" = "返回了正常模式";
+"Prompt.BackgroundCouldNotOnStage" = "該學生的應用程序在後臺，無法上臺";
+"Prompt.NetworkChanged" = "網絡出現異常，請檢查網路環境，重新進入";

@@ -1,15 +1,15 @@
 10
 
 dir
-25774
+25814
 svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource
 svn://tonglm@192.168.1.28
 
 
 
-2017-11-04T02:25:48.403720Z
-25765
-jinchao
+2017-11-08T11:24:18.764209Z
+25814
+tonglm
 
 
 
@@ -41,11 +41,11 @@ file
 
 
 
-2017-11-06T02:34:18.000000Z
-5717d538aaef291158eaaaddffe6bc0f
-2017-11-04T02:25:48.403720Z
-25765
-jinchao
+2017-11-10T02:26:39.000000Z
+a057ba5933d72d8c111df1d5f5a3cfa0
+2017-11-08T11:24:18.764209Z
+25814
+tonglm
 has-props
 
 
@@ -67,7 +67,7 @@ has-props
 
 
 
-3582248
+3595440
 
 SocketIO.framework
 dir

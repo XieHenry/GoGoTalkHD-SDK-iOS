@@ -96,12 +96,14 @@ TKNavigationController* _iEduNavigationController = nil;
     [_iRoomProperty parseMeetingInfo:paramDic];
     _iRoomProperty.iRoomType = [[paramDic objectForKey:@"type"] integerValue];
     bool isConform = [TKUtil deviceisConform];
-    isConform      = true;
+    // isConform      = true;  // 注释掉开启低功耗模式
     if (!isConform) {
         _iRoomProperty.iMaxVideo = @(2);
     }else{
          _iRoomProperty.iMaxVideo = @(6);
     }
+
+    
     _HUD = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
     [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
     _HUD.dimBackground = YES;
@@ -190,7 +192,7 @@ TKNavigationController* _iEduNavigationController = nil;
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
                     bool isConform = [TKUtil deviceisConform];
-                    isConform      = true;
+                    //isConform      = true;     // 注释掉开启低功耗模式
                     if (!isConform) {
                         _iRoomProperty.iMaxVideo = @(2);
                     }

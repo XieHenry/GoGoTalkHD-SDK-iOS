@@ -121,4 +121,8 @@
 
 "Prompt.enterBackGround" = "进入后台";
 "Prompt.enterForeGround" = "恢复前台";
-"Prompt.NetworkException" = "网络出现异常，请检查网络环境，重新进入";
+"Prompt.NetworkException" = "网络出现异常，请关闭杀毒软件或防火墙后，重新进入";
+"Prompt.HaveEnterBackground" = "进入了后台模式";
+"Prompt.HaveBackForground" = "返回了正常模式";
+"Prompt.BackgroundCouldNotOnStage" = "该学生的应用程序在后台，无法上台";
+"Prompt.NetworkChanged" = "网络出现异常，请检查网络环境，重新进入";

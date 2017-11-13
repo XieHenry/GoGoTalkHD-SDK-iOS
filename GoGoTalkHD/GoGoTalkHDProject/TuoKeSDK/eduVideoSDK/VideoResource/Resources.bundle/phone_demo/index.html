@@ -96,7 +96,9 @@
 				<div class="timer-teachTool-againBtn" ng-click="againBtnHandel()"></div>
 				<div class="timer-teachTool-againBtn-unclickable" ></div>
 			
-				<audio id="ring_audio" ng-src="{{data.url}}"></audio>
+				<audio id="ring_audio"    ng-src="{{data.url|trustUrl}}" >
+					 <!--<source  type="audio/mpeg"></source>-->
+				</audio>
 			</div>
 			<!--学生端倒计时-->
 			<div class="timer-studentTool-wrap" >
@@ -138,7 +140,8 @@
 					    <div class="timer-studentTool-triangle-down"  style="visibility: hidden;"></div>
 				</div>
 				<div class="stop-btn-Img"></div>
-				<audio id="ring_audio_student" ng-src="{{data.url}}"></audio>
+				<audio id="ring_audio_student" ng-src="{{data.url|trustUrl}}">
+				</audio>
 			</div>	
 	        <!--老师端答题卡-->
 	        <div class="answer-teach-wrapDiv">
@@ -409,7 +412,7 @@
 				                        <li class="answer-implement-bg" ng-click="answerShowHandel()"></li>
 				                        <li class="turnplate-implement-bg" ng-click="turnplateShowHandel()"></li>
 				                        <li class="timer-implement-bg" ng-click="timerShowHandel()"></li>
-				                        <li class="responder-implement-bg" ng-click="responderShowHandel()" style="display:none;"></li>
+				                        <li class="responder-implement-bg" ng-click="responderShowHandel()" style="display: none;"></li>
 				                    </ul>
 								</button>
 							</li>

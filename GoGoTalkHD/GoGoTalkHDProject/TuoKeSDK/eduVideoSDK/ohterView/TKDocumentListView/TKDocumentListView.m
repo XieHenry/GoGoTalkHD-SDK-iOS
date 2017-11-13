@@ -112,6 +112,7 @@
             break;
         case FileListTypeUserList:
         {
+            //用户列表
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             tCell.iIndexPath = indexPath;

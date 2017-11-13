@@ -274,8 +274,8 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     BOOL isClassBegin = [TKEduSessionHandle shareInstance].isClassBegin;
     BOOL isCanDraw = [TKEduSessionHandle shareInstance].localUser.canDraw;
     BOOL isTeacher = ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher);
-    //BOOL isResultStudent = [msgName isEqualToString:sResultStudent];
-    BOOL isResultStudent = YES;
+    BOOL isResultStudent = [msgName isEqualToString:sResultStudent];
+    //BOOL isResultStudent = YES;
     BOOL isH5Document = ([tDocmentDocModel.fileprop integerValue] == 3);
     
     //BOOL isCanSend = (isClassBegin &&((isCanDraw && isSharpsChangeMsg) || isTeacher || (isH5Document &&isCanDraw )));

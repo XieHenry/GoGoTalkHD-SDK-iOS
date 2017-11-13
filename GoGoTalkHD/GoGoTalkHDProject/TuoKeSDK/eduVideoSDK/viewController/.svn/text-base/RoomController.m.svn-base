@@ -16,6 +16,7 @@
 #import "TKVideoSmallView.h"
 #import "TKUtil.h"
 #import "TKMacro.h"
+#import "sys/utsname.h"
 //reconnection
 
 #import "TKTimer.h"
@@ -2125,6 +2126,18 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [self.iUsertListView reloadData];
     [self refreshData];
     
+    // 提示在后台的学生
+    //[[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]
+    if (_iUserType == UserType_Teacher || _iUserType == UserType_Assistant || _iUserType == UserType_Patrol) {
+        if ([user.properties objectForKey:sIsInBackGround] != nil &&
+            [[user.properties objectForKey:sIsInBackGround] boolValue] == YES) {
+            NSString *deviceType = [user.properties objectForKey:@"devicetype"];
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", user.nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:user.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:user.nickName aTime:[TKUtil currentTimeToSeconds]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }
+    }
     
 }
 //用户离开
@@ -2269,6 +2282,33 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     for (RoomUser *user in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
         NSLog(@"%d", user.disableVideo);
         NSLog(@"%d", user.disableAudio);
+    }
+    
+    if ([properties objectForKey:sIsInBackGround]) {
+        BOOL isInBackground = [[properties objectForKey:sIsInBackGround] boolValue];
+        // 当用户发生前后台切换，用户列表状态也要发生变化
+        for (RoomUser *u in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
+            if ([u.peerID isEqualToString:user.peerID]) {
+                [u.properties setObject:[properties objectForKey:sIsInBackGround] forKey:sIsInBackGround];
+                [self.iUsertListView reloadData];
+                break;
+            }
+        }
+        
+        if (_iUserType == UserType_Teacher || _iUserType == UserType_Assistant || _iUserType == UserType_Patrol) {
+            NSString *deviceType = [user.properties objectForKey:@"devicetype"];
+            NSString *content;
+            if (isInBackground) {
+                content = MTLocalized(@"Prompt.HaveEnterBackground");
+            } else {
+                content = MTLocalized(@"Prompt.HaveBackForground");
+            }
+            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", user.nickName, deviceType, content];
+            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:user.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:user.nickName aTime:[TKUtil currentTimeToSeconds]];
+            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+            [self refreshData];
+        }
+
     }
     
     NSDictionary *tDic = @{sRaisehand:[properties objectForKey:sRaisehand]?[properties objectForKey:sRaisehand]:@(isRaiseHand),
@@ -2587,12 +2627,28 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [self moveVideo:tMvVideoDic];
         
 
-    }else if ([msgName isEqualToString:sUserEnterBackGround]){
-
+    } else if ([msgName isEqualToString:sUserEnterBackGround]){
+        
+//        NSString *peerId = [[msgID componentsSeparatedByString:@"_"] objectAtIndex:1];
+//        NSString *nickName;
+//        NSString *deviceType;
+//        for (RoomUser *user in _iSessionHandle.iUserList) {
+//            if ([user.peerID isEqualToString:peerId]) {
+//                nickName = user.nickName;
+//                deviceType = [user.properties objectForKey:@"devicetype"];
+//            }
+//        }
+//
 //        if (add) {
-//              [self showMessage:[NSString stringWithFormat:@"%@",MTLocalized(@"Prompt.enterBackGround")]];
+//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
+//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+//            [self refreshData];
 //        }else{
-//              [self showMessage:[NSString stringWithFormat:@"%@",MTLocalized(@"Prompt.enterForeGround")]];
+//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveBackForground")];
+//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
+//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+//            [self refreshData];
 //        }
       
     }
@@ -2799,6 +2855,13 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark 首次发布或订阅失败3次
 - (void)networkTrouble {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:MTLocalized(@"Prompt.NetworkException") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *tActionSure = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.OK") style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:tActionSure];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)networkChanged {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:MTLocalized(@"Prompt.NetworkChanged") preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *tActionSure = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.OK") style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:tActionSure];
     [self presentViewController:alert animated:YES completion:nil];

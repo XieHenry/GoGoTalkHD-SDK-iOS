@@ -112,6 +112,7 @@
             break;
         case FileListTypeUserList:
         {
+            //用户列表
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             tCell.iIndexPath = indexPath;
@@ -194,6 +195,14 @@
                 return;
             }
             
+            // 在后台的学生不能上台
+            if ([tRoomUser.properties objectForKey:sIsInBackGround] != nil && [[tRoomUser.properties objectForKey:sIsInBackGround] boolValue] == YES) {
+                NSArray *array = [UIApplication sharedApplication].windows;
+                int count = (int)array.count;
+                [TKRCGlobalConfig HUDShowMessage:MTLocalized(@"Prompt.BackgroundCouldNotOnStage") addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
+                return;
+            }
+            
             int isSucess = [[TKEduSessionHandle shareInstance] addPendingUser:tRoomUser];
             if (!isSucess) {
                 //[tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -211,6 +220,7 @@
             }
             
         } else {
+            
             if (tRoomUser.disableVideo == YES && tRoomUser.disableAudio == NO) {
                 tState = PublishState_AUDIOONLY;
             }

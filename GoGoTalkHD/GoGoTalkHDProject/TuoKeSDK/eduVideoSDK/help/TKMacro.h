@@ -162,6 +162,7 @@ typedef NS_ENUM(NSInteger, PromptType) {
    
 };
 
+static  NSString *const sLowConsume                 = @"LowConsume";
 static  NSString *const sChairmancontrol            = @"chairmancontrol";
 static  NSString *const sClassBegin                 = @"ClassBegin";
 static  NSString *const sWBPageCount                = @"WBPageCount";//加页

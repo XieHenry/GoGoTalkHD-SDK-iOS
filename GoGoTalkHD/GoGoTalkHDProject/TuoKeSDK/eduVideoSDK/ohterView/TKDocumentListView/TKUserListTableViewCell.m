@@ -285,10 +285,21 @@
                 _iButton4.enabled = YES;
             }
 
+            /*
+            //用设备图标替换用户头像
+            _iIconImageView.image = LOADIMAGE(@"icon_user.png");
+            //昵称 （身份）
+            NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[tRoomUser.nickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+            
+            NSArray *userTypeArray = [NSArray arrayWithObjects:@"老师",@"助教",@"学生",@"直播",@"巡课", nil];
+            NSString *nickAndRole = [NSString stringWithFormat:@"%@ (%@)",attrStr.string,userTypeArray[tRoomUser.role]];
+            _iNameLabel.text = nickAndRole ;
+            */
+            
             _iIconImageView.image = LOADIMAGE(@"icon_user.png");
             NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[tRoomUser.nickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
             _iNameLabel.text = attrStr.string ;
-            
+
          
 //            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
 //            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];

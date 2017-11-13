@@ -857,8 +857,6 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
                     	var userSelect=data.params.data.mySelect;
                     	var userId=data.params.data.sendUserID;
                     	var userName = data.params.data.sendStudentName;
-                    	console.error(data);
-                    	console.error($scope.studentNumbers);
                     	$timeout(function(){
                     		$scope.langeTYPE();
                     		$scope.allStudentChosseAnswer[userId]={};
@@ -869,7 +867,6 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 								$scope.allStudentChosseAnswer[userId][userName] = userSelect;	
 								}
 							}
-							console.error($scope.studentNumbers);
 							$scope.idA=[];
 						    $scope.idB=[];
 						    $scope.idC=[];
@@ -984,7 +981,6 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 								}
 						})
 							$scope.studentNumbers=Array.from(new Set($scope.studentNumbers));
-							console.error($scope.studentNumbers);
 							if($scope.allStudentChosseAnswer[i][namesValue].sort().toString()==$scope.trueSelectArry.sort().toString()){
 	            				$scope.studentNums++;
 	            				var studentLength=$scope.studentNumbers.length;
@@ -3133,29 +3129,26 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 		$scope.stop =null;
 		$scope.stopStudent=null;
 		$scope.data={
-          
-			};  
+        "name":"音频",
+        "url":"../../music/ring.mp3"//视频路径
+		};  
+		//$scope.data.url = $sce.trustAsResourceUrl($scope.data.url);//第二种处理方式     
 		   /*播放音乐*/
-	    $scope.playAudioToAudiooutput =function(audioId, play){
-	    	$scope.data={
-			            "name":"音频",
-			            "url":"../../music/ring.mp3"//视频路径
-						};  
-					$scope.data.url = $sce.trustAsResourceUrl($scope.data.url);//第二种处理方式     
-					 var audio = document.getElementById(audioId);
-	            if(play){
-	            	 audio.load();
-	               audio.play();
-	            }else{
-	                audio.pause();
-	            }
+	    $scope.playAudioToAudiooutputTeacher =function(){
+				var audios = document.getElementById("ring_audio");
+				audios.load();
+			    audios.play();  
+	    }; 
+	    $scope.playAudioToAudiooutputStudetn =function(){
+				var audiosStudetn = document.getElementById("ring_audio_student");
+				audiosStudetn.load();
+			    audiosStudetn.play();  
 	    }; 
 		$scope.timeReduce=function(){
 			var a=$(".timer-teachTool-num-content").eq(3).text();
 			var b=$(".timer-teachTool-num-content").eq(2).text();
 			var c=$(".timer-teachTool-num-content").eq(1).text();
 			var d=$(".timer-teachTool-num-content").eq(0).text();
-			
 			$scope.timerAllArry=[d,c,b,a];
 	        	a--;
 				$(".timer-teachTool-num-content").eq(3).text(a);
@@ -3193,14 +3186,14 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	            	$(".timer-teachTool-startBtn").hide();
 	            	$(".timer-teachTool-num-content").css("color","red");
 	            	 $interval.cancel($scope.stop);
-	            	$scope.playAudioToAudiooutput("ring_audio",true);
+	            	$scope.playAudioToAudiooutputTeacher();
 				}
 	            
 	        }if(a==0&&b==0&&c==0&&d==0){
 	        	for(var i=0;i<4;i++){
 	        		$(".timer-teachTool-num-content").eq(i).text(0);
 	        	}
-	           $scope.playAudioToAudiooutput("ring_audio",true);
+	           $scope.playAudioToAudiooutputTeacher();
 	            $(".timer-teachTool-num-content").css("color","red");
 	            $interval.cancel($scope.stop);
 	        }
@@ -3233,7 +3226,7 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				$(".timer-studentTool-num-content").eq(0).text(0);
 				$(".timer-studentTool-num-content").css("color", "red");
 				$interval.cancel($scope.stopStudent);
-				$scope.playAudioToAudiooutput("ring_audio_student", true);
+				$scope.playAudioToAudiooutputStudetn();
 			}
 			}
 			if(e == 0 && f == 0 && g == 0 && h == 0) {
@@ -3242,7 +3235,7 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				}
 				$(".timer-studentTool-num-content").css("color", "red");
 				$interval.cancel($scope.stopStudent);
-				$scope.playAudioToAudiooutput("ring_audio_student", true);
+				$scope.playAudioToAudiooutputStudetn();
 			}
 		}
 		$scope.minutesArry=[0,5];
@@ -3676,7 +3669,6 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 	$scope.answerBegin = function(){
 		if($rootScope.hasRole.roleChairman || $rootScope.hasRole.roleTeachingAssistant){
 			$scope.langeTYPE();
-			console.error($scope.allStudentChosseAnswer);
 			if($(".answer-teach-begin").css("background")=="rgb(7, 68, 150) none repeat scroll 0% 0% / auto padding-box border-box"){
 				return false;
 			};
@@ -3828,7 +3820,13 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				$(".reuslt-submit").html($rootScope.english.answers.submitAnswer.text);
     		}if($scope.language=="tw"){
     			$(".reuslt-submit").html($rootScope.complex.answers.submitAnswer.text);
-    		}	
+    		}
+    		$scope.mySelectArry=[];
+    		 for(var i=0;i<$scope.teacherResult.length;i++){
+    		 	$scope.teacherResult[i].sel=false;
+    		 	$(".answer-student-lis").eq(i).css("background","#1e2b48");
+    		 }
+    		$(".reuslt-submit").css("background","#074496");
 		}
 		
 	}
@@ -4087,7 +4085,8 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 			$(".answer-teach-lis").eq(i).css("background","#1e2b48");
 		}
 		$(".answer-teach-begin").css("background","#074496");
-		
+		$(".answer-teach-reduce").css("background","#368bcd");
+        $(".answer-teach-add").css("background","#368bcd");
 		for(var key in $scope.initArr){
 			var value = $scope.initArr[key];
 			value.sel=false;
@@ -4129,7 +4128,8 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 			$(".answer-teach-lis").eq(i).css("background","#1e2b48");
 		}
 		$(".answer-teach-begin").css("background","#074496");
-		
+		$(".answer-teach-reduce").css("background","#368bcd");
+        $(".answer-teach-add").css("background","#368bcd");
 		for(var key in $scope.initArr){
 			var value = $scope.initArr[key];
 			value.sel=false;
@@ -4150,7 +4150,6 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 				AnswerSHOW:false,
 			}, signallingName = "answer" , assignId = "answerMesg" ;
     	$(document).trigger("deleteLiterallyDataEvent" , [null, testData , signallingName , assignId]);
-    	console.error($scope.allStudentChosseAnswer)
     }
 	};
 	/*字体*/
@@ -4297,6 +4296,12 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
     		}
 			$scope.answerIsShow=true;
 			$(".answer-teach-wrapDiv").show();
+			for(var i=0;i< $scope.initArr.length;i++){
+			$(".answer-teach-lis").eq(i).css("background","#1e2b48");
+			}
+			$(".answer-teach-begin").css("background","#074496");
+			$(".answer-teach-reduce").css("background","#368bcd");
+	        $(".answer-teach-add").css("background","#368bcd");
 			$(".teach-box-left").toggle();
 			var iconShow=$scope.answerIsShow;
 			var quizTime = $("#result-teach-mytime").html() 
@@ -4701,4 +4706,8 @@ tk_room.controller('phoneController', function ($scope , $timeout , $interval ,$
 
 	});
 });
-
+tk_room.filter("trustUrl", ['$sce', function ($sce) {
+    return function (recordingUrl) {
+        return $sce.trustAsResourceUrl(recordingUrl);
+    };
+}]);

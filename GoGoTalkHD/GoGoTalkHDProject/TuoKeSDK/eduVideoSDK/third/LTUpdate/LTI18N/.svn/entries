@@ -1,7 +1,7 @@
 10
 
 dir
-25774
+25814
 svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third/LTUpdate/LTI18N
 svn://tonglm@192.168.1.28
 
@@ -44,28 +44,28 @@ dir
 cs.lproj
 dir
 
-fr.lproj
+es.lproj
 dir
 
-es.lproj
+fr.lproj
 dir
 
 zh-Hans.lproj
 dir
 
-zh-Hant.lproj
+nl.lproj
 dir
 
 ko.lproj
 dir
 
-nl.lproj
-dir
-
-th.lproj
+zh-Hant.lproj
 dir
 
 pl.lproj
+dir
+
+th.lproj
 dir
 
 it.lproj
@@ -83,10 +83,10 @@ dir
 ro.lproj
 dir
 
-pt-BR.lproj
+da.lproj
 dir
 
-da.lproj
+pt-BR.lproj
 dir
 
 tr.lproj
@@ -95,9 +95,9 @@ dir
 ru.lproj
 dir
 
-sv.lproj
+de.lproj
 dir
 
-de.lproj
+sv.lproj
 dir
 

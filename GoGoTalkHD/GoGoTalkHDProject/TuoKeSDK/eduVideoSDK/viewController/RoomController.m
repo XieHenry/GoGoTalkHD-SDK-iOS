@@ -270,7 +270,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         _iRoomProperty      = aRoomProperty;
         _iRoomName          = aRoomName;
         _iParamDic          = aParamDic;
-
+        
         //_iRoomProperty.iMaxVideo = [[NSNumber alloc] initWithInt:6];
         _iSessionHandle = [TKEduSessionHandle shareInstance];
         _iSessionHandle.isPlayback = YES;
@@ -1874,6 +1874,27 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 //自己进入课堂
 - (void)sessionManagerRoomJoined:(NSError *)error {
+    
+    bool isConform = [TKUtil  deviceisConform];
+    if (_iSessionHandle.localUser.role == UserType_Teacher) {
+        if (!isConform) {
+            NSString *str = [TKUtil dictionaryToJSONString:@{@"lowconsume":@YES, @"maxvideo":@(2)}];
+            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+        } else {
+            NSString *str = [TKUtil dictionaryToJSONString:@{@"lowconsume":@NO, @"maxvideo":@(_iRoomProperty.iMaxVideo.intValue)}];
+            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+        }
+    }
+    
+    // 如果断网之前在后台，回到前台时的时候需要发送回到前台的信令
+    if ([_iSessionHandle.localUser.properties objectForKey:@"isInBackGround"] &&
+        [[_iSessionHandle.localUser.properties objectForKey:@"isInBackGround"] boolValue] == YES &&
+        _iSessionHandle.localUser.role == UserType_Student &&
+        _iSessionHandle.roomMgr.inBackground == NO) {
+        
+        [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:[TKEduSessionHandle shareInstance].localUser.peerID TellWhom:sTellAll Key:sIsInBackGround Value:@(NO) completion:nil];
+    }
+    
     [TKEduSessionHandle shareInstance].iIsJoined = YES;
     //设置画笔等权限
     [[TKEduSessionHandle shareInstance]configureDrawAndPageWithControl:[_iSessionHandle.roomProperties objectForKey:sChairmancontrol]];
@@ -3100,8 +3121,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     _iMessageList = [_iSessionHandle messageList];
     
     [_iChatTableView reloadData];
-    if(_iChatTableView.contentSize.height > _iChatTableView.frame.size.height)
-        [_iChatTableView setContentOffset:CGPointMake(0, _iChatTableView.contentSize.height -_iChatTableView.bounds.size.height) animated:YES];
+    if(_iChatTableView.contentSize.height > _iChatTableView.frame.size.height) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_iMessageList.count - 1 inSection:0];
+        [_iChatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 #pragma mark keyboard Notification
 - (void)keyboardWillShow:(NSNotification*)notification
