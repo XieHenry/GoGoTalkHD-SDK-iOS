@@ -26,6 +26,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 @property (nonatomic, strong) UIImageView *xc_headPortraitImgView;
 @property (nonatomic, strong) UILabel *xc_courseNameLabel;
 @property (nonatomic, strong) UILabel *xc_teachNameLabel;
+@property (nonatomic, strong) UIImageView *xc_substituteImgView;        // 替补老师标识
 
 // 顶部 上课前倒计时
 @property (nonatomic, strong) UIView *xc_topCountDownParentView;    // 新增
@@ -227,6 +228,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     });
     [self.xc_bodyView addSubview:self.xc_courseTypeLabel];
     
+    // 老师名字
     self.xc_teachNameLabel = ({
         UILabel *xc_teachNameLabel = [UILabel new];
         xc_teachNameLabel.text = @"老师名字";
@@ -236,6 +238,16 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     });
     [self.xc_bodyView addSubview:self.xc_teachNameLabel];
     
+    //替补老师
+    self.xc_substituteImgView = ({
+        UIImageView *imgView = [UIImageView new];
+        imgView.image = UIIMAGE_FROM_NAME(@"tibu");
+        imgView.contentMode = UIViewContentModeCenter;
+        imgView;
+    });
+    [self.xc_bodyView addSubview:self.xc_substituteImgView];
+    
+    // 进入教室按钮 评价按钮
     self.xc_courseButton = ({
         UIButton *xc_enterRoomButton = [UIButton new];
         xc_enterRoomButton.frame = CGRectMake(0, 0, 98, 36);
@@ -360,14 +372,22 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         make.top.equalTo(self.xc_headPortraitImgView.mas_top).offset(LineH(margin15/2.0));
     }];
     
+    // 课程类型
     [self.xc_courseTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.xc_courseNameLabel.mas_right).offset(margin40);
         make.centerY.equalTo(self.xc_courseNameLabel);
     }];
     
+    // 老师名字
     [self.xc_teachNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.xc_headPortraitImgView.mas_bottom).offset(-LineH(margin15/2.0));
         make.left.equalTo(self.xc_courseNameLabel.mas_left);
+    }];
+    
+    // 替补
+    [self.xc_substituteImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_teachNameLabel.mas_right).offset(14);
+        make.centerY.equalTo(self.xc_teachNameLabel);
     }];
     
     [self.xc_courseButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -608,6 +628,13 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 - (void)setXc_cellModel:(GGT_CourseCellModel *)xc_cellModel
 {
     _xc_cellModel = xc_cellModel;
+    
+    //0没有替补  1是替补
+    if (xc_cellModel.IsSub == 0) {
+        self.xc_substituteImgView.hidden = YES;
+    } else {
+        self.xc_substituteImgView.hidden = NO;
+    }
     
 //    static dispatch_once_t onceToken;
 //    dispatch_once(&onceToken, ^{

@@ -48,6 +48,9 @@
 //教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
 @property (nonatomic, assign) NSInteger ClassRoomType;
 
+// 是否是替补老师
+@property (nonatomic, assign) NSInteger IsSub;      //0没有替补  1是替补
+
 @end
 
 /*

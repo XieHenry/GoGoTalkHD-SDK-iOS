@@ -27,6 +27,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 @property (nonatomic, strong) UIImageView *xc_headPortraitImgView;
 @property (nonatomic, strong) UILabel *xc_courseNameLabel;
 @property (nonatomic, strong) UILabel *xc_teachNameLabel;
+@property (nonatomic, strong) UIImageView *xc_substituteImgView;        // 替补老师标识
 
 // 底部 教室性别 年龄
 @property (nonatomic, strong) UILabel *xc_sexLabel;
@@ -239,6 +240,15 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     });
     [self.xc_bodyView addSubview:self.xc_teachNameLabel];
     
+    //替补老师
+    self.xc_substituteImgView = ({
+        UIImageView *imgView = [UIImageView new];
+        imgView.image = UIIMAGE_FROM_NAME(@"tibu");
+        imgView.contentMode = UIViewContentModeCenter;
+        imgView;
+    });
+    [self.xc_bodyView addSubview:self.xc_substituteImgView];
+    
     self.xc_courseButton = ({
         UIButton *xc_enterRoomButton = [UIButton new];
         xc_enterRoomButton.frame = CGRectMake(0, 0, 98, 36);
@@ -394,22 +404,30 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
         make.left.equalTo(self.xc_courseNameLabel.mas_left);
     }];
     
+    // 替补
+    [self.xc_substituteImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_teachNameLabel.mas_right).offset(14);
+        make.centerY.equalTo(self.xc_teachNameLabel);
+    }];
+    
+    // 性别
+    [self.xc_sexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_substituteImgView.mas_right).offset(margin20);
+        make.centerY.equalTo(self.xc_teachNameLabel.mas_centerY);
+    }];
+    
+    // 年龄
+    [self.xc_ageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.xc_sexLabel.mas_right).offset(margin20);
+        make.centerY.equalTo(self.xc_sexLabel.mas_centerY);
+    }];
+    
+    // 上课按钮 评价按钮
     [self.xc_courseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.xc_bodyView).offset(-LineW(margin15));
         make.bottom.equalTo(self.xc_headPortraitImgView);
         make.width.equalTo(@(LineW(self.xc_courseButton.width)));//142 × 62
         make.height.equalTo(@(LineH(self.xc_courseButton.height)));
-    }];
-    
-    // 性别  年龄
-    [self.xc_sexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.xc_teachNameLabel.mas_right).offset(margin20);
-        make.centerY.equalTo(self.xc_teachNameLabel.mas_centerY);
-    }];
-    
-    [self.xc_ageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.xc_sexLabel.mas_right).offset(margin20);
-        make.centerY.equalTo(self.xc_sexLabel.mas_centerY);
     }];
     
     // 底部 外教点评
@@ -572,6 +590,19 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
 - (void)setXc_cellModel:(GGT_CourseCellModel *)xc_cellModel
 {
     _xc_cellModel = xc_cellModel;
+    
+    //0没有替补  1是替补
+    if (xc_cellModel.IsSub == 0) {
+        self.xc_substituteImgView.hidden = YES;
+        
+        // 重新布局教室的性别和年龄
+        [self.xc_sexLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.xc_teachNameLabel.mas_right).offset(margin20);
+            make.centerY.equalTo(self.xc_teachNameLabel.mas_centerY);
+        }];
+    } else {
+        self.xc_substituteImgView.hidden = NO;
+    }
     
     // 公用的
     // 上课时间  头像  课程名称  外教名称
