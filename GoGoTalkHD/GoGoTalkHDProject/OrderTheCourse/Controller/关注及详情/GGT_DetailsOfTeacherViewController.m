@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong) GGT_DetailsOfTeacherView *detailsOfTeacherView;
 @property (nonatomic, strong)  GGT_OrderTimeTableView *orderTimeView;
-@property (nonatomic, strong) NSMutableArray *timeDataArray;
 @end
 
 @implementation GGT_DetailsOfTeacherViewController
@@ -205,117 +204,28 @@
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
-        /*代码啰嗦，待改进*/
         NSDictionary *dataDic = responseObject[@"data"];
-        self.timeDataArray = [NSMutableArray array];
-        NSMutableArray *classListAArr = [NSMutableArray array];
-        NSMutableArray *classListBArr = [NSMutableArray array];
-        NSMutableArray *classListCArr = [NSMutableArray array];
-        NSMutableArray *classListDArr = [NSMutableArray array];
-        NSMutableArray *classListEArr = [NSMutableArray array];
-        NSMutableArray *classListFArr = [NSMutableArray array];
-        NSMutableArray *classListGArr = [NSMutableArray array];
-        
-        NSMutableArray *classListHArr = [NSMutableArray array];
-        NSMutableArray *classListIArr = [NSMutableArray array];
-        NSMutableArray *classListJArr = [NSMutableArray array];
-        NSMutableArray *classListKArr = [NSMutableArray array];
-        NSMutableArray *classListLArr = [NSMutableArray array];
-        NSMutableArray *classListMArr = [NSMutableArray array];
-        NSMutableArray *classListNArr = [NSMutableArray array];
-        
-        for (NSDictionary *dic in dataDic[@"classListA"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListAArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListAArr];
+        //获取所有的key
+        NSArray *keyArray = [dataDic allKeys];
+        //对所有的key进行排序
+        NSArray *newKeyArray = [keyArray sortedArrayUsingSelector:@selector(compare:)];
         
         
-        for (NSDictionary *dic in dataDic[@"classListB"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListBArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListBArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListC"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListCArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListCArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListD"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListDArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListDArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListE"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListEArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListEArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListF"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListFArr addObject:model];
-        }
-        [self.timeDataArray addObject:classListFArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListG"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListGArr addObject:model];
-        }
-        
-        [self.timeDataArray addObject:classListGArr];
-        
-        
-        
-        for (NSDictionary *dic in dataDic[@"classListH"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListHArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListHArr];
-        
-        
-        for (NSDictionary *dic in dataDic[@"classListI"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListIArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListIArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListJ"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListJArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListJArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListK"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListKArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListKArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListL"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListLArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListLArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListM"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListMArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListMArr];
-        
-        for (NSDictionary *dic in dataDic[@"classListN"]) {
-            GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-            [classListNArr addObject:model];
-        }
-        [self.timeDataArray  addObject:classListNArr];
+        NSMutableArray *tempArray = [NSMutableArray array];
 
-
+        //处理数据，对每一个section数据添加到大数组中
+        for (int i=0; i<newKeyArray.count; i++) {
+            NSMutableArray *section = [NSMutableArray array];
+            for (NSDictionary *dic in dataDic[newKeyArray[i]]) {
+                GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+                [section addObject:model];
+            }
+            [tempArray addObject:section];
+        }
+        
+        
         //cell获得数据
-        [self.orderTimeView getCellArr:self.timeDataArray];
+        [self.orderTimeView getCellArr:tempArray];
         
     } failure:^(NSError *error) {
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];

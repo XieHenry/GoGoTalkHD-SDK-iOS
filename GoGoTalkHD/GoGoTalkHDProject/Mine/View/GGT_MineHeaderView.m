@@ -294,7 +294,7 @@
    
     
     //英语等级
-    self.levelLabel.text = [NSString stringWithFormat:@"英语等级： Level %ld",(long)model.lv];
+    self.levelLabel.text = [NSString stringWithFormat:@"英语等级： %@",model.lv];
     
     //已说英语
     self.speakLabel.text = [NSString stringWithFormat:@"%ld",(long)model.shuo];

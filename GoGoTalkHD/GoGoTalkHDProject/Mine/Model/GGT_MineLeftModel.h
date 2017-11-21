@@ -20,7 +20,7 @@
 @property (nonatomic, assign) NSInteger shuo;
 
 //lv
-@property (nonatomic, assign) NSInteger lv;
+@property (nonatomic, copy) NSString *lv;
 
 //isVIP
 @property (nonatomic, assign) NSInteger isVip;
@@ -34,7 +34,22 @@
 //头像
 @property (nonatomic, copy) NSString *ImageUrl;
 
-
+/*
+ {
+ data =     {
+ ImageUrl = "http://117.107.153.228:801";
+ Name = "未填写";
+ chi = 0;
+ isVip = 1;
+ lv = L7;
+ que = 25;
+ shuo = 175;
+ totalCount = 619;
+ };
+ msg = "成功";
+ result = 1;
+ }
+ */
 
 
 @end
