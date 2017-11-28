@@ -173,6 +173,15 @@ static inline UIColor *UICOLOR_FROM_HEX(NSInteger hex)
 {
     return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:1.0];
 }
+
+/**
+ @abstract 根据HEX值来获取UICOLOR. 带透明度
+ **/
+static inline UIColor *UICOLOR_FROM_HEX_ALPHA(NSInteger hex, NSInteger alpha)
+{
+    return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:alpha/100.0f];
+}
+
 /**
  @abstract 根据RGB值来获取UICOLOR.
  **/
