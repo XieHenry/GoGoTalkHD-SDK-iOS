@@ -49,7 +49,7 @@
             UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), 60)];
             
             tLabel.text = MTLocalized(@"Title.UserList.two");
-            tLabel.font = TEXT_FONT;
+            tLabel.font = TITLE_FONT;
             tLabel.textAlignment = NSTextAlignmentCenter;
             tLabel.textColor = RGBCOLOR(225, 225, 225);
             tLabel;
@@ -154,7 +154,7 @@
  
         }else{
             [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
-         
+            
         }
         
         if(_iPreButton) {
@@ -187,7 +187,7 @@
         if (tRoomUser.publishState < 1 && !(tRoomUser.disableVideo == YES && tRoomUser.disableAudio == YES)) {
             
             // 如果台上人员超限，不允许上台
-            if ([TKEduSessionHandle shareInstance].iPublishDic.count == [[TKEduSessionHandle shareInstance].iRoomProperties.iMaxVideo intValue]) {
+            if ([TKEduSessionHandle shareInstance].iPublishDic.count >= [[TKEduSessionHandle shareInstance].iRoomProperties.iMaxVideo intValue]) {
                 NSArray *array = [UIApplication sharedApplication].windows;
                 int count = (int)array.count;
                 [TKRCGlobalConfig HUDShowMessage:MTLocalized(@"Prompt.exceeds") addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
@@ -199,7 +199,9 @@
             if ([tRoomUser.properties objectForKey:sIsInBackGround] != nil && [[tRoomUser.properties objectForKey:sIsInBackGround] boolValue] == YES) {
                 NSArray *array = [UIApplication sharedApplication].windows;
                 int count = (int)array.count;
-                [TKRCGlobalConfig HUDShowMessage:MTLocalized(@"Prompt.BackgroundCouldNotOnStage") addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
+                //拼接上用户名
+                NSString *logStr = [NSString stringWithFormat:@"%@%@",tRoomUser.nickName,MTLocalized(@"Prompt.BackgroundCouldNotOnStage")];
+                [TKRCGlobalConfig HUDShowMessage:logStr addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
                 return;
             }
             
@@ -462,8 +464,8 @@
                 [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocModel To:sTellAllExpectSender aTellLocal:YES];
                 
             }else{
-                [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
                 
+                [[TKEduSessionHandle shareInstance] docmentDefault:tDocmentDocModel];
             }
             
             
@@ -529,6 +531,9 @@
     switch (_iFileListType) {
         case FileListTypeAudioAndVideo:
         {
+            // 按钮点击后需要等待网络回调后才可用
+            aButton.enabled = NO;
+            
             //@"影音列表"
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.MediaList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
@@ -545,17 +550,24 @@
                 [[TKEduSessionHandle shareInstance] deleteaMediaDocModel:tMediaDocModel To:sTellAllExpectSender];
                 [[TKEduSessionHandle shareInstance] delMediaArray:tMediaDocModel];
                 _iFileMutableArray = [[[TKEduSessionHandle shareInstance] mediaArray]mutableCopy];
+                
+                // 网络回调完成，按钮可用
+                aButton.enabled = YES;
                 [_iFileTableView reloadData];
                 return 1;
-            }aNetError:nil];
-            
-            
-            
+            }aNetError:^int(id  _Nullable response) {
+                // 网络回调完成，按钮可用
+                aButton.enabled = YES;
+                return -1;
+            }];
             
         }
             break;
         case FileListTypeDocument:
         {
+            // 按钮点击后需要等待网络回调后才可用
+            aButton.enabled = NO;
+            
             //@"文档列表"
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.DocumentList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
@@ -580,9 +592,16 @@
                 
                 [[TKEduSessionHandle shareInstance] delDocmentArray:tDocmentDocModel];
                 _iFileMutableArray = [[[TKEduSessionHandle shareInstance] docmentArray]mutableCopy];
+                
+                // 网络回调完成，按钮可用
+                aButton.enabled = YES;
                 [_iFileTableView reloadData];
                 return 1;
-            }aNetError:nil];
+            }aNetError:^int(id  _Nullable response) {
+                // 网络回调完成，按钮可用
+                aButton.enabled = YES;
+                return -1;
+            }];
             
             
         }

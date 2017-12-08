@@ -11,7 +11,7 @@
 @class TKEduRoomProperty;
 
 @interface RoomController : UIViewController
-@property (nonatomic, strong) UIView *iTKEduWhiteBoardView;
+@property (nonatomic, strong) UIView *iTKEduWhiteBoardView;//白板视图
 - (instancetype)initWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
                        aParamDic:(NSDictionary *)aParamDic
                        aRoomName:(NSString *)aRoomName

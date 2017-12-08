@@ -1,14 +1,14 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView
+svn://tonglm@192.168.1.15
 
 
 
-2017-11-08T11:24:18.764209Z
-25814
+2017-12-07T01:51:51.419575Z
+26706
 tonglm
 
 
@@ -29,16 +29,13 @@ de2abff8-9739-4157-a70d-81cc75667de8
 TKUploadImageView
 dir
 
-TKNavigationController
-dir
-
 TKPlaybackMaskView.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 b2a644e817f57e58554c3d222c2aec83
 2017-09-13T12:28:25.918250Z
 24750
@@ -66,7 +63,7 @@ tonglm
 
 824
 
-TKDocumentListView
+TKSplitScreenView
 dir
 
 TKPlaybackMaskView.m
@@ -75,10 +72,10 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
-329f3ac2c0340af1803e521712eb03d7
-2017-09-25T17:15:26.527395Z
-24955
+2017-12-07T05:57:56.000000Z
+bf2f43442cff7c1c0b6cf435c4e15b22
+2017-11-15T14:55:13.202530Z
+25933
 tonglm
 
 
@@ -101,24 +98,36 @@ tonglm
 
 
 
-6843
+6885
 
-TKMediaView
+TKVideoSmallView
 dir
 
 TKPickViewTextField
 dir
 
-TKVideoSmallView
-dir
-
 TKLandScapeImagePicker
 dir
 
-chatView
+TKButtonClickedOnce
 dir
 
-TKButtonClickedOnce
+TKChooseAreaListView
+dir
+
+TKNavigationController
+dir
+
+TKEmoji
+dir
+
+TKDocumentListView
+dir
+
+TKMediaView
+dir
+
+chatView
 dir
 
 TKClassTimeView

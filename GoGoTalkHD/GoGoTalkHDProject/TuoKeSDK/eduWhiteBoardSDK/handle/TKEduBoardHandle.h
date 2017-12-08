@@ -25,9 +25,7 @@ typedef void(^bLoadFinishedBlock) (void);
         aBloadFinishedBlock:(bLoadFinishedBlock)aBloadFinishedBlock
                   aRootView:(UIView *)aRootView;
 
--(void)setDrawable:(BOOL) candraw;
--(void)setPagePermission:(BOOL)canPage;
--(void)closeNewPptVideo:(id) aData;
+-(void)closeDynamicPptWebPlay:(id) aData;//2017-11-10 closeNewPptVideo更改为closeDynamicPptWebPlay
 -(void)setPageParameterForPhoneForRole:(UserType)aRole;
 -(void)setAddPagePermission:(bool)aPagePermission;
 //数据
@@ -35,9 +33,7 @@ typedef void(^bLoadFinishedBlock) (void);
 -(void)cleanup;
 -(void)refreshUIForFull:(BOOL)isFull;
 -(void)refreshWebViewUI;
--(void)setRoomType:(NSInteger)roomType;
--(void)clearLcAllData;
--(void)setMyPeerID:(NSString *)peerId nickName:(NSString *)nickName;
+
 -(void)disconnectCleanup;
 -(void)playbackSeekCleanup;
 @end

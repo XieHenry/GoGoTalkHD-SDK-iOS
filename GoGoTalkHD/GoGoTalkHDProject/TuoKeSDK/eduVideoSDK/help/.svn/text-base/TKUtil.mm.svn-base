@@ -11,10 +11,13 @@
 #import "TKGTMBase64.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "sys/utsname.h"
+#include <netdb.h>
+#include <arpa/inet.h>
+#import <objc/runtime.h>
+
 #define kChosenDigestLength		CC_SHA1_DIGEST_LENGTH
 
 #define DESKEY @"Gd0^9f@KoAQOXFPZQ^H&fURo"
-
 
 @implementation TKUtil
 
@@ -416,6 +419,15 @@
     
     return @"ch";
 }
+
++(BOOL)isSimplifiedChinese {
+    if ([[TKUtil getCurrentLanguage] isEqualToString:@"ch"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 //https://www.theiphonewiki.com/wiki/Models
 //2014年10月17日iPad Air 2、iPad mini 3 iPhone6 iPad mini 2
 +(bool)deviceisConform{
@@ -470,5 +482,15 @@
         
     }
     return false;
+}
+
++(BOOL)isDomain:(NSString *)host {
+    const char *hostN= [host UTF8String];
+    in_addr_t rt = inet_addr(hostN);
+    if (rt == INADDR_NONE) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 @end

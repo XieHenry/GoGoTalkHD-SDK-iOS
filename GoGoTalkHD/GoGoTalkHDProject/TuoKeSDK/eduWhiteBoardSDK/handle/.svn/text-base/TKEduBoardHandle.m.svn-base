@@ -17,17 +17,18 @@
 #import "TKUtil.h"
 #import "TKDocmentDocModel.h"
 #import "TKDocumentListView.h"
-//guangsheng
-static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_demo/index.html";
-//weijin
-//static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
-//static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.12:8020/phone_demo/index.html";
-//建行
 
-//static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.33:8020/phone-demo/index.html";
+//广生
+//static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.182:9403/publish/index.html#/mobileApp";
+//建行
+//static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.251:9251/publish/index.html#/mobileApp";
+//魏锦
+static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/index.html#/mobileApp";
+
 @interface TKEduBoardHandle ()<WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 
 @property(nonatomic,retain)UIView *iContainView;
+//@property(nonatomic,retain)UIScrollView *iContainView;
 @property(nonatomic,copy)bLoadFinishedBlock iBloadFinishedBlock;
 @property (nonatomic,assign)CGRect iNoFullFrame;
 @property (nonatomic,assign)CGRect iFullFrame;
@@ -50,8 +51,29 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     _iBloadFinishedBlock = aBloadFinishedBlock;
     _iRootView = aRootView;
     return _iContainView;
+    
+//    _iContainView = [[UIScrollView alloc]initWithFrame:rect];
+//    _iContainView.delegate = self;
+//    _iContainView.maximumZoomScale = 4.0;
+//    _iContainView.backgroundColor = [UIColor clearColor];
+//    _iContainView.userInteractionEnabled = YES;
+//    _iNoFullFrame = rect;
+//    _iFullFrame = CGRectMake(0, 0, ScreenW, ScreenH);
+//    [self initWebView:rect aContainView:_iContainView];
+//    _iBloadFinishedBlock = aBloadFinishedBlock;
+//    _iRootView = aRootView;
+//    return _iContainView;
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+//    if (scrollView == _iContainView) {
+//        return _iWebView;
+//    } else {
+//        return nil;
+//    }
+    
+    return nil;
+}
 
 -(void)initWebView:(CGRect)aFrame aContainView:(UIView*)aContainView{
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
@@ -115,16 +137,19 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     
     TKWeakScriptMessageDelegate *tScriptMessageDelegate = [[TKWeakScriptMessageDelegate alloc] initWithDelegate:self];
     //本地白板交互的方法
-    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sSendBoardData];
-    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sDeleteBoardData];
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sPubMsg];
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sDelMsg];
     //白板加载完成的回调，需要在这里进行进入教室以及进行白板初始化
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sOnPageFinished];
     //打印白板内日志
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sPrintLogMessage];
     //全屏按钮交互
-    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sfullScreenToLc];
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sChangeWebPageFullScreen];
     //播放ppt内视频交互
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sOnJsPlay];
+    //2017-11-10 新增sSetProperty
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sSetProperty];
+    
     config.userContentController = userContentController;
    
     CGRect tFrame = CGRectMake(0, 0, CGRectGetWidth(aFrame), CGRectGetHeight(aFrame));
@@ -137,6 +162,14 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     _iWebView.scrollView.scrollEnabled = NO;
     _iWebView.scrollView.backgroundColor = RGBCOLOR(28, 28, 28);
     
+    //禁用长按出现粘贴复制的问题
+    NSMutableString *javascript = [NSMutableString string];
+    [javascript appendString:@"document.documentElement.style.webkitTouchCallout='none';"];//禁止长按
+    [javascript appendString:@"document.documentElement.style.webkitUserSelect='none';"];//禁止选择
+    WKUserScript *noneSelectScript = [[WKUserScript alloc] initWithSource:javascript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+   
+    [_iWebView.configuration.userContentController addUserScript:noneSelectScript];
+   
     
 #ifdef __IPHONE_11_0
     if ([_iWebView.scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
@@ -147,8 +180,8 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 
 #ifdef Debug
 
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ts=%@",sEduWhiteBoardUrl, @([[NSDate date]timeIntervalSince1970])]];
-//    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&languageType=%@", url.absoluteString, [TKUtil getCurrentLanguage]]];
+////    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ts=%@",sEduWhiteBoardUrl, @([[NSDate date]timeIntervalSince1970])]];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?languageType=%@", sEduWhiteBoardUrl, [TKUtil getCurrentLanguage]]];
 //     //根据URL创建请求
 //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 //     [self clearcookie];
@@ -156,12 +189,12 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 //    [_iWebView loadRequest:request];
     
 #endif
-    //phone_demo/index.hml?ts=1111
-    NSURL *path = [BUNDLE URLForResource:@"phone_demo/index" withExtension:@"html"];
-    path = [NSURL URLWithString:[NSString stringWithFormat:@"%@?languageType=%@", path.absoluteString, [TKUtil getCurrentLanguage]]];
+    NSURL *path = [BUNDLE URLForResource:@"react_mobile_publishdir/index" withExtension:@"html"];
+    path = [NSURL URLWithString:[NSString stringWithFormat:@"%@#/mobileApp?languageType=%@",path.absoluteString,[TKUtil getCurrentLanguage]]];
+
     [self clearcookie];
     [_iWebView loadRequest:[NSURLRequest requestWithURL:path]];
-    
+
     
     //添加到containView上
     [aContainView addSubview:_iWebView];
@@ -194,12 +227,10 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     role:null , //角色
     };
     */
-    bool tAddPagePermission = false;
      int role = [TKEduSessionHandle shareInstance].iRoomProperties.iUserType;
     NSDictionary *dictM = @{
                             @"mClientType":@(2),
                             @"serviceUrl":tJsServiceUrl,
-                            @"addPagePermission":@(tAddPagePermission),
                             @"deviceType":@(1),
                             @"role":@([TKEduSessionHandle shareInstance].isPlayback?-1:role),
                             @"raisehand":@(false),
@@ -207,20 +238,22 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
                             @"candraw":@(false),
                             @"disablevideo":@(false),
                             @"disableaudio":@(false),
-                            @"playback":@([TKEduSessionHandle shareInstance].isPlayback?true:false)
+                            @"playback":@([TKEduSessionHandle shareInstance].isPlayback?true:false),
+                            @"isSendLogMessage":@([TKEduSessionHandle shareInstance].isSendLogMessage?true:false)//2017-11-10 判断是否开启log日志
                             };
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictM options:NSJSONWritingPrettyPrinted error:nil];
     NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.setInitPageParameterFormPhone(%@)",strM];
+    NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.setInitPageParameterFormPhone(%@)",strM];
 
     //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         // response 返回值
-        NSLog(@"----GLOBAL.phone.setInitPageParameterFormPhone");
+        NSLog(@"----MOBILETKSDK.receiveInterface.setInitPageParameterFormPhone");
         if (_iBloadFinishedBlock) {
-            _iBloadFinishedBlock();
+            if ([TKEduSessionHandle shareInstance].iIsJoined == NO) {
+                _iBloadFinishedBlock();
+            }
         }
-        
     }];
    
     
@@ -256,6 +289,10 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
         tDocmentDocModel.pptslide = tPPTslide?tPPTslide:tDocmentDocModel.pptslide;
         tDocmentDocModel.pptstep = tPPTstep?tPPTstep:tDocmentDocModel.pptstep;
         tDocmentDocModel.pagenum = tPageNum?tPageNum:tDocmentDocModel.pagenum;
+        
+        //当name为sShowPage  要更改toId为 all
+        toId = sTellAll;
+        
     }else if ([msgName isEqualToString:sWBPageCount]){
             //加页
           NSNumber *tTotalPage = [tDataDic objectForKey:@"totalPage"];
@@ -263,6 +300,7 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
           tDocmentDocModel.currpage = tTotalPage?tTotalPage:tDocmentDocModel.pagenum;
     }
    
+    
     //NSArray *tArray =  [[TKEduSessionHandle shareInstance] docmentArray];
     //TKLog(@"jin sendBoardData %@",tArray);
     [[TKEduSessionHandle shareInstance] addOrReplaceDocmentArray:tDocmentDocModel];
@@ -274,16 +312,20 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     BOOL isClassBegin = [TKEduSessionHandle shareInstance].isClassBegin;
     BOOL isCanDraw = [TKEduSessionHandle shareInstance].localUser.canDraw;
     BOOL isTeacher = ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher);
-    //BOOL isResultStudent = [msgName isEqualToString:sResultStudent];
-    BOOL isResultStudent = YES;
+    BOOL isResultStudent = [msgName isEqualToString:sSubmitAnswers];
+    
+    //BOOL isResultStudent = YES;
     BOOL isH5Document = ([tDocmentDocModel.fileprop integerValue] == 3);
     
     //BOOL isCanSend = (isClassBegin &&((isCanDraw && isSharpsChangeMsg) || isTeacher || (isH5Document &&isCanDraw )));
     
     BOOL isCanSend = (isClassBegin &&(isCanDraw  || isTeacher || isResultStudent));
     
+    
     if (isCanSend) {
-        [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID completion:nil];
+        [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:0  completion:nil];
+    }else if (isClassBegin && ![msgId isEqualToString:sDocumentFilePage_ShowPage]){
+        [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:0 completion:nil];
     }
     
     
@@ -308,18 +350,18 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
         [[TKEduSessionHandle shareInstance] sessionHandleDelMsg:msgName ID:msgId To:toId Data:data completion:nil];
     }
     
-
 }
 -(void)printLogMessage:(id)messageName aMessageBody:(id)aMessageBody{
      TKLog(@"----JS 调用了 %@ 方法，传回参数 %@",messageName,aMessageBody);
 }
--(void)fullScreenToLc:(id)messageName aMessageBody:(id)aMessageBody{
+-(void)ChangeWebPageFullScreen:(id)messageName aMessageBody:(id)aMessageBody{
     
     if ([aMessageBody isKindOfClass:[NSDictionary class]]) {
         NSDictionary *tDic = (NSDictionary *)aMessageBody;
         BOOL tIsFull = [[tDic objectForKey:@"data"]boolValue];
         [self refreshUIForFull:tIsFull];
     }
+    
      TKLog(@"---- 调用了 %@ 方法，传回参数 %@",messageName,aMessageBody);
     
     
@@ -328,6 +370,27 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     CGRect frame = CGRectMake(0, 0, CGRectGetWidth(_iContainView.frame), CGRectGetHeight(_iContainView.frame));
     _iWebView.frame = frame;
     _iNoFullFrame = _iContainView.frame;
+    
+    //给白板发送webview宽高
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    [tDict setObject:@"transmitWindowSize" forKey:@"type"];
+    
+    NSDictionary *tParamDic = @{
+                                @"height":@(CGRectGetHeight(_iWebView.frame)),//DocumentFilePage_ShowPage
+                                @"width":@(CGRectGetWidth(_iWebView.frame))
+                                };
+    
+    [tDict setObject:tParamDic forKey:@"windowSize"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tjsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tjsonString];
+    
+    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        TKLog(@"MOBILETKSDK.receiveInterface.dispatchEvent");
+    }];
+    
 }
 
 -(void)refreshUIForFull:(BOOL)isFull{
@@ -335,8 +398,15 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     [UIView animateWithDuration:0.1 animations:^{
         _iContainView.frame = isFull?_iFullFrame:_iNoFullFrame;
         _iWebView.frame = isFull?_iFullFrame :CGRectMake(0, 0, CGRectGetWidth(_iNoFullFrame), CGRectGetHeight(_iNoFullFrame));
-        [[NSNotificationCenter defaultCenter]postNotificationName:sfullScreenToLc object:@(isFull)];
+        [[NSNotificationCenter defaultCenter]postNotificationName:sChangeWebPageFullScreen object:@(isFull)];
         TKDocmentDocModel *tDocmentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
+        
+        NSNumber *full = [NSNumber numberWithBool:isFull];
+        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.fullScreenChangeCallback(%@)", full];
+        [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            TKLog(@"MOBILETKSDK.receiveInterface.fullScreenChangeCallback");
+        }];
+
         
         //todo 判断是否是动态ppt
         if ([tDocmentDocModel.dynamicppt integerValue]) {
@@ -348,12 +418,13 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
             
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tParamDic options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-            NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.resizeNewpptHandler(%@)",jsonString];
+            NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeDynamicPptSize(%@)",jsonString];
             [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
                 
-                NSLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
+                NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
             }];
         }
+        
 
     }];
     
@@ -396,49 +467,29 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 
 #pragma mark 设置白板权限
 
--(void)closeNewPptVideo:(id) aData{
+-(void)closeDynamicPptWebPlay:(id) aData{
     
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.closeNewPptVideo()"];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.closeDynamicPptWebPlay()"];
     [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.closeNewPptVideo");
+        NSLog(@"----MOBILETKSDK.receiveInterface.closeDynamicPptWebPlay");
     }];
-    
 }
 
--(void)setDrawable:(BOOL) candraw{
-   
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.drawPermission(%@)",@(candraw)];
-    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.drawPermission");
-    }];
-    
-}
-
--(void)setPagePermission:(BOOL)canPage{
-    
-    bool tAdd = canPage?true:false;
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.pageTurningPermission(%@)",@(tAdd)];
-    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.pageTurningPermission %d", tAdd);
-    }];
-
-}
 -(void)setPageParameterForPhoneForRole:(UserType)aRole{
     
-   // NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.changeInitPageParameterFormPhone(\"role\",%@)",@(aRole)];
+   // NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone(\"role\",%@)",@(aRole)];
     
-     NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.changeInitPageParameterFormPhone({role:%@})",@(aRole)];
+     NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone({role:%@})",@(aRole)];
     //NSString *js2 =@" myFunction('Bill Gates','CEO')";
     //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        
         
     }];
 }
 
 -(void)setAddPagePermission:(bool)aPagePermission{
     
-     NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.changeInitPageParameterFormPhone({addPagePermission:%@})",@(aPagePermission)];
+     NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone({addPagePermission:%@})",@(aPagePermission)];
     //NSString *js2 =@" myFunction('Bill Gates','CEO')";
     //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
@@ -446,31 +497,15 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
         
     }];
 }
-
--(void)clearLcAllData {
-    NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.clearLcAllData"];
-    [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        NSLog(@"清理白板!");
-    }];
-}
-
-
 -(void)resizeHandler{
-    
-
-    NSString *js = [NSString stringWithFormat:@"GLOBAL.phone.resizeHandler()"];
+    NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.resizeHandler()"];
     //NSString *js2 =@" myFunction('Bill Gates','CEO')";
     //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         
-        
     }];
-    
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return nil;
-}
 -(void)clearcookie{
     //清除cookies
     NSHTTPCookie *cookie;
@@ -488,34 +523,11 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     //webview暂停加载
    // [_iWebView stopLoading];
 }
-
--(void)setRoomType:(NSInteger)roomType {
-    NSDictionary *roomTypeDic = @{@"roomType":@(roomType)};
-    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:roomTypeDic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.oneToMany(%@)", tJsonString];
-    [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        // 什么都不做
-    }];
-}
-
--(void)setMyPeerID:(NSString *)peerId nickName:(NSString *)nickName {
-    if (peerId && nickName) {
-        NSDictionary *peerIdDic = @{@"peerid":peerId, @"nickname":nickName};
-        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:peerIdDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
-        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.joinRoom(%@)", tJsonString];
-        [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            // 什么都不做
-        }];
-    }
-}
-
 -(void)disconnectCleanup {
     NSDictionary *dic = @{@"type":@"room-disconnected"};
     NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.dispatchEvent(%@)", tJsonString];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)", tJsonString];
     [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         TKLog(@"断网重连白板清理！");
     }];
@@ -525,7 +537,7 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     NSDictionary *dic = @{@"type":@"room-playback-clear_all"};
     NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *tJsonString = [[NSString alloc] initWithData:tJsonData encoding:NSUTF8StringEncoding];
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.dispatchEvent(%@)", tJsonString];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)", tJsonString];
     [_iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         TKLog(@"回放seek白板清理！");
     }];
@@ -535,14 +547,14 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 
 - (void)userContentController:(WKUserContentController *)userContentController
       didReceiveScriptMessage:(WKScriptMessage *)message {
-    if ([message.name isEqualToString:sSendBoardData]) {
+    if ([message.name isEqualToString:sPubMsg]) {
         // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,
         // NSDictionary, and NSNull类型
         //        NSLog(@"-------%@", message.body);
         //        NSLog(@"JS 调用了 %@ 方法，传回参数 %@",message.name,message.body);
         [self sendBoardData:message.body];
         
-    }else if ([message.name isEqualToString:sDeleteBoardData]){
+    }else if ([message.name isEqualToString:sDelMsg]){
         [self deleteBoardData:message.body];
         
         
@@ -551,11 +563,13 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
     }else if ([message.name isEqualToString:sPrintLogMessage]){
         
         [self printLogMessage:message.name aMessageBody:message.body];
-    }else if ([message.name isEqualToString:sfullScreenToLc]){
-        [self fullScreenToLc:message.name aMessageBody:message.body];
+    }else if ([message.name isEqualToString:sChangeWebPageFullScreen]){
+        [self ChangeWebPageFullScreen:message.name aMessageBody:message.body];
     }else if ([message.name isEqualToString:sOnJsPlay]){
         TKLog(@"----JS 调用了 %@ 方法，传回参数 %@",message.name,message.body);
         [self onJsPlay:message.body];
+    }else if ([message.name isEqualToString:sSetProperty]){//2017-11-10新增
+        
     }
     
 }
@@ -611,13 +625,13 @@ static NSString const* sEduWhiteBoardUrl = @"http://192.168.1.182:8020/phone_dem
 #pragma mark life cycle
 -(void)dealloc{
     
-    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sSendBoardData];
-    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sDeleteBoardData];
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sPubMsg];
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sDelMsg];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sOnPageFinished];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sPrintLogMessage];
-    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sfullScreenToLc];
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sChangeWebPageFullScreen];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sOnJsPlay];
-   
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sSetProperty];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_iWebView stopLoading];
     

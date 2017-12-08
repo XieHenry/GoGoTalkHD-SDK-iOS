@@ -1,14 +1,14 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/viewController
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/viewController
+svn://tonglm@192.168.1.15
 
 
 
-2017-11-08T11:24:18.764209Z
-25814
+2017-12-07T01:51:51.419575Z
+26706
 tonglm
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
-f8434d0147f811e035c079ed9cf34c59
-2017-09-13T12:28:25.918250Z
-24750
-tonglm
+2017-12-07T05:57:56.000000Z
+c1087e043b760788808bcb7fdc0b1c28
+2017-11-26T20:31:52.955602Z
+26179
+liyy
 
 
 
@@ -58,18 +58,18 @@ tonglm
 
 
 
-911
+925
 
 RoomController.m
 file
+26756
 
 
 
-
-2017-11-10T02:26:39.000000Z
-3a59c26710694e986fe18e276537dbac
-2017-11-08T11:24:18.764209Z
-25814
+2017-12-07T10:51:51.000000Z
+2d2d7beb7f6310c625cabdbba0d02cef
+2017-12-07T20:50:05.793376Z
+26756
 tonglm
 
 
@@ -92,5 +92,5 @@ tonglm
 
 
 
-182008
+214462
 

@@ -4,7 +4,7 @@
 //
 //  Created by mac on 2017/4/28.
 //  Copyright © 2017年 talkcloud. All rights reserved.
-//
+//  7个常用语 5个修改的地方
 
 //#import "ViewController.h"
 #import "RoomController.h"
@@ -14,11 +14,11 @@
 #import "TKEduSessionHandle.h"
 #import <WebKit/WebKit.h>
 #import "TKVideoSmallView.h"
+#import "TKSplitScreenView.h"//分屏视图
 #import "TKUtil.h"
 #import "TKMacro.h"
 #import "sys/utsname.h"
 //reconnection
-
 #import "TKTimer.h"
 #import "TKProgressHUD.h"
 #import "TKRCGlobalConfig.h"
@@ -36,11 +36,13 @@
 #import "TKTeacherMessageTableViewCell.h"
 #import "TKStudentMessageTableViewCell.h"
 #import "TKDocumentListView.h"
+#import "TKChooseAreaListView.h"
 #import "TKChatView.h"
 #import "BITAttributedLabel.h"
 //#import "UIButton+clickedOnce.h"
 #import "UIControl+clickedOnce.h"
 
+#import "TKAreaChooseModel.h"
 #import "TKBaseMediaView.h"
 #import "TKMediaDocModel.h"
 #import "TKDocmentDocModel.h"
@@ -117,8 +119,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //https://imtx.me/archives/1933.html 黑色背景
 
 
-
-@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate>
+#pragma mark - 常用语
+@interface RoomController() <TKEduBoardDelegate,TKEduSessionDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,TKGrowingTextViewDelegate,CAAnimationDelegate,UIImagePickerControllerDelegate,TKEduNetWorkDelegate,UINavigationControllerDelegate,TKChooseAreaDelegate, UIPopoverPresentationControllerDelegate>
 
 
 //移动
@@ -141,6 +143,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic, strong) UIButton *iDocumentButton;
 @property (nonatomic, strong) UIButton *iMediaButton;
 @property (nonatomic, strong) UIButton *iUserButton;
+@property (nonatomic, strong) UIButton *iChooseAreaButton;
 
 @property (nonatomic, strong) TKClassTimeView *iClassTimeView;
 
@@ -167,6 +170,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property(nonatomic,retain)TKDocumentListView *iDocumentListView;
 @property(nonatomic,retain)TKDocumentListView *iUsertListView;
 @property(nonatomic,retain)TKDocumentListView *iMediaListView;
+@property(nonatomic,strong)TKChooseAreaListView *iAreaListView;
 //白板
 @property (nonatomic, assign) BOOL iShowBefore;//yes 出现过 no 没出现过
 @property (nonatomic, assign) BOOL iShow;//yes 出现过 no 没出现过
@@ -175,9 +179,16 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic, strong) TKEduRoomProperty *iRoomProperty;
 @property (nonatomic, strong) TKEduSessionHandle *iSessionHandle;
 @property (nonatomic, weak)  id<TKEduRoomDelegate> iRoomDelegate;
-@property (nonatomic, strong) TKVideoSmallView *iTeacherVideoView;
-@property (nonatomic, strong) TKVideoSmallView *iOurVideoView;
-@property (nonatomic, strong) NSMutableArray  *iStudentVideoViewArray;
+@property (nonatomic, strong) TKVideoSmallView *iTeacherVideoView;//老师视频
+@property (nonatomic, strong) TKVideoSmallView *iOurVideoView;//自己的视频
+@property (nonatomic, strong) NSMutableArray  *iStudentVideoViewArray;//存放学生视频数组
+
+//分屏
+@property (nonatomic, strong) TKSplitScreenView *splitScreenView;//分屏视图
+
+@property (nonatomic, strong) NSMutableArray  *iStudentSplitViewArray;//存放学生视频数组
+@property (nonatomic, strong) NSMutableArray  *iStudentSplitScreenArray;//存放学生分屏视频数组
+
 //播放的视频view的字典
 @property (nonatomic, strong) NSMutableDictionary    *iPlayVideoViewDic;
 //拖动进来时的状态
@@ -207,14 +218,18 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic, strong) TKPlaybackMaskView *playbackMaskView;
 @property (nonatomic, assign) BOOL isQuiting;
 
+@property (nonatomic, copy) NSString *currentServer;
     
 #pragma mark 上传图片
 #define OpenAlbumActionSheetTag (0x45A912)
 @property (nonatomic, strong) UIAlertController *OpenAlbumActionSheet;
 @property (nonatomic, assign) float progress;
-@property (nonatomic , strong) TKUploadImageView * uploadImageView;
-@property (nonatomic , strong) TKEduNetManager * requestManager;
-@property (nonatomic , strong) UIImagePickerController * iPickerController;
+@property (nonatomic, strong) TKUploadImageView * uploadImageView;
+@property (nonatomic, strong) TKEduNetManager * requestManager;
+@property (nonatomic, strong) UIImagePickerController * iPickerController;
+
+// 发生断线重连设置为YES，恢复后设置为NO
+@property (nonatomic, assign) BOOL networkRecovered;
 
 #pragma mark - 常用语
 @property (nonatomic, strong) NSMutableArray *xc_phraseMuArray;
@@ -236,9 +251,12 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         _iRoomProperty      = aRoomProperty;
         _iRoomName          = aRoomName;
         _iParamDic          = aParamDic;
+        _currentServer      = [aParamDic objectForKey:@"server"];
+        _networkRecovered   = YES;
        // _iBoardHandle  = [TKEduBoardHandle shareTKEduWhiteBoardHandleInstance];
         _iSessionHandle = [TKEduSessionHandle shareInstance];
         _iSessionHandle.isPlayback = NO;
+        _iSessionHandle.isSendLogMessage = YES;
         // 下课定时器
         _iClassTimetimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                             target:self
@@ -270,7 +288,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         _iRoomProperty      = aRoomProperty;
         _iRoomName          = aRoomName;
         _iParamDic          = aParamDic;
-        
+        _currentServer      = [aParamDic objectForKey:@"server"];
+        _networkRecovered   = YES;
         //_iRoomProperty.iMaxVideo = [[NSNumber alloc] initWithInt:6];
         _iSessionHandle = [TKEduSessionHandle shareInstance];
         _iSessionHandle.isPlayback = YES;
@@ -316,7 +335,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 }
 
 -(void)addNotification{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fullScreenToLc:) name:sfullScreenToLc object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fullScreenToLc:) name:sChangeWebPageFullScreen object:nil];
     /** 1.先设置为外放 */
     //    dispatch_async(dispatch_get_main_queue(), ^{
     //        [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
@@ -393,7 +412,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [self initNavigation:tFrame];
     [self initRightView];
     [self initBottomView];
-    [self initWhiteBoardView];
+    [self initWhiteBoardView];//初始化白板
+    [self initSplitScreenView];//初始化分屏视图
     [self initTapGesTureRecognizer];
     //[self initAutoReconection];
     [self createTimer];
@@ -484,15 +504,37 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
     [_titleView addSubview:_leftButton];
     
+    _iClassTimeView = ({
+        //TKClassTimeView *tClassTimeView = [[TKClassTimeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), ScreenW-sRightWidth*Proportion,sClassTimeViewHeigh*Proportion)];
+        CGFloat h = sClassTimeViewHeigh*Proportion;
+        CGFloat w = h * 3;
+        CGFloat x = 65;
+        CGFloat y = 0;
+        TKClassTimeView *tClassTimeView = [[TKClassTimeView alloc]initWithFrame:CGRectMake(x, y, w, h)];
+        tClassTimeView.backgroundColor = [UIColor clearColor];
+        tClassTimeView.backgroundColor = RGBCOLOR(28, 28, 28);
+        [tClassTimeView setClassTime:0];
+        tClassTimeView;
+        
+    });
+    
+    if (_iSessionHandle.isPlayback == NO) {
+        [_titleView addSubview:_iClassTimeView];
+    }
     
     _titleLable = ({
         
-        UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, self.view.frame.size.width-65-sDocumentButtonWidth*4- 8* 4, sDocumentButtonWidth*Proportion)];
+        //UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, self.view.frame.size.width-65-sDocumentButtonWidth*4- 8* 4, sDocumentButtonWidth*Proportion)];
+        CGFloat w = self.view.frame.size.width-65-sDocumentButtonWidth*4-8*4;
+        CGFloat h = sDocumentButtonWidth*Proportion;
+        CGFloat x = (self.view.frame.size.width - w)/2;
+        CGFloat y = 0;
+        UILabel *tTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, w, h)];
         NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[_iSessionHandle.roomName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
         tTitleLabel.text = attrStr.string ;
         tTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tTitleLabel.backgroundColor = [UIColor clearColor];
-        tTitleLabel.textAlignment = NSTextAlignmentLeft;
+        tTitleLabel.textAlignment = NSTextAlignmentCenter;
         tTitleLabel.font = TKFont(21);
         tTitleLabel.textColor = RGBCOLOR(255, 255, 255);
         tTitleLabel;
@@ -500,10 +542,22 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     });
     [_titleView addSubview:_titleLable];
     
+//    _iChooseAreaButton = ({
+//
+//        UIButton *tUserButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        tUserButton.frame = CGRectMake(ScreenW-sDocumentButtonWidth*Proportion-8, 0, sDocumentButtonWidth*Proportion, sDocumentButtonWidth*Proportion);
+//
+//        tUserButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+//        [tUserButton addTarget:self action:@selector(chooseAreaButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        [tUserButton setImage: LOADIMAGE(@"icon_choose_area_normal") forState:UIControlStateNormal];
+//        tUserButton;
+//
+//    });
+    
     _iUserButton = ({
         
         UIButton *tUserButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        tUserButton.frame = CGRectMake(ScreenW-sDocumentButtonWidth*Proportion-8, 0, sDocumentButtonWidth*Proportion, sDocumentButtonWidth*Proportion);
+        tUserButton.frame = CGRectMake(ScreenW-sDocumentButtonWidth*Proportion*((1))-8*(1), 0, sDocumentButtonWidth*Proportion, sDocumentButtonWidth*Proportion);
         
         tUserButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [tUserButton addTarget:self action:@selector(userButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -539,28 +593,20 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         tDocumentButton;
         
     });
-
+    
     if ((_iUserType == UserType_Teacher) && !_iSessionHandle.isPlayback) {
         [_titleView addSubview:_iDocumentButton];
         [_titleView addSubview:_iMediaButton];
         [_titleView addSubview:_iUserButton];
+        [_titleView addSubview:_iChooseAreaButton];
     }
-  
+    
+    if ((_iUserType != UserType_Teacher) && !_iSessionHandle.isPlayback) {
+        [_titleView addSubview:_iChooseAreaButton];
+    }
+    
     [_iScroll addSubview:_titleView];
     
-    _iClassTimeView = ({
-    
-        TKClassTimeView *tClassTimeView = [[TKClassTimeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), ScreenW-sRightWidth*Proportion,sClassTimeViewHeigh*Proportion)];
-        tClassTimeView.backgroundColor = [UIColor clearColor];
-        tClassTimeView.backgroundColor = RGBCOLOR(28, 28, 28);
-        [tClassTimeView setClassTime:0];
-        tClassTimeView;
-    
-    });
-    
-    if (_iSessionHandle.isPlayback == NO) {
-        [_iScroll addSubview:_iClassTimeView];
-    }
 }
 #pragma mark 点击上课
 -(void)classBeginAndRaiseHandButtonClicked:(UIButton *)aButton{
@@ -579,7 +625,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
                 //  {"recordchat" : true};
                 NSString *str = [TKUtil dictionaryToJSONString:@{@"recordchat":@YES}];
                 //[_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true completion:nil];
-                [_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+                [_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
                 [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
                 
                 return 0;
@@ -597,15 +643,21 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
                 
                 TKLog(@"下课");
                 UIButton *tButton = _iClassBeginAndRaiseHandButton;
-                 [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:YES];
+                [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:YES];
                 [_iClassTimetimer invalidate];      // 下课后计时器销毁
                 
-                // 下课清理白板
-                [_iSessionHandle.iBoardHandle clearLcAllData];
+                // 下课关闭MP3和MP4
+                if ([TKEduSessionHandle shareInstance].isPlayMedia == YES) {
+                    [TKEduSessionHandle shareInstance].isPlayMedia          = NO;
+                    [[TKEduSessionHandle shareInstance]sessionHandleUnpublishMedia:nil];
+                }
+                // 下课清理聊天日志
+                [_iSessionHandle clearMessageList];
+                [self refreshData];
                 // 下课文档复位
                 [_iSessionHandle fileListResetToDefault];
                 // 下课后showpage
-                [_iSessionHandle docmentDefault:_iSessionHandle.iDefaultDocment];
+                [_iSessionHandle docmentDefault:[_iSessionHandle getClassOverDocument]];
                 
                 [TKEduNetManager classBeginEnd:[TKEduSessionHandle shareInstance].iRoomProperties.iRoomId companyid:[TKEduSessionHandle shareInstance].iRoomProperties.iCompanyID aHost:[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp aPort:[TKEduSessionHandle shareInstance].iRoomProperties.sWebPort aComplete:^int(id  _Nullable response) {
                     [[TKEduSessionHandle shareInstance] sessionHandleDelMsg:sClassBegin ID:sClassBegin To:sTellAll Data:@{} completion:nil];
@@ -726,6 +778,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         }aNetError:nil];
     }
 }
+
 -(void)refreshUI{
     //[_iSessionHandle.iBoardHandle refreshUIForFull:NO];
     if (_iPickerController) {
@@ -737,12 +790,17 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     //老师
     CGFloat tViewWidth = (sRightWidth-2*sViewCap)*Proportion;
     {
-        _iTeacherVideoView.frame = CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion);
+        if ([TKEduSessionHandle shareInstance].iStdOutBottom) {
+            _iTeacherVideoView.frame = CGRectMake(tViewCap, tViewCap, tViewWidth, sTeacherVideoViewHeigh*Proportion);
+
+        }
+        
     }
     //多人时 bottom和whiteview
     {
         
         [self refreshWhiteBoard:YES];
+        [self sVideoSplitScreen:_iStudentSplitScreenArray];
        
     }
     //我
@@ -996,9 +1054,11 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         _iRightView = ({
             
             UIView *tRightView = [[UIView alloc] initWithFrame: tRithtFrame];
+            
             tRightView.backgroundColor =  RGBCOLOR(62, 62, 62) ;
             tRightView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             tRightView;
+            
         });
         [_iScroll addSubview:_iRightView];
     
@@ -1017,13 +1077,40 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             tTeacherVideoView.iEduClassRoomSessionHandle = _iSessionHandle;
             tTeacherVideoView;
             
+            
         });
-          [_iRightView addSubview:_iTeacherVideoView];
-    
+        
+        __weak typeof(self) weakSelf = self;
+        _iTeacherVideoView.oneKeyResetBlock = ^{//全部恢复
+            
+            [[TKEduSessionHandle shareInstance] sessionHandleDelMsg:sVideoSplitScreen ID:sVideoSplitScreen To:sTellAllExpectSender Data:@{} completion:nil];
+            
+            NSArray *sArray = [NSArray arrayWithArray:weakSelf.iStudentSplitViewArray];
+            for (TKVideoSmallView *view in sArray) {
+                
+                view.isSplit = YES;
+                [weakSelf TKSplitScreenView:view];
+               
+            }
+            
+            //将拖拽的视频还原
+            for (TKVideoSmallView *view  in weakSelf.iStudentVideoViewArray) {
+                
+                [weakSelf updateMvVideoForPeerID:view.iPeerId];
+                view.isDrag = NO;
+            }
+            
+            [weakSelf sendMoveVideo:weakSelf.iPlayVideoViewDic aSuperFrame:weakSelf.iTKEduWhiteBoardView.frame];
+           
+            [weakSelf refreshBottom];
+        };
+        
+        [_iRightView addSubview:_iTeacherVideoView];
+        
+       
     }
     //我
     {
-    
         CGFloat tOurVideoViewHeight = (_iRoomType == RoomType_OneToOne)?sTeacherVideoViewHeigh*Proportion:0;
         _iOurVideoView= ({
             
@@ -1179,11 +1266,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
     //聊天
     {
-         CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
+        CGFloat tChatHeight       = sRightViewChatBarHeight*Proportion;
         
 //        CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)-tChatHeight-tViewCap;
 //         _iChatTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iClassBeginAndOpenAlumdView.frame)+tViewCap, CGRectGetWidth(_iRightView.frame), tChatTableHeight) style:UITableViewStylePlain];
-        
         
 #pragma mark - 修改的
         CGFloat tChatTableHeight  = CGRectGetHeight(_iRightView.frame)-CGRectGetMaxY(_iMuteAudioAndRewardView.frame)-tChatHeight-tViewCap;
@@ -1233,7 +1319,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         
         [_inputContainer addSubview:tButton];
         
-        
 #pragma mark - 常用语
         self.xc_commonButton = ({
             
@@ -1267,6 +1352,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         _iMediaListView = [[TKDocumentListView alloc]initWithFrame:CGRectMake(ScreenW, 0, 382, ScreenH)];
         _iMediaListView.delegate = self;
         _iUsertListView = [[TKDocumentListView alloc]initWithFrame:CGRectMake(ScreenW, 0, 382, ScreenH) ];
+//        _iAreaListView = [[TKChooseAreaListView alloc] initWithFrame:CGRectMake(ScreenW, 0, 382, ScreenH)];
+//        _iAreaListView.delegate = self;
         [TKEduSessionHandle shareInstance].iMediaListView = _iMediaListView;
         [TKEduSessionHandle shareInstance].iDocumentListView = _iDocumentListView;
         
@@ -1275,14 +1362,78 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
 }
 
+#pragma mark - 分屏/取消分屏
+- (void)TKSplitScreenView:(TKVideoSmallView*)videoView{
+    
+    if (!videoView.isSplit) {
+        
+        //在_iStudentVideoViewArray 中删除视图
+        NSArray *videoArray = [NSArray arrayWithArray:_iStudentVideoViewArray];
+        
+        for (TKVideoSmallView *view in videoArray) {
+            
+            if (view.iVideoViewTag == videoView.iVideoViewTag) {
+                
+                [_iStudentVideoViewArray removeObject:view];
+                
+            }
+        }
+        
+        [_iStudentSplitViewArray addObject:videoView];
+        _splitScreenView.hidden = NO;
+        videoView.isSplit = YES;
+        [_splitScreenView addVideoSmallView:videoView];
+        BOOL isbool = [_iStudentSplitScreenArray containsObject: videoView.iRoomUser.peerID];
+        if (!isbool) {
+            [_iStudentSplitScreenArray addObject:videoView.iRoomUser.peerID];
+            
+        }
+        
+    }else{//取消分屏
+        
+        
+        [_iStudentVideoViewArray addObject:videoView];
+        
+        [_iStudentSplitScreenArray removeObject:videoView.iRoomUser.peerID];
+        
+        [_splitScreenView deleteVideoSmallView:videoView];
+        
+        [_iStudentSplitViewArray removeObject:videoView];
+        
+        if (_iStudentSplitScreenArray.count<=0) {
+            _splitScreenView.hidden = YES;
+        }
+        [self sendMoveVideo:_iPlayVideoViewDic aSuperFrame:_iTKEduWhiteBoardView.frame];
+        
+        videoView.isSplit = NO;
+    }
+    
+    videoView.isDrag = NO;
+    
+    if (_iUserType == UserType_Teacher) {
+        NSString *str = [TKUtil dictionaryToJSONString:@{@"userIDArry":_iStudentSplitScreenArray}];
+        [_iSessionHandle sessionHandlePubMsg:sVideoSplitScreen ID:sVideoSplitScreen To:sTellAllExpectSender Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
+        
+    }
+    
+    [self refreshBottom];
+   
+}
+
 -(void)initWhiteBoardView{
    
     CGFloat tWidth =  ScreenW-sRightWidth*Proportion;
-    CGFloat tHeight = (tWidth *9.0/16.0);
+//    CGFloat tHeight = (tWidth *9.0/16.0);
+//    CGFloat tMidHeight = CGRectGetHeight(_iClassTimeView.frame);
+//    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame),tWidth, tHeight);
+//    if (_iRoomType == RoomType_OneToOne) {
+//        tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame), tWidth, (CGRectGetHeight(_iRightView.frame) - tMidHeight *2));
+//    }
+    CGFloat tHeight = ScreenH - CGRectGetMaxY(_titleView.frame);
     CGFloat tMidHeight = CGRectGetHeight(_iClassTimeView.frame);
-    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame),tWidth, tHeight);
+    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame),tWidth, tHeight);
     if (_iRoomType == RoomType_OneToOne) {
-        tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame), tWidth, (CGRectGetHeight(_iRightView.frame) - tMidHeight *2));
+        tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), tWidth, tHeight);
     }
     
     TKEduRoomProperty *tClassRoomProperty  = _iRoomProperty;
@@ -1354,7 +1505,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
     _iMidView = ({
        
-        UIView *tMidView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,tMidHeight)];
+        UIView *tMidView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,0)];
         tMidView.backgroundColor = RGBCOLOR(28, 28, 28);
         tMidView;
         
@@ -1365,33 +1516,49 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [self refreshWhiteBoard:NO];
 
 }
--(void)refreshWhiteBoard:(BOOL)hasAnimate{
+- (void)initSplitScreenView{
+    
     CGFloat tWidth =  ScreenW-sRightWidth*Proportion;
-    CGFloat tHeight = (tWidth *9.0/16.0);
     CGFloat tMidHeight = CGRectGetHeight(_iClassTimeView.frame);
-    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame), tWidth, (CGRectGetHeight(_iRightView.frame) - tMidHeight*2));
+    CGRect tFrame = CGRectMake(0, 0, tWidth, (CGRectGetHeight(_iRightView.frame) - tMidHeight*2));
+    self.splitScreenView = [[TKSplitScreenView alloc]initWithFrame:tFrame];
+    
+    [self.iTKEduWhiteBoardView addSubview:self.splitScreenView];
+    self.splitScreenView.hidden = YES;
+}
+
+-(void)refreshWhiteBoard:(BOOL)hasAnimate{
+    
+    CGFloat tWidth =  ScreenW-sRightWidth*Proportion;
+//    CGFloat tHeight = (tWidth *9.0/16.0);
+//    CGFloat tMidHeight = CGRectGetHeight(_iClassTimeView.frame);
+//    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame), tWidth, (CGRectGetHeight(_iRightView.frame) - tMidHeight*2));
+    CGFloat tHeight = ScreenH - CGRectGetMaxY(_titleView.frame);
+    CGFloat tMidHeight = CGRectGetHeight(_iClassTimeView.frame);
+    CGRect tFrame = CGRectMake(0, CGRectGetMaxY(_titleView.frame), tWidth, tHeight);
     [_iScroll bringSubviewToFront:_iTKEduWhiteBoardView];
     
     // 去掉了判断1对1
     _iBottomView.hidden = (_iRoomType == RoomType_OneToOne)? ![self onlyAssistantOrTeacherPublished] : ![TKEduSessionHandle shareInstance].iHasPublishStd;
     if (_iRoomType == RoomType_OneToOne) {
-        tFrame =  [self onlyAssistantOrTeacherPublished] ? CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame),tWidth, tHeight) : tFrame;
+        tFrame =  [self onlyAssistantOrTeacherPublished] ? CGRectMake(0, CGRectGetMaxY(_titleView.frame), tWidth, (tWidth *9.0/16.0)+sClassTimeViewHeigh*Proportion + tMidHeight) : tFrame;
     } else {
-        tFrame = [TKEduSessionHandle shareInstance].iHasPublishStd ?CGRectMake(0, CGRectGetMaxY(_iClassTimeView.frame),tWidth, tHeight) : tFrame;
+        tFrame = [TKEduSessionHandle shareInstance].iHasPublishStd ?CGRectMake(0, CGRectGetMaxY(_titleView.frame), tWidth, (tWidth *9.0/16.0)+sClassTimeViewHeigh*Proportion + tMidHeight) : tFrame;
     }
     
     if (hasAnimate) {
         [UIView animateWithDuration:0.1 animations:^{
             _iTKEduWhiteBoardView.frame = tFrame;
+            _splitScreenView.frame = CGRectMake(0, 0, CGRectGetWidth(tFrame), CGRectGetHeight(tFrame));
             // MP3图标位置变化,但是MP4的位置不需要变化
             if (!_iMediaView.iMediaStream.hasVideo) {
-                _iMediaView.frame = CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), CGRectGetWidth(self.iTKEduWhiteBoardView.frame), 57);
+                _iMediaView.frame = CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame)-57, CGRectGetWidth(self.iTKEduWhiteBoardView.frame), 57);
             }
-            _iMidView.frame =  CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,tMidHeight);
+            _iMidView.frame =  CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,0);
             [[TKEduSessionHandle shareInstance].iBoardHandle refreshWebViewUI];
             [self refreshBottom];
-            if (_iMvVideoDic) {
-                [self moveVideo:_iMvVideoDic];
+            if (_iMvVideoDic && _iStudentSplitViewArray.count<=0) {
+                [self moveVideo:_iMvVideoDic];//视频位置会乱掉所以注释掉了
                 
             }
             
@@ -1399,7 +1566,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }else{
         
         _iTKEduWhiteBoardView.frame = tFrame;
-        _iMidView.frame =  CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,tMidHeight);
+        _splitScreenView.frame = CGRectMake(0, 0, CGRectGetWidth(tFrame), CGRectGetHeight(tFrame));
+        _iMidView.frame =  CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,0);
         [[TKEduSessionHandle shareInstance].iBoardHandle refreshWebViewUI];
         [self refreshBottom];
         if (_iMvVideoDic) {
@@ -1469,24 +1637,49 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [_iScroll addSubview:_iBottomView];
 
     _iStudentVideoViewArray = [NSMutableArray arrayWithCapacity:_iRoomProperty.iMaxVideo.intValue];
+    _iStudentSplitScreenArray = [NSMutableArray arrayWithCapacity:_iRoomProperty.iMaxVideo.intValue];
+    _iStudentSplitViewArray =[NSMutableArray arrayWithCapacity:_iRoomProperty.iMaxVideo.intValue];
     _iPlayVideoViewDic = [[NSMutableDictionary alloc]initWithCapacity:10];
     CGFloat tWidth = sStudentVideoViewWidth*Proportion;
     CGFloat tHeight = sStudentVideoViewHeigh*Proportion;
     CGFloat tCap = sViewCap *Proportion;
-   
+    
     for (NSInteger i = 0; i < _iRoomProperty.iMaxVideo.intValue-1; ++i) {
         TKVideoSmallView *tOurVideoBottomView = [[TKVideoSmallView alloc]initWithFrame:CGRectMake(tCap*2 + tWidth,tCap + CGRectGetMinY(_iBottomView.frame), tWidth, tHeight) aVideoRole:EVideoRoleOther];
         tOurVideoBottomView.iPeerId         = @"";
         tOurVideoBottomView.iVideoViewTag   = i;
         tOurVideoBottomView.isDrag          = NO;
+        tOurVideoBottomView.isSplit         = NO;
         tOurVideoBottomView.isNeedFunctionButton = (_iUserType==UserType_Teacher);
         tOurVideoBottomView.iEduClassRoomSessionHandle = _iSessionHandle;
         tOurVideoBottomView.hidden = NO;
         tOurVideoBottomView.iNameLabel.text = [NSString stringWithFormat:@"%@",@(i)];
+        //分屏按钮回调
+        __weak typeof(self) weakSelf = self;
+        tOurVideoBottomView.splitScreenClickBlock = ^(EVideoRole aVideoRole) {
+            //学生分屏开始
+            [weakSelf TKSplitScreenView:tOurVideoBottomView];
+            
+//            if (tOurVideoBottomView.isSplit && tOurVideoBottomView.isDrag) {
+//                tOurVideoBottomView.frame = CGRectMake(tCap*2 + tWidth,tCap + CGRectGetMinY(_iBottomView.frame), tWidth, tHeight);
+//                [self sendMoveVideo:_iPlayVideoViewDic aSuperFrame:_iTKEduWhiteBoardView.frame];
+//            }
+           
+            NSArray *videoArray = [NSArray arrayWithArray:_iStudentVideoViewArray];
+            NSArray *array = [NSArray arrayWithArray:_iStudentSplitScreenArray];
+            for (TKVideoSmallView *view in videoArray) {
+                BOOL isbool = [self.iStudentSplitScreenArray containsObject: view.iRoomUser.peerID];
+                if (view.isDrag && !view.isSplit && !isbool && array.count>0) {
+                    [self.iStudentSplitScreenArray addObject:view.iRoomUser.peerID];
+                    [self TKSplitScreenView:view];
+                }
+            }
+        };
         // 添加长按手势
         UILongPressGestureRecognizer * longGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressClick:)];
         [tOurVideoBottomView addGestureRecognizer:longGes];
         [_iStudentVideoViewArray addObject:tOurVideoBottomView];
+        
     }
 
 }
@@ -1497,38 +1690,70 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     CGFloat tCap    = sViewCap *Proportion;
     CGFloat left    = tCap;
     BOOL tStdOutBottom = NO;
+    
+//    for (TKVideoSmallView *view in _splitScreenView.videoSmallViewArray) {
+//        if (view.iRoomUser) {
+//
+//            [_iScroll addSubview:view];
+//            view.isDrag = NO;
+//            view.alpha  = 1;
+//            view.frame = CGRectMake(left, tCap+CGRectGetMaxY(_iMidView.frame), tWidth, tHeight);
+//            left += tCap + tWidth;
+//
+//        }
+//        else {
+//
+//            if (view.superview) {
+//                [view removeFromSuperview];
+//            }
+//        }
+//    }
+    
     for (TKVideoSmallView *view in _iStudentVideoViewArray) {
-        
+
         if (view.iRoomUser) {
-            BOOL isEndMvToScrv = ((CGRectGetMaxY(view.frame) < CGRectGetMinY(_iBottomView.frame)));
-            if (!view.superview) {
+            
+            if (!view.isSplit && view.isDrag == NO) {//判断是否分屏
                 [_iScroll addSubview:view];
-            }
-            if (isEndMvToScrv) {
+                view.alpha  = 1;
+                view.frame = CGRectMake(left, tCap+CGRectGetMaxY(_iMidView.frame), tWidth, tHeight);
+                left += tCap + tWidth;
                 
-                view.isDrag = YES;
-                tStdOutBottom = YES;
-                //view.transform = CGAffineTransformMakeScale(1.2, 1.2);
-                continue;
+            }else{
+                BOOL isEndMvToScrv = ((CGRectGetMaxY(view.frame) < CGRectGetMinY(_iBottomView.frame)));
+                if (!view.superview) {
+                    [_iScroll addSubview:view];
+                }
+                if (isEndMvToScrv) {
+
+                    view.isDrag = YES;
+                    tStdOutBottom = YES;
+                    //view.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                    continue;
+                }
+                //view.transform = CGAffineTransformIdentity;
+                view.isDrag = NO;
+                view.alpha  = 1;
+                view.frame = CGRectMake(left, tCap+CGRectGetMaxY(_iMidView.frame), tWidth, tHeight);
+                left += tCap + tWidth;
+                
             }
             
-            
-            //view.transform = CGAffineTransformIdentity;
-            view.isDrag = NO;
-            view.alpha  = 1;
-            view.frame = CGRectMake(left, tCap+CGRectGetMaxY(_iMidView.frame), tWidth, tHeight);
-            left += tCap + tWidth;
         }
         else {
-            
+
             if (view.superview) {
-                
                 [view removeFromSuperview];
             }
         }
         
+        if(view.iRoomUser.peerID){
+            
+            [_iPlayVideoViewDic setObject:view forKey:view.iRoomUser.peerID];
+        }
+
     }
-    
+
     [TKEduSessionHandle shareInstance].iStdOutBottom = tStdOutBottom;
     if (tStdOutBottom && ![TKEduSessionHandle shareInstance].iIsFullState) {
         [_iScroll sendSubviewToBack:_iTKEduWhiteBoardView];
@@ -1614,7 +1839,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
      //TKLog(@"1------checkPlayVideo:%@,%@",tHaveRaiseHand?@"举手":@"取消举手",tIsMuteAudioState?@"静音":@"非静音");
 }
-
+#pragma mark - 播放
 -(void)playVideo:(RoomUser*)user {
     
     [_iSessionHandle delUserPlayAudioArray:user];
@@ -1656,22 +1881,44 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         viewToSee = _iOurVideoView;
     }
     else
+    {
         for (TKVideoSmallView* view in _iStudentVideoViewArray) {
             if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:user.peerID]) {
                 viewToSee = view;
                 break;
             }
         }
+        for (TKVideoSmallView* view in _splitScreenView.videoSmallViewArray) {
+            if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:user.peerID]) {
+               viewToSee = view;
+                break;
+            }
+        }
+    }
     
     if (viewToSee && viewToSee.iRoomUser != nil && [viewToSee.iRoomUser.peerID isEqualToString:user.peerID]) {
+        
         __weak typeof(self)weekSelf = self;
         NSMutableDictionary *tPlayVideoViewDic = _iPlayVideoViewDic;
+        
+        NSArray *array = [NSArray arrayWithArray:_iStudentSplitScreenArray];
+        for (NSString *peerID in array) {
+            if([user.peerID isEqualToString:peerID]) {
+                viewToSee.isSplit = YES;
+                [self TKSplitScreenView:viewToSee];
+            }
+        }
+        
         [self myUnPlayVideo:user aVideoView:viewToSee completion:^(NSError *error) {
+            
             [tPlayVideoViewDic removeObjectForKey:user.peerID];
+            
             __strong typeof(weekSelf) strongSelf =  weekSelf;
-            viewToSee.frame = CGRectMake(0, CGRectGetMinY(_iBottomView.frame), CGRectGetWidth(viewToSee.frame), CGRectGetHeight(viewToSee.frame));
-           
+            
+//            viewToSee.frame = CGRectMake(0, CGRectGetMinY(_iBottomView.frame), CGRectGetWidth(viewToSee.frame), CGRectGetHeight(viewToSee.frame));
+            
             [strongSelf updateMvVideoForPeerID:user.peerID];
+            
             [strongSelf refreshUI];
             
         }];
@@ -1679,13 +1926,14 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
      [_iSessionHandle delePendingUser:user];
 }
 
+
 -(void)updateMvVideoForPeerID:(NSString *)aPeerId {
 
     NSDictionary *tVideoViewDic = (NSDictionary*) [_iMvVideoDic objectForKey:aPeerId];
     NSMutableDictionary *tVideoViewDicNew = [NSMutableDictionary dictionaryWithDictionary:tVideoViewDic];
     [tVideoViewDicNew setObject:@(NO) forKey:@"isDrag"];
-    [tVideoViewDicNew setObject:@(0) forKey:@"top"];
-    [tVideoViewDicNew setObject:@(0) forKey:@"left"];
+    [tVideoViewDicNew setObject:@(0) forKey:@"percentTop"];
+    [tVideoViewDicNew setObject:@(0) forKey:@"percentLeft"];
     [_iMvVideoDic setObject:tVideoViewDicNew forKey:aPeerId];
     
     
@@ -1710,7 +1958,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             aVideoView.iPeerId        = aRoomUser.peerID;
             aVideoView.iRoomUser      = aRoomUser;
             aVideoView.iRealVideoView = tView;
-            tView.frame = CGRectMake(0, 0, CGRectGetWidth(aVideoView.iVideoFrame), CGRectGetHeight(aVideoView.iVideoFrame));
+            CGFloat vWidth =  CGRectGetWidth(aVideoView.frame);
+            CGFloat vHeight = vWidth/4*3;
+            tView.frame = CGRectMake(0, 0, vWidth, vHeight);
             [aVideoView addVideoView:tView];
             [aVideoView changeAudioDisabledState]; // 当用户初始播放时，没有发送属性改变的通知，需要手动设置
             [aVideoView changeVideoDisabledState]; // 当用户初始播放时，没有发送属性改变的通知，需要手动设置
@@ -1721,6 +1971,12 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             }else{
                 [aVideoView changeName:aRoomUser.nickName];
             }
+            //进入后台的提示
+            BOOL isInBackGround = [aRoomUser.properties[sIsInBackGround] boolValue];
+           
+            [aVideoView endInBackGround:isInBackGround];
+            
+            
             TKLog(@"----play:%@  playerID:%@ frame:%@ VideoView:%@",aRoomUser.nickName, aVideoView.iPeerId,@(tView.frame.size.width),@(aVideoView.iVideoViewTag));
             completion(error);
         
@@ -1786,6 +2042,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
          [_iSessionHandle sessionHandleLeaveRoom:nil];
          [_iSessionHandle.iBoardHandle cleanup];
      }else{
+         // 清理数据
+         [self quitClearData];
          
          [_iSessionHandle clearAllClassData];
          _iSessionHandle.roomMgr = nil;
@@ -1802,6 +2060,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark - 修改的
 //                     ViewController *tRoom = (ViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
 //                     [tRoom openUrl:tRoom.urlPath];
+                 }
+                 
+                 if (self.networkRecovered == NO) {
+                     [TKUtil showMessage:MTLocalized(@"Error.WaitingForNetwork")];
                  }
              }];
              
@@ -1875,15 +2137,57 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //自己进入课堂
 - (void)sessionManagerRoomJoined:(NSError *)error {
     
+//    // 进入房间后更改底层默认服务器（由于链接入会的服务器和底层的默认服务器不一致，需要修改）
+//    if ([_iSessionHandle.localUser.properties objectForKey:@"servername"]) {
+//        [[RoomManager instance] changeCurrentServer:[_iSessionHandle.localUser.properties objectForKey:@"servername"]];
+//    }
+    [TKEduNetManager getDefaultAreaWithComplete:^int(id  _Nullable response) {
+        if (response) {
+            NSString *serverName = [response objectForKey:@"name"];
+            if (serverName && ([self.currentServer isEqualToString:@"global"] ||
+                               [self.currentServer isEqualToString:@"demo"])) {
+                self.currentServer = serverName;
+            }
+            [[RoomManager instance] changeCurrentServer:self.currentServer];
+        }
+        return 0;
+    } aNetError:^int(id  _Nullable response) {
+        [[RoomManager instance] changeCurrentServer:self.currentServer];
+        return -1;
+    }];
+    
+    // 断线重连后主动获取奖杯数目
+    if (self.networkRecovered == NO) {
+        [self getTrophyNumber];
+    }
+    
+    self.networkRecovered = YES;
+    
     bool isConform = [TKUtil  deviceisConform];
     if (_iSessionHandle.localUser.role == UserType_Teacher) {
         if (!isConform) {
             NSString *str = [TKUtil dictionaryToJSONString:@{@"lowconsume":@YES, @"maxvideo":@(2)}];
-            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
         } else {
             NSString *str = [TKUtil dictionaryToJSONString:@{@"lowconsume":@NO, @"maxvideo":@(_iRoomProperty.iMaxVideo.intValue)}];
-            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+            [_iSessionHandle sessionHandlePubMsg:sLowConsume ID:sLowConsume To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
         }
+    }
+    
+    // 低能耗老师进入一对多房间，进行提示
+    if (!isConform && _iSessionHandle.localUser.role == UserType_Teacher && _iRoomType != RoomType_OneToOne) {
+        NSString *message = [NSString stringWithFormat:@"%@", MTLocalized(@"Prompt.devicetPrompt")];
+        TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:_iSessionHandle.localUser.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:_iSessionHandle.localUser.nickName aTime:[TKUtil currentTimeToSeconds]];
+        [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+        [self refreshData];
+    }
+    
+    // 低能耗学生进入一对多房间，进行提示
+    if (!isConform && _iSessionHandle.localUser.role != UserType_Teacher && _iRoomType != RoomType_OneToOne) {
+        NSString *message = [NSString stringWithFormat:@"%@", MTLocalized(@"Prompt.devicetPrompt")];
+        TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:_iSessionHandle.localUser.peerID aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_Message aMessage:message aUserName:_iSessionHandle.localUser.nickName aTime:[TKUtil currentTimeToSeconds]];
+        [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
+        [self refreshData];
     }
     
     // 如果断网之前在后台，回到前台时的时候需要发送回到前台的信令
@@ -2033,7 +2337,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }
     
     //[_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:_iSessionHandle.localUser.peerID Data:@"" Save:NO completion:nil];
-    [_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:_iSessionHandle.localUser.peerID Data:@"" Save:NO AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    [_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:_iSessionHandle.localUser.peerID Data:@"" Save:NO AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
     
     // 判断上下课按钮是否需要隐藏
     if ((_iSessionHandle.roomMgr.hideClassBeginEndButton == YES && _iSessionHandle.roomMgr.localUser.role != UserType_Student) || _iSessionHandle.isPlayback == YES) {
@@ -2053,7 +2357,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             [_iClassBeginAndRaiseHandButton setTitle:MTLocalized(@"Button.ClassIsOver") forState:UIControlStateNormal];
             NSString *str = [TKUtil dictionaryToJSONString:@{@"recordchat":@YES}];
             //[_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true completion:nil];
-            [_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+            [_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
             [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
         
             return 0;
@@ -2073,8 +2377,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [self sessionManagerUserPublished:_iSessionHandle.localUser];
     }
     
-    // 给白板传自己peerId
-    [_iSessionHandle.iBoardHandle setMyPeerID:_iSessionHandle.localUser.peerID nickName:_iSessionHandle.localUser.nickName];
 }
 
 //自己离开课堂
@@ -2110,12 +2412,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 //观看视频
 - (void)sessionManagerUserPublished:(RoomUser *)user {
-    
-    // 一对一助教发布音视频不处理
-//    if (user.role == UserType_Assistant && _iSessionHandle.roomMgr.roomType == RoomType_OneToOne) {
-//        return;
-//    }
-    
     // ToDo: 线程安全
     [[TKEduSessionHandle shareInstance] addPublishUser:user];
     [[TKEduSessionHandle shareInstance] delePendingUser:user];
@@ -2162,6 +2458,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [[TKEduSessionHandle shareInstance]publishVideoDragWithDic:tMvVideoDic To:sTellAllExpectSender];
     }
    
+    if (_iSessionHandle.iHasPublishStd == NO) {
+        [self refreshUI];
+    }
 }
 
 //用户进入
@@ -2189,9 +2488,23 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         }
     }
     [[TKEduSessionHandle shareInstance]addUser:user];
-    //寻课不提示
+    //巡课不提示
+    NSString *userRole;
+    switch (user.role) {
+        case UserType_Teacher:
+            userRole = MTLocalized(@"Role.Teacher");
+            break;
+        case UserType_Student:
+            userRole = MTLocalized(@"Role.Student");
+            break;
+        case UserType_Assistant:
+            userRole = MTLocalized(@"Role.Assistant");
+            break;
+        default:
+            break;
+    }
     if (user.role !=UserType_Patrol) {
-        TKChatMessageModel *tModel = [[TKChatMessageModel alloc]initWithFromid:0 aTouid:0 iMessageType:MessageType_Message aMessage:[NSString stringWithFormat:@"%@ %@",user.nickName, MTLocalized(@"Action.EnterRoom")] aUserName:nil aTime:[TKUtil currentTime]];
+        TKChatMessageModel *tModel = [[TKChatMessageModel alloc]initWithFromid:0 aTouid:0 iMessageType:MessageType_Message aMessage:[NSString stringWithFormat:@"%@(%@) %@",user.nickName,userRole, MTLocalized(@"Action.EnterRoom")] aUserName:nil aTime:[TKUtil currentTime]];
         [_iSessionHandle addOrReplaceMessage:tModel];
     }
     BOOL tISpclUser = (user.role !=UserType_Student && user.role !=UserType_Teacher);
@@ -2222,8 +2535,23 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [self unPlayVideo:user];
     
     BOOL tIsMe = [[NSString stringWithFormat:@"%@",user.peerID] isEqualToString:[NSString stringWithFormat:@"%@",[TKEduSessionHandle shareInstance].localUser.peerID]];
+    
+    NSString *userRole;
+    switch (user.role) {
+        case UserType_Teacher:
+            userRole = MTLocalized(@"Role.Teacher");
+            break;
+        case UserType_Student:
+            userRole = MTLocalized(@"Role.Student");
+            break;
+        case UserType_Assistant:
+            userRole = MTLocalized(@"Role.Assistant");
+            break;
+        default:
+            break;
+    }
     if (user.role != UserType_Patrol && !tIsMe) {
-        TKChatMessageModel *tModel = [[TKChatMessageModel alloc]initWithFromid:0 aTouid:0 iMessageType:MessageType_Message aMessage:[NSString stringWithFormat:@"%@ %@",user.nickName, MTLocalized(@"Action.ExitRoom")] aUserName:nil aTime:[TKUtil currentTime]];
+        TKChatMessageModel *tModel = [[TKChatMessageModel alloc]initWithFromid:0 aTouid:0 iMessageType:MessageType_Message aMessage:[NSString stringWithFormat:@"%@(%@)%@",user.nickName,userRole, MTLocalized(@"Action.ExitRoom")] aUserName:nil aTime:[TKUtil currentTime]];
         [_iSessionHandle addOrReplaceMessage:tModel];
     }
    
@@ -2240,7 +2568,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 }
 
 //用户信息变化 
-- (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties{
+- (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId {
     
      TKLog(@"------UserChanged:%@ properties:(%@)",user.nickName,properties);
   
@@ -2290,7 +2618,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         if([_iSessionHandle.localUser.peerID isEqualToString:user.peerID] ) {
             
             NSLog(@"------sPublishstate%@",[properties objectForKey:sPublishstate]);
-
+            
             if (tPublishState == PublishState_NONE || (tPublishState == PublishState_VIDEOONLY)) {
                 _iIsCanRaiseHandUp                = YES;
             } else {
@@ -2360,6 +2688,12 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
     if ([properties objectForKey:sIsInBackGround]) {
         BOOL isInBackground = [[properties objectForKey:sIsInBackGround] boolValue];
+        
+        // 发送通知告诉视频控件后台状态
+        NSDictionary *dict = @{sIsInBackGround:[properties objectForKey:sIsInBackGround]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"%@%@",sIsInBackGround,user.peerID] object:nil userInfo:dict];
+        
+        
         // 当用户发生前后台切换，用户列表状态也要发生变化
         for (RoomUser *u in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
             if ([u.peerID isEqualToString:user.peerID]) {
@@ -2385,12 +2719,43 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
     }
     
+    if ([properties objectForKey:sUdpState]) {
+        NSInteger updState = [[properties objectForKey:sUdpState] integerValue];
+        // 用户列表的属性进行变更
+        for (RoomUser *u in [[TKEduSessionHandle shareInstance] userListExpecPtrlAndTchr]) {
+            if ([u.peerID isEqualToString:user.peerID]) {
+                [u.properties setObject:@(updState) forKey:sUdpState];
+                [self.iUsertListView reloadData];
+                break;
+            }
+        }
+    }
+    
+    if ([properties objectForKey:sServerName]) {
+        
+        if ([user.peerID isEqualToString:_iSessionHandle.localUser.peerID] &&
+            ![fromId isEqualToString:_iSessionHandle.localUser.peerID]) {
+            
+            // 其他用户修改自己的服务器
+            NSString *serverName = [NSString stringWithFormat:@"%@", [properties objectForKey:sServerName]];
+            if (serverName != nil) {
+                TKLog(@"助教协助修改了服务器地址:%@", serverName);
+                // 修改本地默认服务器选项
+                //[self.iAreaListView setServerName:serverName];
+                [self changeServer:serverName];
+            }
+            
+        }
+        
+    }
+    
     NSDictionary *tDic = @{sRaisehand:[properties objectForKey:sRaisehand]?[properties objectForKey:sRaisehand]:@(isRaiseHand),
                            sPublishstate:[properties objectForKey:sPublishstate]?[properties objectForKey:sPublishstate]:@(user.publishState),
                            sCandraw:[properties objectForKey:sCandraw]?[properties objectForKey:sCandraw]:@(user.canDraw),
                            sGiftNumber:@(tGiftNumber),
                            sDisableAudio:[properties objectForKey:sDisableAudio]?@([[properties objectForKey:sDisableAudio] boolValue]):@(user.disableAudio),
-                           sDisableVideo:[properties objectForKey:sDisableVideo]?@([[properties objectForKey:sDisableVideo] boolValue]):@(user.disableVideo)
+                           sDisableVideo:[properties objectForKey:sDisableVideo]?@([[properties objectForKey:sDisableVideo] boolValue]):@(user.disableVideo),
+                           sFromId:fromId
                            };
     [[NSNotificationCenter defaultCenter]postNotificationName:[NSString stringWithFormat:@"%@%@",sRaisehand,user.peerID] object:tDic];
     [[NSNotificationCenter defaultCenter]postNotificationName:sDocListViewNotification object:nil];
@@ -2482,6 +2847,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //进入会议失败,重连
 - (void)sessionManagerDidFailWithError:(NSError *)error {
     
+    self.networkRecovered = NO;
+    self.currentServer = nil;
+    
     BOOL isJoinRoomed = YES;
     if (isJoinRoomed) {
       
@@ -2492,12 +2860,19 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [[TKEduSessionHandle shareInstance].iBoardHandle disconnectCleanup];
     [_iSessionHandle clearAllClassData];
     [_iSessionHandle.iBoardHandle clearAllWhiteBoardData];
-    [_iTeacherVideoView clearVideoData];
-    [_iOurVideoView clearVideoData];
-    [_iPlayVideoViewDic removeAllObjects];
+//    [_iTeacherVideoView clearVideoData];
+//    [_iOurVideoView clearVideoData];
+//    [_iPlayVideoViewDic removeAllObjects];
+//    for (TKVideoSmallView *view in _iStudentVideoViewArray) {
+//        [view clearVideoData];
+//    }
+    [self clearVideoViewData:_iTeacherVideoView];
+    [self clearVideoViewData:_iOurVideoView];
     for (TKVideoSmallView *view in _iStudentVideoViewArray) {
-        [view clearVideoData];
+        [self clearVideoViewData:view];
     }
+    [_iPlayVideoViewDic removeAllObjects];
+   
     // 播放的MP4前，先移除掉上一个MP4窗口
     if (self.iMediaView) {
         [self.iMediaView removeFromSuperview];
@@ -2508,9 +2883,28 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [self.iScreenView removeFromSuperview];
         self.iScreenView = nil;
     }
+    
+    //将分屏的数据删除
+    for (TKVideoSmallView *view in _iStudentSplitViewArray) {
+        //[view clearVideoData];
+        [self clearVideoViewData:view];
+    }
+    [_splitScreenView deleteAllVideoSmallView];
+    [_iStudentSplitScreenArray removeAllObjects];
+    
 }
 
-//相关信令
+- (void)clearVideoViewData:(TKVideoSmallView *)videoView {
+    if (videoView.iRoomUser != nil) {
+        [self myUnPlayVideo:videoView.iRoomUser aVideoView:videoView completion:^(NSError *error) {
+            TKLog(@"清理视频窗口完成!");
+        }];
+    } else {
+        [videoView clearVideoData];
+    }
+}
+
+//相关信令 pub
 - (void)sessionManagerOnRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(unsigned long)ts Data:(NSObject*)data InList:(BOOL)inlist{
      TKLog(@"jin------remoteMsg:%@ msgID:%@",msgName,msgID);
     //添加
@@ -2526,6 +2920,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
          //上课
         if (add) {
            
+            [TKEduSessionHandle shareInstance].iIsClassEnd = NO;
             // 上课之前将自己的音视频关掉
             _iSessionHandle.localUser.publishState = PublishState_NONE;
             [self sessionManagerUserUnpublished:_iSessionHandle.localUser];
@@ -2535,12 +2930,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
                 [[TKEduSessionHandle shareInstance]sessionHandleUnpublishMedia:nil];
                 
             }
-            if (_iUserType == UserType_Teacher ) {
-                if ([TKEduSessionHandle shareInstance].iCurrentDocmentModel) {
-                    [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:[TKEduSessionHandle shareInstance].iCurrentDocmentModel To:sTellAllExpectSender aTellLocal:NO];
-                }
-                
-            }
+           
             if ((self.playbackMaskView.iProgressSlider.sliderPercent < 0.01 && _iSessionHandle.isPlayback == YES && self.playbackMaskView.playButton.isSelected == YES) ||
                 _iSessionHandle.isPlayback == NO) {
                 [self showMessage:MTLocalized(@"Class.Begin")];
@@ -2548,7 +2938,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             
             if (!_iSessionHandle.isPlayback) {
                 if (_iUserType==UserType_Teacher || (_iUserType==UserType_Student && [str intValue]  == 1)) {
-                    
+                     //PublishState_BOTH 
                     [_iSessionHandle sessionHandleChangeUserPublish:tPeerId Publish:(PublishState_BOTH) completion:^(NSError *error) {
                         
                     }];
@@ -2564,7 +2954,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
            
             //如果是学生需要重新设置翻页
             [[TKEduSessionHandle shareInstance]configurePage:[TKEduSessionHandle shareInstance].iIsCanDrawInit?true:[TKEduSessionHandle shareInstance].iIsCanPageInit isSend:NO to:sTellAll peerID:isStdAndRoomOne?tPeerId:@""];
-           
+            
             
             /*
             if (isStdAndRoomOne) {
@@ -2582,15 +2972,13 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //            [_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:tPeerId  Data:@"" Save:false completion:^(NSError *error) {
 //
 //            }];
-            [_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:tPeerId Data:@"" Save:false AssociatedMsgID:nil AssociatedUserID:nil completion:^(NSError *error) {
+            [_iSessionHandle sessionHandlePubMsg:sUpdateTime ID:sUpdateTime To:tPeerId Data:@"" Save:false AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:^(NSError *error) {
 
             }];
             
             [self startClassBeginTimer];
             [self refreshUI];
             
-            // 给白板发送房间类型
-            [_iSessionHandle.iBoardHandle setRoomType:_iSessionHandle.roomType];
             
         }else{
             
@@ -2673,12 +3061,52 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
       
 
     }else if ([msgName isEqualToString:sStreamFailure]){
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *tDataDic = (NSDictionary *)data;
-            NSString *tPeerId = [tDataDic objectForKey:@"studentId"];
-            [[TKEduSessionHandle shareInstance] delePendingUser:[[TKEduSessionHandle shareInstance]userInUserList:tPeerId]];
-            TKLog(@"-------ICE");
+        
+        // 收到用户发布失败的消息
+        NSDictionary *tDataDic = @{};
+        if ([data isKindOfClass:[NSString class]]) {
+            NSString *tDataString = [NSString stringWithFormat:@"%@",data];
+            NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+            tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
         }
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            tDataDic = (NSDictionary *)data;
+        }
+        
+        NSString *tPeerId = [tDataDic objectForKey:@"studentId"];
+        NSInteger failureType = [tDataDic objectForKey:@"failuretype"]?[[tDataDic objectForKey:@"failuretype"] integerValue] : 0;
+        
+        // 如果这个发布失败的用户是自己点击上台的，需要对自己进行上台失败错误原因进行提示。
+        if ([[[_iSessionHandle pendingUserDic] allKeys] containsObject:tPeerId]) {
+            switch (failureType) {
+                case 1:
+                    [TKUtil showMessage:MTLocalized(@"Prompt.StudentUdpOnStageError")];
+                    break;
+                    
+                case 2:
+                    [TKUtil showMessage:MTLocalized(@"Prompt.StudentTcpError")];
+                    break;
+                    
+                case 3:
+                    [TKUtil showMessage:MTLocalized(@"Prompt.exceeds")];
+                    break;
+                    
+                case 4:
+                {
+                  
+                    [TKUtil showMessage:[NSString stringWithFormat:@"%@%@",[[TKEduSessionHandle shareInstance] localUser].nickName,MTLocalized(@"Prompt.BackgroundCouldNotOnStage")]];//拼接上用户名
+                    break;
+                }
+                case 5:
+                    [TKUtil showMessage:MTLocalized(@"Prompt.StudentUdpError")];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+        [[TKEduSessionHandle shareInstance] delePendingUser:[[TKEduSessionHandle shareInstance]userInUserList:tPeerId]];
         
     }else if ([msgName isEqualToString:sVideoDraghandle]){
         
@@ -2701,35 +3129,87 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         [self moveVideo:tMvVideoDic];
         
 
-    } else if ([msgName isEqualToString:sUserEnterBackGround]){
+    } else if ([msgName isEqualToString:sChangeServerArea]){
+//        NSDictionary *tDataDic = @{};
+//        if ([data isKindOfClass:[NSString class]]) {
+//            NSString *tDataString = [NSString stringWithFormat:@"%@", data];
+//            NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+//            tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+//        }
+//        if ([data isKindOfClass:[NSDictionary class]]) {
+//            tDataDic = (NSDictionary *)data;
+//        }
+//        NSString *serverName = [tDataDic objectForKey:@"servername"];
+//        if (serverName != nil) {
+//            TKLog(@"助教协助修改了服务器地址:%@", serverName);
+//            // 修改本地默认服务器选项
+//            [self.iAreaListView setServerName:serverName];
+//        }
+    } else if ([msgName isEqualToString:sVideoSplitScreen]){//分屏回调
+    
+        NSDictionary *tDataDic = @{};
+        if ([data isKindOfClass:[NSString class]]) {
+            NSString *tDataString = [NSString stringWithFormat:@"%@",data];
+            NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+            tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+        }
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            tDataDic = (NSDictionary *)data;
+        }
+        NSMutableArray *array = [NSMutableArray arrayWithArray:tDataDic[@"userIDArry"]];
+       
+        //取消全屏的操作
+        if (_iStudentSplitScreenArray.count>array.count) {
+            
+            __block NSMutableArray *difObject = [NSMutableArray arrayWithCapacity:10];
+            //找到arr2中有,arr1中没有的数据
+            [_iStudentSplitScreenArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSNumber *number1 = obj;//[obj objectAtIndex:idx];
+                __block BOOL isHave = NO;
+                [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([number1 isEqual:obj]) {
+                        isHave = YES;
+                        *stop = YES;
+                    }
+                }];
+                if (!isHave) {
+                    [difObject addObject:obj];
+                }
+            }];
+            [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSNumber *number1 = obj;//[obj objectAtIndex:idx];
+                __block BOOL isHave = NO;
+                [_iStudentSplitScreenArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([number1 isEqual:obj]) {
+                        isHave = YES;
+                        *stop = YES;
+                    }
+                }];
+                if (!isHave) {
+                    [difObject addObject:obj];
+                }
+            }];
+            
+            for (NSString *peerID in difObject) {
+                
+                NSArray *sArray = [NSArray arrayWithArray:_iStudentSplitViewArray];
+                for (TKVideoSmallView *view in sArray) {
+                    
+                    if([view.iRoomUser.peerID isEqualToString:peerID]){
+                        view.isSplit = YES;
+                        [self TKSplitScreenView:view];
+                    }
+                }
+            }
+        }
+
         
-//        NSString *peerId = [[msgID componentsSeparatedByString:@"_"] objectAtIndex:1];
-//        NSString *nickName;
-//        NSString *deviceType;
-//        for (RoomUser *user in _iSessionHandle.iUserList) {
-//            if ([user.peerID isEqualToString:peerId]) {
-//                nickName = user.nickName;
-//                deviceType = [user.properties objectForKey:@"devicetype"];
-//            }
-//        }
-//
-//        if (add) {
-//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveEnterBackground")];
-//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
-//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
-//            [self refreshData];
-//        }else{
-//            NSString *message = [NSString stringWithFormat:@"%@ (%@) %@", nickName, deviceType, MTLocalized(@"Prompt.HaveBackForground")];
-//            TKChatMessageModel *chatMessageModel = [[TKChatMessageModel alloc] initWithFromid:peerId aTouid:_iSessionHandle.localUser.peerID iMessageType:MessageType_OtherUer aMessage:message aUserName:nickName aTime:[TKUtil currentTime]];
-//            [[TKEduSessionHandle shareInstance] addOrReplaceMessage:chatMessageModel];
-//            [self refreshData];
-//        }
-      
+        _iStudentSplitScreenArray = array;
+       
+        [self sVideoSplitScreen:_iStudentSplitScreenArray];
     }
     
 }
-
-
 - (void)sessionManagerIceStatusChanged:(NSString*)state ofUser:(RoomUser *)user {
     TKLog(@"------IceStatusChanged:%@ nickName:%@",state,user.nickName);
 }
@@ -2739,7 +3219,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 -(void)sessionManagerMediaPublish:(MediaStream *)mediaStream roomUser:(RoomUser *)user{
     [TKEduSessionHandle shareInstance].isPlayMedia = YES;
     [[TKEduSessionHandle shareInstance] configureHUD:@"" aIsShow:NO];
-    [[TKEduSessionHandle shareInstance].iBoardHandle closeNewPptVideo:nil];
+    [[TKEduSessionHandle shareInstance].iBoardHandle closeDynamicPptWebPlay:nil];
     
     //peerid设置为空，不设置本地的page变量
     [[TKEduSessionHandle shareInstance]configurePage:false isSend:NO to:sTellAll peerID:@""];
@@ -2754,8 +3234,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     NSString *filedId= [NSString stringWithFormat:@"%@",mediaStream.fileid];
     //不是视频的时候
     if (!hasVideo) {
-        
-        frame =CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame), CGRectGetWidth(self.iTKEduWhiteBoardView.frame), 57);
+        frame =CGRectMake(0, CGRectGetMaxY(_iTKEduWhiteBoardView.frame) - 57, CGRectGetWidth(self.iTKEduWhiteBoardView.frame), 57);
         if ([TKEduSessionHandle shareInstance].localUser.role == 2) {
              frame =CGRectMake(10, CGRectGetHeight(self.iTKEduWhiteBoardView.frame)-57+CGRectGetMinY(self.iTKEduWhiteBoardView.frame), 57, 57);
         }
@@ -2980,7 +3459,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         case MessageType_Message:
         {
 
-            CGSize titlesize = [TKMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:CGRectGetWidth(_iChatTableView.frame) Font:TKFont(15)];
+//            CGSize titlesize = [TKMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:CGRectGetWidth(_iChatTableView.frame) Font:TKFont(15)];
+            
+            CGSize titlesize = [TKMessageTableViewCell sizeFromAttributedString:tMessageModel.iMessage withLimitWidth:CGRectGetWidth(_iChatTableView.frame) Font:TKFont(15)];
+            
             tHeight = titlesize.height+20;
             
         }
@@ -2996,7 +3478,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
             CGFloat tContentWidth        = CGRectGetWidth(_iChatTableView.frame);
             CGFloat tTimeLabelHeigh      = 16*Proportion;
             CGFloat tTranslateLabelHeigh = 22*Proportion;
-            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iMessage withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];;
+            
+            CGSize titlesize = [TKStudentMessageTableViewCell sizeFromAttributedString:tMessageModel.iMessage withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+                                
             CGSize tTranslationSize = [TKStudentMessageTableViewCell sizeFromText:tMessageModel.iTranslationMessage withLimitWidth:tContentWidth-2*tViewCap Font:TKFont(15)];
             
             tHeight = titlesize.height+tTranslationSize.height+20+tTimeLabelHeigh;
@@ -3093,6 +3577,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 }
 #pragma mark Event
 
+-(void)chooseAreaButtonClicked:(UIButton*)aButton{
+    TKLog(@"选择区域");
+    [self.iAreaListView showView];
+}
 -(void)userButtonClicked:(UIButton*)aButton{
     TKLog(@"用户列表");
     
@@ -3121,10 +3609,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     _iMessageList = [_iSessionHandle messageList];
     
     [_iChatTableView reloadData];
-    if(_iChatTableView.contentSize.height > _iChatTableView.frame.size.height) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_iMessageList.count - 1 inSection:0];
-        [_iChatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+    [_iChatTableView layoutIfNeeded];
+    if(_iChatTableView.contentSize.height > _iChatTableView.frame.size.height)
+        [_iChatTableView setContentOffset:CGPointMake(0, _iChatTableView.contentSize.height -_iChatTableView.bounds.size.height) animated:YES];
 }
 #pragma mark keyboard Notification
 - (void)keyboardWillShow:(NSNotification*)notification
@@ -3296,10 +3783,15 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [_iDocumentListView hide];
     [_iUsertListView hide];
     [_iMediaListView hide];
+    [_iAreaListView hideView];
     [_iTeacherVideoView hideFunctionView];
     [_iOurVideoView hideFunctionView];
     
     for (TKVideoSmallView * view in _iStudentVideoViewArray) {
+        [view hideFunctionView];
+    }
+    //分屏模式下取消functionView的显示
+    for (TKVideoSmallView * view in _iStudentSplitViewArray) {
         [view hideFunctionView];
     }
   
@@ -3335,24 +3827,31 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 #pragma mark 拖动视频
 - (void)longPressClick:(UIGestureRecognizer *)longGes
 {
-     TKVideoSmallView * currentBtn = (TKVideoSmallView *)longGes.view;
+    
+    TKVideoSmallView * currentBtn = (TKVideoSmallView *)longGes.view;
   
+    //判断视图是否处于分屏状态，如果是分屏状态则不可以拖动
+    for (NSString *peerID in _iStudentSplitScreenArray) {
+        if ([peerID isEqualToString:currentBtn.iRoomUser.peerID] ) {
+            return;
+        }
+    }
+    
     if (([TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol)) {
         return;
     }
+    
     //把白板放到最下边
     [_iScroll sendSubviewToBack:_iTKEduWhiteBoardView];
-   
     
     if (UIGestureRecognizerStateBegan == longGes.state) {
         [UIView animateWithDuration:0.2 animations:^{
-            currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
-            currentBtn.alpha     = 0.7f;
+//            currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
+//            currentBtn.alpha     = 0.7f;
             _iStrtCrtVideoViewP  = [longGes locationInView:currentBtn];
             _iCrtVideoViewC      = currentBtn.center;
         }];
     }
-    
     if (UIGestureRecognizerStateChanged == longGes.state) {
         //移动距离
         CGPoint newP = [longGes locationInView:currentBtn];
@@ -3373,34 +3872,45 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         if (isOverEdgTD) {
             tCurBtnCenterY = tCurBtnCenterY - movedY;
         }
-        
         currentBtn.center = CGPointMake(tCurBtnCenterX, tCurBtnCenterY);
     }
-    
     // 手指松开之后 进行的处理
     if (UIGestureRecognizerStateEnded == longGes.state) {
         
+        
         BOOL isEndEdgMvToScrv = ((currentBtn.center.y< CGRectGetMinY(_iBottomView.frame)) &&(CGRectGetMaxY(currentBtn.frame) > CGRectGetMinY(_iBottomView.frame)));
+        
         BOOL isEndMvToScrv = ((CGRectGetMaxY(currentBtn.frame) < CGRectGetMinY(_iBottomView.frame)));
+        
         currentBtn.isDrag = YES;
         [UIView animateWithDuration:0.2 animations:^{
             currentBtn.alpha     = 1.0f;
             currentBtn.transform = CGAffineTransformIdentity;
             if (isEndEdgMvToScrv ) {
+
+//                currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
                 
-                //currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
                 currentBtn.frame= CGRectMake(CGRectGetMinX(currentBtn.frame), CGRectGetMinY(_iBottomView.frame)-CGRectGetHeight(currentBtn.frame), CGRectGetWidth(currentBtn.frame), CGRectGetHeight(currentBtn.frame));
-                
+
             }else if(isEndMvToScrv) {
-                //currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
+//                currentBtn.transform = CGAffineTransformMakeScale(1.2, 1.2);
                 
             }else {
-                //currentBtn.transform = CGAffineTransformIdentity;
+//                currentBtn.transform = CGAffineTransformIdentity;
                 currentBtn.isDrag = NO;
             }
+            
+            //拖动视频的时候判断下视频是否有分屏状态的
+            if(_iStudentSplitScreenArray.count>0){
+                
+                [self TKSplitScreenView:currentBtn];
+//
+                return;
+            }
+            
             [self refreshBottom];
             [self sendMoveVideo:_iPlayVideoViewDic aSuperFrame:_iTKEduWhiteBoardView.frame];
-            
+
         }];
     }
 }
@@ -3415,7 +3925,12 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         CGFloat tY = CGRectGetHeight(aSuperFrame)-CGRectGetHeight(tVideoView.frame);
         CGFloat tLeft = CGRectGetMinX(tVideoView.frame)/tX;
         CGFloat tTop= (CGRectGetMinY(tVideoView.frame)-CGRectGetMinY(aSuperFrame))/tY;
-        NSDictionary *tDic = @{@"top":@(tTop),@"left":@(tLeft),@"isDrag":@(tVideoView.isDrag)};
+        if(tVideoView.isSplit){
+            tLeft = 0;
+            tTop = 0;
+        }
+            
+        NSDictionary *tDic = @{@"percentTop":@(tTop),@"percentLeft":@(tLeft),@"isDrag":@(tVideoView.isDrag)};
         if ((tVideoView.iRoomUser.role == UserType_Student) || (tVideoView.iRoomUser.role == UserType_Assistant)) {
              [tVideosDic setObject:tDic forKey:tVideoView.iPeerId?tVideoView.iPeerId:@""];
         }
@@ -3426,7 +3941,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
         [[TKEduSessionHandle shareInstance]publishVideoDragWithDic:tDic To:sTellAllExpectSender];
     }
-    
 }
 
 
@@ -3435,8 +3949,8 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     for (NSString *peerId in aMvVideoDic) {
         NSDictionary *obj = [aMvVideoDic objectForKey:peerId];
         BOOL isDrag = [[obj objectForKey:@"isDrag"]boolValue];
-        CGFloat top = [[obj objectForKey:@"top"]floatValue];
-        CGFloat left = [[obj objectForKey:@"left"]floatValue];
+        CGFloat top = [[obj objectForKey:@"percentTop"]floatValue];
+        CGFloat left = [[obj objectForKey:@"percentLeft"]floatValue];
         TKVideoSmallView *tVideoView = [_iPlayVideoViewDic objectForKey:peerId];
         
         if (tVideoView) {
@@ -3453,12 +3967,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
                 
                 // 当老师拖拽后，网页助教再拖拽，收到的拖拽信令中有老师的peerID，因为从网页收到了老师view变化的错误信令
                 if (tVideoView.iRoomUser.role != UserType_Teacher) {
-                    tVideoView.frame = CGRectMake(CGRectGetMinX(tVideoView.frame), CGRectGetMinY(_iBottomView.frame)+1, CGRectGetWidth(tVideoView.frame), CGRectGetHeight(tVideoView.frame));
-                   
+//                    tVideoView.frame = CGRectMake(CGRectGetMinX(tVideoView.frame), CGRectGetMinY(_iBottomView.frame)+1, CGRectGetWidth(tVideoView.frame), CGRectGetHeight(tVideoView.frame));
                 }
                 
             }
-            
             
         }
     }
@@ -3496,7 +4008,38 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
         
     }];*/
 }
-
+- (void)sVideoSplitScreen:(NSMutableArray *)array{
+    
+    
+    //在_iStudentVideoViewArray 中删除视图
+   
+    
+//    if(array.count == 0){
+//        [_iStudentSplitScreenArray removeAllObjects];
+//        [_splitScreenView deleteAllVideoSmallView];
+//
+//        [self refreshBottom];
+//        self.splitScreenView.hidden = YES;
+//        return;
+//    }
+    
+    
+    NSArray *vArray = [NSArray arrayWithArray:_iStudentVideoViewArray];
+    
+    for (TKVideoSmallView *videoView in vArray) {
+        
+        for (int i=0;i<array.count;i++) {
+            
+            NSString *peerId = array[i];
+            
+            if ([peerId isEqualToString:videoView.iRoomUser.peerID]) {
+                
+                [self TKSplitScreenView:videoView];
+                
+            }
+        }
+    }
+}
 
 #pragma mark 其他
 - (void)showMessage:(NSString *)message {
@@ -3619,6 +4162,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     }  else {
         NSLog(@"---jin current category is : unknow");
     }
+    
 }
 
 - (void)printAudioCurrentMode{
@@ -3644,7 +4188,9 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     } else {
         NSLog(@"---jin current mode is : unknow");
     }
+    
 }
+
 -(void)printAudioCategoryOption{
     NSString *tSString = @"AVAudioSessionCategoryOptionMixWithOthers";
     switch ([AVAudioSession sharedInstance].categoryOptions) {
@@ -4139,6 +4685,207 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     }
    
+}
+
+- (void)changeServer:(NSString *)server {
+    
+    if ([server isEqualToString:self.currentServer]) {
+        return;
+    }
+    
+    // 改变底层的服务器数据
+    [[RoomManager instance] changeCurrentServer:server];
+    
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:_iParamDic];
+    [tempDic setObject:server forKey:@"server"];
+    
+    TKEduRoomProperty *tClassRoomProperty  = _iRoomProperty;
+    NSDictionary *tDic = tempDic;
+    [TKEduNetManager getGiftinfo:tClassRoomProperty.iRoomId aParticipantId: tClassRoomProperty.iUserId  aHost:tClassRoomProperty.sWebIp aPort:tClassRoomProperty.sWebPort aGetGifInfoComplete:^(id  _Nullable response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int result = 0;
+            result = [[response objectForKey:@"result"]intValue];
+            if (!result || result == -1) {
+                
+                NSArray *tGiftInfoArray = [response objectForKey:@"giftinfo"];
+                int giftnumber = 0;
+                for(int  i = 0; i < [tGiftInfoArray count]; i++) {
+                    if (![tClassRoomProperty.iUserId isEqualToString:@"0"] && _iRoomProperty.iUserId) {
+                        NSDictionary *tDicInfo = [tGiftInfoArray objectAtIndex: i];
+                        if ([[tDicInfo objectForKey:@"receiveid"] isEqualToString:tClassRoomProperty.iUserId]) {
+                            
+                            giftnumber = [tDicInfo objectForKey:@"giftnumber"] ? [[tDicInfo objectForKey:@"giftnumber"] intValue] : 0;
+                            break;
+                            
+                        }
+                    }
+                }
+                
+                // 清空之前的数据
+                [self sessionManagerDidFailWithError:nil];
+                // 更新当前房间的区域
+                self.currentServer = server;
+                // 记录选择的服务器
+                [[NSUserDefaults standardUserDefaults] setObject:server forKey:@"server"];
+                
+                [[TKEduSessionHandle shareInstance] joinEduClassRoomWithParam:tDic aProperties:@{sGiftNumber:@(giftnumber)}];
+            }
+        });
+        
+    } aGetGifInfoError:^int(NSError * _Nullable aError) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 清空之前的数据
+            [self sessionManagerDidFailWithError:nil];
+            // 更新当前房间的区域
+            self.currentServer = server;
+            // 记录选择的服务器
+            [[NSUserDefaults standardUserDefaults] setObject:server forKey:@"server"];
+            
+            [[TKEduSessionHandle shareInstance] joinEduClassRoomWithParam:tDic aProperties:nil];
+        });
+        
+        return 1;
+    }];
+}
+
+#pragma mark TKChooseAreaDelegate 选择区域
+- (void)chooseArea:(TKAreaChooseModel *)areaModel {
+    // 记录选择的服务器
+    [[NSUserDefaults standardUserDefaults] setObject:areaModel.serverAreaName forKey:@"server"];
+    
+    if ([areaModel.serverAreaName isEqualToString:_iRoomProperty.defaultServerArea]) {
+        [self.iAreaListView hideView];
+        return;
+    }
+    
+    // 改变底层的服务器数据
+    [[RoomManager instance] changeCurrentServer:areaModel.serverAreaName];
+    
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:_iParamDic];
+    [tempDic setObject:areaModel.serverAreaName forKey:@"server"];
+    
+    TKEduRoomProperty *tClassRoomProperty  = _iRoomProperty;
+    NSDictionary *tDic = tempDic;
+    [TKEduNetManager getGiftinfo:tClassRoomProperty.iRoomId aParticipantId: tClassRoomProperty.iUserId  aHost:tClassRoomProperty.sWebIp aPort:tClassRoomProperty.sWebPort aGetGifInfoComplete:^(id  _Nullable response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int result = 0;
+            result = [[response objectForKey:@"result"]intValue];
+            if (!result || result == -1) {
+                
+                NSArray *tGiftInfoArray = [response objectForKey:@"giftinfo"];
+                int giftnumber = 0;
+                for(int  i = 0; i < [tGiftInfoArray count]; i++) {
+                    if (![tClassRoomProperty.iUserId isEqualToString:@"0"] && _iRoomProperty.iUserId) {
+                        NSDictionary *tDicInfo = [tGiftInfoArray objectAtIndex: i];
+                        if ([[tDicInfo objectForKey:@"receiveid"] isEqualToString:tClassRoomProperty.iUserId]) {
+                            
+                            giftnumber = [tDicInfo objectForKey:@"giftnumber"] ? [[tDicInfo objectForKey:@"giftnumber"] intValue] : 0;
+                            break;
+                            
+                        }
+                    }
+                }
+                
+                // 清空之前的数据
+                [self sessionManagerDidFailWithError:nil];
+                // 更新当前房间的区域
+                self.iRoomProperty.defaultServerArea = areaModel.serverAreaName;
+                
+                [[TKEduSessionHandle shareInstance] joinEduClassRoomWithParam:tDic aProperties:@{sGiftNumber:@(giftnumber)}];
+
+                [self.iAreaListView hideView];
+            }
+        });
+        
+    } aGetGifInfoError:^int(NSError * _Nullable aError) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 清空之前的数据
+            [self sessionManagerDidFailWithError:nil];
+            // 更新当前房间的区域
+            self.iRoomProperty.defaultServerArea = areaModel.serverAreaName;
+            
+            [[TKEduSessionHandle shareInstance] joinEduClassRoomWithParam:tDic aProperties:nil];
+
+            [self.iAreaListView hideView];
+        });
+        
+        return 1;
+    }];
+}
+
+#pragma mark Private
+
+// 获取礼物数
+- (void)getTrophyNumber {
+    
+    // 老师不需要获取礼物
+    if (_iSessionHandle.localUser.role != UserType_Student || _iSessionHandle.isPlayback == YES) {
+        return;
+    }
+    
+    // 学生断线重连需要获取礼物
+    [TKEduNetManager getGiftinfo:_iRoomProperty.iRoomId aParticipantId: _iRoomProperty.iUserId  aHost:_iRoomProperty.sWebIp aPort:_iRoomProperty.sWebPort aGetGifInfoComplete:^(id  _Nullable response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int result = 0;
+            result = [[response objectForKey:@"result"]intValue];
+            if (!result || result == -1) {
+                
+                NSArray *tGiftInfoArray = [response objectForKey:@"giftinfo"];
+                int giftnumber = 0;
+                for(int  i = 0; i < [tGiftInfoArray count]; i++) {
+                    if (![_iRoomProperty.iUserId isEqualToString:@"0"] && _iRoomProperty.iUserId) {
+                        NSDictionary *tDicInfo = [tGiftInfoArray objectAtIndex: i];
+                        if ([[tDicInfo objectForKey:@"receiveid"] isEqualToString:_iRoomProperty.iUserId]) {
+                            giftnumber = [tDicInfo objectForKey:@"giftnumber"] ? [[tDicInfo objectForKey:@"giftnumber"] intValue] : 0;
+                            break;
+                        }
+                    }
+                }
+                
+                self.iSessionHandle.localUser.properties[sGiftNumber] = @(giftnumber);
+                [_iSessionHandle sessionHandleChangeUserProperty:self.iSessionHandle.localUser.peerID TellWhom:sTellAll Key:sGiftNumber Value:@(giftnumber) completion:nil];
+            }
+        });
+        
+    } aGetGifInfoError:^int(NSError * _Nullable aError) {
+        TKLog(@"获取奖杯数量失败");
+        return -1;
+    }];
+    
+}
+
+- (void)quitClearData {
+    [[TKEduSessionHandle shareInstance]configureDraw:false isSend:NO to:sTellAll peerID:[TKEduSessionHandle shareInstance].localUser.peerID];
+    [[TKEduSessionHandle shareInstance].iBoardHandle disconnectCleanup];
+    [_iSessionHandle clearAllClassData];
+    [_iSessionHandle.iBoardHandle clearAllWhiteBoardData];
+    [self clearVideoViewData:_iTeacherVideoView];
+    [self clearVideoViewData:_iOurVideoView];
+    for (TKVideoSmallView *view in _iStudentVideoViewArray) {
+        [self clearVideoViewData:view];
+    }
+    [_iPlayVideoViewDic removeAllObjects];
+    
+    // 播放的MP4前，先移除掉上一个MP4窗口
+    if (self.iMediaView) {
+        [self.iMediaView removeFromSuperview];
+        self.iMediaView = nil;
+    }
+    
+    if (self.iScreenView) {
+        [self.iScreenView removeFromSuperview];
+        self.iScreenView = nil;
+    }
+    
+    //将分屏的数据删除
+    for (TKVideoSmallView *view in _iStudentSplitViewArray) {
+        //[view clearVideoData];
+        [self clearVideoViewData:view];
+    }
+    [_splitScreenView deleteAllVideoSmallView];
+    [_iStudentSplitScreenArray removeAllObjects];
 }
 
 #pragma mark - 常用语

@@ -59,7 +59,7 @@
     [self.iProgressSlider addTarget:self action:@selector(progressValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.bottmView addSubview:self.iProgressSlider];
     //时间
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.playButton.frame)+tViewCap, 10, 100, 25)];
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.playButton.frame)+tViewCap, 10, 150, 25)];
     self.timeLabel.text = @"00:00/00:00";
     self.timeLabel.textColor = RGBACOLOR_Title_White;
     self.timeLabel.textAlignment = NSTextAlignmentLeft;
@@ -108,6 +108,7 @@
     if (self.seekInterval > 0) {
         self.acceptSeekTime = NSDate.date.timeIntervalSince1970;
         [[TKEduSessionHandle shareInstance] seekPlayback:pos];
+        NSLog(@"tk-------------滑动!");
     }
 }
 

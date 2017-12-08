@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, CONNECT_RESULE)
 {
   
     CONNECT_RESULE_PasswordError = 4008,//房间密码错误
+    CONNECT_RESULE_WrongPasswordForRole = 4012,//密码与身份不符
     CONNECT_RESULE_NeedPassword = 4110,//该房间需要密码，请输入密码
     CONNECT_RESULE_RoomNonExistent = 4007,//房间不存在
     CONNECT_RESULE_ServerOverdue = 3001,//服务器过期
@@ -96,7 +97,7 @@ TKNavigationController* _iEduNavigationController = nil;
     [_iRoomProperty parseMeetingInfo:paramDic];
     _iRoomProperty.iRoomType = [[paramDic objectForKey:@"type"] integerValue];
     bool isConform = [TKUtil deviceisConform];
-    // isConform      = true;  // 注释掉开启低功耗模式
+//     isConform      = true;  // 注释掉开启低功耗模式
     if (!isConform) {
         _iRoomProperty.iMaxVideo = @(2);
     }else{
@@ -192,7 +193,7 @@ TKNavigationController* _iEduNavigationController = nil;
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
                     bool isConform = [TKUtil deviceisConform];
-                    //isConform      = true;     // 注释掉开启低功耗模式
+//                    isConform      = true;     // 注释掉开启低功耗模式
                     if (!isConform) {
                         _iRoomProperty.iMaxVideo = @(2);
                     }
@@ -293,11 +294,18 @@ TKNavigationController* _iEduNavigationController = nil;
             }
                 break;
         
-            case CONNECT_RESULE_RoomNumberOverRun: {//4103  房间人数超限
-                alertMessage = MTLocalized(@"Error.MemberOverRoomLimit");
-                 //alertMessage = @"房间人数超限";
+            case CONNECT_RESULE_WrongPasswordForRole: {//4012  密码与角色不符
+                alertMessage = MTLocalized(@"Error.PwdError");
+                //alertMessage = @"房间密码错误";
             }
                 break;
+                
+            case CONNECT_RESULE_RoomNumberOverRun: {//4103  房间人数超限
+                alertMessage = MTLocalized(@"Error.MemberOverRoomLimit");
+                //alertMessage = @"房间人数超限";
+            }
+                break;
+                
             case CONNECT_RESULE_NeedPassword: {//4110  该房间需要密码，请输入密码
                 alertMessage = MTLocalized(@"Error.NeedPwd");
 //                 alertMessage = @"该房间需要密码，请输入密码";

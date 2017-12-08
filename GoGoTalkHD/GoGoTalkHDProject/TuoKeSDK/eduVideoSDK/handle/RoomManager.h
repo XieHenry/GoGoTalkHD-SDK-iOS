@@ -4,6 +4,7 @@
 //
 //  Created by MAC-MiNi on 2017/7/29.
 //  Copyright © 2017年 MAC-MiNi. All rights reserved.
+//  Version: 2.1.0
 //
 
 @import WebRTC;
@@ -14,6 +15,8 @@
 @class ECClient;
 
 @protocol RoomManagerDelegate<NSObject>
+
+
 
 /**
  成功连接
@@ -71,7 +74,16 @@
  @param user 用户对象
  @param properties 发生变化的属性
  */
-- (void)roomManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties;
+//- (void)roomManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties;
+
+/**
+ 有用户的属性发生了变化
+ 
+ @param user 用户对象
+ @param properties 发生变化的属性
+ @param fromId 修改用户属性消息的发送方的id
+ */
+- (void)roomManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId;
 
 /**
  收到聊天消息
@@ -162,7 +174,7 @@
  */
 - (void)roomManagerScreenUnPublished:(RoomUser *)user;
 
-#pragma mark Playback
+#pragma mark playback
 
 /**
  获取到回放总时长的回调
@@ -224,6 +236,7 @@
  */
 - (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist fromID:(NSString*)fromId;
 
+//******************************************内容已弃用**************************************
 /**
  白板接收到的所有信令
  
@@ -251,6 +264,37 @@
  @param user 离开的用户
  */
 - (void)onUserLeft:(RoomUser *)user;
+
+//***************************************************************************************
+
+//2017-11-10
+/**
+ 课堂连接成功
+ @param userList 用户列表
+ @param msgList 消息列表
+ @param myself 自己的用户信息
+ @param roomProperties  课堂属性 内容为{roomtype:roomtype , companyid:companyid ,chairmancontrol:chairmancontrol , roomname:roomname , starttime:starttime , endtime:endtime ,serial:serial }
+ */
+- (void)onRoomConnectedUserlist:(NSArray *)userList MsgList:(NSArray*)msgList Myself:(RoomUser *)myself roomProperties:(NSDictionary *)roomProperties;
+/**
+ 更改用户
+ @param userid 用户id
+ @param properties 服务端传递的属性
+ @param fromID 谁发的信令
+ */
+- (void)onRoomUserpropertyChangedUserid:(NSString *)userid properties:(NSDictionary *)properties fromID:(NSString *)fromID;
+/**
+ 白板接收到用户离开
+ 
+ @param user 离开的用户
+ */
+- (void)onRoomParticipantLeave:(RoomUser *)user;
+/**
+ 白板接收到用户加入
+ 
+ @param user 加入的用户
+ */
+- (void)onRoomParticipantJoin:(RoomUser *)user;
 
 @end
 
@@ -345,6 +389,7 @@
  当前的流媒体
  */
 @property (nonatomic, strong, readonly) MediaStream *currentMediaStream;
+
 /**
  是否低消耗状态
  */
@@ -355,42 +400,83 @@
  */
 @property (nonatomic, assign) BOOL inBackground;
 
-/**
- 初始化方法，如果不需要白板用此方法
- 
- @param delegate 实现了RoomManagerDelegate回调接口的对象
- @return RoomManager实例方法
- */
-- (instancetype)initWithDelegate:(id<RoomManagerDelegate>)delegate;
 
 /**
- 初始化方法，需要白板和音视频用此方法
+ 单例
  
- @param delegate 实现了RoomManagerDelegate回调接口的对象
- @param wb 实现了RoomWhiteBoard回调接口的白板对象
- @return RoomManager实例方法
+ @return 单例
  */
-- (instancetype)initWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
++ (instancetype)instance;
 
-/**
- 进入回放教室的初始化方法，需要白板和音频用此方法
- 
- @param delegate 实现了RoomManagerDelegate回调接口的对象
- @param wb 实现了RoomWhiteBoard回调接口的白板对象
- @return RoomManager实例方法
- */
-- (instancetype)initPlaybackWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
+- (void)changeCurrentServer:(NSString *)serverName;
 
-- (void)joinRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
+- (instancetype)configureWithDelegate:(id<RoomManagerDelegate>)delegate;
 
-- (void)joinPlaybackRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
+- (instancetype)configurePlaybackWithDelegate:(id<RoomManagerDelegate>)delegate
+                                        AndWB:(id<RoomWhiteBoard>)wb;
+
+- (instancetype)configureWithDelegate:(id<RoomManagerDelegate>)delegate
+                                AndWB:(id<RoomWhiteBoard>)wb;
+
+///**
+// 初始化方法，如果不需要白板用此方法
+//
+// @param delegate 实现了RoomManagerDelegate回调接口的对象
+// @return RoomManager实例方法
+// */
+//- (instancetype)initWithDelegate:(id<RoomManagerDelegate>)delegate;
+//
+///**
+// 初始化方法，需要白板和音视频用此方法
+//
+// @param delegate 实现了RoomManagerDelegate回调接口的对象
+// @param wb 实现了RoomWhiteBoard回调接口的白板对象
+// @return RoomManager实例方法
+// */
+//- (instancetype)initWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
+//
+//
+///**
+// 进入回放教室的初始化方法，需要白板和音频用此方法
+//
+// @param delegate 实现了RoomManagerDelegate回调接口的对象
+// @param wb 实现了RoomWhiteBoard回调接口的白板对象
+// @return RoomManager实例方法
+// */
+//- (instancetype)initPlaybackWithDelegate:(id<RoomManagerDelegate>)delegate AndWB:(id<RoomWhiteBoard>)wb;
+
+
+#pragma mark jion
+
 /**
  进入房间
+ 
+ @param host 服务器地址，通常是global.talk-cloud.net
+ @param port 服务器https端口，通常是443
+ @param nickname 本地用户的昵称
+ @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选),type（房间类型，需要去管理系统查看回放链接，截取type参数）, path (录制件地址，需要去管理系统查看回放链接，截取path参数)
+ @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
+ @param lowConsume  BOOL格式 是否低功率模式
+ */
+- (void)joinRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
+/**
+ 进入回放房间
  
  @param host 服务器地址，通常是global.talk-cloud.com
  @param port 服务器https端口，通常是443
  @param nickname 本地用户的昵称
- @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选)
+ @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选),type（房间类型，需要去管理系统查看回放链接，截取type参数）, path (录制件地址，需要去管理系统查看回放链接，截取path参数)
+ @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
+ @param lowConsume  BOOL格式 是否低功率模式
+ */
+- (void)joinPlaybackRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties lowConsume:(BOOL)lowConsume;
+/**
+ 进入房间
+ 
+ @param host 服务器地址，通常是global.talk-cloud.net
+ @param port 服务器https端口，通常是443
+ @param nickname 本地用户的昵称
+ @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选),type（房间类型，需要去管理系统查看回放链接，截取type参数）, path (录制件地址，需要去管理系统查看回放链接，截取path参数)
  @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
  */
 - (void)joinRoomWithHost:(NSString *)host Port:(int)port NickName:(NSString*)nickname Params:(NSDictionary*)params Properties:(NSDictionary*)properties;
@@ -401,7 +487,7 @@
  @param host 服务器地址，通常是global.talk-cloud.com
  @param port 服务器https端口，通常是443
  @param nickname 本地用户的昵称
- @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选)
+ @param params Dic格式，内含进入房间所需的基本参数，比如：NSDictionary类型，键值需要传递serial（房间号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）,uiserid(用户ID，可选),type（房间类型，需要去管理系统查看回放链接，截取type参数）, path (录制件地址，需要去管理系统查看回放链接，截取path参数)
  @param properties  Dic格式，内含进入房间时用户的初始化的信息。比如 giftNumber（礼物数）
  */
 - (void)joinPlaybackRoomWithHost:(NSString *)host
@@ -482,8 +568,12 @@
  @param block 完成的回调
  */
 - (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
-
-- (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save AssociatedMsgID:(NSString*)associatedMsgID AssociatedUserID:(NSString*)associatedUserID completion:(void (^)(NSError *error))block;
+//expires ：这个消息，多长时间结束，以秒为单位，是相对时间。一般用于classbegin，给定一个相对时间
+- (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save AssociatedMsgID:(NSString*)associatedMsgID AssociatedUserID:(NSString*)associatedUserID
+       expires:(NSTimeInterval)expires
+    completion:(void (^)(NSError *error))block;
+//expendData:拓展数据，与msgName同级
+- (void)pubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save expendData:(NSDictionary*)expendData completion:(void (^)(NSError *error))block;
 
 /**
  删除自定义消息
@@ -656,6 +746,7 @@
  */
 - (void)playScreen:(NSString *)peerID completion:(void (^)(NSError *, NSObject *))block;
 
+
 /**
  关闭共享桌面
  
@@ -664,4 +755,23 @@
  */
 - (void)unPlayScreen:(NSString *)peerID completion:(void (^)(NSError *error))block;
 
+/**
+ 录制用户的视频流
+ 
+ @param peerId 用户id
+ @param convert 0 不转换, 1 webm, 2 mp4
+ @param completion 回调block，第一个参数为0时，表示成功，非0表示失败；第二个参数为视频路径。
+ */
+- (void)startRecordUser:(NSString *)peerId convert:(NSInteger)convert completion:(void (^)(NSInteger ret, NSString *path))completion;
+
+
+/**
+ 结束用户的视频流录制
+ 
+ @param peerId 用户id
+ @param completion 回调block，参数为0，表示成功；非0表示失败。
+ */
+- (void)stopRecordUser:(NSString *)peerId completion:(void (^)(NSInteger))completion;
+
 @end
+

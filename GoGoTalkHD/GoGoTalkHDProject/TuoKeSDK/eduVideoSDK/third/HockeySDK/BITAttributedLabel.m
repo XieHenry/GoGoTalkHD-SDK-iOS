@@ -59,7 +59,7 @@ static inline CTLineBreakMode CTLineBreakModeFromUILineBreakMode(UILineBreakMode
         case UILineBreakModeHeadTruncation: return kCTLineBreakByTruncatingHead;
         case UILineBreakModeTailTruncation: return kCTLineBreakByTruncatingTail;
         case UILineBreakModeMiddleTruncation: return kCTLineBreakByTruncatingMiddle;
-        default: return 0;
+        default: return kCTLineBreakByWordWrapping;
     }
 }
 
@@ -71,7 +71,7 @@ static inline __attribute__((unused)) CTLineBreakMode CTLineBreakModeFromNSLineB
         case NSLineBreakByTruncatingHead: return kCTLineBreakByTruncatingHead;
         case NSLineBreakByTruncatingTail: return kCTLineBreakByTruncatingTail;
         case NSLineBreakByTruncatingMiddle: return kCTLineBreakByTruncatingMiddle;
-        default: return 0;
+        default: return kCTLineBreakByWordWrapping;
     }
 }
 
@@ -83,7 +83,7 @@ static inline __attribute__((unused)) UILineBreakMode UILineBreakModeFromNSLineB
         case NSLineBreakByTruncatingHead: return UILineBreakModeHeadTruncation;
         case NSLineBreakByTruncatingTail: return UILineBreakModeTailTruncation;
         case NSLineBreakByTruncatingMiddle: return UILineBreakModeMiddleTruncation;
-        default: return 0;
+        default: return UILineBreakModeWordWrap;
     }
 }
 

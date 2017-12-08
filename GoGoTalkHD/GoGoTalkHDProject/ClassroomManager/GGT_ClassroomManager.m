@@ -11,6 +11,7 @@
 // 拓课
 #import "TKEduClassRoom.h"
 #import "TKMacro.h"
+#import "TKUtil.h"
 
 // 百家云
 //#import "BJRoomViewController.h"
@@ -45,8 +46,17 @@
 - (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model viewController:(UIViewController *)viewController
 {
 
-//    model.serial = @"755158726";
-//    model.nickname = @"teacher";
+//    model.serial = @"240966698";
+//    model.nickname = @"student";
+//    model.host = sHost;
+    
+    NSString *server = @"";
+    if ([TKUtil isDomain:sHost] == YES) {
+        NSArray *array = [sHost componentsSeparatedByString:@"."];
+        server = [NSString stringWithFormat:@"%@", array[0]];
+    } else {
+        server = @"global";
+    }
 
     NSDictionary *tDict = @{
                             @"serial"   :model.serial,
@@ -54,7 +64,8 @@
                             // @"userid"  : @"1111",
                             @"port"    :model.port,
                             @"nickname":model.nickname,    // 学生密码567
-                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            @"userrole":model.userrole,    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            @"server":server
                             };
 
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:viewController Delegate:self isFromWeb:NO];

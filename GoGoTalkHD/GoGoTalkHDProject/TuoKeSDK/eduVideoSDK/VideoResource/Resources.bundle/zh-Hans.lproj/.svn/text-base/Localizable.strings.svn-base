@@ -30,7 +30,7 @@
 "Prompt.Quite" = "您确定退出吗？";
 "Prompt.nicknameNotNull" = "昵称不能为空";
 "Prompt.RoomIDNotNull" = "课堂号不能为空";
-"Prompt.devicetPrompt" = "当前的设备配置较低，课堂不能完美运行";
+"Prompt.devicetPrompt" = "当前的设备配置较低，仅提供两路视频";
 "Prompt.onlyNumber" = "课堂号只能是数字";
 "Login.EnterRoom" = "进入教室";
 "Login.RoomId" = "教室号";
@@ -48,14 +48,16 @@
 "State.ConnectException" = "网路异常！";
 "State.ConnectLocked" = "会议室锁死！";
 "State.Retry" = "重新连接";
-"State.Reconnecting" = "自动重连中...";
+"State.Reconnecting" = "正在连接课堂";
 "KickOut.ChairmanKick" = "您已被主席请出会议...";
 "KickOut.Repeat" = "有相同身份的用户进入，您已经离开教室";
+"State.isInBackGround" = "该学生按home键啦";
 //role
 "Role.Me" = "我";
 "Role.Teacher" = "老师";
 "Role.Student" = "学生";
 "Role.Patrol"  = "巡课";
+"Role.Assistant" = "助教";
 //say
 "Say.say" = "说点什么吧";
 //button
@@ -84,6 +86,10 @@
 "Button.AllowDoodle"        = "授权涂鸦";
 "Button.CancelDoodle"       = "取消涂鸦";
 "Button.GiveCup"            = "发送奖杯";
+"Button.Speech"             = "演讲";
+"Button.OneKeyRecovery"     = "全部恢复";
+"Button.Recovery"           = "恢复";
+"Button.CancelSplitScreen"  = "取消分屏";
 "Action.EnterRoom"          = "加入课堂!";
 "Action.ExitRoom"           = "离开课堂!";
 "Prompt.EndClass1M"         = "距离下课还剩1分钟，请合理安排时间哦~";
@@ -98,13 +104,14 @@
 "Title.MediaList"           = "媒体库";
 "Title.UserList"            = "花名册";
 "Title.UserList.two"        = "花名册 (1)";
+"Title.AreaList"            = "优选网络";
 "Button.remindKnow"         = "我知道了";
 "Prompt.timeoutEnd"         = "课堂即将关闭";
 
 "Title.whiteBoard"          = "白板";
 "Prompt.CanotOn"            = "该学生的音视频设备不可用。有可能是自行禁用了设备。请提醒学生启用设备。";
 "Prompt.FinishClass"        = "您确定要下课吗?";
-"Prompt.exceeds"            = "发言席人数超过限制!";
+"Prompt.exceeds"            = "课堂发言席人数超过限制";
 "Prompt.ClassEnd"           = "本次课程已经结束!";
 
 "Prompt.NeedCamera"         = "请在iPhone的\"设置-隐私-相机\"选项中，允许拓课云访问你的相机。";
@@ -124,5 +131,13 @@
 "Prompt.NetworkException" = "网络出现异常，请关闭杀毒软件或防火墙后，重新进入";
 "Prompt.HaveEnterBackground" = "进入了后台模式";
 "Prompt.HaveBackForground" = "返回了正常模式";
-"Prompt.BackgroundCouldNotOnStage" = "该学生的应用程序在后台，无法上台";
+"Prompt.BackgroundCouldNotOnStage" = "的应用程序在后台运行，无法上台";
 "Prompt.NetworkChanged" = "网络出现异常，请检查网络环境，重新进入";
+"Prompt.NetworkError" = "当前网络不可用，请检查后重启应用";
+"Prompt.ServerRequst" = "服务器正在初始化，请稍后点击";
+
+"Prompt.StudentUdpError" = "该学生与服务器UDP通讯不通，无法上台";
+"Prompt.StudentTcpError" = "与服务器之间的通讯异常，无法上台";
+"Prompt.StudentNetworkOccuredError" = "该用户与服务器之间的UDP通讯异常，无法上台";
+"Prompt.StudentUdpOnStageError" = "由于防火墙原因，该用户与服务器之间的UDP通讯无法建立，无法上台";
+

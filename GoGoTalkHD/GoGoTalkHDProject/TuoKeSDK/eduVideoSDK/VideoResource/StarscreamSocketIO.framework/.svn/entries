@@ -1,9 +1,9 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/StarscreamSocketIO.framework
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/StarscreamSocketIO.framework
+svn://tonglm@192.168.1.15
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:38.000000Z
+2017-12-07T05:57:54.000000Z
 271c1b1f92db9f790f9d386e182ef482
 2017-10-18T18:46:05.728282Z
 25283
@@ -66,7 +66,7 @@ file
 
 
 
-2017-11-10T02:26:38.000000Z
+2017-12-07T05:57:54.000000Z
 86b0226f384b4e28de60f11cef9e63b2
 2017-10-18T18:46:05.728282Z
 25283

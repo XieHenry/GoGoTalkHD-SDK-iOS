@@ -27,7 +27,7 @@
     return self;
 }
 -(void)initPickerView{
-    _iPickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenH-120, ScreenW, 120)];// 新建pickerView, 我是在3.5上运行的, 6/6plus或许宽度不同.
+    _iPickView = [[UIPickerView alloc] init];// 新建pickerView, 我是在3.5上运行的, 6/6plus或许宽度不同.
     _iPickView.dataSource = self;
     _iPickView.delegate   = self;
     

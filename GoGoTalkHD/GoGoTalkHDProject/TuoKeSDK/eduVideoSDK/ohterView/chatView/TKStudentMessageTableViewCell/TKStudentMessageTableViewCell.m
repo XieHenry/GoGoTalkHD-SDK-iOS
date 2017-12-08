@@ -9,6 +9,7 @@
 #import "TKStudentMessageTableViewCell.h"
 #import "TKMacro.h"
 #import "TKUtil.h"
+#import "NSAttributedString+JTATEmoji.h"
 
 @implementation TKStudentMessageTableViewCell
 
@@ -52,7 +53,7 @@
             CGRect tFrame = CGRectMake(tContentWidth-tTimeLabelWidth-tViewCap, 0, tContentWidth-tTimeLabelWidth, tTimeLabelHeigh);
             UILabel *tLabel = [[UILabel alloc] initWithFrame:tFrame];
             tLabel.textColor = RGBCOLOR(255, 255, 255);
-            _iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+            //_iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
             tLabel.backgroundColor = [UIColor clearColor];
             tLabel.font = TKFont(10);
             tLabel;
@@ -126,32 +127,22 @@
 }
 - (void)resetView
 {
-//    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:_iText];
-//    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-//    style.lineSpacing = 10;
-//    
-//    [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, _iText.length)];
-//    [attributeString addAttribute:NSFontAttributeName value:TKFont(15) range:NSMakeRange(0, _iText.length)];
-//    
-//    NSMutableAttributedString *attributeString2 = [[NSMutableAttributedString alloc] initWithString:_iText];
-//    NSMutableParagraphStyle *style2 = [[NSMutableParagraphStyle alloc] init];
-//    style.lineSpacing = 10;
-//   
-//    [attributeString2 addAttribute:NSParagraphStyleAttributeName value:style2 range:NSMakeRange(0, _iText.length)];
-//    [attributeString2 addAttribute:NSFontAttributeName value:TKFont(15) range:NSMakeRange(0, _iText.length)];
-//    _iMessageTranslationLabel.attributedText = attributeString2;
-//    
-//    _iMessageLabel.attributedText = attributeString;
-    _iMessageLabel.text = _iText;
+    NSAttributedString *iMessageText = [NSAttributedString emojiAttributedString:_iText withFont:TEXT_FONT withColor:[UIColor whiteColor]];
+   
+    _iMessageLabel.attributedText = iMessageText;
+
+    //判断是否只是表情，如果只是表情则不进行翻译
+    if ([_iTranslationtext isEqualToString:@""]) {
+        _iTranslationtext = nil;
+    }
     _iMessageTranslationLabel.text = _iTranslationtext;
+    
      NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[_iNickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
     _iNickNameLabel.text = attrStr.string;
     _iTimeLabel.text =  _iTime;
      [self layoutSubviews];
     
 }
-
-
 
 - (void)layoutSubviews
 {
@@ -166,8 +157,12 @@
         _iTimeLabel.frame = CGRectMake(tViewCap,0,tTimeLabelWidth ,tTimeLabelHeigh);
         _iNickNameLabel.frame =  CGRectMake(CGRectGetMaxX(_iTimeLabel.frame), 0, tContentWidth-tTimeLabelWidth-tViewCap, tTimeLabelHeigh);
 
-        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromAttributedString:_iText withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        
+//        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iText withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        
         _iNickNameLabel.textAlignment =  NSTextAlignmentRight;
+        _iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _iTimeLabel.textAlignment = NSTextAlignmentLeft;
         _iMessageView.frame  = CGRectMake(tViewCap, CGRectGetHeight(_iNickNameLabel.frame)+5, tMessageLabelsize.width+tTranslateLabelHeigh+5, tMessageLabelsize.height+5);
         
@@ -188,8 +183,13 @@
         _iTimeLabel.frame =  CGRectMake(CGRectGetMaxX(_iNickNameLabel.frame), 0, tContentWidth-tTimeLabelWidth-tViewCap, tTimeLabelHeigh);
        
         _iNickNameLabel.textAlignment = NSTextAlignmentLeft ;
+        _iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _iTimeLabel.textAlignment = NSTextAlignmentRight;
-        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+
+        
+        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromAttributedString:_iText withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
+        
+//        CGSize tMessageLabelsize = [TKStudentMessageTableViewCell sizeFromText:_iText withLimitWidth:tContentWidth-tTranslateLabelHeigh-tViewCap*2 Font:TKFont(15)];
         
         _iMessageView.frame  = CGRectMake(tContentWidth-tMessageLabelsize.width-5-tViewCap*2-tTranslateLabelHeigh, CGRectGetHeight(_iNickNameLabel.frame)+5, tMessageLabelsize.width+tTranslateLabelHeigh+5, tMessageLabelsize.height+5);
         
@@ -244,5 +244,12 @@
 }
 
 
-
++ (CGSize)sizeFromAttributedString:(NSString *)text withLimitWidth:(CGFloat)width Font:(UIFont*)aFont{
+    //计算富文本的宽高
+    CGSize textBlockMinSize = {width-60, CGFLOAT_MAX};
+    NSAttributedString *attributedString = [NSAttributedString emojiAttributedString:text withFont:aFont withColor:RGBCOLOR(134, 134, 134)];
+    CGRect boundingRect = [attributedString boundingRectWithSize:textBlockMinSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize tMessageLabelsize = boundingRect.size;
+    return tMessageLabelsize;
+}
 @end

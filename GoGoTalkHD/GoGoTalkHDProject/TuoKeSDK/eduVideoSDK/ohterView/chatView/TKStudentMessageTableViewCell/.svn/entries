@@ -1,15 +1,15 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView/TKStudentMessageTableViewCell
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView/TKStudentMessageTableViewCell
+svn://tonglm@192.168.1.15
 
 
 
-2017-09-01T22:45:13.201913Z
-24422
-tonglm
+2017-11-20T18:48:31.882449Z
+26028
+liyy
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
-4057b4e85804106732f6cb9bcc765ea6
-2017-07-01T22:11:33.914037Z
-23577
-jinchao
+2017-12-07T05:57:56.000000Z
+801262abb638d7f26cdeb709622306d2
+2017-11-20T18:48:31.882449Z
+26028
+liyy
 
 
 
@@ -58,7 +58,7 @@ jinchao
 
 
 
-1290
+1393
 
 TKStudentMessageTableViewCell.m
 file
@@ -66,11 +66,11 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
-558b0ae173b0b4ac2d998ef47f0bb6c2
-2017-09-01T22:45:13.201913Z
-24422
-tonglm
+2017-12-07T05:57:56.000000Z
+cc1780f25a81dff15e187844f4c87a2e
+2017-11-20T18:48:31.882449Z
+26028
+liyy
 
 
 
@@ -92,7 +92,7 @@ tonglm
 
 
 
-11673
+12058
 
 TKStudentMessageTableViewCell.xib
 file
@@ -100,7 +100,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 0c6c91889edd8f93b0238a63fc4809a4
 2017-07-01T22:11:33.914037Z
 23577

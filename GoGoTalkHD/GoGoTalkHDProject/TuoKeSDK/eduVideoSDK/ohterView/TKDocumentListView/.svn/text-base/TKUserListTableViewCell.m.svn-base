@@ -38,7 +38,7 @@
     _iIconImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_user")];
     _iIconImageView.frame = CGRectMake(8, (CGRectGetHeight(self.frame)-30)/2, 30, 30);
     [self.contentView addSubview:_iIconImageView];
-    _iNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iIconImageView.frame), 0, CGRectGetWidth(self.frame)-2*tWidth-CGRectGetMaxX(_iIconImageView.frame), CGRectGetHeight(self.frame))];
+    _iNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iIconImageView.frame)+10, 0, CGRectGetWidth(self.frame)-2*tWidth-CGRectGetMaxX(_iIconImageView.frame)-90, CGRectGetHeight(self.frame))];
     _iNameLabel.textColor = RGBACOLOR_PromptWhite;
     _iNameLabel.backgroundColor = [UIColor clearColor];
     [_iNameLabel setFont:TEXT_FONT];
@@ -123,6 +123,7 @@
 - (void)resetView
 {
     _iNameLabel.text = _text;
+    
 }
 
 
@@ -136,7 +137,7 @@
     CGFloat tY = 0;
     CGFloat tX = CGRectGetWidth(self.frame)-tWidthAndCap*4;
     _iIconImageView.frame = CGRectMake(8, (CGRectGetHeight(self.frame)-30)/2, 30, 30);
-    _iNameLabel.frame = CGRectMake(CGRectGetMaxX(_iIconImageView.frame), 0, CGRectGetWidth(self.frame)-2*tWidth-CGRectGetMaxX(_iIconImageView.frame), CGRectGetHeight(self.frame));
+    _iNameLabel.frame = CGRectMake(CGRectGetMaxX(_iIconImageView.frame)+10, 0, CGRectGetWidth(self.frame)-2*tWidth-CGRectGetMaxX(_iIconImageView.frame)-90, CGRectGetHeight(self.frame));
     _iButton1.frame = CGRectMake(tX, tY, tWidth, tWidth);
     _iButton2.frame = CGRectMake(tX+tWidthAndCap, tY, tWidth, tWidth);
     _iButton3.frame = CGRectMake(tX+tWidthAndCap*2, tY, tWidth, tWidth);
@@ -284,16 +285,32 @@
                 _iButton3.enabled = YES;
                 _iButton4.enabled = YES;
             }
-
+            
             //用设备图标替换用户头像
-            _iIconImageView.image = LOADIMAGE(@"icon_user.png");
+            NSMutableDictionary *properties = tRoomUser.properties;
+            NSString *deviceImg = [NSString stringWithFormat:@"icon_%@",properties[@"devicetype"]];
+            _iIconImageView.contentMode = UIViewContentModeCenter;
+            _iIconImageView.image = LOADIMAGE(deviceImg);
+            
+            // 当用被墙了，图标变化
+            if ([tRoomUser.properties objectForKey:sUdpState]) {
+                NSInteger udpState = [[tRoomUser.properties objectForKey:sUdpState] integerValue];
+                if (udpState == 2) {
+                    NSString *deviceImg1 = [NSString stringWithFormat:@"icon_%@_udp",properties[@"devicetype"]];
+                    _iIconImageView.image = LOADIMAGE(deviceImg1);
+                } else {
+                    _iIconImageView.image = LOADIMAGE(deviceImg);
+                }
+            }
+            
             //昵称 （身份）
             NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[tRoomUser.nickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
             
-            NSArray *userTypeArray = [NSArray arrayWithObjects:@"老师",@"助教",@"学生",@"直播",@"巡课", nil];
+            NSArray *userTypeArray = [NSArray arrayWithObjects:MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Assistant"),MTLocalized(@"Role.Student"),@"直播",MTLocalized(@"Role.Patrol"), nil];//直播只是占个位
             NSString *nickAndRole = [NSString stringWithFormat:@"%@ (%@)",attrStr.string,userTypeArray[tRoomUser.role]];
             _iNameLabel.text = nickAndRole ;
-            
+            _iNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+
          
 //            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
 //            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];

@@ -1,15 +1,15 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView/TGLiveViewChatTableViewCell
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView/TGLiveViewChatTableViewCell
+svn://tonglm@192.168.1.15
 
 
 
-2017-06-08T17:59:21.255163Z
-23350
-jinchao
+2017-11-20T18:48:31.882449Z
+26028
+liyy
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 48243e7369c17e52572c1b720669aeae
 2017-06-08T17:59:21.255163Z
 23350
@@ -66,11 +66,11 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
-94e04f5d275ce238924e25a68e595c64
-2017-06-08T17:59:21.255163Z
-23350
-jinchao
+2017-12-07T05:57:56.000000Z
+5fd6117a91091db9b4bd26a60493536e
+2017-11-20T18:48:31.882449Z
+26028
+liyy
 
 
 
@@ -92,5 +92,5 @@ jinchao
 
 
 
-5756
+5936
 

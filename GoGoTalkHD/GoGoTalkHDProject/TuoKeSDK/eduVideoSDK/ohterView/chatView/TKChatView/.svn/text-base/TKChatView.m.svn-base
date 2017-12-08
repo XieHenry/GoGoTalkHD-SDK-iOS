@@ -15,15 +15,22 @@
 //todo
 #import "TKChatMessageModel.h"
 #import "RoomUser.h"
+#import "TKEmojiHeader.h"
 
-@interface TKChatView ()<TKGrowingTextViewDelegate,UIGestureRecognizerDelegate>
+@interface TKChatView ()<TKGrowingTextViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 
 @property(nonatomic,retain)UIView *iChatInputView;//全屏
 @property(nonatomic,retain)UIView   *iChatTitleView;//抬头
 @property(nonatomic,retain)UILabel  *iChatTitleLabel;//聊天
 @property(nonatomic,retain)UIButton *iChatTitleClosedButton;//关闭
 @property(nonatomic,retain)UIButton *iChatTitleSenddButton;//发送
-@property (nonatomic, strong) TKGrowingTextView *iInputField;
+@property(nonatomic,retain)UIButton *iChatTitleEmojiButton;//表情键盘选择
+//@property (nonatomic, strong) TKGrowingTextView *iInputField;
+
+@property (nonatomic, strong) TKEmotionTextView *iInputField;//输入框
+
+@property (nonatomic, strong) TKEmotionKeyboard *kerboard; //自定义表情键盘
+
 @property (nonatomic, strong) UILabel *iReplyText;
 @end
 
@@ -40,6 +47,9 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
         
         self.frame = CGRectMake(0, 0, ScreenW, ScreenH);
         self.backgroundColor = RGBACOLOR(0, 0, 0, 0.7);
+        
+        [self addNotification];
+        
         _iChatTitleView  =({
             UIView *tView= [[UIView alloc]initWithFrame:CGRectMake((ScreenW-sChatTitleViewWidth*Proportion)/2.0, 20*Proportion, sChatTitleViewWidth*Proportion , sChatTitleViewHigh*Proportion)];
             tView.backgroundColor = RGBCOLOR(41, 41, 41);
@@ -80,7 +90,6 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
             
             UIButton *tButton = [UIButton buttonWithType:UIButtonTypeCustom];
             tButton.frame = CGRectMake(CGRectGetWidth(_iChatTitleView.frame)-sChatTitleViewClosedWidth*Proportion, 0, sChatTitleViewClosedWidth*Proportion, CGRectGetHeight(_iChatTitleView.frame));
-            
             [tButton setTitle:MTLocalized(@"Button.send") forState:UIControlStateNormal];
             [tButton setTitleColor:RGBCOLOR(236, 203, 47) forState:UIControlStateNormal];
             tButton.titleLabel.font = TKFont(15);
@@ -90,25 +99,45 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
             tButton;
             
         });
+        _iChatTitleEmojiButton = ({
+            UIButton *tButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            tButton.frame = CGRectMake(CGRectGetWidth(_iChatTitleView.frame)-sChatTitleViewClosedWidth*Proportion-CGRectGetHeight(_iChatTitleView.frame), 0, CGRectGetHeight(_iChatTitleView.frame), CGRectGetHeight(_iChatTitleView.frame));
+            
+            tButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+            [tButton addTarget:self action:@selector(chatTitleEmojiButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            tButton.backgroundColor = [UIColor clearColor];
+            
+//            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_Emoji_normal") forState:(UIControlStateNormal)];
+//
+//            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_Emoji_disabled") forState:(UIControlStateDisabled)];
+//            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_Emoji_hover") forState:(UIControlStateFocused)];
+//            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_Emoji_pressed") forState:(UIControlStateSelected)];
+            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_Emoji_normal") forState:(UIControlStateSelected)];
+            [tButton setImage:LOADIMAGE(@"TKEmoji/icon_keyboard_normal") forState:(UIControlStateNormal)];
+            tButton.contentMode = UIViewContentModeCenter;
+            
+            tButton.selected = YES;
+            
+            tButton;
+        });
         
         _iInputField =({
             
             CGFloat tInPutInerContainerWidth = CGRectGetWidth(_iChatTitleView.frame);
             CGFloat tInPutInerContainerHeigh =ScreenH - 100;
             CGRect rectInputFieldFrame = CGRectMake(CGRectGetMinX(_iChatTitleView.frame), CGRectGetMaxY(_iChatTitleView.frame), tInPutInerContainerWidth, tInPutInerContainerHeigh);
-            TKGrowingTextView *tInputField =  [[TKGrowingTextView alloc] initWithFrame:rectInputFieldFrame];
-            tInputField.internalTextView.backgroundColor = RGBCOLOR(62,62,62);
-            //tInputField.internalTextView.backgroundColor = [UIColor magentaColor];
-            [tInputField.internalTextView setTextColor:RGBACOLOR(168, 168, 168, 1)];
-            [tInputField.internalTextView setTintColor:RGBACOLOR(255, 255, 255, 1)];
-            //_inputField.layer.borderColor = RGBCOLOR(60,61,64).CGColor;
-            //_inputField.layer.borderWidth = 1;
-            //tInputField.font = [UIFont systemFontOfSize:15];
+            TKEmotionTextView *tInputField =  [[TKEmotionTextView alloc] initWithFrame:rectInputFieldFrame];
+            
+            tInputField.placehoder = MTLocalized(@"Say.say");//@"说点什么吧";
+            tInputField.textAlignment = NSTextAlignmentLeft;
+            tInputField.contentMode = UIViewContentModeCenter;//设置textview的文字对齐方式
+            
+            [tInputField setTextColor:RGBACOLOR(168, 168, 168, 1)];
+            [tInputField setTintColor:RGBACOLOR(255, 255, 255, 1)];
             tInputField.delegate         = self;
-            tInputField.maxNumberOfLines = 5;
             tInputField.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-            tInputField.internalTextView.returnKeyType = UIReturnKeySend;
-            tInputField.internalTextView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+            tInputField.returnKeyType = UIReturnKeySend;
+            tInputField.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
             tInputField.backgroundColor =RGBCOLOR(61, 61, 61);
             tInputField;
             
@@ -122,7 +151,7 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
             UILabel *tReplyText                 = [[UILabel alloc] initWithFrame:tReplyTextFrame];
             //tReplyText.backgroundColor = [UIColor redColor];
             tReplyText.textColor       = RGBCOLOR(99, 99, 99);
-            tReplyText.text            = MTLocalized(@"Say.say");//@"说点什么吧";
+//            tReplyText.text            = MTLocalized(@"Say.say");//@"说点什么吧";
             tReplyText.textAlignment   = NSTextAlignmentLeft;
             tReplyText.numberOfLines   = 1;
             tReplyText.font            = TKFont(15);
@@ -131,6 +160,7 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
         });
         [self addSubview:_iReplyText];
         [_iChatTitleView addSubview:_iChatTitleSenddButton];
+        [_iChatTitleView addSubview:_iChatTitleEmojiButton];
         [_iChatTitleView addSubview:_iChatTitleClosedButton];
         [_iChatTitleView addSubview:_iChatTitleLabel];
        
@@ -142,15 +172,76 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
     
     
 }
+- (void)addNotification{
+    //2017-11-16添加表情选中的通知    监听键盘
+    // 监听表情选中的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:TKEmotionDidSelectedNotification object:nil];
+    // 监听删除按钮点击的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidDeleted:) name:TKEmotionDidDeletedNotification object:nil];
+}
+#pragma mark -  当表情选中的时候调用
+- (void)emotionDidSelected:(NSNotification *)note
+{
+    TKEmotion *emotion = note.userInfo[TKSelectedEmotion];
+    // 1.拼接表情
+    [_iInputField appendEmotion:emotion];
+    
+}
 
+/**
+ *  当点击表情键盘上的删除按钮时调用
+ */
+- (void)emotionDidDeleted:(NSNotification *)note
+{
+    // 往回删
+    [_iInputField deleteBackward];
+}
+
+
+#pragma mark -系统键盘与表情键盘切换
+- (void)chatTitleEmojiButtonClicked:(UIButton *)aButton{
+    if (aButton.selected) {
+        aButton.selected = NO;
+        
+        [self openEmotion];
+        
+    }else{
+        aButton.selected = YES;
+        
+        [self openEmotion];
+        
+    }
+}
+- (void)openEmotion{
+    if (_iChatTitleEmojiButton.selected) {
+        // 当前显示的是自定义键盘，切换为系统自带的键盘
+        _iInputField.inputView = nil;
+        // 显示表情图片
+    } else
+    {
+        _iInputField.inputView = nil;
+        // 当前显示的是系统自带的键盘，切换为自定义键盘
+        // 如果临时更换了文本框的键盘，一定要重新打开键盘
+        _iInputField.inputView = self.kerboard;
+        // 不显示表情图片
+    }
+    // 关闭键盘
+    [self.iInputField resignFirstResponder];
+    // 记录是否正在更换键盘
+    // 更换完毕完毕
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 打开键盘
+        [self.iInputField becomeFirstResponder];
+    });
+}
 
 -(void)chatTitleSenddButtonClicked:(UIButton*)aButton{
-    if (!_iInputField || !_iInputField.text || _iInputField.text.length == 0)
+    if (!_iInputField || !_iInputField.realText || _iInputField.realText.length == 0)
     {
         return;
     }
-
-    NSDictionary *messageDic = @{@"msg":_iInputField.text, @"type":@(0)};
+    //type = 0 聊天 type = 1 提问
+    NSDictionary *messageDic = @{@"msg":_iInputField.realText, @"type":@(0)};
     NSData *messageData = [NSJSONSerialization dataWithJSONObject:messageDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *messageConvertStr = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
     
@@ -161,6 +252,20 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
    
     
     [self hide];
+    
+    _iChatTitleEmojiButton.selected = YES;//键盘置为原来的样式
+    _iInputField.inputView = nil;
+}
+#pragma mark - 键盘发送按钮事件
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        if (![_iInputField.text isEqualToString:@""]) {
+            [self chatTitleSenddButtonClicked:nil];
+        }
+        return NO;
+    }
+    return YES;
 }
 
 -(void)chatTitleClosedButtonClicked:(UIButton *)aButton{
@@ -191,6 +296,10 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
     //
     [self removeFromSuperview];
     [self endEditing:NO];
+    
+    _iInputField.inputView = nil;
+    _iChatTitleEmojiButton.selected = YES;//键盘置为原来的样式
+    
     _iInputField.text = @"";
     // [self refreshData];
     _iReplyText.hidden = NO;
@@ -198,18 +307,29 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
     [UIView commitAnimations];
 }
 -(void)tapTable:(UIGestureRecognizer *)aTab{
-    [self hide];
+//    [self hide];
+    _iInputField.inputView = nil;
+    _iChatTitleEmojiButton.selected = YES;//键盘置为原来的样式
+    [self endEditing:YES];
 }
 - (void)changeInputAreaHeight:(int)height duration:(NSTimeInterval)duration orientationChange:(bool)orientationChange dragging:(bool)__unused dragging completion:(void (^)(BOOL finished))completion
 {
-    
-    
     
 }
 - (void)updatePlaceholderVisibility:(bool)firstResponder
 {
     _iReplyText.hidden = firstResponder || _iInputField.text.length != 0;
 }
+
+#pragma mark UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.view == self.iChatTitleView) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark TKTextViewInternalDelegate
 - (void)TKTextViewChangedResponderState:(bool)firstResponder
 {
@@ -261,4 +381,17 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
     return YES;
 }
 
+
+#pragma mark - 表情键盘初始化
+- (TKEmotionKeyboard *)kerboard {
+    if (!_kerboard) {
+        self.kerboard = [TKEmotionKeyboard keyboard];
+        
+        self.kerboard.frame = CGRectMake(0, 0, self.frame.size.width, TKKeyBoardHeight);
+        
+        //        self.kerboard.width = SCREEN_WIDTH;
+        //        self.kerboard.height = 216;
+    }
+    return _kerboard;
+}
 @end
