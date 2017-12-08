@@ -1,9 +1,9 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/SocketIO.framework/Modules/SocketIO.swiftmodule
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/SocketIO.framework/Modules/SocketIO.swiftmodule
+svn://tonglm@192.168.1.15
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 a74bda6fc9549a932afd1fb3e0a22eda
 2017-10-18T18:46:05.728282Z
 25283
@@ -66,7 +66,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 8d1940bccc745214f87be2a54d7e17cf
 2017-10-18T18:46:05.728282Z
 25283
@@ -100,7 +100,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 761b5376aa1c719539fb40fe7b35acc1
 2017-10-18T18:46:05.728282Z
 25283
@@ -134,7 +134,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 826e4eaf75546b612c6768c9d9cf72a9
 2017-10-18T18:46:05.728282Z
 25283

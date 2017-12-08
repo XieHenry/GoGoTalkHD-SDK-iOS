@@ -17,13 +17,10 @@ typedef NS_ENUM(NSInteger, EDir)
     EDirTop,
     EDirBottom
 };
-
 // 悬浮按钮的尺寸
 #define floatSize 50
-
-
-
 typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
+
 @interface TKVideoSmallView : UIView
 
 -(nonnull instancetype)initWithFrame:(CGRect)frame aVideoRole:(EVideoRole)aVideoRole NS_DESIGNATED_INITIALIZER;
@@ -37,12 +34,15 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 @property(strong,nonatomic)NSString *_Nonnull iVideoSmallViewkey;
 /** *  名字 */
 @property(strong,nonatomic)UILabel *_Nonnull iNameLabel;
+@property(strong,nonatomic)UILabel *_Nonnull iBackgroundLabel;
 /** *  奖杯 */
 @property(strong,nonatomic)UIButton *_Nonnull iGifButton;
 /** *  当前看的peerid */
 @property(copy,nonatomic)NSString *_Nonnull iPeerId;
 /** *  是否拖拽出去了 */
 @property(assign,nonatomic)BOOL isDrag;
+/** *  是否分屏 */
+@property(assign,nonatomic)BOOL isSplit;
 
 /** *  当前的用户 */
 @property(strong,nonatomic)RoomUser *_Nullable iRoomUser;
@@ -60,11 +60,15 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 /** *  授权等点击事件 */
 @property(assign,nonatomic)BOOL  isNeedFunctionButton;
 
-
 @property(strong,nonatomic)TKEduSessionHandle *_Nonnull iEduClassRoomSessionHandle;
 
 
 @property(copy,nonatomic)bVideoSmallViewClickeBlockType  _Nullable bVideoSmallViewClickedBlock;
+
+
+@property(nonatomic,copy) void(^ _Nullable splitScreenClickBlock)(EVideoRole aVideoRole);//分屏回调
+
+@property(nonatomic,copy) void(^ _Nullable oneKeyResetBlock)();//分屏回调
 
 -(void)changeName:(NSString *_Nullable)aName;
 -(void)hideFunctionView;
@@ -72,4 +76,5 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 -(void)addVideoView:(UIView*_Nullable)view;
 -(void)changeAudioDisabledState;
 -(void)changeVideoDisabledState;
+- (void)endInBackGround:(BOOL)isInBackground;
 @end

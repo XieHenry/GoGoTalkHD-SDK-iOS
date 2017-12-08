@@ -15,6 +15,7 @@
 #import "TKEduNetManager.h"
 #import "TKEduRoomProperty.h"
 #import "TKEduSessionHandle.h"
+#import "TKBackGroundView.h"
 //214*140  214*120 214*20
 //214*140  214*120 214*20
 //120*112  120*90  120*22
@@ -22,6 +23,9 @@
 //static const CGFloat sVideoSmallNameLabelHeight = 22;
 
 @interface TKVideoSmallView ()<VideolistProtocol,CAAnimationDelegate>
+
+@property (nonatomic, strong) TKBackGroundView *sIsInBackGroundView;//进入后台覆盖视图
+
 @property(nonatomic,retain)TKVideoFunctionView *iFunctionView;
 @property(nonatomic,assign)EVideoRole iVideoRole;
 /** *  画笔 */
@@ -36,6 +40,8 @@
 //gift
 @property (nonatomic, strong) UIImageView *iGiftAnimationView;
 @property (nonatomic, assign) NSInteger iGiftCount;
+@property (nonatomic, assign) EVideoRole videoRole;
+
 
 @end
 
@@ -48,18 +54,15 @@
     return [self initWithFrame:frame aVideoRole:EVideoRoleTeacher];
 }
 -(instancetype)initWithFrame:(CGRect)frame aVideoRole:(EVideoRole)aVideoRole{
+    
     if (self = [super initWithFrame:frame]) {
-        //[iRootView addSubview:self];
+        
         self.backgroundColor = RGBCOLOR(47, 47, 47);
-        CGFloat tVideoWidth     = CGRectGetWidth(frame);
-       // CGFloat tVideoHeigh     = CGRectGetHeight(frame)-sVideoSmallNameLabelHeight*Proportion;
-        CGFloat tVideoHeigh     = tVideoWidth*3/4.0;
+        _videoRole = aVideoRole;
         _iVideoBackgroundImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_teacher_big")];
-        _iVideoBackgroundImageView.frame        = CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
         _iVideoBackgroundImageView.backgroundColor = RGBCOLOR(47, 47, 47);
         _iVideoBackgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewContentModeBottom;
         
-        _iVideoFrame =  CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
         _iVideoRole  = aVideoRole;
         switch (aVideoRole) {
             case EVideoRoleTeacher:{
@@ -84,9 +87,9 @@
 
       
         _iNameLabel =({
-            CGFloat tWidth = (aVideoRole != EVideoRoleTeacher?(CGRectGetWidth(frame)-48):CGRectGetWidth(frame));
             
-            UILabel *tNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,tVideoHeigh, tWidth, CGRectGetHeight(frame)-tVideoHeigh)];
+            UILabel *tNameLabel = [[UILabel alloc]init];
+            tNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
             
             [tNameLabel setFont:TKFont(12)];
             tNameLabel.textColor = [UIColor whiteColor];
@@ -101,24 +104,20 @@
         });
       
         
-        UILabel *tBackgroundLabel =({
-            CGFloat tWidth = (CGRectGetWidth(frame));
-            
-            UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,tVideoHeigh, tWidth, CGRectGetHeight(frame)-tVideoHeigh)];
+        _iBackgroundLabel =({
+            UILabel *tLabel = [[UILabel alloc]init];
             tLabel.backgroundColor =RGBACOLOR(0, 0, 0, 0.3);
             tLabel;
         
         });
         
         [self addSubview:_iVideoBackgroundImageView];
-        [self addSubview:tBackgroundLabel];
+        [self addSubview:_iBackgroundLabel];
         [self addSubview:_iNameLabel];
         
         
         _iGifButton = ({
             UIButton *tButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            tButton.frame = CGRectMake(CGRectGetMaxX(_iNameLabel.frame), CGRectGetMinY(_iNameLabel.frame), 48, CGRectGetHeight(_iNameLabel.frame));
-            
             tButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
             [tButton setImage:LOADIMAGE(@"icon_gift") forState:UIControlStateNormal];
             [tButton setTitleColor:RGBCOLOR(240,207,46)forState:UIControlStateNormal];
@@ -128,14 +127,13 @@
             tButton;
             
         });
-        CGFloat tVideoImageWidth = (tVideoWidth-6)/8.0;
         
         if (aVideoRole != EVideoRoleTeacher) {
             
             _iVideoImageView = ({
                 
                 UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_video")];
-                tImageView.frame        = CGRectMake(0, 0, tVideoImageWidth, tVideoImageWidth);
+                
                 tImageView;
                 
             });
@@ -148,14 +146,15 @@
         _iAudioImageView = ({
             
             UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_audio")];
-            tImageView.frame        = CGRectMake((aVideoRole == EVideoRoleTeacher) ? 0 : tVideoImageWidth, 0, tVideoImageWidth, tVideoImageWidth);
+//            tImageView.contentMode = UIViewContentModeTopLeft;
             tImageView;
+          
             
         });
         _iDrawImageView = ({
             
             UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_tools")];
-            tImageView.frame        = CGRectMake(tVideoImageWidth*2, 0, tVideoImageWidth, tVideoImageWidth);
+            
             tImageView;
             
         });
@@ -163,7 +162,7 @@
         _iHandsUpImageView = ({
             
             UIImageView *tImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_hand")];
-            tImageView.frame        = CGRectMake(tVideoWidth-tVideoImageWidth-3, 0, tVideoImageWidth, tVideoImageWidth);
+            
             
             tImageView;
             
@@ -182,12 +181,12 @@
         _iHandsUpImageView.hidden  = YES;
         
          _iFunctionButton = ({
+             
             UIButton *tButton = [UIButton buttonWithType:UIButtonTypeCustom];
-             tButton.frame = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
+             
              [tButton addTarget:self action:@selector(functionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             tButton;
-            
             
         });
          [self addSubview:_iFunctionButton];
@@ -195,9 +194,55 @@
     }
     return self;
 }
+
+
 -(void)layoutSubviews{
+    
     [self bringSubviewToFront:_iFunctionButton];
+    
+    CGFloat videoSmallWidth  = CGRectGetWidth(self.frame);
+    
+    CGFloat videoSmallHeight = CGRectGetHeight(self.frame);
+    
+    CGFloat tVideoWidth     = videoSmallWidth;
+    
+//    CGFloat tVideoHeigh     = CGRectGetHeight(frame)-sVideoSmallNameLabelHeight*Proportion;
+//    CGFloat tVideoHeigh     = tVideoWidth*3/4.0;
+    
+    CGFloat tVideoHeigh     = videoSmallHeight-30;
+    
+    _iVideoBackgroundImageView.frame        = CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
+    
+    _iVideoFrame =  CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
+    
+    _iRealVideoView.frame = _iVideoFrame;
+    
+//    CGFloat tWidth = (_videoRole != EVideoRoleTeacher?(videoSmallWidth-48):CGRectGetWidth(self.frame));
+    CGFloat tWidth = videoSmallWidth-48;
+    
+    _iNameLabel.frame = CGRectMake(0,tVideoHeigh, tWidth, videoSmallHeight-tVideoHeigh);
+    
+    _iGifButton.frame = CGRectMake(CGRectGetMaxX(_iNameLabel.frame), CGRectGetMinY(_iNameLabel.frame), 48, CGRectGetHeight(_iNameLabel.frame));
+    
+    _iBackgroundLabel.frame = CGRectMake(0,tVideoHeigh, tVideoWidth, CGRectGetHeight(self.frame)-tVideoHeigh);
+    
+    
+    CGFloat tVideoImageWidth = self.isSplit?30:(tVideoWidth-6)/8.0;
+    
+    _iVideoImageView.frame        = CGRectMake(0, 0, tVideoImageWidth, tVideoImageWidth);
+    
+    _iAudioImageView.frame        = CGRectMake((_videoRole == EVideoRoleTeacher) ? 0 : tVideoImageWidth, 0, tVideoImageWidth, tVideoImageWidth);
+    
+    
+    _iDrawImageView.frame        = CGRectMake(tVideoImageWidth*2, 0, tVideoImageWidth, tVideoImageWidth);
+    
+    _iHandsUpImageView.frame        = CGRectMake(tVideoWidth-tVideoImageWidth-3, 0, tVideoImageWidth, tVideoImageWidth);
+    
+    _iFunctionButton.frame = CGRectMake(0, 0, videoSmallWidth, videoSmallHeight);
+    
+    
 }
+
 -(void)setIsNeedFunctionButton:(BOOL)isNeedFunctionButton{
     _iFunctionButton.enabled = isNeedFunctionButton;
 }
@@ -213,12 +258,18 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshRaiseHandUI:) name:[NSString stringWithFormat:@"%@%@",sRaisehand,iRoomUser.peerID] object:nil];
         _iGifButton.hidden = NO;
         
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(inBackground:) name:[NSString stringWithFormat:@"%@%@",sIsInBackGround,iRoomUser.peerID] object:nil];
+        
     }else{
         // [[NSNotificationCenter defaultCenter]postNotificationName:[NSString stringWithFormat:@"%@%@",sRaisehand,user.peerID] object:@(_iIsRaiseHandUp)];
         //删除前一个
         [[NSNotificationCenter defaultCenter]removeObserver:self name:[NSString stringWithFormat:@"%@%@",sRaisehand,_iRoomUser.peerID] object:nil];
         
         _iGifButton.hidden = YES;
+        
+        
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:[NSString stringWithFormat:@"%@%@",sIsInBackGround,_iRoomUser.peerID] object:nil];
+        
     }
     [self bringSubviewToFront:_iAudioImageView];
     [self bringSubviewToFront:_iDrawImageView];
@@ -256,7 +307,23 @@
         _iVideoImageView.hidden = YES;
     }
 }
-
+- (void)inBackground:(NSNotification *)aNotification{
+    BOOL isInBackground =[aNotification.userInfo[sIsInBackGround] boolValue];
+    
+     [self endInBackGround:isInBackground];
+    
+}
+- (void)endInBackGround:(BOOL)isInBackground{
+    
+    if (isInBackground) {//进入后台需将视频顶层覆盖视图
+        
+        [self addSubview:self.sIsInBackGroundView];
+        [self bringSubviewToFront:self.sIsInBackGroundView];
+    }else{//取消覆盖
+        [self.sIsInBackGroundView removeFromSuperview];
+        
+    }
+}
 -(void)refreshRaiseHandUI:(NSNotification *)aNotification{
     NSDictionary *tDic = (NSDictionary *)aNotification.object;
     PublishState tPublishState = [[tDic objectForKey:sPublishstate]integerValue];
@@ -273,7 +340,10 @@
     _iDrawImageView.hidden = tDrawImageShow;
     
     if([[tDic objectForKey:sGiftNumber]integerValue] && _iRoomUser.role != UserType_Teacher){
-        [self  potStartAnimationForView:self];
+        NSString *fromId = [tDic objectForKey:sFromId];
+        if ([fromId isEqualToString:_iRoomUser.peerID] == NO) {
+            [self potStartAnimationForView:self];
+        }
     }
     
     self.iRoomUser.disableVideo = [[tDic valueForKey:sDisableVideo] boolValue];
@@ -302,7 +372,10 @@
         return;
     }
     
-    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID] || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
+//    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || [[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID] || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
+//        return;
+    
+    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
         return;
     
     if (!_iFunctionView) {
@@ -312,7 +385,9 @@
                 //修改部分
                 _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 320, 70) withType:1 aVideoRole:EVideoRoleTeacher aRoomUer:_iRoomUser];
                 // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(ScreenW-295-CGRectGetWidth(self.frame), CGRectGetMinY(self.frame)+70, 295, 70) withType:1 aVideoRole:EVideoRoleTeacher aRoomUer:_iRoomUser];
-                _iFunctionView.iDelegate = self;
+                
+                self.iFunctionView.iDelegate = self;
+                
                 break;
             }
             case EVideoRoleOur:{
@@ -326,9 +401,19 @@
             default:{
                 
                 _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
-
+                
+                //此处判断下是否为学生且开启了允许开关摄像头功能
+                CGFloat functionWidth = 320;
+                
                 //修改部分
-                _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame)-70, 320, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+                if (!self.isSplit) {
+                    
+                    _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame)-70, functionWidth, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+                }else{
+                    _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame)+70, functionWidth, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
+                }
+                
+                _iFunctionView.isSplitScreen = self.isSplit;
                 // _iFunctionView = [[TKVideoFunctionView alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.superview.frame)-70, 295, 70) withType:0 aVideoRole:EVideoRoleOther aRoomUer:_iRoomUser];
                 _iFunctionView.iDelegate = self;
                 
@@ -338,11 +423,12 @@
                 
         }
         
+        [[UIApplication sharedApplication].keyWindow addSubview:self.iFunctionView];
         
-        [[UIApplication sharedApplication].keyWindow addSubview:_iFunctionView];
+        
     }else{
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
-        
+        [self hideFunctionView];
     }
     
 }
@@ -440,8 +526,6 @@
                 aButton.selected =  !_iRoomUser.canDraw;
                 _iDrawImageView.hidden = _iRoomUser.canDraw;
             }
-           
-            
         }
         
     }
@@ -450,7 +534,7 @@
   
 }
 -(void)videoSmallButton2:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
-     [self hideFunctionView];
+    [self hideFunctionView];
     if ( ![_iPeerId isEqualToString:@""]) {
         if (aVideoRole == EVideoRoleTeacher) {
             TKLog(@"关闭音频");
@@ -505,7 +589,7 @@
 }
 -(void)videoSmallButton3:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
     TKLog(@"关闭音频");
-     [self hideFunctionView];
+    [self hideFunctionView];
     if (![_iPeerId isEqualToString:@""]) {
         
         //_iCurrentPeerId = _iPeerId;
@@ -544,7 +628,7 @@
     
 }
 -(void)videoSmallButton4:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{
-     [self hideFunctionView];
+    [self hideFunctionView];
     if (![_iPeerId isEqualToString:@""]) {
        
         TKEduSessionHandle *tSessionHandle = [TKEduSessionHandle shareInstance];
@@ -616,8 +700,18 @@
         }
         
     }
-    
-    
+}
+-(void)videoSmallButton6:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole{//分屏显示
+    [self hideFunctionView];
+    if (self.splitScreenClickBlock) {
+        self.splitScreenClickBlock(aVideoRole);
+    }
+}
+- (void)videoOneKeyReset{//全部恢复
+    [self hideFunctionView];
+    if (self.oneKeyResetBlock) {
+        self.oneKeyResetBlock();
+    }
 }
 #pragma mark 动画
 - (void)potStartAnimationForView:(UIView *)view
@@ -821,4 +915,13 @@
 //            break;
 //    }
 //}
+- (UIView *)sIsInBackGroundView{
+    if (!_sIsInBackGroundView) {
+        self.sIsInBackGroundView = [[[NSBundle mainBundle]loadNibNamed:@"TKBackGroundView" owner:nil options:nil] lastObject];
+        self.sIsInBackGroundView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    }
+    return _sIsInBackGroundView;
+}
+
+
 @end

@@ -51,5 +51,10 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 #pragma mark 上课
 +(void)classBeginStar:(NSString * _Nonnull )roomID companyid:(NSString *_Nonnull)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
+#pragma mark 获取区域列表
++ (void)getAreaListWithHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
+
+#pragma mark 当前默认选择的区域
++ (void)getDefaultAreaWithComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
 @end

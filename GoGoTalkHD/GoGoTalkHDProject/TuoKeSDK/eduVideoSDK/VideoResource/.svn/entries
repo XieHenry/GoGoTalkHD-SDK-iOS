@@ -1,15 +1,15 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource
+svn://tonglm@192.168.1.15
 
 
 
-2017-11-08T11:24:18.764209Z
-25814
-tonglm
+2017-12-07T14:31:31.433931Z
+26720
+liyy
 
 
 
@@ -37,14 +37,14 @@ dir
 
 libroomsdk.a
 file
+26737
 
 
 
-
-2017-11-10T02:26:39.000000Z
-a057ba5933d72d8c111df1d5f5a3cfa0
-2017-11-08T11:24:18.764209Z
-25814
+2017-12-07T08:37:32.000000Z
+f10d236c8dd6bdf56f83bb0c662cde7c
+2017-12-07T17:56:40.666266Z
+26737
 tonglm
 has-props
 
@@ -67,7 +67,7 @@ has-props
 
 
 
-3595440
+3768640
 
 SocketIO.framework
 dir

@@ -9,6 +9,9 @@
 #import "TKMessageTableViewCell.h"
 #import "TKMacro.h"
 #import "TKUtil.h"
+
+#import "NSAttributedString+JTATEmoji.h"
+
 @implementation TKMessageTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -30,7 +33,8 @@
     _iMessageLabel.textColor = RGBCOLOR(134, 134, 134);
     _iMessageLabel.backgroundColor = [UIColor clearColor];
     _iMessageLabel.textAlignment = NSTextAlignmentCenter;
-    _iMessageLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    _iMessageLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _iMessageLabel.numberOfLines = 0;
     [_iMessageLabel setFont:TKFont(15)];
     [self.contentView addSubview:_iMessageLabel];
     self.contentView.backgroundColor = [UIColor clearColor];
@@ -39,7 +43,8 @@
 }
 - (void)resetView
 {
-    _iMessageLabel.text = _iMessageText;
+//    _iMessageLabel.text = _iMessageText;
+     _iMessageLabel.attributedText = [NSAttributedString emojiAttributedString:_iMessageText withFont:TEXT_FONT withColor:[UIColor whiteColor]];
 }
 
 
@@ -48,9 +53,10 @@
 {
     [super layoutSubviews];
     
-    //CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitHeight:28 Font:TEXT_FONT];
-    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageLabel.text withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
-    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width+20, tMessageLabelsize.height+20);
+    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromAttributedString:_iMessageText withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
+    
+//    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageText withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
+    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width, tMessageLabelsize.height+20);
     
      [self imageAddCornerWithRadius];
      [TKUtil setCenter:_iMessageLabel ToFrame:self.contentView.frame];
@@ -67,7 +73,9 @@
         [self.contentView addSubview:_backgroudImageView];
     }
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_iMessageLabel.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake( CGRectGetWidth(_iMessageLabel.frame)/2,  CGRectGetWidth(_iMessageLabel.frame)/2)];
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_iMessageLabel.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake( CGRectGetWidth(_iMessageLabel.frame)/2,  CGRectGetWidth(_iMessageLabel.frame)/2)];
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_iMessageLabel.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake( CGRectGetWidth(_iMessageLabel.frame)/2 > 10? 10:CGRectGetWidth(_iMessageLabel.frame)/2,  CGRectGetWidth(_iMessageLabel.frame)/2 > 10? 10:CGRectGetWidth(_iMessageLabel.frame)/2)];
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
     //设置大小
@@ -103,6 +111,14 @@
     
     CGFloat height = [self sizeFromText:text withLimitWidth:width Font:TEXT_FONT].height;
     return height;
+}
++ (CGSize)sizeFromAttributedString:(NSString *)text withLimitWidth:(CGFloat)width Font:(UIFont*)aFont{
+    //计算富文本的宽高
+    CGSize textBlockMinSize = {width-60, CGFLOAT_MAX};
+    NSAttributedString *attributedString = [NSAttributedString emojiAttributedString:text withFont:aFont withColor:RGBCOLOR(134, 134, 134)];
+    CGRect boundingRect = [attributedString boundingRectWithSize:textBlockMinSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize tMessageLabelsize = boundingRect.size;
+    return tMessageLabelsize;
 }
 
 @end

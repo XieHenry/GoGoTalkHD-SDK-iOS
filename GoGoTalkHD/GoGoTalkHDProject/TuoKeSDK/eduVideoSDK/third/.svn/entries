@@ -1,14 +1,14 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third
+svn://tonglm@192.168.1.15
 
 
 
-2017-08-16T23:05:30.068789Z
-24144
+2017-12-02T15:17:53.971375Z
+26441
 jinchao
 
 
@@ -30,6 +30,9 @@ CrashReporter.framework
 dir
 
 LTUpdate
+dir
+
+MJExtension
 dir
 
 HockeySDK

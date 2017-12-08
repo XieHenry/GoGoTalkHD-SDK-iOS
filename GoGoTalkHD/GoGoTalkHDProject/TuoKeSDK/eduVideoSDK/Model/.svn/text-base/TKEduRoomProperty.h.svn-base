@@ -12,7 +12,7 @@
 //根据课堂返回的信息，可能重新复制
 @property(nonatomic,copy) NSString * iRoomId;
 @property(nonatomic,copy) NSString * iRoomName;
-
+@property(nonatomic,copy) NSString * defaultServerArea;
 @property(nonatomic,assign)RoomType iRoomType;
 @property(nonatomic,assign)UserType iUserType;
 @property(nonatomic,copy) NSString  *iUserId;

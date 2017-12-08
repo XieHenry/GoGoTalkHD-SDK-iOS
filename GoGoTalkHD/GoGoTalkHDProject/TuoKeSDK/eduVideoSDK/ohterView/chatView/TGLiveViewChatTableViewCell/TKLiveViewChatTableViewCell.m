@@ -10,6 +10,8 @@
 #import "TKUtil.h"
 #import "TKMacro.h"
 
+#import "NSAttributedString+JTATEmoji.h"
+
 
 
 @implementation TKLiveViewChatTableViewCell
@@ -67,7 +69,8 @@
 - (void)resetView
 {
 
-    _textView.text = _text;
+//    _textView.text = _text;
+    _textView.attributedText = [NSAttributedString emojiAttributedString:_text withFont:TEXT_FONT withColor:[UIColor whiteColor]];
     
     self.nameLabel.text = _iName;
     [_nameLabel setTextColor:_iNameColor];
@@ -84,6 +87,7 @@
    
     CGSize titlesize = [TKLiveViewChatTableViewCell sizeFromText:self.nameLabel.text withLimitHeight:20 Font:Name_FONT];
     CGSize colonSize = [TKLiveViewChatTableViewCell sizeFromText:@":" withLimitHeight:20 Font:TEXT_FONT];
+    
     CGSize textSize = [TKLiveViewChatTableViewCell sizeFromText:_text withLimitWidth:CGRectGetWidth(self.frame)-colonSize.width-titlesize.width-30 Font:TEXT_FONT];
     _avaterView.frame = CGRectMake(10, 10, 20, 20);
     _avaterView.frame = CGRectMake(0, 0, 0, 0);

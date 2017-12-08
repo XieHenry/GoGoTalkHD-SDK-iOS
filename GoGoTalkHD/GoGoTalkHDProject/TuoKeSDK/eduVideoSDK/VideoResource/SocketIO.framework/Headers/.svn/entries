@@ -1,9 +1,9 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/SocketIO.framework/Headers
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/VideoResource/SocketIO.framework/Headers
+svn://tonglm@192.168.1.15
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 6c920696994294cf048d767b9b6e7f72
 2017-10-18T18:46:05.728282Z
 25283
@@ -66,7 +66,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 c0bdd89200aae5b1eb46b48bac2a3e53
 2017-08-12T10:43:20.503109Z
 24054
@@ -100,7 +100,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:53.000000Z
 67231a212f5e16a21dca147354a04758
 2017-10-18T18:46:05.728282Z
 25283

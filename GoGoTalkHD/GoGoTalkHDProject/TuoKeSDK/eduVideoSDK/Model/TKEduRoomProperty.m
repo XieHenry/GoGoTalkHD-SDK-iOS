@@ -25,6 +25,7 @@
     _iRoomName    = [params objectForKey:@"roomname"]?[params objectForKey:@"roomname"]:@"";
     _iRoomId      = [params objectForKey:@"serial"]?[params objectForKey:@"serial"]:@"";
     _iCompanyID   = [params objectForKey:@"companyId"]?[params objectForKey:@"companyId"]:@"";
+    _defaultServerArea = [params objectForKey:@"server"]?[params objectForKey:@"server"]:@"";
 }
 
 @end

@@ -18,6 +18,7 @@
 #import "TKDocumentListView.h"
 #import "TKProgressHUD.h"
 #import "sys/utsname.h"
+#import "TKAreaChooseModel.h"
 
 @import AVFoundation;
 @interface RoomManager(test)
@@ -56,14 +57,14 @@
 }
 
 -(void)initPlaybackRoomManager:(id<RoomWhiteBoard>)aRoomWhiteBoardDelegate {
-    _roomMgr = [[RoomManager alloc] initPlaybackWithDelegate:self AndWB:aRoomWhiteBoardDelegate];
+    _roomMgr = [[RoomManager instance] configurePlaybackWithDelegate:self AndWB:aRoomWhiteBoardDelegate];
 }
 
 -(void)initClassRoomManager{
-    _roomMgr = [[RoomManager alloc] initWithDelegate:self];
+    _roomMgr = [[RoomManager instance] configureWithDelegate:self];
 }
 -(void)initClassRoomManager:(id<RoomWhiteBoard>)aRoomWhiteBoardDelegate{
-    _roomMgr = [[RoomManager alloc] initWithDelegate:self AndWB:aRoomWhiteBoardDelegate];
+    _roomMgr = [[RoomManager instance] configureWithDelegate:self AndWB:aRoomWhiteBoardDelegate];
 }
 
 - (void)configureSession:(NSDictionary*)paramDic
@@ -95,7 +96,9 @@
     _iDocmentMutableDic = [[NSMutableDictionary alloc]initWithCapacity:10];
     _iDocmentMutableArray =[[NSMutableArray alloc] init];
     _iMediaMutableArray = [[NSMutableArray alloc]init];
+    _defaultArea = [self getDefaultArea];
     
+    _iIsJoined = NO;
     _isClassBegin = NO;
     _iIsClassEnd = YES;
     _getCameraFail = NO;
@@ -149,6 +152,7 @@
     _iDocmentMutableArray =[[NSMutableArray alloc] init];
     _iMediaMutableArray = [[NSMutableArray alloc]init];
     
+    _iIsJoined = NO;
     _isPlayMedia = NO;
     _iIsPlaying = NO;
     _isLocal = NO;
@@ -183,7 +187,7 @@
         NSString *tPort = [_iParamDic objectForKey:@"port"]?[_iParamDic objectForKey:@"port"]:sPort;
         NSString *tNickName = [_iParamDic objectForKey:@"nickname"]?[_iParamDic objectForKey:@"nickname"]:@"test";
         bool isConform = [TKUtil  deviceisConform];
-        isConform      = true;
+        //isConform      = true;    // 注释掉后开启低功耗
         // 先检测麦克风
         AVAuthorizationStatus authAudioStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
         if (authAudioStatus == AVAuthorizationStatusRestricted|| authAudioStatus == AVAuthorizationStatusDenied) {
@@ -267,13 +271,20 @@
 }
 //状态变化
 - (void)sessionHandleChangeUserProperty:(NSString*)peerID TellWhom:(NSString*)tellWhom Key:(NSString*)key Value:(NSObject*)value completion:(void (^)(NSError *error))block{
+    
     return [_roomMgr changeUserProperty:peerID TellWhom:tellWhom Key:key Value:value completion:block];
     
 }
-//
+
+- (void)sessionHandleApplicationWillEnterForeground{
+    [_roomMgr pubMsg:sUpdateTime ID:sUpdateTime To:self.localUser.peerID Data:@"" Save:NO AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
+    
+}
+
 - (void)sessionHandleChangeUserPublish:(NSString*)peerID Publish:(int)publish completion:(void (^)(NSError *error))block{
     return [_roomMgr changeUserPublish:peerID Publish:publish completion:block];
 }
+
 
 - (void)sessionHandleSendMessage:(NSString*)message completion:(void (^)(NSError *error))block{
      return [_roomMgr sendMessage:message completion:block];
@@ -283,8 +294,9 @@
 //   return [_roomMgr pubMsg:msgName ID:msgID To:toID Data:data Save:save completion:block];
 //}
 
-- (void)sessionHandlePubMsg:(NSString *)msgName ID:(NSString *)msgID To:(NSString *)toID Data:(NSObject *)data Save:(BOOL)save AssociatedMsgID:(NSString *)associatedMsgID AssociatedUserID:(NSString *)associatedUserID completion:(void (^)(NSError *))block {
-    return [_roomMgr pubMsg:msgName ID:msgID To:toID Data:data Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID completion:block];
+- (void)sessionHandlePubMsg:(NSString *)msgName ID:(NSString *)msgID To:(NSString *)toID Data:(NSObject *)data Save:(BOOL)save AssociatedMsgID:(NSString *)associatedMsgID AssociatedUserID:(NSString *)associatedUserID
+                    expires:(NSTimeInterval)expires completion:(void (^)(NSError *))block {
+    return [_roomMgr pubMsg:msgName ID:msgID To:toID Data:data Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:expires completion:block];
 }
 
 - (void)sessionHandleDelMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data completion:(void (^)(NSError *error))block{
@@ -434,10 +446,10 @@
      TKLog(@"jin roomManagerUserLeft");
 }
 //7用户信息变化
-- (void)roomManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties{
+- (void)roomManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId {
     
-    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerUserChanged:Properties:)]) {
-        [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerUserChanged:user Properties:properties];
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerUserChanged:Properties:fromId:)]) {
+        [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerUserChanged:user Properties:properties fromId:fromId];
         
     }
       TKLog(@"jin roomManagerUserChanged");
@@ -584,63 +596,179 @@
 
 #pragma mark roomWhiteBoard Delegate
 
-- (void)onUserPublished:(RoomUser *)user {
-    NSMutableDictionary *onStageUserDic = [[NSMutableDictionary alloc] init];
-    for (RoomUser *user in [self.iPublishDic allValues]) {
-        if (user.role == UserType_Student) {
-            [onStageUserDic setObject:user.nickName forKey:user.peerID];
-        }
-    }
-    if (user && user.role == UserType_Student) {
-        [onStageUserDic setObject:user.nickName forKey:user.peerID];
-        
-        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:onStageUserDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
-        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.userSelector(%@)",tJsonString];
-        [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-            NSLog(@"----GLOBAL.phone.userSelector");
-        }];
-    }
-}
+- (void)onRoomConnectedUserlist:(NSArray *)userList MsgList:(NSArray*)msgList Myself:(RoomUser *)myself roomProperties:(NSDictionary *)roomProperties{
+    
 
-- (void)onUserUnpublished:(RoomUser *)user {
-    NSMutableDictionary *onStageUserDic = [[NSMutableDictionary alloc] init];
-    for (RoomUser *user in [self.iPublishDic allValues]) {
-        if (user.role == UserType_Student) {
-            [onStageUserDic setObject:user.nickName forKey:user.peerID];
-        }
+    [self documentChange:msgList];
+    
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    
+    [tDict setObject:@"room-connected" forKey:@"type"];
+    
+    //useList
+    if (!userList) {
+        return;
     }
-    if (user && user.role == UserType_Student) {
-        [onStageUserDic removeObjectForKey:user.peerID];
+    NSMutableArray *userListArray = [NSMutableArray array];
+    for (RoomUser *user in userList) {
         
-        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:onStageUserDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
-        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.userSelector(%@)",tJsonString];
-        [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-            NSLog(@"----GLOBAL.phone.userSelector");
-        }];
-    }
-}
-
-- (void)onUserLeft:(RoomUser *)user {
-    NSMutableDictionary *onStageUserDic = [[NSMutableDictionary alloc] init];
-    for (RoomUser *user in [self.iPublishDic allValues]) {
-        if (user.role == UserType_Student) {
-            [onStageUserDic setObject:user.nickName forKey:user.peerID];
-        }
+        NSMutableDictionary *userDict = [NSMutableDictionary dictionaryWithDictionary:user.properties];
+        [userDict setObject:user.peerID forKey:@"id"];
+        
+        [userListArray addObject:userDict];
     }
     
-    if (user && [onStageUserDic objectForKey:user.peerID] && user.role == UserType_Student) {
-        [onStageUserDic removeObjectForKey:user.peerID];
+    [tDict setObject:userListArray forKey:@"userlist"];
+    
+    //msgList
+    if (!msgList) {
+        return;
+    }
+    [tDict setObject:msgList forKey:@"msglist"];
+    
+    
+    //myself
+    if (!myself) {
+        return;
+    }
+    NSMutableDictionary *myselfDict = [NSMutableDictionary dictionaryWithDictionary:myself.properties];
+    [myselfDict setObject:myself.peerID forKey:@"id"];
+    [tDict setObject:myselfDict forKey:@"myself"];
+    
+    //roomProperties
+    if (!roomProperties) {
+        return;
+    }
+    [tDict setObject:roomProperties forKey:@"roomProperties"];
+    
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonDataJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tJsonDataJsonString];
+    
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+    }];
+}
+- (void)documentChange:(NSArray *)list{
+//    注释代码为之前内容
+    TKLog(@"jin onRemoteMsgList");
+    NSMutableDictionary *tParamDic = [[NSMutableDictionary alloc]initWithCapacity:10];
+    BOOL tIsHavePageList = NO;
+    BOOL tIsCanPage      = NO;
+    for (NSDictionary *tParamDictemp in list) {
+        NSString *tID = [tParamDictemp objectForKey:@"id"];
+        [tParamDic setObject:tParamDictemp forKey:tID];
         
-        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:onStageUserDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
-        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.userSelector(%@)",tJsonString];
-        [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-            NSLog(@"----GLOBAL.phone.userSelector");
-        }];
+        if ([[tParamDictemp objectForKey:@"name"] isEqualToString:sShowPage]) {
+            tIsHavePageList = YES;
+            NSString *dataJson = [tParamDictemp objectForKey:@"data"];
+            NSDictionary *tDataDic = @{};
+            
+            //TKLog(@"-----%@", [NSString stringWithFormat:@"msgName:%@,msgID:%@",msgName,msgID]);
+            if ([dataJson isKindOfClass:[NSString class]]) {
+                NSString *tDataString = [NSString stringWithFormat:@"%@",dataJson];
+                NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+                tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+            }
+            if ([dataJson isKindOfClass:[NSDictionary class]]) {
+                tDataDic = (NSDictionary *)dataJson;
+            }
+            
+            NSDictionary *filedata = [tDataDic objectForKey:@"filedata"];
+            NSNumber *fileid = [filedata objectForKey:@"fileid"]?[filedata objectForKey:@"fileid"]:@(0);
+            _iPreDocmentModel = _iCurrentDocmentModel;
+            _iCurrentDocmentModel = [_iDocmentMutableDic objectForKey:[NSString stringWithFormat:@"%@", fileid]];
+            
+        }
+        if ([[tParamDictemp objectForKey:@"name"] isEqualToString:sClassBegin]) {
+            tIsCanPage = YES;
+        }
+        
+    }
+    
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    [tDict setObject:@"room-pubmsg" forKey:@"type"];
+    [tDict setObject:tParamDic forKey:@"message"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tjsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tjsonString];
+
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        TKLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
+    }];
+    if (!tIsHavePageList) {
+        [self docmentDefault:_iDefaultDocment];
+        
+    }
+    
+    
+    if (_iBoardDelegate && [_iBoardDelegate respondsToSelector:@selector(boardOnRemoteMsgList:)]) {
+        [_iBoardDelegate boardOnRemoteMsgList:list];
+        
     }
 }
+- (void)onRoomUserpropertyChangedUserid:(NSString *)userid properties:(NSDictionary *)properties fromID:(NSString *)fromID{
+    NSMutableDictionary *messageDic = [[NSMutableDictionary alloc] init];
+    
+    [messageDic setObject:userid forKey:@"userid"];
+    [messageDic setObject:properties forKey:@"properties"];
+    [messageDic setObject:fromID forKey:@"fromID"];
+    
+    
+    NSDictionary *tDict =[NSMutableDictionary dictionary];
+    [tDict setValue:@"room-userproperty-changed" forKey:@"type"];
+    
+    [tDict setValue:messageDic forKey:@"message"];
+    
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tJsonString];
+    
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+    }];
+    
+}
+- (void)onRoomParticipantJoin:(RoomUser *)user{
+    NSMutableDictionary *userDic = [NSMutableDictionary dictionaryWithDictionary:user.properties];
+    [userDic setObject:user.peerID forKey:@"id"];
+    
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    [tDict setObject:@"room-participant_join" forKey:@"type"];
+    [tDict setObject:userDic forKey:@"user"];
+    
+    
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tJsonString];
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+    }];
+}
+
+- (void)onRoomParticipantLeave:(RoomUser *)user{
+    
+    //2017-11-10 room-participant_leave:{type:'room-participant_leave' ,userid:userid }
+    NSDictionary *tDict = @{@"type":@"room-participant_leave",
+                            @"userid":user.peerID
+                            };
+    
+    
+    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tJsonString];
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+    }];
+    
+}
+
+
 
 - (void)onFileList:(NSArray*)fileList{
   
@@ -723,71 +851,6 @@
     }
 }
 
-- (void)onRemoteMsgList:(NSArray*)list{
-    TKLog(@"jin onRemoteMsgList");
-    NSMutableDictionary *tParamDic = [[NSMutableDictionary alloc]initWithCapacity:10];
-    BOOL tIsHavePageList = NO;
-    BOOL tIsCanPage      = NO;
-    for (NSDictionary *tParamDictemp in list) {
-        NSString *tID = [tParamDictemp objectForKey:@"id"];
-        [tParamDic setObject:tParamDictemp forKey:tID];
-        
-        if ([[tParamDictemp objectForKey:@"name"] isEqualToString:sShowPage]) {
-            tIsHavePageList = YES;
-            NSString *dataJson = [tParamDictemp objectForKey:@"data"];
-            NSDictionary *tDataDic = @{};
-            
-            //TKLog(@"-----%@", [NSString stringWithFormat:@"msgName:%@,msgID:%@",msgName,msgID]);
-            if ([dataJson isKindOfClass:[NSString class]]) {
-                NSString *tDataString = [NSString stringWithFormat:@"%@",dataJson];
-                NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
-                tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
-            }
-            if ([dataJson isKindOfClass:[NSDictionary class]]) {
-                tDataDic = (NSDictionary *)dataJson;
-            }
-            
-            NSDictionary *filedata = [tDataDic objectForKey:@"filedata"];
-            NSString *key = [filedata objectForKey:@"fileid"];
-            _iPreDocmentModel = _iCurrentDocmentModel;
-            
-            _iCurrentDocmentModel = [_iDocmentMutableDic objectForKey:key];
-            
-            
-        }
-        if ([[tParamDictemp objectForKey:@"name"] isEqualToString:sClassBegin]) {
-            tIsCanPage = YES;
-        }
-        
-    }
-    NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tParamDic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.receivePhoneByTriggerEvent('message-list-received', %@)",tJsonString];
-    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
-    }];
-    if (!tIsHavePageList) {
-        [self docmentDefault:_iDefaultDocment];
-        
-    }else{
-        
-        NSData *tJsonData = [NSJSONSerialization dataWithJSONObject:tParamDic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *tJsonString = [[NSString alloc]initWithData:tJsonData encoding:NSUTF8StringEncoding];
-        NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.receivePhoneByTriggerEvent('message-list-received', %@)",tJsonString];
-        [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-            NSLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
-        }];
-    }
-    
-    
-    if (_iBoardDelegate && [_iBoardDelegate respondsToSelector:@selector(boardOnRemoteMsgList:)]) {
-        [_iBoardDelegate boardOnRemoteMsgList:list];
-        
-    }
-    
-    
-}
-
 
 //YES ，代表白板处理 不传给会议；  NO ，代表白板不处理，传给会议
 - (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist fromID:(NSString *)fromId{
@@ -833,10 +896,9 @@
                
                 BOOL isCurrntDM = [self isEqualFileId:tDocmentDocModel aSecondModel:_iCurrentDocmentModel];
                 
-                //学生-当前文档-未上课，删除时显示白板
-                if (role == UserType_Student && isCurrntDM &&!_isClassBegin) {
+                //(学生|巡课)-当前文档-未上课，删除时显示白板
+                if ((role == UserType_Student||role == UserType_Patrol) && isCurrntDM &&!_isClassBegin) {
                     [self docmentDefault:self.docmentArray.firstObject];
-                   
                 }
                 //老师-当前文档
                 if (role == UserType_Teacher && isCurrntDM) {
@@ -908,7 +970,6 @@
         
         if ([msgID isEqualToString:sDocumentFilePage_ShowPage]) {
             
-
             TKDocmentDocModel *tDocmentDocModel = [self resolveDocumentModelFromDic:tDataDic];
             if (!tDocmentDocModel.swfpath) {
                 tDocmentDocModel.swfpath =  tDocmentDocModel.fileurl;
@@ -955,14 +1016,20 @@
     }
     
     
-    NSString *tMessageString = add ?@"publish-message-received" :@"delete-message-received";
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tParamDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *tMessageString = add ?@"room-pubmsg" :@"room-delmsg";
+   
+    
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    [tDict setObject:tMessageString forKey:@"type"];
+    [tDict setObject:tParamDic forKey:@"message"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"GLOBAL.phone.receivePhoneByTriggerEvent('%@',%@)",tMessageString,jsonString];
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",jsonString];
     [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
         
-        NSLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
     }];
    
     
@@ -1685,6 +1752,7 @@
     [_iUserList removeAllObjects];
     [_iUserStdAndTchrList removeAllObjects];
     [_iUserPlayAudioArray removeAllObjects];
+    [_iPublishDic removeAllObjects];
     _isClassBegin = NO;
     _isMuteAudio  = NO;
     _iTeacherUser = nil;
@@ -1698,6 +1766,12 @@
     _iHasPublishStd = NO;
     _iStdOutBottom = NO;
     _iIsFullState = NO;
+    
+    // 现在断线重连会重新获取file，所以需要清理文件
+    [_iDocmentMutableArray removeAllObjects];
+    [_iDocmentMutableDic removeAllObjects];
+    [_iMediaMutableArray removeAllObjects];
+    [_iMediaMutableDic removeAllObjects];
     
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     
@@ -1735,6 +1809,12 @@
     return  [_roomMgr roomProperties];
 }
 
+- (NSMutableArray *)iAreaList {
+    if (_iAreaList == nil) {
+        _iAreaList = [[NSMutableArray alloc] init];
+    }
+    return _iAreaList;
+}
 
 #pragma mark 发布影音
 -(void)publishtMediaDocModel:(TKMediaDocModel*)aMediaDocModel add:(BOOL)add To:(NSString *)to{
@@ -1745,9 +1825,11 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tMediaDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //to = sTellAllExpectSender;
+    to = sTellAll;//sShowPage  更改为发给所有人
     if (add) {
+        
         //[self sessionHandlePubMsg:sShowPage ID:tIdString To:to Data:jsonString Save:true completion:nil];
-        [self sessionHandlePubMsg:sShowPage ID:tIdString To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+        [self sessionHandlePubMsg:sShowPage ID:tIdString To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
     }else{
         [self sessionHandleDelMsg:sShowPage ID:tIdString To:to Data:jsonString completion:nil];
     }
@@ -1755,11 +1837,13 @@
 
 -(void)publishVideoDragWithDic:(NSDictionary * )aVideoDic To:(NSString *)to {
     
+    TKLog(@"---lyy  publishVideoDragWithDic %@,%@",aVideoDic,to);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:aVideoDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sVideoDraghandle ID:sVideoDraghandle To:to Data:jsonString Save:true completion:nil];
-    [self sessionHandlePubMsg:sVideoDraghandle ID:sVideoDraghandle To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    [self sessionHandlePubMsg:sVideoDraghandle ID:sVideoDraghandle To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
 }
+
 #pragma mark 发布文档
 -(void)publishtDocMentDocModel:(TKDocmentDocModel*)tDocmentDocModel To:(NSString *)to aTellLocal:(BOOL)aTellLocal{
     if (aTellLocal) {
@@ -1771,7 +1855,10 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true completion:nil];
-    [self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    
+    to = sTellAll;//自己调用sShowPage全部更改成发给所有人
+    
+    [self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
 }
 #pragma mark 删除文档
 
@@ -1851,7 +1938,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true completion:nil];
-    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
 }
 //todo
 -(void)deleteDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to{
@@ -1861,7 +1948,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDocmentDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true completion:nil];
-    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
     
 }
 -(void)deleteaMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to{
@@ -1870,7 +1957,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tMediaDocModelDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true completion:nil];
-    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil completion:nil];
+    [self sessionHandlePubMsg:sDocumentChange ID:sDocumentChange To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
     
 }
 
@@ -1982,10 +2069,21 @@
     return tDataDic;
     
 }
--(void)docmentDefault:(TKDocmentDocModel*)aDefaultDocment{
 
+- (TKDocmentDocModel *)getClassOverDocument {
+    TKDocmentDocModel *rtDocument;
+    for (NSInteger i = 0; i < self.iDocmentMutableArray.count; i++) {
+        TKDocmentDocModel *tDocmentDocModel = self.iDocmentMutableArray[i];
+        if (i == 1 || i == 0 || [[NSString stringWithFormat:@"%@",tDocmentDocModel.type] isEqualToString:@"1"]) {
+            rtDocument = tDocmentDocModel;
+        }
+    }
+    return rtDocument;
+}
+-(void)docmentDefault:(TKDocmentDocModel*)aDefaultDocment{
     _iCurrentDocmentModel = aDefaultDocment;
     NSDictionary *tDataDic =  [self fileDataDic:aDefaultDocment ismedia:NO];
+    
     NSDictionary *tParamDicDefault = @{
                                        @"id":sDocumentFilePage_ShowPage,//DocumentFilePage_ShowPage
                                        @"ts":@(0),
@@ -1993,15 +2091,20 @@
                                        @"name":sShowPage
                                        };
     
-    NSString *tMessageString = @"publish-message-received";
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tParamDicDefault options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
+    [tDict setObject:@"room-pubmsg" forKey:@"type"];
+    [tDict setObject:tParamDicDefault forKey:@"message"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSString *jsReceivePhoneByTriggerEventForDefault = [NSString stringWithFormat:@"GLOBAL.phone.receivePhoneByTriggerEvent('%@',%@)",tMessageString,jsonString];
+    NSString *jsReceivePhoneByTriggerEventForDefault = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",jsonString];
     [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEventForDefault completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        NSLog(@"----GLOBAL.phone.receivePhoneByTriggerEvent");
+        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
     }];
 }
+
 -(void)clearAllWhiteBoardData{
     
     [_iDocmentMutableArray removeAllObjects];
@@ -2190,13 +2293,26 @@
 #pragma mark - 回放
 - (void)playback {
     [_roomMgr playback];
+    //给白板发送回放开始消息
+    [self playbackPlayAndPauseController:true];
+    
 }
 
 - (void)pausePlayback {
     [_roomMgr pausePlayback];
+    //给白板发送回放停止消息
+    [self playbackPlayAndPauseController:false];
+    
 }
-
+//play:布尔值，代表回放是否播放
+- (void)playbackPlayAndPauseController:(BOOL)play{
+    NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.playbackPlayAndPauseController(%@)",@(play)];
+    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+        TKLog(@"----MOBILETKSDK.receiveInterface.playbackPlayAndPauseController");
+    }];
+}
 - (void)seekPlayback:(NSTimeInterval)positionTime {
+    NSLog(@"TK------------seek!");
     [_roomMgr seekPlayback:positionTime];
 }
 #pragma mark - 设置权限
@@ -2219,7 +2335,6 @@
 - (void)configureDraw:(BOOL)isDraw isSend:(BOOL)isSend to:(NSString *)to peerID:(NSString*)peerID{
     BOOL isMe = [peerID isEqualToString:self.localUser.peerID];
     self.iIsCanDraw = isMe ?isDraw:self.iIsCanDraw;
-    [self.iBoardHandle setDrawable:self.iIsCanDraw];
     if (isSend) {
         [self sessionHandleChangeUserProperty: peerID TellWhom:to Key:sCandraw Value:@((bool)(isDraw)) completion:nil];
     }
@@ -2229,12 +2344,20 @@
     
     BOOL isMe = [peerID isEqualToString:self.localUser.peerID];
     self.iIsCanPage = isMe ?isPage:self.iIsCanPage;
-    [self.iBoardHandle setPagePermission: self.iIsCanPage];
     if (isSend) {}
     
 }
 -(void)dealloc{
     TKLog(@"----sessionHandle");
+}
+
+- (NSString *)getDefaultArea {
+    for (TKAreaChooseModel *model in self.iAreaList) {
+        if (model.choosed == YES) {
+            return model.serverAreaName;
+        }
+    }
+    return nil;
 }
 
 @end

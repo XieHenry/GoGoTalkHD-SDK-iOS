@@ -14,6 +14,7 @@
 #import "TKEduSessionHandle.h"
 #import "TKEduRoomProperty.h"
 #import "RoomUser.h"
+#import "NSAttributedString+JTATEmoji.h"
 //192.168.0.66:81/379057693
 #define INTERFACE @"/ClientAPI/"
 #define HTTP_SERVER     @"192.168.0.66"
@@ -278,7 +279,14 @@ extern int expireSeconds;
 }
 -(void)translation:(NSString * _Nonnull )aTranslationString aTranslationComplete:(bTranslationComplete _Nonnull )aTranslationComplete{
    
+    //增加表情的识别，表情不进行翻译
+    aTranslationString = [NSAttributedString removeEmojiAttributedString:aTranslationString withFont:TEXT_FONT withColor:[UIColor whiteColor]];
+
+    if (aTranslationString == nil || [[NSString stringWithFormat:@"%@",aTranslationString] isEqualToString:@""]) {
+        return;
+    }
    unichar ch = [aTranslationString characterAtIndex:0];
+    
     NSString *tTo = @"zh";
     NSString *tFrom = @"en";
     
@@ -450,6 +458,7 @@ extern int expireSeconds;
 -(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *)companyid aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError
 {
     NSDictionary *tParamDic;
+    //act =3 代表删除这个会议
     if ([TKEduSessionHandle shareInstance].roomMgr.autoQuitClassWhenClassOverFlag == YES) {
         tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid,@"endsign":@(1)};         // 英练帮需要结束课堂
     } else {
@@ -539,7 +548,7 @@ extern int expireSeconds;
     if ([[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
         tParamDic = @{@"serial":roomID,@"companyid":companyid};
     } else {
-        //tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
+       //tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
         tParamDic = @{@"serial":roomID,@"companyid":companyid};
     }
     
@@ -601,6 +610,115 @@ extern int expireSeconds;
     [session resume];
 }
 
+#pragma mark 获取区域列表
++ (void)getAreaListWithHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError {
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    // https ssl 验证。
+    [manager setSecurityPolicy:[[self shareInstance] customSecurityPolicy]];
+    manager.requestSerializer.timeoutInterval = 60;
+    
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+    
+    session =   [manager GET:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/getserverarea", sHttp, aHost ,aPort] parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        // Nothing
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                if (aComplete) {
+                    aComplete(json);
+                }
+            }
+        } while(0);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (aNetError) {
+            aNetError(error);
+        }
+        TKLog(@"-----------%@",error.description);
+    }];
+    [session resume];
+}
+
+#pragma mark 当前默认选择的区域
++ (void)getDefaultAreaWithComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError {
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    // https ssl 验证。
+    //[manager setSecurityPolicy:[[self shareInstance] customSecurityPolicy]];
+    manager.requestSerializer.timeoutInterval = 60;
+    
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+    
+    NSString *requestURL;
+    
+#ifdef Debug
+    requestURL = [NSString stringWithFormat:@"http://%@:81/where.html?ts=%@", sHost, @((unsigned long)[[NSDate date]timeIntervalSince1970])];
+#else
+    requestURL = [NSString stringWithFormat:@"http://%@:81/where.html?ts=%@", sHost, @((unsigned long)[[NSDate date]timeIntervalSince1970])];
+#endif
+    
+    session =   [manager GET:requestURL parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        // Nothing
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                if (aComplete) {
+                    aComplete(json);
+                }
+            }
+        } while(0);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (aNetError) {
+            aNetError(error);
+        }
+        TKLog(@"-----------%@",error.description);
+    }];
+    [session resume];
+}
 
 #pragma mark 其他
 + (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID delegate:(id)delegate{

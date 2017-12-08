@@ -81,7 +81,10 @@
 +(NSString *)dictionaryToJSONString:(NSDictionary *)dic;
 #pragma mark 检测语言
 +(NSString*)getCurrentLanguage;
++(BOOL)isSimplifiedChinese;
 #pragma mark 是否符合设备
 +(bool)deviceisConform;
+#pragma mark 是否是域名
++(BOOL)isDomain:(NSString *)host;
 @end
 

@@ -1,9 +1,9 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third/CrashReporter.framework/Versions/A/Headers
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third/CrashReporter.framework/Versions/A/Headers
+svn://tonglm@192.168.1.15
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 2c5826ed03977496c655bc1f101f3827
 2017-06-08T17:59:21.255163Z
 23350
@@ -66,7 +66,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 66e3d804cb6fb6f60274f7879b002445
 2017-06-08T17:59:21.255163Z
 23350
@@ -100,7 +100,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 bbbbbb0f802ac08684de8943669b878f
 2017-06-08T17:59:21.255163Z
 23350
@@ -134,7 +134,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 4264cffd1d3530340f860e74b66a0bc1
 2017-06-08T17:59:21.255163Z
 23350
@@ -168,7 +168,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 87e75dd8b7fb2ee7c81a4975a370fc9c
 2017-06-08T17:59:21.255163Z
 23350
@@ -202,7 +202,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 c22415c87040b3a6271eb00d62b870d7
 2017-06-08T17:59:21.255163Z
 23350
@@ -230,47 +230,13 @@ has-props
 
 3515
 
-PLCrashAsyncSignalInfo.h
-file
-
-
-
-
-2017-11-10T02:26:37.000000Z
-6bfe5fd4a7249a10fabdac71a3ceb630
-2017-06-08T17:59:21.255163Z
-23350
-jinchao
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1759
-
 PLCrashReportProcessorInfo.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 a1c3dc6c336e198eba57ce3d6d1fb4d2
 2017-06-08T17:59:21.255163Z
 23350
@@ -298,14 +264,14 @@ has-props
 
 2434
 
-PLCrashReporterConfig.h
+PLCrashAsyncSignalInfo.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
-72d153565bc942a7d4c2bc43962d8162
+2017-12-07T05:57:56.000000Z
+6bfe5fd4a7249a10fabdac71a3ceb630
 2017-06-08T17:59:21.255163Z
 23350
 jinchao
@@ -330,7 +296,7 @@ has-props
 
 
 
-8037
+1759
 
 PLCrashReportStackFrameInfo.h
 file
@@ -338,7 +304,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 92fcc0cf82daf43e3ff47da999725f5c
 2017-06-08T17:59:21.255163Z
 23350
@@ -366,14 +332,14 @@ has-props
 
 1942
 
-PLCrashReportSystemInfo.h
+PLCrashReporterConfig.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
-66f540747329144733250fbe7fdcecdd
+2017-12-07T05:57:56.000000Z
+72d153565bc942a7d4c2bc43962d8162
 2017-06-08T17:59:21.255163Z
 23350
 jinchao
@@ -398,41 +364,7 @@ has-props
 
 
 
-5075
-
-PLCrashNamespace.h
-file
-
-
-
-
-2017-11-10T02:26:37.000000Z
-e9fcfd7bc533d74fda7cc60ca2cc1517
-2017-06-08T17:59:21.255163Z
-23350
-jinchao
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4228
+8037
 
 PLCrashReportRegisterInfo.h
 file
@@ -440,7 +372,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 c4e4438026c892dbbc356f0a56904ad6
 2017-06-08T17:59:21.255163Z
 23350
@@ -468,14 +400,14 @@ has-props
 
 1707
 
-PLCrashReportBinaryImageInfo.h
+PLCrashNamespace.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
-03beadca2cfe6886ee94187bba31032b
+2017-12-07T05:57:56.000000Z
+e9fcfd7bc533d74fda7cc60ca2cc1517
 2017-06-08T17:59:21.255163Z
 23350
 jinchao
@@ -500,16 +432,16 @@ has-props
 
 
 
-2636
+4228
 
-PLCrashReportFormatter.h
+PLCrashReportSystemInfo.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
-601bf077183301ea20372c5114d04daf
+2017-12-07T05:57:56.000000Z
+66f540747329144733250fbe7fdcecdd
 2017-06-08T17:59:21.255163Z
 23350
 jinchao
@@ -534,7 +466,7 @@ has-props
 
 
 
-2113
+5075
 
 PLCrashReportMachExceptionInfo.h
 file
@@ -542,7 +474,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 f0817a0bd5192dc6919b07fbf35fc857
 2017-06-08T17:59:21.255163Z
 23350
@@ -570,13 +502,81 @@ has-props
 
 1803
 
+PLCrashReportFormatter.h
+file
+
+
+
+
+2017-12-07T05:57:56.000000Z
+601bf077183301ea20372c5114d04daf
+2017-06-08T17:59:21.255163Z
+23350
+jinchao
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2113
+
+PLCrashReportBinaryImageInfo.h
+file
+
+
+
+
+2017-12-07T05:57:56.000000Z
+03beadca2cfe6886ee94187bba31032b
+2017-06-08T17:59:21.255163Z
+23350
+jinchao
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2636
+
 PLCrashReporter.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 2647861bc018f8a7fafee3611dd8f5bb
 2017-06-08T17:59:21.255163Z
 23350
@@ -610,7 +610,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 7f4db6289173a82436395a8dc2d9da65
 2017-06-08T17:59:21.255163Z
 23350
@@ -638,47 +638,13 @@ has-props
 
 2179
 
-CrashReporter.h
-file
-
-
-
-
-2017-11-10T02:26:37.000000Z
-a4e5098e885c3e5e656955cfab474545
-2017-06-08T17:59:21.255163Z
-23350
-jinchao
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-17046
-
 PLCrashReportExceptionInfo.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 c27e8bc900952155b70492002bb06458
 2017-06-08T17:59:21.255163Z
 23350
@@ -706,13 +672,47 @@ has-props
 
 2262
 
+CrashReporter.h
+file
+
+
+
+
+2017-12-07T05:57:56.000000Z
+a4e5098e885c3e5e656955cfab474545
+2017-06-08T17:59:21.255163Z
+23350
+jinchao
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17046
+
 PLCrashReportApplicationInfo.h
 file
 
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 5535fe6d8b744b5eac551866f4308229
 2017-06-08T17:59:21.255163Z
 23350
@@ -746,7 +746,7 @@ file
 
 
 
-2017-11-10T02:26:37.000000Z
+2017-12-07T05:57:56.000000Z
 a29c117cbd60889945888bf1a1b6f26a
 2017-06-08T17:59:21.255163Z
 23350

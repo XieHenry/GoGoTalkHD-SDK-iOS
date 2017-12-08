@@ -31,7 +31,7 @@
 "Prompt.nicknameNotNull" = "The nickName cannot be empty";
 "Prompt.onlyNumber" = "The RoomId only be number";
 "Prompt.RoomIDNotNull" = "The RoomId cannot be empty";
-"Prompt.devicetPrompt" = "The current device configuration is low, the classroom can not run perfectly";
+"Prompt.devicetPrompt" = "The current device is low, providing only two video.";
 "Login.EnterRoom" = "Enter Classroom";
 "Login.RoomId"    = "Room";
 "Login.RoomIdPlaceHolder"    = "Room ID";
@@ -48,15 +48,16 @@
 "State.ConnectException" = "Exception to connect";
 "State.ConnectLocked" = "Meeting room is locked";
 "State.Retry" = "Reconnect";
-"State.Reconnecting" = "Automatic reconnection...";
+"State.Reconnecting" = "Connecting to classroom";
 "KickOut.ChairmanKick" = "You have been kicked out of conference by chairman...";
 "KickOut.Repeat" = "User of the same identity has entered the room. You are blocked.";
+"State.isInBackGround" = "Student pressed home button";
 //role
 "Role.Me" = "me";
 "Role.Teacher" = "teacher";
 "Role.Student" = "student";
 "Role.Patrol"  = "patrol";
-
+"Role.Assistant" = "assistant";
 //say
 "Say.say" = "say something";
 //button
@@ -71,7 +72,7 @@
 
 "Button.MuteAudio" = "Mute Students";
 "Button.Reward"    = "Grant Trophy to All";
-"Button.ClassBegin"    = "Time for Class";
+"Button.ClassBegin"    = "Start Class";
 "Button.ClassIsOver"    = "Finish Class";
 "Button.ClassEnd"      = "Class End";
 "Button.RaiseHand"     = "Raise Hand";
@@ -86,6 +87,9 @@
 "Button.AllowDoodle"        = "Draw";
 "Button.CancelDoodle"       = "No Drawing";
 "Button.GiveCup"            = "Give Trophy";
+"Button.Speech"             = "Speech";
+"Button.OneKeyRecovery"     = "Restore All";
+"Button.Recovery"           = "Restore";
 "Action.EnterRoom"          = "Enter Classroom";
 "Action.ExitRoom"           = "Leave Classroom";
 "Prompt.EndClass1M"         = "There are 1 minute to finish class. Be remained.";
@@ -100,13 +104,14 @@
 "Title.MediaList"           = "Media Files";
 "Title.UserList"            = "Student List";
 "Title.UserList.two"        = "Student List (1)";
+"Title.AreaList"            = "Optimal server";
 "Button.remindKnow"         = "I got it.";
 "Prompt.timeoutEnd"         = "This class is about to shut down.";
 
 "Title.whiteBoard"          = "whiteboard";
 "Prompt.CanotOn"            = "The student's audio and video devices are unavailable. May be disabled. Please tell student to enable them.";
 "Prompt.FinishClass"        = "Are you sure you want to finish class？";
-"Prompt.exceeds"            = "The number of screen video exceeds the limit!";
+"Prompt.exceeds"            = "Attendants number is over limit.";
 "Prompt.ClassEnd"           = "The class is over!";
 "Prompt.leaveRoom"          = "Have entered a classroom, quit first!";
 "Prompt.NeedCamera"         = "Please allow TalkCloud to access your device's camera in \"Settings\"->\"Privacy\"->\"Camera\".";
@@ -126,5 +131,12 @@
 "Prompt.NetworkException" = "Network exception. Please close the antivirus software or firewall and re-enter";
 "Prompt.HaveEnterBackground" = "Backstage mode";
 "Prompt.HaveBackForground" = "Back to normal mode";
-"Prompt.BackgroundCouldNotOnStage" = "The student's application in the background, could not on stage.";
+"Prompt.BackgroundCouldNotOnStage" = " is running at back-end.  Presence failed.";
 "Prompt.NetworkChanged" = "Network exception, check the network environment and re-enter";
+"Prompt.NetworkError" = "The network is not available. Please checking and restart the application.";
+"Prompt.ServerRequst" = "The server is initializing, please click later.";
+
+"Prompt.StudentUdpError" = "The student is unable to connect to server UDP port and can't on stage";
+"Prompt.StudentTcpError" = "Anomaly in server connection. Presence failed.";
+"Prompt.StudentNetworkOccuredError" = "Anomalous UDP communication occurs between the user and the server. Opening video failed.";
+"Prompt.StudentUdpOnStageError" = "Due to the firewall intervention,the user is unable to carry out UDP connection with the server.  Opening video failed.";

@@ -9,6 +9,7 @@
 #import "TKTeacherMessageTableViewCell.h"
 #import "TKMacro.h"
 #import "TKUtil.h"
+#import "NSAttributedString+JTATEmoji.h"
 
 @implementation TKTeacherMessageTableViewCell
 
@@ -121,7 +122,8 @@
 - (void)resetView
 {
     _iMessageLabel.text            = _iText;
-    _iMessageTranslationLabel.text = _iTranslationtext;
+//    _iMessageTranslationLabel.text = _iTranslationtext;
+    _iMessageTranslationLabel.attributedText = [NSAttributedString emojiAttributedString:_iTranslationtext withFont:TEXT_FONT withColor:[UIColor whiteColor]];
     
 }
 

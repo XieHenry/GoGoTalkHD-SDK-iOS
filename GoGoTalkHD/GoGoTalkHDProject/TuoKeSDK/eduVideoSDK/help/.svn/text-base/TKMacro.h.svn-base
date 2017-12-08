@@ -39,6 +39,7 @@
 //屏幕比例，相对pad 1024 * 768
 #define Proportion (ScreenH/768.0)
 
+#define TITLE_FONT TKFont(16)
 #define TEXT_FONT TKFont(14)
 #define Name_FONT TKFont(15)
 
@@ -147,11 +148,24 @@ typedef NS_ENUM(NSInteger, FileListType) {
     FileListTypeDocument,        // 文档列表
     FileListTypeUserList         //用户列表
 };
+
+typedef NS_ENUM(NSInteger, DeviceType) {//设备类型
+    AndroidPad,
+    iPad,
+    AndroidPhone,
+    iPhone,
+    WindowClient,
+    WindowPC,
+    MacClient,
+    MacPC
+};
+
 #define RGBACOLOR_PromptWhite       RGBCOLOR(249, 249, 249)
 #define RGBACOLOR_PromptRed         RGBCOLOR(215, 0, 0)
 #define RGBACOLOR_PromptYellow      RGBCOLOR(155, 136, 58)
 #define RGBACOLOR_PromptYellowDeep  RGBCOLOR(206, 203, 48)
 #define RGBACOLOR_PromptBlue        RGBCOLOR(78, 100, 196)
+
 typedef NS_ENUM(NSInteger, PromptType) {
     PromptTypeStartReady1Minute,  //距离上课还有1分钟,White 249,249,249
     PromptTypeStartPass1Minute,   //超过上课时间,White 249,249,249,blue:78,100,196
@@ -162,6 +176,7 @@ typedef NS_ENUM(NSInteger, PromptType) {
    
 };
 
+static  NSString *const sLowConsume                 = @"LowConsume";
 static  NSString *const sChairmancontrol            = @"chairmancontrol";
 static  NSString *const sClassBegin                 = @"ClassBegin";
 static  NSString *const sWBPageCount                = @"WBPageCount";//加页
@@ -177,9 +192,13 @@ static  NSString *const sStreamFailure              = @"StreamFailure";
 static  NSString *const sAllAll             = @"__AllAll";
 
 static  NSString *const sVideoDraghandle            = @"videoDraghandle";//视频拖拽
+static  NSString *const sVideoSplitScreen            = @"VideoSplitScreen";//分屏
 
-static  NSString *const sResultStudent            = @"resultStudent";//学生答题
+
+static  NSString *const sSubmitAnswers            = @"submitAnswers";//学生答题
 static  NSString *const sUserEnterBackGround      = @"userEnterBackGround";//进入后台
+static  NSString *const sChangeServerArea         = @"RemoteControl";
+static  NSString *const sServerName               = @"servername";//助教协助切换服务器
 
 static  NSString *const sUpdateTime          = @"UpdateTime";
 static  NSString *const sMuteAudio           = @"MuteAudio";
@@ -187,20 +206,24 @@ static  NSString *const sRaisehand           = @"raisehand";
 static  NSString *const sPublishstate        = @"publishstate";
 static  NSString *const sTellAll             = @"__all";
 static  NSString *const sTellNone            = @"__none";
-static  NSString *const sTellAllExpectSender = @"__allExceptSender";
+static  NSString *const sTellAllExpectSender = @"__allExceptSender";//发给除自己外的其他人
 static  NSString *const sTellAllExpectAuditor = @"__allExceptAuditor";
 static  NSString *const sSuperUsers          = @"__allSuperUsers";
 static  NSString *const sGiftNumber          = @"giftnumber";
 static  NSString *const sCandraw             = @"candraw";
-static  NSString *const sSendBoardData       = @"sendBoardData";
-static  NSString *const sDeleteBoardData     = @"deleteBoardData";
+static  NSString *const sPubMsg       = @"pubMsg";//sendBoardData更改为pubMsg
+static  NSString *const sDelMsg     = @"delMsg";//deleteBoardData更改为delMsg
+static  NSString *const sSetProperty         = @"setProperty";//2017-11-10 新添加接口
+static  NSString *const sUdpState            = @"udpstate";//UDP状态发生变化，1是畅通，2是防火墙导致不畅通
+
 static  NSString *const sOnPageFinished      = @"onPageFinished";
 static  NSString *const sPrintLogMessage     = @"printLogMessage";
-static  NSString *const sfullScreenToLc      = @"fullScreenToLc";
+static  NSString *const sChangeWebPageFullScreen      = @"changeWebPageFullScreen";//白板放大事件
 static  NSString *const sOnJsPlay            = @"onJsPlay";
-static  NSString *const sCloseNewPptVideo    = @"closeNewPptVideo";
+static  NSString *const scloseDynamicPptWebPlay    = @"closeDynamicPptWebPlay";//closeNewPptVideo更改为closeDynamicPptWebPlay
 static  NSString *const sDisableVideo        = @"disablevideo";
 static  NSString *const sDisableAudio        = @"disableaudio";
+static  NSString *const sFromId              = @"fromId";
 static  NSString *const sIsInBackGround      = @"isInBackGround";
 
 // 英练帮公司id
@@ -219,7 +242,7 @@ static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_
 static  NSString *const sHttp   = @"https";
 static  NSString *const sPort   = @"443";
 #ifdef Debug
-static  NSString *const sHost   = @"192.168.1.17";
+static  NSString *const sHost   = @"global.talk-cloud.neiwang";
 
 #else
 static  NSString *const sHost   = @"global.talk-cloud.net";

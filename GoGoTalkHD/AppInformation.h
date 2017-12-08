@@ -161,7 +161,7 @@ static inline BOOL iPhone6Plus()
 /*
  @abstract 判断是否是iPad
  */
-static inline BOOL iPad()
+static inline BOOL iPad_XC()
 {
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }

@@ -1,15 +1,15 @@
 10
 
 dir
-25814
-svn://tonglm@192.168.1.28/talk/ios/branches/new/EduClassPad/EduClass/eduWhiteBoardSDK/handle
-svn://tonglm@192.168.1.28
+26720
+svn://tonglm@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduWhiteBoardSDK/handle
+svn://tonglm@192.168.1.15
 
 
 
-2017-11-03T17:16:47.524932Z
-25706
-jinchao
+2017-12-06T22:28:29.597090Z
+26678
+liyy
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:56.000000Z
 51ea6f5a2d953e9fefa86ce3d376607f
 2017-06-08T17:59:21.255163Z
 23350
@@ -66,11 +66,11 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
-d04077ff78a58050d3c4536536b322bf
-2017-11-03T17:16:47.524932Z
-25706
-jinchao
+2017-12-07T05:57:56.000000Z
+08f4e71781ad194a8ed1775e4f4ca8fd
+2017-11-21T12:05:36.852958Z
+26044
+liyy
 
 
 
@@ -92,7 +92,7 @@ jinchao
 
 
 
-1182
+1042
 
 TKWeakScriptMessageDelegate.m
 file
@@ -100,7 +100,7 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
+2017-12-07T05:57:56.000000Z
 be7cda50db2ea21e6d1ef912593e57b8
 2017-06-08T17:59:21.255163Z
 23350
@@ -134,11 +134,11 @@ file
 
 
 
-2017-11-10T02:26:39.000000Z
-3f4b1176bc0809bceeb21711dd4d33db
-2017-11-03T17:16:47.524932Z
-25706
-jinchao
+2017-12-07T05:57:56.000000Z
+9f4549c974b4c08a6c48ed97b794088b
+2017-12-06T22:28:29.597090Z
+26678
+liyy
 
 
 
@@ -160,5 +160,5 @@ jinchao
 
 
 
-28823
+30172
 

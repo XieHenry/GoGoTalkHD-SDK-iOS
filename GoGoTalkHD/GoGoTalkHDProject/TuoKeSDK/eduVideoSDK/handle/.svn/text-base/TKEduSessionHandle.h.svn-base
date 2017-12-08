@@ -32,7 +32,7 @@
 //用户离开
 - (void)sessionManagerUserLeft:(RoomUser *)user ;
 //用户信息变化 sGiftNumber sCandraw sRaisehand sPublishstate
-- (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties;
+- (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId;
 //聊天信息
 - (void)sessionManagerMessageReceived:(NSString *)message ofUser:(RoomUser *)user ;
 //回放的聊天信息
@@ -98,6 +98,8 @@
 @property (nonatomic, copy) NSDictionary *iParamDic;
 @property (nonatomic,strong) NSMutableDictionary *iPublishDic;
 @property (nonatomic,strong) NSMutableArray *iUserList;
+@property (nonatomic, copy) NSMutableArray *iAreaList;
+@property (nonatomic, copy) NSString *defaultArea;
 #pragma mark 自定义
 @property (nonatomic, strong) TKEduRoomProperty *iRoomProperties;
 @property (nonatomic, strong) RoomUser *iTeacherUser;
@@ -109,6 +111,7 @@
 @property (nonatomic, assign) BOOL iHasPublishStd;//是否有发布的学生
 @property (nonatomic, assign) BOOL iStdOutBottom;//是否有拖出去的视频
 @property (nonatomic, assign) BOOL iIsFullState;//是否全屏状态
+@property (nonatomic, assign) BOOL iIsSplitScreen;//是否分屏状态
 #pragma mark 白板
 @property (nonatomic,strong) TKMediaDocModel    *iCurrentMediaDocModel;
 @property (nonatomic,strong) TKMediaDocModel    *iPreMediaDocModel;
@@ -130,6 +133,7 @@
 @property (nonatomic,assign)BOOL isLocal;
 @property (nonatomic,assign)BOOL isPlayback;  // 是否是回放
 @property (nonatomic,assign)BOOL iIsJoined;//是否加入了房间
+@property (nonatomic, assign) BOOL isSendLogMessage;//2017-11-10是否打印h5日志
 
 //配置项
 @property (assign,nonatomic)BOOL iIsCanDraw;
@@ -164,12 +168,18 @@
 
 - (void)sessionHandleChangeUserProperty:(NSString*)peerID TellWhom:(NSString*)tellWhom Key:(NSString*)key Value:(NSObject*)value completion:(void (^)(NSError *error))block;
 
+/**
+  进入前台
+ */
+- (void)sessionHandleApplicationWillEnterForeground;
+
 - (void)sessionHandleChangeUserPublish:(NSString*)peerID Publish:(int)publish completion:(void (^)(NSError *error))block;
 
 - (void)sessionHandleSendMessage:(NSString*)message completion:(void (^)(NSError *error))block;
 
 //- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
-- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save AssociatedMsgID:(NSString*)associatedMsgID AssociatedUserID:(NSString*)associatedUserID completion:(void (^)(NSError *error))block;
+- (void)sessionHandlePubMsg:(NSString *)msgName ID:(NSString *)msgID To:(NSString *)toID Data:(NSObject *)data Save:(BOOL)save AssociatedMsgID:(NSString *)associatedMsgID AssociatedUserID:(NSString *)associatedUserID
+                    expires:(NSTimeInterval)expires completion:(void (^)(NSError *))block;
 
 - (void)sessionHandleDelMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data completion:(void (^)(NSError *error))block;
 
@@ -210,7 +220,6 @@
 #pragma mark Screen
 -(void)sessionHandlePlayScreen:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
 -(void)sessionHandleUnPlayScreen:(NSString *)peerId completion:(void (^)(NSError *error))block;
-
 #pragma 其他
 -(void)clearAllClassData;
 -(void)clearMessageList;
@@ -256,6 +265,8 @@
 -(void)deleteDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to;
 //添加文档
 -(void)addDocMentDocModel:(TKDocmentDocModel*)aDocmentDocModel To:(NSString *)to;
+//老师点击下课时获取文档
+- (TKDocmentDocModel *)getClassOverDocument;
 #pragma mark 白板
 //文档
 -(NSDictionary *)docmentDic;
