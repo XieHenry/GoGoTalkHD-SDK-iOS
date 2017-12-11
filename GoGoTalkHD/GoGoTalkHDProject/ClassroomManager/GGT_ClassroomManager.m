@@ -46,6 +46,7 @@
 - (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model viewController:(UIViewController *)viewController
 {
 
+//    model.serial = @"755158726";
 //    model.serial = @"240966698";
 //    model.nickname = @"student";
 //    model.host = sHost;

@@ -16,8 +16,9 @@
 //static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com:9332";
 
 // 最新测试地址
-static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
+//static NSString * const BASE_REQUEST_URL = @"http://117.107.153.228:808";
 
+static NSString * const BASE_REQUEST_URL = @"http://testapi.gogo-talk.com";
 
 
 /*登录注册*/
