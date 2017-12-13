@@ -213,7 +213,7 @@
             self.buttonClickBlock(self.contentField.text);
         }
         
-        if ([self.titleStr isEqualToString:@"中文名"]) {
+        if ([self.titleStr isEqualToString:@"英文名"]) {
             //如果中文名修改之后，需要刷新头像下面的信息，即名字，使用通知来做
             [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil userInfo:@{@"isRefresh":@"NO"}];
         }

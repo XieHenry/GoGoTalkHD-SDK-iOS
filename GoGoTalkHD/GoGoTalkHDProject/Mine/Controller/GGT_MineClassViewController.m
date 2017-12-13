@@ -98,18 +98,27 @@
         
             
             NSMutableArray *contentArray = [NSMutableArray array];
+        if (!IsArrEmpty(listArray)) {
             for (NSDictionary *dic in listArray) {
+                
+               [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"%@%@",dic[@"sourceName"],dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+
+                
+                
+                
                 //1 购买课时 2获赠课时  3返还课时
-                if ([dic[@"types"] isEqual:@1]) {
-                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-
-                } else if ([dic[@"types"] isEqual:@2]) {
-                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-
-                } else if ([dic[@"types"] isEqual:@3]) {
-                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"返还%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-                }
+//                if ([dic[@"types"] isEqual:@1]) {
+//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+//
+//                } else if ([dic[@"types"] isEqual:@2]) {
+//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+//
+//                } else if ([dic[@"types"] isEqual:@3]) {
+//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"返还%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
+//                }
             }
+        }
+        
             
             [self.tableView.mj_footer endRefreshing];
             [self.tableView.mj_header endRefreshing];

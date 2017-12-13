@@ -107,7 +107,16 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 #pragma mark 获取左边的名称和icon
 - (void)getLeftName {
-    [[BaseService share] sendGetRequestWithPath:URL_GetInfo token:YES viewController:self success:^(id responseObject) {
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+    NSString *flag;
+    if (sin.isAuditStatus == YES) {
+        flag = @"0";
+    } else {
+        flag = @"1";
+    }
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@?&Flag=%@",URL_GetInfo,flag];
+    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
         _dataArray = [NSMutableArray array];
         _iconArray = [NSMutableArray array];

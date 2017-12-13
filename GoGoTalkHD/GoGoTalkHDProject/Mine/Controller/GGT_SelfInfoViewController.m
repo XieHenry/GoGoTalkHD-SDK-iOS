@@ -393,9 +393,7 @@
         postDic = @{@"NameEn":self.selfInfoModel.NameEn,@"Name":self.selfInfoModel.Name,@"Age":[NSString stringWithFormat:@"%ld",(long)self.selfInfoModel.Age],@"Gender":@(intString),@"FatherName":self.selfInfoModel.FatherName,@"DateOfBirth":self.selfInfoModel.Birthday,@"Province":@0,@"City":@0,@"Area":@0};
         
     }else if ([Type isEqualToString:@"birthdayType"]) {
-        
-      
-        
+
         postDic = @{@"NameEn":self.selfInfoModel.NameEn,@"Name":self.selfInfoModel.Name,@"Age":[NSString stringWithFormat:@"%ld",(long)self.selfInfoModel.Age],@"Gender":@(sexInt),@"FatherName":self.selfInfoModel.FatherName,@"DateOfBirth":changeStr,@"Province":@0,@"City":@0,@"Area":@0};
         
     } else if ([Type isEqualToString:@"addressType"]) {
@@ -408,31 +406,10 @@
     [[BaseService share] sendPostRequestWithPath:URL_UpdateStudentInfo parameters:postDic token:YES viewController:self success:^(id responseObject) {
         
         [MBProgressHUD showMessage:responseObject[@"msg"] toView:self.view];
-        
-        
-        //这里使用的是文本替换的方法，修改完信息之后，没有刷新UI。下面两个方法任选其一
-//        1.
+
+        //刷新数据
         [self getLoadData];
-        //2.
-//        if ([Type isEqualToString:@"sexType"]) {
-//            GGT_SelfInfoTableViewCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-//            
-//            if ([changeStr isEqualToString:@"1"]) {
-//                cell.contentLabel.text = @"男";
-//            } else {
-//                cell.contentLabel.text = @"女";
-//            }
-//            
-//        }else if ([Type isEqualToString:@"birthdayType"]) {
-//            
-//            GGT_SelfInfoTableViewCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-//            cell.contentLabel.text = changeStr;
-//            
-//        } else if ([Type isEqualToString:@"addressType"]) {
-//            GGT_SelfInfoTableViewCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
-//            cell.contentLabel.text = changeStr;
-//        }
-        
+
     } failure:^(NSError *error) {
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
         
