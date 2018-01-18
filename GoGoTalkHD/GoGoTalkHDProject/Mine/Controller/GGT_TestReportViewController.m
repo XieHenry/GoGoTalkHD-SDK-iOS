@@ -45,7 +45,7 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
     _rightBtn.hidden = YES;
-
+    
     
     [self getLoadData];
     
@@ -56,25 +56,20 @@
     
     [[BaseService share] sendGetRequestWithPath:URL_GetReportsList token:YES viewController:self success:^(id responseObject) {
         
-        
         NSArray *dataArr = responseObject[@"data"];
-        if ([dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0) {
-            [self showStatusView:[dataArr safe_objectAtIndex:0][@"htmlUrl"] method:ClassNormal];
-            
-                //如果地址为空，则隐藏按钮，不为空，显示分享按钮
-                if (IsStrEmpty([dataArr safe_objectAtIndex:0][@"htmlUrl"])) {
-                    [self showStatusView:@"参与体验课，获得英语水平测评报告！" method:ClassNotStartStatus];
-                    
-                }else {
-                    _rightBtn.hidden = NO;
-                    self.shareUrlStr = [dataArr safe_objectAtIndex:0][@"htmlUrl"];
-                    self.nameStr = [dataArr safe_objectAtIndex:0][@"NameEn"];
-                }
-        } else {
-            [self showStatusView:@"参与体验课，获得英语水平测评报告！" method:ClassNotStartStatus];
-        }
         
-     
+        [self showStatusView:[dataArr safe_objectAtIndex:0][@"htmlUrl"] method:ClassNormal];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //如果地址为空，则隐藏按钮，不为空，显示分享按钮
+            if (IsStrEmpty([dataArr safe_objectAtIndex:0][@"htmlUrl"])) {
+                
+            }else {
+                _rightBtn.hidden = NO;
+                self.shareUrlStr = [dataArr safe_objectAtIndex:0][@"htmlUrl"];
+                self.nameStr = [dataArr safe_objectAtIndex:0][@"NameEn"];
+            }
+        });
     } failure:^(NSError *error) {
         
         //result返回1 为成功 2：即将上课 3：待测评 4 ：缺席 0 ：失败   UserInfo={msg=失败, result=0}
@@ -85,6 +80,7 @@
             
         }else {
             [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
+            
         }
         
     }];
@@ -182,7 +178,7 @@
 }
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType {
-
+    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
@@ -190,7 +186,7 @@
     //title 和 webpageUrl不能为空
     NSString *desctStr = [NSString stringWithFormat:@"%@ 在GoGoTalk青少外教英语体验课中获得了一份英语水平测评报告！",self.nameStr];
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"GoGoTalk英语水平测评报告" descr:desctStr thumImage:UIIMAGE_FROM_NAME(@"启动图标-分享")];
-
+    
     //设置网页地址
     shareObject.webpageUrl = self.shareUrlStr;
     
@@ -215,9 +211,9 @@
                 NSLog(@"response data is %@",data);
             }
         }
-
-    }];
         
+    }];
+    
 }
 
 
@@ -230,3 +226,4 @@
 
 
 @end
+

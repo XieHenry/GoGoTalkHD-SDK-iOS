@@ -173,7 +173,11 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     
 #ifdef __IPHONE_11_0
     if ([_iWebView.scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-         [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        if (@available(iOS 11.0, *)) {
+            [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
 #endif

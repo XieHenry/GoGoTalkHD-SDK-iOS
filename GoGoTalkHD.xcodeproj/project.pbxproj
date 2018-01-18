@@ -15,6 +15,16 @@
 		5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D201EC5A2B7004E744A /* GGT_SelfInfoViewController.m */; };
 		5B743D241EC5A416004E744A /* GGT_MineRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D231EC5A416004E744A /* GGT_MineRightViewController.m */; };
 		5B743D271EC5A435004E744A /* GGT_MineLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D261EC5A435004E744A /* GGT_MineLeftViewController.m */; };
+		5B7E68A52010B83900482DE7 /* BJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68922010B83800482DE7 /* BJTableViewController.m */; };
+		5B7E68A62010B83900482DE7 /* UIViewController+BJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68942010B83800482DE7 /* UIViewController+BJUtil.m */; };
+		5B7E68A72010B83900482DE7 /* BJConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68972010B83800482DE7 /* BJConsoleViewController.m */; };
+		5B7E68A82010B83900482DE7 /* BJPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68992010B83800482DE7 /* BJPlayingView.m */; };
+		5B7E68A92010B83900482DE7 /* BJRoomViewController+media.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E689B2010B83800482DE7 /* BJRoomViewController+media.m */; };
+		5B7E68AA2010B83900482DE7 /* BJRoomViewController+users.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E689D2010B83800482DE7 /* BJRoomViewController+users.m */; };
+		5B7E68AB2010B83900482DE7 /* BJRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E689F2010B83800482DE7 /* BJRoomViewController.m */; };
+		5B7E68AC2010B83900482DE7 /* BJAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68A22010B83800482DE7 /* BJAppConfig.m */; };
+		5B7E68AD2010B83900482DE7 /* BJAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E68A42010B83800482DE7 /* BJAppearance.m */; };
+		5B7E68B02010B87000482DE7 /* BJHLMediaPlayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B7E68AE2010B85100482DE7 /* BJHLMediaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5B7FE82C1ECC4E9600404939 /* GGT_ChangePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FE82B1ECC4E9600404939 /* GGT_ChangePasswordView.m */; };
 		5B8049D41ED295AC00A99911 /* GGT_AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8049D31ED295AC00A99911 /* GGT_AboutUsViewController.m */; };
 		5B8337CE1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8337CD1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m */; };
@@ -335,6 +345,7 @@
 			files = (
 				D620DAC21FDA3B6D002182A7 /* StarscreamSocketIO.framework in CopyFiles */,
 				D620DAC11FDA3B69002182A7 /* SocketIO.framework in CopyFiles */,
+				5B7E68B02010B87000482DE7 /* BJHLMediaPlayer.framework in CopyFiles */,
 				D620DAC01FDA3B61002182A7 /* WebRTC.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +373,25 @@
 		5B743D231EC5A416004E744A /* GGT_MineRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineRightViewController.m; sourceTree = "<group>"; };
 		5B743D251EC5A435004E744A /* GGT_MineLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineLeftViewController.h; sourceTree = "<group>"; };
 		5B743D261EC5A435004E744A /* GGT_MineLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineLeftViewController.m; sourceTree = "<group>"; };
+		5B7E68912010B83800482DE7 /* BJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJTableViewController.h; sourceTree = "<group>"; };
+		5B7E68922010B83800482DE7 /* BJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJTableViewController.m; sourceTree = "<group>"; };
+		5B7E68932010B83800482DE7 /* UIViewController+BJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BJUtil.h"; sourceTree = "<group>"; };
+		5B7E68942010B83800482DE7 /* UIViewController+BJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BJUtil.m"; sourceTree = "<group>"; };
+		5B7E68962010B83800482DE7 /* BJConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJConsoleViewController.h; sourceTree = "<group>"; };
+		5B7E68972010B83800482DE7 /* BJConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJConsoleViewController.m; sourceTree = "<group>"; };
+		5B7E68982010B83800482DE7 /* BJPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJPlayingView.h; sourceTree = "<group>"; };
+		5B7E68992010B83800482DE7 /* BJPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJPlayingView.m; sourceTree = "<group>"; };
+		5B7E689A2010B83800482DE7 /* BJRoomViewController+media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BJRoomViewController+media.h"; sourceTree = "<group>"; };
+		5B7E689B2010B83800482DE7 /* BJRoomViewController+media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BJRoomViewController+media.m"; sourceTree = "<group>"; };
+		5B7E689C2010B83800482DE7 /* BJRoomViewController+users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BJRoomViewController+users.h"; sourceTree = "<group>"; };
+		5B7E689D2010B83800482DE7 /* BJRoomViewController+users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BJRoomViewController+users.m"; sourceTree = "<group>"; };
+		5B7E689E2010B83800482DE7 /* BJRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRoomViewController.h; sourceTree = "<group>"; };
+		5B7E689F2010B83800482DE7 /* BJRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRoomViewController.m; sourceTree = "<group>"; };
+		5B7E68A12010B83800482DE7 /* BJAppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJAppConfig.h; sourceTree = "<group>"; };
+		5B7E68A22010B83800482DE7 /* BJAppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJAppConfig.m; sourceTree = "<group>"; };
+		5B7E68A32010B83800482DE7 /* BJAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJAppearance.h; sourceTree = "<group>"; };
+		5B7E68A42010B83800482DE7 /* BJAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJAppearance.m; sourceTree = "<group>"; };
+		5B7E68AE2010B85100482DE7 /* BJHLMediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BJHLMediaPlayer.framework; sourceTree = "<group>"; };
 		5B7FE82A1ECC4E9600404939 /* GGT_ChangePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_ChangePasswordView.h; sourceTree = "<group>"; };
 		5B7FE82B1ECC4E9600404939 /* GGT_ChangePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_ChangePasswordView.m; sourceTree = "<group>"; };
 		5B8049D21ED295AC00A99911 /* GGT_AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_AboutUsViewController.h; sourceTree = "<group>"; };
@@ -1043,6 +1073,56 @@
 				5B8F1F5A1EE143CA00149368 /* GGT_MineClassPlaceholderView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5B7E688F2010B83800482DE7 /* BJYRoom */ = {
+			isa = PBXGroup;
+			children = (
+				5B7E68AE2010B85100482DE7 /* BJHLMediaPlayer.framework */,
+				5B7E68902010B83800482DE7 /* Extention */,
+				5B7E68952010B83800482DE7 /* Room */,
+				5B7E68A02010B83800482DE7 /* utilities */,
+			);
+			path = BJYRoom;
+			sourceTree = "<group>";
+		};
+		5B7E68902010B83800482DE7 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				5B7E68912010B83800482DE7 /* BJTableViewController.h */,
+				5B7E68922010B83800482DE7 /* BJTableViewController.m */,
+				5B7E68932010B83800482DE7 /* UIViewController+BJUtil.h */,
+				5B7E68942010B83800482DE7 /* UIViewController+BJUtil.m */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		5B7E68952010B83800482DE7 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				5B7E68962010B83800482DE7 /* BJConsoleViewController.h */,
+				5B7E68972010B83800482DE7 /* BJConsoleViewController.m */,
+				5B7E68982010B83800482DE7 /* BJPlayingView.h */,
+				5B7E68992010B83800482DE7 /* BJPlayingView.m */,
+				5B7E689A2010B83800482DE7 /* BJRoomViewController+media.h */,
+				5B7E689B2010B83800482DE7 /* BJRoomViewController+media.m */,
+				5B7E689C2010B83800482DE7 /* BJRoomViewController+users.h */,
+				5B7E689D2010B83800482DE7 /* BJRoomViewController+users.m */,
+				5B7E689E2010B83800482DE7 /* BJRoomViewController.h */,
+				5B7E689F2010B83800482DE7 /* BJRoomViewController.m */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		5B7E68A02010B83800482DE7 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5B7E68A12010B83800482DE7 /* BJAppConfig.h */,
+				5B7E68A22010B83800482DE7 /* BJAppConfig.m */,
+				5B7E68A32010B83800482DE7 /* BJAppearance.h */,
+				5B7E68A42010B83800482DE7 /* BJAppearance.m */,
+			);
+			path = utilities;
 			sourceTree = "<group>";
 		};
 		5B9E05751F149BA80050CEDB /* OrderTheCourse */ = {
@@ -2156,6 +2236,7 @@
 		D6E0A5191EC2CFD8006A003D /* GoGoTalkHDProject */ = {
 			isa = PBXGroup;
 			children = (
+				5B7E688F2010B83800482DE7 /* BJYRoom */,
 				D6B1FF311F6B749C00DD6D7C /* ClassroomManager */,
 				5B9E05751F149BA80050CEDB /* OrderTheCourse */,
 				D68774341F0A07C9008687C2 /* TuoKeSDK */,
@@ -2600,36 +2681,32 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BJLiveBase/BJLiveBase.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
-				"${BUILT_PRODUCTS_DIR}/ZFPlayer/ZFPlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BJLiveBase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFPlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2652,6 +2729,7 @@
 				D620DA6D1FDA3B1F002182A7 /* BITCrashManager.m in Sources */,
 				D620DA801FDA3B1F002182A7 /* TKTextViewInternal.m in Sources */,
 				D6353E141EE8E20A004E1288 /* GGT_PopoverController.m in Sources */,
+				5B7E68A52010B83900482DE7 /* BJTableViewController.m in Sources */,
 				D620DA641FDA3B1F002182A7 /* HockeySDKPrivate.m in Sources */,
 				5B1E61DF1F46CC5F00342CC5 /* GGT_LoadingView.m in Sources */,
 				D620DA4D1FDA3B1F002182A7 /* MJIvar.m in Sources */,
@@ -2695,6 +2773,7 @@
 				D620DA8D1FDA3B1F002182A7 /* TKVideoSevenView.m in Sources */,
 				D603AAED1ECD3AE7003ECC20 /* GGT_EvaluationPopViewController.m in Sources */,
 				D620DAAE1FDA3B1F002182A7 /* TKEmotion.m in Sources */,
+				5B7E68AB2010B83900482DE7 /* BJRoomViewController.m in Sources */,
 				D620DABE1FDA3B1F002182A7 /* TKWeakScriptMessageDelegate.m in Sources */,
 				D620DA571FDA3B1F002182A7 /* BITHockeyBaseManager.m in Sources */,
 				D620DA5A1FDA3B1F002182A7 /* BITHockeyHelper.m in Sources */,
@@ -2775,6 +2854,7 @@
 				D69427381EC94CD30048FD2C /* GGT_HomeLeftView.m in Sources */,
 				D620DA711FDA3B1F002182A7 /* BITStoreButton.m in Sources */,
 				D620DAB01FDA3B1F002182A7 /* NSString+Emoji.m in Sources */,
+				5B7E68A62010B83900482DE7 /* UIViewController+BJUtil.m in Sources */,
 				D6E0A55F1EC2D9CD006A003D /* UIView+XCCornerRadius.m in Sources */,
 				5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */,
 				D620DAA51FDA3B1F002182A7 /* KTEmotionAttachment.m in Sources */,
@@ -2785,14 +2865,17 @@
 				5BF1CBC11F176C5C00BB1CDA /* GGT_DetailsOfTeacherViewController.m in Sources */,
 				D6E0A55E1EC2D9CD006A003D /* UIView+Layout.m in Sources */,
 				D627DCF21ED4196E00076FBD /* XCNormalHeader.m in Sources */,
+				5B7E68A92010B83900482DE7 /* BJRoomViewController+media.m in Sources */,
 				D6E0A5311EC2D9AE006A003D /* BaseBackViewController.m in Sources */,
 				D6353E221EE95D4A004E1288 /* GGT_PreviewTeachEvaCell.m in Sources */,
+				5B7E68A82010B83900482DE7 /* BJPlayingView.m in Sources */,
 				5BC4735F1EC95C12003B8154 /* GGT_MineClassViewController.m in Sources */,
 				D60FA5191EC987AE00838DE4 /* FLAnimatedImageView+WebCache.m in Sources */,
 				D620DA5C1FDA3B1F002182A7 /* BITHockeyManager.m in Sources */,
 				D620DAA41FDA3B1F002182A7 /* TKBackGroundView.m in Sources */,
 				5B9E05841F14A8160050CEDB /* GGT_OrderCourseOfAllLeftVc.m in Sources */,
 				D66FCBF81EEA9A4400792A6C /* GGT_EvaReportModel.m in Sources */,
+				5B7E68AD2010B83900482DE7 /* BJAppearance.m in Sources */,
 				D620DA401FDA3B1F002182A7 /* TKEduSessionHandle.m in Sources */,
 				D6E0A5771EC2DB15006A003D /* GGT_Singleton.m in Sources */,
 				D620DA451FDA3B1F002182A7 /* TKAFSecurityPolicy.m in Sources */,
@@ -2817,6 +2900,7 @@
 				D620DAB91FDA3B1F002182A7 /* TKEduRoomProperty.m in Sources */,
 				D620DA631FDA3B1F002182A7 /* BITFeedbackActivity.m in Sources */,
 				5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */,
+				5B7E68AA2010B83900482DE7 /* BJRoomViewController+users.m in Sources */,
 				D67D55EE1EC58E47009D3CC5 /* GGT_ScheduleViewController.m in Sources */,
 				D66FCBF51EEA7D3200792A6C /* GGT_PreviewDemoPlaceholderView.m in Sources */,
 				D6E0A5581EC2D9CD006A003D /* NSString+XCHelper.m in Sources */,
@@ -2849,8 +2933,10 @@
 				5BF912D51ECEC50D009C8186 /* GGT_CheckDeviceView.m in Sources */,
 				D63DA9491ED5554400EFA686 /* NSDictionary+Log.m in Sources */,
 				D6E0A58E1EC2DBB3006A003D /* GGT_RegisterViewController.m in Sources */,
+				5B7E68AC2010B83900482DE7 /* BJAppConfig.m in Sources */,
 				D620DAA91FDA3B1F002182A7 /* TKEmotionGridView.m in Sources */,
 				5BF1CBC21F176C5C00BB1CDA /* GGT_OrderCourseOfFocusViewController.m in Sources */,
+				5B7E68A72010B83900482DE7 /* BJConsoleViewController.m in Sources */,
 				D620DA491FDA3B1F002182A7 /* TKAFNetworkReachabilityManager.m in Sources */,
 				D6E0A5411EC2D9C1006A003D /* PlaceholderTextView.m in Sources */,
 				5B743D271EC5A435004E744A /* GGT_MineLeftViewController.m in Sources */,
@@ -3067,6 +3153,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/third",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BaijiayunSDK",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BJYRoom",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GoGoTalkHD/PrefixHeader.pch";
@@ -3107,6 +3195,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/third",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BaijiayunSDK",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BJYRoom",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GoGoTalkHD/PrefixHeader.pch";

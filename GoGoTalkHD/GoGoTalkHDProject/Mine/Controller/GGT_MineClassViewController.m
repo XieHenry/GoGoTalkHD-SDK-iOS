@@ -34,10 +34,10 @@
     [super viewDidLoad];
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     self.navigationItem.title = @"我的课时";
-
+    
     [self initTableView];
     
-
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.dataArray = [NSMutableArray array];
         _tempContentArray = [NSMutableArray array];
@@ -45,103 +45,94 @@
         [self getLoadData];
     }];
     [self.tableView.mj_header beginRefreshing];
-
+    
     
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         self.page ++;
         [self getLoadData];
-
+        
     }];
 }
 
 #pragma mark 数据请求，比较复杂，加强测试
 - (void)getLoadData {
-
+    
     
     NSString *urlStr = [NSString stringWithFormat:@"%@?pageIndex=%ld",URL_GetMyClassHour,(long)self.page];
     
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
-      
-            //总课时
-            NSArray *listGoodsArr = responseObject[@"data"][@"result_listGoods"];
-            
-            NSArray *listArray = responseObject[@"data"][@"result_list"];
-            
-            //如果无数据。展示缺省图，并终止下面的操作
-            if (IsArrEmpty(listGoodsArr) && IsArrEmpty(listArray)) {
-                [self.tableView.mj_footer endRefreshing];
-                [self.tableView.mj_header endRefreshing];
-                self.dataArray = [NSMutableArray array];
-                self.mineClassPlaceholderView.hidden = NO;
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                [self.tableView reloadData];
-                return ;
-            }
-            
-            
-            NSMutableArray *headerArray = [NSMutableArray array];
-            for (NSDictionary *dic in listGoodsArr) {
-                [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"剩余%@课时",dic[@"SurplusCount"]],@"rightTitle":@""}];
-                [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"总共%@课时",dic[@"TotalCount"]],@"rightTitle":[NSString stringWithFormat:@"有效期至:%@",dic[@"ExpireTime"]]}];
-          
-               //判断是否操作课时，如果操作，进行刷新left的数据
-                GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-                
-                //数据不一样，进行刷新，因为在修改姓名的时候，有一个通知，再次直接用那个了
-                if ([[NSString stringWithFormat:@"%@",dic[@"SurplusCount"]] isEqualToString:sin.leftTotalCount] == NO) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil userInfo:@{@"isRefresh":@"YES"}];
-                }
-
-                
-            }
-            
         
+        //总课时
+        NSArray *listGoodsArr = responseObject[@"data"][@"result_listGoods"];
+        
+        NSArray *listArray = responseObject[@"data"][@"result_list"];
+        
+        //如果无数据。展示缺省图，并终止下面的操作
+        if (IsArrEmpty(listGoodsArr) && IsArrEmpty(listArray)) {
+            [self.tableView.mj_footer endRefreshing];
+            [self.tableView.mj_header endRefreshing];
+            self.dataArray = [NSMutableArray array];
+            self.mineClassPlaceholderView.hidden = NO;
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            [self.tableView reloadData];
+            return ;
+        }
+        
+        
+        NSMutableArray *headerArray = [NSMutableArray array];
+        for (NSDictionary *dic in listGoodsArr) {
+            [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"剩余%@课时",dic[@"SurplusCount"]],@"rightTitle":@""}];
+            [headerArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"总共%@课时",dic[@"TotalCount"]],@"rightTitle":[NSString stringWithFormat:@"有效期至:%@",dic[@"ExpireTime"]]}];
             
-            NSMutableArray *contentArray = [NSMutableArray array];
-        if (!IsArrEmpty(listArray)) {
-            for (NSDictionary *dic in listArray) {
+            //判断是否操作课时，如果操作，进行刷新left的数据
+            GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+            
+            //数据不一样，进行刷新，因为在修改姓名的时候，有一个通知，再次直接用那个了
+            if ([[NSString stringWithFormat:@"%@",dic[@"SurplusCount"]] isEqualToString:sin.leftTotalCount] == NO) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNameStatus" object:nil userInfo:@{@"isRefresh":@"YES"}];
+            }
+            
+            
+        }
+        
+        
+        
+        NSMutableArray *contentArray = [NSMutableArray array];
+        for (NSDictionary *dic in listArray) {
+            //1 购买课时 2获赠课时  3返还课时
+            if ([dic[@"types"] isEqual:@1]) {
+                [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
                 
-               [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"%@%@",dic[@"sourceName"],dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-
+            } else if ([dic[@"types"] isEqual:@2]) {
+                [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
                 
-                
-                
-                //1 购买课时 2获赠课时  3返还课时
-//                if ([dic[@"types"] isEqual:@1]) {
-//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"购买%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-//
-//                } else if ([dic[@"types"] isEqual:@2]) {
-//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"获赠%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-//
-//                } else if ([dic[@"types"] isEqual:@3]) {
-//                    [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"返还%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
-//                }
+            } else if ([dic[@"types"] isEqual:@3]) {
+                [contentArray addObject:@{@"leftTitle":[NSString stringWithFormat:@"返还%@课时",dic[@"classHour"]],@"rightTitle":dic[@"createTime"]}];
             }
         }
         
-            
-            [self.tableView.mj_footer endRefreshing];
-            [self.tableView.mj_header endRefreshing];
-
-            [_tempContentArray addObjectsFromArray:contentArray];
-            self.dataArray = [NSMutableArray arrayWithObjects:headerArray,_tempContentArray, nil];
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        
+        [_tempContentArray addObjectsFromArray:contentArray];
+        self.dataArray = [NSMutableArray arrayWithObjects:headerArray,_tempContentArray, nil];
+        [self.tableView reloadData];
+        
+        
+        if (contentArray.count < 20 && _tempContentArray.count < 20) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
             [self.tableView reloadData];
-      
-
-            if (contentArray.count < 20 && _tempContentArray.count < 20) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                [self.tableView reloadData];
-                return ;
-            }
-
+            return ;
+        }
+        
         
     } failure:^(NSError *error) {
         [self.tableView.mj_footer endRefreshing];
         [self.tableView.mj_header endRefreshing];
         
         [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
-      
-
+        
+        
     }];
 }
 
@@ -186,17 +177,17 @@
     if (!cell) {
         cell = [[GGT_MineClassTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"Cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        
     }
     
     
     //对第一个和最后一个进行切圆角
     if (IsArrEmpty(_tempContentArray) && IsArrEmpty(_dataArray)) {
         cell.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-
+        
     } else {
         if (indexPath.section == 0) {//如果是第一组，就对上下进行裁角
-
+            
             if (indexPath.row == 0) {
                 
                 [self cornCell:cell sideType:UIRectCornerTopLeft|UIRectCornerTopRight];
@@ -208,7 +199,7 @@
         } else { //如果是第二组，首先判断数据是否为1，进行全部剪裁，如果>1，就对第一最后一个分别进行定制剪裁
             if (_tempContentArray.count == 1) {
                 [self cornCell:cell sideType:UIRectCornerTopLeft|UIRectCornerTopRight | UIRectCornerBottomLeft|UIRectCornerBottomRight];
-
+                
             } else if(_tempContentArray.count > 1) {
                 if (indexPath.row == 0) {
                     
@@ -225,9 +216,9 @@
         cell.leftTitleLabel.text = _dataArray[indexPath.section][indexPath.row][@"leftTitle"];
         cell.contentLabel.text = _dataArray[indexPath.section][indexPath.row][@"rightTitle"];
         cell.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-
+        
     }
-
+    
     
     return cell;
     
@@ -259,7 +250,7 @@
         
     }
     
-  
+    
     
 }
 
@@ -290,3 +281,4 @@
 
 
 @end
+

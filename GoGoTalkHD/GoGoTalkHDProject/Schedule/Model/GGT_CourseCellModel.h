@@ -51,6 +51,11 @@
 // 是否是替补老师
 @property (nonatomic, assign) NSInteger IsSub;      //0没有替补  1是替补
 
+
+@property (nonatomic, strong) NSString *partner_key;
+@property (nonatomic, strong) NSString *user_avatar;
+@property (nonatomic, strong) NSString *user_number;
+
 @end
 
 /*

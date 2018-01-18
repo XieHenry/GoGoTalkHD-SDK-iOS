@@ -14,7 +14,7 @@
 #import "TKUtil.h"
 
 // 百家云
-//#import "BJRoomViewController.h"
+#import "BJRoomViewController.h"
 
 @interface GGT_ClassroomManager ()<TKEduRoomDelegate>
 @property (nonatomic, strong) GGT_CourseCellModel *xc_model;
@@ -138,15 +138,24 @@
 + (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model
 {
 
-//    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
-//    manager.xc_model = model;
-//
-//    BJRoomViewController *roomViewController = [BJRoomViewController new];
-//    [viewController presentViewController:roomViewController
-//                       animated:YES
-//                     completion:^{
-//                         [roomViewController enterRoomWithSecret:@"2mnuv7" userName:@"Student"];
-//                     }];
+    GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
+    manager.xc_model = model;
+    
+    if (![model.nickname isKindOfClass:[NSString class]] || model.nickname.length == 0) {
+        model.nickname = @"Student";
+    }
+    
+    //#warning 修改教室房间的字段
+    //    NSString *userName = @"";
+    //    if (!IsStrEmpty([UserDefaults() objectForKey:@"phoneNumber"])) {
+    //        userName = [UserDefaults() objectForKey:@"phoneNumber"];
+    //    }
+    BJRoomViewController *roomViewController = [BJRoomViewController new];
+    [viewController presentViewController:roomViewController
+                                 animated:YES
+                               completion:^{
+                                   [roomViewController enterRoomWithSecret:model.serial userName:model.nickname courseCellModel:model];
+                               }];
 }
 
 // 调用接口 区别进入那个教室
@@ -166,8 +175,6 @@
                 currentModel = model;
             }
             
-//#warning 需要删除
-//            currentModel.ClassRoomType = 4;
             
             // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室
             if (currentModel.ClassRoomType == 1) {  // 拓课
@@ -175,8 +182,9 @@
             }
             
             if (currentModel.ClassRoomType == 4) {  // 百家云
-//                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
+                [self bjy_enterClassroomWithViewController:viewController courseModel:currentModel];
                 
+                /*
                 // 进入百家云的APP
                 // 教室是拓课的  需要唤醒另一个APP 进行上课
                 NSURL *schemes = [NSURL URLWithString:BJY_APP_URL_SCHEMES];
@@ -213,9 +221,10 @@
                     }];
                     
                 }
+                */
             }
             
-            
+          
         }
         
     } failure:^(NSError *error) {

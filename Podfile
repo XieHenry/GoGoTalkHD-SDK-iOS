@@ -1,11 +1,16 @@
 platform :ios, '9.0'
-target 'GoGoTalkHD' do
 
+post_install do |installer|
+    installer.pods_project.root_object.attributes["CLASSPREFIX"] = "BJL"
+    installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "BaijiaYun"
+end
+
+
+target 'GoGoTalkHD' do
 inhibit_all_warnings!   #可能产生其他问题
 
     pod 'Masonry'
     pod 'MJRefresh'
-    pod 'MJExtension'
     pod 'MBProgressHUD'
     pod 'JPush'
     
@@ -16,8 +21,6 @@ inhibit_all_warnings!   #可能产生其他问题
     pod 'ReactiveObjC'
     
     pod 'AFNetworking'
-    pod 'FMDB'
-    pod 'Reachability'
     pod 'SDWebImage'
     pod 'YYModel'
 
@@ -25,7 +28,6 @@ inhibit_all_warnings!   #可能产生其他问题
     pod 'Bugly'
     pod 'IQKeyboardManager'
     pod 'FSCalendar', '2.7.8'
-    pod 'ZFPlayer'
     pod 'FLAnimatedImage'
     
     # 友盟 U-Share SDK
@@ -43,17 +45,13 @@ inhibit_all_warnings!   #可能产生其他问题
 
 
     ############# 百家云 #############
-#    source 'https://github.com/CocoaPods/Specs.git'
-#    source 'https://github.com/baijia/specs.git'
-#
-#    post_install do |installer|
-#        installer.pods_project.root_object.attributes["CLASSPREFIX"] = "BJL"
-#        installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Baijia Cloud"
-#    end
-##    inhibit_all_warnings!   #可能产生其他问题   去掉pod中的警告
-#    pod 'BJLiveCore'
-#    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-    ############# 百家云 #############
+    source 'https://github.com/CocoaPods/Specs.git'
+    source 'http://git.baijiashilian.com/open-ios/specs.git'
+
+
+    pod 'BJLiveCore', '1.3.1-weak02'
+    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+    ############ 百家云 #############
     
     
     
