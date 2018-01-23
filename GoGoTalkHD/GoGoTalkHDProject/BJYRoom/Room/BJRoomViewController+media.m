@@ -86,13 +86,7 @@
          observer:^BOOL(id _Nullable old, id _Nullable now) {
              @strongify(self);
              
-             // 打开自己的视频
-             [self showRecordingView];
-             [self.room.recordingVM setRecordingAudio:YES
-                                       recordingVideo:YES];
-             // 设置用于采集音视频的上行链路为 UDP
-             self.room.mediaVM.upLinkType = BJLLinkType_UDP;
-             
+            
              // 从音视频用户列表 playingUsers 中筛选出老师
              for (BJLOnlineUser *user in self.room.playingVM.playingUsers) {
                  if (user.isTeacher && user.videoOn) { // 身份为老师且开启了视频
@@ -109,6 +103,16 @@
                      [self.room.playingVM updatePlayingUserWithID:user.ID videoOn:YES];
                      // 设置用于播放音视频的下行链路为 TCP
                      self.room.mediaVM.downLinkType = BJLLinkType_TCP;
+                     
+                     
+                     // 打开自己的视频
+                     [self showRecordingView];
+                     [self.room.recordingVM setRecordingAudio:YES
+                                               recordingVideo:YES];
+                     // 设置用于采集音视频的上行链路为 UDP
+                     self.room.mediaVM.upLinkType = BJLLinkType_UDP;
+                     
+                     
                      break;
                  }
              }
@@ -119,6 +123,9 @@
                  // 移除该 user 的 playingView (playingView 获取方法参考播放视频部分)
                  UIView *playingView = [self.room.playingVM playingViewForUserWithID:self.room.onlineUsersVM.onlineTeacher.ID];
                  [playingView removeFromSuperview];
+                 
+                 [self.room.recordingVM setRecordingAudio:NO recordingVideo:NO];
+                 [self.room.recordingView removeFromSuperview];
              }
              
              return YES;
@@ -156,7 +163,7 @@
          @strongify(self);
          
          if (self.teacherPage != self.studentPage) {
-             [self.console printFormat:@"调试信息，老师和学生页码不一致，无法使用画笔"];
+             [self.console printFormat:@"当前课件和老师端课件不在同一页，不可以使用画笔工具哦~"];
              return ;
          }
          
@@ -172,7 +179,7 @@
          @strongify(self);
          
          if (self.teacherPage != self.studentPage) {
-             [self.console printFormat:@"调试信息:老师和学生教材页码不一致，无法使用橡皮擦"];
+             [self.console printFormat:@"当前课件和老师端课件不在同一页，不可以使用画笔工具哦~"];
              return ;
          }
          

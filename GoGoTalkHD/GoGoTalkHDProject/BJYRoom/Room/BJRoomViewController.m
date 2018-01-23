@@ -107,14 +107,14 @@ static CGFloat const xc_drawBarHeight = 68.0f;
     
     self.recordingView.backgroundColor = UICOLOR_FROM_HEX(0x2f2f2f);
     [self.recordingView setTitle:@"" forState:UIControlStateNormal];
-    [self.recordingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_teacher_big_bjy") forState:UIControlStateNormal];
-    [self.recordingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_teacher_big_bjy") forState:UIControlStateHighlighted];
+    [self.recordingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_teacher_big") forState:UIControlStateNormal];
+    [self.recordingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_teacher_big") forState:UIControlStateHighlighted];
     
     self.playingView.backgroundColor = UICOLOR_FROM_HEX(0x2f2f2f);
     [self.playingView setTitle:@"" forState:UIControlStateNormal];
-    [self.playingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_user_big_bjy") forState:UIControlStateNormal];
-    [self.playingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_user_big_bjy") forState:UIControlStateHighlighted];
-    
+    [self.playingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_user_big") forState:UIControlStateNormal];
+    [self.playingView setBackgroundImage:UIIMAGE_FROM_NAME(@"icon_user_big") forState:UIControlStateHighlighted];
+
 }
 
 - (void)dealloc {
@@ -143,13 +143,26 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                              userAvatar:nil];
     // BJLRoom.deployType = [BJAppConfig sharedInstance].deployType;
     
-    BJLUser *user = [BJLUser userWithNumber:model.user_number
-                                       name:userName
-                                     avatar:model.user_avatar
-                                       role:BJLUserRole_student];
-    self.room = [BJLRoom roomWithID:model.serial
-                            apiSign:[self creatAPISign:model userName:userName]
-                               user:user];
+//    BJLUser *user = [BJLUser userWithNumber:model.user_number
+//                                       name:userName
+//                                     avatar:model.user_avatar
+//                                       role:BJLUserRole_student];
+//    self.room = [BJLRoom roomWithID:model.serial
+//                            apiSign:[self creatAPISign:model userName:userName]
+//                               user:user];
+    
+#warning test
+    /**
+     参加码方式
+     @param roomSecret   教室参加码
+     */
+    roomSecret = @"n4ka2d";
+    self.room = [BJLRoom roomWithSecret:roomSecret
+                               userName:userName
+                             userAvatar:nil];
+#warning test
+
+    
     
     
     
@@ -181,6 +194,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                  @strongify(self);
                  
                  return YES;
+                 /*
                  if (!error) {
                      [self goBack];
                      return YES;
@@ -206,6 +220,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                  [self presentViewController:alert animated:YES completion:nil];
                  
                  return YES;
+                 */
              }];
     
     [self bjl_kvo:BJLMakeProperty(self.room, loadingVM)
@@ -483,7 +498,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
         UIView *view = [UIView new];
         view.clipsToBounds = YES;
         UILabel *label = [UILabel new];
-        label.text = @"白板";
+//        label.text = @"白板";
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
