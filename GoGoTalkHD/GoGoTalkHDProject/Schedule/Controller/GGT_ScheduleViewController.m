@@ -660,11 +660,11 @@ static NSString * const CalendarCellID = @"cell";
     
     // 测试使用
     // 调用接口 进行教室判断  是百家云还是拓课
-    GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:cell.xc_cellModel leftRoomBlock:^{
-
-    }];
-    return;
+//    GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:cell.xc_cellModel leftRoomBlock:^{
+//
+//    }];
+//    return;
     
     if (!self.xc_isPush) {
         GGT_ScheduleStudyingCell *cell = [tableView cellForRowAtIndexPath:indexPath];

@@ -40,6 +40,23 @@ typedef enum : NSUInteger {
 
 @implementation GGT_OrderCourseOfAllRightVc
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeOrderListCellNotification:) name:@"changeOrderListCell" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeOrderListCell" object:nil];
+}
+
+- (void)changeOrderListCellNotification:(NSNotification *)noti {
+    self.xc_pageIndex = 1;
+    self.xc_loadType = XCLoadNewData;
+    [self xc_loadDataWithDate:self.xc_date timge:self.xc_time pageIndex:self.xc_pageIndex pageSize:self.xc_pageSize];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

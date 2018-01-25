@@ -185,7 +185,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         [_headerView getResultModel:_model];
         
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        sin.leftTotalCount = [NSString stringWithFormat:@"%ld",(long)_model.totalCount];
+        sin.leftTotalCount = [NSString stringWithFormat:@"%@",_model.totalCount];
         
         
         if (sin.isAuditStatus == NO) {
@@ -199,7 +199,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
             
             if (sin.isShowAuditStatus == NO) {
                 GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",_model.totalCount];
             }
             
             
@@ -312,7 +312,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     if (sin.isShowAuditStatus == NO) {
         if(indexPath.row == 1){
-            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%ld课时",(long)_model.totalCount];
+            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",_model.totalCount];
         }
     }
     return cell;

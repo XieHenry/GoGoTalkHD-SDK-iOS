@@ -26,7 +26,7 @@
 @property (nonatomic, assign) NSInteger isVip;
 
 //剩余课程
-@property (nonatomic, assign) NSInteger totalCount;
+@property (nonatomic, copy) NSString *totalCount;
 
 //姓名
 @property (nonatomic, copy) NSString *Name;

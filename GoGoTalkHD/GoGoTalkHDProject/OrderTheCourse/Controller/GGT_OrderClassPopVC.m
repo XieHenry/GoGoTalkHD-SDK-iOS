@@ -255,6 +255,7 @@
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeOrderListCell" object:nil userInfo:nil];
 
     } failure:^(NSError *error) {
         

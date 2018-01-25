@@ -176,7 +176,7 @@
             }
             
 #warning test
-            currentModel.ClassRoomType = 4;
+//            currentModel.ClassRoomType = 4;
 #warning test
 
             // 教室类型:1: 拓课电子教室 2：QQ教室 3:飞博教室 4：百家云教室

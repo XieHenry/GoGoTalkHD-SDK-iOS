@@ -156,7 +156,8 @@
     [[BaseService share] sendPostRequestWithPath:URL_AgainLesson parameters:dic token:YES viewController:self success:^(id responseObject) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeTimeTableColor" object:nil userInfo:@{@"statusColor":@"order"}];
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeOrderListCell" object:nil userInfo:nil];
+
         self.xc_rightItemButton.userInteractionEnabled = YES;
 
         [self dismissViewControllerAnimated:YES completion:nil];

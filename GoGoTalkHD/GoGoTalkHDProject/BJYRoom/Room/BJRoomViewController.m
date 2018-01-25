@@ -143,23 +143,23 @@ static CGFloat const xc_drawBarHeight = 68.0f;
                              userAvatar:nil];
     // BJLRoom.deployType = [BJAppConfig sharedInstance].deployType;
     
-//    BJLUser *user = [BJLUser userWithNumber:model.user_number
-//                                       name:userName
-//                                     avatar:model.user_avatar
-//                                       role:BJLUserRole_student];
-//    self.room = [BJLRoom roomWithID:model.serial
-//                            apiSign:[self creatAPISign:model userName:userName]
-//                               user:user];
+    BJLUser *user = [BJLUser userWithNumber:model.user_number
+                                       name:userName
+                                     avatar:model.user_avatar
+                                       role:BJLUserRole_student];
+    self.room = [BJLRoom roomWithID:model.serial
+                            apiSign:[self creatAPISign:model userName:userName]
+                               user:user];
     
 #warning test
     /**
      参加码方式
      @param roomSecret   教室参加码
      */
-    roomSecret = @"n4ka2d";
-    self.room = [BJLRoom roomWithSecret:roomSecret
-                               userName:userName
-                             userAvatar:nil];
+//    roomSecret = @"n4ka2d";
+//    self.room = [BJLRoom roomWithSecret:roomSecret
+//                               userName:userName
+//                             userAvatar:nil];
 #warning test
 
     
@@ -626,7 +626,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
             continueCallback(YES);
             return;
         }
-        [self.console printFormat:@"loading step suspend: %td", step];
+//        [self.console printFormat:@"loading step suspend: %td", step];
         
         NSString *message = nil;
         if (reason == BJLLoadingSuspendReason_errorOccurred) {
@@ -691,7 +691,7 @@ static CGFloat const xc_drawBarHeight = 68.0f;
 - (void)startPrintAVDebugInfo {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     
-    [self.console printFormat:@"---- av - %f ----", [NSDate timeIntervalSinceReferenceDate]];
+//    [self.console printFormat:@"---- av - %f ----", [NSDate timeIntervalSinceReferenceDate]];
     for (NSString *info in [self.room.mediaVM avDebugInfo]) {
         [self.console printLine:info];
     }
