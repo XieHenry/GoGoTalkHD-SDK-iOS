@@ -95,12 +95,12 @@
     }
     
     
-    BOOL isPhoneNum =   [NSString xc_isMobilePhone:self.loginView.phoneAccountField.text];
-    //判断手机号是否合法
-    if (isPhoneNum == NO) {
+    //判断第一位是否是1开头
+    NSString *firstStr = [self.loginView.phoneAccountField.text substringToIndex:1];
+    if (![firstStr isEqualToString:@"1"] || self.loginView.phoneAccountField.text.length != 11) {
         [MBProgressHUD showMessage:@"请输入正确的手机号码" toView:self.view];
         return;
-    }
+    } 
     
     
     //密码验证

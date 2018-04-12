@@ -306,15 +306,6 @@
     return [NSURL URLWithString:self];
 }
 
-- (NSString *)xc_URLEncode {
-    NSString *result =
-    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                              (CFStringRef)self,
-                                                              NULL,
-                                                              CFSTR("!*'();:@&;=+$,/?%#[] "),
-                                                              kCFStringEncodingUTF8));
-    return result;
-}
 
 - (NSString *)xc_filterHtml {
     return [NSString xc_filterHTML:self];

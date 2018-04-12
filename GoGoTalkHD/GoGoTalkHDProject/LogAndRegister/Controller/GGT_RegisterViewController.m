@@ -71,13 +71,11 @@
     }
     
     
-    BOOL isPhoneNum =   [NSString xc_isMobilePhone:self.registerView.phoneAccountField.text];
-    //判断手机号是否合法
-    if (isPhoneNum == NO) {
+    NSString *firstStr = [self.registerView.phoneAccountField.text substringToIndex:1];
+    if (![firstStr isEqualToString:@"1"] || self.self.registerView.phoneAccountField.text.length != 11 ) {
         [MBProgressHUD showMessage:@"请输入正确的手机号码" toView:self.view];
         return;
     }
-    
     
     
     if(IsStrEmpty(self.registerView.passwordField.text) || self.registerView.passwordField.text.length <6 || self.registerView.passwordField.text.length >12) {

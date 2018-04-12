@@ -51,24 +51,21 @@
 //    model.nickname = @"student";
 //    model.host = sHost;
     
-    NSString *server = @"";
-    if ([TKUtil isDomain:sHost] == YES) {
-        NSArray *array = [sHost componentsSeparatedByString:@"."];
-        server = [NSString stringWithFormat:@"%@", array[0]];
-    } else {
-        server = @"global";
-    }
 
+    //port  2.1.0为443，2.1.8以后为80，需要后台返回不同的信息，暂时写死（后台不好操作）
+    model.port = @"80";
     NSDictionary *tDict = @{
-                            @"serial"   :model.serial,
-                            @"host"    :model.host,
+                            @"serial"   : model.serial,
+                            @"host"    : model.host,
                             // @"userid"  : @"1111",
-                            @"port"    :model.port,
-                            @"nickname":model.nickname,    // 学生密码567
-                            @"userrole":model.userrole,    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-                            @"server":server
+                            @"port"    : model.port,
+                            @"nickname": model.nickname,    // 学生密码567
+                            @"userrole": model.userrole,    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
+                            @"server": @"global",
+                            @"playback":@"0"
                             };
 
+    
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:viewController Delegate:self isFromWeb:NO];
     
     // 记录日志

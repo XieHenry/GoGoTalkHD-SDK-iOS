@@ -14,20 +14,10 @@
 #import "GGT_EvaluationPopViewController.h"
 
 #import "GGT_PlaceHolderView.h"
-
 #import "GGT_PreviewDemoCourseVC.h"
-//#import "GGT_PreviewCoursewareVC.h"
-
 #import "GGT_PreCoursewareVC.h"
-
 #import "MZTimerLabel.h"
 
-// 测试拓课
-//#import "TKEduClassRoom.h"
-//#import "TKMacro.h"
-
-//// 百家云
-//#import "BJRoomViewController.h"
 
 static NSString * const CalendarCellID = @"cell";
 
@@ -77,7 +67,6 @@ static NSString * const CalendarCellID = @"cell";
 {
     self = [super init];
     if (self) {
-//        self.title = @"FSCalendar";
         self.gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         
         self.xc_dateFormatter = [[NSDateFormatter alloc] init];
@@ -91,8 +80,7 @@ static NSString * const CalendarCellID = @"cell";
     return self;
 }
 
-- (BOOL)hidesBottomBarWhenPushed
-{
+- (BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
 
@@ -163,19 +151,7 @@ static NSString * const CalendarCellID = @"cell";
     }];
     self.xc_lineView.hidden = YES;
     
-    // 更新数据源 刷新calendar
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        // 更新数据
-////        self.datesWithEvent = @[@"2017/05/03",
-////                                @"2017/05/04",
-////                                @"2017/05/06",
-////                                @"2017/05/12",
-////                                @"2017/05/25",
-////                                @"2017/06/01"];
-////        [self.calendar reloadData];
-//        
-//    });
-    
+
     [self.calendar.calendarWeekdayView.weekdayLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.textAlignment = NSTextAlignmentCenter;
         obj.frame = CGRectMake(obj.x+20, obj.y, obj.width-20, obj.height);
@@ -817,10 +793,7 @@ static NSString * const CalendarCellID = @"cell";
                 // 进pdf界面
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
-                
-//                [self enterTKClassroomWithCourseModel:model];
-                
-                
+
                 // 调用接口 进行教室判断  是百家云还是拓课
                 // 进入拓课的方法
                 [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
@@ -839,9 +812,6 @@ static NSString * const CalendarCellID = @"cell";
                 // 进pdf界面
                 [self getLessonWithCourseModel:model tableView:self.xc_tableView indexPath:indexPath];
             } else {
-                
-//                [self enterTKClassroomWithCourseModel:model];
-                
                 
                 // 调用接口 进行教室判断  是百家云还是拓课
                  // 进入拓课的方法
@@ -872,20 +842,6 @@ static NSString * const CalendarCellID = @"cell";
             break;
     }
 }
-
-// 进入教室调用接口
-//- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
-//{
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    param[@"LessonId"] = model.LessonId;
-//    
-//    NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
-//    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//}
 
 // 取消预约
 - (void)cancleReservationCourseWithModel:(GGT_CourseCellModel *)model withIndexPath:(NSIndexPath *)indexPath
@@ -1203,83 +1159,5 @@ static NSString * const CalendarCellID = @"cell";
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
     NSLog(@"弹框已经消失");
 }
-
-#pragma mark - 拓课
-#pragma mark TKEduEnterClassRoomDelegate
-//- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
-//{
-//    NSDictionary *tDict = @{
-//                            @"serial"   :model.serial,
-//                            @"host"    :model.host,
-//                            // @"userid"  : @"1111",
-//                            @"port"    :model.port,
-//                            @"nickname":model.nickname,    // 学生密码567
-//                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-//                            };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-//    shareRoom.xc_roomPassword = model.stuPwd;
-//    shareRoom.xc_roomName = model.LessonName;
-//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
-//    
-//    // 记录日志
-//    [XCLogManager xc_redirectNSlogToDocumentFolder];
-//}
-//
-////error.code  Description:error.description
-//- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
-//    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
-//        
-//    } else {
-//        TKLog(@"-----onEnterRoomFailed");
-//        [XCLogManager xc_readDataFromeFile];
-//    }
-//}
-//- (void) onKitout:(EKickOutReason)reason{
-//    TKLog(@"-----onKitout");
-//}
-//- (void) joinRoomComplete{
-//    TKLog(@"-----joinRoomComplete");
-//    [XCLogManager xc_readDataFromeFile];
-//    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
-//}
-//- (void) leftRoomComplete{
-//    TKLog(@"-----leftRoomComplete");
-//    [XCLogManager xc_deleteLogData];
-//    
-//    // 网络请求 刷新数据
-//    [self loadCourseDataWithStime:self.xc_selectedDate showMBP:NO];
-//    [self loadCalendarDataWithDate:self.xc_selectedDate showMBP:NO];
-//}
-//- (void) onClassBegin{
-//    TKLog(@"-----onClassBegin");
-//}
-//- (void) onClassDismiss{
-//    NSLog(@"-----onClassDismiss");
-//    [TKEduClassRoom leftRoom];
-//}
-//- (void) onCameraDidOpenError{
-//    TKLog(@"-----onCameraDidOpenError");
-//}
-
-
-//#pragma mark - 百家云
-//- (void)enterBJYClassroom {
-//    [self.view endEditing:YES];
-//    
-//    [self enterRoomWithJoinCode:@"2mnuv7"
-//                       userName:@"Student"];
-//}
-//
-//- (void)enterRoomWithJoinCode:(NSString *)joinCode userName:(NSString *)userName {
-//    
-//    BJRoomViewController *roomViewController = [BJRoomViewController new];
-//    
-//    [self presentViewController:roomViewController
-//                       animated:YES
-//                     completion:^{
-//                         [roomViewController enterRoomWithSecret:joinCode userName:userName];
-//                     }];
-//}
-
 
 @end

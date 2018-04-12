@@ -57,18 +57,6 @@
     }];
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.xc_scrollView.contentOffset = CGPointZero;
-//}
-//
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    self.xc_scrollView.contentOffset = CGPointZero;
-//}
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -258,7 +246,6 @@
 - (void)cellButtonAction:(UIButton *)button
 {
     GGT_CourseCellModel *model = self.xc_model;
-    //    NSIndexPath *indexPath = self.xc_indexPath;
     
     self.xc_course_model = model;
     
@@ -270,11 +257,6 @@
             break;
         case 1:     // 即将上课  // 进入预习界面
         {
-            
-            
-//            [self enterTKClassroomWithCourseModel:model];
-//            [self postNetworkModifyLessonStatusWithCourseModel:model];
-
             
             @weakify(self);
             [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
@@ -289,10 +271,6 @@
             break;
         case 2:     // 正在上课  // 进入教室
         {
-            
-//            [self enterTKClassroomWithCourseModel:model];
-//            [self postNetworkModifyLessonStatusWithCourseModel:model];
-
             @weakify(self);
             [GGT_ClassroomManager chooseClassroomWithViewController:self courseModel:model leftRoomBlock:^{
                 
@@ -325,20 +303,6 @@
             break;
     }
 }
-
-//// 进入教室调用接口
-//- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
-//{
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    param[@"LessonId"] = model.LessonId;
-//    
-//    NSString *url = [NSString stringWithFormat:@"%@?LessonId=%@", URL_ModifyLessonStatus, model.LessonId];
-//    [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//}
 
 
 // 取消预约
@@ -504,62 +468,6 @@
 {
     [MBProgressHUD hideHUDForView:self.view];
 }
-
-#pragma mark - 拓课
-#pragma mark TKEduEnterClassRoomDelegate
-//- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model
-//{
-//    NSDictionary *tDict = @{
-//                            @"serial"   :model.serial,
-//                            @"host"    :model.host,
-//                            // @"userid"  : @"1111",
-//                            @"port"    :model.port,
-//                            @"nickname":model.nickname,    // 学生密码567
-//                            @"userrole":model.userrole    //用户身份，0：老师；1：助教；2：学生；3：旁听；4：隐身用户
-//                            };
-//    TKEduClassRoom *shareRoom = [TKEduClassRoom shareInstance];
-//    shareRoom.xc_roomPassword = model.stuPwd;
-//    shareRoom.xc_roomName = model.LessonName;
-//    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self];
-//    
-//    // 记录日志
-//    [XCLogManager xc_redirectNSlogToDocumentFolder];
-//}
-//
-////error.code  Description:error.description
-//- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
-//    if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
-//        
-//    } else {
-//        TKLog(@"-----onEnterRoomFailed");
-//        [XCLogManager xc_readDataFromeFile];
-//    }
-//}
-//- (void) onKitout:(EKickOutReason)reason{
-//    TKLog(@"-----onKitout");
-//}
-//- (void) joinRoomComplete{
-//    TKLog(@"-----joinRoomComplete");
-//    [XCLogManager xc_readDataFromeFile];
-//    [self postNetworkModifyLessonStatusWithCourseModel:self.xc_course_model];
-//}
-//- (void) leftRoomComplete{
-//    TKLog(@"-----leftRoomComplete");
-//    [XCLogManager xc_deleteLogData];
-//    
-//    // 网络请求 刷新数据
-//    [self refreshTableView];
-//}
-//- (void) onClassBegin{
-//    TKLog(@"-----onClassBegin");
-//}
-//- (void) onClassDismiss{
-//    NSLog(@"-----onClassDismiss");
-//    [TKEduClassRoom leftRoom];
-//}
-//- (void) onCameraDidOpenError{
-//    TKLog(@"-----onCameraDidOpenError");
-//}
 
 // 退出教室 刷新数据
 - (void)refreshTableView

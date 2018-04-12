@@ -186,6 +186,20 @@
     }];
     
     
+    //当前版本号
+    UILabel *versionLabel = [[UILabel alloc] init];
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    versionLabel.text = [NSString stringWithFormat:@"当前版本:v%@",app_Version];
+    
+    versionLabel.textColor = UICOLOR_FROM_HEX(ColorD5D5D5);
+    versionLabel.font = Font(17);
+    versionLabel.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:versionLabel];
+    
+    
+    
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     if (sin.isAuditStatus == NO) {
@@ -205,9 +219,23 @@
             make.top.equalTo(self.loginButton.mas_bottom).with.offset(LineY(30));
             make.size.mas_offset(CGSizeMake(LineW(324), LineH(44)));
         }];
+        
+        [versionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.top.equalTo(self.registerButton.mas_bottom).with.offset(LineY(30));
+            make.height.mas_offset(LineH(18));
+        }];
+    } else {
+        [versionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.top.equalTo(self.loginButton.mas_bottom).with.offset(LineY(30));
+            make.height.mas_offset(LineH(18));
+        }];
     }
     
+    
 
+    
     //背景图
     UIImageView *footerImageView = [[UIImageView alloc]init];
     footerImageView.image = UIIMAGE_FROM_NAME(@"tob_background");

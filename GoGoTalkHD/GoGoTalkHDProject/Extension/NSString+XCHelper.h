@@ -218,12 +218,6 @@
  */
 - (NSURL *)xc_toURL;
 
-/** URL编码
- *	Try to do a url encode.
- *
- *	@return Encoded string.
- */
-- (NSString *)xc_URLEncode;
 
 #pragma mark - HTML
 /** 顾虑HTML标签中的字符串
