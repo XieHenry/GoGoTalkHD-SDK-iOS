@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TKProgressSlider, PlaybackModel;
+@class TKProgressSlider;
 
 @interface TKPlaybackMaskView : UIView
 
@@ -20,7 +20,8 @@
 
 @property (nonatomic, strong) UILabel *timeLabel;
 
-@property (nonatomic, strong) PlaybackModel *model;
+//@property (nonatomic, strong) PlaybackModel *model;
+@property (nonatomic, assign) NSTimeInterval duration;
 
 @property (nonatomic, assign) NSTimeInterval lastTime;
 

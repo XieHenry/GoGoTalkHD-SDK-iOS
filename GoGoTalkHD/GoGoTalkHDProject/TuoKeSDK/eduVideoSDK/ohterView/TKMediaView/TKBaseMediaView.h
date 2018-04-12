@@ -7,19 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKVideoBoardHandle.h"
+#import "TKEduSessionHandle.h"
+
 @class TKMediaDocModel,TKProgressSlider,MediaStream;
 @interface TKBaseMediaView : UIView
 
 - (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
-                              frame:(CGRect)frame;
+                              frame:(CGRect)frame
+                      sessionHandle:(TKEduSessionHandle *)sessionHandle;
 
 - (instancetype)initScreenShare:(CGRect)frame;
+- (instancetype)initFileShare:(CGRect)frame;
 
 - (void)playAction:(BOOL)star;
 -(void)seekProgressToPos:(NSTimeInterval)value;
 - (void)update:(NSTimeInterval)current total:(NSTimeInterval)total;
 -(void)updatePlayUI:(BOOL)star;
+- (void)loadWhiteBoard;
+- (void)hiddenVideoWhiteBoard;
+- (void)deleteWhiteBoard;
 
+- (void)loadLoadingView;
+//播放mp4时，需要 hidden loading
+- (void)hiddenLoadingView;
 @property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -37,7 +48,8 @@
 @property (nonatomic, assign) BOOL iIsPlay;
 @property (nonatomic, assign) BOOL isPlayEnd;
 @property (nonatomic, strong) MediaStream *iMediaStream;
-
 @property(nonatomic, strong) UIButton        *iDiskButtion;
 
+@property (nonatomic, strong) UIView *iVideoBoardView;
+@property (nonatomic, strong) UIImageView *loadingView;
 @end

@@ -10,8 +10,6 @@
 #import "TKEmotionTool.h"
 #import "TKEmotion.h"
 
-#import "NSObject+MJKeyValue.h"
-
 @implementation TKEmotionTool
 /** 默认表情 */
 static NSArray *_defaultEmotions;
@@ -26,7 +24,16 @@ static NSMutableArray *_recentEmotions;
     if (!_defaultEmotions) {
 
         NSString *plist = [[NSBundle mainBundle] pathForResource:@"TKEmoji.bundle/TKEmoji.plist" ofType:nil];
-        _defaultEmotions = [TKEmotion objectArrayWithFile:plist];
+        NSArray *dictArray = [NSArray arrayWithContentsOfFile:plist];
+        NSMutableArray *emojiArray = [NSMutableArray array];
+        for (NSDictionary *dict in dictArray){
+            TKEmotion *emotion = [[TKEmotion alloc]init];
+            emotion.chs = dict[@"chs"];
+            emotion.cht = dict[@"cht"];
+            emotion.png = dict[@"png"];
+            [emojiArray addObject:emotion];
+        }
+        _defaultEmotions = [NSArray arrayWithArray:emojiArray];
         
         [_defaultEmotions makeObjectsPerformSelector:@selector(setDirectory:) withObject:@"TKEmoji.bundle"];
     }
@@ -39,7 +46,16 @@ static NSMutableArray *_recentEmotions;
     if (!_emojiEmotions) {
         
         NSString *plist = [[NSBundle mainBundle] pathForResource:@"TKEmoji.bundle/TKEmoji.plist" ofType:nil];
-        _emojiEmotions = [TKEmotion objectArrayWithFile:plist];
+        NSArray *dictArray = [NSArray arrayWithContentsOfFile:plist];
+        NSMutableArray *emojiArray = [NSMutableArray array];
+        for (NSDictionary *dict in dictArray){
+            TKEmotion *emotion = [[TKEmotion alloc]init];
+            emotion.chs = dict[@"chs"];
+            emotion.cht = dict[@"cht"];
+            emotion.png = dict[@"png"];
+            [emojiArray addObject:emotion];
+        }
+        _emojiEmotions = [NSArray arrayWithArray:emojiArray];
         [_emojiEmotions makeObjectsPerformSelector:@selector(setDirectory:) withObject:@"TKEmoji.bundle"];
         
     }

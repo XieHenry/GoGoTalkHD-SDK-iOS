@@ -11,7 +11,7 @@
 #import "TKEduSessionHandle.h"
 #import "TKUtil.h"
 #import "TKMacro.h"
-#import "PlaybackModel.h"
+//#import "PlaybackModel.h"
 
 @interface TKPlaybackMaskView ()
 
@@ -25,7 +25,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.model = [[PlaybackModel alloc] init];
+//        self.model = [[PlaybackModel alloc] init];
         self.seekInterval = 2;
         self.acceptSeekTime = 0;
         [self setupViews];
@@ -99,7 +99,7 @@
     if (self.iProgressSlider.sliderPercent > 1) {
         self.iProgressSlider.sliderPercent = 1;
     }
-    NSTimeInterval pos = floor(self.iProgressSlider.sliderPercent * self.model.duration);
+    NSTimeInterval pos = floor(self.iProgressSlider.sliderPercent * self.duration);
     
     if (NSDate.date.timeIntervalSince1970 - self.acceptSeekTime < self.seekInterval) {
         return;
@@ -122,14 +122,14 @@
     
     //如果用户在手动滑动滑块，则不对滑块的进度进行设置重绘
     if (!self.iProgressSlider.isSliding) {
-        self.iProgressSlider.sliderPercent = current/self.model.duration;
+        self.iProgressSlider.sliderPercent = current/self.duration;
     }
     
     if (current!=self.lastTime) {
         [self.activity stopAnimating];
-        self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", [self formatPlayTime:current/1000], isnan(self.model.duration)?@"00:00":[self formatPlayTime:self.model.duration/1000]];
+        self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", [self formatPlayTime:current/1000], isnan(self.duration)?@"00:00":[self formatPlayTime:self.duration/1000]];
     } else {
-        if (current < self.model.duration) {
+        if (current < self.duration) {
             [self.activity startAnimating];
         }
     }
@@ -158,7 +158,7 @@
     self.iProgressSlider.sliderPercent = 0;
     [[TKEduSessionHandle shareInstance] seekPlayback:0];
     [[TKEduSessionHandle shareInstance] pausePlayback];
-    self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", @"00:00", [self formatPlayTime:self.model.duration/1000]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", @"00:00", [self formatPlayTime:self.duration/1000]];
 }
 
 //- (void)getPlayDuration:(NSTimeInterval)duration {
@@ -173,17 +173,17 @@
     
     if (self.playButton.selected == YES) {
         // 播放状态断线重连，进行seek
-        NSTimeInterval pos = self.iProgressSlider.sliderPercent * self.model.duration;
+        NSTimeInterval pos = self.iProgressSlider.sliderPercent * self.duration;
         [[TKEduSessionHandle shareInstance] seekPlayback:pos];
     } else {
         if (self.iProgressSlider.sliderPercent > 0.001) {
             // 暂停状态断线重连，进行seek，然后再pause
-            NSTimeInterval pos = self.iProgressSlider.sliderPercent * self.model.duration;
+            NSTimeInterval pos = self.iProgressSlider.sliderPercent * self.duration;
             [[TKEduSessionHandle shareInstance] seekPlayback:pos];
             [[TKEduSessionHandle shareInstance] pausePlayback];
         } else {
             // 正常状态
-            self.model.duration = duration;
+            self.duration = duration;
             self.playButton.selected = YES;
             [[TKEduSessionHandle shareInstance] configurePlayerRoute:NO isCancle:NO];
         }

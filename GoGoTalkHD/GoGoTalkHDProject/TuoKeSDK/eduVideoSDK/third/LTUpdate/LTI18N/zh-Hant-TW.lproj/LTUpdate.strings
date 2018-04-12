@@ -9,3 +9,11 @@
 "Remind Me Later" = "以後再提醒我";
 
 "Release Notes" = "更新資訊";
+
+
+"Prompt.FoundNewVersions" = "發現新版本：";
+
+"Prompt.ForcedToUpgrade" = "已有新版本可用，為了獲得完整的學習體驗，請您立即完成版本升級。";
+
+"Prompt.ConditionsForTheUpgrade" = "已有新版本可用，為了達到最佳使用體驗，建議您立即完成版本升級。";
+

@@ -25,4 +25,6 @@
  */
 - (void)deleteAllVideoSmallView;
 
+- (void)refreshSplitScreenView;
+
 @end

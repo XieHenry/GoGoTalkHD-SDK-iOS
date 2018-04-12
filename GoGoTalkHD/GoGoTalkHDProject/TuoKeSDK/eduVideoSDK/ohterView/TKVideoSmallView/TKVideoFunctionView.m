@@ -10,6 +10,8 @@
 #import "TKButton.h"
 #import "TKEduSessionHandle.h"
 
+#import "TKEduRoomProperty.h"
+
 @interface TKVideoFunctionView ()
 @property (nonatomic,retain)TKButton *iButton1;
 @property (nonatomic,retain)TKButton *iButton2;
@@ -22,7 +24,7 @@
 
 @implementation TKVideoFunctionView
 //291*70
--(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer{
+-(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer isSplit:(BOOL)isSplit{
     
     if (self = [super initWithFrame:frame]) {
         _iRoomUer = aRoomUer;
@@ -52,25 +54,41 @@
             if ([TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV && aRoomUer.role == 2) {
                 tPoroFloat = 2.0;
             }else{
-                tPoroFloat = 3.0;
+                
+                TKEduSessionHandle *tSessionHandle = [TKEduSessionHandle shareInstance];
+                TKEduRoomProperty *tRoomProperty = tSessionHandle.iRoomProperties;
+                if ([tRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+                    if ([[TKEduSessionHandle shareInstance] roomType] != RoomType_OneToOne && ![TKEduSessionHandle shareInstance].isClassBegin && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
+                        tPoroFloat = 3.0;//3.0    4.0  这里还需要判断是什么模板
+                    }else{
+                        tPoroFloat = 4.0;//3.0    4.0  这里还需要判断是什么模板
+                    }
+                    
+                }else{
+                    tPoroFloat = 3.0;
+                }
             }
             
         }
         
         // 不显示学生的关闭视频按钮，减一个位置
         if (aVideoRole != EVideoRoleTeacher && ![aRoomUer.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]) {
-            tPoroFloat = tPoroFloat - 1;
+//            tPoroFloat = tPoroFloat - 1;
         }
         
         // 如果是助教，只显示下台和关音频2个
         if (aRoomUer.role == UserType_Assistant) {
-            tPoroFloat = 3;
+            tPoroFloat = 4;
         }
         
         //如果是1v1课堂减少分屏按钮
-        if ( [[TKEduSessionHandle shareInstance] roomType] == RoomType_OneToOne && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
+        if ( [[TKEduSessionHandle shareInstance] roomType] == RoomType_OneToOne && (aRoomUer.role == UserType_Teacher || aRoomUer.role == UserType_Student) && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
             tPoroFloat = tPoroFloat - 1;
         }
+        if ([[TKEduSessionHandle shareInstance] roomType] != RoomType_OneToOne && ![TKEduSessionHandle shareInstance].isClassBegin && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
+            tPoroFloat = tPoroFloat -1;
+        }
+        
         CGFloat tWidth = (CGRectGetWidth(frame)-20)/tPoroFloat;
        
         _iButton1 = ({
@@ -83,7 +101,7 @@
             tButton.titleLabel.font = TKFont(13);
             [tButton setTitleColor:RGBCOLOR(181, 181, 181) forState:UIControlStateNormal];
             tButton.titleLabel.textAlignment =NSTextAlignmentCenter;
-            [tButton addTarget:self  action:@selector(button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
+            [tButton addTarget:self action:@selector(button1Clicked:) forControlEvents:UIControlEventTouchUpInside];
             //修改部分
             tButton.imageRect = CGRectMake((tWidth-30)/2.0 - 10, (tHeight-50)/2.0, 30, 30);
             tButton.titleRect = CGRectMake(-10, tHeight-30, tWidth, 20);
@@ -123,7 +141,7 @@
         });
         
         if (aRoomUer.disableVideo == NO) {
-            _iButton5 = ({
+            _iButton5 = ({//关闭视频
                 
                 TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
                 [tButton setImage:LOADIMAGE(@"icon_control_camera_01")  forState:UIControlStateNormal];
@@ -141,7 +159,7 @@
                 tButton.titleRect = CGRectMake(0, tHeight-30, tWidth, 20);
 //                tButton.imageRect = CGRectMake((tWidth-30)/2.0, (tHeight-30)/2.0, 30, 30);
 //                tButton.titleRect = CGRectMake(0, tHeight-20, tWidth, 20);
-                tButton.frame = CGRectMake(10+tWidth*2, 0, tWidth, tHeight);
+                tButton.frame = CGRectMake(10+tWidth*3, 0, tWidth, tHeight);
                 tButton;
                 
             });
@@ -149,7 +167,7 @@
         
         if (aRoomUer.disableAudio == NO) {
             
-            _iButton3 = ({
+            _iButton3 = ({//关闭音频
                 
                 TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
                 [tButton setImage:LOADIMAGE(@"icon_control_audio")  forState:UIControlStateNormal];
@@ -174,7 +192,7 @@
             });
         }
 
-        _iButton4= ({
+        _iButton4= ({//发送奖杯
             
             TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
             [tButton setImage:LOADIMAGE(@"icon_control_gift")  forState:UIControlStateNormal];
@@ -202,7 +220,7 @@
                     x = tWidth * 4;
                 }
             }
-            x = x - tWidth;     // 不显示关闭视频按钮，减一个位置
+//            x = x - tWidth;     // 不显示关闭视频按钮，减一个位置
             tButton.frame = CGRectMake(10+x, 0, tWidth, tHeight);
             tButton;
             
@@ -210,7 +228,7 @@
        
         self.backgroundColor = RGBCOLOR(31, 31, 31);
         
-        _iButton6 = ({
+        _iButton6 = ({//演讲
             TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
             [tButton setImage:LOADIMAGE(@"icon_split_normal")  forState:UIControlStateNormal];
             [tButton setTitle:MTLocalized(@"Button.Speech") forState:UIControlStateNormal];
@@ -226,14 +244,15 @@
             tButton.titleRect = CGRectMake(0, tHeight-30, tWidth, 20);
             //                tButton.imageRect = CGRectMake((tWidth-30)/2.0, (tHeight-30)/2.0, 30, 30);
             //                tButton.titleRect = CGRectMake(0, tHeight-20, tWidth, 20);
-            tButton.frame = CGRectMake(10+tWidth*4, 0, tWidth, tHeight);
+            tButton.frame = CGRectMake(10+tWidth*5, 0, tWidth, tHeight);
             tButton;
             
         });
         
         
         if (aVideoRole == EVideoRoleTeacher) {
-            _iButton1 = ({
+            
+            _iButton1 = ({//关闭视频
                 
                 TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
                 
@@ -255,11 +274,11 @@
                 tButton.titleRect = CGRectMake(0, tHeight-30, tWidth, 20);
                 //                tButton.imageRect = CGRectMake((tWidth-30)/2.0, (tHeight-30)/2.0, 30, 30);
                 //                tButton.titleRect = CGRectMake(0, tHeight-20, tWidth, 20);
-                tButton.frame = CGRectMake(0, 0, tWidth, tHeight);
+                tButton.frame = CGRectMake(tWidth, 0, tWidth, tHeight);
                 tButton;
                 
             });
-            _iButton2 = ({
+            _iButton2 = ({//关闭音频
                 
                 TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
                 
@@ -278,16 +297,16 @@
                 tButton.titleRect = CGRectMake(0, tHeight-30, tWidth, 20);
 //                tButton.imageRect = CGRectMake((tWidth-30)/2.0, (tHeight-30)/2.0, 30, 30);
 //                tButton.titleRect = CGRectMake(0, tHeight-20, tWidth, 20);
-                tButton.frame = CGRectMake(tWidth, 0, tWidth, tHeight);
+                tButton.frame = CGRectMake(0, 0, tWidth, tHeight);
                 tButton;
                 
             });
-            _iButton3 = ({
+            _iButton3 = ({//全部恢复
                 
                 TKButton *tButton = [TKButton buttonWithType:UIButtonTypeCustom];
-                [tButton setImage:LOADIMAGE(@"icon_oneKeyReset_normal")  forState:UIControlStateNormal];
+                [tButton setImage:LOADIMAGE(@"icon_allReset")  forState:UIControlStateNormal];
                 [tButton setTitle:MTLocalized(@"Button.OneKeyRecovery") forState:UIControlStateNormal];
-                [tButton setImage:LOADIMAGE(@"icon_oneKeyReset_normal")  forState:UIControlStateSelected];
+                [tButton setImage:LOADIMAGE(@"icon_allReset")  forState:UIControlStateSelected];
                 [tButton setTitle:MTLocalized(@"Button.OneKeyRecovery") forState:UIControlStateSelected];
                 
                 tButton.titleLabel.font = TKFont(13);
@@ -307,30 +326,52 @@
             
             [self addSubview:_iButton1];
             [self addSubview:_iButton2];
-            [self addSubview:_iButton3];
-            
+           
+            if ([TKEduSessionHandle shareInstance].isClassBegin) {
+                [self addSubview:_iButton3];
+            }
+            if(tPoroFloat == 4.0)
+            {
+                _iButton3.frame = CGRectMake(tWidth*3, 0, tWidth, tHeight);
+                _iButton6.frame = CGRectMake(tWidth*2, 0, tWidth, tHeight);
+                [self addSubview:_iButton6];
+                
+            }
          
            
         } else if ([aRoomUer.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID] && aVideoRole != EVideoRoleTeacher) {
-            _iButton5.frame = CGRectMake(10, 0, tWidth, tHeight);
-            _iButton3.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
+            _iButton3.frame = CGRectMake(10, 0, tWidth, tHeight);
+            _iButton5.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
             [self addSubview:_iButton5];
             [self addSubview:_iButton3];
             [self addSubview:_iButton6];
         } else if (aRoomUer.role == UserType_Assistant) {
             _iButton2.frame = CGRectMake(10, 0, tWidth, tHeight);
             _iButton3.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
-            _iButton6.frame = CGRectMake(20+2*tWidth, 0, tWidth, tHeight);
+            _iButton5.frame = CGRectMake(20+2*tWidth, 0, tWidth, tHeight);
+            _iButton6.frame = CGRectMake(30+3*tWidth, 0, tWidth, tHeight);
             [self addSubview:_iButton2];
             [self addSubview:_iButton3];
+            [self addSubview:_iButton5];
             [self addSubview:_iButton6];
         } else {
-            [self addSubview:_iButton1];
+            
+            CGFloat tWidth = (CGRectGetWidth(frame)-20)/(tPoroFloat-1);
+            if (!isSplit) {
+                [self addSubview:_iButton1];
+            }else{
+                _iButton2.frame = CGRectMake(10, 0, tWidth, tHeight);
+                _iButton3.frame = CGRectMake(10+tWidth, 0, tWidth, tHeight);
+                _iButton5.frame = CGRectMake(20+2*tWidth, 0, tWidth, tHeight);
+                _iButton4.frame = CGRectMake(30+3*tWidth, 0, tWidth, tHeight);
+                _iButton6.frame = CGRectMake(40+4*tWidth, 0, tWidth, tHeight);
+            }
             [self addSubview:_iButton2];
             [self addSubview:_iButton3];
+            [self addSubview:_iButton5];
             [self addSubview:_iButton4];
             [self addSubview:_iButton6];
-            //[self addSubview:_iButton5];
+            
         }
         
         [TKUtil setCornerForView:self];
@@ -401,6 +442,8 @@
         case EVideoRoleTeacher:
         {
             _iButton3.selected = isSplitScreen;
+            
+            _iButton6.selected = isSplitScreen;
         }
             break;
         case EVideoRoleOur:

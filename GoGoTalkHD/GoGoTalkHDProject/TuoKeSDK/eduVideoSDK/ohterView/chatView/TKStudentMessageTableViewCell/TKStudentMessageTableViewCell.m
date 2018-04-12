@@ -11,6 +11,24 @@
 #import "TKUtil.h"
 #import "NSAttributedString+JTATEmoji.h"
 
+
+@interface TKStudentMessageTableViewCell()
+
+@property (nonatomic, strong) UILabel *iNickNameLabel;
+@property (nonatomic, strong) UILabel *iTimeLabel;
+@property (nonatomic, strong) UIView *iMessageView;
+@property (nonatomic, strong) UILabel *iMessageLabel;
+@property (nonatomic, strong) UIButton *iTranslationButton;
+@property (nonatomic, copy)   bTranslationButtonClicked iTranslationButtonClicked;
+@property (nonatomic, strong) UILabel *iMessageTranslationLabel;
+@property (nonatomic, assign) MessageType iMessageType;
+@property (nonatomic, strong) NSString *iText;
+@property (nonatomic, strong) NSString *iTranslationtext;
+@property (nonatomic, strong) NSString *iNickName;
+@property (nonatomic, strong) NSString *iTime;
+
+@end
+
 @implementation TKStudentMessageTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -137,8 +155,9 @@
     }
     _iMessageTranslationLabel.text = _iTranslationtext;
     
-     NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[_iNickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
-    _iNickNameLabel.text = attrStr.string;
+//     NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[_iNickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+    
+    _iNickNameLabel.text = _iNickName;
     _iTimeLabel.text =  _iTime;
      [self layoutSubviews];
     
@@ -251,5 +270,14 @@
     CGRect boundingRect = [attributedString boundingRectWithSize:textBlockMinSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGSize tMessageLabelsize = boundingRect.size;
     return tMessageLabelsize;
+}
+- (void)setChatModel:(TKChatMessageModel *)chatModel{
+    _iText               = chatModel.iMessage;
+    _iMessageLabel.textColor = (chatModel.iMessageType ==MessageType_Me)?  RGBCOLOR(221, 221, 221): RGBCOLOR(162, 162, 162);
+    _iTranslationtext    = chatModel.iTranslationMessage;
+    _iTime = chatModel.iTime;
+    _iNickName = chatModel.iUserName;
+    _iMessageType        = chatModel.iMessageType;
+    [self resetView];
 }
 @end

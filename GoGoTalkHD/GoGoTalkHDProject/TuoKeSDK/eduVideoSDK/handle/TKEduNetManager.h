@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
+//@import UIKit;
+#import <UIKit/UIKit.h>
 @class RoomUser;
 #import "TKMacro.h"
 typedef int(^bCheckRoomdidComplete)( id _Nullable response ,NSString* _Nullable aPassWord);
@@ -56,5 +57,39 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 
 #pragma mark 当前默认选择的区域
 + (void)getDefaultAreaWithComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
+
+/**
+ 获取安装文件的版本信息
+
+ @param aHost host
+ @param aPort port
+ @param version 本地版本
+ @param type （0:IM   1:PC 2:Android pad  4:Android mobile platform   5:IOS mobile platform 6:hardware）
+ @param aComplete 返回消息
+ @param aNetError 错误消息
+ */
++ (void)getupdateinfoWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort Version:(NSString *_Nonnull)version Type:(NSString *_Nonnull)type Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
+
+/**
+ MP3文件下载
+
+ @param url 文件名称
+ @param aComplete 返回消息
+ @param aNetError 错误消息
+ */
++ (void)downLoadMp3File:(NSString*_Nonnull)url Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
+
+/**
+ 获取回放的room.json数据
+ 
+ @param path 访问地址
+ @param aComplete 返回消息
+ @param aNetError 错误消息
+ */
++ (void)getRoomJsonWithPath:(NSString *_Nonnull)path Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
+
+
+
++(void)systemtime:(NSDictionary *_Nonnull)aParam Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
 @end

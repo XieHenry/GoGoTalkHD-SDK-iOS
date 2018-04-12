@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
+//@import UIKit;
+#import <UIKit/UIKit.h>
 @interface NSAttributedString (JTATEmoji)
 + (NSAttributedString *)emojiAttributedString:(NSString *)string withFont:(UIFont *)font withColor:(UIColor *)color;
 

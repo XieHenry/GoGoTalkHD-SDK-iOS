@@ -25,6 +25,15 @@
 #define RGBACOLOR_ClassBegin_RedDeep        RGBCOLOR(207,65, 21)
 #define RGBACOLOR_ClassEnd_Red              RGBCOLOR(121, 69, 67)
 #define RGBACOLOR_Title_White               RGBCOLOR(115, 115, 115)
+#define RGBACOLOR_RAISEHAND_HOLD            RGBCOLOR(179, 38, 17)
+
+#define RGBACOLOR_ClassBeginAndEnd          UIColorRGB(0xcf4014)
+#define RGBACOLOR_muteAudio_Normal          UIColorRGB(0x784442)
+#define RGBACOLOR_muteAudio_Select          UIColorRGB(0xd3585e)
+#define RGBACOLOR_unMuteAudio_Normal        UIColorRGB(0x375b9e)
+#define RGBACOLOR_unMuteAudio_Select        UIColorRGB(0x5068cd)
+#define RGBACOLOR_RewardColor               UIColorRGB(0xda7c17)
+
 
 #define TKFont(s) [UIFont fontWithName:@"PingFang-SC-Light" size:s]
 
@@ -52,8 +61,8 @@
 #define MTLocalized(s) [BUNDLE localizedStringForKey:s value:@"" table:nil]
 
  #define IS_CH_SYMBOL(chr) ((int)(chr)>127)
-static NSString *const sAPP_ID = @"20170605000052251";
-static NSString *const sSECURITY_KEY = @"sYlf3rTdnEGTOKr1FuT1";
+static NSString *const sAPP_ID_BaiDu = @"20180130000119815";
+static NSString *const sSECURITY_KEY = @"MeLC5NI37txuT_wtTd0B";
 static NSString *const sTRANS_API_HOST = @"http://api.fanyi.baidu.com/api/trans/vip/translate";
 static NSString *const sTapTableNotification = @"tapTableNotification";
 static NSString *const sDocListViewNotification = @"docListViewNotification";
@@ -109,7 +118,8 @@ typedef NS_ENUM(NSInteger, PublishState) {
     PublishState_AUDIOONLY      = 1,		    //只有音频
     PublishState_VIDEOONLY      = 2,            //只有视频
     PublishState_BOTH           = 3,		    //都有
-    PublishState_NONE_ONSTAGE   = 4             //音视频都没有但还在台上
+    PublishState_NONE_ONSTAGE   = 4,            //音视频都没有但还在台上
+    PublishState_Local_NONE     = 5             //本地显示流
 };
 
 typedef NS_ENUM(NSInteger, UserType) {
@@ -125,7 +135,6 @@ typedef NS_ENUM(NSInteger, RoomType) {
     RoomType_OneToOne   = 0,		    //小班
     RoomType_OneToMore  = 1,           //大班
 };
-
 typedef NS_ENUM(NSInteger, EVideoRole)
 {
     EVideoRoleTeacher,//老师视频
@@ -157,7 +166,8 @@ typedef NS_ENUM(NSInteger, DeviceType) {//设备类型
     WindowClient,
     WindowPC,
     MacClient,
-    MacPC
+    MacPC,
+    AndroidTV
 };
 
 #define RGBACOLOR_PromptWhite       RGBCOLOR(249, 249, 249)
@@ -176,6 +186,10 @@ typedef NS_ENUM(NSInteger, PromptType) {
    
 };
 
+static  NSString *const sMobile               = @"mobile";//拍照上传入口
+
+static  NSString *const sTKAppVersion               = @"tkAppVersion";//app的version版本标识
+
 static  NSString *const sLowConsume                 = @"LowConsume";
 static  NSString *const sChairmancontrol            = @"chairmancontrol";
 static  NSString *const sClassBegin                 = @"ClassBegin";
@@ -193,7 +207,7 @@ static  NSString *const sAllAll             = @"__AllAll";
 
 static  NSString *const sVideoDraghandle            = @"videoDraghandle";//视频拖拽
 static  NSString *const sVideoSplitScreen            = @"VideoSplitScreen";//分屏
-
+static  NSString *const sVideoZoom                  = @"VideoChangeSize";//视频缩放
 
 static  NSString *const sSubmitAnswers            = @"submitAnswers";//学生答题
 static  NSString *const sUserEnterBackGround      = @"userEnterBackGround";//进入后台
@@ -206,8 +220,8 @@ static  NSString *const sRaisehand           = @"raisehand";
 static  NSString *const sPublishstate        = @"publishstate";
 static  NSString *const sTellAll             = @"__all";
 static  NSString *const sTellNone            = @"__none";
-static  NSString *const sTellAllExpectSender = @"__allExceptSender";//发给除自己外的其他人
-static  NSString *const sTellAllExpectAuditor = @"__allExceptAuditor";
+static  NSString *const sTellAllExpectSender = @"__allExceptSender";//除自己以外的所有人
+static  NSString *const sTellAllExpectAuditor = @"__allExceptAuditor";//除旁听用户以外的所有人
 static  NSString *const sSuperUsers          = @"__allSuperUsers";
 static  NSString *const sGiftNumber          = @"giftnumber";
 static  NSString *const sCandraw             = @"candraw";
@@ -228,6 +242,12 @@ static  NSString *const sIsInBackGround      = @"isInBackGround";
 
 // 英练帮公司id
 static  NSString *const YLB_COMPANYID        = @"10035";
+//公司定义
+static  NSString *const DEFAULT_COMPANY      = @"default";
+static  NSString *const YLB_COMPANY          = @"yinglianbang";
+static  NSString *const ZYW30_COMPANY        = @"zuoyewang30";
+static  NSString *const SHARKTOP_COMPANY     = @"sharktop";
+static  NSString *const GOGOXMAS_COMPANY     = @"gogoxmas";
 
 //播放mp3，mp4
 static  NSString *const sVideo_MediaFilePage_ShowPage   = @"Video_MediaFilePage_ShowPage";
@@ -236,11 +256,23 @@ static  NSString *const sMediaProgress                  = @"MediaProgress";
 static  NSString *const sMediaProgress_video_1          = @"MediaProgress_video_1";
 static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_1";
 
+//白板类型
+static  NSString *const sVideoWhiteboard                         = @"VideoWhiteboard";
+//视频标注相关
+static  NSString *const sPrintLogMessage_videoWhiteboardPage     = @"printLogMessage_videoWhiteboardPage";
+static  NSString *const sOnPageFinished_videoWhiteboardPage      = @"onPageFinished_videoWhiteboardPage";
+static  NSString *const sPubMsg_videoWhiteboardPage              = @"pubMsg_videoWhiteboardPage";
+static  NSString *const sDelMsg_videoWhiteboardPage              = @"delMsg_videoWhiteboardPage";
+
+//拍摄照片、选择照片上传
+static  NSString *const sTakePhotosUploadNotification = @"sTakePhotosUploadNotification";
+static  NSString *const sChoosePhotosUploadNotification = @"sChoosePhotosUploadNotification";
+
 //#define Debug 1;
 #define Realese 1;
 
-static  NSString *const sHttp   = @"https";
-static  NSString *const sPort   = @"443";
+static  NSString *const sHttp   = @"http";
+static  NSString *const sPort   = @"80";
 #ifdef Debug
 static  NSString *const sHost   = @"global.talk-cloud.neiwang";
 

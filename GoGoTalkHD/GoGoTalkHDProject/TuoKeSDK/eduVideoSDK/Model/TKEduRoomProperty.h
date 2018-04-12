@@ -14,6 +14,7 @@
 @property(nonatomic,copy) NSString * iRoomName;
 @property(nonatomic,copy) NSString * defaultServerArea;
 @property(nonatomic,assign)RoomType iRoomType;
+@property(nonatomic,copy)NSString *iPadLayout;//模板类型
 @property(nonatomic,assign)UserType iUserType;
 @property(nonatomic,copy) NSString  *iUserId;
 @property(nonatomic,copy) NSString  *iCompanyID;

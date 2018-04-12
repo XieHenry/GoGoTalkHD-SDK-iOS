@@ -16,17 +16,19 @@
 
 #import "TKUtil.h"
 #import "TKDocmentDocModel.h"
-#import "TKDocumentListView.h"
+//#import "TKDocumentListView.h"
 
 //广生
 //static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.182:9403/publish/index.html#/mobileApp";
 //建行
 //static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.251:9251/publish/index.html#/mobileApp";
 //魏锦
-static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/index.html#/mobileApp";
+static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/index.html#/mobileApp";
 
 @interface TKEduBoardHandle ()<WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
-
+{
+    NSURLConnection *theConnection;
+}
 @property(nonatomic,retain)UIView *iContainView;
 //@property(nonatomic,retain)UIScrollView *iContainView;
 @property(nonatomic,copy)bLoadFinishedBlock iBloadFinishedBlock;
@@ -173,11 +175,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     
 #ifdef __IPHONE_11_0
     if ([_iWebView.scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-        if (@available(iOS 11.0, *)) {
-            [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-        } else {
-            // Fallback on earlier versions
-        }
+         [_iWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
     
 #endif
@@ -194,16 +192,82 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     
 #endif
     NSURL *path = [BUNDLE URLForResource:@"react_mobile_publishdir/index" withExtension:@"html"];
+//    path = [NSURL URLWithString:@"http:www"];
     path = [NSURL URLWithString:[NSString stringWithFormat:@"%@#/mobileApp?languageType=%@",path.absoluteString,[TKUtil getCurrentLanguage]]];
 
     [self clearcookie];
+
+
     [_iWebView loadRequest:[NSURLRequest requestWithURL:path]];
 
-    
     //添加到containView上
     [aContainView addSubview:_iWebView];
     
+//    if (theConnection)
+//    {
+//        [theConnection cancel];
+//        //        SAFE_RELEASE(theConnection);
+//        NSLog(@"safe release connection");
+//    }
+//    theConnection= [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
 }
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    if (theConnection) {
+        //        SAFE_RELEASE(theConnection);
+        NSLog(@"safe release connection");
+    }
+    
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]){
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+        if ((([httpResponse statusCode]/100) == 2)){
+            NSLog(@"connection ok");
+        }
+        else{
+            NSError *error = [NSError errorWithDomain:@"HTTP" code:[httpResponse statusCode] userInfo:nil];
+            if ([error code] == 404){
+                NSLog(@"404");
+                //                [self openNextLink];
+            }
+            else if ([error code] == 403){
+                NSLog(@"403");
+                //                [self openNextLink];
+            }
+        }
+    }
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    if (theConnection) {
+        //        SAFE_RELEASE(theConnection);
+        NSLog(@"safe release connection");
+   
+    }
+    //    if (loadNotFinishCode == NSURLErrorCancelled)  {
+    //        return;
+    //    }
+    if (error.code == 22) //The operation couldn’t be completed. Invalid argument
+    {
+        NSLog(@"22");
+    }
+    else if (error.code == -1001) //The request timed out.  webview code -999的时候会收到－1001
+    {
+        NSLog(@"-1001");
+        
+    }
+    else if (error.code == -1005) //The network connection was lost.
+    {
+        NSLog(@"-1005");
+    }
+    else if (error.code == -1009) //The Internet connection appears to be offline
+    {
+        NSLog(@"-1009");
+    }
+}
+
+
 
 #pragma mark js注入
 -(void)onPageFinished{
@@ -249,6 +313,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.setInitPageParameterFormPhone(%@)",strM];
 
+    NSLog(@"MOBILETKSDK.receiveInterface.setInitPageParameterFormPhone:%@",dictM);
     //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         // response 返回值
@@ -483,6 +548,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     
    // NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone(\"role\",%@)",@(aRole)];
     
+    
      NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone({role:%@})",@(aRole)];
     //NSString *js2 =@" myFunction('Bill Gates','CEO')";
     //evaluate 评估
@@ -490,7 +556,36 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
         
     }];
 }
+-(void)changeWBUrlAndPort{
+    
+   
+    if([TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr &&![[TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr isEqualToString:@""]){
+        
+    }else{
+        return;
+    }
+    
+    NSDictionary *tJsServiceUrl = @{
+                                    @"address":[NSString stringWithFormat:@"%@://%@",sHttp,[TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr],
+                                    @"port":@(80)
+                                    };
 
+    NSDictionary *dictM = @{
+                            @"serviceUrl":tJsServiceUrl,
+                            };
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictM options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone(%@)",strM];
+    
+    //evaluate 评估
+    [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        // response 返回值
+        NSLog(@"----MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone");
+     
+    }];
+    
+    
+}
 -(void)setAddPagePermission:(bool)aPagePermission{
     
      NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone({addPagePermission:%@})",@(aPagePermission)];
@@ -580,7 +675,9 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
 
 
 #pragma mark - WKNavigationDelegate
-
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0)){
+     TKLog(@"webViewWebContentProcessDidTerminate");
+}
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     TKLog(@"页面开始加载时调用");
@@ -626,6 +723,19 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.19:9251/publish/in
     TKLog(@"在发送请求之前，决定是否跳转");
 }
 
+- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        if ([challenge previousFailureCount] == 0) {
+            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+            completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+        } else {
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+        }
+    } else {
+        completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+    }
+}
 #pragma mark life cycle
 -(void)dealloc{
     

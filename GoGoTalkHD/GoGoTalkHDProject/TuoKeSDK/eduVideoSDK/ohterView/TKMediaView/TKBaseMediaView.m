@@ -15,6 +15,7 @@
 @interface TKBaseMediaView ()
 
 @property (nonatomic, assign) BOOL isScreenShare;
+@property (nonatomic, assign) BOOL isFileShare;
 
 @end
 
@@ -22,6 +23,7 @@
 
 - (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
                               frame:(CGRect)frame
+                      sessionHandle:(TKEduSessionHandle *)sessionHandle
 
 {
     self = [super initWithFrame:frame];
@@ -31,6 +33,7 @@
         _isPlayEnd      = NO;
         _duration       = aMediaStream.duration;
         _isScreenShare  = NO;
+        _isFileShare = NO;
         [TKEduSessionHandle shareInstance].isPlayMedia = YES;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
@@ -52,6 +55,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isScreenShare = YES;
+        self.isFileShare = NO;
         [self ac_initVideoSubviews];
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
         [[NSNotificationCenter defaultCenter]removeObserver:self];
@@ -60,7 +64,19 @@
     }
     return self;
 }
-
+- (instancetype)initFileShare:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.isFileShare = YES;
+        self.isScreenShare = NO;
+//        [self ac_initVideoSubviews];
+        [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(unPluggingHeadSet:) name:sUnunpluggingHeadsetNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pluggInMicrophone:) name:sPluggInMicrophoneNotification object:nil];
+    }
+    return self;
+}
 -(void)unPluggingHeadSet:(NSNotification *)notifi{
     
     [self audioVolum: [TKEduSessionHandle shareInstance].iVolume];
@@ -160,6 +176,8 @@
 
 - (void)ac_initVideoSubviews
 {
+    
+    
     if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback) || self.isScreenShare){
         return;
     }
@@ -234,6 +252,18 @@
     [self addSubview:self.activity];
     
 }
+- (void)loadLoadingView{
+    CGFloat loadingH = ScreenH * 2 / 3;
+    UIImage *img = LOADIMAGE(@"mediaLoading1.png");
+    CGFloat scale = img.size.width / img.size.height;
+    _loadingView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scale * loadingH, loadingH)];
+    _loadingView.center = CGPointMake(self.center.x, self.center.y);
+    _loadingView.animationDuration = 0.3;
+    _loadingView.animationRepeatCount = 0;
+    _loadingView.animationImages = @[img, LOADIMAGE(@"mediaLoading2.png"), LOADIMAGE(@"mediaLoading3.png")];
+    [_loadingView startAnimating];
+    [self addSubview:_loadingView];
+}
 #pragma mark - 响应事件
 
 // 点击退出
@@ -241,6 +271,14 @@
     
     [TKEduSessionHandle shareInstance].isPlayMedia          = NO;
     [[TKEduSessionHandle shareInstance]sessionHandleUnpublishMedia:nil];
+    if (self.iVideoBoardView) {
+        [[TKEduSessionHandle shareInstance].iVideoBoardHandle deleteVideoWhiteBoard];
+        
+        [self.iVideoBoardView removeFromSuperview];
+        self.iVideoBoardView = nil;
+    }
+    
+    
     
 }
 //-1
@@ -251,16 +289,116 @@
 }
 
 - (void)playAction:(BOOL)start {
-    NSLog(@"jin-------%@",@(self.playButton.selected));
     if (self.playButton.selected == start) {
         return;
     }
-   
+    
     [[TKEduSessionHandle shareInstance]sessionHandleMediaPause:!start];
     [[TKEduSessionHandle shareInstance]configurePlayerRoute: NO isCancle:NO];
     
+    if ([TKEduSessionHandle shareInstance].roomMgr.videoWhiteboardFlag && [TKEduSessionHandle shareInstance].isClassBegin) {
+        
+        [self refreshVideoWhiteBoard:start];
+    }
+    
 }
+
+- (void)refreshVideoWhiteBoard:(BOOL)start{
+    
+    if (start) {//加载白板
+        if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
+            
+            [[TKEduSessionHandle shareInstance] sessionHandleDelMsg:sVideoWhiteboard ID:sVideoWhiteboard To:sTellAll Data:@{} completion:nil];
+        }
+        
+    }else{
+        if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
+            
+            [self loadWhiteBoard];
+            
+            if (_iMediaStream.height>0) {
+                
+                [TKEduSessionHandle shareInstance].videoRatio = @(_iMediaStream.width*1.0/_iMediaStream.height);
+                
+                [[TKEduSessionHandle shareInstance]sessionHandlePubMsg:sVideoWhiteboard ID:sVideoWhiteboard To:sTellAll Data:[TKEduSessionHandle shareInstance].videoRatio Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
+            }
+        }
+        
+    }
+}
+- (void)loadWhiteBoard{
+    
+    if (self.iVideoBoardView) {
+            //给白板发送webview宽高
+            NSMutableDictionary *tDictSize = [NSMutableDictionary dictionary];
+            [tDictSize setObject:@"transmitWindowSize" forKey:@"type"];
+            
+            NSDictionary *tParamDicSize = @{
+                                            @"height":@(CGRectGetHeight(self.frame)),//DocumentFilePage_ShowPage
+                                            @"width":@(CGRectGetWidth(self.frame))
+                                            };
+            
+            [tDictSize setObject:tParamDicSize forKey:@"windowSize"];
+            
+            NSData *jsonDataSize = [NSJSONSerialization dataWithJSONObject:tDictSize options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *tjsonStringSize = [[NSString alloc]initWithData:jsonDataSize encoding:NSUTF8StringEncoding];
+            
+            NSString *jsReceivePhoneByTriggerEventSize = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",tjsonStringSize];
+            
+            [[TKEduSessionHandle shareInstance].iVideoBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEventSize completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                TKLog(@"MOBILETKSDK.receiveInterface.dispatchEvent");
+            }];
+        
+        
+        self.iVideoBoardView.hidden = NO;
+        return;
+    }
+    [self deleteWhiteBoard];
+    NSString *videoType;
+    //判断是播放的媒体还是电影
+    if (self.isFileShare) {
+        videoType = @"fileVideo";
+    }else{
+        videoType = @"mediaVideo";
+    }
+    UIView *tVideoBoardView = [[TKEduSessionHandle shareInstance].iVideoBoardHandle createVideoWhiteBoardWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) UserName:@"" videoDrawingBoardType:videoType aBloadFinishedBlock:^{
+        
+    }];
+    
+    self.iVideoBoardView = tVideoBoardView;
+    for (UIView *view in self.subviews) {
+        if (view.tag == 10001)
+        {
+            [view addSubview:self.iVideoBoardView];
+            [view bringSubviewToFront:self.iVideoBoardView];
+        }
+    }
+    
+    
+    
+}
+- (void)hiddenVideoWhiteBoard{
+    self.iVideoBoardView.hidden = YES;
+}
+
+- (void)deleteWhiteBoard{
+    
+    if (self.iVideoBoardView) {
+        [[TKEduSessionHandle shareInstance].iVideoBoardHandle deleteVideoWhiteBoard];
+        [self.iVideoBoardView removeFromSuperview];
+        self.iVideoBoardView = nil;
+    }
+}
+
 -(void)updatePlayUI:(BOOL)start{
+    
+    if (start == NO) {
+         self.iVideoBoardView.hidden = NO;
+        if (_iMediaStream.height>0 && [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
+            [TKEduSessionHandle shareInstance].videoRatio = @(_iMediaStream.width*1.0/_iMediaStream.height);
+        }
+    }
+    
     if (self.playButton.selected == start) {
         return;
     }
@@ -277,11 +415,13 @@
             [self.iDiskButtion.layer addAnimation:tRotationAnimation forKey:@"rotationAnimation"];
         }else{
             [self.iDiskButtion.layer removeAllAnimations];
+            
         }
         
     }
     self.playButton.selected = start;
     self.iIsPlay = start;
+    
 }
 
 // 播放进度滑块
@@ -350,6 +490,14 @@
     hour = secend / 3600;
     secend = secend % 60;
     return [NSString stringWithFormat:@"%02d:%02d", minute, secend];
+}
+- (void)hiddenLoadingView
+{
+    if (_loadingView) {
+        [_loadingView stopAnimating];
+        [_loadingView removeFromSuperview];
+        _loadingView = nil;
+    }
 }
 
 @end

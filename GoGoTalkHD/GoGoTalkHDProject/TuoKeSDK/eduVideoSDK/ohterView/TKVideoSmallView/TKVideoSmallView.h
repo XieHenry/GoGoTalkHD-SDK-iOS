@@ -17,6 +17,11 @@ typedef NS_ENUM(NSInteger, EDir)
     EDirTop,
     EDirBottom
 };
+
+typedef BOOL(^IsWhiteboardContainsSelfBlock)(void);
+typedef CGRect(^ResizeVideoViewBlock)(void);
+typedef CGRect(^OnRemoteMsgResizeVideoViewBlock)(CGFloat);
+
 // 悬浮按钮的尺寸
 #define floatSize 50
 typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
@@ -41,6 +46,8 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 @property(copy,nonatomic)NSString *_Nonnull iPeerId;
 /** *  是否拖拽出去了 */
 @property(assign,nonatomic)BOOL isDrag;
+/** *  固定到白板区标志 */
+@property(assign,nonatomic)BOOL isDragWhiteBoard;
 /** *  是否分屏 */
 @property(assign,nonatomic)BOOL isSplit;
 
@@ -68,7 +75,22 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 
 @property(nonatomic,copy) void(^ _Nullable splitScreenClickBlock)(EVideoRole aVideoRole);//分屏回调
 
-@property(nonatomic,copy) void(^ _Nullable oneKeyResetBlock)();//分屏回调
+@property(nonatomic,copy) void(^ _Nullable oneKeyResetBlock)(void);//分屏回调
+
+@property(nonatomic,copy) void(^ _Nullable finishScaleBlock)(void);//分屏回调
+
+@property (nonatomic, strong) IsWhiteboardContainsSelfBlock _Nullable isWhiteboardContainsSelfBlock;
+
+@property (nonatomic, strong) ResizeVideoViewBlock _Nullable resizeVideoViewBlock;
+    
+@property (nonatomic, strong) OnRemoteMsgResizeVideoViewBlock _Nullable onRemoteMsgResizeVideoViewBlock;
+
+// 记录初始窗口大小
+@property (nonatomic, assign) CGFloat originalWidth;
+@property (nonatomic, assign) CGFloat originalHeight;
+@property (nonatomic, assign) CGFloat currentWidth;
+@property (nonatomic, assign) CGFloat currentHeight;
+
 
 -(void)changeName:(NSString *_Nullable)aName;
 -(void)hideFunctionView;
@@ -76,5 +98,13 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 -(void)addVideoView:(UIView*_Nullable)view;
 -(void)changeAudioDisabledState;
 -(void)changeVideoDisabledState;
+-(void)changeVideoDisabledState2;
 - (void)endInBackGround:(BOOL)isInBackground;
+
+/**
+ 缩放视频窗口
+
+ @param scale 缩放比例
+ */
+- (void)changeVideoSize:(CGFloat)scale;
 @end

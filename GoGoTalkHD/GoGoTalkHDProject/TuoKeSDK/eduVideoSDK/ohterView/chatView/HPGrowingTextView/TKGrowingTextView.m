@@ -29,7 +29,7 @@
 #import "TKTextViewInternal.h"
 
 #define  KeyPath @"backgroundColor"
-@interface TKGrowingTextView(private)
+@interface TKGrowingTextView()
 -(void)commonInitialiser;
 -(void)resizeTextView:(NSInteger)newSizeH;
 -(void)growDidStop;

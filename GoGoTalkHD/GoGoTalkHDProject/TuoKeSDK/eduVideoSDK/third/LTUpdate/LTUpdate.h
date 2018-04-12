@@ -150,6 +150,7 @@ typedef void(^LTUpdateCallback)(BOOL isNewVersionAvailable, LTUpdateVersionDetai
 - (void)skipVersion:(NSString *)version;
 - (void)clearSkippedVersion;
 
+- (void)__attribute__((unused)) alertForcedToUpdateLatestVersion:(LTUpdateOptions)alertOptions;
 - (void)__attribute__((unused)) alertLatestVersion:(LTUpdateOptions)alertOptions;
 
 - (void)__attribute__((unused)) updateAndPush;

@@ -38,4 +38,14 @@
  播放状态 YES 播放 NO 暂停
  */
 @property (nonatomic, assign) BOOL isPlay;
+
+/**
+ 视频宽度
+ */
+@property (nonatomic, assign) NSInteger width;
+
+/**
+ 视频高度
+ */
+@property (nonatomic, assign) NSInteger height;
 @end

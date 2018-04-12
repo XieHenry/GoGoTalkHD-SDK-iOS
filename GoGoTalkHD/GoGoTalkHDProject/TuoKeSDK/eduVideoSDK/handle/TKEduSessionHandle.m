@@ -20,7 +20,8 @@
 #import "sys/utsname.h"
 #import "TKAreaChooseModel.h"
 
-@import AVFoundation;
+//@import AVFoundation;
+#import <AVFoundation/AVFoundation.h>
 @interface RoomManager(test)
 - (void)setTestServer:(NSString*)ip Port:(NSString*)port;
 @end
@@ -43,19 +44,39 @@
 @end
 
 @implementation TKEduSessionHandle
-
+static TKEduSessionHandle *singleton = nil;
 +(instancetype )shareInstance{
     
-    static TKEduSessionHandle *singleton = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
-                  {
-                      singleton = [[TKEduSessionHandle alloc] init];
-                  });
-    
+    @synchronized(self)
+    {
+        if (!singleton) {
+            singleton = [[TKEduSessionHandle alloc] init];
+        }
+    }
     return singleton;
+    
+//    static TKEduSessionHandle *singleton = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^
+//                  {
+//                      singleton = [[TKEduSessionHandle alloc] init];
+//                  });
+//
+//    return singleton;
 }
-
++ (void)destory
+{
+    if (singleton) {
+        [RoomManager destory];
+        singleton = nil;
+    }
+}
+- (void)clear
+{
+    if (_roomMgr) {
+        [_roomMgr clear];
+    } 
+}
 -(void)initPlaybackRoomManager:(id<RoomWhiteBoard>)aRoomWhiteBoardDelegate {
     _roomMgr = [[RoomManager instance] configurePlaybackWithDelegate:self AndWB:aRoomWhiteBoardDelegate];
 }
@@ -82,12 +103,15 @@
     aBoardDelegate ?[self initClassRoomManager:self] : [self initClassRoomManager];
 
 #endif
+    
     _iBoardHandle                = [[TKEduBoardHandle alloc]init];
+    _iVideoBoardHandle           = [[TKVideoBoardHandle alloc]init];
     _iMessageList                = [[NSMutableArray alloc] init];
     _iUserList                   = [[NSMutableArray alloc] init];
     _iUserStdAndTchrList         = [[NSMutableArray alloc] init];
     _iSpecialUserDic             = [[NSMutableDictionary alloc]initWithCapacity:10];
     _iUserPlayAudioArray         = [[NSMutableSet alloc] init];
+    _msgList                     = [NSMutableArray array];
     _iRoomProperties             = aRoomProperties;
     _iPendingButtonDic = [[NSMutableDictionary alloc]initWithCapacity:10];
     _iPublishDic = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -122,10 +146,10 @@
 }
 
 - (void)configurePlaybackSession:(NSDictionary*)paramDic
-           aRoomDelegate:(id<TKEduRoomDelegate>) aRoomDelegate
-        aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
-          aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
-         aRoomProperties:(TKEduRoomProperty*)aRoomProperties
+                   aRoomDelegate:(id<TKEduRoomDelegate>) aRoomDelegate
+                aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
+                  aBoardDelegate:(id<TKEduBoardDelegate>)aBoardDelegate
+                 aRoomProperties:(TKEduRoomProperty*)aRoomProperties
 {
     
 #if TARGET_OS_IPHONE
@@ -138,11 +162,13 @@
     [self initPlaybackRoomManager:self];
 #endif
     _iBoardHandle                = [[TKEduBoardHandle alloc]init];
+    _iVideoBoardHandle           = [[TKVideoBoardHandle alloc]init];
     _iMessageList                = [[NSMutableArray alloc] init];
     _iUserList                   = [[NSMutableArray alloc] init];
     _iUserStdAndTchrList         = [[NSMutableArray alloc] init];
     _iSpecialUserDic             = [[NSMutableDictionary alloc]initWithCapacity:10];
     _iUserPlayAudioArray         = [[NSMutableSet alloc] init];
+    _msgList                     = [NSMutableArray array];
     _iRoomProperties             = aRoomProperties;
     _iPendingButtonDic = [[NSMutableDictionary alloc]initWithCapacity:10];
     _iPublishDic = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -296,6 +322,10 @@
 
 - (void)sessionHandlePubMsg:(NSString *)msgName ID:(NSString *)msgID To:(NSString *)toID Data:(NSObject *)data Save:(BOOL)save AssociatedMsgID:(NSString *)associatedMsgID AssociatedUserID:(NSString *)associatedUserID
                     expires:(NSTimeInterval)expires completion:(void (^)(NSError *))block {
+    
+    if(associatedMsgID == nil && ( ![msgName isEqualToString:sClassBegin] && ![msgName isEqualToString:sUpdateTime] && ![msgName isEqualToString:sDocumentChange] && ![msgName isEqualToString:sShowPage] && ![msgName isEqualToString:sSharpsChange] && ![msgName isEqualToString:sWBPageCount]) ){
+        associatedMsgID = sClassBegin;
+    }
     return [_roomMgr pubMsg:msgName ID:msgID To:toID Data:data Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:expires completion:block];
 }
 
@@ -369,7 +399,6 @@
 #pragma mark room manager delegate
 //1自己进入课堂
 - (void)roomManagerRoomJoined:(NSError *)error {
-    
     if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerRoomJoined:)]) {
         [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerRoomJoined:error];
         
@@ -394,11 +423,11 @@
      TKLog(@"jin roomManagerRoomLeft");
 }
 // 被踢
-- (void)roomManagerSelfEvicted{
+- (void)roomManagerSelfEvicted:(NSDictionary *)reason{
     //classbegin
-    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerSelfEvicted)]) {
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerSelfEvicted:)]) {
        
-        [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerSelfEvicted];
+        [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerSelfEvicted:reason];
         
     }
     if (_iRoomDelegate && [_iRoomDelegate respondsToSelector:@selector(onKitout:)]) {
@@ -433,6 +462,7 @@
         [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerUserJoined:user InList:inList];
         
     }
+ 
      TKLog(@"jin roomManagerUserJoined");
 }
 
@@ -443,6 +473,7 @@
         [(id<TKEduSessionDelegate>)_iSessionDelegate sessionManagerUserLeft:user];
         
     }
+   
      TKLog(@"jin roomManagerUserLeft");
 }
 //7用户信息变化
@@ -486,6 +517,8 @@
 }
 //10白板等相关信令
 - (void)roomManagerOnRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(unsigned long)ts Data:(NSObject*)data InList:(BOOL)inlist{
+    
+   
     //classbegin
     if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerOnRemoteMsg:ID:Name:TS:Data:InList:)]) {
         [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerOnRemoteMsg:add ID:msgID Name:msgName TS:ts Data:data InList:inlist];
@@ -554,7 +587,12 @@
         [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerUpdateMediaStream:mediaStream pos:pos isPlay:isPlay];
     }
 }
-
+- (void)roomManagerMediaLoaded
+{
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerMediaLoaded)]) {
+        [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerMediaLoaded];
+    }
+}
 #pragma mark screen
 - (void)roomManagerScreenPublished:(RoomUser *)user {
     if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerScreenPublish:)]) {
@@ -565,6 +603,17 @@
 - (void)roomManagerScreenUnPublished:(RoomUser *)user {
     if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerScreenUnPublish:)]) {
         [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerScreenUnPublish:user];
+    }
+}
+#pragma mark file
+- (void)roomManagerFilePublished:(RoomUser *)user{
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerFilePublish:)]) {
+        [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerFilePublish:user];
+    }
+}
+- (void)roomManagerFileUnPublished:(RoomUser *)user {
+    if (_iSessionDelegate && [_iSessionDelegate respondsToSelector:@selector(sessionManagerFileUnPublish:)]) {
+        [(id<TKEduSessionDelegate>) _iSessionDelegate sessionManagerFileUnPublish:user];
     }
 }
 
@@ -597,8 +646,8 @@
 #pragma mark roomWhiteBoard Delegate
 
 - (void)onRoomConnectedUserlist:(NSArray *)userList MsgList:(NSArray*)msgList Myself:(RoomUser *)myself roomProperties:(NSDictionary *)roomProperties{
+    [_iBoardHandle changeWBUrlAndPort];
     
-
     [self documentChange:msgList];
     
     NSMutableDictionary *tDict = [NSMutableDictionary dictionary];
@@ -649,6 +698,7 @@
     [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
         NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
     }];
+  
 }
 - (void)documentChange:(NSArray *)list{
 //    注释代码为之前内容
@@ -704,7 +754,6 @@
         
     }
     
-    
     if (_iBoardDelegate && [_iBoardDelegate respondsToSelector:@selector(boardOnRemoteMsgList:)]) {
         [_iBoardDelegate boardOnRemoteMsgList:list];
         
@@ -751,7 +800,9 @@
 }
 
 - (void)onRoomParticipantLeave:(RoomUser *)user{
-    
+    if (!user || !user.peerID) {
+        return;
+    }
     //2017-11-10 room-participant_leave:{type:'room-participant_leave' ,userid:userid }
     NSDictionary *tDict = @{@"type":@"room-participant_leave",
                             @"userid":user.peerID
@@ -803,38 +854,56 @@
             if ([tDocmentDocModel.dynamicppt integerValue]==1) {
                 continue;
             }
-            if (i == 1 || i==0 || [[NSString stringWithFormat:@"%@",tDocmentDocModel.type] isEqualToString:@"1"]) {
+            if (i==1 || i==0 || [[NSString stringWithFormat:@"%@",tDocmentDocModel.type] isEqualToString:@"1"]) {
                 _iDefaultDocment = tDocmentDocModel;
                 _iCurrentDocmentModel= _iDefaultDocment;
             }
-            
             i++;
         }
-        
     }
     
     // 文档排序
     [_iDocmentMutableArray sortUsingComparator:^NSComparisonResult(TKDocmentDocModel *  _Nonnull obj1, TKDocmentDocModel *  _Nonnull obj2) {
         
-        if (obj1.fileid.intValue > obj2.fileid.intValue) {
+        if (obj1.fileid.integerValue > obj2.fileid.integerValue) {
             return (NSComparisonResult)NSOrderedDescending;
         }
         
-        if (obj1.fileid.intValue < obj2.fileid.intValue) {
+        if (obj1.fileid.integerValue < obj2.fileid.integerValue) {
             return (NSComparisonResult)NSOrderedAscending;
         }
         
         return (NSComparisonResult)NSOrderedSame;
     }];
     
+    //设置默认文档
+    /*先看是否有后台关联或接口设置过的默认文档，如果有，显示如果没有，显示课堂文件夹里第一个上传的课件，如果再没有，显示系统文件夹里第一个上传的课件；都没有，则选择白板*/
+//    TKDocmentDocModel*defaultModel = nil;
+//    for (TKDocmentDocModel *model in self.docmentArray) {
+//        if ([model.type intValue]) {
+//            defaultModel = model;
+//        }
+//    }
+//    if (!defaultModel && self.classDocmentArray.count>0) {
+//        defaultModel = self.classDocmentArray.firstObject;
+//    }
+//    if (!defaultModel && self.systemDocmentArray.count>0) {
+//        defaultModel = self.systemDocmentArray.firstObject;
+//    }
+//    if (!defaultModel) {
+//        defaultModel = self.docmentArray.firstObject;
+//    }
+//    _iDefaultDocment = defaultModel;
+//    _iCurrentDocmentModel= _iDefaultDocment;
+    
     // 媒体排序
     [_iMediaMutableArray sortUsingComparator:^NSComparisonResult(TKMediaDocModel *  _Nonnull obj1, TKMediaDocModel *  _Nonnull obj2) {
         
-        if (obj1.fileid.intValue > obj2.fileid.intValue) {
+        if (obj1.fileid.integerValue > obj2.fileid.integerValue) {
             return (NSComparisonResult)NSOrderedDescending;
         }
         
-        if (obj1.fileid.intValue < obj2.fileid.intValue) {
+        if (obj1.fileid.integerValue < obj2.fileid.integerValue) {
             return (NSComparisonResult)NSOrderedAscending;
         }
         
@@ -853,7 +922,8 @@
 
 
 //YES ，代表白板处理 不传给会议；  NO ，代表白板不处理，传给会议
-- (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist fromID:(NSString *)fromId{
+- (BOOL)onRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(long)ts Data:(NSObject*)data InList:(BOOL)inlist fromID:(NSString *)fromId AssociatedMsgID:(NSString *)associatedMsgID{
+    
     TKLog(@"jin onRemoteMsg %@",msgName);
     BOOL tIsWhiteBoardDealWith = false;
     NSDictionary *tDataDic = @{};
@@ -867,19 +937,20 @@
     if ([data isKindOfClass:[NSDictionary class]]) {
         tDataDic = (NSDictionary *)data;
     }
-
+    
+    
     if ([msgName isEqualToString:sDocumentChange])
     {
         
         
         BOOL tIsDelete = [[tDataDic objectForKey:@"isDel"]boolValue];
-        
+       
         if (tIsDelete && [tDataDic objectForKey:@"isDel"]) {
             bool tIsMedia = [[tDataDic objectForKey:@"isMedia"]boolValue];
             if (tIsMedia) {
 
                 TKMediaDocModel *tMediaDocModel = [self resolveMediaModelFromDic:tDataDic];
-                UserType role = self.localUser.role;
+                UserType role = (UserType)self.localUser.role;
                 BOOL isCurrntDM = [self isEqualFileId:tMediaDocModel aSecondModel:_iCurrentMediaDocModel];
             
                 //老师-当前文档
@@ -892,16 +963,19 @@
                 
 
                 TKDocmentDocModel *tDocmentDocModel = [self resolveDocumentModelFromDic:tDataDic];
-                UserType role = self.localUser.role;
+                UserType role = (UserType)self.localUser.role;
                
                 BOOL isCurrntDM = [self isEqualFileId:tDocmentDocModel aSecondModel:_iCurrentDocmentModel];
                 
-                //(学生|巡课)-当前文档-未上课，删除时显示白板
-                if ((role == UserType_Student||role == UserType_Patrol) && isCurrntDM &&!_isClassBegin) {
+                //(学生-当前文档-未上课，删除时显示白板
+                if ((role == UserType_Student) && isCurrntDM &&!_isClassBegin) {
+                    
                     [self docmentDefault:self.docmentArray.firstObject];
+                    
+                    
                 }
-                //老师-当前文档
-                if (role == UserType_Teacher && isCurrntDM) {
+                //老师，巡课-当前文档
+                if ((role == UserType_Teacher||role == UserType_Patrol)&& isCurrntDM) {
                     if (!_isClassBegin) {
                         [self docmentDefault:[self getNextDocment:tDocmentDocModel]];
                         if (self.isPlayMedia) {
@@ -932,10 +1006,13 @@
                 //先设置后删除
                 [self delDocmentArray:tDocmentDocModel];
             }
-            
+            //删除的通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:sDocListViewNotification object:nil userInfo:nil];
             
         }else{
             bool tIsMedia = [[tDataDic objectForKey:@"isMedia"]boolValue];
+            
+            NSDictionary *dict;
             if (tIsMedia) {
 
                 TKMediaDocModel *tMediaDocModel = [self resolveMediaModelFromDic:tDataDic];
@@ -947,6 +1024,11 @@
                 }
                 [self addOrReplaceMediaArray:tMediaDocModel];
                 
+                if (tMediaDocModel.filecategory) {
+                    dict = @{@"filecategory":tMediaDocModel.filecategory};
+                }else{
+                    dict = nil;
+                }
                 
             }else{
                 
@@ -958,10 +1040,21 @@
                     tDocmentDocModel.filetype = [tDocmentDocModel.filename pathExtension];
                 }
                 [self addOrReplaceDocmentArray:tDocmentDocModel];
+                
+                if (tDocmentDocModel.filecategory) {
+                    dict = @{@"filecategory":tDocmentDocModel.filecategory};
+                }else{
+                    dict = nil;
+                }
+//                if ([[NSString stringWithFormat:@"%@",tDocmentDocModel.type] isEqualToString:@"1"] && !_isClassBegin) {
+//                    _iDefaultDocment = tDocmentDocModel;
+//                    _iCurrentDocmentModel= _iDefaultDocment;
+//                }
             }
             
+            [[NSNotificationCenter defaultCenter]postNotificationName:sDocListViewNotification object:nil userInfo:dict];
+            
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:sDocListViewNotification object:nil];
     }
     
     
@@ -1026,22 +1119,58 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tDict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     
+    TKLog(@"room-pubmsg ===%@",jsonString);
+    
     NSString *jsReceivePhoneByTriggerEvent = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.dispatchEvent(%@)",jsonString];
-    [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
-        
-        NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
-    }];
-   
     
-    if (_iBoardDelegate && [_iBoardDelegate respondsToSelector:@selector(boardOnRemoteMsg:ID:Name:TS:Data:InList:)]) {
+    
+    if ([associatedMsgID isEqualToString:sVideoWhiteboard] || [msgName isEqualToString:sVideoWhiteboard]) {//视频标注
         
-        tIsWhiteBoardDealWith = [_iBoardDelegate boardOnRemoteMsg:add ID:msgID Name:msgName TS:ts Data:data InList:inlist];
+        [_iVideoBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+            
+            NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+        }];
         
+    }else{//文档标注
+        
+        [_iBoardHandle.iWebView evaluateJavaScript:jsReceivePhoneByTriggerEvent completionHandler:^(id _Nullable id, NSError * _Nullable error) {
+            
+            NSLog(@"----MOBILETKSDK.receiveInterface.dispatchEvent");
+        }];
+       
+        
+        
+        if (_iBoardDelegate && [_iBoardDelegate respondsToSelector:@selector(boardOnRemoteMsg:ID:Name:TS:Data:InList:)]) {
+            
+            tIsWhiteBoardDealWith = [_iBoardDelegate boardOnRemoteMsg:add ID:msgID Name:msgName TS:ts Data:data InList:inlist];
+            
+        }
     }
-    
     return tIsWhiteBoardDealWith;
 }
-
+- (void)onRemoteMsgList:(BOOL)add Params:(id)params{
+    NSDictionary *tDataDic = @{};
+    
+    //TKLog(@"-----%@", [NSString stringWithFormat:@"msgName:%@,msgID:%@",msgName,msgID]);
+    if ([params isKindOfClass:[NSString class]]) {
+        NSString *tDataString = [NSString stringWithFormat:@"%@",params];
+        NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+        tDataDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+    }
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        tDataDic = (NSDictionary *)params;
+    }
+    NSString *videoID = tDataDic[@"id"];
+    NSString *associatedMsgID = tDataDic[@"associatedMsgID"];
+    
+    
+    //根据associatedMsgID过滤msgList数据   ----VideoWhiteboard
+        if ([videoID isEqualToString:sVideoWhiteboard] || [associatedMsgID isEqualToString:sVideoWhiteboard]) {
+    
+            [_msgList addObject:tDataDic];
+        }
+    
+}
 - (TKDocmentDocModel *)resolveDocumentModelFromDic:(NSDictionary *)dic {
     
     /*
@@ -1308,6 +1437,38 @@
     return [_iDocmentMutableArray copy];
     
 }
+- (NSArray *)whiteBoardArray{
+    
+    NSMutableArray *array = [NSMutableArray array];
+    if (_iDocmentMutableArray.count>0) {
+        [array addObject:_iDocmentMutableArray.firstObject];
+    }
+    return array;
+}
+- (NSArray *)classDocmentArray{
+    
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableArray *docArray = [NSMutableArray arrayWithArray:_iDocmentMutableArray];
+    [docArray removeObjectAtIndex:0];
+    for (TKDocmentDocModel *model in docArray) {
+        if (![model.filecategory intValue]) {
+            [array addObject:model];
+        }
+    }
+    return array;
+}
+- (NSArray *)systemDocmentArray{
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableArray *docArray = [NSMutableArray arrayWithArray:_iDocmentMutableArray];
+    [docArray removeObjectAtIndex:0];
+    for (TKDocmentDocModel *model in docArray) {
+        if ([model.filecategory intValue]) {
+            [array addObject:model];
+        }
+    }
+    return array;
+}
+
 - (bool )addOrReplaceDocmentArray:(TKDocmentDocModel *)aDocmentDocModel {
    
     if (!aDocmentDocModel) {
@@ -1495,6 +1656,25 @@
     
     return [_iMediaMutableArray copy];
     
+}
+
+- (NSArray *)classMediaArray{
+    NSMutableArray *array = [NSMutableArray array];
+    for (TKMediaDocModel *model in _iMediaMutableArray) {
+        if (![model.filecategory intValue]) {
+            [array addObject:model];
+        }
+    }
+    return array;
+}
+- (NSArray *)systemMediaArray{
+    NSMutableArray *array = [NSMutableArray array];
+    for (TKMediaDocModel *model in _iMediaMutableArray) {
+        if ([model.filecategory intValue]) {
+            [array addObject:model];
+        }
+    }
+    return array;
 }
 - (void)addOrReplaceMediaArray:(TKMediaDocModel *)aMediaDocModel {
     if (!aMediaDocModel) {
@@ -1837,7 +2017,6 @@
 
 -(void)publishVideoDragWithDic:(NSDictionary * )aVideoDic To:(NSString *)to {
     
-    TKLog(@"---lyy  publishVideoDragWithDic %@,%@",aVideoDic,to);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:aVideoDic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //[self sessionHandlePubMsg:sVideoDraghandle ID:sVideoDraghandle To:to Data:jsonString Save:true completion:nil];
@@ -1857,8 +2036,11 @@
     //[self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true completion:nil];
     
     to = sTellAll;//自己调用sShowPage全部更改成发给所有人
-    
-    [self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
+    //发布文档（上课）
+    if ([TKEduSessionHandle shareInstance].isClassBegin) {
+        
+        [self sessionHandlePubMsg:sShowPage ID:sDocumentFilePage_ShowPage To:to Data:jsonString Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
+    }
 }
 #pragma mark 删除文档
 
@@ -1990,7 +2172,8 @@
                                    @"filedata":@{
                                            @"fileid"   :@(0),
                                            @"filename" :MTLocalized(@"Title.whiteBoard"),
-                                           @"filetype" :MTLocalized(@"Title.whiteBoard"),
+//                                           @"filetype" :MTLocalized(@"Title.whiteBoard"),
+                                           @"filetype" :@"whiteboard",
                                            @"currpage" :@(1),
                                            @"pagenum"  :@(1),
                                            @"pptslide" :@(1),
@@ -2262,12 +2445,25 @@
     
 }
 -(void)configureHUD:(NSString *)aString  aIsShow:(BOOL)aIsShow{
+    if ([NSThread isMainThread]) {
+        [self showHudOnMainThreadWithString:aString show:aIsShow];
+    } else
+    {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self showHudOnMainThreadWithString:aString show:aIsShow];
+        });
+    }
+}
+// 需要在UI线程 显示 todo
+-(void)showHudOnMainThreadWithString:(NSString *)aString show:(BOOL)aIsShow
+{
     if (aIsShow) {
         if (!_HUD) {
             _HUD = [[TKProgressHUD alloc] initWithView:[UIApplication sharedApplication].keyWindow];
             [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
             _HUD.dimBackground = YES;
             _HUD.removeFromSuperViewOnHide = YES;
+            _HUD.layer.zPosition = INT8_MAX;
         }
         if ([aString length] > 0) {
             _HUD.labelText          = aString;
@@ -2278,6 +2474,7 @@
         [_HUD hide:YES];
         _HUD = nil;
     }
+    
 }
 
 #pragma mark screen
@@ -2288,6 +2485,15 @@
 
 -(void)sessionHandleUnPlayScreen:(NSString *)peerId completion:(void (^)(NSError *error))block {
     [_roomMgr unPlayScreen:peerId completion:block];
+}
+
+#pragma mark file
+-(void)sessionHandlePlayFile:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+{
+    [_roomMgr playFile:peerId completion:block];
+}
+-(void)sessionHandleUnPlayFile:(NSString *)peerId completion:(void (^)(NSError *error))block{
+    [_roomMgr unPlayFile:peerId completion:block];
 }
 
 #pragma mark - 回放
@@ -2312,7 +2518,8 @@
     }];
 }
 - (void)seekPlayback:(NSTimeInterval)positionTime {
-    NSLog(@"TK------------seek!");
+    TKLog(@"TK------------seek!");
+    [self sessionHandleDelMsg:sVideoWhiteboard ID:sVideoWhiteboard To:sTellAll Data:@{} completion:nil];
     [_roomMgr seekPlayback:positionTime];
 }
 #pragma mark - 设置权限

@@ -12,6 +12,7 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <Security/Security.h>
 #import "TKRCGlobalConfig.h"
+#import "TKPromptMessage.h"
 #define EMMIOSVER ([[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue])
 
 #ifndef GETDICVALUE
@@ -29,10 +30,11 @@
 //};
 
 
-
-
-
 @interface TKUtil : NSObject
+
++ (instancetype)shareInstance;
+//播放礼物动画的音频
+- (void)playVoiceWithFileURL:(NSString *)fileUrl;
 + (NSString*)fullPath:(NSString*)shortPath;
 
 + (NSString*)GetDicString:(NSDictionary*)dic Key:(NSString*)key;
@@ -71,6 +73,7 @@
 + (BOOL)validateNumber:(NSString*)number;
 #pragma mark globle
 + (void)showMessage:(NSString *)message ;
++ (void)showClassEndMessage:(NSString *)message;
 #pragma mark 几位数
 +(NSInteger)numberBit:(NSInteger)aNumber;
 #pragma mark 判断当前语言
@@ -86,5 +89,45 @@
 +(bool)deviceisConform;
 #pragma mark 是否是域名
 +(BOOL)isDomain:(NSString *)host;
++(NSString*)optString:(NSDictionary*)dic Key:(NSObject*)key;
+#pragma mark 根据控件高度动态设置字体大小
++(int)getCurrentFontSize:(CGSize)size withString:(NSString *)string;
+/**
+ 获取版本号
+
+ @return 版本号
+ */
++(NSString *)getTKVersion;
+
+/**
+ 判断是否全是空格
+
+ @param str 字符串
+ @return 是否是空格
+ */
++ (BOOL)isEmpty:(NSString *)str;
+
+/**
+ 获取年月日时分秒
+
+ @return 返回时间
+ */
++(NSString *)getCurrentDateTime;
+
+/**
+ 获取当前时间
+
+ @return YYYY-MM-dd HH:mm:ss
+ */
++(NSString*)getCurrentTimes;
+
+/**
+ 获取当前时间戳
+
+ @return 时间戳
+ */
++(NSTimeInterval)getNowTimeTimestamp;
+
++ (id) processDictionaryIsNSNull:(id)obj;
 @end
 

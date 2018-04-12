@@ -17,6 +17,7 @@
 
 @interface TKDocumentListView : UIView<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,weak)RoomController*  delegate;
+@property (nonatomic, assign) BOOL isShow;
 -(instancetype)initWithFrame:(CGRect)frame;
 
 -(void)show:(FileListType)aFileListType aFileList:(NSArray *)aFileList isClassBegin:(BOOL)isClassBegin;

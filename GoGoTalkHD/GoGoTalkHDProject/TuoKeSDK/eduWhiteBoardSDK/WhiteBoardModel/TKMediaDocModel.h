@@ -70,4 +70,9 @@
 @property (nonatomic, strong) NSNumber* isPlay;//BOOl
 @property (nonatomic, strong) NSNumber* duration;//BOOl
 
+/**
+ 区分文件类型 0：课堂  1：系统
+ */
+@property (nonatomic, strong) NSString *filecategory;
+
 @end

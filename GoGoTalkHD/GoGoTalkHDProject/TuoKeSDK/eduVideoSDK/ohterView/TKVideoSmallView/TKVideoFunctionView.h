@@ -26,7 +26,7 @@
 @property (nonatomic, assign) BOOL isSplitScreen;//分屏标识
 @property (nonatomic,weak)id<VideolistProtocol>iDelegate;
 @property (nonatomic,strong)RoomUser *iRoomUer;
--(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer;
+-(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer isSplit:(BOOL)isSplit;
 
 
 @end

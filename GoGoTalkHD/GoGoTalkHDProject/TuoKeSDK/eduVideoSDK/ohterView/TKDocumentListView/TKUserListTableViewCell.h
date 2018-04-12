@@ -17,7 +17,6 @@
 -(void)listButton3:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath;
 -(void)listButton4:(UIButton *)aButton aIndexPath:(NSIndexPath*)aIndexPath;
 
-
 @end
 
 @interface TKUserListTableViewCell : UITableViewCell
@@ -38,6 +37,7 @@
 @property (strong, nonatomic) RoomUser *iRoomUserModel;
 @property (strong, nonatomic) NSIndexPath *iIndexPath;
 
+@property (nonatomic, assign) BOOL hiddenDeleteBtn;
 
 -(void)configaration:(id)aModel withFileListType:(FileListType)aFileListType isClassBegin:(BOOL)isClassBegin;
 

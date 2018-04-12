@@ -302,8 +302,11 @@ static const CGFloat sPromButtonHeigh = 34;
     [TKUtil setWidth:_iPromptView To:sPromButtonWidth*tIsNeedPrompButton+3*sTimeWithViewCap+CGRectGetWidth(_iPromptLabel.frame)];
     [TKUtil setCornerForView:_iPromptView];
     
-
-    !_iPromptViewButton ?:[_iPromptViewButton removeFromSuperview];
+    if (_iPromptViewButton) {
+        [_iPromptViewButton removeFromSuperview];
+    }
+    //适配飞博
+    //!_iPromptViewButton ?:[_iPromptViewButton removeFromSuperview];
   
     if (!aPromptTime) {
         return;

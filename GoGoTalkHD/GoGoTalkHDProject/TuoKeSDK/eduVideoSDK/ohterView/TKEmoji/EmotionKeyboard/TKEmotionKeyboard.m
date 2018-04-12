@@ -8,14 +8,14 @@
 
 #import "TKEmojiHeader.h"
 #import "TKEmotionKeyboard.h"
-#import "HMEmotionListView.h"
+#import "TKEmotionListView.h"
 #import "TKEmotionToolbar.h"
 #import "TKEmotionTool.h"
 #import "UIView+Extension.h"
 
 @interface TKEmotionKeyboard() <HMEmotionToolbarDelegate>
 /** 表情列表 */
-@property (nonatomic, weak) HMEmotionListView *listView;
+@property (nonatomic, weak) TKEmotionListView *listView;
 /** 表情工具条 */
 @property (nonatomic, weak) TKEmotionToolbar *toollbar;
 @end
@@ -34,7 +34,7 @@
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"TKEmoji.bundle/emoticon_keyboard_background"]];
         
         // 1.添加表情列表
-        HMEmotionListView *listView = [[HMEmotionListView alloc] init];
+        TKEmotionListView *listView = [[TKEmotionListView alloc] init];
         [self addSubview:listView];
         self.listView = listView;
         

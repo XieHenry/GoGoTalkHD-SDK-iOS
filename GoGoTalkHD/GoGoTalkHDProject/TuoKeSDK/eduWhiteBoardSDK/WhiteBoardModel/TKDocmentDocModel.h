@@ -65,6 +65,11 @@
 @property (nonatomic, strong) NSNumber* steptotal;//总的
 @property (nonatomic, strong) NSNumber *isShow;//是否查看
 @property (nonatomic, strong) NSNumber* duration;//BOOl
+
+/**
+ 区分文件类型 0：课堂  1：系统
+ */
+@property (nonatomic, strong) NSString *filecategory;
 -(void)dynamicpptUpdate;
 - (void)resetToDefault;
 @end

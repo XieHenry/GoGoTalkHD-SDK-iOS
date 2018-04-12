@@ -14,12 +14,29 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #import <objc/runtime.h>
-
+#import <AVFoundation/AVFoundation.h>
 #define kChosenDigestLength		CC_SHA1_DIGEST_LENGTH
 
 #define DESKEY @"Gd0^9f@KoAQOXFPZQ^H&fURo"
 
+static TKUtil *instace;
+@interface TKUtil()
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+
+@end
 @implementation TKUtil
++ (instancetype)shareInstance
+{
+    @synchronized(self)
+    {
+        if (!instace) {
+           instace = [[TKUtil alloc] init];
+        }
+    }
+    return instace;
+}
 
 /*
  
@@ -355,6 +372,11 @@
     int count = (int)array.count;
     [TKRCGlobalConfig HUDShowMessage:message addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
 }
++ (void)showClassEndMessage:(NSString *)message {
+    NSArray *array = [UIApplication sharedApplication].windows;
+    int count = (int)array.count;
+    [TKPromptMessage HUDShowMessage:message addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:4];
+}
 +(NSInteger)numberBit:(NSInteger)aNumber{
     int sum=0;
 
@@ -493,4 +515,200 @@
         return NO;
     }
 }
++(NSString *)getTKVersion {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
++ (BOOL)isEmpty:(NSString *)str {
+    
+    if (!str) {
+        
+        return true;
+        
+    } else {
+        
+        NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        
+        NSString *trimedString = [str stringByTrimmingCharactersInSet:set];
+        
+        if ([trimedString length] == 0) {
+            
+            return true;
+            
+        } else {
+            
+            return false;
+            
+        }
+        
+    }
+    
+}
+
++(NSString*)optString:(NSDictionary*)dic Key:(NSObject*)key
+{
+    id value = [dic objectForKey:key];
+    if (value)
+    {
+        if ([value isKindOfClass:[NSString class]])
+            return value;
+        else
+            return [NSString stringWithFormat:@"%@", value];
+    }
+    
+    return nil;
+}
+
++(int)getCurrentFontSize:(CGSize)size  withString:(NSString *)string{
+    CGSize maxSize=size;
+    int currentFontSize=12;
+    NSString *str=string;
+    CGSize requiredSize = [str boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:currentFontSize]} context:nil].size;
+    if(requiredSize.height<=maxSize.height)
+    {
+        while (requiredSize.height<=maxSize.height&&requiredSize.width<maxSize.width) {
+            currentFontSize++;
+            requiredSize=[str boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:currentFontSize]} context:nil].size;
+        }
+    }else
+    {
+        while (requiredSize.height>maxSize.height||requiredSize.width>maxSize.width) {
+            currentFontSize--;
+            requiredSize=[str boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:currentFontSize]} context:nil].size;
+        }
+        requiredSize=[str boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:currentFontSize]} context:nil].size;
+    }
+    return currentFontSize;
+}
+- (void)playVoiceWithFileURL:(NSString *)fileUrl
+{
+    if (!_player) {
+        [self createPlayerWithURL:fileUrl];
+    } else
+    {
+        [self deletePlayer];
+        [self createPlayerWithURL:fileUrl];
+    }
+}
+
+- (void)createPlayerWithURL:(NSString *)url
+{
+    NSURL *sourceMovieUrl = [NSURL fileURLWithPath:url];
+    AVAsset *movieAsset = [AVURLAsset URLAssetWithURL:sourceMovieUrl options:nil];
+    _playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+    _player = [AVPlayer playerWithPlayerItem:_playerItem];
+    //    _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+    //    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    [_player setVolume:1];
+    [_player play];
+    
+    
+}
+
+- (void)deletePlayer
+{
+    if (_player) {
+        if (_player.status == AVPlayerStatusReadyToPlay) {
+            [_player pause];
+        }
+        _player = nil;
+        _playerItem = nil;
+    }
+}
+- (void)dealloc
+{
+    [self deletePlayer];
+}
++(NSString *)getCurrentDateTime{
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    
+    int year =(int) [dateComponent year];
+    int month = (int) [dateComponent month];
+    int day = (int) [dateComponent day];
+    int hour = (int) [dateComponent hour];
+    int minute = (int) [dateComponent minute];
+    int second = (int) [dateComponent second];
+    
+    //字符串的转化并且拼接
+    NSString *yearstr=[NSString stringWithFormat:@"%ld-",(long)year];
+    NSString *monthstr=[NSString stringWithFormat:@"%ld-",(long)month];
+    NSString *daystr=[NSString stringWithFormat:@"%ld_",(long)day];
+    NSString *hourstr=[NSString stringWithFormat:@"%ld_",(long)hour];
+    NSString *minutestr=[NSString stringWithFormat:@"%ld_",(long)minute];
+    NSString *secondstr=[NSString stringWithFormat:@"%ld",(long)second];
+    //字符串开始拼接
+    NSString *allstr=[yearstr stringByAppendingString:monthstr];
+    NSString *allstr1=[allstr stringByAppendingString:daystr];
+    NSString *allstr2=[allstr1 stringByAppendingString:hourstr];
+    NSString *allstr3=[allstr2 stringByAppendingString:minutestr];
+    NSString *DateTime=[allstr3 stringByAppendingString:secondstr];
+    return DateTime;
+}
+
++(NSString*)getCurrentTimes{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    //现在时间,你可以输出来看下是什么格式
+    
+    NSDate *datenow = [NSDate date];
+    
+    //----------将nsdate按formatter格式转成nsstring
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    
+    return currentTimeString;
+    
+}
++(NSTimeInterval)getNowTimeTimestamp{
+    
+    
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    
+    
+    return [datenow timeIntervalSince1970];
+    
+}
++ (id) processDictionaryIsNSNull:(id)obj{
+    const NSString *blank = @"";
+    
+    if ([obj isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *dt = [(NSMutableDictionary*)obj mutableCopy];
+        for(NSString *key in [dt allKeys]) {
+            id object = [dt objectForKey:key];
+            if([object isKindOfClass:[NSNull class]]) {
+                [dt setObject:blank
+                       forKey:key];
+            }
+            else if ([object isKindOfClass:[NSString class]]){
+                NSString *strobj = (NSString*)object;
+                if ([strobj isEqualToString:@"<null>"]) {
+                    [dt setObject:blank
+                           forKey:key];
+                }
+            }
+            else if ([object isKindOfClass:[NSArray class]]){
+                NSArray *da = (NSArray*)object;
+                da = [self processDictionaryIsNSNull:da];
+                [dt setObject:da
+                       forKey:key];
+            }
+            else if ([object isKindOfClass:[NSDictionary class]]){
+                NSDictionary *ddc = (NSDictionary*)object;
+                ddc = [self processDictionaryIsNSNull:object];
+                [dt setObject:ddc forKey:key];
+            }
+        }
+        return [dt copy];
+    }else{
+        return nil;
+    }
+}
+
 @end

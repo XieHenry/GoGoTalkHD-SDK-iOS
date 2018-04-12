@@ -11,10 +11,12 @@
 #import "TKEduNetManager.h"
 #import "TKEduRoomProperty.h"
 #import "RoomController.h"
+#import "ClassRoomController.h"
 #import "TKProgressHUD.h"
 #import "TKMacro.h"
 #import "TKUtil.h"
-
+// change openurl
+#import "TKOpenUrlViewController.h"
 typedef NS_ENUM(NSInteger, EClassStatus) {
     EClassStatus_IDLE = 0,
     EClassStatus_CHECKING,
@@ -42,14 +44,19 @@ TKNavigationController* _iEduNavigationController = nil;
 @interface TKEduClassRoom ()
 
 @property (atomic) EClassStatus iStatus;
-@property (nonatomic, strong) UIViewController *iController;
+@property (nonatomic, weak ) UIViewController *iController;
 @property (nonatomic, strong) RoomController *iRoomController;
+@property (nonatomic, strong) ClassRoomController *iClassRoomController;//更改布局后的页面
 @property (nonatomic, weak) id<TKEduRoomDelegate> iRoomDelegate;
 @property (nonatomic, strong) TKEduRoomProperty * iRoomProperty;
 @property (nonatomic, strong) NSDictionary * iParam;
 @property (nonatomic, assign) BOOL  isFromWeb;
 @property (nonatomic, strong) TKProgressHUD *HUD;
 @property (nonatomic, readwrite) BOOL enterClassRoomAgain;
+// change openurl
+@property (nonatomic, readwrite) NSString* url;
+@property (nonatomic, strong) TKOpenUrlViewController* openUrlViewController;
+
 @end
 
 @implementation TKEduClassRoom
@@ -78,13 +85,20 @@ TKNavigationController* _iEduNavigationController = nil;
                                  Delegate:(id<TKEduRoomDelegate>)delegate
                                isFromWeb:(BOOL)isFromWeb {
     TKLog(@"tlm----- 进入房间之前的时间: %@", [TKUtil currentTimeToSeconds]);
+    
     if (_iStatus != EClassStatus_IDLE)
     {
-//        NSArray *array = [UIApplication sharedApplication].windows;
-//        int count = (int)array.count;
-//        [TKRCGlobalConfig HUDShowMessage:MTLocalized(@"Prompt.leaveRoom") addedToView:[array objectAtIndex:(count >= 2 ? (count - 2) : 0)] showTime:2];
-        self.enterClassRoomAgain = YES;
-        [_iRoomController prepareForLeave:YES];
+        // change openurl
+//        self.enterClassRoomAgain = YES;
+//        if ([_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+//
+//             [_iClassRoomController prepareForLeave:YES];
+//
+//        }else{
+//
+//            [_iRoomController prepareForLeave:YES];
+//
+//        }
         return -1;//正在开会
     }
     
@@ -95,13 +109,13 @@ TKNavigationController* _iEduNavigationController = nil;
     _isFromWeb = isFromWeb;
     _iRoomProperty = [[TKEduRoomProperty alloc]init];
     [_iRoomProperty parseMeetingInfo:paramDic];
-    _iRoomProperty.iRoomType = [[paramDic objectForKey:@"type"] integerValue];
+    _iRoomProperty.iRoomType = (RoomType)[[paramDic objectForKey:@"type"] integerValue];
     bool isConform = [TKUtil deviceisConform];
 //     isConform      = true;  // 注释掉开启低功耗模式
     if (!isConform) {
         _iRoomProperty.iMaxVideo = @(2);
     }else{
-         _iRoomProperty.iMaxVideo = @(6);
+        _iRoomProperty.iMaxVideo = @(6);
     }
 
     
@@ -117,16 +131,97 @@ TKNavigationController* _iEduNavigationController = nil;
         return -1;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //_iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
-        _enterClassRoomAgain = NO;
-        _iRoomController = [[RoomController alloc] initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
-        _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:_iRoomController];
-        [controller presentViewController:_iEduNavigationController animated:YES completion:^{
-            [_HUD hide:YES];
-        }];
+    [TKEduNetManager getRoomJsonWithPath:paramDic[@"path"] Complete:^int(id  _Nullable response) {
+      
+        if (response) {
+            _iStatus = EClassStatus_CONNECTING;
+            int ret = 0;
+            TKLog(@"tlm-----checkRoom 进入房间之前的时间: %@", [TKUtil currentTimeToSeconds]);
+            ret = [[response objectForKey:@"result"] intValue];
+            if (ret == 0) {
+                
+                NSDictionary *tRoom = [response objectForKey:@"room"];
+                if (tRoom) {
+                    //0 xiaoban 1daban
+                    _iRoomProperty.iRoomType = [tRoom objectForKey:@"roomtype"]?(RoomType)[[tRoom objectForKey:@"roomtype"]intValue]:RoomType_OneToOne;
+                    _iRoomProperty.iRoomId = [tRoom objectForKey:@"serial"]?[tRoom objectForKey:@"serial"]:@"";
+                    _iRoomProperty.iRoomName = [tRoom objectForKey:@"roomname"]?[tRoom objectForKey:@"roomname"]:@"";
+                    _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
+                    int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
+                    _iRoomProperty.iMaxVideo = @(tMaxVideo);
+                    bool isConform = [TKUtil deviceisConform];
+                    //                    isConform      = true;     // 注释掉开启低功耗模式
+                    if (!isConform) {
+                        _iRoomProperty.iMaxVideo = @(2);
+                    }
+                    
+                }
+                
+                //roomrole
+                UserType tUserRole = [response objectForKey:@"roomrole"]?(UserType)[[response objectForKey:@"roomrole"]intValue ]:UserType_Teacher;
+                _iRoomProperty.iUserType = tUserRole;
+                
+                //padlayout
+                NSString *tPadLayout = [NSString stringWithFormat:@"%@",[response objectForKey:@"padlayout"]];
+                
+                _iRoomProperty.iPadLayout = tPadLayout;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _enterClassRoomAgain = NO;
+                    
+                    UIViewController *viewController;
+                    
+                    if ([_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+                        //            _iClassRoomController = [[ClassRoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        
+                        _iClassRoomController = [[ClassRoomController alloc]initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        viewController = _iClassRoomController;
+                        
+                    }else{
+                        //            _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        _iRoomController = [[RoomController alloc]initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        viewController = _iRoomController;
+                    }
+                    
+                    _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:viewController];
+                    [controller presentViewController:_iEduNavigationController animated:YES completion:^{
+                        [_HUD hide:YES];
+                    }];
+                    
+                    
+                    
+                    
+                });
+            }
+        }
+        return 0;
+    } aNetError:^int(id  _Nullable response) {
         
-    });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _enterClassRoomAgain = NO;
+            
+            UIViewController *viewController;
+            
+            if ([_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+                //            _iClassRoomController = [[ClassRoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                
+                _iClassRoomController = [[ClassRoomController alloc]initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                viewController = _iClassRoomController;
+                
+            }else{
+                //            _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                _iRoomController = [[RoomController alloc]initPlaybackWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                viewController = _iRoomController;
+            }
+            
+            _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:viewController];
+            [controller presentViewController:_iEduNavigationController animated:YES completion:^{
+                [_HUD hide:YES];
+            }];
+            
+        });
+        return -1;
+    }];
     
     //默认返回0
     return  0;
@@ -170,8 +265,7 @@ TKNavigationController* _iEduNavigationController = nil;
         [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
         [_HUD hide:YES];
         return -1;
-    }
-    
+    } 
     [TKEduNetManager checkRoom:paramDic aDidComplete:^int(id  _Nullable response, NSString * _Nullable aPassWord) {
         __strong typeof(self)strongSelf = weekSelf;
         _iRoomProperty.sCmdPassWord = aPassWord;
@@ -186,7 +280,7 @@ TKNavigationController* _iEduNavigationController = nil;
                 NSDictionary *tRoom = [response objectForKey:@"room"];
                 if (tRoom) {
                     //0 xiaoban 1daban
-                    _iRoomProperty.iRoomType = [tRoom objectForKey:@"roomtype"]?[[tRoom objectForKey:@"roomtype"]intValue]:RoomType_OneToOne;
+                    _iRoomProperty.iRoomType = [tRoom objectForKey:@"roomtype"]?(RoomType)[[tRoom objectForKey:@"roomtype"]intValue]:RoomType_OneToOne;
                     _iRoomProperty.iRoomId = [tRoom objectForKey:@"serial"]?[tRoom objectForKey:@"serial"]:@"";
                     _iRoomProperty.iRoomName = [tRoom objectForKey:@"roomname"]?[tRoom objectForKey:@"roomname"]:@"";
                     _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
@@ -198,11 +292,30 @@ TKNavigationController* _iEduNavigationController = nil;
                         _iRoomProperty.iMaxVideo = @(2);
                     }
                     
+                    // 下载发奖杯 音频
+//                    NSString *url = [TKUtil optString:tRoom Key:@"voicefile"];
+//                    if (url && url.length > 0) {
+//                        NSString *voiceFileURL = [NSString stringWithFormat:@"http://%@:%@%@",[TKUtil optString:_iParam Key:@"host"], [TKUtil optString:_iParam Key:@"port"],url];
+//                        if (voiceFileURL && voiceFileURL.length > 0) {
+//                            [TKEduNetManager downLoadMp3File:voiceFileURL Complete:^int(id  _Nullable response) {
+//                                return 0;
+//                            } aNetError:^int(id  _Nullable response) {
+//                                return 0;
+//                            }];
+//                        }
+//                    }
+                    
                 }
                 
                 //roomrole
-                UserType tUserRole = [response objectForKey:@"roomrole"]?[[response objectForKey:@"roomrole"]intValue ]:UserType_Teacher;
+                UserType tUserRole = [response objectForKey:@"roomrole"]?(UserType)[[response objectForKey:@"roomrole"]intValue ]:UserType_Teacher;
                 _iRoomProperty.iUserType = tUserRole;
+                
+                //padlayout
+                NSString *tPadLayout = [NSString stringWithFormat:@"%@",[response objectForKey:@"padlayout"]];
+                
+                _iRoomProperty.iPadLayout = tPadLayout;
+//                _iRoomProperty.iPadLayout = SHARKTOP_COMPANY;
                 
                 if ((tUserRole != _iRoomProperty.sCmdUserRole) &&  !isFromWeb) {
                     [strongSelf reportFail:CONNECT_RESULE_PasswordError aDescript:@""];
@@ -210,12 +323,26 @@ TKNavigationController* _iEduNavigationController = nil;
                     return -1;
                     
                 }
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
-                    _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:_iRoomController];
+                    // change openurl
+                    _enterClassRoomAgain = NO;
+                    UIViewController *viewController;
+                    if (_iRoomProperty.iPadLayout && [_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+                        _iClassRoomController = [[ClassRoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        viewController = _iClassRoomController;
+                        
+                    }else{
+                        _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        viewController = _iRoomController;
+                    }
+                    
+                    _iEduNavigationController = [[TKNavigationController alloc] initWithRootViewController:viewController];
+                   
                     [controller presentViewController:_iEduNavigationController animated:YES completion:^{
-                        [_HUD hide:YES];
+                         [_HUD hide:YES];
                     }];
+                    
                     
                 });
                 
@@ -251,16 +378,23 @@ TKNavigationController* _iEduNavigationController = nil;
     return [TKEduClassRoom shareInstance].iRoomController ;
 }
 +(void)leftRoom{
-    [[TKEduClassRoom shareInstance].iRoomController prepareForLeave:YES];
+//    [[TKEduClassRoom shareInstance].iRoomController prepareForLeave:YES];
+    [[TKEduClassRoom shareInstance].iClassRoomController prepareForLeave:YES];
 }
 
 - (void)onRoomControllerDisappear:(NSNotification*)__unused notif
 {
     _iEduNavigationController = nil;
     _iRoomController = nil;
+    _iClassRoomController = nil;
     _iStatus = EClassStatus_IDLE;
     _iRoomDelegate = nil;
     _iController = nil;
+    // change openurl
+    //如果是因为再次进入而产生的退出，则需要重新进入
+    if ( self.enterClassRoomAgain) {
+        [self joinRoomFromWebUrl:self.url];
+    }
 }
 
 #pragma mark 加入会议
@@ -352,7 +486,10 @@ TKNavigationController* _iEduNavigationController = nil;
                 
             }];
             UIAlertAction *tAction2 = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.Cancel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
+                // change openurl
+                if (_isFromWeb && _openUrlViewController) {
+                    [_openUrlViewController dismissViewControllerAnimated:NO completion:nil];
+                }
             }];
             [alertController addAction:tAction];
             [alertController addAction:tAction2];
@@ -361,7 +498,10 @@ TKNavigationController* _iEduNavigationController = nil;
         }else{
            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:MTLocalized(@"Prompt.prompt") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *tAction2 = [UIAlertAction actionWithTitle:MTLocalized(@"Prompt.Know") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
+                // change openurl
+                if (_isFromWeb && _openUrlViewController) {
+                    [_openUrlViewController dismissViewControllerAnimated:NO completion:nil];
+                }
             }];
        
             [alertController addAction:tAction2];
@@ -382,6 +522,45 @@ TKNavigationController* _iEduNavigationController = nil;
         }
     }
 }
+
+#pragma mark joinRoom
+// change openurl
++(void)joinRoomFromWebUrl:(NSString*)url{
+    [[TKEduClassRoom shareInstance]joinRoomFromWebUrl:url];
+}
+-(void)joinRoomFromWebUrl:(NSString*)url{
+    self.url = url;
+    //此时正在课堂中,需要退出
+    if (self.iStatus != EClassStatus_IDLE) {
+        self.enterClassRoomAgain = YES;
+        self.openUrlViewController.url = url;
+        if ([_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
+            [_iClassRoomController prepareForLeave:YES];
+        }else{
+            [_iRoomController prepareForLeave:YES];
+        }
+        
+    }else{
+        if (!self.openUrlViewController) {
+             self.openUrlViewController = [[TKOpenUrlViewController alloc]init];
+             self.openUrlViewController.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+            self.openUrlViewController.url = url;
+            UIViewController *tRoomRoot = (UIViewController*) [UIApplication sharedApplication].keyWindow.rootViewController;
+            [tRoomRoot presentViewController:self.openUrlViewController animated:NO completion:^{
+                
+                [self.openUrlViewController openUrl:self.url];
+            }];
+        }else{
+             [self.openUrlViewController openUrl:self.url];
+        }
+    }
+}
+
++(void)clearWebUrlData{
+    [TKEduClassRoom shareInstance].openUrlViewController = nil;
+}
+
+
 #pragma mark - private
 - (id)init
 {

@@ -11,7 +11,8 @@
 #import "TKMacro.h"
 #import <WebKit/WebKit.h>
 
-@import UIKit;
+//@import UIKit;
+#import <UIKit/UIKit.h>
 
 typedef void(^bLoadFinishedBlock) (void);
 
@@ -27,6 +28,7 @@ typedef void(^bLoadFinishedBlock) (void);
 
 -(void)closeDynamicPptWebPlay:(id) aData;//2017-11-10 closeNewPptVideo更改为closeDynamicPptWebPlay
 -(void)setPageParameterForPhoneForRole:(UserType)aRole;
+-(void)changeWBUrlAndPort;
 -(void)setAddPagePermission:(bool)aPagePermission;
 //数据
 -(void)clearAllWhiteBoardData;

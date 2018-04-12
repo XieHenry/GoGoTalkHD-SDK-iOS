@@ -172,7 +172,7 @@
             _iButton4.selected = NO;
             _iNameLabel.text = tMediaModel.filename;
             _iButton3.hidden = NO;
-            _iButton4.hidden = NO;
+            _iButton4.hidden = _hiddenDeleteBtn;
             TKMediaDocModel *tCurrentMediaModel = [TKEduSessionHandle shareInstance].iCurrentMediaDocModel;
             BOOL tIsCurrentDocment =[[TKEduSessionHandle shareInstance]isEqualFileId:tMediaModel aSecondModel:tCurrentMediaModel];
             _iButton3.selected = tIsCurrentDocment;
@@ -198,7 +198,7 @@
             _iIconImageView.image = LOADIMAGE(tTypeString);
             _iNameLabel.text = tDocModel.filename;
             _iButton3.selected = NO;
-            _iButton4.selected = NO;
+            _iButton4.selected = _hiddenDeleteBtn;
             if ([tDocModel.filetype isEqualToString:(@"whiteboard")]) {
                 //_iButton3.hidden = YES;
                 _iButton3.hidden = NO;              // 白板的眼睛也需要显示出来
@@ -209,7 +209,7 @@
                 _iButton4.hidden = YES;
             }else{
                 _iButton3.hidden = NO;
-                _iButton4.hidden = NO;
+                _iButton4.hidden = _hiddenDeleteBtn;
                 _iButton3.selected = tIsCurrentDocment;
                 [_iButton3 setImage: LOADIMAGE(@"btn_eyes_01_normal") forState:UIControlStateNormal];
                 [_iButton3 setImage: LOADIMAGE(@"btn_eyes_02_normal") forState:UIControlStateSelected];
@@ -288,7 +288,14 @@
             
             //用设备图标替换用户头像
             NSMutableDictionary *properties = tRoomUser.properties;
-            NSString *deviceImg = [NSString stringWithFormat:@"icon_%@",properties[@"devicetype"]];
+            NSString *devicetype = properties[@"devicetype"];
+            NSString *deviceImg;
+            if ([devicetype isEqualToString:@"AndroidPad"] || [devicetype isEqualToString:@"iPad"] || [devicetype isEqualToString:@"AndroidPhone"] || [devicetype isEqualToString:@"iPhone"] || [devicetype isEqualToString:@"WindowClient"] || [devicetype isEqualToString:@"WindowPC"] || [devicetype isEqualToString:@"MacClient"] || [devicetype isEqualToString:@"MacPC"] || [devicetype isEqualToString:@"AndroidTV"]
+                ) {
+                deviceImg = [NSString stringWithFormat:@"icon_%@",properties[@"devicetype"]];
+            }else{
+                deviceImg = @"icon_unknown";
+            }
             _iIconImageView.contentMode = UIViewContentModeCenter;
             _iIconImageView.image = LOADIMAGE(deviceImg);
             
@@ -305,25 +312,34 @@
             
             //昵称 （身份）
             NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[tRoomUser.nickName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+          
+//            NSArray *userTypeArray = [NSArray arrayWithObjects:MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Assistant"),MTLocalized(@"Role.Student"),@"直播",MTLocalized(@"Role.Patrol"), nil];//直播只是占个位
             
-            NSArray *userTypeArray = [NSArray arrayWithObjects:MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Assistant"),MTLocalized(@"Role.Student"),@"直播",MTLocalized(@"Role.Patrol"), nil];//直播只是占个位
-            NSString *nickAndRole = [NSString stringWithFormat:@"%@ (%@)",attrStr.string,userTypeArray[tRoomUser.role]];
+            NSString *nickAndRole = [NSString stringWithFormat:@"%@",attrStr.string];
             _iNameLabel.text = nickAndRole ;
             _iNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
 
-         
-//            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateNormal];
-//            [_iButton1 setImage: LOADIMAGE(@"btn_hand") forState:UIControlStateSelected];
-//            [_iButton2 setImage: LOADIMAGE(@"btn_down_normal") forState:UIControlStateNormal];
-//            [_iButton2 setImage: LOADIMAGE(@"btn_up_normal") forState:UIControlStateSelected];
-//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_01_normal") forState:UIControlStateNormal];
-//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateSelected];
-//            [_iButton3 setImage: LOADIMAGE(@"btn_audio_02_normal") forState:UIControlStateHighlighted];
-//            [_iButton4 setImage: LOADIMAGE(@"icon_control_tools_02") forState:UIControlStateNormal];
-//            [_iButton4 setImage: LOADIMAGE(@"btn_tools_02_normal") forState:UIControlStateSelected];
+            switch (tRoomUser.role) {
+                case UserType_Teacher:
+                    
+                    [_iButton1 setImage: LOADIMAGE(@"teacher_down") forState:UIControlStateNormal];
+                    [_iButton1 setImage: LOADIMAGE(@"teacher_up") forState:UIControlStateSelected];
+                    break;
+                case UserType_Student:
+                    
+                    [_iButton1 setImage: LOADIMAGE(@"student_down") forState:UIControlStateNormal];
+                    [_iButton1 setImage: LOADIMAGE(@"student_up") forState:UIControlStateSelected];
+                    break;
+                case UserType_Assistant:
+                    
+                    [_iButton1 setImage: LOADIMAGE(@"assistant-down") forState:UIControlStateNormal];
+                    [_iButton1 setImage: LOADIMAGE(@"assistant_up") forState:UIControlStateSelected];
+                    break;
+                    
+                default:
+                    break;
+            }
             
-            [_iButton1 setImage: LOADIMAGE(@"btn_down_normal") forState:UIControlStateNormal];
-            [_iButton1 setImage: LOADIMAGE(@"btn_up_normal") forState:UIControlStateSelected];
             [_iButton2 setImage: LOADIMAGE(@"btn_camera_01_normal") forState:UIControlStateNormal];
             [_iButton2 setImage: LOADIMAGE(@"btn_camera_02_normal") forState:UIControlStateSelected];
             [_iButton3 setImage: LOADIMAGE(@"btn_audio_01_normal") forState:UIControlStateNormal];

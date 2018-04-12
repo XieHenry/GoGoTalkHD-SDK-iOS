@@ -11,6 +11,7 @@
 #import "TKEduClassRoom.h"
 #import "TKMacro.h"
 #import "TKEduBoardHandle.h"
+#import "TKVideoBoardHandle.h"
 
 @class TKChatMessageModel,TKEduRoomProperty,TKMediaDocModel,TKDocmentDocModel,RoomUser,RoomManager,TKDocumentListView,TKProgressHUD;
 
@@ -22,7 +23,7 @@
 //自己离开课堂
 - (void)sessionManagerRoomLeft ;
 //自己被踢
--(void) sessionManagerSelfEvicted;
+-(void) sessionManagerSelfEvicted:(NSDictionary *)reason;
 //观看视频
 - (void)sessionManagerUserPublished:(RoomUser *)user ;
 //取消视频
@@ -51,9 +52,13 @@
 - (void)sessionManagerMediaUnPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user;
 //媒体流进度
 - (void)sessionManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+- (void)sessionManagerMediaLoaded;
 #pragma mark Screen
 - (void)sessionManagerScreenPublish:(RoomUser *)user;
 - (void)sessionManagerScreenUnPublish:(RoomUser *)user;
+#pragma mark file
+- (void)sessionManagerFilePublish:(RoomUser *)user;
+- (void)sessionManagerFileUnPublish:(RoomUser *)user;
 
 #pragma mark Playback
 - (void)sessionManagerReceivePlaybackDuration:(NSTimeInterval)duration;
@@ -105,6 +110,7 @@
 @property (nonatomic, strong) RoomUser *iTeacherUser;
 @property (nonatomic, assign) BOOL isClassBegin;
 @property (nonatomic, assign) BOOL isMuteAudio;
+@property (nonatomic, assign) BOOL isunMuteAudio;//全体发言状态
 @property (nonatomic, assign) BOOL iIsCanOffertoDraw;//yes 可以 no 不可以
 @property (nonatomic, assign) BOOL isHeadphones;//是否是耳机
 @property (nonatomic, assign) BOOL iIsClassEnd;
@@ -112,19 +118,22 @@
 @property (nonatomic, assign) BOOL iStdOutBottom;//是否有拖出去的视频
 @property (nonatomic, assign) BOOL iIsFullState;//是否全屏状态
 @property (nonatomic, assign) BOOL iIsSplitScreen;//是否分屏状态
+@property (nonatomic, strong) NSNumber * videoRatio;
 #pragma mark 白板
 @property (nonatomic,strong) TKMediaDocModel    *iCurrentMediaDocModel;
 @property (nonatomic,strong) TKMediaDocModel    *iPreMediaDocModel;
 @property (nonatomic,strong) TKDocmentDocModel  *iCurrentDocmentModel;
 @property (nonatomic,strong) TKDocmentDocModel  *iPreDocmentModel;
-@property(nonatomic,strong)  TKDocumentListView *iDocumentListView;
-@property(nonatomic,strong)  TKDocumentListView *iMediaListView;
+@property(nonatomic,strong)  UIView *iDocumentListView;
+@property(nonatomic,strong)  UIView *iMediaListView;
 @property (nonatomic,strong) TKDocmentDocModel  *iDefaultDocment;
 @property (nonatomic,strong) NSMutableArray     *iDocmentMutableArray;
 @property (nonatomic,strong) NSMutableDictionary*iDocmentMutableDic;
 @property (nonatomic,strong) NSMutableArray     *iMediaMutableArray;
 @property (nonatomic,strong) NSMutableDictionary*iMediaMutableDic;
 @property (nonatomic,strong) TKEduBoardHandle   *iBoardHandle;
+@property (nonatomic,strong) TKVideoBoardHandle *iVideoBoardHandle;//视频标注handle
+@property (nonatomic,strong) NSMutableArray     *msgList;
 
 @property (nonatomic,assign)BOOL iIsPlaying;//是否播放中
 @property (nonatomic,assign)BOOL isPlayMedia;//是否有音频
@@ -142,7 +151,8 @@
 @property (assign,nonatomic)BOOL iIsCanPageInit;
 @property (assign,nonatomic)BOOL iIsAssitOpenVInit;
 +(instancetype)shareInstance;
-
++(void)destory;
+- (void)clear;
 - (void)configureSession:(NSDictionary*)paramDic
             aRoomDelegate:(id<TKEduRoomDelegate>) aRoomDelegate
         aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
@@ -220,6 +230,11 @@
 #pragma mark Screen
 -(void)sessionHandlePlayScreen:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
 -(void)sessionHandleUnPlayScreen:(NSString *)peerId completion:(void (^)(NSError *error))block;
+
+#pragma mark file
+-(void)sessionHandlePlayFile:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+-(void)sessionHandleUnPlayFile:(NSString *)peerId completion:(void (^)(NSError *error))block;
+
 #pragma 其他
 -(void)clearAllClassData;
 -(void)clearMessageList;
@@ -273,6 +288,10 @@
 -(TKDocmentDocModel*)getDocmentFromFiledId:(NSString *)aFiledId;
 
 - (NSArray *)docmentArray;
+- (NSArray *)whiteBoardArray;
+- (NSArray *)classDocmentArray;
+- (NSArray *)systemDocmentArray;
+
 - (bool)addOrReplaceDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 - (void)delDocmentArray:(TKDocmentDocModel *)aDocmentDocModel;
 -(TKDocmentDocModel *)getNextDocment:(TKDocmentDocModel *)aCurrentDocmentModel;
@@ -281,6 +300,9 @@
 -(NSDictionary *)meidaDic;
 -(TKMediaDocModel*)getMediaFromFiledId:(NSString *)aFiledId;
 - (NSArray *)mediaArray;
+- (NSArray *)classMediaArray;
+- (NSArray *)systemMediaArray;
+
 - (void)addOrReplaceMediaArray:(TKMediaDocModel *)aMediaDocModel;
 - (void)delMediaArray:(TKMediaDocModel *)aMediaDocModel;
 -(TKMediaDocModel*)getNextMedia:(TKMediaDocModel *)aCurrentMediaDocModel;

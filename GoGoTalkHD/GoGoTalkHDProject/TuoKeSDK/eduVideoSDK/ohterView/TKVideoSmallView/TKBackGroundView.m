@@ -18,6 +18,11 @@
     self.promptLabel.text = MTLocalized(@"State.isInBackGround");
     
 }
+
+- (void)setContent:(NSString *)content {
+    self.promptLabel.text = content;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

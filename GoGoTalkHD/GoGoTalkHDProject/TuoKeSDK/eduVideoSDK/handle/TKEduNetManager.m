@@ -15,6 +15,8 @@
 #import "TKEduRoomProperty.h"
 #import "RoomUser.h"
 #import "NSAttributedString+JTATEmoji.h"
+#import "TKMP3ToPCM.h"
+
 //192.168.0.66:81/379057693
 #define INTERFACE @"/ClientAPI/"
 #define HTTP_SERVER     @"192.168.0.66"
@@ -297,8 +299,8 @@ extern int expireSeconds;
     
     NSNumber *tSaltNumber = @(arc4random());
     // APP_ID + query + salt + SECURITY_KEY;
-     NSString *tSign =[TKUtil md5HexDigest:[NSString stringWithFormat:@"%@%@%@%@",sAPP_ID,aTranslationString,tSaltNumber,sSECURITY_KEY]];
-    NSDictionary *tParamDic = @{@"appid":sAPP_ID,@"q":aTranslationString,@"from":tFrom,@"to":tTo,@"salt":tSaltNumber,@"sign":tSign};
+     NSString *tSign =[TKUtil md5HexDigest:[NSString stringWithFormat:@"%@%@%@%@",sAPP_ID_BaiDu,aTranslationString,tSaltNumber,sSECURITY_KEY]];
+    NSDictionary *tParamDic = @{@"appid":sAPP_ID_BaiDu,@"q":aTranslationString,@"from":tFrom,@"to":tTo,@"salt":tSaltNumber,@"sign":tSign};
     
     
     //1。创建管理者对象
@@ -459,11 +461,11 @@ extern int expireSeconds;
 {
     NSDictionary *tParamDic;
     //act =3 代表删除这个会议
-    if ([TKEduSessionHandle shareInstance].roomMgr.autoQuitClassWhenClassOverFlag == YES) {
-        tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid,@"endsign":@(1)};         // 英练帮需要结束课堂
-    } else {
+//    if ([TKEduSessionHandle shareInstance].roomMgr.autoQuitClassWhenClassOverFlag == YES) {
+//        tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid,@"endsign":@(1)};         // 英练帮需要结束课堂
+//    } else {
         tParamDic = @{@"serial":roomID,@"act":@(3),@"companyid":companyid};
-    }
+//    }
     
     //1。创建管理者对象
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
@@ -720,6 +722,221 @@ extern int expireSeconds;
     [session resume];
 }
 
+#pragma mark 获取安装文件的版本信息
++ (void)getupdateinfoWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort Version:(NSString *_Nonnull)version Type:(NSString *_Nonnull)type Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    
+    [[self shareInstance] getupdateinfoWithaHost:aHost aPort:aPort Version:version Type:type Complete:aComplete aNetError:aNetError];
+    
+}
+
+- (void)getupdateinfoWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort Version:(NSString *_Nonnull)version Type:(NSString *_Nonnull)type Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+//    {"version":"2017080100","filename":"CloudClass.exe","filetype":"1","isupdate":"0","updateflag":"0","updateaddr":"http:\/\/localhost\/Updatefiles\/CloudClass.exe","result":0}
+//    {"version":版本号,"filename":名字,"filetype":类型,"isupdate":（1：升级包   0：安装包）,"updateflag":（0:不强制   1：强制升级   2：有条件升级）,"updateaddr":安装地址,"result":0}
+//    result=-1表示没有数据
+    
+    NSDictionary *tParamDic = @{@"version":version,@"type":type};
+    
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    // https ssl 验证。
+    [manager setSecurityPolicy:[self customSecurityPolicy]];
+    manager.requestSerializer.timeoutInterval = 60;
+    
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+    NSLog(@"%@",[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/getupdateinfo",sHttp,aHost ,aPort]);
+    
+    session =   [manager GET:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/getupdateinfo",sHttp,aHost ,aPort] parameters: tParamDic progress:^(NSProgress * _Nonnull uploadProgress) {
+     
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                
+                aComplete(json);         // 无需关心返回值是什么，直接上课
+                
+            }
+            
+            
+        }while(0);
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (aNetError) {
+            aNetError(error);
+        }
+    }];
+    [session resume];
+}
+#pragma mark - MP3文件下载
++ (void)downLoadMp3File:(NSString*_Nonnull)url Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    [[self shareInstance] downLoadMp3File:url Complete:aComplete aNetError:aNetError];
+}
+- (void)downLoadMp3File:(NSString*_Nonnull)url Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *download  =[manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]stringByAppendingPathComponent:response.suggestedFilename];
+ 
+        return [NSURL fileURLWithPath:filePath];
+        
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        NSString *strp = filePath.absoluteString;
+        NSString *str = [strp substringFromIndex:7];
+        NSString *pcmFilePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+        pcmFilePath = [pcmFilePath stringByAppendingPathComponent:@"ABC.wav"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [TKMP3ToPCM mp3ToPcmWithMp3FilePath:str pcmFilePath:pcmFilePath completion:^(BOOL finish) {
+                if (finish) {
+                    aComplete(pcmFilePath);
+                }
+            }];
+        });
+        
+//        aComplete(strp);
+    }];
+    [download resume];
+    
+}
++ (void)getRoomJsonWithPath:(NSString *_Nonnull)path Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    [[self shareInstance] getRoomJsonWithPath:path Complete:aComplete aNetError:aNetError];
+}
+- (void)getRoomJsonWithPath:(NSString *_Nonnull)path Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+    
+    session =   [manager GET:[NSString stringWithFormat:@"http://%@room.json",path] parameters: nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                
+                aComplete(json);         // 无需关心返回值是什么，直接上课
+                
+            }
+            
+            
+        }while(0);
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (aNetError) {
+            aNetError(error);
+        }
+    }];
+    [session resume];
+}
+
++(void)systemtime:(NSDictionary *_Nonnull)aParam Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    [[self shareInstance] systemtime:aParam Complete:aComplete aNetError:aNetError];
+}
+
+-(void)systemtime:(NSDictionary *_Nonnull)aParam Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError{
+    //1。创建管理者对象
+    TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
+    manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
+    //    manager.baseURL.scheme = @"https";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",@"image/jpeg",
+                                                                              @"image/*"]];
+    
+    manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
+    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    __block NSURLSessionDataTask *session = nil;
+    NSString *tHost = [aParam objectForKey:@"host"]?[aParam objectForKey:@"host"]:sHost;
+    NSString *tPort= [aParam objectForKey:@"port"]?[aParam objectForKey:@"port"]:sPort;
+    
+    session =   [manager GET:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/systemtime",sHttp,tHost ,tPort] parameters: nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        do
+        {
+            if (responseObject == nil)
+                break;
+            if ([responseObject isKindOfClass:[NSData class]]){
+                id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                
+                aComplete(json);         // 无需关心返回值是什么，直接上课
+                
+            }
+            
+            
+        }while(0);
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (aNetError) {
+            aNetError(error);
+        }
+    }];
+    [session resume];
+}
 #pragma mark 其他
 + (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID delegate:(id)delegate{
     
@@ -740,14 +957,14 @@ extern int expireSeconds;
     // https ssl 验证。
     [manager setSecurityPolicy:[[self shareInstance] customSecurityPolicy]];
     NSDictionary *parameters = @{@"serial" : roomID,
-                              @"userid" : userID,
-                              @"sender" : userName,
-                              @"conversion" : @1,
-                              @"isconversiondone" : @0,
-                              @"writedb" : @1,
-                              @"fileoldname" : fileName,
-                              @"fieltype" : fileType,
-                              @"alluser" : @1};
+                                 @"userid" : userID,
+                                 @"sender" : userName,
+                                 @"conversion" : @1,
+                                 @"isconversiondone" : @0,
+                                 @"writedb" : @1,
+                                 @"fileoldname" : fileName,
+                                 @"fieltype" : fileType,
+                                 @"alluser" : @1};
     NSURLSessionTask *session = [manager POST:requestURL parameters:parameters constructingBodyWithBlock:^(id<TKAFMultipartFormData>  _Nonnull formData) {
         NSData *imageData = fileData;
         
@@ -803,7 +1020,6 @@ extern int expireSeconds;
     
     return 1;
 }
-
 - (int)uploadWithaHost2:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -840,6 +1056,8 @@ extern int expireSeconds;
                               @"isconversiondone" : @0,
                               @"writedb" : @1,
                               @"fileoldname" : fileName,
+                              @"filename": fileName,
+                              @"filenewname": [NSString stringWithFormat:@"%@-%@",userName,fileName],
                               @"fieltype" : fileType,
                               @"alluser" : @1};
     for (NSString *key in dataDic.allKeys)

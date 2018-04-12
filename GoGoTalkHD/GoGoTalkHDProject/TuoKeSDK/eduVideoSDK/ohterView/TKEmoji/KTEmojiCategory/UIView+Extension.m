@@ -94,4 +94,30 @@
     return self.frame.size;
 }
 
+- (void)setRight:(CGFloat)rightX
+{
+    CGRect frame = self.frame;
+    frame.origin.x = rightX - frame.size.width;
+    self.frame = frame;
+}
+
+- (CGFloat)rightX
+{
+    return self.frame.origin.x + self.width;
+}
+
+- (void)setLeft:(CGFloat)leftX
+{
+    CGRect frame = self.frame;
+    frame.origin.x = leftX;
+    self.frame = frame;
+}
+
+- (CGFloat)leftX
+{
+    return self.x;
+}
+
+ 
+
 @end

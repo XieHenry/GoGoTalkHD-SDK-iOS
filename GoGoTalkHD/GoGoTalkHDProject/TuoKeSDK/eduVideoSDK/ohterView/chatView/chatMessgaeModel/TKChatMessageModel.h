@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
+//@import UIKit;
+#import <UIKit/UIKit.h>
 #import "TKMacro.h"
 @interface TKChatMessageModel : NSObject
 @property (nonatomic, strong) NSString *iUserName;

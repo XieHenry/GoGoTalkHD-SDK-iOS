@@ -111,7 +111,7 @@ static long _appStoreID;
 - (void)update {
     [self update:^(BOOL isNewVersionAvailable, LTUpdateVersionDetails *versionDetails) {
         if (isNewVersionAvailable) {
-            [self alertLatestVersion:LTUpdateOption | LTUpdateSkip];
+            [self alertLatestVersion:(LTUpdateOptions)(LTUpdateOption | LTUpdateSkip)];
         }
     }];
 }
@@ -307,10 +307,25 @@ static long _appStoreID;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+//强制升级
+- (void)__attribute__((unused)) alertForcedToUpdateLatestVersion:(LTUpdateOptions)alertOptions{
+    UIAlertView *alertView = [[UIAlertView alloc] init];
+    [alertView setTitle:LTI18N(@"Prompt.FoundNewVersions")];
+    [alertView setMessage:LTI18N(@"Prompt.ForcedToUpgrade")];
+    
+    [alertView addButtonWithTitle:LTI18N(@"Update")];
+
+    [alertView setDelegate:self];
+    [alertView show];
+    [alertView release];
+    alertView = nil;
+}
+//有条件升级
 - (void)__attribute__((unused)) alertLatestVersion:(LTUpdateOptions)alertOptions {
     UIAlertView *alertView = [[UIAlertView alloc] init];
-    [alertView setTitle:LTI18N(@"A new version is available!")];
-    [alertView setMessage:[self updateMessage]];
+    [alertView setTitle:LTI18N(@"Prompt.FoundNewVersions")];
+    [alertView setMessage:LTI18N(@"Prompt.ConditionsForTheUpgrade")];
     
     [alertView addButtonWithTitle:LTI18N(@"Update")];
     
@@ -396,7 +411,8 @@ static long _appStoreID;
         if (action == LTUpdateNotifyOpenAppStore) {
             [self openAppStore];
         } else if (action == LTUpdateNotifyThenAlert) {
-            [self alertLatestVersion:LTUpdateSkip|LTUpdateOption];
+            [self alertLatestVersion:(LTUpdateOptions)(LTUpdateSkip|LTUpdateOption)];
+//            [self alertLatestVersion:LTUpdateSkip|LTUpdateOption];
         }
     }
 }

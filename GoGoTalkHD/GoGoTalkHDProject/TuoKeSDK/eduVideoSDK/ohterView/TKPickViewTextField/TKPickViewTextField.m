@@ -35,10 +35,46 @@
     
 
     _iDataArray = @[MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Student"),MTLocalized(@"Role.Patrol")];//0-老师 ,1-助教，2-学生 4-寻课
-
-    _iRole = 0;
-    /* default selected item */
-    [self setText:[_iDataArray objectAtIndex:0]];// 设置TextField默认显示pickerView第一列的内容
+    
+    NSString  *role = [[NSUserDefaults standardUserDefaults] objectForKey:@"userrole"];
+   
+    if (role != nil && [role isKindOfClass:[NSString class]])
+    {
+        NSInteger index = [_iDataArray indexOfObject:role];
+        switch (index) {
+            case 0:
+                _iRole = 0;
+                break;
+            case 1:
+                _iRole = 2;
+                break;
+            case 2:
+                _iRole = 4;
+                break;
+            default:
+                break;
+        }
+        
+        /* default selected item */
+        [self setText:[_iDataArray objectAtIndex:index]];// 设置TextField默认显示学生
+        
+        [_iPickView selectRow:index inComponent:0 animated:NO];
+    }
+    else
+    {
+//#ifdef Realese
+//
+//#else
+        _iRole = 2;
+        
+        /* default selected item */
+        [self setText:[_iDataArray objectAtIndex:1]];// 设置TextField默认显示学生
+        
+        [_iPickView selectRow:1 inComponent:0 animated:NO];
+//#endif
+        
+    }
+   
 }
 - (void)setSelectRow:(NSInteger)index
 {
@@ -67,11 +103,11 @@
 {
     self.text = [_iDataArray objectAtIndex:row];
     switch (row) {
-        //老师
+        //学生
         case 0:
             _iRole = 0;
             break;
-        //学生
+        //老师
         case 1:
             _iRole = 2;
             break;

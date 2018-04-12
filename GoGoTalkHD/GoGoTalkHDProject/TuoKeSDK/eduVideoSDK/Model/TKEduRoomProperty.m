@@ -13,10 +13,8 @@
 -(void)parseMeetingInfo:(NSDictionary*) params
 {
   
-    
-  
-    _sWebIp       = [params objectForKey:@"host"]?[params objectForKey:@"host"]:@"global.talk-cloud.com";
-    _sWebPort     = [params objectForKey:@"port"]?[params objectForKey:@"port"]:@"443";
+    _sWebIp       = [params objectForKey:@"host"]?[params objectForKey:@"host"]:sHost;
+    _sWebPort     = [params objectForKey:@"port"]?[params objectForKey:@"port"]:sPort;
     _sNickName    = [params objectForKey:@"nickname"]?[params objectForKey:@"nickname"]:@"";
     _sDomain      = [params objectForKey:@"domain"]?[params objectForKey:@"domain"]:@"www";
     _sCmdPassWord = [params objectForKey:@"password"]?[params objectForKey:@"password"]:@"";

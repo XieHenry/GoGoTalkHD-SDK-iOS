@@ -43,8 +43,8 @@
 }
 - (void)resetView
 {
-//    _iMessageLabel.text = _iMessageText;
-     _iMessageLabel.attributedText = [NSAttributedString emojiAttributedString:_iMessageText withFont:TEXT_FONT withColor:[UIColor whiteColor]];
+    _iMessageLabel.text = _iMessageText;
+    
 }
 
 
@@ -55,9 +55,8 @@
     
     CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromAttributedString:_iMessageText withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
     
-//    CGSize tMessageLabelsize = [TKMessageTableViewCell sizeFromText:_iMessageText withLimitWidth:CGRectGetWidth(self.frame) Font:TKFont(15)];
-    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width, tMessageLabelsize.height+20);
-    
+    _iMessageLabel.frame = CGRectMake(0, 0, tMessageLabelsize.width, 30);
+    _iMessageLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
      [self imageAddCornerWithRadius];
      [TKUtil setCenter:_iMessageLabel ToFrame:self.contentView.frame];
     [self.contentView bringSubviewToFront:_iMessageLabel];

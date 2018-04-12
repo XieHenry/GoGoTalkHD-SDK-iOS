@@ -20,11 +20,21 @@
 }
 - (void)setVideoSmallViewArray:(NSMutableArray *)videoSmallViewArray{
     
-    TKVideoSmallView *view =(TKVideoSmallView *) videoSmallViewArray[0];
-    [self addSubview:view];
-    view.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
- 
+    CGFloat w = CGRectGetWidth(self.frame);
+    CGFloat h = CGRectGetHeight(self.frame);
+    CGFloat x = 0, y = 0;
+    NSUInteger count = videoSmallViewArray.count, next = 0;
     
+    for(int i=1;i<=2;i++){
+        for (int j=0; j<(i==1?1:count-1); j++) {
+            TKVideoSmallView *view =(TKVideoSmallView *) videoSmallViewArray[next++];
+            [self addSubview:view];
+            view.frame = CGRectMake(x, y, w/(count/2+1), h/((i==1?1:count-1)/2+1));
+            y =h/((i==1?1:count-1)/2+1);
+        }
+        y = 0;
+        x = w/(count/2+1);
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

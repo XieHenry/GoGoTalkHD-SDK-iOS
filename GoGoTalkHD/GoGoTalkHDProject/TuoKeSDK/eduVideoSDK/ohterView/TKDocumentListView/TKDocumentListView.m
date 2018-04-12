@@ -17,6 +17,8 @@
 #import "TKProgressHUD.h"
 #import "TKEduNetManager.h"
 
+#define kMargin 20
+#define kBtnHeight 40
 
 @interface TKDocumentListView ()<listProtocol>
 @property (nonatomic,retain)UILabel  *iFileHeadLabel;
@@ -30,6 +32,8 @@
 
 @property (nonatomic,strong)TKProgressHUD*  iVideoPlayerHud;
 
+@property (nonatomic, strong) UIButton *takePhotoBtn;//拍照上传
+@property (nonatomic, strong) UIButton *choosePicBtn;//选择照片
 @end
 
 @implementation TKDocumentListView
@@ -59,11 +63,65 @@
         [_iFileTableView registerClass:[TKUserListTableViewCell class] forCellReuseIdentifier:@"Cell"];
         
         [self addSubview:_iFileTableView];
-
+        _isShow = NO;
+        [self createUploadPhotosButton];
          [[UIApplication sharedApplication].keyWindow addSubview:self];
         
     }
     return self;
+}
+
+- (void)createUploadPhotosButton
+{
+    if (_takePhotoBtn && _choosePicBtn) {
+        return;
+    }
+    CGFloat btnWidth = (self.width - kMargin * 3) / 2;
+    
+    _takePhotoBtn = [self createCommonButtonWithFrame:CGRectMake(kMargin, self.height - kBtnHeight - kMargin, btnWidth, kBtnHeight) title:MTLocalized(@"UploadPhoto.TakePhoto") backgroundColor:UIColorRGB(0x30b3e4) selector:@selector(takePhotosAction:)];
+    
+    [self addSubview:_takePhotoBtn];
+    
+    _choosePicBtn = [self createCommonButtonWithFrame:CGRectMake(_takePhotoBtn.x + _takePhotoBtn.width + kMargin, self.height - kBtnHeight - kMargin, btnWidth, kBtnHeight) title:MTLocalized(@"UploadPhoto.FromGallery") backgroundColor:UIColorRGB(0xed9f3b)  selector:@selector(choosePicturesAction:)];
+    
+    [self addSubview:_choosePicBtn];
+}
+
+//只在显示文档列表时才会显示上传图片按钮
+- (void)showUploadButton:(BOOL)show
+{
+    if (_takePhotoBtn && _choosePicBtn) {
+        if (show)
+            _iFileTableView.height = self.height - kBtnHeight - kMargin;
+        else
+            _iFileTableView.height = self.height;
+        
+        _takePhotoBtn.hidden = !show;
+        _choosePicBtn.hidden = !show;
+    }
+}
+
+//拍摄照片
+- (void)takePhotosAction:(UIButton *)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:sTakePhotosUploadNotification object:sTakePhotosUploadNotification];
+}
+//选择照片
+- (void)choosePicturesAction:(UIButton *)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:sChoosePhotosUploadNotification object:sChoosePhotosUploadNotification];
+}
+- (UIButton *)createCommonButtonWithFrame:(CGRect)frame title:(NSString *)title backgroundColor:(UIColor *)color selector:(SEL)selector
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = frame;
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:color];
+    [TKUtil setCornerForView:btn];
+    [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    btn.hidden = YES;
+    return btn;
 }
 //382
 
@@ -211,7 +269,7 @@
                 return;
             }
         }
-        PublishState tState = tRoomUser.publishState;
+        PublishState tState = (PublishState)tRoomUser.publishState;
         BOOL isShowVideo = tRoomUser.publishState >= 1;      // isShowVideo现在是是否在台上的判断结果
         if (isShowVideo) {
             tState = PublishState_NONE;
@@ -263,6 +321,7 @@
     [TKUtil setLeft:self To:ScreenW-CGRectGetWidth(self.frame)];
     
     [UIView commitAnimations];
+    _isShow = YES;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateData) name:sDocListViewNotification object:nil];
     
 }
@@ -275,8 +334,8 @@
     //[[UIApplication sharedApplication].keyWindow addSubview:self];
     
     [TKUtil setLeft:self To:ScreenW];
-    
     [UIView commitAnimations];
+    _isShow = NO;
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 -(void)updateData{
@@ -328,6 +387,7 @@
         case FileListTypeDocument:
         {
             //@"文档列表"
+            [self showUploadButton:YES];
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.DocumentList"), @([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
         }
@@ -381,7 +441,7 @@
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"), @([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
-            PublishState tState = tRoomUser.publishState;
+            PublishState tState = (PublishState)tRoomUser.publishState;
             BOOL isShowVideo = tRoomUser.publishState >1;
             
             if (isShowVideo) {
@@ -454,9 +514,9 @@
             [aButton setSelected:YES];
             
             // 上课后再下课之后点击上课时最后点击的文档
-            if (aButton == _iPreButton && ![TKEduSessionHandle shareInstance].iIsClassEnd) {
-                return;
-            }
+//            if (aButton == _iPreButton && ![TKEduSessionHandle shareInstance].iIsClassEnd) {
+//                return;
+//            }
             
             TKDocmentDocModel *tDocmentDocModel = [_iFileMutableArray objectAtIndex:aIndexPath.row];
             
@@ -482,7 +542,7 @@
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
             RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
-            PublishState tState = tRoomUser.publishState;
+            PublishState tState =(PublishState) tRoomUser.publishState;
             switch (tRoomUser.publishState) {
                     
                 case PublishState_AUDIOONLY:

@@ -8,7 +8,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
+//@import UIKit;
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger,EKickOutReason) {
     
@@ -64,6 +65,7 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 
 @end
 
+
 @interface TKEduClassRoom : NSObject
 
 @property (nonatomic, readonly) BOOL enterClassRoomAgain;
@@ -117,4 +119,16 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
  @return 当前教室的viewController
  */
 +(UIViewController *)currentRoomViewController;
+
+/**
+ 从网页链接进入教室
+
+ @param url 网页url
+ */
++(void)joinRoomFromWebUrl:(NSString*)url;
+
+/**
+ 清楚网页链接进入教室的数据
+ */
++(void)clearWebUrlData;
 @end

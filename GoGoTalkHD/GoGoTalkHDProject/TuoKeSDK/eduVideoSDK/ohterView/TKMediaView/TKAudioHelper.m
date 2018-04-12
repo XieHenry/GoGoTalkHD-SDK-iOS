@@ -21,7 +21,7 @@
 #else
     CFStringRef route ;
     UInt32 propertySize = sizeof(CFStringRef);
-    AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &propertySize, route);
+    AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &propertySize, (void*)route);
     
     if((route == NULL) || (CFStringGetLength(route) == 0)){
         // Silent Mode
@@ -105,7 +105,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
     
     UInt32 audioCategory;
     UInt32 size = sizeof(audioCategory);
-    AudioSessionGetProperty(kAudioSessionProperty_AudioCategory, &size, audioCategory);
+    AudioSessionGetProperty(kAudioSessionProperty_AudioCategory, &size, (void*)audioCategory);
     
     if ( audioCategory == kAudioSessionCategory_UserInterfaceSoundEffects ){
         NSLog(@"current category is : dioSessionCategory_UserInterfaceSoundEffects");
@@ -152,15 +152,15 @@ void audioRouteChangeListenerCallback (
     if (inPropertyID != kAudioSessionProperty_AudioRouteChange) return;
     // Determines the reason for the route change, to ensure that it is not
     //      because of a category change.
-    CFDictionaryRef routeChangeDictionary = inPropertyValue;
+    CFDictionaryRef routeChangeDictionary = (CFDictionaryRef)inPropertyValue;
     
     CFNumberRef routeChangeReasonRef =
-    CFDictionaryGetValue (routeChangeDictionary,
+    (CFNumberRef)CFDictionaryGetValue (routeChangeDictionary,
                           CFSTR (kAudioSession_AudioRouteChangeKey_Reason));
     
     SInt32 routeChangeReason;
     
-    CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, routeChangeReason);
+    CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, (void*)routeChangeReason);
     NSLog(@" ===================================== RouteChangeReason : %d", routeChangeReason);
     TKAudioHelper *_self = (__bridge TKAudioHelper *) inUserData;
     if (routeChangeReason == kAudioSessionRouteChangeReason_OldDeviceUnavailable){

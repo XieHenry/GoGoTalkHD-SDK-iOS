@@ -9,3 +9,11 @@
 "Remind Me Later" = "Remind Me Later";
 
 "Release Notes" = "Release Notes";
+
+
+"Prompt.FoundNewVersions" = "found new versions:";
+
+"Prompt.ForcedToUpgrade" = "The new version is available, so to get the full learning experience, please do your version upgrade immediately.";
+
+"Prompt.ConditionsForTheUpgrade" = "A new version is available, and for the best use experience, it is recommended that you complete the version upgrade immediately.";
+

@@ -10,4 +10,6 @@
 
 @interface TKBackGroundView : UIView
 
+- (void)setContent:(NSString *)content;
+
 @end
