@@ -119,8 +119,8 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     NSString *urlStr = [NSString stringWithFormat:@"%@?&paramshowMyHours=%@",URL_GetInfo,paramshowMyHoursStr];
     [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
         
-        _dataArray = [NSMutableArray array];
-        _iconArray = [NSMutableArray array];
+        self.dataArray = [NSMutableArray array];
+        self.iconArray = [NSMutableArray array];
         
         NSArray *dataArr = responseObject[@"data"];
         
@@ -131,26 +131,26 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
         }
         
         for (NSDictionary *dic in dataArr) {
-            [_dataArray addObject:dic[@"name"]];
-            [_iconArray addObject:dic[@"pic"]];
+            [self.dataArray addObject:dic[@"name"]];
+            [self.iconArray addObject:dic[@"pic"]];
         }
         
-        [_tableView reloadData];
+        [self.tableView reloadData];
         
         //先刷新数据，再选中cell
         if (sin.isAuditStatus == YES ) {
             if (isShowTestReportVc == YES) {
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             } else {
                 //每次请求数据后，都默认选中第一行
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
         } else {
             if (isShowTestReportVc == YES) {
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             } else {
                 //每次请求数据后，都默认选中第一行
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
         }
         
@@ -181,25 +181,25 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     [[BaseService share] sendGetRequestWithPath:URL_GetLessonStatistics token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
-        _model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
-        [_headerView getResultModel:_model];
+        self.model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
+        [self.headerView getResultModel:self.model];
         
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        sin.leftTotalCount = [NSString stringWithFormat:@"%@",_model.totalCount];
+        sin.leftTotalCount = [NSString stringWithFormat:@"%@",self.model.totalCount];
         
         
         if (sin.isAuditStatus == NO) {
             if (isRefreshMyClassVc == YES) {
                 //刷新我的课时cell数据，更改课时的显示，并选中这一个cell
                 NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-                [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                 
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
             
             if (sin.isShowAuditStatus == NO) {
                 GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",_model.totalCount];
+                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",self.model.totalCount];
             }
             
             

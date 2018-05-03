@@ -50,7 +50,7 @@
     
     [_failLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self);
-        make.top.mas_equalTo(_failView.mas_bottom).with.offset(20);
+        make.top.mas_equalTo(self.failView.mas_bottom).with.offset(20);
         
     }];
     
@@ -64,7 +64,7 @@
     [_reloadButton addTarget:self action:@selector(reloadAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_reloadButton];
     [_reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_failLabel.mas_bottom).with.offset(23);
+        make.top.mas_equalTo(self.failLabel.mas_bottom).with.offset(23);
         make.centerX.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(120, 38));
     }];

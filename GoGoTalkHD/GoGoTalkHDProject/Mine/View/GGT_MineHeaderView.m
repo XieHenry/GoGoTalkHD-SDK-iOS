@@ -128,7 +128,7 @@
     }];
     [ciLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(17);
-        make.left.equalTo(_laterLabel.mas_right).with.offset(5);
+        make.left.equalTo(self.laterLabel.mas_right).with.offset(5);
         make.bottom.equalTo(lateView.mas_bottom).with.offset(-28);
     }];
     
@@ -140,7 +140,7 @@
     [lateSubLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ciLabel.mas_bottom).with.offset(1);
         make.height.mas_equalTo(17);
-        make.left.equalTo(_laterLabel.mas_left);
+        make.left.equalTo(self.laterLabel.mas_left);
     }];
     /*  ---------------迟到次数---------------------  */
     /*---------------已说---------------------*/
@@ -191,7 +191,7 @@
     [talkMin addSubview:ciTalkLabel];
     [ciTalkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(17);
-        make.left.equalTo(_speakLabel.mas_right).with.offset(5);
+        make.left.equalTo(self.speakLabel.mas_right).with.offset(5);
         make.bottom.equalTo(lateView.mas_bottom).with.offset(-28);
     }];
     UILabel *talkSubLabel = [UILabel new];
@@ -202,7 +202,7 @@
     [talkSubLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(lateSubLabel.mas_centerY);
         make.height.mas_equalTo(LineH(17));
-        make.left.mas_equalTo(_speakLabel.mas_left);
+        make.left.mas_equalTo(self.speakLabel.mas_left);
     }];
     /*---------------已说---------------------*/
     /* ---------------缺席---------------- */
@@ -223,8 +223,8 @@
     _absentLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
     [absenceView addSubview:_absentLabel];
     [_absentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_speakLabel.mas_centerY);
-        make.height.equalTo(_speakLabel.mas_height);
+        make.centerY.equalTo(self.speakLabel.mas_centerY);
+        make.height.equalTo(self.speakLabel.mas_height);
         make.centerX.equalTo(absenceView.mas_centerX).with.offset(-LineX(11));
     }];
     UILabel *ciAbsenceLabel = [UILabel new];
@@ -234,7 +234,7 @@
     [absenceView addSubview:ciAbsenceLabel];
     [ciAbsenceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(LineH(17));
-        make.left.equalTo(_absentLabel.mas_right).with.offset(5);
+        make.left.equalTo(self.absentLabel.mas_right).with.offset(5);
         make.centerY.equalTo(ciTalkLabel.mas_centerY);
     }];
     UILabel *absenceSubLabel = [UILabel new];
@@ -244,7 +244,7 @@
     [absenceView addSubview:absenceSubLabel];
     [absenceSubLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(talkSubLabel.mas_height);
-        make.left.equalTo(_absentLabel.mas_left);
+        make.left.equalTo(self.absentLabel.mas_left);
         make.centerY.equalTo(talkSubLabel.mas_centerY);
     }];
     /* ---------------缺席---------------- */

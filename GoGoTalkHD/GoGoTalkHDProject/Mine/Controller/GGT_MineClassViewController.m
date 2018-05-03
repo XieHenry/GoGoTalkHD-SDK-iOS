@@ -40,7 +40,7 @@
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.dataArray = [NSMutableArray array];
-        _tempContentArray = [NSMutableArray array];
+        self.tempContentArray = [NSMutableArray array];
         self.page = 1;
         [self getLoadData];
     }];
@@ -114,12 +114,12 @@
         [self.tableView.mj_footer endRefreshing];
         [self.tableView.mj_header endRefreshing];
         
-        [_tempContentArray addObjectsFromArray:contentArray];
-        self.dataArray = [NSMutableArray arrayWithObjects:headerArray,_tempContentArray, nil];
+        [self.tempContentArray addObjectsFromArray:contentArray];
+        self.dataArray = [NSMutableArray arrayWithObjects:headerArray,self.tempContentArray, nil];
         [self.tableView reloadData];
         
         
-        if (contentArray.count < 20 && _tempContentArray.count < 20) {
+        if (contentArray.count < 20 && self.tempContentArray.count < 20) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
             [self.tableView reloadData];
             return ;

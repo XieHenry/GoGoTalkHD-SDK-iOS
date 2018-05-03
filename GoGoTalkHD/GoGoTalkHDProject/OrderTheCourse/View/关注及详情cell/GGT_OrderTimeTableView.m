@@ -102,7 +102,7 @@
     [_bgScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(LineW(104));
         make.right.equalTo(self.mas_right).with.offset(-LineW(104));
-        make.top.equalTo(_headerScrollerView.mas_bottom).with.offset(0);
+        make.top.equalTo(self.headerScrollerView.mas_bottom).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(-0);
     }];
     

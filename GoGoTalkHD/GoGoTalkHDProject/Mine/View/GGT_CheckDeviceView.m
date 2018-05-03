@@ -38,8 +38,8 @@
     [_cameraBigImgView addSubview:_camerasmallImgView];
     
     [_camerasmallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_cameraBigImgView.mas_centerX);
-        make.centerY.equalTo(_cameraBigImgView.mas_centerY);
+        make.centerX.equalTo(self.cameraBigImgView.mas_centerX);
+        make.centerY.equalTo(self.cameraBigImgView.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(32), LineW(26)));
     }];
     
@@ -63,8 +63,8 @@
 
     
     [_microphonesmallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_microphoneBigImgView.mas_centerX);
-        make.centerY.equalTo(_microphoneBigImgView.mas_centerY);
+        make.centerX.equalTo(self.microphoneBigImgView.mas_centerX);
+        make.centerY.equalTo(self.microphoneBigImgView.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(23), LineW(32)));
     }];
     
@@ -89,8 +89,8 @@
 
     
     [_wifismallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_wifiBigImgView.mas_centerX);
-        make.centerY.equalTo(_wifiBigImgView.mas_centerY);
+        make.centerX.equalTo(self.wifiBigImgView.mas_centerX);
+        make.centerY.equalTo(self.wifiBigImgView.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(32), LineW(26)));
     }];
     
@@ -105,7 +105,7 @@
     
     [self.checkingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(_microphoneBigImgView.mas_bottom).with.offset(LineY(50));
+        make.top.equalTo(self.microphoneBigImgView.mas_bottom).with.offset(LineY(50));
         make.height.equalTo(@(25));
     }];
     
@@ -203,19 +203,19 @@
 
         if (singleton.netStatus == YES) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                _microphoneBigImgView.animationImages = nil;
-                _wifiBigImgView.image = UIIMAGE_FROM_NAME(@"WiFi_open");
-                _wifismallImgView.hidden = YES;
-                _wifiBigImgView.animationImages = nil;
+                self.microphoneBigImgView.animationImages = nil;
+                self.wifiBigImgView.image = UIIMAGE_FROM_NAME(@"WiFi_open");
+                self.wifismallImgView.hidden = YES;
+                self.wifiBigImgView.animationImages = nil;
 
             });
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                _microphoneBigImgView.animationImages = nil;
-                _wifiBigImgView.image = UIIMAGE_FROM_NAME(@"WiFi_off");
-                _wifismallImgView.hidden = YES;
-                _wifiBigImgView.animationImages = nil;
+                self.microphoneBigImgView.animationImages = nil;
+                self.wifiBigImgView.image = UIIMAGE_FROM_NAME(@"WiFi_off");
+                self.wifismallImgView.hidden = YES;
+                self.wifiBigImgView.animationImages = nil;
 
             });
         }
@@ -280,7 +280,7 @@
                 
                 [alertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.centerX.equalTo(self.mas_centerX);
-                    make.top.equalTo(_microphoneBigImgView.mas_bottom).with.offset(h+LineY(36)*i);
+                    make.top.equalTo(self.microphoneBigImgView.mas_bottom).with.offset(h+LineY(36)*i);
                     make.height.equalTo(@(25));
                 }];
             }
@@ -322,21 +322,21 @@
 - (void)animaMic:(BOOL)isYes {
     if (isYes == YES) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _wifismallImgView.hidden = NO;
-            _microphoneBigImgView.animationImages = nil;
-            _microphonesmallImgView.hidden = NO;
-            _microphoneBigImgView.image = UIIMAGE_FROM_NAME(@"voice_open");
-            [self animationClick:_wifiBigImgView];
-            _microphonesmallImgView.hidden = YES;
+            self.wifismallImgView.hidden = NO;
+            self.microphoneBigImgView.animationImages = nil;
+            self.microphonesmallImgView.hidden = NO;
+            self.microphoneBigImgView.image = UIIMAGE_FROM_NAME(@"voice_open");
+            [self animationClick:self.wifiBigImgView];
+            self.microphonesmallImgView.hidden = YES;
         });
         
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _wifismallImgView.hidden = NO;
-            _microphoneBigImgView.animationImages = nil;
-            _microphoneBigImgView.image = UIIMAGE_FROM_NAME(@"voice_off");
-            [self animationClick:_wifiBigImgView];
-            _microphonesmallImgView.hidden = YES;
+            self.wifismallImgView.hidden = NO;
+            self.microphoneBigImgView.animationImages = nil;
+            self.microphoneBigImgView.image = UIIMAGE_FROM_NAME(@"voice_off");
+            [self animationClick:self.wifiBigImgView];
+            self.microphonesmallImgView.hidden = YES;
         });
     }
 }
@@ -347,22 +347,22 @@
 - (void)animaCamera:(BOOL)isYes{
     if (isYes == YES) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _microphonesmallImgView.hidden = NO;
-            _cameraBigImgView.animationImages = nil;
-            _camerasmallImgView.hidden = YES;
-            _cameraBigImgView.image = UIIMAGE_FROM_NAME(@"camera_open");
-            [self animationClick:_microphoneBigImgView];
+            self.microphonesmallImgView.hidden = NO;
+            self.cameraBigImgView.animationImages = nil;
+            self.camerasmallImgView.hidden = YES;
+            self.cameraBigImgView.image = UIIMAGE_FROM_NAME(@"camera_open");
+            [self animationClick:self.microphoneBigImgView];
 
         });
         
     } else {
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            _microphonesmallImgView.hidden = NO;
-            _cameraBigImgView.animationImages = nil;
-            _camerasmallImgView.hidden = YES;
-            _cameraBigImgView.image = UIIMAGE_FROM_NAME(@"camera_off");
-            [self animationClick:_microphoneBigImgView];
+            self.microphonesmallImgView.hidden = NO;
+            self.cameraBigImgView.animationImages = nil;
+            self.camerasmallImgView.hidden = YES;
+            self.cameraBigImgView.image = UIIMAGE_FROM_NAME(@"camera_off");
+            [self animationClick:self.microphoneBigImgView];
         });
     }
 }

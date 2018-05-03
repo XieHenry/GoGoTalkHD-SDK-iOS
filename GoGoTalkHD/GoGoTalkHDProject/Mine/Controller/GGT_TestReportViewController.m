@@ -65,7 +65,7 @@
             if (IsStrEmpty([dataArr safe_objectAtIndex:0][@"htmlUrl"])) {
                 
             }else {
-                _rightBtn.hidden = NO;
+                self.rightBtn.hidden = NO;
                 self.shareUrlStr = [dataArr safe_objectAtIndex:0][@"htmlUrl"];
                 self.nameStr = [dataArr safe_objectAtIndex:0][@"NameEn"];
             }

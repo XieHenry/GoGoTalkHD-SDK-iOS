@@ -162,31 +162,31 @@
                 self.nameLabel.text = model.TeacherName;
                 [self reloadFocusOnImgFrame:model.TeacherName];
                 self.selectedIndex = 4;
-                _PScrollView.pageScrollView.status = @"center1";
+                self.PScrollView.pageScrollView.status = @"center1";
             } else if(self.iconDataArray.count == 1){
                 GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.iconDataArray.count/2];
                 self.nameLabel.text = model.TeacherName;
                 [self reloadFocusOnImgFrame:model.TeacherName];
                 self.selectedIndex = 0;
-                _PScrollView.pageScrollView.status = @"first";
+                self.PScrollView.pageScrollView.status = @"first";
                 
             }else {
                 GGT_FocusImgModel *model = [self.iconDataArray safe_objectAtIndex:self.iconDataArray.count/2];
                 self.nameLabel.text = model.TeacherName;
                 [self reloadFocusOnImgFrame:model.TeacherName];
                 self.selectedIndex = self.iconDataArray.count/2;
-                _PScrollView.pageScrollView.status = @"center2";
+                self.PScrollView.pageScrollView.status = @"center2";
                 
             }
             
         } else {
-            _PScrollView.pageScrollView.isfirst = NO;
-            _PScrollView.pageScrollView.status = @"last";
-            _PScrollView.pageScrollView.page = self.page-1;
+            self.PScrollView.pageScrollView.isfirst = NO;
+            self.PScrollView.pageScrollView.status = @"last";
+            self.PScrollView.pageScrollView.page = self.page-1;
             self.selectedIndex = ((self.page-1)*10)-1;
             
         }
-        [_PScrollView.pageScrollView reloadData];
+        [self.PScrollView.pageScrollView reloadData];
         
         
         //获取时间表格数据

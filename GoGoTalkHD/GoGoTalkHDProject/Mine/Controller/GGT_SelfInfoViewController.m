@@ -69,16 +69,16 @@
     
     [[BaseService share] sendGetRequestWithPath:URL_GetStudentInfo token:YES viewController:self success:^(id responseObject) {
         
-        _selfInfoModel = [GGT_SelfInfoModel yy_modelWithDictionary:responseObject[@"data"]];
-        _dataArray = [NSMutableArray array];
-        NSArray *sectionArr1 = @[_selfInfoModel.Mobile,_selfInfoModel.NameEn,_selfInfoModel.Name,_selfInfoModel.Gender,_selfInfoModel.Birthday];
-        NSArray *sectionArr2 = @[_selfInfoModel.FatherName,_selfInfoModel.Address,@""];
+        self.selfInfoModel = [GGT_SelfInfoModel yy_modelWithDictionary:responseObject[@"data"]];
+        self.dataArray = [NSMutableArray array];
+        NSArray *sectionArr1 = @[self.selfInfoModel.Mobile,self.selfInfoModel.NameEn,self.selfInfoModel.Name,self.selfInfoModel.Gender,self.selfInfoModel.Birthday];
+        NSArray *sectionArr2 = @[self.selfInfoModel.FatherName,self.selfInfoModel.Address,@""];
         
-        _dataArray = [NSMutableArray arrayWithObjects:sectionArr1,sectionArr2, nil];
-        [_tableView reloadData];
+        self.dataArray = [NSMutableArray arrayWithObjects:sectionArr1,sectionArr2, nil];
+        [self.tableView reloadData];
         
         //保存英文名
-        [UserDefaults() setObject:_selfInfoModel.NameEn forKey:K_nameEn];
+        [UserDefaults() setObject:self.selfInfoModel.NameEn forKey:K_nameEn];
         [UserDefaults() synchronize];
         
         
@@ -203,7 +203,7 @@
                 vc.getModel = _selfInfoModel;
                 vc.buttonClickBlock = ^(NSString *FieldText) {
                     //下页面进行了post，返回来之后需要刷新数据
-                    _dataArray = [NSMutableArray array];
+                    self.dataArray = [NSMutableArray array];
                     [self getLoadData];
                     
                 };
@@ -217,7 +217,7 @@
                 vc.titleStr = @"中文名";
                 vc.getModel = _selfInfoModel;
                 vc.buttonClickBlock = ^(NSString *FieldText) {
-                    _dataArray = [NSMutableArray array];
+                    self.dataArray = [NSMutableArray array];
                     [self getLoadData];
                 };
                 [self.navigationController pushViewController:vc animated:YES];
@@ -285,7 +285,7 @@
                 vc.titleStr = @"父母称呼";
                 vc.getModel = _selfInfoModel;
                 vc.buttonClickBlock = ^(NSString *FieldText) {
-                    _dataArray = [NSMutableArray array];
+                    self.dataArray = [NSMutableArray array];
                     [self getLoadData];
                     
                 };

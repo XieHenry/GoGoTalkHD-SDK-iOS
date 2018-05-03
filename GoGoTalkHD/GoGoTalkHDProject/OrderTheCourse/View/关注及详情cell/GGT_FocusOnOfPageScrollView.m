@@ -184,7 +184,7 @@
         self.selectedIndex = xInCellNumber;
         [self.delegate pageScrollView:self didTapPageAtIndex:xInCellNumber];
         [UIView animateWithDuration:0.3 animations:^{
-            [self setContentOffset:CGPointMake((_cellSize.width + self.padding) * xInCellNumber, 0)];
+            [self setContentOffset:CGPointMake((self.cellSize.width + self.padding) * xInCellNumber, 0)];
         }];
     }
 }
