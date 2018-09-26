@@ -70,6 +70,7 @@
 #import "TKMacro.h"
 #import <TKRoomSDK/TKRoomSDK.h>
 #import "TKModelToJson.h"
+#import "TKUtil.h"
 
 static NSString * const xc_returnCode = @"result";
 static NSString * const xc_returnMsg = @"msg";

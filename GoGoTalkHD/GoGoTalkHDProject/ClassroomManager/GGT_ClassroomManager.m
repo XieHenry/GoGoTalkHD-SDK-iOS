@@ -7,14 +7,8 @@
 //
 
 #import "GGT_ClassroomManager.h"
-
-// 拓课
-#import "TKEduClassRoom.h"
-#import "TKMacro.h"
-#import "TKUtil.h"
-
-// 百家云
-#import "BJRoomViewController.h"
+#import "TKEduClassRoom.h" // 拓课
+#import "BJRoomViewController.h" // 百家云
 
 @interface GGT_ClassroomManager ()<TKEduRoomDelegate>
 @property (nonatomic, strong) GGT_CourseCellModel *xc_model;
@@ -23,8 +17,7 @@
 
 @implementation GGT_ClassroomManager
 
-+ (instancetype)share
-{
++ (instancetype)share {
     static GGT_ClassroomManager *shareInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -35,16 +28,14 @@
 
 
 #pragma mark - 进入拓课的方法
-+ (void)tk_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock
-{
++ (void)tk_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock {
     GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
     manager.xc_model = model;
     [manager enterTKClassroomWithCourseModel:model viewController:viewController];
     manager.xc_leftRoomBlock = leftRoomBlock;
 }
 
-- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model viewController:(UIViewController *)viewController
-{
+- (void)enterTKClassroomWithCourseModel:(GGT_CourseCellModel *)model viewController:(UIViewController *)viewController {
 
 //    model.serial = @"755158726";
 //    model.serial = @"240966698";
@@ -73,7 +64,7 @@
 }
 
 //error.code  Description:error.description
-- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
+- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc {
     if ([desc isEqualToString:MTLocalized(@"Error.NeedPwd")]) {     // 需要密码错误日志不发送
         
     } else {
@@ -81,10 +72,10 @@
         [XCLogManager xc_readDataFromeFile];
     }
 }
-- (void) onKitout:(EKickOutReason)reason{
+- (void) onKitout:(EKickOutReason)reason {
     TKLog(@"-----onKitout");
 }
-- (void) joinRoomComplete{
+- (void) joinRoomComplete {
     TKLog(@"-----joinRoomComplete");
     [XCLogManager xc_readDataFromeFile];
     
@@ -95,7 +86,7 @@
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.isInRoom = YES;
 }
-- (void) leftRoomComplete{
+- (void) leftRoomComplete {
     TKLog(@"-----leftRoomComplete");
     [XCLogManager xc_deleteLogData];
     
@@ -106,20 +97,19 @@
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];
     single.isInRoom = NO;
 }
-- (void) onClassBegin{
+- (void) onClassBegin {
     TKLog(@"-----onClassBegin");
 }
-- (void) onClassDismiss{
+- (void) onClassDismiss {
     NSLog(@"-----onClassDismiss");
     [TKEduClassRoom leftRoom];
 }
-- (void) onCameraDidOpenError{
+- (void) onCameraDidOpenError {
     TKLog(@"-----onCameraDidOpenError");
 }
 
 #pragma mark - 进入教室调用接口 更新接口
-- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
-{
+- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"LessonId"] = model.LessonId;
     
@@ -132,8 +122,7 @@
 }
 
 #pragma mark - 进入百家云的接口
-+ (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model
-{
++ (void)bjy_enterClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model {
 
     GGT_ClassroomManager *manager = [GGT_ClassroomManager share];
     manager.xc_model = model;
@@ -156,8 +145,7 @@
 }
 
 // 调用接口 区别进入那个教室
-+ (void)chooseClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock
-{
++ (void)chooseClassroomWithViewController:(UIViewController *)viewController courseModel:(GGT_CourseCellModel *)model leftRoomBlock:(TKLeftClassroomBlock)leftRoomBlock {
     
     NSString *url = [NSString stringWithFormat:@"%@?lessonId=%@", URL_GetLessonByLessonId, model.LessonId];
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:viewController showMBProgress:YES success:^(id responseObject) {
