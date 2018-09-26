@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 //@import UIKit;
 #import <UIKit/UIKit.h>
-@class RoomUser;
+@class TKRoomUser;
 #import "TKMacro.h"
 typedef int(^bCheckRoomdidComplete)( id _Nullable response ,NSString* _Nullable aPassWord);
 typedef int(^bCheckRoomError)( NSError *_Nullable aError);
@@ -39,7 +39,7 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 +(void)translation:(NSString * _Nonnull )aTranslationString aTranslationComplete:(bTranslationComplete _Nonnull )aTranslationComplete;
 +(void)delRoomFile:(NSString * _Nonnull )roomID docid:(NSString *_Nonnull)docid isMedia:(bool)isMedia    aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aDelComplete:(bComplete _Nonnull )aDelComplete aNetError:(bError _Nullable) aNetError;
 
-+(void)sendGifForRoomUser:(NSArray *_Nonnull)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError;
++(void)sendGifForRoomUser:(NSArray *_Nonnull)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(TKRoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError;
 #pragma mark 上传文档
 + (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*_Nullable)roomID fileData:(NSData *_Nullable)fileData fileName:(NSString *_Nullable)fileName  fileType:(NSString *_Nullable)fileType userName:(NSString *_Nullable)userName userID:(NSString *_Nullable)userID delegate:(id _Nullable )delegate;
 
@@ -49,7 +49,16 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 #pragma mark 下课
 +(void)classBeginEnd:(NSString * _Nonnull )roomID companyid:(NSString *_Nonnull)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
-#pragma mark 上课
+/**
+ roomstart  上课
+
+ @param roomID 课堂号
+ @param companyid 公司id
+ @param aHost host
+ @param aPort port
+ @param aComplete 返回消息
+ @param aNetError 错误消息
+ */
 +(void)classBeginStar:(NSString * _Nonnull )roomID companyid:(NSString *_Nonnull)companyid  aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aComplete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
 #pragma mark 获取区域列表
@@ -90,6 +99,13 @@ typedef int(^bSendGifInfoError)( NSError *_Nullable aError);
 
 
 
+/**
+ 获取服务器时间
+
+ @param aParam 请求参数
+ @param aComplete 返回消息
+ @param aNetError 错误消息
+ */
 +(void)systemtime:(NSDictionary *_Nonnull)aParam Complete:(bComplete _Nonnull )aComplete aNetError:(bError _Nullable) aNetError;
 
 @end

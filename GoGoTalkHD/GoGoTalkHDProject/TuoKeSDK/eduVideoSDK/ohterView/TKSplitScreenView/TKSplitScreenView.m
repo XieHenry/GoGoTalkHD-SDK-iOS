@@ -10,8 +10,7 @@
 #import "TKVideoOneView.h"
 #import "TKVideoTwoLinesView.h"
 #import "TKVideoThreeLinesView.h"
-#import "TKVideoThirteenView.h"
-#import "RoomUser.h"
+#import "TKVideoThirteenView.h" 
 
 
 @interface TKSplitScreenView()

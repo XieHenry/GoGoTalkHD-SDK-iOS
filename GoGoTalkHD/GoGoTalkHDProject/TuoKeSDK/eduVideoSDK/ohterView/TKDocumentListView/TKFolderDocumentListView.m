@@ -12,7 +12,6 @@
 #import "TKUserListTableViewCell.h"
 #import "TKMediaDocModel.h"
 #import "TKDocmentDocModel.h"
-#import "RoomUser.h"
 #import "RoomController.h"
 #import "TKProgressHUD.h"
 #import "TKEduNetManager.h"
@@ -189,7 +188,7 @@
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = tString;
             tCell.iIndexPath = indexPath;
-            RoomUser *tRoomUser = [_iFileMutableArray objectAtIndex:indexPath.row];
+            TKRoomUser *tRoomUser = [_iFileMutableArray objectAtIndex:indexPath.row];
             [tCell configaration:tRoomUser withFileListType:FileListTypeUserList isClassBegin:_isClassBegin];
 
             // 设置为NO后cell无法响应cell内的按钮点击事件
@@ -301,10 +300,10 @@
         
         NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"), @([_iFileMutableArray count])];
         _iFileHeadLabel.text = MTLocalized(tString);
-        RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:indexPath.row];
+        TKRoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:indexPath.row];
         
         // 助教不能上下台
-        if (tRoomUser.role == UserType_Assistant && [TKEduSessionHandle shareInstance].roomMgr.assistantCanPublish == NO) {
+        if (tRoomUser.role == UserType_Assistant && [[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].assistantCanPublish == NO) {
             //[tableView deselectRowAtIndexPath:indexPath animated:NO];
             return;
         }
@@ -583,7 +582,7 @@
         case FileListTypeUserList:
         {
             _iFileHeadLabel.text = MTLocalized(@"Title.UserList");
-            RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
+            TKRoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
             PublishState tState = (PublishState)tRoomUser.publishState;
             BOOL isShowVideo = tRoomUser.publishState >1;
             
@@ -712,7 +711,7 @@
         {
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
-            RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
+            TKRoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
             PublishState tState =(PublishState) tRoomUser.publishState;
             switch (tRoomUser.publishState) {
                     
@@ -841,7 +840,7 @@
             //关闭涂鸦
             NSString *tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.UserList"),@([_iFileMutableArray count])];
             _iFileHeadLabel.text = MTLocalized(tString);
-            RoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
+            TKRoomUser *tRoomUser =[_iFileMutableArray objectAtIndex:aIndexPath.row];
             if (tRoomUser.publishState>1) {
                  [[TKEduSessionHandle shareInstance]configureDraw:!tRoomUser.canDraw isSend:true to:sTellAll peerID:tRoomUser.peerID];
                 //[[TKEduSessionHandle shareInstance]  sessionHandleChangeUserProperty:tRoomUser.peerID TellWhom:sTellAll Key:sCandraw Value:@((bool)(!tRoomUser.canDraw)) completion:nil];

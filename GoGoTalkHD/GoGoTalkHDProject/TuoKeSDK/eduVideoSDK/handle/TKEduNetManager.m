@@ -13,7 +13,6 @@
 #import "TKUtil.h"
 #import "TKEduSessionHandle.h"
 #import "TKEduRoomProperty.h"
-#import "RoomUser.h"
 #import "NSAttributedString+JTATEmoji.h"
 #import "TKMP3ToPCM.h"
 
@@ -62,6 +61,67 @@ extern int expireSeconds;
 }
 
 -(void)checkRoom:(NSDictionary *_Nonnull)aParam  aDidComplete:(bCheckRoomdidComplete _Nullable )aDidComplete aNetError:(bCheckRoomError _Nullable) aNetError{
+//            //1。创建管理者对象
+//            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//            //    manager.baseURL.scheme = @"https";
+//            manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+//                                                                                      @"text/html",
+//                                                                                      @"text/json",
+//                                                                                      @"text/plain",
+//                                                                                      @"text/javascript",
+//                                                                                      @"text/xml",@"image/jpeg",
+//                                                                                      @"image/*"]];
+//
+//            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//            manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+//
+//            // https ssl 验证。
+//            [manager setSecurityPolicy:[self customSecurityPolicy]];
+//            manager.requestSerializer.timeoutInterval = 60;
+//
+//
+//            NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+//            [NSURLCache setSharedURLCache:URLCache];
+//
+//            __block NSURLSessionDataTask *session = nil;
+//            _aCheckMeetingDidComplete  = aDidComplete;
+//            _aCheckMeetingError       = aNetError;
+//            NSString *tPassword = @"";
+//            NSString *tHost = [aParam objectForKey:@"host"]?[aParam objectForKey:@"host"]:sHost;
+//            NSString *tPort= [aParam objectForKey:@"port"]?[aParam objectForKey:@"port"]:sPort;
+//            session =   [manager POST:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/checkroom",sHttp,tHost ,tPort] parameters: aParam progress:^(NSProgress * _Nonnull uploadProgress) {
+//
+//
+//
+//            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//                do
+//                {
+//                    if (responseObject == nil)
+//                        break;
+//                    if ([responseObject isKindOfClass:[NSData class]]){
+//                        id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+//
+//                        if (aDidComplete) {
+//                            aDidComplete(json,tPassword);
+//                        }
+//                    }
+//
+//
+//                }while(0);
+//
+//
+//
+//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//
+//                if (aNetError) {
+//                    aNetError(error);
+//                }
+//                NSLog(@"-----------%@",error.description);
+//            }];
+//            [session resume];
+
     //1。创建管理者对象
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
     manager.responseSerializer = [TKAFHTTPResponseSerializer serializer];
@@ -73,18 +133,18 @@ extern int expireSeconds;
                                                                               @"text/javascript",
                                                                               @"text/xml",@"image/jpeg",
                                                                               @"image/*"]];
-    
+
     manager.requestSerializer = [TKAFHTTPRequestSerializer serializer];
     manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
-    
+
     // https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     manager.requestSerializer.timeoutInterval = 60;
-    
-    
+
+
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
-    
+
     __block NSURLSessionDataTask *session = nil;
     _aCheckMeetingDidComplete  = aDidComplete;
     _aCheckMeetingError       = aNetError;
@@ -92,30 +152,30 @@ extern int expireSeconds;
     NSString *tHost = [aParam objectForKey:@"host"]?[aParam objectForKey:@"host"]:sHost;
     NSString *tPort= [aParam objectForKey:@"port"]?[aParam objectForKey:@"port"]:sPort;
     session =   [manager POST:[NSString stringWithFormat:@"%@://%@:%@/ClientAPI/checkroom",sHttp,tHost ,tPort] parameters: aParam progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-        
-        
+
+
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+
         do
         {
             if (responseObject == nil)
                 break;
             if ([responseObject isKindOfClass:[NSData class]]){
                 id json = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-                
+
                 if (aDidComplete) {
                     aDidComplete(json,tPassword);
                 }
             }
-            
-            
+
+
         }while(0);
-        
-        
-        
+
+
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+
         if (aNetError) {
             aNetError(error);
         }
@@ -192,17 +252,17 @@ extern int expireSeconds;
 }
 #pragma mark 请求礼物
 
-+(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
++(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(TKRoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
     
     [[self shareInstance] sendGifForRoomUser:aRoomUserArray roomID:roomID aMySelf:aMySelf aHost:aHost aPort:aPort aSendComplete:aSendComplete aNetError:aNetError];
     
 }
 
--(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(RoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
+-(void)sendGifForRoomUser:(NSArray *)aRoomUserArray  roomID:(NSString * _Nonnull )roomID   aMySelf:(TKRoomUser *_Nonnull)aMySelf aHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort aSendComplete:(bSendGifInfoComplete _Nonnull )aSendComplete aNetError:(bError _Nullable) aNetError{
     
     NSMutableDictionary *tParamDic = @{@"serial":roomID,@"sendid":aMySelf.peerID,@"sendname":aMySelf.nickName}.mutableCopy;
     NSMutableDictionary *tJS = [[NSMutableDictionary alloc]initWithCapacity:10];
-    for (RoomUser *aRoomUser in aRoomUserArray) {
+    for (TKRoomUser *aRoomUser in aRoomUserArray) {
         [tJS setObject:aRoomUser.nickName forKey:aRoomUser.peerID];
         
     }
@@ -547,7 +607,7 @@ extern int expireSeconds;
 {
     NSDictionary *tParamDic;
     
-    if ([[TKEduSessionHandle shareInstance].roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
+    if ([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].companyid isEqualToString:YLB_COMPANYID]) {
         tParamDic = @{@"serial":roomID,@"companyid":companyid};
     } else {
        //tParamDic = @{@"serial":roomID,@"companyid":companyid, @"expiresabs":@(expireSeconds)};
@@ -938,7 +998,7 @@ extern int expireSeconds;
     [session resume];
 }
 #pragma mark 其他
-+ (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort  roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID delegate:(id)delegate{
++ (int)uploadWithaHost:(NSString*_Nonnull)aHost aPort:(NSString *_Nonnull)aPort roomID:(NSString*)roomID fileData:(NSData *)fileData fileName:(NSString *)fileName  fileType:(NSString *)fileType userName:(NSString *)userName userID:(NSString *)userID delegate:(id)delegate{
     
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
     NSString*requestURL= [NSString stringWithFormat:@"%@://%@:%@/ClientAPI/uploaddocument",sHttp,aHost ,aPort];

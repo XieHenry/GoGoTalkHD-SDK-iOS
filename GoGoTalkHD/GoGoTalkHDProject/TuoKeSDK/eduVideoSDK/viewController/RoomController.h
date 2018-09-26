@@ -57,6 +57,8 @@ static NSString *const sStudentCellIdentifier           = @"studentCellIdentifie
 static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifier";
 
 @interface RoomController : UIViewController
+
+@property (nonatomic, assign) BOOL isConnect;
 //视频的宽高属性
 @property (nonatomic, assign) CGFloat maxVideo;
 @property (nonatomic, assign) CGFloat VideoSmallViewLittleWidth;
@@ -83,6 +85,10 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic, strong) UILabel *titleLable;
 
 @property (nonatomic, strong) TKClassTimeView *iClassTimeView;
+
+//测试
+@property (nonatomic, strong) UILabel *cpuLabel;
+@property (nonatomic, strong) UILabel *memoryLabel;
 
 @property(nonatomic,retain)UIView   *iMidView;
 @property(nonatomic,retain)UIView   *iRightView;//左视图
@@ -141,11 +147,29 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 @property (nonatomic, assign) BOOL networkRecovered;
 
 
+/**
+ 初始化课堂
+
+ @param aRoomDelegate 进入房间回调
+ @param aParamDic 进入课堂所需参数
+ @param aRoomName roomName
+ @param aRoomProperty 课堂参数
+ @return self
+ */
 - (instancetype)initWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
                        aParamDic:(NSDictionary *)aParamDic
                        aRoomName:(NSString *)aRoomName
                    aRoomProperty:(TKEduRoomProperty *)aRoomProperty;
 
+/**
+ 初始化回放课堂
+ 
+ @param aRoomDelegate 进入房间回调
+ @param aParamDic 进入课堂所需参数
+ @param aRoomName roomName
+ @param aRoomProperty 课堂参数
+ @return self
+ */
 - (instancetype)initPlaybackWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
                                aParamDic:(NSDictionary *)aParamDic
                                aRoomName:(NSString *)aRoomName
@@ -284,15 +308,15 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
  @param user 用户
  */
--(void)playVideo:(RoomUser*)user;
--(void)myPlayVideo:(RoomUser*)aRoomUser aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion;
+-(void)playVideo:(TKRoomUser *)user;
+-(void)myPlayVideo:(TKRoomUser *)aRoomUser aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion;
 /**
  停止播放
 
- @param user 用户
+ @param peerID 用户
  */
--(void)unPlayVideo:(RoomUser*)user;
--(void)myUnPlayVideo:(RoomUser*)aRoomUser aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion;
+-(void)unPlayVideo:(NSString *)peerID;
+-(void)myUnPlayVideo:(NSString *)peerID aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion;
 
 
 /**
@@ -323,7 +347,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
  @param error error
  */
-- (void)sessionManagerRoomJoined:(NSError *)error;
+- (void)sessionManagerRoomJoined;
 
 /**
  获取礼物数
@@ -337,7 +361,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
  @param user 用户
  */
-- (void)sessionManagerUserPublished:(RoomUser *)user;
+- (void)sessionManagerUserPublished:(TKRoomUser *)user;
 
 /**
  退出清楚数据
@@ -350,5 +374,13 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
  @param peerIdToScaleDic 缩放内容
  */
 - (void)sScaleVideo:(NSDictionary *)peerIdToScaleDic;
+
+/**
+ 全屏通知
+
+ @param aNotification 通知
+ */
 -(void)fullScreenToLc:(NSNotification*)aNotification;
+
+- (void)showMessage:(NSString *)message;
 @end

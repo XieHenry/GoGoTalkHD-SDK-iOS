@@ -4,8 +4,7 @@
  
  Created by macmini on 15/2/3.
  Copyright (c) 2015年 macmini. All rights reserved.
- */
-
+ */ 
 "Error.NoMeeting" = "教室号不存在";
 "Error.NoLiving" = "直播不存在";
 "Error.NotSupportThisType" = "不支持这种直播类型，请用电脑端登陆";
@@ -32,6 +31,7 @@
 "Prompt.RoomIDNotNull" = "教室号不能为空";
 "Prompt.devicetPrompt" = "当前的设备配置较低，仅提供两路视频";
 "Prompt.onlyNumber" = "教室号只能是数字";
+"Prompt.NotRepeatChat" = "请勿在聊天区刷屏";
 "Login.EnterRoom" = "进入教室";
 "Login.RoomId" = "教室号";
 "Login.RoomIdPlaceHolder"    = "教室号";

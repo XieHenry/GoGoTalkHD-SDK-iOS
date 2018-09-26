@@ -34,26 +34,41 @@
     self.inputView = _iPickView;// 重点！ 这样点击TextField就会弹出pickerView了.
     
 
-    _iDataArray = @[MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Student"),MTLocalized(@"Role.Patrol")];//0-老师 ,1-助教，2-学生 4-寻课
+    _iDataArray = @[MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Student"),MTLocalized(@"Role.Patrol")];//0-老师 ,2-学生 4-寻课
     
-    NSString  *role = [[NSUserDefaults standardUserDefaults] objectForKey:@"userrole"];
-   
-    if (role != nil && [role isKindOfClass:[NSString class]])
+    NSNumber  *role = [[NSUserDefaults standardUserDefaults] objectForKey:@"userrole"];
+
+    if (role != nil && [role isKindOfClass:[NSNumber class]])
     {
-        NSInteger index = [_iDataArray indexOfObject:role];
-        switch (index) {
-            case 0:
-                _iRole = 0;
+//    NSInteger index = 0;
+//    switch ([role intValue]) {
+//        case 0:
+//            index = 0;
+//            break;
+//        case 1:
+//            index = 2;
+//            break;
+//        case 2:
+//            index = 1;
+//            break;
+//        default:
+//            break;
+//    }
+        NSInteger index = 0;
+        switch ([role intValue]) {
+            case UserType_Teacher:
+                index = 0;
                 break;
-            case 1:
-                _iRole = 2;
+            case UserType_Student:
+                index = 1;
                 break;
-            case 2:
-                _iRole = 4;
+            case UserType_Patrol:
+                index = 2;
                 break;
             default:
                 break;
         }
+    
         
         /* default selected item */
         [self setText:[_iDataArray objectAtIndex:index]];// 设置TextField默认显示学生
@@ -101,13 +116,17 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
+//    _iDataArray = @[MTLocalized(@"Role.Teacher"),MTLocalized(@"Role.Student"),MTLocalized(@"Role.Patrol")];//0-老师 ,2-学生 4-寻课
+    
+    
     self.text = [_iDataArray objectAtIndex:row];
     switch (row) {
-        //学生
+        //老师
         case 0:
             _iRole = 0;
             break;
-        //老师
+        //学生
         case 1:
             _iRole = 2;
             break;
@@ -118,7 +137,6 @@
         default:
             break;
     }
-    TKLog(@"%@",@(_iRole));
     if (_iTKPickerViewDelegate && [_iTKPickerViewDelegate respondsToSelector:@selector(tkPickerViewSelectedRole:)]) {
         
         [(id<TKPickerViewDelegate>) _iTKPickerViewDelegate tkPickerViewSelectedRole:_iRole];
@@ -136,7 +154,6 @@
     
     [self resignFirstResponder];
     [super resignFirstResponder];
-    NSLog(@"%@",@(_iRole));
     if (_iTKPickerViewDelegate && [_iTKPickerViewDelegate respondsToSelector:@selector(tkPickerViewSelectedRole:)]) {
         
         [(id<TKPickerViewDelegate>) _iTKPickerViewDelegate tkPickerViewSelectedRole:_iRole];

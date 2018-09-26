@@ -24,6 +24,7 @@
     _iRoomId      = [params objectForKey:@"serial"]?[params objectForKey:@"serial"]:@"";
     _iCompanyID   = [params objectForKey:@"companyId"]?[params objectForKey:@"companyId"]:@"";
     _defaultServerArea = [params objectForKey:@"server"]?[params objectForKey:@"server"]:@"";
+    _whiteboardcolor = [params objectForKey:@"whiteboardcolor"]?[params objectForKey:@"whiteboardcolor"]:@"";
 }
 
 @end

@@ -52,7 +52,7 @@ typedef CGPoint (^bVideoSmallViewClickeBlockType)(void);
 @property(assign,nonatomic)BOOL isSplit;
 
 /** *  当前的用户 */
-@property(strong,nonatomic)RoomUser *_Nullable iRoomUser;
+@property(strong,nonatomic)TKRoomUser *_Nullable iRoomUser;
 
 /** *  视频view */
 @property (nonatomic, weak) UIView * _Nullable  iRealVideoView;

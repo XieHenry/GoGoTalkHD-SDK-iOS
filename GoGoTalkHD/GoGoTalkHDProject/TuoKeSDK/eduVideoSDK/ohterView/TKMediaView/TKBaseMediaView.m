@@ -10,35 +10,46 @@
 #import "TKProgressSlider.h"
 #import "TKEduSessionHandle.h"
 #import "TKUtil.h"
-#import "MediaStream.h"
 
 @interface TKBaseMediaView ()
 
 @property (nonatomic, assign) BOOL isScreenShare;
 @property (nonatomic, assign) BOOL isFileShare;
 
+@property (nonatomic, assign) BOOL iIsPlay;
+@property (nonatomic, assign) BOOL isPlayEnd;
+@property (nonatomic, assign) BOOL isPlay;
+@property (nonatomic, assign) NSInteger width;
+@property (nonatomic, assign) NSInteger height;
+@property (nonatomic, strong) NSString *filename;
+
 @end
 
 @implementation TKBaseMediaView
 
-- (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
-                              frame:(CGRect)frame
-                      sessionHandle:(TKEduSessionHandle *)sessionHandle
+- (instancetype)initWithMedia:(NSDictionary *)extension
+                        frame:(CGRect)frame
+                sessionHandle:(TKEduSessionHandle *)sessionHandle
 
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-        _iMediaStream = aMediaStream;
+        self.width = [TKUtil getIntegerValueFromDic:extension Key:@"width"];
+        self.height = [TKUtil getIntegerValueFromDic:extension Key:@"height"];
+        self.isPlay = ![TKUtil getBOOValueFromDic:extension Key:@"pause"];
+        self.hasVideo = [TKUtil getBOOValueFromDic:extension Key:@"video"];
+        self.filename = [TKUtil optString:extension Key:@"filename"];
+        
         _isPlayEnd      = NO;
-        _duration       = aMediaStream.duration;
+        _duration       = [TKUtil getIntegerValueFromDic:extension Key:@"duration"];
         _isScreenShare  = NO;
         _isFileShare = NO;
         [TKEduSessionHandle shareInstance].isPlayMedia = YES;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
         
-        if (aMediaStream.hasVideo) {
+        if (self.hasVideo) {
             [self ac_initVideoSubviews];
         }else{
             [self ac_initAudioSubviews];
@@ -96,7 +107,7 @@
     if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback)) {
         self.iDiskButtion = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 57, 57)];
         [self.iDiskButtion setImage:LOADIMAGE(@"disk") forState:UIControlStateNormal];
-        if ( _iMediaStream.isPlay) {
+        if ( self.isPlay) {
             
             CABasicAnimation *tRotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
             tRotationAnimation.toValue     = [NSNumber numberWithFloat: M_PI * 2.0 ];
@@ -113,8 +124,9 @@
         [self.playButton setImage:LOADIMAGE(@"playBtn") forState:UIControlStateNormal];
         [self.playButton setImage:LOADIMAGE(@"pauseBtn") forState:UIControlStateSelected];
         [self.playButton addTarget:self action:@selector(playOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.playButton.selected = _iMediaStream.isPlay;
+        self.playButton.selected = self.isPlay;
         self.backgroundColor = [UIColor clearColor];
+        
         
         return;
     }
@@ -133,12 +145,12 @@
     [self.playButton setImage:LOADIMAGE(@"playBtn") forState:UIControlStateNormal];
     [self.playButton setImage:LOADIMAGE(@"pauseBtn") forState:UIControlStateSelected];
     [self.playButton addTarget:self action:@selector(playOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.playButton.selected = _iMediaStream.isPlay;
+    self.playButton.selected = self.isPlay;
     [self addSubview:self.playButton];
     
     //名称
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.playButton.frame)+20, 0, 315, 25)];
-    self.titleLabel.text = self.iMediaStream.filename;
+    self.titleLabel.text = self.filename;
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.titleLabel];
@@ -176,8 +188,6 @@
 
 - (void)ac_initVideoSubviews
 {
-    
-    
     if (([TKEduSessionHandle shareInstance].localUser.role==UserType_Student) ||([TKEduSessionHandle shareInstance].localUser.role==UserType_Patrol) || ([TKEduSessionHandle shareInstance].localUser.role==UserType_Playback) || self.isScreenShare){
         return;
     }
@@ -202,7 +212,7 @@
     [self.playButton setImage:LOADIMAGE(@"playBtn") forState:UIControlStateNormal];
     [self.playButton setImage:LOADIMAGE(@"pauseBtn") forState:UIControlStateSelected];
     [self.playButton addTarget:self action:@selector(playOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.playButton.selected = _iMediaStream.isPlay;
+    self.playButton.selected = self.isPlay;
     [self.bottmView addSubview:self.playButton];
     
     //声道滑块
@@ -240,7 +250,7 @@
     self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.iProgressSlider.frame)- labelsize.width-10, 8, labelsize.width+10, labelsize.height);
     
     self.titleLabel      = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.playButton.frame)+tViewCap, 8, tProgressSliderW- labelsize.width-10, 25)];
-    self.titleLabel.text = self.iMediaStream.filename;
+    self.titleLabel.text = self.filename;
     self.titleLabel.textColor = RGBACOLOR_Title_White;
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
     [self.bottmView addSubview:self.titleLabel];
@@ -249,20 +259,23 @@
     [self.activity setCenter:self.center];//指定进度轮中心点
     [self.activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];//设置进度轮显示类型
     self.activity.hidesWhenStopped = YES;
-    [self addSubview:self.activity];
+//    [self addSubview:self.activity];
     
 }
 - (void)loadLoadingView{
     CGFloat loadingH = ScreenH * 2 / 3;
     UIImage *img = LOADIMAGE(@"mediaLoading1.png");
     CGFloat scale = img.size.width / img.size.height;
+    _loadBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
+    _loadBackgroundView.backgroundColor = [UIColor blackColor];
+    [self addSubview:_loadBackgroundView];
     _loadingView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scale * loadingH, loadingH)];
     _loadingView.center = CGPointMake(self.center.x, self.center.y);
     _loadingView.animationDuration = 0.3;
     _loadingView.animationRepeatCount = 0;
     _loadingView.animationImages = @[img, LOADIMAGE(@"mediaLoading2.png"), LOADIMAGE(@"mediaLoading3.png")];
     [_loadingView startAnimating];
-    [self addSubview:_loadingView];
+    [_loadBackgroundView addSubview:_loadingView];
 }
 #pragma mark - 响应事件
 
@@ -296,7 +309,10 @@
     [[TKEduSessionHandle shareInstance]sessionHandleMediaPause:!start];
     [[TKEduSessionHandle shareInstance]configurePlayerRoute: NO isCancle:NO];
     
-    if ([TKEduSessionHandle shareInstance].roomMgr.videoWhiteboardFlag && [TKEduSessionHandle shareInstance].isClassBegin) {
+    if (!self.hasVideo) {
+        return;
+    }
+    if ([[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].videoWhiteboardFlag && [TKEduSessionHandle shareInstance].isClassBegin) {
         
         [self refreshVideoWhiteBoard:start];
     }
@@ -316,9 +332,9 @@
             
             [self loadWhiteBoard];
             
-            if (_iMediaStream.height>0) {
+            if (self.height>0) {
                 
-                [TKEduSessionHandle shareInstance].videoRatio = @(_iMediaStream.width*1.0/_iMediaStream.height);
+                [TKEduSessionHandle shareInstance].videoRatio = @(self.width*1.0/self.height);
                 
                 [[TKEduSessionHandle shareInstance]sessionHandlePubMsg:sVideoWhiteboard ID:sVideoWhiteboard To:sTellAll Data:[TKEduSessionHandle shareInstance].videoRatio Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
             }
@@ -366,16 +382,11 @@
     }];
     
     self.iVideoBoardView = tVideoBoardView;
-    for (UIView *view in self.subviews) {
-        if (view.tag == 10001)
-        {
-            [view addSubview:self.iVideoBoardView];
-            [view bringSubviewToFront:self.iVideoBoardView];
-        }
-    }
-    
-    
-    
+    [self addSubview:self.iVideoBoardView];
+    [self bringSubviewToFront:self.iVideoBoardView];
+    [self bringSubviewToFront:self.backButton];
+    [self bringSubviewToFront:self.bottmView];
+   
 }
 - (void)hiddenVideoWhiteBoard{
     self.iVideoBoardView.hidden = YES;
@@ -394,8 +405,8 @@
     
     if (start == NO) {
          self.iVideoBoardView.hidden = NO;
-        if (_iMediaStream.height>0 && [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
-            [TKEduSessionHandle shareInstance].videoRatio = @(_iMediaStream.width*1.0/_iMediaStream.height);
+        if (self.height>0 && [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
+            [TKEduSessionHandle shareInstance].videoRatio = @(self.width*1.0/self.height);
         }
     }
     
@@ -443,7 +454,8 @@
     CGFloat tVolume                 = aButton.selected ? 0 : 1;
     [TKEduSessionHandle shareInstance].iVolume  = tVolume;
     self.iAudioslider.sliderPercent = tVolume;
-    [[TKEduSessionHandle shareInstance]sessionHandleMediaVolum:tVolume];
+    //FIXME:todo
+    [[TKEduSessionHandle shareInstance] sessionHandleMediaVolum:tVolume peerId:[TKEduSessionHandle shareInstance].roomMgr.localUser.peerID];
 }
 
 // 音量大小滑块
@@ -456,7 +468,8 @@
 -(void)audioVolum:(CGFloat)volum{
     _iAudioButton.selected = (volum==0);
     [TKEduSessionHandle shareInstance].iVolume = volum;
-    [[TKEduSessionHandle shareInstance]sessionHandleMediaVolum:volum*10];
+        //FIXME:todo
+    [[TKEduSessionHandle shareInstance]sessionHandleMediaVolum:volum peerId:[TKEduSessionHandle shareInstance].roomMgr.localUser.peerID];
 }
 - (void)update:(NSTimeInterval)current total:(NSTimeInterval)total
 {
@@ -495,9 +508,48 @@
 {
     if (_loadingView) {
         [_loadingView stopAnimating];
+        [_loadBackgroundView removeFromSuperview];
         [_loadingView removeFromSuperview];
         _loadingView = nil;
+        _loadBackgroundView = nil;
     }
 }
 
+- (void)setVideoViewToBack
+{
+    if (self.hasVideo) {
+        if (self.backButton) {
+            [self bringSubviewToFront:self.backButton];
+        }
+        if (self.bottmView) {
+            [self bringSubviewToFront:self.bottmView];
+        }
+    } else {
+        if (self.iDiskButtion) {
+            [self bringSubviewToFront:self.iDiskButtion];
+        }
+        if (self.backButton) {
+            [self bringSubviewToFront:self.backButton];
+        }
+        if (self.playButton) {
+            [self bringSubviewToFront:self.playButton];
+        }
+        if (self.titleLabel) {
+            [self bringSubviewToFront:self.titleLabel];
+        }
+        if (self.timeLabel) {
+            [self bringSubviewToFront:self.timeLabel];
+        }
+        if (self.iProgressSlider) {
+            [self bringSubviewToFront:self.iProgressSlider];
+        }
+        if (self.iAudioButton) {
+            [self bringSubviewToFront:self.iAudioButton];
+        }
+        if (self.iAudioslider) {
+            [self bringSubviewToFront:self.iAudioslider];
+        }
+        
+    }
+}
 @end

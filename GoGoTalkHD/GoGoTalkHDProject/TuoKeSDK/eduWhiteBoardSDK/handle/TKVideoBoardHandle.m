@@ -399,50 +399,52 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.182:1314/publish/i
     }];
 }
 #pragma mark - WKNavigationDelegate
-
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0)) {
+    TKLog(@"WKWebView 总体内存占用过大，页面即将白屏");
+}
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    TKLog(@"页面开始加载时调用");
+    TKLog(@"WKWebView 页面开始加载时调用");
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    TKLog(@"当内容开始返回时调用");
+    TKLog(@"WKWebView 当内容开始返回时调用");
 }
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    TKLog(@"页面加载完成之后调用");
+    TKLog(@"WKWebView 页面加载完成之后调用");
 }
 
 
 //提交发生错误时调用
 -(void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    TKLog(@"%@", error.debugDescription);
+    TKLog(@"WKWebView %@", error.debugDescription);
 }
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
     
-    TKLog(@"页面加载失败时调用");
+    TKLog(@"WKWebView 页面加载失败时调用");
 }
 
 
 //  接收到服务器跳转请求之后调用
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
-    TKLog(@"接收到服务器跳转请求之后调用");
+    TKLog(@"WKWebView 接收到服务器跳转请求之后调用");
     
 }
 
 //  在收到响应后，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-    TKLog(@"在收到响应后，决定是否跳转");
+    TKLog(@"WKWebView 在收到响应后，决定是否跳转");
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
 
 //  在发送请求之前，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     decisionHandler(WKNavigationActionPolicyAllow);
-    TKLog(@"在发送请求之前，决定是否跳转");
+    TKLog(@"WKWebView 在发送请求之前，决定是否跳转");
 }
 
 #pragma mark life cycle

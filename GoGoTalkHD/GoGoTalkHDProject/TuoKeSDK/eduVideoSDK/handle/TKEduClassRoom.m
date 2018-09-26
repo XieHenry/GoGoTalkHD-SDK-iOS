@@ -24,21 +24,7 @@ typedef NS_ENUM(NSInteger, EClassStatus) {
 };
 
 
-typedef NS_ENUM(NSInteger, CONNECT_RESULE)
-{
-  
-    CONNECT_RESULE_PasswordError = 4008,//房间密码错误
-    CONNECT_RESULE_WrongPasswordForRole = 4012,//密码与身份不符
-    CONNECT_RESULE_NeedPassword = 4110,//该房间需要密码，请输入密码
-    CONNECT_RESULE_RoomNonExistent = 4007,//房间不存在
-    CONNECT_RESULE_ServerOverdue = 3001,//服务器过期
-    CONNECT_RESULE_RoomFreeze = 3002,// 公司被冻结
-    CONNECT_RESULE_RoomDeleteOrOrverdue = 3003,//房间被删除或过期
-    CONNECT_RESULE_RoomAuthenError = 4109,//认证错误
-    CONNECT_RESULE_RoomPointOverrun = 4112,//企业点数超限
-    CONNECT_RESULE_RoomNumberOverRun = 4103//房间人数超限
-   
-};
+
 
 TKNavigationController* _iEduNavigationController = nil;
 @interface TKEduClassRoom ()
@@ -126,7 +112,7 @@ TKNavigationController* _iEduNavigationController = nil;
     [_HUD show:YES];
     
     if ((_iRoomProperty.sCmdUserRole ==UserType_Teacher && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
-        [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
+        [self reportFail:TKErrorCode_CheckRoom_NeedPassword aDescript:@""];
         [_HUD hide:YES];
         return -1;
     }
@@ -149,11 +135,14 @@ TKNavigationController* _iEduNavigationController = nil;
                     _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
+                    _iRoomProperty.whiteboardcolor = @([[tRoom objectForKey:@"whiteboardcolor"]intValue]);
+                    
                     bool isConform = [TKUtil deviceisConform];
                     //                    isConform      = true;     // 注释掉开启低功耗模式
                     if (!isConform) {
                         _iRoomProperty.iMaxVideo = @(2);
                     }
+                    
                     
                 }
                 
@@ -246,6 +235,7 @@ TKNavigationController* _iEduNavigationController = nil;
         return -1;//正在开会
     }
 
+
     _iController = controller;
     _iRoomDelegate = delegate;
     _iStatus = EClassStatus_CHECKING;
@@ -262,7 +252,7 @@ TKNavigationController* _iEduNavigationController = nil;
     [_HUD show:YES];
     //除了学生可以没有密码，其他身份都需要密码
     if ((_iRoomProperty.sCmdUserRole !=UserType_Student && [_iRoomProperty.sCmdPassWord isEqualToString:@""]&&_iRoomProperty.sCmdPassWord) && !isFromWeb) {
-        [self reportFail:CONNECT_RESULE_NeedPassword aDescript:@""];
+        [self reportFail:TKErrorCode_CheckRoom_NeedPassword aDescript:@""];
         [_HUD hide:YES];
         return -1;
     } 
@@ -286,6 +276,8 @@ TKNavigationController* _iEduNavigationController = nil;
                     _iRoomProperty.iCompanyID = [tRoom objectForKey:@"companyid"]?[tRoom objectForKey:@"companyid"]:@"";
                     int  tMaxVideo = [[tRoom objectForKey:@"maxvideo"]intValue];
                     _iRoomProperty.iMaxVideo = @(tMaxVideo);
+                    _iRoomProperty.whiteboardcolor = @([TKUtil getIntegerValueFromDic:tRoom Key:@"whiteboardcolor"]);
+                    _iRoomProperty.sNickName = [TKUtil optString:response Key:@"nickname"];
                     bool isConform = [TKUtil deviceisConform];
 //                    isConform      = true;     // 注释掉开启低功耗模式
                     if (!isConform) {
@@ -318,10 +310,16 @@ TKNavigationController* _iEduNavigationController = nil;
 //                _iRoomProperty.iPadLayout = SHARKTOP_COMPANY;
                 
                 if ((tUserRole != _iRoomProperty.sCmdUserRole) &&  !isFromWeb) {
-                    [strongSelf reportFail:CONNECT_RESULE_PasswordError aDescript:@""];
+                    [strongSelf reportFail:TKErrorCode_CheckRoom_NeedPassword aDescript:@""];
                     [_HUD hide:YES];
                     return -1;
                     
+                }
+                
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:paramDic];
+                
+                if(![[paramDic allKeys]  containsObject: @"nickname"]){
+                    [dict setObject:_iRoomProperty.sNickName forKey:@"nickname"];
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -329,11 +327,11 @@ TKNavigationController* _iEduNavigationController = nil;
                     _enterClassRoomAgain = NO;
                     UIViewController *viewController;
                     if (_iRoomProperty.iPadLayout && [_iRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {
-                        _iClassRoomController = [[ClassRoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        _iClassRoomController = [[ClassRoomController alloc]initWithDelegate:delegate aParamDic:dict aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
                         viewController = _iClassRoomController;
                         
                     }else{
-                        _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:paramDic aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
+                        _iRoomController = [[RoomController alloc]initWithDelegate:delegate aParamDic:dict aRoomName:@"roomName" aRoomProperty:_iRoomProperty];
                         viewController = _iRoomController;
                     }
                     
@@ -398,7 +396,7 @@ TKNavigationController* _iEduNavigationController = nil;
 }
 
 #pragma mark 加入会议
-- (void)reportFail:(int)ret  aDescript:(NSString *)aDescript
+- (void)reportFail:(TKRoomErrorCode)ret  aDescript:(NSString *)aDescript
 {
     [_HUD hide:YES];
     if(_iRoomDelegate)
@@ -406,52 +404,55 @@ TKNavigationController* _iEduNavigationController = nil;
         bool report            = true;
         NSString *alertMessage = nil;
         switch (ret) {
-            case CONNECT_RESULE_ServerOverdue: {//3001  服务器过期
+            case TKErrorCode_CheckRoom_ServerOverdue: {//3001  服务器过期
                 alertMessage = MTLocalized(@"Error.ServerExpired");
                 //alertMessage = @"服务器过期";
             }
                 break;
-            case CONNECT_RESULE_RoomFreeze: {//3002  公司被冻结
+            case TKErrorCode_CheckRoom_RoomFreeze: {//3002  公司被冻结
                 alertMessage = MTLocalized(@"Error.CompanyFreeze");
                 //alertMessage = @"公司被冻结";
             }
                 break;
-            case CONNECT_RESULE_RoomDeleteOrOrverdue: //3003  房间被删除或过期
-            case CONNECT_RESULE_RoomNonExistent: {//4007 房间不存在 房间被删除或者过期
+            case TKErrorCode_CheckRoom_RoomDeleteOrOrverdue: //3003  房间被删除或过期
+            case TKErrorCode_CheckRoom_RoomNonExistent: {//4007 房间不存在 房间被删除或者过期
                 alertMessage = MTLocalized(@"Error.RoomDeletedOrExpired");
                // alertMessage = @"房间被删除或者过期";
             }
                 break;
-            case CONNECT_RESULE_PasswordError: {//4008  房间密码错误
+            case TKErrorCode_CheckRoom_RequestFailed:
+                alertMessage = MTLocalized(@"Error.WaitingForNetwork");
+                break;
+            case TKErrorCode_CheckRoom_PasswordError: {//4008  房间密码错误
                 alertMessage = MTLocalized(@"Error.PwdError");
 //                 alertMessage = @"房间密码错误";
             }
                 break;
         
-            case CONNECT_RESULE_WrongPasswordForRole: {//4012  密码与角色不符
+            case TKErrorCode_CheckRoom_WrongPasswordForRole: {//4012  密码与角色不符
                 alertMessage = MTLocalized(@"Error.PwdError");
                 //alertMessage = @"房间密码错误";
             }
                 break;
                 
-            case CONNECT_RESULE_RoomNumberOverRun: {//4103  房间人数超限
+            case TKErrorCode_CheckRoom_RoomNumberOverRun: {//4103  房间人数超限
                 alertMessage = MTLocalized(@"Error.MemberOverRoomLimit");
                 //alertMessage = @"房间人数超限";
             }
                 break;
                 
-            case CONNECT_RESULE_NeedPassword: {//4110  该房间需要密码，请输入密码
+            case TKErrorCode_CheckRoom_NeedPassword: {//4110  该房间需要密码，请输入密码
                 alertMessage = MTLocalized(@"Error.NeedPwd");
 //                 alertMessage = @"该房间需要密码，请输入密码";
             }
                 break;
                 
-            case CONNECT_RESULE_RoomPointOverrun: {//4112  企业点数超限
+            case TKErrorCode_CheckRoom_RoomPointOverrun: {//4112  企业点数超限
                 alertMessage = MTLocalized(@"Error.pointOverRun");
                 //                 alertMessage = @" 企业点数超限";
             }
                 break;
-            case CONNECT_RESULE_RoomAuthenError: {
+            case TKErrorCode_CheckRoom_RoomAuthenError: {
                 alertMessage = MTLocalized(@"Error.AuthIncorrect");
 //                 alertMessage = @"认证错误";
             }
@@ -460,14 +461,13 @@ TKNavigationController* _iEduNavigationController = nil;
             default:{
                 report = YES;
                  //alertMessage = aDescript;
-                 alertMessage = MTLocalized(@"Error.WaitingForNetwork");
-               
+                alertMessage = [NSString stringWithFormat:@"%@(%ld)",MTLocalized(@"Error.WaitingForNetwork"),(long)ret];
                 break;
             }
                 
         }
        
-        if (ret == CONNECT_RESULE_PasswordError || ret == CONNECT_RESULE_NeedPassword)
+        if (ret == TKErrorCode_CheckRoom_NeedPassword || ret == TKErrorCode_CheckRoom_PasswordError ||  ret ==  TKErrorCode_CheckRoom_WrongPasswordForRole)
         {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:MTLocalized(@"Prompt.prompt") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){

@@ -13,9 +13,10 @@
 @class TKMediaDocModel,TKProgressSlider,MediaStream;
 @interface TKBaseMediaView : UIView
 
-- (instancetype)initWithMediaStream:(MediaStream *)aMediaStream
-                              frame:(CGRect)frame
-                      sessionHandle:(TKEduSessionHandle *)sessionHandle;
+@property (nonatomic, assign) BOOL hasVideo;
+- (instancetype)initWithMedia:(NSDictionary *)extension
+                        frame:(CGRect)frame
+                sessionHandle:(TKEduSessionHandle *)sessionHandle;
 
 - (instancetype)initScreenShare:(CGRect)frame;
 - (instancetype)initFileShare:(CGRect)frame;
@@ -31,6 +32,7 @@
 - (void)loadLoadingView;
 //播放mp4时，需要 hidden loading
 - (void)hiddenLoadingView;
+- (void)setVideoViewToBack;
 @property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -45,11 +47,10 @@
 @property (nonatomic, assign) NSTimeInterval lastTime;
 @property (nonatomic, assign) NSTimeInterval lastSyncTime;
 @property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, assign) BOOL iIsPlay;
-@property (nonatomic, assign) BOOL isPlayEnd;
-@property (nonatomic, strong) MediaStream *iMediaStream;
+
 @property(nonatomic, strong) UIButton        *iDiskButtion;
 
 @property (nonatomic, strong) UIView *iVideoBoardView;
 @property (nonatomic, strong) UIImageView *loadingView;
+@property (nonatomic, strong) UIView *loadBackgroundView;
 @end

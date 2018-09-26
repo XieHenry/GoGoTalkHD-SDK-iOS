@@ -42,7 +42,7 @@
 @property (nonatomic, strong) UIImageView *iGiftAnimationView;
 @property (nonatomic, assign) NSInteger iGiftCount;
 @property (nonatomic, assign) EVideoRole videoRole;
-
+@property (nonatomic, strong) UIView *bottomView;
 @end
 
 
@@ -63,7 +63,8 @@
         _videoRole = aVideoRole;
         _iVideoBackgroundImageView = [[UIImageView alloc]initWithImage:LOADIMAGE(@"icon_teacher_big")];
         CGFloat tVideoWidth     = CGRectGetWidth(frame);
-        CGFloat tVideoHeigh     = tVideoWidth*3/4.0;
+        CGFloat tVideoHeigh     = self.frame.size.height;
+//        tVideoWidth*3/4.0;
         _iVideoBackgroundImageView.frame        = CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
         _iVideoBackgroundImageView.backgroundColor = RGBCOLOR(47, 47, 47);
         _iVideoBackgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewContentModeBottom;
@@ -92,7 +93,7 @@
       
         _iNameLabel =({
             CGFloat tWidth = (aVideoRole != EVideoRoleTeacher?(CGRectGetWidth(frame)-30):CGRectGetWidth(frame));
-            UILabel *tNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,tVideoHeigh, tWidth, CGRectGetHeight(frame)-tVideoHeigh)];
+            UILabel *tNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0, tWidth, CGRectGetHeight(frame)-tVideoHeigh)];
             tNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
             [tNameLabel adjustsFontSizeToFitWidth];
             tNameLabel.textColor = [UIColor whiteColor];
@@ -112,7 +113,7 @@
         
         [self addSubview:_iVideoBackgroundImageView];
         [self addSubview:_iBackgroundLabel];
-        [self addSubview:_iNameLabel];
+//        [self addSubview:_iNameLabel];
         
         
         _iGifButton = ({
@@ -160,14 +161,21 @@
             tImageView;
             
         });
+//        CGRectMake(0,0, tWidth, CGRectGetHeight(frame)-tVideoHeigh)
+        self.bottomView = ({
+            UIView *view = [[UIView alloc] init];
+            view.backgroundColor = [UIColor blackColor];
+            view.alpha = 0.7;
+            view;
+        });
         
         [self addSubview:_iVideoImageView];
         [self addSubview:_iAudioImageView];
         [self addSubview:_iDrawImageView];
         [self addSubview:_iHandsUpImageView];
-        
-       
-        if (aVideoRole != EVideoRoleTeacher) {[self addSubview:_iGifButton];}
+        [self addSubview:self.bottomView];
+        [self.bottomView addSubview:self.iNameLabel];
+        if (aVideoRole != EVideoRoleTeacher) {[self.bottomView addSubview:_iGifButton];}
         _iVideoImageView.hidden    = YES;
         _iAudioImageView.hidden    = YES;
         _iDrawImageView.hidden     = YES;
@@ -195,6 +203,7 @@
 -(void)layoutSubviews{
     
     [self bringSubviewToFront:_iFunctionButton];
+    [self bringSubviewToFront:self.bottomView];
     
     // 分屏下布局
     CGFloat videoSmallWidth  = CGRectGetWidth(self.frame);
@@ -208,16 +217,22 @@
     
     CGFloat tVideoHeigh     = self.isSplit?videoSmallHeight-30:videoSmallHeight/7.0*6;
     
-    _iVideoBackgroundImageView.frame        = CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
+    _iVideoBackgroundImageView.frame        =CGRectMake(0, 0, tVideoWidth, videoSmallHeight);
+//    CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
+    
+    _iVideoBackgroundImageView.contentMode = UIViewContentModeCenter;
     
     _sIsInBackGroundView.frame = CGRectMake(0, 0, videoSmallWidth, videoSmallHeight);
     
     _iVideoFrame =  CGRectMake(0, 0, tVideoWidth, tVideoHeigh);
     
+    
     _iRealVideoView.frame = _iVideoFrame;
     CGFloat tWidth = videoSmallWidth-30;
     
-    _iNameLabel.frame = CGRectMake(0,tVideoHeigh, tWidth, videoSmallHeight-tVideoHeigh);
+    self.bottomView.frame =  CGRectMake(0,tVideoHeigh, tVideoWidth, videoSmallHeight-tVideoHeigh);
+    
+    _iNameLabel.frame = CGRectMake(0,0, tWidth, videoSmallHeight-tVideoHeigh);
     if (_iNameLabel.text) {
         int currentFontSize = [TKUtil getCurrentFontSize:CGSizeMake(_iNameLabel.frame.size.width, _iNameLabel.frame.size.height) withString:_iNameLabel.text];
         if (currentFontSize>12) {
@@ -225,7 +240,7 @@
         }
         [_iNameLabel setFont:TKFont(currentFontSize)];
     }
-    _iGifButton.frame = CGRectMake(CGRectGetMaxX(_iNameLabel.frame), CGRectGetMinY(_iNameLabel.frame), 30, CGRectGetHeight(_iNameLabel.frame));
+    _iGifButton.frame = CGRectMake(CGRectGetMaxX(_iNameLabel.frame)-10, 0, 40, CGRectGetHeight(_iNameLabel.frame));
     _iGifButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     if (_iGifButton.titleLabel.text) {
@@ -261,7 +276,7 @@
 -(void)setIsNeedFunctionButton:(BOOL)isNeedFunctionButton{
     _iFunctionButton.enabled = isNeedFunctionButton;
 }
--(void)setIRoomUser:(RoomUser *)iRoomUser{
+-(void)setIRoomUser:(TKRoomUser *)iRoomUser{
     
     BOOL isShowAudioImage = ( iRoomUser.publishState == PublishState_AUDIOONLY ||
                              iRoomUser.publishState== PublishState_BOTH);
@@ -285,9 +300,11 @@
         [[NSNotificationCenter defaultCenter]removeObserver:self name:[NSString stringWithFormat:@"%@%@",sIsInBackGround,_iRoomUser.peerID] object:nil];
         
     }
+    [self bringSubviewToFront:_iVideoImageView];
     [self bringSubviewToFront:_iAudioImageView];
     [self bringSubviewToFront:_iDrawImageView];
     [self bringSubviewToFront:_iHandsUpImageView];
+    [self bringSubviewToFront:self.bottomView];
     
     // 学生自己可以在自己的SmallView上弹出操作视图
     if ([iRoomUser.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID] && iRoomUser.role == EVideoRoleOther) {
@@ -316,8 +333,8 @@
     [self changeAudioDisabledState];
     [self changeVideoDisabledState];
     
+    [self refreshBackLogoImage];
     
-   
     
 }
 - (void)inBackground:(NSNotification *)aNotification{
@@ -382,7 +399,8 @@
     }
     
     
-    
+    [self refreshBackLogoImage];
+
     
    
 }
@@ -392,22 +410,21 @@
         return;
     }
     
-    if (![TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student) {
+    if (![[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].allowStudentCloseAV && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student) {
         return;
     }
     if (![TKEduSessionHandle shareInstance].isClassBegin && [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]) {
         return;
     }
     
-    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV == NO) || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
+    if (!_iPeerId || [_iPeerId isEqualToString:@""] || ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student && [[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].allowStudentCloseAV == NO) || ([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && ![_iPeerId isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID]))
         return;
     
     
     CGFloat functionY =  55*Proportion+(ScreenW-10*8)/7/4*3;
     TKEduSessionHandle *tSessionHandle = [TKEduSessionHandle shareInstance];
     TKEduRoomProperty *tRoomProperty = tSessionHandle.iRoomProperties;
-    
-    
+   
     if (!_iFunctionView) {
         [[NSNotificationCenter defaultCenter]postNotificationName:sTapTableNotification object:nil];
         switch (_iVideoRole) {
@@ -447,7 +464,7 @@
             }
             default:{//学生及其他人
                 
-                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
+//                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
                 
                 CGRect functionViewFrame;
                 if ([tRoomProperty.iPadLayout isEqualToString:SHARKTOP_COMPANY]) {//判断是什么模板
@@ -521,14 +538,15 @@
 }
 
 -(void)changeName:(NSString *)aName{
-  
-    if (!aName||aName.length==0) {
-        return;
-    }
+    
     _iNameLabel.hidden = ([aName isEqualToString:@""]);
-    [self bringSubviewToFront:_iNameLabel];
+//    [self bringSubviewToFront:_iNameLabel];
+    [self bringSubviewToFront:self.bottomView];
     [self bringSubviewToFront:_iFunctionButton];
     
+    if (!aName || [aName isEqualToString:@""]) {
+        return;
+    }
     NSAttributedString * attrStr =  [[NSAttributedString alloc]initWithData:[aName dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
     _iNameLabel.text = attrStr.string ;
 }
@@ -678,6 +696,7 @@
                 [self bringSubviewToFront:_iAudioImageView];
                 [self bringSubviewToFront:_iDrawImageView];
                 [self bringSubviewToFront:_iHandsUpImageView];
+                [self bringSubviewToFront:self.bottomView];
             } else {
                 // 如果播放视频，将背景图片移动至最底层
                 [self sendSubviewToBack:_iVideoBackgroundImageView];
@@ -797,7 +816,7 @@
         TKEduSessionHandle *tSessionHandle = [TKEduSessionHandle shareInstance];
         TKEduRoomProperty *tRoomProperty = tSessionHandle.iRoomProperties;
         __weak typeof(self)weakSelf = self;
-        RoomUser *tRoomUser = _iRoomUser;
+        TKRoomUser *tRoomUser = _iRoomUser;
         [TKEduNetManager sendGifForRoomUser:@[tRoomUser] roomID:tRoomProperty.iRoomId  aMySelf:tSessionHandle.localUser aHost:tRoomProperty.sWebIp aPort:tRoomProperty.sWebPort aSendComplete:^(id  _Nullable response) {
             __strong typeof(self)strongSelf = weakSelf;
             int currentGift = 0;
@@ -857,7 +876,7 @@
             [self bringSubviewToFront:_iAudioImageView];
             [self bringSubviewToFront:_iDrawImageView];
             [self bringSubviewToFront:_iHandsUpImageView];
-        } else {
+            [self bringSubviewToFront:self.bottomView];
             // 如果播放视频，将背景图片移动至最底层
             [self sendSubviewToBack:_iVideoBackgroundImageView];
         }
@@ -986,13 +1005,12 @@
             self.iAudioImageView.image = LOADIMAGE(@"icon_audio");
             self.iAudioImageView.hidden = (_videoRole == EVideoRoleTeacher)?YES:NO;
             self.iAudioImageView.hidden = NO;
+            [self bringSubviewToFront:self.iAudioImageView];
         } else {
             self.iAudioImageView.image = LOADIMAGE(@"icon_audio");
             self.iAudioImageView.hidden = YES;
         }
-        
     }
-    
     
 //    // 未上课，不显示摄像头和话筒图标
 //    if ([TKEduSessionHandle shareInstance].isClassBegin == NO && ![TKEduSessionHandle shareInstance].roomMgr.beforeClassPubVideoFlag) {
@@ -1013,13 +1031,15 @@
         [self bringSubviewToFront:_iAudioImageView];
         [self bringSubviewToFront:_iDrawImageView];
         [self bringSubviewToFront:_iHandsUpImageView];
+        [self bringSubviewToFront:self.bottomView];
         
     } else {
         if (self.iRoomUser.publishState == 2 || self.iRoomUser.publishState == 3) {
             self.iVideoImageView.image = LOADIMAGE(@"icon_video");
             self.iVideoImageView.hidden = NO;
-            
+            [self bringSubviewToFront:_iVideoImageView];
             [self sendSubviewToBack:_iVideoBackgroundImageView];
+            
         } else {
             self.iVideoImageView.image = LOADIMAGE(@"icon_video");
             self.iVideoImageView.hidden = YES;
@@ -1029,6 +1049,7 @@
             [self bringSubviewToFront:_iAudioImageView];
             [self bringSubviewToFront:_iDrawImageView];
             [self bringSubviewToFront:_iHandsUpImageView];
+            [self bringSubviewToFront:self.bottomView];
         }
     }
     if (self.iRoomUser.publishState == PublishState_Local_NONE) {//0：未发布，1：发布音频；2：发布视频；3：发布音视频
@@ -1046,12 +1067,13 @@
         [self bringSubviewToFront:_iAudioImageView];
         [self bringSubviewToFront:_iDrawImageView];
         [self bringSubviewToFront:_iHandsUpImageView];
+        [self bringSubviewToFront:self.bottomView];
         
     } else {
         if (self.iRoomUser.publishState == 2 || self.iRoomUser.publishState == 3) {
             self.iVideoImageView.image = LOADIMAGE(@"icon_video");
             self.iVideoImageView.hidden = NO;
-            
+            [self bringSubviewToFront:_iVideoImageView];
             [self sendSubviewToBack:_iVideoBackgroundImageView];
         } else {
             self.iVideoImageView.image = LOADIMAGE(@"icon_video");
@@ -1062,6 +1084,7 @@
             [self bringSubviewToFront:_iAudioImageView];
             [self bringSubviewToFront:_iDrawImageView];
             [self bringSubviewToFront:_iHandsUpImageView];
+            [self bringSubviewToFront:self.bottomView];
         }
     }
     if (self.iRoomUser.publishState == PublishState_Local_NONE) {//0：未发布，1：发布音频；2：发布视频；3：发布音视频
@@ -1151,4 +1174,62 @@
     }
 }
 
+- (void)refreshBackLogoImage{
+    switch (self.iRoomUser.publishState) {
+        case PublishState_NONE:
+        {
+            if (self.iVideoViewTag == -1) {
+                
+                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_teacher_big");
+            }else if (self.iVideoViewTag == -2){
+                
+                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_big");
+            }else{
+                _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_user_small");
+                
+            }
+        }
+            
+            break;
+        case PublishState_AUDIOONLY:
+        case PublishState_VIDEOONLY:
+        case PublishState_BOTH:
+        case PublishState_NONE_ONSTAGE:////音视频都没有但还在台上
+        case PublishState_Local_NONE:
+        {
+            if (self.iRoomUser.hasVideo) {
+                //1v1显示大图、1vn标准模板下老师 显示大图，其余情况显示小图
+                if (([TKEduSessionHandle shareInstance].iRoomProperties.iRoomType == RoomType_OneToOne) || (![[TKEduSessionHandle shareInstance].iRoomProperties.iPadLayout isEqualToString:SHARKTOP_COMPANY] && _videoRole == UserType_Teacher) ) {
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_videoClose_big");
+                    
+                }else if([[TKEduSessionHandle shareInstance].iRoomProperties.iMaxVideo intValue]<=7){
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_videoClose_small");
+                }else{
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_videoClose_mini");
+                }
+                
+                
+            }else{
+                //1v1显示大图、1vn标准模板下老师 显示大图，其余情况显示小图
+                if (([TKEduSessionHandle shareInstance].iRoomProperties.iRoomType == RoomType_OneToOne) || (![[TKEduSessionHandle shareInstance].iRoomProperties.iPadLayout isEqualToString:SHARKTOP_COMPANY] && _videoRole == UserType_Teacher) ) {
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_noVideo_big");
+                }else if([[TKEduSessionHandle shareInstance].iRoomProperties.iMaxVideo intValue]<=7){
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_noVideo_small");
+                }else{
+                    
+                    _iVideoBackgroundImageView.image = LOADIMAGE(@"icon_noVideo_mini");
+                }
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
 @end

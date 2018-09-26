@@ -90,6 +90,10 @@
 #pragma mark 是否是域名
 +(BOOL)isDomain:(NSString *)host;
 +(NSString*)optString:(NSDictionary*)dic Key:(NSObject*)key;
++(NSInteger)getIntegerValueFromDic:(NSDictionary*)dic Key:(NSObject*)key;
++(BOOL)getBOOValueFromDic:(NSDictionary*)dic Key:(NSObject*)key;
++(id)getValueFromDic:(NSDictionary*)dic Key:(NSObject*)key Class:(Class)cls; 
+
 #pragma mark 根据控件高度动态设置字体大小
 +(int)getCurrentFontSize:(CGSize)size withString:(NSString *)string;
 /**
@@ -120,6 +124,12 @@
  @return YYYY-MM-dd HH:mm:ss
  */
 +(NSString*)getCurrentTimes;
+/**
+ 获取当前时间
+ 
+ @return HH:mm
+ */
++(NSString *)getCurrentHoursAndMinutes:(NSString *)time;
 
 /**
  获取当前时间戳
@@ -128,6 +138,12 @@
  */
 +(NSTimeInterval)getNowTimeTimestamp;
 
+
 + (id) processDictionaryIsNSNull:(id)obj;
+
++ (float)GetCpuUsage;
++ (CGFloat)GetCurrentTaskUsedMemory;
+
+
 @end
 

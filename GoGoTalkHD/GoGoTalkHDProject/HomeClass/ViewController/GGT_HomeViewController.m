@@ -12,14 +12,10 @@
 #import "GGT_MineSplitViewController.h"
 #import "GGT_OrderCourseViewController.h"
 #import "BaseNavigationController.h"
-
 //检查设备
 #import "GGT_CheckDevicePopViewController.h"
-
 #import "GGT_PopAlertView.h"
 
-//#import "TKEduClassRoom.h"      // 测试拓课
-//#import "TKMacro.h"
 
 @interface GGT_HomeViewController () <UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) GGT_HomeLeftView *xc_leftView;
@@ -125,8 +121,7 @@
 }
 
 // 添加通知  进入教室的通知
-- (void)popView:(NSNotification *)noit
-{
+- (void)popView:(NSNotification *)noit {
     NSDictionary *userInfo = noit.userInfo;
     NSLog(@"--%@--", userInfo);
     
@@ -161,8 +156,7 @@
 }
 
 // 进入教室调用接口
-- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model
-{
+- (void)postNetworkModifyLessonStatusWithCourseModel:(GGT_CourseCellModel *)model {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"LessonId"] = model.LessonId;
     
@@ -258,18 +252,15 @@
                 break;
             case 103:
             {
-                
                 GGT_CheckDevicePopViewController *vc = [GGT_CheckDevicePopViewController new];
                 BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
                 
                 nav.modalPresentationStyle = UIModalPresentationFormSheet;
                 nav.popoverPresentationController.delegate = self;
                 //    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                
                 // 修改弹出视图的size 在控制器内部修改更好
                 //    vc.preferredContentSize = CGSizeMake(100, 100);
                 [self presentViewController:nav animated:YES completion:nil];
-                
                 
             }
                 break;
@@ -287,27 +278,6 @@
                     
                 }];
                 
-//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"请拨打电话 ：400-8787-276" preferredStyle:UIAlertControllerStyleAlert];
-//                alert.titleColor = UICOLOR_FROM_HEX(0x000000);
-//
-//                // 知道了按钮
-//                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
-//                cancelAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
-//
-//
-//                // 人工客服按钮
-//                UIAlertAction *helpAction = [UIAlertAction actionWithTitle:xc_humanCheckTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//                    // 获取人工检测设备房间的信息
-//                    [self getHumanCheckClassroomInfo];
-//
-//                }];
-//                helpAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
-//
-//                [alert addAction:cancelAction];
-//                [alert addAction:helpAction];
-//                [self presentViewController:alert animated:YES completion:nil];
-                
             }
                 break;
                 
@@ -318,8 +288,7 @@
 }
 
 // 获取人工检测设备房间的信息
-- (void)getHumanCheckClassroomInfo
-{
+- (void)getHumanCheckClassroomInfo {
     [[BaseService share] sendGetRequestWithPath:URL_GetOnlineInfns token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
         // 进入教室
@@ -338,15 +307,10 @@
 }
 
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPopoverCourseAlterViewNotification object:nil];
-}
 
 
-- (void)updateNewVersion
-{
+
+- (void)updateNewVersion {
     
     // 版本号
     NSString *version = [APP_VERSION() stringByReplacingOccurrencesOfString:@"." withString:@""];
@@ -365,8 +329,7 @@
     }];
 }
 
-- (void)popAlertVCWithModel:(GGT_UpdateModel *)model
-{
+- (void)popAlertVCWithModel:(GGT_UpdateModel *)model {
     //Type类型：0 非强制性更新  1 强制性更新  2 已是最新版本，不用更新
     if ([model.Title isKindOfClass:[NSString class]] && [model.Contents isKindOfClass:[NSString class]]) {
         
@@ -415,6 +378,9 @@
     
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end
 

@@ -24,7 +24,7 @@
 
 @implementation TKVideoFunctionView
 //291*70
--(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer isSplit:(BOOL)isSplit{
+-(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(TKRoomUser *)aRoomUer isSplit:(BOOL)isSplit{
     
     if (self = [super initWithFrame:frame]) {
         _iRoomUer = aRoomUer;
@@ -51,7 +51,7 @@
         //CGFloat tPoroFloat = aRoomUer.disableAudio ? 3.0 : 4.0;
     
         if (aVideoRole == EVideoRoleTeacher || (aVideoRole != EVideoRoleTeacher && [aRoomUer.peerID isEqualToString:[TKEduSessionHandle shareInstance].localUser.peerID])) {
-            if ([TKEduSessionHandle shareInstance].roomMgr.allowStudentCloseAV && aRoomUer.role == 2) {
+            if ([[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].allowStudentCloseAV && aRoomUer.role == 2) {
                 tPoroFloat = 2.0;
             }else{
                 
@@ -264,7 +264,12 @@
                 [tButton setTitle:MTLocalized(@"Button.OpenVideo") forState:UIControlStateNormal];
                 [tButton setImage:LOADIMAGE(@"icon_control_camera_02") forState:UIControlStateSelected];
                 [tButton setTitle:MTLocalized(@"Button.CloseVideo") forState:UIControlStateSelected];
-                 tButton.selected = [[TKEduSessionHandle shareInstance]sessionHandleIsVideoEnabled];
+                BOOL state = NO;
+                if (_iRoomUer.publishState == 2 || _iRoomUer.publishState == 3) {
+                    state = YES;
+                }
+                tButton.selected = state;
+//                                     sessionHandleIsVideoEnabled];
                 tButton.titleLabel.font = TKFont(13);
                 [tButton setTitleColor:RGBCOLOR(181, 181, 181) forState:UIControlStateNormal];
                 tButton.titleLabel.textAlignment =NSTextAlignmentCenter;
@@ -288,7 +293,13 @@
                 [tButton setImage:LOADIMAGE(@"icon_control_mute")  forState:UIControlStateSelected];
                 [tButton setTitle:MTLocalized(@"Button.CloseAudio") forState:UIControlStateSelected];
                 tButton.titleLabel.font = TKFont(13);
-                 tButton.selected = [[TKEduSessionHandle shareInstance]sessionHandleIsAudioEnabled];
+                
+                BOOL state = NO;
+                if (_iRoomUer.publishState == 1 || _iRoomUer.publishState == 3) {
+                    state = YES;
+                }
+                tButton.selected = state;
+//                [[TKEduSessionHandle shareInstance]sessionHandleIsAudioEnabled];
                 [tButton setTitleColor:RGBCOLOR(181, 181, 181) forState:UIControlStateNormal];
                 [tButton addTarget:self  action:@selector(button2Clicked:) forControlEvents:UIControlEventTouchUpInside];
                 tButton.titleLabel.textAlignment =NSTextAlignmentCenter;

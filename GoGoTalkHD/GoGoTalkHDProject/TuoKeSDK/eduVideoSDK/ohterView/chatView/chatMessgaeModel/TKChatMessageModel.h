@@ -12,11 +12,11 @@
 #import "TKMacro.h"
 @interface TKChatMessageModel : NSObject
 @property (nonatomic, strong) NSString *iUserName;
-@property (nonatomic, strong) NSString *iTime;
 @property (nonatomic, strong) NSString *iMessage;
 @property (nonatomic, strong) NSString *iTranslationMessage;
 @property (nonatomic, copy)   NSString* iToUid;
 @property (nonatomic, copy)   NSString* iFromid;
+@property (nonatomic, strong) NSString *iTime;
 @property (nonatomic, assign) MessageType iMessageType;
 @property (nonatomic, strong) UIColor *  iMessageTypeColor;
 

@@ -8,8 +8,7 @@
 
 #import "TKUserListTableViewCell.h"
 #import "TKDocmentDocModel.h"
-#import "TKMediaDocModel.h"
-#import "RoomUser.h"
+#import "TKMediaDocModel.h" 
 #import "TKUtil.h"
 #import "TKEduBoardHandle.h"
 #import "TKEduSessionHandle.h"
@@ -224,10 +223,10 @@
             //用户列表
         case FileListTypeUserList:
         {
-            RoomUser *tRoomUser =(RoomUser*) aModel;
-            RoomUser *tPublishUser = [[[TKEduSessionHandle shareInstance]publishUserDic]objectForKey:tRoomUser.peerID];
-            RoomUser *tUnPublishUser = [[[TKEduSessionHandle shareInstance]unpublishUserDic]objectForKey:tRoomUser.peerID];
-            RoomUser *tPendUser = [[[TKEduSessionHandle shareInstance]pendingUserDic]objectForKey:tRoomUser.peerID];
+            TKRoomUser *tRoomUser = (TKRoomUser *)aModel;
+            TKRoomUser *tPublishUser = [[[TKEduSessionHandle shareInstance]publishUserDic]objectForKey:tRoomUser.peerID];
+            TKRoomUser *tUnPublishUser = [[[TKEduSessionHandle shareInstance]unpublishUserDic]objectForKey:tRoomUser.peerID];
+            TKRoomUser *tPendUser = [[[TKEduSessionHandle shareInstance]pendingUserDic]objectForKey:tRoomUser.peerID];
         
             // 发布状态，0：未发布，1：发布音频；2：发布视频；3：发布音视频
             switch (tRoomUser.publishState) {

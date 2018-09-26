@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSInteger serverRequestRt;
 @property (nonatomic, assign) BOOL isPlayback;
 @property (nonatomic, copy) NSString *urlPath;
+
 @end
 
 @implementation TKOpenUrlViewController
@@ -50,7 +51,7 @@
 -(void)openUrl:(NSString*)aString{
     
 //        aString = @"http://global.talk-cloud.net:80/static/h5/index.html#/replay?host=global.talk-cloud.net&domain=test&serial=2105172330&type=0&path=global.talk-cloud.net:8081/r3/2017-12-15/2105172330/1513309368/";
-    //    aString = @"http://demo.talk-cloud.net:80/static/h5/index.html#/replay?host=demo.talk-cloud.net&domain=newtest&serial=1370449456&type=0&path=demo.talk-cloud.net:8081/demor1/2018-01-07/1370449456/1515319072/";
+//    aString = @"http://demo.talk-cloud.net:80/static/h5/index.html#/replay?host=demo.talk-cloud.net&domain=newtest&serial=1370449456&type=0&path=demo.talk-cloud.net:8081/demor1/2018-01-07/1370449456/1515319072/";
 //        aString = @"http://demo.talk-cloud.net:80/static/h5/index.html#/replay?host=demo.talk-cloud.net&domain=newtest&serial=1227506405&type=3&path=demo.talk-cloud.net:8081/demor1/2018-01-08/1227506405/1515383539/";
     
     aString = [aString stringByRemovingPercentEncoding];
@@ -148,7 +149,8 @@
             }
 #endif
             
-            [tDic setObject:@(self.isPlayback) forKey:@"playback"];
+            [tDic setObject:@(self.isPlayback) forKey:@"playback"]; 
+            
             [TKEduClassRoom joinRoomWithParamDic:tDic ViewController:self Delegate:self isFromWeb:YES];
         }
         

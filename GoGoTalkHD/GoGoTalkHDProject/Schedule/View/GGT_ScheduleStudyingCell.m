@@ -580,7 +580,7 @@ static NSString * const xc_CountDownTitleName = @"正在上课";
     if (countDown > xc_room_countDown * 60) return;
     
     /// 重新赋值
-    self.xc_countDownLabel.text = [NSString stringWithFormat:@"%02zd分%02zd秒", (countDown/60)%60, countDown%60];
+    self.xc_countDownLabel.text = [NSString stringWithFormat:@"%02ld分%02zd秒", (countDown/60)%60, countDown%60];
     /// 当倒计时到了进行回调
     if (countDown == 0) {
         self.xc_countDownLabel.text = xc_CountDownTitleName;

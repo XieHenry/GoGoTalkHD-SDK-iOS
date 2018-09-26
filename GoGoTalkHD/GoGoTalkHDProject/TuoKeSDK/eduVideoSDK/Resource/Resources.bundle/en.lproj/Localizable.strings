@@ -32,6 +32,7 @@
 "Prompt.onlyNumber" = "The RoomId only be number";
 "Prompt.RoomIDNotNull" = "The RoomId cannot be empty";
 "Prompt.devicetPrompt" = "The current device is low, providing only two video.";
+"Prompt.NotRepeatChat" = "Do not repeat in the chat area";
 "Login.EnterRoom" = "Enter Classroom";
 "Login.RoomId"    = "Room";
 "Login.RoomIdPlaceHolder"    = "Room ID";

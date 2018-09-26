@@ -16,14 +16,35 @@
 
 #import "TKUtil.h"
 #import "TKDocmentDocModel.h"
-//#import "TKDocumentListView.h"
+
+#define IS_LOAD_LOCAL_INDEX 1 // 1.读取本地index  0.读取指定
+
+#if IS_LOAD_LOCAL_INDEX
+
+#ifdef Debug//debug模式是内网
+#define WBHTTPS   @"http"
+#define WBPort    @"80"
+#else
+#define WBHTTPS   @"https"
+#define WBPort    @"443"
+
+#endif
+
+#else
+
+#define WBHTTPS   @"http"
+#define WBPort    @"80"
+
+#endif
 
 //广生
 //static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.182:9403/publish/index.html#/mobileApp";
 //建行
 //static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.251:9251/publish/index.html#/mobileApp";
 //魏锦
-static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/index.html#/mobileApp";
+//static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/index.html#/mobileApp";
+//李凯
+static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.228:9251/publish/index.html#/mobileApp";
 
 @interface TKEduBoardHandle ()<WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 {
@@ -34,6 +55,8 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
 @property(nonatomic,copy)bLoadFinishedBlock iBloadFinishedBlock;
 @property (nonatomic,assign)CGRect iNoFullFrame;
 @property (nonatomic,assign)CGRect iFullFrame;
+@property (strong, nonatomic) NSString *docAddresKey;
+@property (assign, nonatomic) BOOL webViewTerminated;
 
 @end
 
@@ -44,6 +67,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
                  aBloadFinishedBlock:(bLoadFinishedBlock)aBloadFinishedBlock
                            aRootView:(UIView *)aRootView;
 {
+    _webViewTerminated = NO;
     _iContainView = [[UIView alloc]initWithFrame:rect];
     _iContainView.backgroundColor = [UIColor clearColor];
     _iContainView.userInteractionEnabled = YES;
@@ -151,7 +175,8 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sOnJsPlay];
     //2017-11-10 新增sSetProperty
     [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sSetProperty];
-    
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sGetValueByKey];
+    [userContentController addScriptMessageHandler:tScriptMessageDelegate name:sSaveValueByKey];
     config.userContentController = userContentController;
    
     CGRect tFrame = CGRectMake(0, 0, CGRectGetWidth(aFrame), CGRectGetHeight(aFrame));
@@ -180,36 +205,27 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     
 #endif
 
-#ifdef Debug
-
-////    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ts=%@",sEduWhiteBoardUrl, @([[NSDate date]timeIntervalSince1970])]];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?languageType=%@", sEduWhiteBoardUrl, [TKUtil getCurrentLanguage]]];
-//     //根据URL创建请求
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//     [self clearcookie];
-//     //WKWebView加载请求
-//    [_iWebView loadRequest:request];
+#if IS_LOAD_LOCAL_INDEX
     
-#endif
     NSURL *path = [BUNDLE URLForResource:@"react_mobile_publishdir/index" withExtension:@"html"];
-//    path = [NSURL URLWithString:@"http:www"];
     path = [NSURL URLWithString:[NSString stringWithFormat:@"%@#/mobileApp?languageType=%@",path.absoluteString,[TKUtil getCurrentLanguage]]];
-
     [self clearcookie];
-
-
     [_iWebView loadRequest:[NSURLRequest requestWithURL:path]];
+   
+#else
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?languageType=%@", sEduWhiteBoardUrl, [TKUtil getCurrentLanguage]]];
+    //根据URL创建请求
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self clearcookie];
+    //WKWebView加载请求
+    [_iWebView loadRequest:request];
 
+#endif
+  
     //添加到containView上
     [aContainView addSubview:_iWebView];
     
-//    if (theConnection)
-//    {
-//        [theConnection cancel];
-//        //        SAFE_RELEASE(theConnection);
-//        NSLog(@"safe release connection");
-//    }
-//    theConnection= [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
 }
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -276,13 +292,13 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
 #ifdef Debug
     //NSString *tUrl = [NSString stringWithFormat:@"%@://%@:%@%@",@"http",_iEduClassRoomProperty.sWebIp,@"80",_iCurrentMediaDocModel.swfpath];
     NSDictionary *tJsServiceUrl = @{
-                                    @"address":[NSString stringWithFormat:@"%@://%@",@"http",[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp],
-                                    @"port":@(80)
+                                    @"address":[NSString stringWithFormat:@"%@://%@",@"https",[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp],
+                                    @"port":@(443)
                                     };
 #else
     NSDictionary *tJsServiceUrl = @{
-                                    @"address":[NSString stringWithFormat:@"%@://%@",sHttp,[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp],
-                                    @"port":@([[TKEduSessionHandle shareInstance].iRoomProperties.sWebPort integerValue])
+                                    @"address":[NSString stringWithFormat:@"%@://%@",@"https",[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp],
+                                    @"port":@(443)
                                     };
 #endif
   
@@ -296,6 +312,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     };
     */
      int role = [TKEduSessionHandle shareInstance].iRoomProperties.iUserType;
+    
     NSDictionary *dictM = @{
                             @"mClientType":@(2),
                             @"serviceUrl":tJsServiceUrl,
@@ -307,8 +324,11 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
                             @"disablevideo":@(false),
                             @"disableaudio":@(false),
                             @"playback":@([TKEduSessionHandle shareInstance].isPlayback?true:false),
-                            @"isSendLogMessage":@([TKEduSessionHandle shareInstance].isSendLogMessage?true:false)//2017-11-10 判断是否开启log日志
+                            @"isSendLogMessage":@([TKEduSessionHandle shareInstance].isSendLogMessage?true:false),//判断是否开启log日志
+                            @"whiteboardcolor":@([[TKEduSessionHandle shareInstance].iRoomProperties.whiteboardcolor integerValue]),
+                            @"debugLog" : @(false)
                             };
+   
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictM options:NSJSONWritingPrettyPrinted error:nil];
     NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.setInitPageParameterFormPhone(%@)",strM];
@@ -323,11 +343,11 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
                 _iBloadFinishedBlock();
             }
         }
+        if (self.webViewTerminated) {
+            self.webViewTerminated = NO; 
+            [[NSNotificationCenter defaultCenter] postNotificationName:TKWhiteBoardGetMsgListNotification object:nil];
+        }
     }];
-   
-    
-    
-    
 }
 
 
@@ -395,7 +415,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
         [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:0  completion:nil];
     }else if (isClassBegin && ![msgId isEqualToString:sDocumentFilePage_ShowPage]){
         [[TKEduSessionHandle shareInstance] sessionHandlePubMsg:msgName ID:msgId To:toId Data:tData Save:save AssociatedMsgID:associatedMsgID AssociatedUserID:associatedUserID expires:0 completion:nil];
-    }
+   }
     
     
 }
@@ -467,7 +487,7 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     [UIView animateWithDuration:0.1 animations:^{
         _iContainView.frame = isFull?_iFullFrame:_iNoFullFrame;
         _iWebView.frame = isFull?_iFullFrame :CGRectMake(0, 0, CGRectGetWidth(_iNoFullFrame), CGRectGetHeight(_iNoFullFrame));
-        [[NSNotificationCenter defaultCenter]postNotificationName:sChangeWebPageFullScreen object:@(isFull)];
+        [[NSNotificationCenter defaultCenter] postNotificationName:sChangeWebPageFullScreen object:@(isFull)];
         TKDocmentDocModel *tDocmentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
         
         NSNumber *full = [NSNumber numberWithBool:isFull];
@@ -556,36 +576,57 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
         
     }];
 }
--(void)changeWBUrlAndPort{
+- (void)setWhiteBoardDocumentServerAddress
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-   
-    if([TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr &&![[TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr isEqualToString:@""]){
-        
-    }else{
+    NSString *phpAddr = [TKEduSessionHandle shareInstance].iRoomProperties.sWebIp;
+    if (!phpAddr || phpAddr.length == 0) {
         return;
     }
+    NSString *docServerAddr = [[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].ClassDocServerAddr;
     
-    NSDictionary *tJsServiceUrl = @{
-                                    @"address":[NSString stringWithFormat:@"%@://%@",sHttp,[TKEduSessionHandle shareInstance].roomMgr.ClassDocServerAddr],
-                                    @"port":@(80)
-                                    };
+    if(!docServerAddr || [docServerAddr isEqualToString:@""]) {
+        docServerAddr = phpAddr;
+    }
+    
+    //文档服务器地址
+    //备份链路域名集合
+    NSArray *classDocServerAddrBackup = [[[TKRoomManager instance] getRoomProperty].ClassDocServerAddrBackup mutableCopy];
 
-    NSDictionary *dictM = @{
-                            @"serviceUrl":tJsServiceUrl,
-                            };
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dictM options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *docServerAddrBackup =classDocServerAddrBackup.firstObject;
+    
+    NSString *webServerAddr = [[TKRoomManager instance]getRoomProperty].currentWebAddr;
+    
+    [dic setValue:WBHTTPS forKey:TKWhiteBoardWebProtocolKey];
+    [dic setValue:webServerAddr forKey:TKWhiteBoardWebHostKey];
+    [dic setValue:WBPort forKey:TKWhiteBoardWebPortKey];
+    
+
+    [dic setValue:WBHTTPS forKey:TKWhiteBoardDocProtocolKey];
+    [dic setValue:docServerAddr forKey:TKWhiteBoardDocHostKey];
+    [dic setValue:WBPort forKey:TKWhiteBoardDocPortKey];
+    
+    
+    [dic setValue:WBHTTPS forKey:TKWhiteBoardBackupDocProtocolKey];
+    [dic setValue:docServerAddrBackup forKey:TKWhiteBoardBackupDocHostKey];
+    [dic setValue:WBPort forKey:TKWhiteBoardBackupDocPortKey];
+    
+    
+    [dic setValue:classDocServerAddrBackup forKey:TKWhiteBoardBackupDocHostListKey];
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     NSString *strM = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone(%@)",strM];
-    
-    //evaluate 评估
+
+        //evaluate 评估
     [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        // response 返回值
+            // response 返回值
         NSLog(@"----MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone");
-     
     }];
-    
-    
 }
+
+
 -(void)setAddPagePermission:(bool)aPagePermission{
     
      NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.changeInitPageParameterFormPhone({addPagePermission:%@})",@(aPagePermission)];
@@ -642,6 +683,11 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     }];
 }
 
+- (void)webViewreload
+{
+    _webViewTerminated = YES;
+    [_iWebView reload];
+}
 #pragma mark - WKScriptMessageHandler
 
 - (void)userContentController:(WKUserContentController *)userContentController
@@ -669,14 +715,57 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
         [self onJsPlay:message.body];
     }else if ([message.name isEqualToString:sSetProperty]){//2017-11-10新增
         
+        NSString *tDataString = [message.body objectForKey:@"data"];
+        NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+        
+        NSString *peerId = [TKUtil optString:tDic Key:@"id"];
+        NSString *toID = [TKUtil optString:tDic Key:@"toID"];
+        [[TKRoomManager instance] changeUserProperty:peerId tellWhom:toID data:tDic[@"properties"] completion:nil];
+        
+    } else if ([message.name isEqualToString:sSaveValueByKey]) {
+        if ([message.body isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)message.body;
+            NSString *tDataString = [dic objectForKey:@"data"];
+            NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+            NSString *key = tDic[@"key"];
+            NSString *value = tDic[@"value"];
+            [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
+        }
+    } else if ([message.name isEqualToString:sGetValueByKey]) {
+        if ([message.body isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)message.body;
+            NSString *tDataString = [dic objectForKey:@"data"];
+            NSData *tJsData = [tDataString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *tDic = [NSJSONSerialization JSONObjectWithData:tJsData options:NSJSONReadingMutableContainers error:nil];
+            NSString *callbackID = tDic[@"callbackID"];
+            NSString *strM = nil;
+            NSString *key = tDic[@"key"];
+            if (key) {
+               strM = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+            }
+            NSString *js = [NSString stringWithFormat:@"MOBILETKSDK.receiveInterface.JsSocketCallback('%@',%@)",callbackID,strM];
+            if (_iWebView) {
+                [_iWebView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                }];
+            }
+        }
     }
-    
 }
 
 
 #pragma mark - WKNavigationDelegate
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0)){
-     TKLog(@"webViewWebContentProcessDidTerminate");
+//    [_iWebView reload];
+    
+    TKLog(@"WKWebView 总体内存占用过大，页面即将白屏");
+    
+    _webViewTerminated = YES;
+    [_iWebView reload];
+    if(self.WarningAlert){
+        self.WarningAlert();
+    }
 }
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
@@ -737,8 +826,8 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     }
 }
 #pragma mark life cycle
--(void)dealloc{
-    
+- (void)dealloc
+{
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sPubMsg];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sDelMsg];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sOnPageFinished];
@@ -746,17 +835,23 @@ static NSString *const sEduWhiteBoardUrl = @"http://192.168.1.23:9251/publish/in
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sChangeWebPageFullScreen];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sOnJsPlay];
     [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sSetProperty];
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sGetValueByKey];
+    [[_iWebView configuration].userContentController removeScriptMessageHandlerForName:sSaveValueByKey];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_iWebView stopLoading];
     
 }
 
--(void)clearAllWhiteBoardData{
+- (void)clearAllWhiteBoardData
+{
+    _webViewTerminated = NO;
     _iBloadFinishedBlock = nil;
 }
 
--(void)cleanup{
-    
+- (void)cleanup
+{
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"about:blank"]];
+    [_iWebView loadRequest:request];
     _iContainView = nil;
     _iWebView.scrollView.delegate = nil;
     _iWebView = nil;

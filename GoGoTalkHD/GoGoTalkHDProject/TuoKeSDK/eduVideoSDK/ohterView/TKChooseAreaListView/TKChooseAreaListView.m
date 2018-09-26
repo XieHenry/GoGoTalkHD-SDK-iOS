@@ -9,8 +9,7 @@
 #import "TKChooseAreaListView.h"
 #import "TKUtil.h"
 #import "TKMacro.h"
-#import "TKAreaChooseModel.h"
-#import "RoomManager.h"
+//#import "TKAreaChooseModel.h"
 //#import "TKChooseAreaListTableViewCell.h"
 #import "TKAreaTableViewCell.h"
 
@@ -19,7 +18,7 @@
 @property (nonatomic, strong) UILabel *iChooseAreaHeadLabel;
 @property (nonatomic, strong) UITableView *iAreaTableView;
 @property (nonatomic, strong) UIButton *button;
-@property (nonatomic, strong) TKAreaChooseModel *chooseAreaModel;
+//@property (nonatomic, strong) TKAreaChooseModel *chooseAreaModel;
 @property (nonatomic, strong) NSArray *dataArray;
 @end
 
@@ -93,28 +92,28 @@
 }
 
 - (void)setServerName:(NSString *)serverName {
-    if (serverName == nil || [self.chooseAreaModel.serverAreaName isEqualToString:serverName]) {
-        return;
-    }
-    
-    for (TKAreaChooseModel *obj in self.dataArray) {
-        if ([obj.serverAreaName isEqualToString:serverName]) {
-            // 如果找到了指定的服务器
-            [self.dataArray enumerateObjectsUsingBlock:^(TKAreaChooseModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj.serverAreaName isEqualToString:serverName]) {
-                    obj.choosed = YES;
-                    self.chooseAreaModel = obj;
-                } else {
-                    obj.choosed = NO;
-                }
-            }];
-            
-            // 连接新服务器
-            [self chooseCurrentArea];
-            [self.iAreaTableView reloadData];
-            break;
-        }
-    }
+//    if (serverName == nil || [self.chooseAreaModel.serverAreaName isEqualToString:serverName]) {
+//        return;
+//    }
+//
+//    for (TKAreaChooseModel *obj in self.dataArray) {
+//        if ([obj.serverAreaName isEqualToString:serverName]) {
+//            // 如果找到了指定的服务器
+//            [self.dataArray enumerateObjectsUsingBlock:^(TKAreaChooseModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                if ([obj.serverAreaName isEqualToString:serverName]) {
+//                    obj.choosed = YES;
+//                    self.chooseAreaModel = obj;
+//                } else {
+//                    obj.choosed = NO;
+//                }
+//            }];
+//
+//            // 连接新服务器
+//            [self chooseCurrentArea];
+//            [self.iAreaTableView reloadData];
+//            break;
+//        }
+//    }
 }
 
 #pragma mark UITableViewDelegate & UITableViewDataSource
@@ -135,31 +134,31 @@
     
     TKAreaTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"TKAreaTableViewCell" forIndexPath:indexPath];
     TKAreaChooseModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    if ([TKUtil isSimplifiedChinese]) {
-        tCell.areaName = model.chineseDesc;
-    } else {
-        tCell.areaName = model.englishDesc;
-    }
-    
-    tCell.choosed = model.choosed;
+//    if ([TKUtil isSimplifiedChinese]) {
+//        tCell.areaName = model.chineseDesc;
+//    } else {
+//        tCell.areaName = model.englishDesc;
+//    }
+//
+//    tCell.choosed = model.choosed;
     return tCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TKAreaChooseModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    self.chooseAreaModel = model;
-    
-    // 其他选项取消选择
-    [self.dataArray enumerateObjectsUsingBlock:^(TKAreaChooseModel   * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj != model) {
-            obj.choosed = NO;
-        } else {
-            obj.choosed = YES;
-        }
-    }];
-    
-    // 选中当前选项
-    self.chooseAreaModel.choosed = YES;
+//    self.chooseAreaModel = model;
+//
+//    // 其他选项取消选择
+//    [self.dataArray enumerateObjectsUsingBlock:^(TKAreaChooseModel   * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj != model) {
+//            obj.choosed = NO;
+//        } else {
+//            obj.choosed = YES;
+//        }
+//    }];
+//
+//    // 选中当前选项
+//    self.chooseAreaModel.choosed = YES;
     
     [tableView reloadData];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -169,16 +168,16 @@
 
 - (void)chooseCurrentArea {
     // 避免没有点击列表就点击确定
-    if (self.chooseAreaModel) {
-        [self.delegate chooseArea:self.chooseAreaModel];
-    } else {
-        for (TKAreaChooseModel *model in self.dataArray) {
-            if (model.choosed == YES) {
-                [self.delegate chooseArea:model];
-                break;
-            }
-        }
-    }
+//    if (self.chooseAreaModel) {
+//        [self.delegate chooseArea:self.chooseAreaModel];
+//    } else {
+//        for (TKAreaChooseModel *model in self.dataArray) {
+//            if (model.choosed == YES) {
+//                [self.delegate chooseArea:model];
+//                break;
+//            }
+//        }
+//    }
 }
 
 @end

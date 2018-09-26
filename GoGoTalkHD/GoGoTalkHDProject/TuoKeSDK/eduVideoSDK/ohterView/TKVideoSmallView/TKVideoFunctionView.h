@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TKMacro.h"
-#import "TKUtil.h"
-#import "RoomUser.h"
+#import "TKUtil.h" 
 @protocol VideolistProtocol <NSObject>
 
 -(void)videoSmallbutton1:(UIButton *)aButton aVideoRole:(EVideoRole)aVideoRole;
@@ -25,8 +24,8 @@
 
 @property (nonatomic, assign) BOOL isSplitScreen;//分屏标识
 @property (nonatomic,weak)id<VideolistProtocol>iDelegate;
-@property (nonatomic,strong)RoomUser *iRoomUer;
--(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(RoomUser*)aRoomUer isSplit:(BOOL)isSplit;
+@property (nonatomic,strong)TKRoomUser *iRoomUer;
+-(instancetype)initWithFrame:(CGRect)frame withType:(int)type aVideoRole:(EVideoRole)aVideoRole aRoomUer:(TKRoomUser *)aRoomUer isSplit:(BOOL)isSplit;
 
 
 @end

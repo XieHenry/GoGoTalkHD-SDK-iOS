@@ -194,7 +194,7 @@
          observer:^BOOL(id  _Nullable old, id  _Nullable now) {
              @strongify(self);
              self.studentPage = self.room.slideshowViewController.localPageIndex;
-             self.pageNumLabel.text = [NSString stringWithFormat:@"%td/%ld",[now integerValue],self.room.slideshowVM.totalPageCount];
+             self.pageNumLabel.text = [NSString stringWithFormat:@"%td/%d",[now integerValue],self.room.slideshowVM.totalPageCount];
              return YES;
          }];
     

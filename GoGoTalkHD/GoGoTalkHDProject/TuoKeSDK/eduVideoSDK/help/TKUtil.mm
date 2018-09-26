@@ -15,7 +15,10 @@
 #include <arpa/inet.h>
 #import <objc/runtime.h>
 #import <AVFoundation/AVFoundation.h>
-#define kChosenDigestLength		CC_SHA1_DIGEST_LENGTH
+#import <mach/mach.h>
+#import <sys/sysctl.h>
+
+#define kChosenDigestLength        CC_SHA1_DIGEST_LENGTH
 
 #define DESKEY @"Gd0^9f@KoAQOXFPZQ^H&fURo"
 
@@ -32,7 +35,7 @@ static TKUtil *instace;
     @synchronized(self)
     {
         if (!instace) {
-           instace = [[TKUtil alloc] init];
+            instace = [[TKUtil alloc] init];
         }
     }
     return instace;
@@ -41,11 +44,11 @@ static TKUtil *instace;
 /*
  
  typedef NS_OPTIONS(NSUInteger, UIRectCorner) {
-	UIRectCornerTopLeft     = 1 << 0,//左上角
-	UIRectCornerTopRight    = 1 << 1,//右上角
-	UIRectCornerBottomLeft  = 1 << 2,//左下角
-	UIRectCornerBottomRight = 1 << 3,//右下角
-	UIRectCornerAllCorners  = ~0UL   //全部
+ UIRectCornerTopLeft     = 1 << 0,//左上角
+ UIRectCornerTopRight    = 1 << 1,//右上角
+ UIRectCornerBottomLeft  = 1 << 2,//左下角
+ UIRectCornerBottomRight = 1 << 3,//右下角
+ UIRectCornerAllCorners  = ~0UL   //全部
  };
  
  //创建圆角边框(UIRectCornerBottomLeft | UIRectCornerBottomRight)
@@ -165,7 +168,7 @@ static TKUtil *instace;
 {
     
     //
-   
+    
     size_t plainTextBufferSize;
     
     if (encryptOrDecrypt == kCCDecrypt)//解密
@@ -174,22 +177,22 @@ static TKUtil *instace;
         NSData *tData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
         NSData *EncryptData = [TKGTMBase64 TK_webSafeDecodeData:tData];
         plainTextBufferSize = [EncryptData length];
-       
+        
     }
     else //加密
     {
         NSData* data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
         plainTextBufferSize = [data length];
-       
+        
     }
     uint8_t *bufferPtr = NULL;
     size_t bufferPtrSize = 0;
     size_t movedBytes = 0;
     
     bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
-   //http://stackoverflow.com/questions/13415672/assigning-to-uint8-t-aka-unsigned-char-from-incompatible-type-void
+    //http://stackoverflow.com/questions/13415672/assigning-to-uint8-t-aka-unsigned-char-from-incompatible-type-void
     bufferPtr =  static_cast<uint8_t *> (malloc( bufferPtrSize * sizeof(uint8_t)));
-   // bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    // bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
     
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     // memset((void *) iv, 0x0, (size_t) sizeof(iv));
@@ -200,8 +203,8 @@ static TKUtil *instace;
     if (encryptOrDecrypt == kCCDecrypt)
     {
         result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr
-                                                                length:(NSUInteger)movedBytes]
-                                        encoding:NSUTF8StringEncoding];
+                                                               length:(NSUInteger)movedBytes]
+                                       encoding:NSUTF8StringEncoding];
     }
     else
     {
@@ -215,7 +218,7 @@ static TKUtil *instace;
 //
 +(NSMutableDictionary *)decodeUrl:(NSString *)aDecodeUrl{
     NSMutableDictionary *tResultDic = [[NSMutableDictionary  alloc]initWithCapacity:10];
-
+    
     NSArray *tUrlArray = [aDecodeUrl componentsSeparatedByString:@"?"];
     //[tUrlArray objectAtIndex:1] ->param=ENCRYPT&timestamp=xxxxx(unix 时间戳)
     NSArray *tParamArray = [[tUrlArray objectAtIndex:1] componentsSeparatedByString:@"&"];
@@ -225,7 +228,7 @@ static TKUtil *instace;
             [tResultDic  setObject:[tParamOrTimestapArray objectAtIndex:1]  forKey:[tParamOrTimestapArray objectAtIndex:0]];
         }
     }
-   
+    
     
     return tResultDic;
 }
@@ -275,7 +278,7 @@ static TKUtil *instace;
         tIsMedia = true;
     }
     return tIsMedia;
-
+    
 }
 +(BOOL)isVideo:(NSString *)filetype{
     BOOL tIsVideo = false;
@@ -379,7 +382,7 @@ static TKUtil *instace;
 }
 +(NSInteger)numberBit:(NSInteger)aNumber{
     int sum=0;
-
+    
     while(aNumber){
         sum++;
         aNumber/=10;
@@ -403,7 +406,7 @@ static TKUtil *instace;
     return NO;
 }
 +(NSString*)absolutefileUrl:(NSString*)fileUrl webIp:(NSString*)webIp webPort:(NSString*)webPort{
-
+    
     NSString *tUrl = [NSString stringWithFormat:@"%@://%@:%@%@",sHttp,webIp,webPort,fileUrl];
     NSString *tdeletePathExtension = tUrl.stringByDeletingPathExtension;
     NSString *tNewURLString = [NSString stringWithFormat:@"%@-1.%@",tdeletePathExtension,tUrl.pathExtension];
@@ -453,10 +456,10 @@ static TKUtil *instace;
 //https://www.theiphonewiki.com/wiki/Models
 //2014年10月17日iPad Air 2、iPad mini 3 iPhone6 iPad mini 2
 +(bool)deviceisConform{
-
+    
     struct utsname systemInfo;
     uname(&systemInfo);
-    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];//获得设备类型
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];//获得设备类型 iPad4,4
     
     NSArray *tParagramArray = [platform componentsSeparatedByString:@","];
     if ([tParagramArray count]<2) {
@@ -465,8 +468,8 @@ static TKUtil *instace;
     
     // 运行app的时候，给一个提示：当前的设备配置较低，课堂不能完美运行
     // 点击按钮“知道了”关闭
-    NSString *platString = [tParagramArray objectAtIndex:0];
-    NSString *tPlatVersion = [tParagramArray objectAtIndex:1];
+    NSString *platString = [tParagramArray objectAtIndex:0]; //ipad 4
+    NSString *tPlatVersion = [tParagramArray objectAtIndex:1];//4
     
     NSArray *tIPhoneArray = [platString componentsSeparatedByString:@"iPhone"];
     NSArray *tIPadArray   = [platString componentsSeparatedByString:@"iPad"];
@@ -484,10 +487,29 @@ static TKUtil *instace;
         return isConformPhone;
     }
     if ([tIPadArray count]==2) {
-        //iPad Air 2
-        //iPad5,3 iPad5,4
-        //iPad mini 4
-        //iPad5,1
+        
+        //支持多路
+        /**  iPad
+         iPad Air 2
+         iPad Pro (12.9-inch) iPad Pro (9.7-inch)
+         iPad (5th generation)
+         iPad Pro (12.9-inch, 2nd generation)
+         iPad Pro (10.5-inch)
+         iPad (6th generation)
+         */
+
+        /**  iPad mini
+         iPad mini 3,
+         iPad mini 4
+         */
+        //仅支持2路
+        /**
+         iPad mini
+         iPad mini 2
+         iPad Air
+         iPad (4th generation)
+         iPad (3rd generation)
+         */
         NSString *tIPadVersion = [tIPadArray objectAtIndex:1];
         bool isConformIPad = [tIPadVersion intValue]>4?true:false;
         if (isConformIPad) {
@@ -498,7 +520,7 @@ static TKUtil *instace;
         //iPad mini 3
         //iPad4,7 iPad4,8 iPad4,9
         if ([tIPadVersion intValue] == 4) {
-            isConformIPad = [tPlatVersion intValue]>3?true:false;
+            isConformIPad = [tPlatVersion intValue]>6?true:false;
         }
         return isConformIPad;
         
@@ -558,7 +580,35 @@ static TKUtil *instace;
     
     return nil;
 }
-
++(NSInteger)getIntegerValueFromDic:(NSDictionary*)dic Key:(NSObject*)key
+{
+    id value = [dic objectForKey:key];
+    if (value && ([value isKindOfClass:[NSNumber class]]
+                  || [value isKindOfClass:[NSString class]])) {
+        return [value integerValue];
+    }
+    
+    return 0;
+}
++(BOOL)getBOOValueFromDic:(NSDictionary*)dic Key:(NSObject*)key
+{
+    id value = [dic objectForKey:key];
+    if (value && ([value isKindOfClass:[NSNumber class]]
+                  || [value isKindOfClass:[NSString class]])) {
+        return [value boolValue];
+    }
+    
+    return NO;
+}
++(id)getValueFromDic:(NSDictionary*)dic Key:(NSObject*)key Class:(Class)cls
+{
+    id value = [dic objectForKey:key];
+    if (value && [value isKindOfClass:cls]) {
+        return value;
+    }
+    
+    return nil;
+}
 +(int)getCurrentFontSize:(CGSize)size  withString:(NSString *)string{
     CGSize maxSize=size;
     int currentFontSize=12;
@@ -666,6 +716,25 @@ static TKUtil *instace;
     return currentTimeString;
     
 }
+
++(NSString *)getCurrentHoursAndMinutes:(NSString *)time{
+    
+    NSTimeInterval t=[time doubleValue];
+    
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:t];
+    
+    NSLog(@"date:%@",[detaildate description]);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"HH:mm"];
+    
+    NSString *strDate = [dateFormatter stringFromDate:detaildate];
+    
+    return strDate;
+    
+}
+
 +(NSTimeInterval)getNowTimeTimestamp{
     
     
@@ -709,6 +778,82 @@ static TKUtil *instace;
     }else{
         return nil;
     }
+}
+
+
++ (float)GetCpuUsage {
+    kern_return_t kr;
+    task_info_data_t tinfo;
+    mach_msg_type_number_t task_info_count;
+    
+    task_info_count = TASK_INFO_MAX;
+    kr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)tinfo, &task_info_count);
+    if (kr != KERN_SUCCESS) {
+        return 0;
+    }
+    
+    task_basic_info_t      basic_info;
+    thread_array_t         thread_list;
+    mach_msg_type_number_t thread_count;
+    
+    thread_info_data_t     thinfo;
+    mach_msg_type_number_t thread_info_count;
+    
+    thread_basic_info_t basic_info_th;
+    uint32_t stat_thread = 0; // Mach threads
+    
+    basic_info = (task_basic_info_t)tinfo;
+    
+    // get threads in the task
+    kr = task_threads(mach_task_self(), &thread_list, &thread_count);
+    if (kr != KERN_SUCCESS) {
+        return 0;
+    }
+    if (thread_count > 0)
+    stat_thread += thread_count;
+    
+    long tot_sec = 0;
+    long tot_usec = 0;
+    float tot_cpu = 0;
+    int j;
+    
+    for (j = 0; j < thread_count; j++)
+    {
+        thread_info_count = THREAD_INFO_MAX;
+        kr = thread_info(thread_list[j], THREAD_BASIC_INFO,
+                         (thread_info_t)thinfo, &thread_info_count);
+        if (kr != KERN_SUCCESS) {
+            return 0;
+        }
+        
+        basic_info_th = (thread_basic_info_t)thinfo;
+        
+        if (!(basic_info_th->flags & TH_FLAGS_IDLE)) {
+            tot_sec = tot_sec + basic_info_th->user_time.seconds + basic_info_th->system_time.seconds;
+            tot_usec = tot_usec + basic_info_th->system_time.microseconds + basic_info_th->system_time.microseconds;
+            tot_cpu = tot_cpu + basic_info_th->cpu_usage / (float)TH_USAGE_SCALE * 100.0;
+        }
+        
+    } // for each thread
+    
+    kr = vm_deallocate(mach_task_self(), (vm_offset_t)thread_list, thread_count * sizeof(thread_t));
+    assert(kr == KERN_SUCCESS);
+    
+    return tot_cpu;
+}
++ (CGFloat)GetCurrentTaskUsedMemory {
+    task_basic_info_data_t taskInfo;
+    mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;
+    kern_return_t kernReturn = task_info(mach_task_self(),
+                                         TASK_BASIC_INFO, (task_info_t)&taskInfo, &infoCount);
+    
+    if(kernReturn != KERN_SUCCESS) {
+        return 0;
+    }
+    
+    
+    CGFloat memory =taskInfo.resident_size / 1024.0 / 1024.0;
+    return memory;
 }
 
 @end

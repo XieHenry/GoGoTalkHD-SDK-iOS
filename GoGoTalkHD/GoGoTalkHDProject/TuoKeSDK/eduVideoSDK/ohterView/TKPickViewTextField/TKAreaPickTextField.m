@@ -8,7 +8,7 @@
 
 #import "TKAreaPickTextField.h"
 #import "TKMacro.h"
-#import "TKAreaChooseModel.h"
+//#import "TKAreaChooseModel.h"
 #import "TKUtil.h"
 
 @interface TKAreaPickTextField ()
@@ -59,16 +59,16 @@
     _iDataArray = [iDataArray copy];
     // 需要显示区域列表中已经选中的地区
     NSString *defaultArea;
-    for (TKAreaChooseModel *model in iDataArray) {
-        if (model.choosed == YES) {
-            self.serverName = model.serverAreaName;
-            if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
-                defaultArea = [NSString stringWithFormat:@"%@(Auto)", model.englishDesc];
-            } else {
-                defaultArea = [NSString stringWithFormat:@"%@(默认)", model.chineseDesc];
-            }
-        }
-    }
+//    for (TKAreaChooseModel *model in iDataArray) {
+//        if (model.choosed == YES) {
+//            self.serverName = model.serverAreaName;
+//            if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
+//                defaultArea = [NSString stringWithFormat:@"%@(Auto)", model.englishDesc];
+//            } else {
+//                defaultArea = [NSString stringWithFormat:@"%@(默认)", model.chineseDesc];
+//            }
+//        }
+//    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setText:defaultArea];
@@ -88,23 +88,24 @@
 
 -(NSString *) pickerView:(UIPickerView* )pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    TKAreaChooseModel *model = [_iDataArray objectAtIndex:row];
-    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
-        return model.englishDesc;
-    } else {
-        return model.chineseDesc;
-    }
+//    TKAreaChooseModel *model = [_iDataArray objectAtIndex:row];
+//    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
+//        return model.englishDesc;
+//    } else {
+//        return model.chineseDesc;
+//    }
+    return nil;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    TKAreaChooseModel *model = [_iDataArray objectAtIndex:row];
-    self.serverName = model.serverAreaName;
-    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
-        self.text = model.englishDesc;
-    } else {
-        self.text = model.chineseDesc;
-    }
+//    TKAreaChooseModel *model = [_iDataArray objectAtIndex:row];
+//    self.serverName = model.serverAreaName;
+//    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
+//        self.text = model.englishDesc;
+//    } else {
+//        self.text = model.chineseDesc;
+//    }
 }
 
 #pragma mark - inputAccessoryView with toolbar
@@ -113,13 +114,13 @@
         return NO;
     }
     
-    TKAreaChooseModel *model = [_iDataArray objectAtIndex:0];
-    self.serverName = model.serverAreaName;
-    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
-        self.text = model.englishDesc;
-    } else {
-        self.text = model.chineseDesc;
-    }
+//    TKAreaChooseModel *model = [_iDataArray objectAtIndex:0];
+//    self.serverName = model.serverAreaName;
+//    if ([[TKUtil getCurrentLanguage] isEqualToString:@"en"]) {
+//        self.text = model.englishDesc;
+//    } else {
+//        self.text = model.chineseDesc;
+//    }
     return YES;
 }
 

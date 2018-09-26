@@ -13,8 +13,7 @@
 #import "TKMacro.h"
 #import "TKEduSessionHandle.h"
 //todo
-#import "TKChatMessageModel.h"
-#import "RoomUser.h"
+#import "TKChatMessageModel.h" 
 #import "TKEmojiHeader.h"
 
 @interface TKChatView ()<TKGrowingTextViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
@@ -32,6 +31,11 @@
 @property (nonatomic, strong) TKEmotionKeyboard *kerboard; //自定义表情键盘
 
 @property (nonatomic, strong) UILabel *iReplyText;
+
+
+@property (nonatomic, strong) NSTimer *chatTimer;
+@property (nonatomic, assign) BOOL chatTimerFlag;
+@property (nonatomic, strong) NSString *lastSendChatTime;
 @end
 
 
@@ -241,13 +245,28 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
         return;
     }
     //type = 0 聊天 type = 1 提问
-    NSDictionary *messageDic = @{@"msg":_iInputField.realText, @"type":@(0)};
-    NSData *messageData = [NSJSONSerialization dataWithJSONObject:messageDic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *messageConvertStr = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+    NSDictionary *messageDic = @{@"type":@0};
     
-    [[TKEduSessionHandle shareInstance] sessionHandleSendMessage:messageConvertStr completion:nil];
+    NSDictionary *msg = @{@"msg":_iInputField.realText};
+    
+    BOOL isSame = [[TKEduSessionHandle shareInstance] judgmentOfTheSameMessage:_iInputField.realText lastSendTime:self.lastSendChatTime];
+    if (isSame && _chatTimerFlag) {
+        [TKUtil showMessage: MTLocalized(@"Prompt.NotRepeatChat")];
+    }else{
+        
+        
+        [[TKEduSessionHandle shareInstance] sessionHandleSendMessage:msg toID:sTellAll extensionJson:messageDic];
+        
+        [self creatTimer];
+    }
+    
+    
+    self.chatTimerFlag = true;
+    
     _iInputField.text = @"";
+    
     _iReplyText.hidden = NO;
+    
     [_iInputField resignFirstResponder];
    
     
@@ -255,6 +274,21 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
     
     _iChatTitleEmojiButton.selected = YES;//键盘置为原来的样式
     _iInputField.inputView = nil;
+}
+- (void)creatTimer{
+    if (!self.chatTimer) {
+        self.lastSendChatTime = [NSString stringWithFormat:@"%f", [TKUtil getNowTimeTimestamp]];
+        self.chatTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerFire) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)timerFire{
+    
+    self.chatTimerFlag = false;
+    [self.chatTimer invalidate];
+    self.chatTimer = nil;
+    self.lastSendChatTime = nil;
+    
 }
 #pragma mark - 键盘发送按钮事件
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
@@ -393,5 +427,9 @@ static const CGFloat sChatTitleViewClosedWidth = 100;
         //        self.kerboard.height = 216;
     }
     return _kerboard;
+}
+- (void)dealloc{
+    [self.chatTimer invalidate];
+    self.chatTimer = nil;
 }
 @end

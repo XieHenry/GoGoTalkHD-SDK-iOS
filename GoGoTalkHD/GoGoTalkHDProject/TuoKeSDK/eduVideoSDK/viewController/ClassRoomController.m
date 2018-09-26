@@ -679,7 +679,7 @@
             self.iTKEduWhiteBoardView.frame = tFrame;
             self.splitScreenView.frame = CGRectMake(0, 0, CGRectGetWidth(tFrame), CGRectGetHeight(tFrame));
             // MP3图标位置变化,但是MP4的位置不需要变化
-            if (!self.iMediaView.iMediaStream.hasVideo) {
+            if (!self.iMediaView.hasVideo) {
                 self.iMediaView.frame = CGRectMake(0, CGRectGetMaxY(self.iTKEduWhiteBoardView.frame)-57, CGRectGetWidth(self.iTKEduWhiteBoardView.frame), 57);
             }
             self.iMidView.frame =  CGRectMake(0, CGRectGetMaxY(self.iTKEduWhiteBoardView.frame), ScreenW-sRightWidth*Proportion,0);
@@ -882,8 +882,8 @@
     //举手按钮
     {
         BOOL tIsHide = NO;
-        if ([self.iSessionHandle.roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
-            
+        if ([[self.iSessionHandle.roomMgr getRoomProperty].companyid isEqualToString:YLB_COMPANYID]) {
+        
             tIsHide = (![TKEduSessionHandle shareInstance].isClassBegin && (self.iUserType == UserType_Student));
         } else {
             // 非英联邦点击下课后，老师的上下课按钮可见
@@ -965,7 +965,7 @@
             if (isNeedSelected)
             {
                 self.iRewardButton.hidden = (self.iRoomType == RoomType_OneToOne)?YES:NO;
-                if ([self.iSessionHandle.roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
+            if ([[self.iSessionHandle.roomMgr getRoomProperty].companyid isEqualToString:YLB_COMPANYID]) {
                     self.iClassBeginAndRaiseHandButton.backgroundColor = RGBACOLOR_ClassBeginAndEnd;
                     [self.iClassBeginAndRaiseHandButton setTitle:MTLocalized(@"Button.ClassIsOver") forState:UIControlStateNormal];
                 } else {
@@ -984,7 +984,7 @@
             if (isNeedSelected)
             {
                 self.iClassBeginAndRaiseHandButton.enabled = YES;
-                if ([self.iSessionHandle.roomMgr.companyId isEqualToString:YLB_COMPANYID]) {
+                if ([[self.iSessionHandle.roomMgr getRoomProperty].companyid isEqualToString:YLB_COMPANYID]) {
                     self.iClassBeginAndRaiseHandButton.backgroundColor = RGBACOLOR_ClassBeginAndEnd;
                     [self.iClassBeginAndRaiseHandButton setTitle:MTLocalized(@"Button.ClassIsOver") forState:UIControlStateNormal];
                 } else {
@@ -1017,11 +1017,11 @@
     
     
     // 判断上下课按钮是否需要隐藏
-    if ((self.iSessionHandle.roomMgr.hideClassBeginEndButton == YES && self.iSessionHandle.roomMgr.localUser.role != UserType_Student) || self.iSessionHandle.isPlayback == YES) {
+    if (([self.iSessionHandle.roomMgr getRoomConfigration].hideClassBeginEndButton == YES && self.iSessionHandle.roomMgr.localUser.role != UserType_Student) || self.iSessionHandle.isPlayback == YES) {
         self.iClassBeginAndRaiseHandButton.hidden = YES;
         self.iClassBeginAndOpenAlumdView.hidden   = YES;
     }
-    if(self.iSessionHandle.localUser.role == UserType_Patrol && self.iSessionHandle.roomMgr.hideClassBeginEndButton == NO){
+    if(self.iSessionHandle.localUser.role == UserType_Patrol && [self.iSessionHandle.roomMgr getRoomConfigration].hideClassBeginEndButton == NO){
         if(self.iSessionHandle.isClassBegin){
             self.iClassBeginAndRaiseHandButton.hidden = NO;
             self.iClassBeginAndOpenAlumdView.hidden   = NO;
@@ -1147,19 +1147,17 @@
 }
 
 #pragma mark - 播放
--(void)playVideo:(RoomUser*)user {
+-(void)playVideo:(TKRoomUser *)user {
     
-    [self.iSessionHandle delUserPlayAudioArray:user];
+    [self.iSessionHandle delUserPlayAudioArray:user.peerID];
     
     TKVideoSmallView* viewToSee = nil;
     if (user.role == UserType_Teacher)
         viewToSee = self.iTeacherVideoView;
-    else if (self.iRoomType == RoomType_OneToOne && user.role == UserType_Student) {
+    else if ((self.iRoomType == RoomType_OneToOne && user.role == UserType_Student)||(self.iRoomType == RoomType_OneToOne && user.role == UserType_Patrol)) {
         viewToSee = self.iOurVideoView;
     }
     else
-        
-        
         for (int i =0; i< self.iStudentVideoViewArray.count; i++) {
             
             TKVideoSmallView *view = (TKVideoSmallView *)self.iStudentVideoViewArray[i];
@@ -1203,24 +1201,39 @@
 //    
 //    return nil;
 //}
+
 //进入会议失败,重连
 - (void)sessionManagerDidFailWithError:(NSError *)error {
+    if (!(error.code == TKErrorCode_ConnectSocketError || error.code == TKRoomWarning_ReConnectSocket_ServerChanged || error.code == TKErrorCode_Subscribe_RoomNotExist)) {
+        return;
+    }
     
     self.networkRecovered = NO;
     self.currentServer = nil;
     
-    BOOL isJoinRoomed = YES;
-    if (isJoinRoomed) {
-        
-        [[TKEduSessionHandle shareInstance]configureHUD:MTLocalized(@"State.Reconnecting") aIsShow:YES];
+    [self clearAll];
+}
+- (void)clearAll{
+    
+    if (self.isConnect) {
+        return;
     }
     
+    self.isConnect = YES;
+    
+    [[TKEduSessionHandle shareInstance]configureHUD:MTLocalized(@"State.Reconnecting") aIsShow:YES];
+    
+    
     [[TKEduSessionHandle shareInstance]configureDraw:false isSend:NO to:sTellAll peerID:[TKEduSessionHandle shareInstance].localUser.peerID];
+    
     [[TKEduSessionHandle shareInstance].iBoardHandle disconnectCleanup];
+    
     [self.iSessionHandle clearAllClassData];
+    
     [self.iSessionHandle.iBoardHandle clearAllWhiteBoardData];
+    
     [self clearVideoViewData:self.iOurVideoView];
-   
+    
     //将分屏的数据删除
     for (TKVideoSmallView *view in self.iStudentSplitViewArray) {
         view.isDrag = NO;
@@ -1279,11 +1292,17 @@
     
     self.splitScreenView.hidden = YES;
 }
-
-- (void)sessionManagerUserPublished:(RoomUser *)user{
+- (void)sessionManagerUserPublished:(TKRoomUser *)user{
+    
+//    {
+//        NSString *msg = [NSString stringWithFormat:@"播放：%@的视频,peerid:%@",user.nickName,user.peerID];
+//        //测试删除
+//        [self showMessage:msg];
+//    }
+    
     // ToDo: 线程安全
     [[TKEduSessionHandle shareInstance] addPublishUser:user];
-    [[TKEduSessionHandle shareInstance] delePendingUser:user];
+    [[TKEduSessionHandle shareInstance] delePendingUser:user.peerID];
     
     /// 仝磊鸣修改，原来是大于1，由于现在只发布一次，所以先发布音频后发布视频会看不到
     TKLog(@"jin------publish:%@",user.nickName);
@@ -1308,66 +1327,7 @@
         aButton.selected = [TKEduSessionHandle shareInstance].isClassBegin;
         if (!aButton.selected) {
             
-            //(4)点击上课按钮后判断->未到下课时间->提前x分钟给出提示语（老师，助教）->课程结束，一律离开
-            //(5)点击上课按钮后判断->已过下课时间->提示课程结束，不能上课
-            if (self.iSessionHandle.roomMgr.endClassTimeFlag) {
-                [TKEduNetManager systemtime:self.iParamDic Complete:^int(id  _Nullable response) {
-                    
-                    if (response) {
-                        int time =  self.iRoomProperty.iEndTime - [response[@"time"] intValue];
-                        //(2)未到下课时间： 老师未点下课->下课时间到->课程结束，一律离开
-                        //(3)到下课时间->提前5分钟给出提示语（老师，助教）->课程结束，一律离开
-                        if ((time >0 && time<=300) && self.iSessionHandle.localUser.role == UserType_Teacher) {
-                            int ratio = time/60;
-                            int remainder = time % 60;
-                            
-                            if (ratio == 0 && remainder>0) {
-                                
-                                [TKUtil showClassEndMessage:[NSString stringWithFormat:@"%d%@",remainder,MTLocalized(@"Prompt.ClassEndTimeseconds")]];
-                            }else if(ratio>0){
-                                
-                                [TKUtil showClassEndMessage:[NSString stringWithFormat:@"%d%@",ratio,MTLocalized(@"Prompt.ClassEndTime")]];
-                            }
-                        }
-                        if (time<=0) {
-                            [TKUtil showClassEndMessage:MTLocalized(@"Error.RoomDeletedOrExpired")];
-                            [self prepareForLeave:YES];
-                        }else{
-                            if(self.iSessionHandle.roomMgr.forbidLeaveClassFlag && self.iUserType == UserType_Teacher){
-                                [[TKEduSessionHandle shareInstance]sessionHandleDelMsg:sAllAll ID:sAllAll To:sTellNone Data:@{} completion:nil];
-                            }
-                            //当前时间定时器
-                            TKLog(@"开始上课");
-                            UIButton *tButton = self.iClassBeginAndRaiseHandButton;
-                            [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:YES];
-                            
-                            [TKEduNetManager classBeginStar:[TKEduSessionHandle shareInstance].iRoomProperties.iRoomId companyid:[TKEduSessionHandle shareInstance].iRoomProperties.iCompanyID aHost:[TKEduSessionHandle shareInstance].iRoomProperties.sWebIp aPort:[TKEduSessionHandle shareInstance].iRoomProperties.sWebPort aComplete:^int(id  _Nullable response) {
-                                tButton.backgroundColor = RGBACOLOR_ClassEnd_Red;
-                                [tButton setTitle:MTLocalized(@"Button.ClassIsOver") forState:UIControlStateNormal];
-                                //  {"recordchat" : true};
-                                NSString *str = [TKUtil dictionaryToJSONString:@{@"recordchat":@YES}];
-                                //[_iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true completion:nil];
-                                [self.iSessionHandle sessionHandlePubMsg:sClassBegin ID:sClassBegin To:sTellAll Data:str Save:true AssociatedMsgID:nil AssociatedUserID:nil expires:0 completion:nil];
-                                [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
-                                
-                                return 0;
-                            } aNetError:^int(id  _Nullable response) {
-                                
-                                [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
-                                return 0;
-                            }];
-                        }
-                    }
-                    
-                    
-                    
-                    return 0;
-                } aNetError:^int(id  _Nullable response) {
-                    
-                    return 0;
-                }];
-            }else{
-                if(self.iSessionHandle.roomMgr.forbidLeaveClassFlag && self.iUserType == UserType_Teacher){
+                if([self.iSessionHandle.roomMgr getRoomConfigration].forbidLeaveClassFlag && self.iUserType == UserType_Teacher){
                     [[TKEduSessionHandle shareInstance]sessionHandleDelMsg:sAllAll ID:sAllAll To:sTellNone Data:@{} completion:nil];
                 }
                 //当前时间定时器
@@ -1390,7 +1350,7 @@
                     [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
                     return 0;
                 }];
-            }
+            
             
         } else {
             
@@ -1409,8 +1369,6 @@
                     
                 }
                 
-                
-                
                 UIButton *tButton = self.iClassBeginAndRaiseHandButton;
                 [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:YES];
                 [self.iClassTimetimer invalidate];      // 下课后计时器销毁
@@ -1420,7 +1378,7 @@
                     [TKEduSessionHandle shareInstance].isPlayMedia          = NO;
                     [[TKEduSessionHandle shareInstance]sessionHandleUnpublishMedia:nil];
                 }
-                if(!self.iSessionHandle.roomMgr.forbidLeaveClassFlag){
+                if(![self.iSessionHandle.roomMgr getRoomConfigration].forbidLeaveClassFlag){
                     
                     // 下课清理聊天日志
                     [self.iSessionHandle clearMessageList];
@@ -1481,25 +1439,25 @@
         }
     }
 }
--(void)unPlayVideo:(RoomUser*)user {
+-(void)unPlayVideo:(NSString *)peerID {
 
     TKVideoSmallView* viewToSee = nil;
-    if (user.role == UserType_Teacher)
+    if (peerID == self.iTeacherVideoView.iPeerId)
         viewToSee = self.iTeacherVideoView;
-    else if (self.iRoomType == RoomType_OneToOne && user.role == UserType_Student) {
+    else if (self.iRoomType == RoomType_OneToOne && peerID == self.iOurVideoView.iPeerId) {
         viewToSee = self.iOurVideoView;
     }
     else
     {
         for (TKVideoSmallView* view in self.iStudentVideoViewArray) {
-            if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:user.peerID]) {
+            if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:peerID]) {
                 viewToSee = view;
                 break;
             }
         }
         NSArray *splitA = [NSArray arrayWithArray:self.splitScreenView.videoSmallViewArray];
         for (TKVideoSmallView* view in splitA) {
-            if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:user.peerID]) {
+            if(view.iRoomUser != nil && [view.iRoomUser.peerID isEqualToString:peerID]) {
 //                [self.iStudentVideoViewArray addObject:view];
 //                [self.splitScreenView.videoSmallViewArray removeObject:view];
                 viewToSee = view;
@@ -1508,14 +1466,14 @@
         }
     }
     
-    if (viewToSee && viewToSee.iRoomUser != nil && [viewToSee.iRoomUser.peerID isEqualToString:user.peerID]) {
+    if (viewToSee && viewToSee.iRoomUser != nil && [viewToSee.iRoomUser.peerID isEqualToString:peerID]) {
         
         __weak typeof(self)weekSelf = self;
         NSMutableDictionary *tPlayVideoViewDic = self.iPlayVideoViewDic;
         
         NSArray *array = [NSArray arrayWithArray:self.iStudentSplitScreenArray];
-        for (NSString *peerID in array) {
-            if([user.peerID isEqualToString:peerID]) {
+        for (NSString *peerId in array) {
+            if([peerID isEqualToString:peerId]) {
 //                viewToSee.isSplit = YES;
 //                [self beginTKSplitScreenView:viewToSee];
                 [self.iStudentVideoViewArray addObject:viewToSee];
@@ -1523,30 +1481,30 @@
             }
         }
         
-        [self myUnPlayVideo:user aVideoView:viewToSee completion:^(NSError *error) {
+        [self myUnPlayVideo:peerID aVideoView:viewToSee completion:^(NSError *error) {
             
-            [tPlayVideoViewDic removeObjectForKey:user.peerID];
+            [tPlayVideoViewDic removeObjectForKey:peerID];
             
             __strong typeof(weekSelf) strongSelf =  weekSelf;
             
             //            viewToSee.frame = CGRectMake(0, CGRectGetMinY(_iBottomView.frame), CGRectGetWidth(viewToSee.frame), CGRectGetHeight(viewToSee.frame));
             
-            [strongSelf updateMvVideoForPeerID:user.peerID];
+            [strongSelf updateMvVideoForPeerID:peerID];
             if (!self.iSessionHandle.iIsFullState) {
                 [strongSelf refreshUI];
             }
             
         }];
     }
-    [self.iSessionHandle delePendingUser:user];
+    [self.iSessionHandle delePendingUser:peerID];
 }
--(void)myUnPlayVideo:(RoomUser*)aRoomUser aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion{
-    [self.iSessionHandle sessionHandleUnPlayVideo:aRoomUser.peerID completion:^(NSError *error) {
+-(void)myUnPlayVideo:(NSString *)peerID aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion{
+    [self.iSessionHandle sessionHandleUnPlayVideo:peerID completion:^(NSError *error) {
         
         //更新uiview
         [aVideoView clearVideoData];
         
-        TKLog(@"----unplay:%@ aVideoView.iPeerId:%@ frame:%@ VideoView:%@",aRoomUser.nickName,aRoomUser.peerID,@(aVideoView.frame.size.width),@(aVideoView.iVideoViewTag));
+        TKLog(@"----unplay:%@ frame:%@ VideoView:%@",peerID,@(aVideoView.frame.size.width),@(aVideoView.iVideoViewTag));
         completion(error);
         
     }];

@@ -205,6 +205,8 @@ static  NSString *const sStreamFailure              = @"StreamFailure";
 
 static  NSString *const sAllAll             = @"__AllAll";
 
+static  NSString *const sEveryoneBanChat            = @"EveryoneBanChat";//禁言信令
+
 static  NSString *const sVideoDraghandle            = @"videoDraghandle";//视频拖拽
 static  NSString *const sVideoSplitScreen            = @"VideoSplitScreen";//分屏
 static  NSString *const sVideoZoom                  = @"VideoChangeSize";//视频缩放
@@ -235,6 +237,12 @@ static  NSString *const sPrintLogMessage     = @"printLogMessage";
 static  NSString *const sChangeWebPageFullScreen      = @"changeWebPageFullScreen";//白板放大事件
 static  NSString *const sOnJsPlay            = @"onJsPlay";
 static  NSString *const scloseDynamicPptWebPlay    = @"closeDynamicPptWebPlay";//closeNewPptVideo更改为closeDynamicPptWebPlay
+
+//本地持久化当前文档服务器的地址信息
+static  NSString *const sSaveValueByKey        = @"saveValueByKey";
+static  NSString *const sGetValueByKey        = @"getValueByKey";
+
+
 static  NSString *const sDisableVideo        = @"disablevideo";
 static  NSString *const sDisableAudio        = @"disableaudio";
 static  NSString *const sFromId              = @"fromId";
@@ -258,6 +266,7 @@ static  NSString *const sMediaProgress_audio_1          = @"MediaProgress_audio_
 
 //白板类型
 static  NSString *const sVideoWhiteboard                         = @"VideoWhiteboard";
+
 //视频标注相关
 static  NSString *const sPrintLogMessage_videoWhiteboardPage     = @"printLogMessage_videoWhiteboardPage";
 static  NSString *const sOnPageFinished_videoWhiteboardPage      = @"onPageFinished_videoWhiteboardPage";
@@ -274,6 +283,7 @@ static  NSString *const sChoosePhotosUploadNotification = @"sChoosePhotosUploadN
 static  NSString *const sHttp   = @"http";
 static  NSString *const sPort   = @"80";
 #ifdef Debug
+
 static  NSString *const sHost   = @"global.talk-cloud.neiwang";
 
 #else
@@ -303,5 +313,18 @@ static  NSString *const sHost   = @"global.talk-cloud.net";
 #define tk_weakify(var)   __weak typeof(var) weakSelf = var
 #define tk_strongify(var) __strong typeof(var) strongSelf = var
 
+
+//白板相关
+
+static NSString *const TKWhiteBoardDocProtocolKey = @"doc_protocol";
+static NSString *const TKWhiteBoardDocHostKey = @"doc_host";
+static NSString *const TKWhiteBoardDocPortKey = @"doc_port";
+static NSString *const TKWhiteBoardBackupDocProtocolKey = @"backup_doc_protocol";
+static NSString *const TKWhiteBoardBackupDocHostKey = @"backup_doc_host";
+static NSString *const TKWhiteBoardBackupDocPortKey = @"backup_doc_port";
+static NSString *const TKWhiteBoardBackupDocHostListKey = @"backup_doc_host_list";
+static NSString *const TKWhiteBoardWebProtocolKey = @"web_protocol";
+static NSString *const TKWhiteBoardWebHostKey = @"web_host";
+static NSString *const TKWhiteBoardWebPortKey = @"web_port";
 
 #endif /* TKMacro_h */

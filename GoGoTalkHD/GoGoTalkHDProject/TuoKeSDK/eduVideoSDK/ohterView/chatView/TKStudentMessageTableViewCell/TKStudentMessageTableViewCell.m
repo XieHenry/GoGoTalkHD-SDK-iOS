@@ -275,7 +275,7 @@
     _iText               = chatModel.iMessage;
     _iMessageLabel.textColor = (chatModel.iMessageType ==MessageType_Me)?  RGBCOLOR(221, 221, 221): RGBCOLOR(162, 162, 162);
     _iTranslationtext    = chatModel.iTranslationMessage;
-    _iTime = chatModel.iTime;
+    _iTime = [TKUtil getCurrentHoursAndMinutes:chatModel.iTime];
     _iNickName = chatModel.iUserName;
     _iMessageType        = chatModel.iMessageType;
     [self resetView];

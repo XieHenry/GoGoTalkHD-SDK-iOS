@@ -6,8 +6,7 @@
 //  Copyright © 2017年 beijing. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "RoomManager.h"
+#import <Foundation/Foundation.h> 
 #import "TKMacro.h"
 #import <WebKit/WebKit.h>
 

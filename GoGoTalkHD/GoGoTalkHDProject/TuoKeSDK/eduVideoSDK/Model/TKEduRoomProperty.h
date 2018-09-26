@@ -23,6 +23,8 @@
 @property(nonatomic,assign) NSTimeInterval iStartTime;
 @property(nonatomic,assign) NSTimeInterval iCurrentTime;
 @property(nonatomic,assign) NSTimeInterval iHowMuchTimeServerFasterThenMe;
+//自定义白板颜色
+@property (nonatomic,assign) NSNumber *whiteboardcolor;
 //根据用户设置的信息，
 @property(nonatomic,copy) NSString * sWebIp;
 @property(nonatomic,copy) NSString * sWebPort;

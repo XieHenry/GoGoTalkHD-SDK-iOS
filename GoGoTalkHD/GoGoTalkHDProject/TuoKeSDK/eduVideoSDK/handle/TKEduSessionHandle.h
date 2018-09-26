@@ -13,52 +13,56 @@
 #import "TKEduBoardHandle.h"
 #import "TKVideoBoardHandle.h"
 
-@class TKChatMessageModel,TKEduRoomProperty,TKMediaDocModel,TKDocmentDocModel,RoomUser,RoomManager,TKDocumentListView,TKProgressHUD;
+@class TKChatMessageModel,TKEduRoomProperty,TKMediaDocModel,TKDocmentDocModel,TKRoomUser,TKRoomManager,TKDocumentListView,TKProgressHUD;
 
 
 #pragma mark 1 TKEduSessionDelegate
 @protocol TKEduSessionDelegate <NSObject>
+
 //自己进入课堂
-- (void)sessionManagerRoomJoined:(NSError *)error ;
+- (void)sessionManagerRoomJoined;
 //自己离开课堂
-- (void)sessionManagerRoomLeft ;
+- (void)sessionManagerRoomLeft;
 //自己被踢
 -(void) sessionManagerSelfEvicted:(NSDictionary *)reason;
 //观看视频
-- (void)sessionManagerUserPublished:(RoomUser *)user ;
+- (void)sessionManagerUserPublished:(TKRoomUser *)user;
 //取消视频
-- (void)sessionManagerUserUnpublished:(RoomUser *)user ;
+- (void)sessionManagerUserUnpublished:(NSString *)peerID;
 //用户进入
-- (void)sessionManagerUserJoined:(RoomUser *)user InList:(BOOL)inList ;
+- (void)sessionManagerUserJoined:(NSString *)peerID InList:(BOOL)inList ;
 //用户离开
-- (void)sessionManagerUserLeft:(RoomUser *)user ;
+- (void)sessionManagerUserLeft:(NSString *)peerID ;
 //用户信息变化 sGiftNumber sCandraw sRaisehand sPublishstate
-- (void)sessionManagerUserChanged:(RoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId;
+- (void)sessionManagerUserChanged:(TKRoomUser *)user Properties:(NSDictionary*)properties fromId:(NSString *)fromId;
 //聊天信息
-- (void)sessionManagerMessageReceived:(NSString *)message ofUser:(RoomUser *)user ;
+- (void)sessionManagerMessageReceived:(NSString *)message ofUser:(TKRoomUser *)user ;
 //回放的聊天信息
-- (void)sessionManagerPlaybackMessageReceived:(NSString *)message ofUser:(RoomUser *)user ts:(NSTimeInterval)ts;
+- (void)sessionManagerPlaybackMessageReceived:(NSString *)message ofUser:(TKRoomUser *)user ts:(NSTimeInterval)ts;
 //进入会议失败
 - (void)sessionManagerDidFailWithError:(NSError *)error ;
 //白板等相关信令
 - (void)sessionManagerOnRemoteMsg:(BOOL)add ID:(NSString*)msgID Name:(NSString*)msgName TS:(unsigned long)ts Data:(NSObject*)data InList:(BOOL)inlist;
 
 //获取礼物数
-- (void)sessionManagerGetGiftNumber:(void(^)())completion;
+- (void)sessionManagerGetGiftNumber:(dispatch_block_t)completion;
 #pragma mark media
-//发布媒体流
-- (void)sessionManagerMediaPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user ;
-//取消媒体流
-- (void)sessionManagerMediaUnPublish:(MediaStream *)mediaStream roomUser:(RoomUser*)user;
+//发布  取消媒体流
+
+//发布取消媒体流
+- (void)sessionManagerOnShareMediaState:(NSString *)peerId state:(TKMediaState)state extension:(NSDictionary *)extension; 
+
 //媒体流进度
-- (void)sessionManagerUpdateMediaStream:(MediaStream *)mediaStream pos:(NSTimeInterval)pos isPlay:(BOOL)isPlay;
+- (void)sessionManagerUpdateMediaStream:(NSTimeInterval)duration
+                                 pos:(NSTimeInterval)pos
+                              isPlay:(BOOL)isPlay;
+
 - (void)sessionManagerMediaLoaded;
 #pragma mark Screen
-- (void)sessionManagerScreenPublish:(RoomUser *)user;
-- (void)sessionManagerScreenUnPublish:(RoomUser *)user;
+- (void)sessionManagerOnShareScreenState:(NSString *)peerId state:(int)state extensionMessage:(NSDictionary *)message;
+
 #pragma mark file
-- (void)sessionManagerFilePublish:(RoomUser *)user;
-- (void)sessionManagerFileUnPublish:(RoomUser *)user;
+- (void)sessionManagerOnShareFileState:(NSString *)peerId state:(int)state extensionMessage:(NSDictionary *)message;
 
 #pragma mark Playback
 - (void)sessionManagerReceivePlaybackDuration:(NSTimeInterval)duration;
@@ -91,15 +95,15 @@
 @property (nonatomic, weak) id<TKEduRoomDelegate>    iRoomDelegate;
 @property (nonatomic, weak) id<TKEduSessionDelegate> iSessionDelegate;
 @property (nonatomic, weak) id<TKEduBoardDelegate>   iBoardDelegate;
-@property (nonatomic, strong) RoomManager *roomMgr;
-@property (nonatomic, strong, readonly) RoomUser *localUser;
-@property (nonatomic, strong, readonly) NSSet *remoteUsers;
-@property (nonatomic, assign, readonly) BOOL useFrontCamera;
-@property (nonatomic, assign, readonly, getter=isConnected) BOOL connected;
-@property (nonatomic, assign, readonly, getter=isJoined) BOOL joined;
+@property (nonatomic, strong) TKRoomManager *roomMgr;
+@property (nonatomic, strong, readonly) TKRoomUser *localUser;
+//@property (nonatomic, strong, readonly) NSSet *remoteUsers;
+//@property (nonatomic, assign, readonly) BOOL useFrontCamera;
+//@property (nonatomic, assign, readonly, getter=isConnected) BOOL connected;
+//@property (nonatomic, assign, readonly, getter=isJoined) BOOL joined;
 @property (nonatomic, copy, readonly) NSString *roomName;
 @property (nonatomic, assign, readonly) int      roomType;
-@property (nonatomic, copy, readonly) NSDictionary *roomProperties;
+//@property (nonatomic, copy, readonly) NSDictionary *roomProperties;
 @property (nonatomic, copy) NSDictionary *iParamDic;
 @property (nonatomic,strong) NSMutableDictionary *iPublishDic;
 @property (nonatomic,strong) NSMutableArray *iUserList;
@@ -107,7 +111,7 @@
 @property (nonatomic, copy) NSString *defaultArea;
 #pragma mark 自定义
 @property (nonatomic, strong) TKEduRoomProperty *iRoomProperties;
-@property (nonatomic, strong) RoomUser *iTeacherUser;
+@property (nonatomic, strong) TKRoomUser *iTeacherUser;
 @property (nonatomic, assign) BOOL isClassBegin;
 @property (nonatomic, assign) BOOL isMuteAudio;
 @property (nonatomic, assign) BOOL isunMuteAudio;//全体发言状态
@@ -151,8 +155,7 @@
 @property (assign,nonatomic)BOOL iIsCanPageInit;
 @property (assign,nonatomic)BOOL iIsAssitOpenVInit;
 +(instancetype)shareInstance;
-+(void)destory;
-- (void)clear;
++(void)destory; 
 - (void)configureSession:(NSDictionary*)paramDic
             aRoomDelegate:(id<TKEduRoomDelegate>) aRoomDelegate
         aSessionDelegate:(id<TKEduSessionDelegate>) aSessionDelegate
@@ -168,11 +171,16 @@
 
 
 -(void)joinEduClassRoomWithParam:(NSDictionary *)aParamDic aProperties:(NSDictionary *)aProperties;
+
+
+- (int)sessionHandleSetVideoOrientation:(UIDeviceOrientation)orientation;
+
 - (void)sessionHandleLeaveRoom:(void (^)(NSError *error))block;
 
 -(void) sessionHandleLeaveRoom:(BOOL)force Completion:(void (^)(NSError *))block;
 
-- (void)sessionHandlePlayVideo:(NSString*)peerID completion:(void (^)(NSError *error, NSObject *view))block;
+- (void)sessionHandlePlayVideo:(NSString*)peerID renderType:(int)renderType window:(UIView *)window completion:(completion_block)block;
+//- (void)sessionHandlePlayVideo:(NSString*)peerID completion:(void (^)(NSError *error, NSObject *view))block;
 
 - (void)sessionHandleUnPlayVideo:(NSString*)peerID completion:(void (^)(NSError *error))block;
 
@@ -185,9 +193,10 @@
 
 - (void)sessionHandleChangeUserPublish:(NSString*)peerID Publish:(int)publish completion:(void (^)(NSError *error))block;
 
-- (void)sessionHandleSendMessage:(NSString*)message completion:(void (^)(NSError *error))block;
-
+//- (void)sessionHandleSendMessage:(NSString*)message completion:(void (^)(NSError *error))block;
+- (void)sessionHandleSendMessage:(NSObject*)message toID:(NSString *)toID extensionJson:(NSObject *)extension;
 //- (void)sessionHandlePubMsg:(NSString*)msgName ID:(NSString*)msgID To:(NSString*)toID Data:(NSObject*)data Save:(BOOL)save completion:(void (^)(NSError *error))block;
+
 - (void)sessionHandlePubMsg:(NSString *)msgName ID:(NSString *)msgID To:(NSString *)toID Data:(NSObject *)data Save:(BOOL)save AssociatedMsgID:(NSString *)associatedMsgID AssociatedUserID:(NSString *)associatedUserID
                     expires:(NSTimeInterval)expires completion:(void (^)(NSError *))block;
 
@@ -219,20 +228,23 @@
 //关闭媒体流
 - (void)sessionHandleUnpublishMedia:(void (^)(NSError *))block;
 //播放媒体流
-- (void)sessionHandlePlayMedia:(NSString*)fileId completion:(void (^)(NSError *error, NSObject *view))block;
+//- (void)sessionHandlePlayMedia:(NSString*)fileId completion:(void (^)(NSError *error, NSObject *view))block;
+- (void)sessionHandlePlayMedia:(NSString*)fileId renderType:(int)renderType window:(UIView *)window completion:(completion_block)block;
 //媒体流暂停
 -(void)sessionHandleMediaPause:(BOOL)pause;
 //媒体流进度
 -(void)sessionHandleMediaSeektoPos:(NSTimeInterval)pos;
 //媒体流音量
--(void)sessionHandleMediaVolum:(CGFloat)volum;
+-(void)sessionHandleMediaVolum:(CGFloat)volum peerId:(NSString *)peerId;
 
 #pragma mark Screen
--(void)sessionHandlePlayScreen:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+//-(void)sessionHandlePlayScreen:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+- (void)sessionHandlePlayScreen:(NSString*)fileId renderType:(int)renderType window:(UIView *)window completion:(completion_block)block;
 -(void)sessionHandleUnPlayScreen:(NSString *)peerId completion:(void (^)(NSError *error))block;
 
 #pragma mark file
--(void)sessionHandlePlayFile:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+//-(void)sessionHandlePlayFile:(NSString *)peerId completion:(void (^)(NSError *error, NSObject *view))block;
+- (void)sessionHandlePlayFile:(NSString*)fileId renderType:(int)renderType window:(UIView *)window completion:(completion_block)block;
 -(void)sessionHandleUnPlayFile:(NSString *)peerId completion:(void (^)(NSError *error))block;
 
 #pragma 其他
@@ -241,36 +253,39 @@
 //message
 - (NSArray *)messageList;
 - (void)addOrReplaceMessage:(TKChatMessageModel *)aMessageModel;
+- (void)addTranslationMessage:(TKChatMessageModel *)aMessageModel;
+- (BOOL)judgmentOfTheSameMessage:(NSString *)message lastSendTime:(NSString *)time;
 //audio
 - (NSSet *)userPlayAudioArray;
-- (void)addOrReplaceUserPlayAudioArray:(RoomUser *)aRoomUser ;
-- (void)delUserPlayAudioArray:(RoomUser *)aRoomUser ;
+- (void)addOrReplaceUserPlayAudioArray:(TKRoomUser *)user;
+- (void)delUserPlayAudioArray:(NSString *)userID ;
 //user
 - (NSArray *)userArray;
-- (void)addUser:(RoomUser *)aRoomUser;
-- (void)delUser:(RoomUser *)aRoomUser;
+- (TKRoomUser *)getUserWithPeerId:(NSString *)peerId;
+- (void)addUser:(TKRoomUser *)aRoomUser;
+- (void)delUser:(NSString *)peerID;
 //user 老师和学生
 - (NSArray *)userStdntAndTchrArray;
-- (void)addUserStdntAndTchr:(RoomUser *)aRoomUser;
-- (void)delUserStdntAndTchr:(RoomUser *)aRoomUser;
--(RoomUser *)userInUserList:(NSString*)peerId ;
+- (void)addUserStdntAndTchr:(TKRoomUser *)aRoomUser;
+- (void)delUserStdntAndTchr:(NSString *)peerID;
+-(TKRoomUser *)userInUserList:(NSString*)peerId ;
 //除了老师teacher和巡课Patrol
 - (NSArray *)userListExpecPtrlAndTchr;
 //特殊身份 助教等
--(void)addSecialUser:(RoomUser *)aRoomUser;
--(void)delSecialUser:(RoomUser*)aRoomUser;
+-(void)addSecialUser:(TKRoomUser *)aRoomUser;
+-(void)delSecialUser:(NSString *)peerID;
 -(NSDictionary *)secialUserDic;
 //pending
 -(NSDictionary *)pendingUserDic;
--(void)delePendingUser:(RoomUser*)aRoomUser;
--(bool)addPendingUser:(RoomUser *)aRoomUser;
+-(void)delePendingUser:(NSString *)peerId;
+-(bool)addPendingUser:(TKRoomUser *)aRoomUser;
 //publish
--(void)addPublishUser:(RoomUser *)aRoomUser;
--(void)delePublishUser:(RoomUser*)aRoomUser;
+-(void)addPublishUser:(TKRoomUser *)aRoomUser;
+-(void)delePublishUser:(NSString *)peerId;
 -(NSDictionary *)publishUserDic;
 //unpublish
--(void)addUnPublishUser:(RoomUser *)aRoomUser;
--(void)deleUnPublishUser:(RoomUser*)aRoomUser;
+-(void)addUnPublishUser:(TKRoomUser *)aRoomUser;
+-(void)deleUnPublishUser:(TKRoomUser *)aRoomUser;
 -(NSDictionary *)unpublishUserDic;
 #pragma mark 影音
 -(void)deleteaMediaDocModel:(TKMediaDocModel*)aMediaDocModel To:(NSString *)to;
