@@ -1,0 +1,55 @@
+10
+
+dir
+30556
+svn://tuyy@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView/chatView
+svn://tuyy@192.168.1.15
+
+
+
+2018-04-16T17:28:55.185749Z
+30251
+liyy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de2abff8-9739-4157-a70d-81cc75667de8
+
+TKTeacherMessageTableViewCell
+dir
+
+TKEmoji
+dir
+
+HPGrowingTextView
+dir
+
+chatMessgaeModel
+dir
+
+TKMessageTableViewCell
+dir
+
+TGLiveViewChatTableViewCell
+dir
+
+TKChatView
+dir
+
+TGWeakDelegate
+dir
+
+TKStudentMessageTableViewCell
+dir
+

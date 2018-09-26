@@ -1,0 +1,52 @@
+10
+
+dir
+30556
+svn://tuyy@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/third
+svn://tuyy@192.168.1.15
+
+
+
+2018-04-04T15:21:31.914398Z
+29978
+liyy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de2abff8-9739-4157-a70d-81cc75667de8
+
+CrashReporter.framework
+dir
+
+HockeySDK.framework
+dir
+
+LTUpdate
+dir
+
+HockeySDK
+dir
+
+TKProgressHUD
+dir
+
+HockeySDKResources.bundle
+dir
+
+GTMBase64
+dir
+
+TKAFNetworking
+dir
+

@@ -1,0 +1,72 @@
+//
+//  MediaStream.h
+//  roomsdk
+//
+//  Created by ifeng on 2017/9/1.
+//  Copyright © 2017年 talkcloud. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface MediaStream : NSObject
+/**
+ 文件名称
+ */
+@property (nonatomic, copy) NSString   *filename;
+
+/**
+ 文件id
+ */
+@property (nonatomic, copy) NSString   *fileid;
+
+/**
+ 文件时长
+ */
+@property (nonatomic, assign) NSTimeInterval duration;
+
+/**
+ 是否有视频，音频时为NO，视频时为YES
+ */
+@property (nonatomic, assign) BOOL hasVideo;
+
+/**
+ 是否有音频，音频时为NO，视频时为YES
+ */
+@property (nonatomic, assign) BOOL hasAudio;
+
+/**
+ 播放状态 YES 播放 NO 暂停
+ */
+@property (nonatomic, assign) BOOL isPlay;
+
+/**
+ 视频宽度
+ */
+@property (nonatomic, assign) NSInteger width;
+
+/**
+ 视频高度
+ */
+@property (nonatomic, assign) NSInteger height;
+
+/**
+ 拖动播放滑块
+ 
+ @param pos 拖动的时间
+ */
+- (void)seek:(NSTimeInterval)pos;
+
+/**
+ 暂停播放
+ */
+- (void)pause;
+
+/**
+ 开始播放
+ */
+- (void)play;
+
+
+
+@end
+

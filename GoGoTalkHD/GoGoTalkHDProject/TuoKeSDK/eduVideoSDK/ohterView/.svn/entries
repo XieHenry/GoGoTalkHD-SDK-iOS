@@ -1,0 +1,132 @@
+10
+
+dir
+30556
+svn://tuyy@192.168.1.15/talk/ios/branches/new/EduClassPad/EduClass/eduVideoSDK/ohterView
+svn://tuyy@192.168.1.15
+
+
+
+2018-04-16T17:28:55.185749Z
+30251
+liyy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de2abff8-9739-4157-a70d-81cc75667de8
+
+TKChooseAreaListView
+dir
+
+TKUploadImageView
+dir
+
+TKPlaybackMaskView.h
+file
+
+
+
+
+2018-02-28T04:29:04.000000Z
+dcbb998492a3cc83ab5bd25201ee504e
+2018-02-07T08:57:23.866358Z
+28673
+tuyy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+866
+
+TKNavigationController
+dir
+
+TKDocumentListView
+dir
+
+TKSplitScreenView
+dir
+
+TKPlaybackMaskView.m
+file
+
+
+
+
+2018-02-28T04:29:04.000000Z
+350145ddea15645eb16d1d1de7c8130d
+2018-02-07T08:57:23.866358Z
+28673
+tuyy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6835
+
+TKVideoSmallView
+dir
+
+TKPickViewTextField
+dir
+
+TKMediaView
+dir
+
+TKLandScapeImagePicker
+dir
+
+chatView
+dir
+
+TKButtonClickedOnce
+dir
+
+TKClassTimeView
+dir
+
