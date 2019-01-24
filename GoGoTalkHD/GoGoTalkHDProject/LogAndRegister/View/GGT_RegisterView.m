@@ -25,9 +25,9 @@
     [self addSubview:backImgView];
     
     [backImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineX(21));
-        make.top.equalTo(self.mas_top).with.offset(LineY(33));
-        make.size.mas_offset(CGSizeMake(LineW(11), LineH(18)));
+        make.left.equalTo(self.mas_left).offset(21);
+        make.top.equalTo(self.mas_top).offset(33);
+        make.size.mas_offset(CGSizeMake(11, 18));
     }];
     
     
@@ -35,9 +35,9 @@
     [self addSubview:self.backButton];
 
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineX(15));
-        make.top.equalTo(self.mas_top).with.offset(LineY(30));
-        make.size.mas_offset(CGSizeMake(LineW(44), LineH(44)));
+        make.left.equalTo(self.mas_left).offset(15);
+        make.top.equalTo(self.mas_top).offset(30);
+        make.size.mas_offset(CGSizeMake(44, 44));
     }];
     
     
@@ -48,8 +48,8 @@
     
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset(LineY(60));
-        make.size.mas_offset(CGSizeMake(LineW(175), LineH(52)));
+        make.top.equalTo(self.mas_top).offset(60);
+        make.size.mas_offset(CGSizeMake(175, 52));
     }];
     
     
@@ -63,8 +63,8 @@
     
     [self.phoneAccountView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(iconImageView.mas_bottom).with.offset(LineY(40));
-        make.size.mas_offset(CGSizeMake(LineW(336), LineH(44)));
+        make.top.equalTo(iconImageView.mas_bottom).offset(40);
+        make.size.mas_offset(CGSizeMake(336, 44));
     }];
     
     
@@ -74,9 +74,9 @@
     [self.phoneAccountView addSubview:self.phoneImageView];
     
     [self.phoneImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneAccountView.mas_left).with.offset(LineX(15));
+        make.left.equalTo(self.phoneAccountView.mas_left).offset(15);
         make.centerY.equalTo(self.phoneAccountView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(14), LineH(20)));
+        make.size.mas_offset(CGSizeMake(14, 20));
     }];
     
     //手机号的分割线
@@ -85,9 +85,9 @@
     [self.phoneAccountView addSubview:self.phonelineView];
     
     [self.phonelineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneAccountView.mas_left).with.offset(LineX(44));
-        make.top.equalTo(self.phoneAccountView.mas_top).with.offset(LineY(0));
-        make.size.mas_offset(CGSizeMake(LineW(1), LineH(44)));
+        make.left.equalTo(self.phoneAccountView.mas_left).offset(44);
+        make.top.equalTo(self.phoneAccountView.mas_top).offset(0);
+        make.size.mas_offset(CGSizeMake(1, 44));
     }];
     
     
@@ -104,10 +104,10 @@
     [self.phoneAccountView addSubview:self.phoneAccountField];
     
     [self.phoneAccountField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneAccountView.mas_left).with.offset(LineX(68));
-        make.right.equalTo(self.phoneAccountView.mas_right).with.offset(-LineW(15));
+        make.left.equalTo(self.phoneAccountView.mas_left).offset(68);
+        make.right.equalTo(self.phoneAccountView.mas_right).offset(-15);
         make.centerY.equalTo(self.phoneAccountView.mas_centerY);
-        make.height.mas_offset(LineH(25));
+        make.height.mas_offset(25);
     }];
     
     
@@ -123,8 +123,8 @@
     
     [self.passwordView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.phoneAccountView.mas_bottom).with.offset(LineY(30));
-        make.size.mas_offset(CGSizeMake(LineW(336), LineH(44)));
+        make.top.equalTo(self.phoneAccountView.mas_bottom).offset(30);
+        make.size.mas_offset(CGSizeMake(336, 44));
     }];
     
     
@@ -134,9 +134,9 @@
     [self.passwordView addSubview:self.passwordImageView];
     
     [self.passwordImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordView.mas_left).with.offset(LineX(15));
+        make.left.equalTo(self.passwordView.mas_left).offset(15);
         make.centerY.equalTo(self.passwordView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(14), LineH(20)));
+        make.size.mas_offset(CGSizeMake(14, 20));
     }];
     
     //密码的分割线
@@ -145,9 +145,9 @@
     [self.passwordView addSubview:self.passwordlineView];
     
     [self.passwordlineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordView.mas_left).with.offset(LineX(44));
-        make.top.equalTo(self.passwordView.mas_top).with.offset(LineY(0));
-        make.size.mas_offset(CGSizeMake(LineW(1), LineH(44)));
+        make.left.equalTo(self.passwordView.mas_left).offset(44);
+        make.top.equalTo(self.passwordView.mas_top).offset(0);
+        make.size.mas_offset(CGSizeMake(1, 44));
     }];
     
     
@@ -167,10 +167,10 @@
     
     
     [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordView.mas_left).with.offset(LineX(68));
-        make.right.equalTo(self.passwordView.mas_right).with.offset(-LineW(15));
+        make.left.equalTo(self.passwordView.mas_left).offset(68);
+        make.right.equalTo(self.passwordView.mas_right).offset(-15);
         make.centerY.equalTo(self.passwordView.mas_centerY);
-        make.height.mas_offset(LineH(25));
+        make.height.mas_offset(25);
     }];
 
     
@@ -189,8 +189,8 @@
     
     [self.registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.passwordView.mas_bottom).with.offset(LineY(40));
-        make.size.mas_offset(CGSizeMake(LineW(324), LineH(44)));
+        make.top.equalTo(self.passwordView.mas_bottom).offset(40);
+        make.size.mas_offset(CGSizeMake(324, 44));
     }];
 
 
@@ -201,8 +201,8 @@
     
     [footerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.size.mas_offset(CGSizeMake(LineW(1024), LineH(327)));
+        make.bottom.equalTo(self.mas_bottom).offset(0);
+        make.size.mas_offset(CGSizeMake(1024, 327));
     }];
     
 }

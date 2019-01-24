@@ -101,10 +101,10 @@
             [self.view addSubview:_webView];
             
             [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.view.mas_top).with.offset(LineY(0));
-                make.left.equalTo(self.view.mas_left).with.offset(LineX(0));
-                make.right.equalTo(self.view.mas_right).with.offset(-LineX(0));
-                make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+                make.top.equalTo(self.view.mas_top).offset(LineY(0));
+                make.left.equalTo(self.view.mas_left).offset(LineX(0));
+                make.right.equalTo(self.view.mas_right).offset(-LineX(0));
+                make.bottom.equalTo(self.view.mas_bottom).offset(0);
             }];
         }
             break;

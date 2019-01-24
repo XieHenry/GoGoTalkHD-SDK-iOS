@@ -96,10 +96,10 @@
     
     
     [self.nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(0);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(-80);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-64);
+        make.top.equalTo(self.view.mas_top).offset(0);
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(-80);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-64);
     }];
     
     

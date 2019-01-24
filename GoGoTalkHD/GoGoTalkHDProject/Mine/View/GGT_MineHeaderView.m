@@ -33,9 +33,9 @@
     
     
     [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(LineW(76), LineW(76)));
+        make.size.mas_equalTo(CGSizeMake(76, 76));
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset(LineY(54));
+        make.top.equalTo(self.mas_top).offset(54);
     }];
     
     
@@ -47,18 +47,18 @@
     
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(LineH(28));
-        make.left.equalTo(self.mas_left).with.offset(116);
-        make.top.equalTo(self.headImgView.mas_bottom).with.offset(LineH(10));
+        make.height.mas_equalTo(28);
+        make.left.equalTo(self.mas_left).offset(116);
+        make.top.equalTo(self.headImgView.mas_bottom).offset(10);
     }];
     
     //v i p
     self.VIPImgView = [UIImageView new];
     [self addSubview:self.VIPImgView];
     [self.VIPImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLabel.mas_right).with.offset(LineW(10));
+        make.left.equalTo(self.nameLabel.mas_right).offset(10);
         make.centerY.equalTo(self.nameLabel.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(LineW(32), LineH(18)));
+        make.size.mas_equalTo(CGSizeMake(32, 18));
     }];
     
     //英语等级
@@ -69,8 +69,8 @@
     
     [self.levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.nameLabel.mas_bottom).with.offset(LineH(3));
-        make.height.mas_equalTo(LineH(17));
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(3);
+        make.height.mas_equalTo(17);
     }];
     
     
@@ -80,10 +80,10 @@
     [self addSubview:classInfoView];
     [classInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         //make.height.mas_equalTo(LineH(55));
-        make.top.equalTo(self.levelLabel.mas_bottom).with.offset(LineY(30));
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.top.equalTo(self.levelLabel.mas_bottom).offset(30);
+        make.left.equalTo(self.mas_left).offset(0);
+        make.right.equalTo(self.mas_right).offset(0);
+        make.bottom.equalTo(self.mas_bottom).offset(0);
     }];
     
     //上课信息与个人信息之间分割线
@@ -91,10 +91,10 @@
     divisionLine.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [classInfoView addSubview:divisionLine];
     [divisionLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(classInfoView.mas_left).with.offset(0);
-        make.right.equalTo(classInfoView.mas_right).with.offset(0);
+        make.left.equalTo(classInfoView.mas_left).offset(0);
+        make.right.equalTo(classInfoView.mas_right).offset(0);
         make.height.mas_equalTo(1);
-        make.bottom.equalTo(classInfoView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(classInfoView.mas_bottom).offset(0);
     }];
     
     /*  ---------------迟到次数---------------------  */
@@ -102,10 +102,10 @@
     //lateView.backgroundColor = UICOLOR_RANDOM_COLOR();
     [classInfoView addSubview:lateView];
     [lateView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(divisionLine.mas_top).with.offset(0);
-        make.top.equalTo(classInfoView.mas_top).with.offset(0);
-        make.width.mas_equalTo(LineW(115));
-        make.left.equalTo(classInfoView.mas_left).with.offset(0);
+        make.bottom.equalTo(divisionLine.mas_top).offset(0);
+        make.top.equalTo(classInfoView.mas_top).offset(0);
+        make.width.mas_equalTo(115);
+        make.left.equalTo(classInfoView.mas_left).offset(0);
     }];
     
     
@@ -123,13 +123,13 @@
     
     [_laterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(30);
-        make.centerX.equalTo(lateView.mas_centerX).with.offset(-11);
-        make.bottom.equalTo(lateView.mas_bottom).with.offset(-25);
+        make.centerX.equalTo(lateView.mas_centerX).offset(-11);
+        make.bottom.equalTo(lateView.mas_bottom).offset(-25);
     }];
     [ciLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(17);
-        make.left.equalTo(self.laterLabel.mas_right).with.offset(5);
-        make.bottom.equalTo(lateView.mas_bottom).with.offset(-28);
+        make.left.equalTo(self.laterLabel.mas_right).offset(5);
+        make.bottom.equalTo(lateView.mas_bottom).offset(-28);
     }];
     
     UILabel *lateSubLabel = [UILabel new];
@@ -138,7 +138,7 @@
     lateSubLabel.font = Font(12);
     [lateView addSubview:lateSubLabel];
     [lateSubLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ciLabel.mas_bottom).with.offset(1);
+        make.top.equalTo(ciLabel.mas_bottom).offset(1);
         make.height.mas_equalTo(17);
         make.left.equalTo(self.laterLabel.mas_left);
     }];
@@ -148,16 +148,16 @@
     //talkMin.backgroundColor = UICOLOR_RANDOM_COLOR();
     [classInfoView addSubview:talkMin];
     [talkMin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(classInfoView.mas_top).with.offset(0);
-        make.left.equalTo(lateView.mas_right).with.offset(0);
-        make.bottom.equalTo(divisionLine.mas_top).with.offset(0);
+        make.top.equalTo(classInfoView.mas_top).offset(0);
+        make.left.equalTo(lateView.mas_right).offset(0);
+        make.bottom.equalTo(divisionLine.mas_top).offset(0);
         make.width.mas_equalTo(117);
     }];
     UIView *talkLine = [UIView new];
     talkLine.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [talkMin addSubview:talkLine];
     [talkLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(talkMin.mas_left).with.offset(0);
+        make.left.equalTo(talkMin.mas_left).offset(0);
         make.width.mas_equalTo(1);
         make.height.mas_equalTo(30);
         make.centerY.equalTo(talkMin.mas_centerY);
@@ -166,7 +166,7 @@
     talkLine2.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
     [talkMin addSubview:talkLine2];
     [talkLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(talkMin.mas_right).with.offset(0);
+        make.right.equalTo(talkMin.mas_right).offset(0);
         make.width.mas_equalTo(1);
         make.height.mas_equalTo(30);
         make.centerY.equalTo(talkMin.mas_centerY);
@@ -180,9 +180,9 @@
     _speakLabel.textColor = UICOLOR_FROM_HEX(ColorC40016);
     [talkMin addSubview:_speakLabel];
     [_speakLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(talkMin.mas_centerX).with.offset(-LineX(11));
+        make.centerX.equalTo(talkMin.mas_centerX).offset(-11);
         make.height.mas_offset(30);
-        make.top.equalTo(talkMin.mas_top).with.offset(0);
+        make.top.equalTo(talkMin.mas_top).offset(0);
     }];
     UILabel *ciTalkLabel = [UILabel new];
     ciTalkLabel.font = Font(12);
@@ -191,8 +191,8 @@
     [talkMin addSubview:ciTalkLabel];
     [ciTalkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(17);
-        make.left.equalTo(self.speakLabel.mas_right).with.offset(5);
-        make.bottom.equalTo(lateView.mas_bottom).with.offset(-28);
+        make.left.equalTo(self.speakLabel.mas_right).offset(5);
+        make.bottom.equalTo(lateView.mas_bottom).offset(-28);
     }];
     UILabel *talkSubLabel = [UILabel new];
     talkSubLabel.text = @"已说";
@@ -201,7 +201,7 @@
     [talkMin addSubview:talkSubLabel];
     [talkSubLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(lateSubLabel.mas_centerY);
-        make.height.mas_equalTo(LineH(17));
+        make.height.mas_equalTo(17);
         make.left.mas_equalTo(self.speakLabel.mas_left);
     }];
     /*---------------已说---------------------*/
@@ -212,8 +212,8 @@
     [absenceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(talkMin.mas_top);
         make.bottom.mas_equalTo(talkMin.mas_bottom);
-        make.left.equalTo(talkMin.mas_right).with.offset(0);
-        make.right.equalTo(classInfoView.mas_right).with.offset(0);
+        make.left.equalTo(talkMin.mas_right).offset(0);
+        make.right.equalTo(classInfoView.mas_right).offset(0);
     }];
     
     
@@ -225,7 +225,7 @@
     [_absentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.speakLabel.mas_centerY);
         make.height.equalTo(self.speakLabel.mas_height);
-        make.centerX.equalTo(absenceView.mas_centerX).with.offset(-LineX(11));
+        make.centerX.equalTo(absenceView.mas_centerX).offset(-11);
     }];
     UILabel *ciAbsenceLabel = [UILabel new];
     ciAbsenceLabel.font = Font(12);
@@ -233,8 +233,8 @@
     ciAbsenceLabel.textColor = UICOLOR_FROM_HEX(Color777777);
     [absenceView addSubview:ciAbsenceLabel];
     [ciAbsenceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(LineH(17));
-        make.left.equalTo(self.absentLabel.mas_right).with.offset(5);
+        make.height.mas_equalTo(17);
+        make.left.equalTo(self.absentLabel.mas_right).offset(5);
         make.centerY.equalTo(ciTalkLabel.mas_centerY);
     }];
     UILabel *absenceSubLabel = [UILabel new];
@@ -269,9 +269,9 @@
 
         //更新姓名的坐标，始终处于中间位置
         [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset((LineW(350) - nameSize.width)/2);
-            make.top.equalTo(self.headImgView.mas_bottom).with.offset(LineH(10));
-            make.height.mas_equalTo(LineH(28));
+            make.left.equalTo(self.mas_left).offset((350 - nameSize.width)/2);
+            make.top.equalTo(self.headImgView.mas_bottom).offset(10);
+            make.height.mas_equalTo(28);
         }];
         
     }else {
@@ -285,9 +285,9 @@
 
         //更新姓名的坐标，始终处于中间位置
         [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset((LineW(312) - nameSize.width)/2);
-            make.top.equalTo(self.headImgView.mas_bottom).with.offset(LineH(10));
-            make.height.mas_equalTo(LineH(28));
+            make.left.equalTo(self.mas_left).offset((312 - nameSize.width)/2);
+            make.top.equalTo(self.headImgView.mas_bottom).offset(10);
+            make.height.mas_equalTo(28);
         }];
     }
 

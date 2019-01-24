@@ -34,9 +34,9 @@
         [self addSubview:leftTitleLabel];
         
         [leftTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(LineX(20));
-            make.top.equalTo(self).with.offset(LineY(13)+LineH(48)*i);
-            make.size.mas_equalTo(CGSizeMake(LineW(80), LineH(22)));
+            make.left.equalTo(self.mas_left).offset(20);
+            make.top.equalTo(self).offset(13+48*i);
+            make.size.mas_equalTo(CGSizeMake(80, 22));
         }];
 
         
@@ -60,10 +60,10 @@
         [self addSubview:field];
         
         [field mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(leftTitleLabel.mas_right).with.offset(LineX(30));
-            make.right.equalTo(self.mas_right).with.offset(-LineX(30));
-            make.top.equalTo(self).with.offset(LineY(13)+LineH(48)*i);
-            make.height.mas_equalTo(LineH(25));
+            make.left.equalTo(leftTitleLabel.mas_right).offset(30);
+            make.right.equalTo(self.mas_right).offset(-30);
+            make.top.equalTo(self).offset(13+48*i);
+            make.height.mas_equalTo(25);
         }];
         
     }
@@ -76,10 +76,10 @@
     [self addSubview:lineView];
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineX(20));
-        make.right.equalTo(self.mas_right).with.offset(-0);
-        make.top.equalTo(self.mas_top).with.offset(LineY(47.5));
-        make.height.mas_offset(LineH(1));
+        make.left.equalTo(self.mas_left).offset(20);
+        make.right.equalTo(self.mas_right).offset(-0);
+        make.top.equalTo(self.mas_top).offset(47.5);
+        make.height.mas_offset(1);
     }];
     
     

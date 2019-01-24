@@ -26,9 +26,9 @@
     [self addSubview:_cameraBigImgView];
     
     [_cameraBigImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineX(60));
-        make.top.equalTo(self.mas_top).with.offset(LineY(40));
-        make.size.mas_offset(CGSizeMake(LineW(60), LineW(60)));
+        make.left.equalTo(self.mas_left).offset(60);
+        make.top.equalTo(self.mas_top).offset(40);
+        make.size.mas_offset(CGSizeMake(60, 60));
     }];
     
     
@@ -40,7 +40,7 @@
     [_camerasmallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.cameraBigImgView.mas_centerX);
         make.centerY.equalTo(self.cameraBigImgView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(32), LineW(26)));
+        make.size.mas_offset(CGSizeMake(32, 26));
     }];
     
     //麦克风
@@ -51,8 +51,8 @@
     
     [_microphoneBigImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset(LineY(40));
-        make.size.mas_offset(CGSizeMake(LineW(60), LineW(60)));
+        make.top.equalTo(self.mas_top).offset(40);
+        make.size.mas_offset(CGSizeMake(60, 60));
     }];
     
    
@@ -65,7 +65,7 @@
     [_microphonesmallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.microphoneBigImgView.mas_centerX);
         make.centerY.equalTo(self.microphoneBigImgView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(23), LineW(32)));
+        make.size.mas_offset(CGSizeMake(23,32));
     }];
     
     
@@ -76,9 +76,9 @@
     
     
     [_wifiBigImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).with.offset(-LineX(60));
-        make.top.equalTo(self.mas_top).with.offset(LineY(40));
-        make.size.mas_offset(CGSizeMake(LineW(60), LineW(60)));
+        make.right.equalTo(self.mas_right).offset(-60);
+        make.top.equalTo(self.mas_top).offset(40);
+        make.size.mas_offset(CGSizeMake(60, 60));
     }];
     
     
@@ -91,7 +91,7 @@
     [_wifismallImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.wifiBigImgView.mas_centerX);
         make.centerY.equalTo(self.wifiBigImgView.mas_centerY);
-        make.size.mas_offset(CGSizeMake(LineW(32), LineW(26)));
+        make.size.mas_offset(CGSizeMake(32, 26));
     }];
     
     
@@ -105,7 +105,7 @@
     
     [self.checkingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.microphoneBigImgView.mas_bottom).with.offset(LineY(50));
+        make.top.equalTo(self.microphoneBigImgView.mas_bottom).offset(50);
         make.height.equalTo(@(25));
     }];
     
@@ -124,9 +124,9 @@
     
     
     [self.cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.mas_bottom).with.offset(-LineH(40));
+        make.bottom.equalTo(self.mas_bottom).offset(-40);
         make.centerX.equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(LineW(324), LineH(44)));
+        make.size.mas_equalTo(CGSizeMake(324, 44));
     }];
     
     
@@ -143,9 +143,9 @@
     self.setButton.hidden = YES;
     
     [self.setButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.mas_bottom).with.offset(-LineH(40));
+        make.bottom.equalTo(self.mas_bottom).offset(-40);
         make.centerX.equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(LineW(324), LineH(44)));
+        make.size.mas_equalTo(CGSizeMake(324, 44));
     }];
     
 
@@ -271,16 +271,16 @@
                 
                 CGFloat h;
                 if (alertArr.count == 1) {
-                    h = LineY(56);
+                    h = 56;
                 } else if (alertArr.count == 2){
-                    h = LineY(38);
+                    h = 38;
                 } else {
-                    h = LineY(20);
+                    h = 20;
                 }
                 
                 [alertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.centerX.equalTo(self.mas_centerX);
-                    make.top.equalTo(self.microphoneBigImgView.mas_bottom).with.offset(h+LineY(36)*i);
+                    make.top.equalTo(self.microphoneBigImgView.mas_bottom).offset(h+36*i);
                     make.height.equalTo(@(25));
                 }];
             }

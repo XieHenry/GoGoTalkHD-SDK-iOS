@@ -138,15 +138,15 @@
             //更新坐标
             cell.rightImgView.hidden = YES;
             [cell.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(cell.leftTitleLabel.mas_right).with.offset(LineX(15));
-                make.right.equalTo(cell.rightImgView.mas_left).with.offset(-LineX(20));
+                make.left.equalTo(cell.leftTitleLabel.mas_right).offset(LineX(15));
+                make.right.equalTo(cell.rightImgView.mas_left).offset(-LineX(20));
                 make.centerY.equalTo(cell.contentView.mas_centerY);
                 make.height.mas_offset(LineH(22));
             }];
             
             
             [cell.rightImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(cell.contentView.mas_right).with.offset(-LineX(0));
+                make.right.equalTo(cell.contentView.mas_right).offset(-LineX(0));
                 make.centerY.equalTo(cell.contentView.mas_centerY);
                 make.size.mas_offset(CGSizeMake(LineW(0), LineH(0)));
             }];
@@ -164,15 +164,15 @@
             //更新坐标
             cell.rightImgView.hidden = YES;
             [cell.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(cell.leftTitleLabel.mas_right).with.offset(LineX(15));
-                make.right.equalTo(cell.rightImgView.mas_left).with.offset(-LineX(20));
+                make.left.equalTo(cell.leftTitleLabel.mas_right).offset(LineX(15));
+                make.right.equalTo(cell.rightImgView.mas_left).offset(-LineX(20));
                 make.centerY.equalTo(cell.contentView.mas_centerY);
                 make.height.mas_offset(LineH(22));
             }];
             
             
             [cell.rightImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(cell.contentView.mas_right).with.offset(-LineX(0));
+                make.right.equalTo(cell.contentView.mas_right).offset(-LineX(0));
                 make.centerY.equalTo(cell.contentView.mas_centerY);
                 make.size.mas_offset(CGSizeMake(LineW(0), LineH(0)));
             }];

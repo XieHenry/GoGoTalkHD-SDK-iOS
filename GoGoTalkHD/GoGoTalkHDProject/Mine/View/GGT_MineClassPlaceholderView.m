@@ -26,8 +26,8 @@
     
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset(LineY(140));
-        make.size.mas_offset(CGSizeMake(LineW(258), LineH(171)));
+        make.top.equalTo(self.mas_top).offset(140);
+        make.size.mas_offset(CGSizeMake(258, 171));
     }];
     
     
@@ -41,7 +41,7 @@
     
     [topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(imgView.mas_bottom).with.offset(LineH(20));
+        make.top.equalTo(imgView.mas_bottom).offset(20);
     }];
     
     
@@ -53,8 +53,8 @@
     
     [bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(topLabel.mas_bottom).with.offset(LineH(10));
-        make.height.mas_equalTo(LineH(20));
+        make.top.equalTo(topLabel.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
     }];
     
     
@@ -66,8 +66,8 @@
             //260 163
             [imgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self.mas_centerX);
-                make.top.equalTo(self.mas_top).with.offset(LineY(180));
-                make.size.mas_offset(CGSizeMake(LineW(230), LineH(144)));
+                make.top.equalTo(self.mas_top).offset(180);
+                make.size.mas_offset(CGSizeMake(230,144));
             }];
 
             topLabel.text = str;
@@ -82,8 +82,8 @@
             //260 191
             [imgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self.mas_centerX);
-                make.top.equalTo(self.mas_top).with.offset(LineY(140));
-                make.size.mas_offset(CGSizeMake(LineW(230), LineH(168)));
+                make.top.equalTo(self.mas_top).offset(140);
+                make.size.mas_offset(CGSizeMake(230, 168));
             }];
             
             

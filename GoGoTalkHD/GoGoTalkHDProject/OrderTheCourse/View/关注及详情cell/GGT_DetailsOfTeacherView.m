@@ -30,7 +30,7 @@
     [self addSubview:self.iconImageView];
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineX(359));
+        make.left.equalTo(self.mas_left).offset(LineX(359));
         make.centerY.equalTo(self.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(72), LineW(72)));
     }];
@@ -50,17 +50,17 @@
     [self addSubview:self.focusButton];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImageView.mas_right).with.offset(LineX(9));
-        make.right.equalTo(self.focusButton.mas_left).with.offset(-LineX(9));
-        make.top.equalTo(self.mas_top).with.offset(LineY(42));
+        make.left.equalTo(self.iconImageView.mas_right).offset(LineX(9));
+        make.right.equalTo(self.focusButton.mas_left).offset(-LineX(9));
+        make.top.equalTo(self.mas_top).offset(LineY(42));
         make.height.mas_offset(LineH(18));
     }];
     
     
     
     [self.focusButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLabel.mas_right).with.offset(LineX(9));
-        make.top.equalTo(self.mas_top).with.offset(LineY(42));
+        make.left.equalTo(self.nameLabel.mas_right).offset(LineX(9));
+        make.top.equalTo(self.mas_top).offset(LineY(42));
         make.size.mas_offset(CGSizeMake(LineW(36), LineH(19)));
     }];
     
@@ -74,8 +74,8 @@
     [self addSubview:self.sexLabel];
     
     [self.sexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImageView.mas_right).with.offset(LineX(8));
-        make.top.equalTo(self.nameLabel.mas_bottom).with.offset(LineY(14));
+        make.left.equalTo(self.iconImageView.mas_right).offset(LineX(8));
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(LineY(14));
         make.height.mas_offset(LineH(14));
     }];
     
@@ -90,7 +90,7 @@
     
     
     [self.ageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.sexLabel.mas_right).with.offset(LineX(11));
+        make.left.equalTo(self.sexLabel.mas_right).offset(LineX(11));
         make.top.equalTo(self.sexLabel.mas_top);
         make.height.mas_offset(LineH(14));
     }];
@@ -105,7 +105,7 @@
     
     
     [self.orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.ageLabel.mas_right).with.offset(LineX(12));
+        make.left.equalTo(self.ageLabel.mas_right).offset(LineX(12));
         make.top.equalTo(self.sexLabel.mas_top);
         make.height.mas_offset(LineH(14));
     }];

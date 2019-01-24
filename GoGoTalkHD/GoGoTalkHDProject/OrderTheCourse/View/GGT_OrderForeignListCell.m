@@ -134,16 +134,16 @@
     // 布局
     // 头像
     [self.xc_iconButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.xc_contentView.mas_left).with.offset(LineX(15));
-        make.top.equalTo(self.xc_contentView.mas_top).with.offset(margin15);
+        make.left.equalTo(self.xc_contentView.mas_left).offset(LineX(15));
+        make.top.equalTo(self.xc_contentView.mas_top).offset(margin15);
         make.bottom.equalTo(self.xc_contentView.mas_bottom).offset(-margin15);
         make.width.equalTo(self.xc_iconButton.mas_height);
     }];
     
     // 姓名
     [self.xc_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.xc_iconButton.mas_right).with.offset(LineX(14));
-        make.top.equalTo(self.xc_contentView.mas_top).with.offset(LineY(27));
+        make.left.equalTo(self.xc_iconButton.mas_right).offset(LineX(14));
+        make.top.equalTo(self.xc_contentView.mas_top).offset(LineY(27));
     }];
     
     // 次数
@@ -167,7 +167,7 @@
     
     // 预约按钮
     [self.xc_orderButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.xc_contentView.mas_right).with.offset(-LineX(15));
+        make.right.equalTo(self.xc_contentView.mas_right).offset(-LineX(15));
         make.centerY.equalTo(self.xc_contentView.mas_centerY);
         make.size.mas_offset(CGSizeMake(LineW(232.0f/2), LineW(76.0f/2)));
     }];

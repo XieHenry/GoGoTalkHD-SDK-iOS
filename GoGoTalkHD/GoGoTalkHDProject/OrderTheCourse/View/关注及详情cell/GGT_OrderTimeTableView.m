@@ -29,9 +29,9 @@
     headerBgView.backgroundColor = UICOLOR_FROM_HEX(0xEBEBEB);
     [self addSubview:headerBgView];
     [headerBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-0);
-        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).offset(0);
+        make.right.equalTo(self.mas_right).offset(-0);
+        make.top.equalTo(self.mas_top).offset(0);
         make.height.mas_offset(LineH(60));
     }];
     
@@ -50,9 +50,9 @@
     [self addSubview:_headerScrollerView];
     
     [_headerScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineW(104));
-        make.right.equalTo(self.mas_right).with.offset(-LineW(104));
-        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).offset(LineW(104));
+        make.right.equalTo(self.mas_right).offset(-LineW(104));
+        make.top.equalTo(self.mas_top).offset(0);
         make.height.mas_offset(LineH(60));
     }];
     
@@ -100,10 +100,10 @@
     [self addSubview:_bgScrollerView];
     
     [_bgScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(LineW(104));
-        make.right.equalTo(self.mas_right).with.offset(-LineW(104));
-        make.top.equalTo(self.headerScrollerView.mas_bottom).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-0);
+        make.left.equalTo(self.mas_left).offset(LineW(104));
+        make.right.equalTo(self.mas_right).offset(-LineW(104));
+        make.top.equalTo(self.headerScrollerView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.mas_bottom).offset(-0);
     }];
     
     
@@ -303,10 +303,10 @@
         [self addSubview:self.timeLabel];
         
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(0);
-            make.right.equalTo(self.mas_right).with.offset(-0);
-            make.top.equalTo(self.mas_top).with.offset(0);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-LineH(2));
+            make.left.equalTo(self.mas_left).offset(0);
+            make.right.equalTo(self.mas_right).offset(-0);
+            make.top.equalTo(self.mas_top).offset(0);
+            make.bottom.equalTo(self.mas_bottom).offset(-LineH(2));
         }];
         
         
@@ -318,9 +318,9 @@
         
         
         [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(0);
-            make.right.equalTo(self.mas_right).with.offset(-0);
-            make.top.equalTo(self.mas_bottom).with.offset(-LineH(2));
+            make.left.equalTo(self.mas_left).offset(0);
+            make.right.equalTo(self.mas_right).offset(-0);
+            make.top.equalTo(self.mas_bottom).offset(-LineH(2));
             make.height.equalTo(@(LineH(2)));
         }];
     }

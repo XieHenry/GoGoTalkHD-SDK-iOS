@@ -106,6 +106,29 @@ DEPENDENCIES:
   - UMengUShare/Social/ReducedWeChat
   - YYModel
 
+SPEC REPOS:
+  http://git.baijiashilian.com/open-ios/specs.git:
+    - BJLiveBase
+    - BJLiveCore
+    - BJLLogStat
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - Bugly
+    - FLAnimatedImage
+    - FLEX
+    - FSCalendar
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - Masonry
+    - MBProgressHUD
+    - MJRefresh
+    - ReactiveObjC
+    - SDWebImage
+    - UMengAnalytics-NO-IDFA
+    - UMengUShare
+    - YYModel
+
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   BJLiveBase: 91a39b8ccef53058e4af7623b3d340ea835f2b78
@@ -129,4 +152,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3f891c8734d131b2606c197a7749e1006a48262e
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

@@ -71,7 +71,6 @@
 		5BDAEE4D215B9B6A00AFDB43 /* BITFeedbackUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAED26215B9B6900AFDB43 /* BITFeedbackUserDataViewController.m */; };
 		5BDAEE4E215B9B6A00AFDB43 /* BITUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAED27215B9B6900AFDB43 /* BITUpdateManager.m */; };
 		5BDAEE4F215B9B6A00AFDB43 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAED2A215B9B6900AFDB43 /* HockeySDKResources.bundle */; };
-		5BDAEE50215B9B6A00AFDB43 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAED2B215B9B6900AFDB43 /* HockeySDK.xcconfig */; };
 		5BDAEE51215B9B6A00AFDB43 /* BITAppVersionMetaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAED2C215B9B6900AFDB43 /* BITAppVersionMetaInfo.m */; };
 		5BDAEE52215B9B6A00AFDB43 /* BITStoreUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAED2D215B9B6900AFDB43 /* BITStoreUpdateManager.m */; };
 		5BDAEE53215B9B6A00AFDB43 /* BITFeedbackActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAED2F215B9B6900AFDB43 /* BITFeedbackActivity.m */; };
@@ -2468,7 +2467,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GGT_;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Chn;
 				TargetAttributes = {
 					D6E0A4761EC2C200006A003D = {
@@ -2551,7 +2550,6 @@
 				5BF3A6B11EEAC3B100491CC2 /* shebeijianche_22.png in Resources */,
 				5BF3A6C31EEAC3B100491CC2 /* shebeijianche_39.png in Resources */,
 				5BF3A6BB1EEAC3B100491CC2 /* shebeijianche_31.png in Resources */,
-				5BDAEE50215B9B6A00AFDB43 /* HockeySDK.xcconfig in Resources */,
 				5BF3A6AC1EEAC3B100491CC2 /* shebeijianche_18.png in Resources */,
 				5BF3A6AB1EEAC3B100491CC2 /* shebeijianche_17.png in Resources */,
 				5BF3A6A91EEAC3B100491CC2 /* shebeijianche_15.png in Resources */,
@@ -3178,7 +3176,7 @@
 					"-w",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = (
@@ -3228,7 +3226,7 @@
 					"-w",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gogo-talk.GoGoTalk.HD";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = (
