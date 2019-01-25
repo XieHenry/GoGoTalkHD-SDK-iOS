@@ -118,6 +118,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popView:) name:kPopoverCourseAlterViewNotification object:nil];
     
     [self updateNewVersion];
+    
+    [self getCacheSize];
 }
 
 // 添加通知  进入教室的通知
@@ -377,6 +379,47 @@
     }
     
 }
+
+
+#pragma mark 计算缓存大小
+-(void)getCacheSize {
+    // 执⾏耗时的异步操作...
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //请求数据
+        NSString *folderSize = [NSString stringWithFormat:@"%.2fMB",[self folderSize]];
+        // 回到主线程,执⾏UI刷新操作
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //对图片或别的操作进行赋值等，回到主线程
+            GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+            sin.cacheSize = folderSize;
+        });
+    });
+}
+
+// 缓存大小
+- (CGFloat)folderSize{
+    CGFloat folderSize = 0.0;
+    
+    //获取路径
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES)firstObject];
+    
+    //获取所有文件的数组
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachePath];
+    NSLog(@"文件地址：%@---%@",cachePath,[self class]);
+    
+    for(NSString *path in files) {
+        
+        NSString *filePath = [cachePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]];
+        
+        //累加
+        folderSize += [[NSFileManager defaultManager]attributesOfItemAtPath:filePath error:nil].fileSize;
+    }
+    //转换为M为单位
+    CGFloat sizeM = folderSize /1024.0 /1024.0;
+    
+    return sizeM;
+}
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

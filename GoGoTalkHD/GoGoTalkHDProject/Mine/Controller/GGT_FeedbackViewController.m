@@ -50,10 +50,10 @@
     [self.view addSubview:bgView];
     
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(LineY(20));
-        make.left.equalTo(self.view.mas_left).offset(LineX(20));
-        make.right.equalTo(self.view.mas_right).offset(-LineW(20));
-        make.height.mas_offset(LineH(180));
+        make.top.equalTo(self.view.mas_top).offset(20);
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.height.mas_offset(180);
     }];
     
     
@@ -66,8 +66,8 @@
     
     [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView.mas_top).offset(0);
-        make.left.equalTo(bgView.mas_left).offset(LineX(20));
-        make.right.equalTo(bgView.mas_right).offset(-LineW(20));
+        make.left.equalTo(bgView.mas_left).offset(20);
+        make.right.equalTo(bgView.mas_right).offset(-20);
         make.bottom.equalTo(bgView.mas_bottom).offset(-0);
     }];
     
@@ -79,9 +79,9 @@
     [self.contentTextView addSubview:self.alertContentLabel];
     
     [self.alertContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentTextView.mas_top).offset(LineY(8));
-        make.left.equalTo(self.contentTextView.mas_left).offset(LineX(0));
-        make.height.equalTo(@(LineH(25)));
+        make.top.equalTo(self.contentTextView.mas_top).offset(8);
+        make.left.equalTo(self.contentTextView.mas_left).offset(0);
+        make.height.equalTo(@(25));
     }];
     
     
@@ -94,9 +94,9 @@
     [self.view addSubview:self.alertLabel];
     
     [self.alertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgView.mas_bottom).offset(LineY(10));
+        make.top.equalTo(bgView.mas_bottom).offset(10);
         make.right.equalTo(bgView.mas_right);
-        make.height.equalTo(@(LineH(14)));
+        make.height.equalTo(@(14));
     }];
     
 }

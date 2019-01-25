@@ -12,7 +12,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+//        cell.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
         [self initView];
     }
     return self;
