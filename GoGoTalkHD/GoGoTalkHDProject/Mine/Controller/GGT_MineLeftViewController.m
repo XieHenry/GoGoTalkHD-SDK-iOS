@@ -15,7 +15,6 @@
 #import "GGT_MineHeaderView.h"
 #import "GGT_MineLeftTableViewCell.h"
 #import "GGT_MineLeftModel.h"
-#import "GGT_CourseDetailsViewController.h"
 
 static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进来的，和平常的要区分开）
 static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
@@ -371,11 +370,6 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 vc = [[GGT_MineClassViewController alloc]init];
                 
                 break;
-                //            case 2:
-                //                //课程详情
-                //                vc = [[GGT_CourseDetailsViewController alloc]init];
-                //
-                //                break;
             case 2:
                 //测评报告
                 vc = [[GGT_TestReportViewController alloc]init];

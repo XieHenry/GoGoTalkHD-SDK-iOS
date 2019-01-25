@@ -10,7 +10,6 @@
 		3538EF571ED2B6AD00078971 /* GGT_SelfInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3538EF561ED2B6AD00078971 /* GGT_SelfInfoTableViewCell.m */; };
 		5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B04FAA01ED52A060038648F /* GGT_SelfInfoModel.m */; };
 		5B1E61DF1F46CC5F00342CC5 /* GGT_LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1E61DE1F46CC5F00342CC5 /* GGT_LoadingView.m */; };
-		5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B43704C1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m */; };
 		5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D1D1EC5A281004E744A /* GGT_MineSplitViewController.m */; };
 		5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D201EC5A2B7004E744A /* GGT_SelfInfoViewController.m */; };
 		5B743D241EC5A416004E744A /* GGT_MineRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D231EC5A416004E744A /* GGT_MineRightViewController.m */; };
@@ -358,8 +357,6 @@
 		5B04FAA01ED52A060038648F /* GGT_SelfInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_SelfInfoModel.m; sourceTree = "<group>"; };
 		5B1E61DD1F46CC5F00342CC5 /* GGT_LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_LoadingView.h; sourceTree = "<group>"; };
 		5B1E61DE1F46CC5F00342CC5 /* GGT_LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_LoadingView.m; sourceTree = "<group>"; };
-		5B43704B1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_CourseDetailsViewController.h; sourceTree = "<group>"; };
-		5B43704C1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_CourseDetailsViewController.m; sourceTree = "<group>"; };
 		5B467CD81ED97B97005CFB52 /* GoGoTalkHD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoGoTalkHD.entitlements; sourceTree = "<group>"; };
 		5B743D1C1EC5A281004E744A /* GGT_MineSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineSplitViewController.h; sourceTree = "<group>"; };
 		5B743D1D1EC5A281004E744A /* GGT_MineSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineSplitViewController.m; sourceTree = "<group>"; };
@@ -1009,8 +1006,6 @@
 				5B8337CD1ED3CF66005EE004 /* GGT_EditSelfInfoViewController.m */,
 				5BC4735D1EC95C12003B8154 /* GGT_MineClassViewController.h */,
 				5BC4735E1EC95C12003B8154 /* GGT_MineClassViewController.m */,
-				5B43704B1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.h */,
-				5B43704C1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m */,
 				5BC473601EC95C39003B8154 /* GGT_FeedbackViewController.h */,
 				5BC473611EC95C39003B8154 /* GGT_FeedbackViewController.m */,
 				5BC473631EC95C5C003B8154 /* GGT_TestReportViewController.h */,
@@ -2871,7 +2866,6 @@
 				5BDAEEB1215B9B6A00AFDB43 /* TKModelToJson.m in Sources */,
 				5BDAEE4C215B9B6A00AFDB43 /* BITHockeyManager.m in Sources */,
 				5BC473651EC95C5C003B8154 /* GGT_TestReportViewController.m in Sources */,
-				5B43704D1EFCE0EA000CD5F9 /* GGT_CourseDetailsViewController.m in Sources */,
 				5BF1CBCD1F176D2A00BB1CDA /* GGT_FocusOnOfPageView.m in Sources */,
 				5BDAEE8D215B9B6A00AFDB43 /* TKVideoThreeLinesView.m in Sources */,
 				5BDAEEAE215B9B6A00AFDB43 /* TKOpenUrlViewController.m in Sources */,

@@ -91,8 +91,8 @@
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-LineH(49));
-        make.height.equalTo(@(LineH(1)));
+        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+        make.height.mas_equalTo(1);
     }];
     
     
@@ -113,7 +113,7 @@
     [nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_bottom).offset(-0);
-        make.height.equalTo(@(LineH(49)));
+        make.height.mas_equalTo(49);
     }];
 
 }
@@ -226,9 +226,9 @@
     [self addSubview:leftLabel];
     
     [leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(LineX(20));
-        make.top.equalTo(self.mas_top).offset(LineX(20));
-        make.height.equalTo(@(LineH(25)));
+        make.left.equalTo(self.mas_left).offset(20);
+        make.top.equalTo(self.mas_top).offset(20);
+        make.height.mas_equalTo(25);
     }];
     
     
@@ -252,10 +252,10 @@
     [self addSubview:contentLabel];
     
     [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(LineX(20));
-        make.right.equalTo(self.mas_right).offset(-LineX(20));
-        make.top.equalTo(leftLabel.mas_bottom).offset(LineY(10));
-        make.height.equalTo(@(LineH(50)));
+        make.left.equalTo(self.mas_left).offset(20);
+        make.right.equalTo(self.mas_right).offset(-20);
+        make.top.equalTo(leftLabel.mas_bottom).offset(10);
+        make.height.mas_equalTo(50);
     }];
     
     
@@ -269,9 +269,9 @@
     [self addSubview:rightLabel];
     
     [rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(-LineW(20));
-        make.top.equalTo(contentLabel.mas_bottom).offset(LineX(24));
-        make.height.equalTo(@(LineH(20)));
+        make.right.equalTo(self.mas_right).offset(-20);
+        make.top.equalTo(contentLabel.mas_bottom).offset(24);
+        make.height.mas_equalTo(20);
     }];
     
     

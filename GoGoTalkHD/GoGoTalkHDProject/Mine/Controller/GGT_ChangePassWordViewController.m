@@ -10,10 +10,8 @@
 #import "GGT_ChangePasswordView.h"
 
 @interface GGT_ChangePassWordViewController ()
-
 //保存按钮
 @property (nonatomic, strong) UIButton *saveBtn;
-
 @property (nonatomic, strong) GGT_ChangePasswordView *changePasswordView;
 @end
 
@@ -21,35 +19,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initUI];
+}
+
+-(void)initUI {
     self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-    
     [self setLeftItem:@"fanhui_top" title:@"个人信息"];
-    
     self.navigationItem.title = @"修改密码";
     
     //设置提交按钮
     [self setSaveButton];
     
-    
-    __weak typeof(self) weakSelf = self;
-    _changePasswordView = [[GGT_ChangePasswordView alloc]init];
-    _changePasswordView.frame = CGRectMake(LineX(20), LineY(20), marginMineRight-LineW(40),LineH(96));
-    [_changePasswordView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:LineW(6)];
-    _changePasswordView.FieldBlock = ^(BOOL isCanSave) {
-        if (isCanSave == YES) {
-            //符合要求
-            weakSelf.saveBtn.userInteractionEnabled = YES;
-            [weakSelf.saveBtn setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:UIControlStateNormal];
-        } else {
-            
-            weakSelf.saveBtn.userInteractionEnabled = NO;
-            [weakSelf.saveBtn setTitleColor:UICOLOR_FROM_HEX(ColorD8D8D8) forState:UIControlStateNormal];
-        }
-    };
-    [self.view addSubview:_changePasswordView];
-    
-    
+    [self.view addSubview:self.changePasswordView];
 }
+
+-(GGT_ChangePasswordView *)changePasswordView {
+    if (!_changePasswordView) {
+        __weak typeof(self) weakSelf = self;
+        self.changePasswordView = [[GGT_ChangePasswordView alloc]init];
+        self.changePasswordView.frame = CGRectMake(LineX(20), LineY(20), marginMineRight-LineW(40),LineH(96));
+        [self.changePasswordView xc_SetCornerWithSideType:XCSideTypeAll cornerRadius:LineW(6)];
+        self.changePasswordView.FieldBlock = ^(BOOL isCanSave) {
+            if (isCanSave == YES) {
+                //符合要求
+                weakSelf.saveBtn.userInteractionEnabled = YES;
+                [weakSelf.saveBtn setTitleColor:UICOLOR_FROM_HEX(ColorFFFFFF) forState:UIControlStateNormal];
+            } else {
+                weakSelf.saveBtn.userInteractionEnabled = NO;
+                [weakSelf.saveBtn setTitleColor:UICOLOR_FROM_HEX(ColorD8D8D8) forState:UIControlStateNormal];
+            }
+        };
+    }
+    return _changePasswordView;
+}
+
 
 - (void)setSaveButton {
     self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -72,7 +75,7 @@
 
 - (void)rightAction {
     
-    NSDictionary *postDic = @{@"OldPwd":_changePasswordView.currentField.text,@"NewPwd":_changePasswordView.changeField.text};
+    NSDictionary *postDic = @{@"OldPwd":self.changePasswordView.currentField.text,@"NewPwd":self.changePasswordView.changeField.text};
     
     [[BaseService share] requestWithPath:URL_ChangePwdByOldPwd method:XCHttpRequestPost parameters:postDic token:YES viewController:self success:^(id responseObject) {
         
