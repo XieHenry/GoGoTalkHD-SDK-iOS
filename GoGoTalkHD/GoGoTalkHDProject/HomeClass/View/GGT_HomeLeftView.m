@@ -44,8 +44,8 @@
     
     [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).offset(LineY(32));
-        make.size.mas_offset(CGSizeMake(LineW(68), LineH(21)));
+        make.top.equalTo(self.mas_top).offset(32);
+        make.size.mas_offset(CGSizeMake(68, 21));
     }];
     
 
@@ -55,8 +55,8 @@
     
     [self.optionsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
-        make.top.equalTo(self.mas_top).offset(LineY(163));
-        make.height.mas_offset(LineH(314)); //88*3+25+25
+        make.top.equalTo(self.mas_top).offset(163);
+        make.height.mas_offset(314); //88*3+25+25
     }];
     
  
@@ -77,7 +77,7 @@
     [scheduleButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
         make.top.equalTo(self.optionsView.mas_top).offset(0);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
+        make.size.mas_equalTo(CGSizeMake(88, 88));
     }];
     
     // 约课按钮
@@ -96,7 +96,7 @@
     [bookClassButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
         make.top.equalTo(scheduleButton.mas_bottom).offset(25);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
+        make.size.mas_equalTo(CGSizeMake(88, 88));
     }];
     
     
@@ -115,7 +115,7 @@
     [mineButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.optionsView.mas_centerX);
         make.bottom.equalTo(self.optionsView.mas_bottom).offset(-0);
-        make.size.mas_equalTo(CGSizeMake(LineW(88), LineH(88)));
+        make.size.mas_equalTo(CGSizeMake(88, 88));
     }];
 
     
@@ -138,15 +138,15 @@
     
     [checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.bottom.equalTo(phoneButton.mas_top).offset(-LineY(30));
-        make.size.mas_equalTo(CGSizeMake(LineW(28), LineH(27)));
+        make.bottom.equalTo(phoneButton.mas_top).offset(-30);
+        make.size.mas_equalTo(CGSizeMake(28, 27));
     }];
     
     
     [phoneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.bottom.equalTo(self.mas_bottom).offset(-LineH(30));
-        make.size.mas_equalTo(CGSizeMake(LineW(26), LineH(26)));
+        make.bottom.equalTo(self.mas_bottom).offset(-30);
+        make.size.mas_equalTo(CGSizeMake(26, 26));
     }];
     
     GGT_Singleton *single = [GGT_Singleton sharedSingleton];

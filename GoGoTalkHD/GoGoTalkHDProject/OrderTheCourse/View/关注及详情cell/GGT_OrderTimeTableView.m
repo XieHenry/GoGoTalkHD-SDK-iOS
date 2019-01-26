@@ -24,6 +24,7 @@
 
 #pragma mark 创建顶部数据
 - (void)initDataSource {
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
 
     UIView *headerBgView = [[UIView alloc]init];
     headerBgView.backgroundColor = UICOLOR_FROM_HEX(0xEBEBEB);
@@ -39,7 +40,8 @@
     
     //7天时间 89*7
     _headerScrollerView = [[UIScrollView alloc]init];
-        _headerScrollerView.contentSize = CGSizeMake(LineW(728)*2,LineH(60));
+//    _headerScrollerView.contentSize = CGSizeMake(LineW(728)*2,LineH(60));
+    _headerScrollerView.contentSize = CGSizeMake(LineW(104)*sin.orderCourse_dateMuArray.count,LineH(60));
     _headerScrollerView.scrollEnabled = YES;
     _headerScrollerView.showsVerticalScrollIndicator = NO;
     _headerScrollerView.showsHorizontalScrollIndicator = NO;
@@ -57,7 +59,6 @@
     }];
     
     
-    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
     
     for (NSUInteger i =  0; i < sin.orderCourse_dateMuArray.count; i++) {
         GGT_HomeDateModel *model = [sin.orderCourse_dateMuArray safe_objectAtIndex:i];
@@ -87,6 +88,8 @@
 
 #pragma mark 创建UICollectionView
 - (void)initContentView {
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+
     _bgScrollerView = [[UIScrollView alloc]init];
     _bgScrollerView.scrollEnabled = YES;
     _bgScrollerView.showsVerticalScrollIndicator = NO;
@@ -96,7 +99,8 @@
     _bgScrollerView.bounces = NO;
     _bgScrollerView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
     //更新坐标
-    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(29 * LineH(42)) + LineH(18));
+//    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(29 * LineH(42)) + LineH(18));
+    _bgScrollerView.contentSize = CGSizeMake(LineW(104)*sin.orderCourse_dateMuArray.count,(29 * LineH(42)) + LineH(18));
     [self addSubview:_bgScrollerView];
     
     [_bgScrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -244,13 +248,18 @@
     self.alltimeArray =  [NSMutableArray array];
 //    _alltimeArray = @[@"08:00",@"08:30",@"09:00",@"09:30",@"10:00",@"10:30",@"11:00",@"11:30",@"12:00",@"12:30",@"13:00",@"13:30",@"14:00",@"14:30",@"15:00",@"15:30",@"16:00",@"16:30",@"17:00",@"17:30",@"18:00",@"18:30",@"19:00",@"19:30",@"20:00",@"20:30",@"21:00",@"21:30",@"22:00"];
     
-    
+    GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
+
     self.alltimeArray = dataArray;
 
     //更新坐标
     NSInteger count = [[self.alltimeArray safe_objectAtIndex:0] count];
-    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(count * LineH(42)) + LineH(18));
-    _collectionView.frame = CGRectMake(0, LineY(8), LineW(728) *2,(count * LineH(42)));
+//    _bgScrollerView.contentSize = CGSizeMake(LineW(728) * 2,(count * LineH(42)) + LineH(18));
+//    _collectionView.frame = CGRectMake(0, LineY(8), LineW(728) *2,(count * LineH(42)));
+    
+    _bgScrollerView.contentSize = CGSizeMake(LineW(104)*sin.orderCourse_dateMuArray.count,(count * LineH(42)) + LineH(18));
+    _collectionView.frame = CGRectMake(0, LineY(8),LineW(104)*sin.orderCourse_dateMuArray.count,(count * LineH(42)));
+    
     
     [_collectionView reloadData];
 

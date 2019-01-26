@@ -470,24 +470,43 @@
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
-        NSDictionary *dataDic = responseObject[@"data"];
-        //获取所有的key
-        NSArray *keyArray = [dataDic allKeys];
-        //对所有的key进行排序
-        NSArray *newKeyArray = [keyArray sortedArrayUsingSelector:@selector(compare:)];
-        
-        
+//        NSDictionary *dataDic = responseObject[@"data"];
+//        //获取所有的key
+//        NSArray *keyArray = [dataDic allKeys];
+//        //对所有的key进行排序
+//        NSArray *newKeyArray = [keyArray sortedArrayUsingSelector:@selector(compare:)];
+//
+//
         NSMutableArray *tempArray = [NSMutableArray array];
+//
+//        //处理数据，对每一个section数据添加到大数组中
+//        for (int i=0; i<newKeyArray.count; i++) {
+//            NSMutableArray *section = [NSMutableArray array];
+//            for (NSDictionary *dic in dataDic[newKeyArray[i]]) {
+//                GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+//                [section addObject:model];
+//            }
+//            [tempArray addObject:section];
+//        }
         
-        //处理数据，对每一个section数据添加到大数组中
-        for (int i=0; i<newKeyArray.count; i++) {
-            NSMutableArray *section = [NSMutableArray array];
-            for (NSDictionary *dic in dataDic[newKeyArray[i]]) {
-                GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-                [section addObject:model];
+        if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && [responseObject[@"data"] count] > 0) {
+            NSArray *dataArr = responseObject[@"data"];
+            for (NSArray *arr in dataArr) {
+                NSMutableArray *section = [NSMutableArray array];
+                for (NSDictionary *dic in arr) {
+                    GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+                    [section addObject:model];
+                }
+                [tempArray addObject:section];
             }
-            [tempArray addObject:section];
         }
+        
+        
+        
+        
+        
+        
+        
         
 
         self.orderTimeView = [[GGT_OrderTimeTableView alloc]initWithFrame:CGRectMake(0, LineH(129), marginFocusOn, SCREEN_HEIGHT()-LineH(129)-64)];

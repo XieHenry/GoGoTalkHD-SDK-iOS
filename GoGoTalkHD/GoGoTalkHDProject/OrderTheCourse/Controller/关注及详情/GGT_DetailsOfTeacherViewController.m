@@ -29,9 +29,7 @@
     NSDictionary *dic = noti.userInfo;
     if ([[dic objectForKey:@"statusColor"] isEqualToString:@"order"]) {
         [self.orderTimeView  orderCourse];
-
     } else {
-        
         [self.orderTimeView  ClernColor];
     }
 }
@@ -40,62 +38,67 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"老师详情";
-    
-    [self setLeftBackButton];
-    self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
-    
-    self.navigationController.navigationBar.translucent = NO;
-    
-
-    //外教详情
-    [self initHeaderView];
-
+    [self initUI];
     
     //布局时间列表
     [self initOrderTimeView];
 
-    
     //获取时间列表数据
     [self getOrderTimeTableViewLoadData];
 }
 
-
+-(void)initUI {
+    self.navigationItem.title = @"老师详情";
+    [self setLeftBackButton];
+    self.view.backgroundColor = UICOLOR_FROM_HEX(ColorF2F2F2);
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+    //外教详情
+    [self.view addSubview:self.detailsOfTeacherView];
+    [self.detailsOfTeacherView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.top.equalTo(self.view.mas_top).offset(0);
+        make.size.mas_equalTo(CGSizeMake(marginFocusOn, 124));
+    }];
+}
 
 #pragma mark 外教详情
-- (void)initHeaderView {
-    
-    self.detailsOfTeacherView = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH() - home_leftView_width, LineH(124))];
-    self.detailsOfTeacherView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-    [self.detailsOfTeacherView getModel:self.pushModel];
-    
-    __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
-    self.detailsOfTeacherView.focusButtonBlock = ^(UIButton *btn) {
+-(GGT_DetailsOfTeacherView *)detailsOfTeacherView {
+    if (!_detailsOfTeacherView) {
+        self.detailsOfTeacherView = [[GGT_DetailsOfTeacherView alloc]initWithFrame:CGRectZero];
+        self.detailsOfTeacherView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+        [self.detailsOfTeacherView getModel:self.pushModel];
         
-        if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
+        __weak GGT_DetailsOfTeacherViewController *weakSelf = self;
+        self.detailsOfTeacherView.focusButtonBlock = ^(UIButton *btn) {
             
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确认要取消关注吗？" preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleCancel handler:nil];
-            
-            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [weakSelf focusOnBtnClick:@"1"];
+            if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
                 
-            }];
-            cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
-            sureAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
-            [alert addAction:cancelAction];
-            [alert addAction:sureAction];
-            [weakSelf presentViewController:alert animated:YES completion:nil];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确认要取消关注吗？" preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂不取消" style:UIAlertActionStyleCancel handler:nil];
+                
+                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [weakSelf focusOnBtnClick:@"1"];
+                    
+                }];
+                cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
+                sureAction.textColor = UICOLOR_FROM_HEX(kThemeColor);
+                [alert addAction:cancelAction];
+                [alert addAction:sureAction];
+                [weakSelf presentViewController:alert animated:YES completion:nil];
+                
+            } else if ([btn.titleLabel.text isEqualToString:@"未关注"]) {
+                [weakSelf focusOnBtnClick:@"0"];
+            }
             
-        } else if ([btn.titleLabel.text isEqualToString:@"未关注"]) {
-            [weakSelf focusOnBtnClick:@"0"];
-        }
-        
-    };
-    [self.view addSubview:self.detailsOfTeacherView];
-    
+        };
+    }
+    return _detailsOfTeacherView;
 }
+
+
 
 #pragma mark 关注按钮 (long)self.pushModel.TeacherId
 - (void)focusOnBtnClick:(NSString *)statusStr {
@@ -204,23 +207,35 @@
     
     [[BaseService share] sendGetRequestWithPath:url token:YES viewController:self showMBProgress:YES success:^(id responseObject) {
         
-        NSDictionary *dataDic = responseObject[@"data"];
-        //获取所有的key
-        NSArray *keyArray = [dataDic allKeys];
-        //对所有的key进行排序
-        NSArray *newKeyArray = [keyArray sortedArrayUsingSelector:@selector(compare:)];
-        
-        
-        NSMutableArray *tempArray = [NSMutableArray array];
+//        NSDictionary *dataDic = responseObject[@"data"];
+//        //获取所有的key
+//        NSArray *keyArray = [dataDic allKeys];
+//        //对所有的key进行排序
+//        NSArray *newKeyArray = [keyArray sortedArrayUsingSelector:@selector(compare:)];
+//
+//
+//
+//        //处理数据，对每一个section数据添加到大数组中
+//        for (int i=0; i<newKeyArray.count; i++) {
+//            NSMutableArray *section = [NSMutableArray array];
+//            for (NSDictionary *dic in dataDic[newKeyArray[i]]) {
+//                GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+//                [section addObject:model];
+//            }
+//            [tempArray addObject:section];
+//        }
+            NSMutableArray *tempArray = [NSMutableArray array];
 
-        //处理数据，对每一个section数据添加到大数组中
-        for (int i=0; i<newKeyArray.count; i++) {
-            NSMutableArray *section = [NSMutableArray array];
-            for (NSDictionary *dic in dataDic[newKeyArray[i]]) {
-                GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
-                [section addObject:model];
+        if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && [responseObject[@"data"] count] > 0) {
+            NSArray *dataArr = responseObject[@"data"];
+            for (NSArray *arr in dataArr) {
+                NSMutableArray *section = [NSMutableArray array];
+                for (NSDictionary *dic in arr) {
+                    GGT_TimeCollectionModel *model = [GGT_TimeCollectionModel yy_modelWithDictionary:dic];
+                    [section addObject:model];
+                }
+                [tempArray addObject:section];
             }
-            [tempArray addObject:section];
         }
         
         
@@ -236,9 +251,6 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeTimeTableColor" object:nil];
     NSLog(@"控制器--%@--销毁了", [self class]);
-    
-  
-    
 }
 
 
