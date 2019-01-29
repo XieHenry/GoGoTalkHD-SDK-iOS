@@ -71,35 +71,12 @@ static BOOL isProduction = true;
     [[BaseService share] sendGetRequestWithPath:url token:NO viewController:nil showMBProgress:NO success:^(id responseObject) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // 进行版本号判断
-            // 获取应用版本号
-//            NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-//            NSString *currentVersion = infoDict[(NSString *)kCFBundleVersionKey];
-//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            
-            
-            // 后台写死版本号
-            
-            // 判断版本号
-            // 版本号小于后台返回的版本号 正式接口
-            // 版本号等于后台返回的版本号 测试接口
-            
-            // 新版本上线后
-            // 后台版本号加1
-            
-            // 逻辑后台处理
-            
             single.base_url = responseObject[@"data"];
             
             //如果地址一样则为正式地址，为非审核状态，为NO。否则为测试地址，为YES
             if ([single.base_url isEqualToString:BASE_REQUEST_URL]) {
-                
                 single.isAuditStatus = NO;
             } else {
-#pragma mark ---修改完成后取消
-//                single.isAuditStatus = NO;
-
                 single.isAuditStatus = YES;
             }
             
@@ -110,10 +87,6 @@ static BOOL isProduction = true;
     } failure:^(NSError *error) {
         
         single.base_url = BASE_REQUEST_URL;
-        
-        // 暂时开启测试地址
-//        NSString *url = [NSString stringWithFormat:@"%@:9332", BASE_REQUEST_URL];
-//        single.base_url = url;
         single.isAuditStatus = NO;
         [self configWithOptions:launchOptions];
         

@@ -56,8 +56,6 @@
         make.height.mas_offset(180);
     }];
     
-    
-    
     self.contentTextView = [[PlaceholderTextView alloc]init];
     self.contentTextView.delegate = self;
     self.contentTextView.font = Font(18);

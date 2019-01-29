@@ -75,7 +75,7 @@
             
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-                    UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"没有网络" message:@"" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"请重新连接网络" message:@"" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alertV show];
 #pragma clang diagnostic pop
                     

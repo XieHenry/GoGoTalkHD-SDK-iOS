@@ -392,7 +392,7 @@
         make.top.equalTo(self.view.mas_top).offset(20);
         make.left.equalTo(self.view.mas_left).offset(20);
         make.right.equalTo(self.view.mas_right).offset(-20);
-        make.height.mas_equalTo(self.singleton.isAuditStatus == YES ? LineH(114) : LineH(192));
+        make.height.mas_equalTo(self.singleton.isAuditStatus == YES ? LineH(144) : LineH(192));
     }];
     
     

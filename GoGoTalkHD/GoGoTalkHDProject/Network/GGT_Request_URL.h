@@ -10,12 +10,12 @@
 #define GGT_Request_URL_h
 
 // 正式地址
-//static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
+static NSString * const BASE_REQUEST_URL = @"http://learnapi.gogo-talk.com";
 
 // 测试地址
 //static NSString * const BASE_REQUEST_URL = @"http://testapi.gogo-talk.com";
 //static NSString * const BASE_REQUEST_URL = @"http://117.107.153.198:808";
-static NSString * const BASE_REQUEST_URL = @"http://1.119.196.182:808";
+//static NSString * const BASE_REQUEST_URL = @"http://1.119.196.182:808";
 
 
 /*登录注册*/

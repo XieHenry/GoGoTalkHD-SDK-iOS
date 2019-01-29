@@ -20,18 +20,11 @@ static BOOL isShowTestReportVc; //是否选中测评报告（这个是推送进�
 static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 @interface GGT_MineLeftViewController () <UITableViewDelegate,UITableViewDataSource>
-
 @property (nonatomic, strong) UITableView *tableView;
-
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
 @property (nonatomic, strong) NSMutableArray *iconArray;
-
 @property (nonatomic, strong) GGT_MineHeaderView *headerView;
-
 @property (nonatomic, strong) GGT_MineLeftModel *model;
-
-
 @end
 
 @implementation GGT_MineLeftViewController
@@ -49,7 +42,6 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"testReport2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeNameStatus" object:nil];
-    
 }
 
 #pragma mark - pushMessageAction
@@ -58,7 +50,6 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     //推送过来消息，进行切换cell的控制器
     [self getLeftName];
-    
 }
 
 //在个人信息页面修改中文名称之后，会发送通知刷新数据。
@@ -72,8 +63,8 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     
     [self getLoadData];
-    
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,23 +74,16 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     self.splitViewController.maximumPrimaryColumnWidth = LineW(350); //可以修改屏幕的宽度
     self.splitViewController.preferredPrimaryColumnWidthFraction = 0.48;
     
-    
-    [self getLeftName];
-    
-    //创建tableview
-    [self initTableView];
+    [self initUI];
+    [self getLeftName]; //本地数据
     
     //获取网络数据
     [self getLoadData];
-    
-    
 }
 
 #pragma mark 没网络，重新数据请求
 -(void)refreshLodaData {
-    
     [self getLeftName];
-    
     //获取网络数据
     [self getLoadData];
 }
@@ -107,81 +91,48 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 #pragma mark 获取左边的名称和icon
 - (void)getLeftName {
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-    NSString *paramshowMyHoursStr;
-    if(sin.isAuditStatus == YES) {
-        paramshowMyHoursStr = @"0";
+    self.dataArray = [NSMutableArray array];
+    self.iconArray = [NSMutableArray array];
+    
+    if (sin.isAuditStatus == YES) {
+        self.dataArray = [NSMutableArray arrayWithObjects:@"个人信息",@"测评报告",@"意见反馈",@"设置", nil];
+        self.iconArray = [NSMutableArray arrayWithObjects:@"Personal_information",@"Test_report",@"feedback",@"Set_up_the", nil];
     } else {
-        paramshowMyHoursStr = @"1";
+        self.dataArray = [NSMutableArray arrayWithObjects:@"个人信息",@"我的课时",@"测评报告",@"意见反馈",@"设置", nil];
+        self.iconArray = [NSMutableArray arrayWithObjects:@"Personal_information",@"class",@"Test_report",@"feedback",@"Set_up_the", nil];
+    }
+    
+    [self.tableView reloadData];
+    
+    //先刷新数据，再选中cell
+    if (sin.isAuditStatus == YES ) {
+        if (isShowTestReportVc == YES) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+        } else {
+            //每次请求数据后，都默认选中第一行
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+        }
+    } else {
+        if (isShowTestReportVc == YES) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+        } else {
+            //每次请求数据后，都默认选中第一行
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
+        }
     }
     
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@?&paramshowMyHours=%@",URL_GetInfo,paramshowMyHoursStr];
-    [[BaseService share] sendGetRequestWithPath:urlStr token:YES viewController:self success:^(id responseObject) {
-        
-        self.dataArray = [NSMutableArray array];
-        self.iconArray = [NSMutableArray array];
-        
-        NSArray *dataArr = responseObject[@"data"];
-        
-        if (dataArr.count == 4) {
-            sin.isShowAuditStatus = YES;
-        } else if (dataArr.count == 5) {
-            sin.isShowAuditStatus = NO;
-        }
-        
-        for (NSDictionary *dic in dataArr) {
-            [self.dataArray addObject:dic[@"name"]];
-            [self.iconArray addObject:dic[@"pic"]];
-        }
-        
-        [self.tableView reloadData];
-        
-        //先刷新数据，再选中cell
-        if (sin.isAuditStatus == YES ) {
-            if (isShowTestReportVc == YES) {
-                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
-            } else {
-                //每次请求数据后，都默认选中第一行
-                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
-            }
-        } else {
-            if (isShowTestReportVc == YES) {
-                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
-            } else {
-                //每次请求数据后，都默认选中第一行
-                [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
-            }
-        }
-        
-        if (self.refreshLoadData) {
-            self.refreshLoadData(YES);
-        }
-        
-    } failure:^(NSError *error) {
-        GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-        if (sin.netStatus == NO) {
-            
-            if (self.refreshLoadData) {
-                self.refreshLoadData(NO);
-            }
-            
-        } else {
-            
-            [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
-            
-        }
-        
-    }];
+    if (self.refreshLoadData) {
+        self.refreshLoadData(YES);
+    }
 }
 
 
 #pragma mark 获取网络请求，添加到view上
 - (void)getLoadData {
-    
     [[BaseService share] sendGetRequestWithPath:URL_GetLessonStatistics token:YES viewController:self showMBProgress:NO success:^(id responseObject) {
         
         self.model = [GGT_MineLeftModel yy_modelWithDictionary:responseObject[@"data"]];
-        [self.headerView getResultModel:self.model];
         
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         sin.leftTotalCount = [NSString stringWithFormat:@"%@",self.model.totalCount];
@@ -196,12 +147,8 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
                 [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:(UITableViewScrollPositionNone)];
             }
             
-            if (sin.isShowAuditStatus == NO) {
-                GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-                cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",self.model.totalCount];
-            }
-            
-            
+            GGT_MineLeftTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",self.model.totalCount];
         }
         
         if (self.refreshLoadData) {
@@ -212,35 +159,13 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     } failure:^(NSError *error) {
         GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
         if (sin.netStatus == NO) {
-            
             if (self.refreshLoadData) {
                 self.refreshLoadData(NO);
             }
-            
         } else {
-            
             [MBProgressHUD showMessage:error.userInfo[@"msg"] toView:self.view];
-            
         }
     }];
-    
-}
-
-
-- (void)initTableView {
-    
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,LineW(351),SCREEN_HEIGHT()) style:(UITableViewStylePlain)];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-    [self.view addSubview:_tableView];
-    
-    
-    _headerView = [[GGT_MineHeaderView alloc]init];
-    _headerView.frame = CGRectMake(0, 0, LineW(350), LineH(275));
-    _tableView.tableHeaderView = _headerView;
-    
 }
 
 
@@ -268,8 +193,8 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     
     
     cell.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
-    cell.leftTitleLabel.text = [_dataArray safe_objectAtIndex:indexPath.row];
-    cell.iconName = [_iconArray safe_objectAtIndex:indexPath.row];
+    cell.leftTitleLabel.text = [self.dataArray safe_objectAtIndex:indexPath.row];
+    cell.iconName = [self.iconArray safe_objectAtIndex:indexPath.row];
     
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
@@ -309,7 +234,7 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     }
     
     
-    if (sin.isShowAuditStatus == NO) {
+    if (sin.isAuditStatus == NO) {
         if(indexPath.row == 1){
             cell.leftSubTitleLabel.text = [NSString stringWithFormat:@"剩余%@课时",_model.totalCount];
         }
@@ -321,17 +246,28 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return LineH(60);
-    
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    GGT_MineHeaderView *headerView = [[GGT_MineHeaderView alloc]init];
+    headerView.frame = CGRectMake(0, 0, LineW(350), LineH(275));
+    [headerView getResultModel:self.model];
+    return headerView;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return LineH(275);
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *vc;
     
     
     GGT_Singleton *sin = [GGT_Singleton sharedSingleton];
-    if (sin.isShowAuditStatus == YES) {
+    if (sin.isAuditStatus == YES) {
         switch (indexPath.row) {
             case 0:
                 //个人信息
@@ -397,6 +333,30 @@ static BOOL isRefreshMyClassVc;   //是否刷新我的课时cell
     [self.splitViewController showDetailViewController:nav sender:self];
     
 }
+
+//MARK:UI加载
+-(void)initUI {
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).offset(0);
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(-0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-0);;
+    }];
+}
+
+-(UITableView *)tableView {
+    if (!_tableView) {
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.backgroundColor = UICOLOR_FROM_HEX(ColorFFFFFF);
+    }
+    return _tableView;
+}
+
+
 
 
 

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.6</string>
+	<string>1.1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -70,7 +70,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.6.2</string>
+	<string>1.1.0.0</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -115,11 +115,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>在线上课时需要使用手机相机，若不允许则不能正常上课。</string>
+	<string>在线上课时需要使用相机，若不允许则不能正常上课。</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>在线上课时需要使用手机麦克风，若不允许则不能正常上课。</string>
+	<string>在线上课时需要使用麦克风，若不允许则不能正常上课。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>在线上课时需要使用手机相册，若不允许则不能正常上课。</string>
+	<string>在线上课时需要使用相册，若不允许则不能正常上课。</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
