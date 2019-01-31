@@ -257,7 +257,7 @@
         cancelAction.textColor = UICOLOR_FROM_HEX(Color777777);
         
         UIAlertAction *clernAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=NOTIFICATIONS_ID"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }];
         clernAction.textColor = UICOLOR_FROM_HEX(ColorC40016);
         
