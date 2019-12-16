@@ -10,6 +10,10 @@
 		3538EF571ED2B6AD00078971 /* GGT_SelfInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3538EF561ED2B6AD00078971 /* GGT_SelfInfoTableViewCell.m */; };
 		5B04FAA11ED52A060038648F /* GGT_SelfInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B04FAA01ED52A060038648F /* GGT_SelfInfoModel.m */; };
 		5B1E61DF1F46CC5F00342CC5 /* GGT_LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1E61DE1F46CC5F00342CC5 /* GGT_LoadingView.m */; };
+		5B4B2F3F23A78EB200AD9E61 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775631F0A085F008687C2 /* libc++.tbd */; };
+		5B4B2F4323A78EF700AD9E61 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4B2F4023A78EF700AD9E61 /* libstdc++.6.0.9.tbd */; };
+		5B4B2F4423A78EF700AD9E61 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4B2F4123A78EF700AD9E61 /* libstdc++.6.tbd */; };
+		5B4B2F4523A78EF700AD9E61 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4B2F4223A78EF700AD9E61 /* libstdc++.tbd */; };
 		5B743D1E1EC5A281004E744A /* GGT_MineSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D1D1EC5A281004E744A /* GGT_MineSplitViewController.m */; };
 		5B743D211EC5A2B7004E744A /* GGT_SelfInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D201EC5A2B7004E744A /* GGT_SelfInfoViewController.m */; };
 		5B743D241EC5A416004E744A /* GGT_MineRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B743D231EC5A416004E744A /* GGT_MineRightViewController.m */; };
@@ -263,7 +267,6 @@
 		D6869CC31F18897700C5390C /* GGT_HomeTeachModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6869CC21F18897700C5390C /* GGT_HomeTeachModel.m */; };
 		D6869CC61F18AA2400C5390C /* GGT_CoursewareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6869CC51F18AA2400C5390C /* GGT_CoursewareModel.m */; };
 		D68775621F0A0853008687C2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775611F0A0853008687C2 /* CoreMedia.framework */; };
-		D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775631F0A085F008687C2 /* libc++.tbd */; };
 		D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D68775651F0A086A008687C2 /* libicucore.tbd */; };
 		D68DC9061ED299910069F385 /* GGT_TeachEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC9051ED299910069F385 /* GGT_TeachEvaCell.m */; };
 		D68DC94C1ED2B6B70069F385 /* GGT_CourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68DC94B1ED2B6B70069F385 /* GGT_CourseDetailCell.m */; };
@@ -358,6 +361,10 @@
 		5B1E61DD1F46CC5F00342CC5 /* GGT_LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_LoadingView.h; sourceTree = "<group>"; };
 		5B1E61DE1F46CC5F00342CC5 /* GGT_LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_LoadingView.m; sourceTree = "<group>"; };
 		5B467CD81ED97B97005CFB52 /* GoGoTalkHD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoGoTalkHD.entitlements; sourceTree = "<group>"; };
+		5B4B2F3D23A781EB00AD9E61 /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		5B4B2F4023A78EF700AD9E61 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
+		5B4B2F4123A78EF700AD9E61 /* libstdc++.6.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.tbd"; sourceTree = "<group>"; };
+		5B4B2F4223A78EF700AD9E61 /* libstdc++.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.tbd"; sourceTree = "<group>"; };
 		5B743D1C1EC5A281004E744A /* GGT_MineSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_MineSplitViewController.h; sourceTree = "<group>"; };
 		5B743D1D1EC5A281004E744A /* GGT_MineSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGT_MineSplitViewController.m; sourceTree = "<group>"; };
 		5B743D1F1EC5A2B7004E744A /* GGT_SelfInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGT_SelfInfoViewController.h; sourceTree = "<group>"; };
@@ -954,13 +961,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4B2F3F23A78EB200AD9E61 /* libc++.tbd in Frameworks */,
 				5BDAEEAA215B9B6A00AFDB43 /* TKRoomSDK.framework in Frameworks */,
+				5B4B2F4523A78EF700AD9E61 /* libstdc++.tbd in Frameworks */,
 				5BDAEE64215B9B6A00AFDB43 /* CrashReporter.framework in Frameworks */,
 				D68775661F0A086A008687C2 /* libicucore.tbd in Frameworks */,
 				5BDAEE68215B9B6A00AFDB43 /* HockeySDK.framework in Frameworks */,
-				D68775641F0A085F008687C2 /* libc++.tbd in Frameworks */,
 				D68775621F0A0853008687C2 /* CoreMedia.framework in Frameworks */,
 				A38DFB95570C011E79A85D71 /* Pods_GoGoTalkHD.framework in Frameworks */,
+				5B4B2F4323A78EF700AD9E61 /* libstdc++.6.0.9.tbd in Frameworks */,
+				5B4B2F4423A78EF700AD9E61 /* libstdc++.6.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,6 +1072,9 @@
 		5B7E688F2010B83800482DE7 /* BJYRoom */ = {
 			isa = PBXGroup;
 			children = (
+				5B4B2F4023A78EF700AD9E61 /* libstdc++.6.0.9.tbd */,
+				5B4B2F4123A78EF700AD9E61 /* libstdc++.6.tbd */,
+				5B4B2F4223A78EF700AD9E61 /* libstdc++.tbd */,
 				5B7E68AE2010B85100482DE7 /* BJHLMediaPlayer.framework */,
 				5B7E68902010B83800482DE7 /* Extention */,
 				5B7E68952010B83800482DE7 /* Room */,
@@ -1817,6 +1830,7 @@
 		B619F8A3CA6A6460D6966153 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B4B2F3D23A781EB00AD9E61 /* libc.tbd */,
 				D68775651F0A086A008687C2 /* libicucore.tbd */,
 				D68775631F0A085F008687C2 /* libc++.tbd */,
 				D68775611F0A0853008687C2 /* CoreMedia.framework */,
@@ -2495,6 +2509,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				ar,
@@ -2621,7 +2636,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-resources.sh",
 				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
 				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/QQ/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
 			);
@@ -2632,7 +2647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B0C04E7207F6C310052F2F4 /* ShellScript */ = {
@@ -2672,7 +2687,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BJLiveBase/BJLiveBase.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
@@ -2703,7 +2718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoGoTalkHD/Pods-GoGoTalkHD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3164,6 +3179,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/libs",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BJYRoom",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3214,6 +3230,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/VideoResource",
 					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/TuoKeSDK/eduVideoSDK/libs",
+					"$(PROJECT_DIR)/GoGoTalkHD/GoGoTalkHDProject/BJYRoom",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
